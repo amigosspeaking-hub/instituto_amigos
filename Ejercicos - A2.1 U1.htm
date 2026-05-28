@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instituto Amigos - A2.1 L1 - Nueva Etapa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #e0e0e0; padding-bottom: 100px; }
+
+        .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-box { background: linear-gradient(145deg, #1e2d45, #1a2540); padding: 40px 30px; border-radius: 20px; border: 2px solid #e74c3c; max-width: 420px; width: 100%; box-shadow: 0 15px 50px rgba(231, 76, 60, 0.3); text-align: center; }
+        .login-box .logo { font-size: 4em; margin-bottom: 10px; }
+        .login-box h1 { color: #f39c12; font-size: 1.8em; margin-bottom: 5px; }
+        .login-box h2 { color: #ffeaa7; font-size: 1.1em; margin-bottom: 8px; font-weight: 400; }
+        .login-box .lesson-info { background: rgba(243, 156, 18, 0.15); color: #ffeaa7; padding: 8px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95em; border: 1px solid #f39c12; }
+        .login-box input { width: 100%; padding: 14px 18px; margin-bottom: 15px; border-radius: 10px; border: 2px solid #34495e; background: #0f1e33; color: #ecf0f1; font-size: 1em; font-family: 'Cairo', sans-serif; direction: ltr; text-align: left; }
+        .login-box input:focus { outline: none; border-color: #e74c3c; }
+        .login-box button { width: 100%; padding: 14px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 10px; font-size: 1.1em; font-weight: 700; cursor: pointer; font-family: 'Cairo', sans-serif; margin-top: 10px; transition: all 0.3s; }
+        .login-box button:hover { transform: translateY(-2px); }
+        .login-error { background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 10px; border-radius: 8px; margin-top: 15px; display: none; font-size: 0.9em; }
+        .login-info { font-size: 0.85em; color: #7f8c8d; margin-top: 15px; line-height: 1.6; }
+
+        #mainApp { display: none; }
+        .header { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #f39c12 100%); padding: 25px 20px; text-align: center; box-shadow: 0 8px 32px rgba(231, 76, 60, 0.3); position: relative; overflow: hidden; }
+        .header::before { content: '🇪🇸'; position: absolute; font-size: 120px; opacity: 0.1; top: -20px; right: 20px; }
+        .header h1 { font-size: 1.9em; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 5px; }
+        .header h2 { font-size: 1.2em; font-weight: 600; color: #ffeaa7; }
+        .header .lesson-badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 20px; margin-top: 8px; font-size: 0.95em; color: white; font-weight: 700; border: 1px solid rgba(255,255,255,0.3); }
+        .user-bar { background: rgba(0,0,0,0.3); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .user-bar .welcome { color: #f39c12; font-weight: 700; }
+        .user-bar .logout-btn { background: #c0392b; color: white; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 600; font-size: 0.9em; }
+
+        .progress-summary { max-width: 900px; margin: 15px auto; padding: 15px 20px; background: linear-gradient(145deg, #1e2d45, #1a2540); border-radius: 12px; border: 2px solid #3498db; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .progress-summary .item { display: flex; flex-direction: column; align-items: center; min-width: 70px; }
+        .progress-summary .item .num { font-size: 1.5em; font-weight: 900; }
+        .progress-summary .item .label { font-size: 0.8em; color: #bdc3c7; }
+        .progress-summary .item.correct .num { color: #2ecc71; }
+        .progress-summary .item.wrong .num { color: #e74c3c; }
+        .progress-summary .item.pending .num { color: #9b59b6; }
+        .progress-summary .item.remaining .num { color: #f39c12; }
+        .progress-summary .item.total .num { color: #3498db; }
+        .progress-summary .progress-bar-mini { flex: 1; min-width: 150px; height: 12px; background: #0f1e33; border-radius: 6px; overflow: hidden; margin: 0 10px; }
+        .progress-summary .progress-bar-mini .fill { height: 100%; background: linear-gradient(90deg, #2ecc71, #27ae60); transition: width 1s; }
+
+        .exercise-container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .exercise { background: linear-gradient(145deg, #1e2d45, #1a2540); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid #2c3e50; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .exercise-title { font-size: 1.4em; font-weight: 800; color: #f39c12; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .exercise-title .num { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em; flex-shrink: 0; }
+        .exercise-title .teacher-review-badge { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.6em; font-weight: 700; }
+        .exercise-instruction { color: #bdc3c7; margin-bottom: 15px; line-height: 1.8; font-size: 0.95em; background: rgba(52, 73, 94, 0.3); padding: 12px 15px; border-radius: 10px; border-right: 4px solid #e74c3c; }
+        .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; padding: 12px; background: rgba(243, 156, 18, 0.1); border-radius: 10px; border: 1px dashed #f39c12; }
+        .word-bank span { background: linear-gradient(135deg, #2c3e50, #34495e); color: #ffeaa7; padding: 5px 14px; border-radius: 20px; font-size: 0.9em; font-weight: 600; border: 1px solid #f39c12; }
+        .question-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        .question-label { font-weight: 600; color: #ecf0f1; font-size: 0.95em; direction: ltr; text-align: left; }
+        .question-text { color: #bdc3c7; margin-bottom: 8px; font-size: 0.93em; line-height: 1.7; direction: ltr; text-align: left; }
+        input[type="text"], select { width: 100%; padding: 12px 15px; border-radius: 10px; border: 2px solid #34495e; background: #0f1e33; color: #ecf0f1; font-size: 1em; font-family: 'Cairo', sans-serif; direction: ltr; text-align: left; }
+        input[type="text"]:focus, select:focus { outline: none; border-color: #3498db; }
+        input[type="text"]:disabled, select:disabled { cursor: not-allowed; opacity: 0.95; }
+        input[type="text"].locked-correct, select.locked-correct { border-color: #27ae60; background: rgba(39, 174, 96, 0.15); color: #2ecc71; font-weight: 700; }
+        input[type="text"].locked-wrong, select.locked-wrong { border-color: #e74c3c; background: rgba(231, 76, 60, 0.15); color: #ff6b6b; font-weight: 700; text-decoration: line-through; }
+        input[type="text"].locked-pending, select.locked-pending { border-color: #9b59b6; background: rgba(155, 89, 182, 0.15); color: #d5a6f0; font-weight: 700; }
+        select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ecf0f1' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 15px center; padding-left: 35px; }
+        select option { background: #1a2540; color: #ecf0f1; }
+
+        .feedback { margin-top: 5px; padding: 12px 15px; border-radius: 8px; display: none; font-size: 0.9em; line-height: 1.8; }
+        .feedback.correct { background: rgba(39, 174, 96, 0.15); border: 1px solid #27ae60; color: #2ecc71; display: block; }
+        .feedback.wrong { background: rgba(231, 76, 60, 0.15); border: 1px solid #e74c3c; color: #e74c3c; display: block; }
+        .feedback.pending { background: rgba(155, 89, 182, 0.15); border: 1px solid #9b59b6; color: #d5a6f0; display: block; }
+
+        .audio-note { background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(142, 68, 173, 0.1)); border: 1px solid #9b59b6; border-radius: 12px; padding: 15px 20px; margin: 15px 0; text-align: center; color: #d5a6f0; font-weight: 600; }
+        .audio-note .icon { font-size: 1.5em; display: block; margin-bottom: 5px; }
+        .whatsapp-note { background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(18, 140, 126, 0.15)); border: 2px solid #25d366; border-radius: 12px; padding: 15px 20px; margin: 15px 0; text-align: center; color: #a3e9c4; font-weight: 600; line-height: 1.7; }
+        .whatsapp-note .icon { font-size: 1.8em; display: block; margin-bottom: 5px; }
+        .whatsapp-note strong { color: #25d366; }
+
+        .teacher-review-note { background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(142, 68, 173, 0.15)); border: 2px solid #9b59b6; border-radius: 10px; padding: 10px 15px; margin: 10px 0 15px 0; text-align: center; color: #d5a6f0; font-weight: 600; font-size: 0.9em; }
+
+        .section-divider { text-align: center; margin: 35px 0; position: relative; }
+        .section-divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #e74c3c, transparent); }
+        .section-divider span { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 5px 25px; position: relative; font-size: 1.3em; font-weight: 800; color: #f39c12; }
+
+        .btn-container { text-align: center; margin: 30px auto; max-width: 800px; padding: 0 15px; }
+        .btn-submit { color: white; border: none; padding: 18px 50px; font-size: 1.2em; font-weight: 700; border-radius: 12px; cursor: pointer; font-family: 'Cairo', sans-serif; margin: 5px; transition: all 0.3s; background: linear-gradient(135deg, #27ae60, #219a52); box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4); width: 100%; max-width: 400px; }
+        .btn-submit:hover { transform: translateY(-3px); }
+        .btn-submit:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none; }
+
+        .results-box { max-width: 800px; margin: 25px auto; padding: 25px; background: linear-gradient(145deg, #1e2d45, #1a2540); border-radius: 16px; border: 2px solid #f39c12; display: none; }
+        .results-box.final { border: 3px solid #2ecc71; background: linear-gradient(145deg, #1e3d2f, #1a2540); }
+        .results-box h2 { color: #f39c12; font-size: 1.5em; margin-bottom: 10px; text-align: center; }
+        .results-box.final h2 { color: #2ecc71; font-size: 2em; }
+        .batch-result { background: rgba(52, 73, 94, 0.3); padding: 12px 18px; border-radius: 10px; margin: 10px 0; text-align: center; }
+        .batch-result .label { font-size: 0.95em; color: #bdc3c7; }
+        .batch-result .value { font-size: 1.4em; font-weight: 800; color: #f39c12; }
+        .final-score-display { font-size: 3.5em; font-weight: 900; text-align: center; margin: 20px 0; }
+        .final-score-display.excellent { color: #2ecc71; }
+        .final-score-display.good { color: #3498db; }
+        .final-score-display.average { color: #f39c12; }
+        .final-score-display.poor { color: #e74c3c; }
+        .progress-bar-container { width: 100%; height: 25px; background: #0f1e33; border-radius: 15px; overflow: hidden; margin: 15px 0; }
+        .progress-bar { height: 100%; border-radius: 15px; transition: width 1s ease; background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71); }
+
+        .status-message { padding: 12px; margin: 10px 0; border-radius: 8px; display: none; font-size: 1em; text-align: center; }
+        .status-message.success { background: rgba(39, 174, 96, 0.2); border: 1px solid #27ae60; color: #2ecc71; display: block; }
+        .status-message.error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; display: block; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; color: white; font-size: 1.2em; font-weight: 700; padding: 20px; }
+        .loading-overlay.show { display: flex; }
+        .loading-overlay .spinner-big { width: 60px; height: 60px; border: 5px solid #f3f3f3; border-top: 5px solid #e74c3c; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .loading-overlay .sub-text { font-size: 0.9em; color: #bdc3c7; margin-top: 10px; font-weight: 400; max-width: 400px; text-align: center; }
+
+        .sub-exercise-title { font-size: 1.1em; font-weight: 700; color: #3498db; margin: 18px 0 12px; padding-bottom: 5px; border-bottom: 1px solid rgba(52, 152, 219, 0.3); }
+        .syllable-example { background: rgba(243, 156, 18, 0.1); border-radius: 10px; padding: 10px 15px; margin-bottom: 12px; text-align: center; direction: ltr; }
+        .syllable-example span { font-size: 1.3em; font-weight: 700; color: #f39c12; letter-spacing: 3px; }
+        .example-solved { background: rgba(39, 174, 96, 0.1); border: 1px solid #27ae60; border-radius: 8px; padding: 8px 12px; color: #2ecc71; font-size: 0.9em; direction: ltr; text-align: left; margin-bottom: 12px; }
+
+        .lock-badge { display: inline-block; background: #3498db; color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; font-weight: 700; }
+        .lock-badge.wrong { background: #e74c3c; }
+        .lock-badge.pending { background: #9b59b6; }
+
+        .confirm-dialog { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .confirm-dialog.show { display: flex; }
+        .confirm-box { background: linear-gradient(145deg, #1e2d45, #1a2540); padding: 30px; border-radius: 16px; border: 2px solid #f39c12; max-width: 450px; width: 100%; text-align: center; }
+        .confirm-box h3 { color: #f39c12; margin-bottom: 15px; font-size: 1.4em; }
+        .confirm-box p { color: #ecf0f1; margin-bottom: 20px; line-height: 1.8; font-size: 1.05em; }
+        .confirm-box .warning { background: rgba(243, 156, 18, 0.15); border: 1px solid #f39c12; padding: 12px; border-radius: 8px; margin: 15px 0; color: #ffeaa7; font-size: 0.95em; line-height: 1.7; }
+        .confirm-box .buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .confirm-box button { padding: 12px 25px; border: none; border-radius: 8px; font-family: 'Cairo', sans-serif; font-weight: 700; cursor: pointer; font-size: 1em; flex: 1; min-width: 130px; }
+        .confirm-box .btn-yes { background: #27ae60; color: white; }
+        .confirm-box .btn-no { background: #7f8c8d; color: white; }
+
+        .retry-banner { background: rgba(243, 156, 18, 0.15); border: 1px solid #f39c12; padding: 12px 15px; border-radius: 10px; margin: 10px auto; max-width: 800px; color: #ffeaa7; text-align: center; display: none; font-size: 0.95em; }
+        .retry-banner button { background: #f39c12; color: white; border: none; padding: 6px 15px; border-radius: 6px; margin-right: 10px; cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 700; }
+
+        textarea { width: 100%; padding: 12px 15px; border-radius: 10px; border: 2px solid #34495e; background: #0f1e33; color: #ecf0f1; font-size: 1em; font-family: 'Cairo', sans-serif; direction: ltr; text-align: left; resize: vertical; min-height: 80px; }
+        textarea:focus { outline: none; border-color: #9b59b6; }
+        textarea:disabled { cursor: not-allowed; opacity: 0.95; }
+        textarea.locked-pending { border-color: #9b59b6; background: rgba(155, 89, 182, 0.15); color: #d5a6f0; font-weight: 600; }
+        textarea.locked-correct { border-color: #27ae60; background: rgba(39, 174, 96, 0.15); color: #2ecc71; font-weight: 600; }
+        textarea.locked-wrong { border-color: #e74c3c; background: rgba(231, 76, 60, 0.15); color: #ff6b6b; font-weight: 600; }
+
+        @media (max-width: 768px) { .header h1 { font-size: 1.6em; } .exercise { padding: 20px; } input[type="text"], select, textarea { font-size: 16px; } }
+        @media (max-width: 600px) { .header h1 { font-size: 1.4em; } .header h2 { font-size: 0.95em; } .exercise { padding: 15px; margin-bottom: 20px; } .btn-submit { padding: 15px 20px; font-size: 1.1em; width: 100%; max-width: 100%; } .final-score-display { font-size: 2.5em; } .progress-summary { padding: 12px; justify-content: center; gap: 15px; } .progress-summary .item { min-width: 55px; margin-bottom: 5px; } .progress-summary .item .num { font-size: 1.2em; } .progress-summary .progress-bar-mini { width: 100%; min-width: 100%; order: 10; margin: 5px 0 0 0; } .login-box { padding: 30px 20px; margin: 15px; } .word-bank span { padding: 5px 10px; font-size: 0.85em; } .confirm-box { padding: 20px; margin: 15px; } .confirm-box .buttons { flex-direction: column; } .confirm-box button { width: 100%; margin-bottom: 5px; } }
+    </style>
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="logo">🇪🇸</div>
+        <h1>Instituto Amigos</h1>
+        <h2>تسجيل الدخول للواجب</h2>
+        <div class="lesson-info">📘 <span id="loginLessonInfo">A2.1 - Lección 1</span></div>
+        <input type="text" id="loginUsername" placeholder="اسم المستخدم (Username)" autocomplete="username">
+        <input type="password" id="loginPassword" placeholder="كلمة السر (Password)" autocomplete="current-password">
+        <button onclick="doLogin()" id="loginBtn">دخول 🔓</button>
+        <div class="login-error" id="loginError"></div>
+        <div class="login-info">🔒 لو نسيت كلمة السر، تواصل مع المدرس على جروب الواتس اب</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner-big"></div>
+    <div id="loadingText">جاري التحميل...</div>
+    <div class="sub-text" id="loadingSubText"></div>
+</div>
+
+<div class="confirm-dialog" id="confirmDialog">
+    <div class="confirm-box">
+        <h3>⚠️ تأكيد الإرسال</h3>
+        <p>هل أنت متأكد من إرسال إجاباتك؟</p>
+        <div class="warning">
+            ✅ الأسئلة الموضوعية ستُصحح فوراً<br>
+            📝 الأسئلة الكتابية ستظهر بانتظار تصحيح المدرس<br>
+            🔒 لن تتمكن من تعديل الإجابات بعد الإرسال!
+        </div>
+        <div class="buttons">
+            <button class="btn-yes" onclick="confirmSubmit()">✅ نعم، أرسل</button>
+            <button class="btn-no" onclick="cancelSubmit()">❌ ألغاء</button>
+        </div>
+    </div>
+</div>
+
+<div id="mainApp">
+
+<div class="header">
+    <h1>📚 Instituto Amigos</h1>
+    <h2 id="lessonHeaderName">Nueva Etapa</h2>
+    <div class="lesson-badge" id="lessonHeaderBadge">A2.1 - Lección 1</div>
+</div>
+
+<div class="user-bar">
+    <div class="welcome">👤 أهلاً <span id="userFullName"></span></div>
+    <button class="logout-btn" onclick="logout()">🚪 خروج</button>
+</div>
+
+<div class="progress-summary">
+    <div class="item correct"><div class="num" id="psCorrect">0</div><div class="label">✅ صح</div></div>
+    <div class="item wrong"><div class="num" id="psWrong">0</div><div class="label">❌ خطأ</div></div>
+    <div class="item pending"><div class="num" id="psPending">0</div><div class="label">⏳ بانتظار المدرس</div></div>
+    <div class="item remaining"><div class="num" id="psRemaining">0</div><div class="label">📝 متبقي</div></div>
+    <div class="progress-bar-mini"><div class="fill" id="psProgressBar" style="width: 0%"></div></div>
+    <div class="item total"><div class="num"><span id="psAnswered">0</span>/<span id="psTotal">0</span></div><div class="label">📊 التقدم</div></div>
+</div>
+
+<div class="retry-banner" id="retryBanner">
+    ⚠️ يوجد محاولة لم تُرسل بنجاح.
+    <button onclick="retrySubmit()">🔄 إعادة الإرسال</button>
+</div>
+
+<div class="exercise-container">
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">1</span>Palabras en contexto</div>
+        <div class="exercise-instruction">Lee de nuevo el artículo del ejercicio 2b de la unidad 1 del libro del alumno y luego completa el siguiente texto utilizando las expresiones adecuadas. ¡Pon atención a la forma correcta!</div>
+        <div class="word-bank"><span>latino</span><span>escribir</span><span>chileno</span><span>escuchar</span><span>divertido</span><span>acostarse</span><span>español</span><span>aprender</span><span>bailar</span></div>
+        <div class="question-text" style="margin-bottom:10px;">¿Cómo reconocer a nuestros estudiantes entre miles? Pues porque son ___(1)___, están siempre alegres, se ríen a menudo, se sienten bien en compañía de otros y siempre encuentran algo que ___(2)___. Saben varios idiomas y son muy inteligentes. ¡Buena prueba de ello es que eligen nuestra lengua! En su tiempo libre ___(3)___ flamenco, ___(4)___ música latina, tocan la guitarra o beben mojitos, vinos ___(5)___ o cervezas mexicanas. Les gusta quedar con sus amigos hispanohablantes o les ___(6)___ mensajes con frecuencia. ¡Además así también pueden practicar su español! Salen mucho y ___(7)___ tarde, claro, como muchos hispanohablantes. Otros hacen cursos de bailes ___(8)___, cantan en un coro español y siempre ven las películas ___(9)___ en versión original.</div>
+        <div class="question-group"><div class="question-label">1.</div><input type="text" id="q1_1" placeholder="(1)..."><div class="feedback" id="fb1_1"></div></div>
+        <div class="question-group"><div class="question-label">2.</div><input type="text" id="q1_2" placeholder="(2)..."><div class="feedback" id="fb1_2"></div></div>
+        <div class="question-group"><div class="question-label">3.</div><input type="text" id="q1_3" placeholder="(3)..."><div class="feedback" id="fb1_3"></div></div>
+        <div class="question-group"><div class="question-label">4.</div><input type="text" id="q1_4" placeholder="(4)..."><div class="feedback" id="fb1_4"></div></div>
+        <div class="question-group"><div class="question-label">5.</div><input type="text" id="q1_5" placeholder="(5)..."><div class="feedback" id="fb1_5"></div></div>
+        <div class="question-group"><div class="question-label">6.</div><input type="text" id="q1_6" placeholder="(6)..."><div class="feedback" id="fb1_6"></div></div>
+        <div class="question-group"><div class="question-label">7.</div><input type="text" id="q1_7" placeholder="(7)..."><div class="feedback" id="fb1_7"></div></div>
+        <div class="question-group"><div class="question-label">8.</div><input type="text" id="q1_8" placeholder="(8)..."><div class="feedback" id="fb1_8"></div></div>
+        <div class="question-group"><div class="question-label">9.</div><input type="text" id="q1_9" placeholder="(9)..."><div class="feedback" id="fb1_9"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">2a</span>El generador de verbos</div>
+        <div class="sub-exercise-title">a. Escribe los siguientes verbos en presente. ¡Cuidado, hay verbos regulares e irregulares!</div>
+        <div class="question-group"><div class="question-label">1. acostarse (él)</div><input type="text" id="q2a_1" placeholder="..."><div class="feedback" id="fb2a_1"></div></div>
+        <div class="question-group"><div class="question-label">2. hablar (tú)</div><input type="text" id="q2a_2" placeholder="..."><div class="feedback" id="fb2a_2"></div></div>
+        <div class="question-group"><div class="question-label">3. seguir (yo)</div><input type="text" id="q2a_3" placeholder="..."><div class="feedback" id="fb2a_3"></div></div>
+        <div class="question-group"><div class="question-label">4. jugar (ellos)</div><input type="text" id="q2a_4" placeholder="..."><div class="feedback" id="fb2a_4"></div></div>
+        <div class="question-group"><div class="question-label">5. pedir (ella)</div><input type="text" id="q2a_5" placeholder="..."><div class="feedback" id="fb2a_5"></div></div>
+        <div class="question-group"><div class="question-label">6. creer (nosotros)</div><input type="text" id="q2a_6" placeholder="..."><div class="feedback" id="fb2a_6"></div></div>
+        <div class="question-group"><div class="question-label">7. tener (usted)</div><input type="text" id="q2a_7" placeholder="..."><div class="feedback" id="fb2a_7"></div></div>
+        <div class="question-group"><div class="question-label">8. subir (vosotros)</div><input type="text" id="q2a_8" placeholder="..."><div class="feedback" id="fb2a_8"></div></div>
+        <div class="question-group"><div class="question-label">9. encontrar (yo)</div><input type="text" id="q2a_9" placeholder="..."><div class="feedback" id="fb2a_9"></div></div>
+        <div class="question-group"><div class="question-label">10. reírse (tú)</div><input type="text" id="q2a_10" placeholder="..."><div class="feedback" id="fb2a_10"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">2b</span>El infinitivo</div>
+        <div class="sub-exercise-title">b. Ahora escribe el infinitivo correspondiente a estos verbos.</div>
+        <div class="question-group"><div class="question-label">1. se identifica →</div><input type="text" id="q2b_1" placeholder="..."><div class="feedback" id="fb2b_1"></div></div>
+        <div class="question-group"><div class="question-label">2. elijo →</div><input type="text" id="q2b_2" placeholder="..."><div class="feedback" id="fb2b_2"></div></div>
+        <div class="question-group"><div class="question-label">3. pueden →</div><input type="text" id="q2b_3" placeholder="..."><div class="feedback" id="fb2b_3"></div></div>
+        <div class="question-group"><div class="question-label">4. sé →</div><input type="text" id="q2b_4" placeholder="..."><div class="feedback" id="fb2b_4"></div></div>
+        <div class="question-group"><div class="question-label">5. conocéis →</div><input type="text" id="q2b_5" placeholder="..."><div class="feedback" id="fb2b_5"></div></div>
+        <div class="question-group"><div class="question-label">6. salgo →</div><input type="text" id="q2b_6" placeholder="..."><div class="feedback" id="fb2b_6"></div></div>
+        <div class="question-group"><div class="question-label">7. vuelves →</div><input type="text" id="q2b_7" placeholder="..."><div class="feedback" id="fb2b_7"></div></div>
+        <div class="question-group"><div class="question-label">8. está →</div><input type="text" id="q2b_8" placeholder="..."><div class="feedback" id="fb2b_8"></div></div>
+        <div class="question-group"><div class="question-label">9. se sienten →</div><input type="text" id="q2b_9" placeholder="..."><div class="feedback" id="fb2b_9"></div></div>
+        <div class="question-group"><div class="question-label">10. soñáis →</div><input type="text" id="q2b_10" placeholder="..."><div class="feedback" id="fb2b_10"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">3</span>El español y yo<span class="teacher-review-badge">📝 يصححه المدرس</span></div>
+        <div class="exercise-instruction">Formula las frases con las siguientes palabras.</div>
+        <div class="word-bank"><span>te</span><span>a mí</span><span>a usted</span><span>a vosotros</span><span>me</span><span>a Regina</span><span>le</span><span>os</span><span>a nosotros</span><span>nos</span><span>le</span><span>a ti</span></div>
+        <div class="teacher-review-note">📝 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>
+        <div class="question-group"><div class="question-label">1. usted / aburrir los ejercicios de gramática →</div><textarea id="q3_1" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_1"></div></div>
+        <div class="question-group"><div class="question-label">2. yo / encantar estudiar español →</div><textarea id="q3_2" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_2"></div></div>
+        <div class="question-group"><div class="question-label">3. vosotros / interesar la información cultural →</div><textarea id="q3_3" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_3"></div></div>
+        <div class="question-group"><div class="question-label">4. Regina / costar la gramática →</div><textarea id="q3_4" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_4"></div></div>
+        <div class="question-group"><div class="question-label">5. tú / aburrir leer varias veces el mismo texto →</div><textarea id="q3_5" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_5"></div></div>
+        <div class="question-group"><div class="question-label">6. nosotros / gustar hablar con hispanohablantes →</div><textarea id="q3_6" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb3_6"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">4</span>Gustos y preferencias</div>
+        <div class="exercise-instruction">Lee la ficha que ha rellenado Rebeca para su curso de español. Escribe después un texto breve sobre ella y sus preferencias a la hora de aprender español.</div>
+        <div class="word-bank"><span>hacer</span><span>tener</span><span>ser</span><span>estar</span><span>estudiar</span><span>aprender</span><span>vivir</span><span>llamarse</span><span>gustar</span><span>costar</span><span>aburrir</span><span>encantar</span><span>interesar</span><span>preferir</span></div>
+        <div class="question-text" style="background: rgba(52,73,94,0.4); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <strong>Nombre:</strong> Rebecca Fischer | <strong>Ciudad:</strong> Hamburgo<br>
+            <strong>Profesión:</strong> empleada en un banco | <strong>Edad:</strong> 37 años<br>
+            <strong>Estado civil:</strong> casada, tres hijos | <strong>Primera clase:</strong> enero 2017<br>
+            <strong>Aprende español para:</strong> viajar a Chile<br><br>
+            👍 jugar en clase, hablar, las audiciones, las noticias de actualidad, la cultura<br>
+            👎 la pronunciación, los ejercicios de gramática, escribir, hacer los deberes, leer textos largos
+        </div>
+        <div class="whatsapp-note"><span class="icon">📱</span><strong>تمرين مقالي:</strong> ابعت الإجابة على جروب الواتس اب ليصححها المدرس</div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">5</span>¡Cuánto tiempo!</div>
+        <div class="exercise-instruction">El primer día de curso los alumnos tienen mucho de qué hablar. Completa las frases con <strong>desde</strong> o <strong>desde hace</strong>.</div>
+        <div class="question-group"><div class="question-text">1. La compañera nueva se llama Marina y es suiza, pero vive en Alemania __________ el otoño.</div><select id="q5_1"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_1"></div></div>
+        <div class="question-group"><div class="question-text">2. Tom tiene un nuevo trabajo __________ unos días.</div><select id="q5_2"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_2"></div></div>
+        <div class="question-group"><div class="question-text">3. El hijo de Martina, Frederick, aprende español __________ tres años.</div><select id="q5_3"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_3"></div></div>
+        <div class="question-group"><div class="question-text">4. Hace mucho que no veo a Silvana. No ha asistido a clase __________ diciembre.</div><select id="q5_4"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_4"></div></div>
+        <div class="question-group"><div class="question-text">5. ¿Jana y John se van a vivir a Madrid? ¡Pero si aprenden español __________ solo dos meses!</div><select id="q5_5"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_5"></div></div>
+        <div class="question-group"><div class="question-text">6. Sí, es que han estudiado español __________ su primer viaje a España en 2016.</div><select id="q5_6"><option value="">-- اختر --</option><option value="desde">desde</option><option value="desde hace">desde hace</option></select><div class="feedback" id="fb5_6"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">6</span>Mi portfolio de las lenguas</div>
+        <div class="exercise-instruction">¿Con qué idiomas has tenido ya contacto? Completa la tabla.</div>
+        <div class="whatsapp-note"><span class="icon">📱</span><strong>تمرين مقالي:</strong> جهز إجاباتك عن الأسئلة التالية وابعثها على جروب الواتس اب ليصححها المدرس:</div>
+        <div class="question-text" style="padding-right: 15px; direction: ltr; text-align: left;">- Idioma:</div>
+        <div class="question-text" style="padding-right: 15px; direction: ltr; text-align: left;">- ¿Cómo lo has aprendido?</div>
+        <div class="question-text" style="padding-right: 15px; direction: ltr; text-align: left;">- ¿En qué situaciones lo usas?</div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">7</span>Consejos prácticos<span class="teacher-review-badge">📝 يصححه المدرس</span></div>
+        <div class="sub-exercise-title">7a.</div>
+        <div class="exercise-instruction">Escucha lo que cuatro alumnos dicen acerca de las dificultades que tienen a la hora de aprender un idioma. Da un consejo a cada uno, utiliza las expresiones: <strong>Tienes que, Lo mejor es, Es (muy) útil o Puedes.</strong></div>
+        <div class="word-bank"><span>escuchar la radio</span><span>participar en una tertulia con nativos</span><span>hacer un intercambio</span><span>leer libros de lectura graduada</span><span>cantar canciones</span><span>escribir a amigos hispanohablantes</span><span>escribir frases con palabras nuevas</span><span>escuchar canciones en español</span></div>
+        <div class="audio-note"><span class="icon">🎧</span>للاستماع للحوارات (1-4)، ارجع لجروب الواتس اب</div>
+        <div class="teacher-review-note">📝 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>
+        <div class="question-group"><div class="question-label">1.</div><textarea id="q7a_1" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7a_1"></div></div>
+        <div class="question-group"><div class="question-label">2.</div><textarea id="q7a_2" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7a_2"></div></div>
+        <div class="question-group"><div class="question-label">3.</div><textarea id="q7a_3" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7a_3"></div></div>
+        <div class="question-group"><div class="question-label">4.</div><textarea id="q7a_4" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7a_4"></div></div>
+
+        <div class="sub-exercise-title">7b.</div>
+        <div class="exercise-instruction">Escucha ahora los consejos que dan estas personas y escríbelos.</div>
+        <div class="audio-note"><span class="icon">🎧</span>للاستماع للحوارات (5-8)، ارجع لجروب الواتس اب</div>
+        <div class="question-group"><div class="question-label">Diálogo 1:</div><textarea id="q7b_1" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7b_1"></div></div>
+        <div class="question-group"><div class="question-label">Diálogo 2:</div><textarea id="q7b_2" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7b_2"></div></div>
+        <div class="question-group"><div class="question-label">Diálogo 3:</div><textarea id="q7b_3" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7b_3"></div></div>
+        <div class="question-group"><div class="question-label">Diálogo 4:</div><textarea id="q7b_4" placeholder="اكتب النصيحة..."></textarea><div class="feedback" id="fb7b_4"></div></div>
+
+        <div class="sub-exercise-title">7c.</div>
+        <div class="exercise-instruction">Y para estas personas, ¿qué consejos tienes?</div>
+        <div class="whatsapp-note"><span class="icon">📱</span><strong>تمرين مقالي:</strong> اكتب نصائحك للحالات التالية، ثم <strong>ابعتها على جروب الواتس اب</strong>:</div>
+        <div class="question-text" style="direction: ltr; text-align: left; background: rgba(52, 73, 94, 0.2); padding: 10px; border-radius: 8px; margin-bottom: 8px;">1. El Sr. Martínez necesita aprender inglés en menos de tres meses.</div>
+        <div class="question-text" style="direction: ltr; text-align: left; background: rgba(52, 73, 94, 0.2); padding: 10px; border-radius: 8px; margin-bottom: 8px;">2. Lucía quiere correr en el maratón de Nueva York el año próximo.</div>
+        <div class="question-text" style="direction: ltr; text-align: left; background: rgba(52, 73, 94, 0.2); padding: 10px; border-radius: 8px;">3. Dimitri va a participar en un concurso de piano.</div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">8</span>Participios irregulares</div>
+        <div class="exercise-instruction">Relaciona los siguientes participios irregulares con los verbos en infinitivo.</div>
+        <div class="question-group"><div class="question-label">1. hacer →</div><select id="q8_1"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_1"></div></div>
+        <div class="question-group"><div class="question-label">2. ver →</div><select id="q8_2"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_2"></div></div>
+        <div class="question-group"><div class="question-label">3. escribir →</div><select id="q8_3"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_3"></div></div>
+        <div class="question-group"><div class="question-label">4. romper →</div><select id="q8_4"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_4"></div></div>
+        <div class="question-group"><div class="question-label">5. volver →</div><select id="q8_5"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_5"></div></div>
+        <div class="question-group"><div class="question-label">6. poner →</div><select id="q8_6"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_6"></div></div>
+        <div class="question-group"><div class="question-label">7. decir →</div><select id="q8_7"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_7"></div></div>
+        <div class="question-group"><div class="question-label">8. abrir →</div><select id="q8_8"><option value="">-- اختر --</option><option value="a">a. visto</option><option value="b">b. abierto</option><option value="c">c. escrito</option><option value="d">d. dicho</option><option value="e">e. puesto</option><option value="f">f. hecho</option><option value="g">g. roto</option><option value="h">h. vuelto</option></select><div class="feedback" id="fb8_8"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">9</span>¿Con pretérito perfecto?</div>
+        <div class="exercise-instruction">Escribe cinco frases sobre ti en pretérito perfecto con los siguientes marcadores temporales.</div>
+        <div class="word-bank"><span>esta mañana</span><span>hoy</span><span>ayer</span><span>este año</span><span>últimamente</span><span>el año pasado</span><span>esta semana</span><span>en 2016</span></div>
+        <div class="whatsapp-note"><span class="icon">📱</span><strong>تمرين مقالي:</strong> اكتب 5 جمل + حدد الكلمات الـ3 التي لا تُستخدم، ثم <strong>ابعت الإجابة على جروب الواتس اب</strong></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">10a</span>¿Qué ha hecho últimamente?<span class="teacher-review-badge">📝 يصححه المدرس</span></div>
+        <div class="exercise-instruction">¿Qué ha hecho Emilio últimamente? Escribe frases con las expresiones que aparecen debajo.</div>
+        <div class="example-solved">✅ <strong>1.</strong> salir a cenar con amigos → <em>Emilio ha salido a cenar con amigos.</em></div>
+        <div class="teacher-review-note">📝 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>
+        <div class="question-group"><div class="question-label">2. trabajar en un proyecto interesante →</div><textarea id="q10_2" placeholder="Ha..."></textarea><div class="feedback" id="fb10_2"></div></div>
+        <div class="question-group"><div class="question-label">3. poner sus cosas en la maleta →</div><textarea id="q10_3" placeholder="Ha..."></textarea><div class="feedback" id="fb10_3"></div></div>
+        <div class="question-group"><div class="question-label">4. invitar a una chica al cine →</div><textarea id="q10_4" placeholder="Ha..."></textarea><div class="feedback" id="fb10_4"></div></div>
+        <div class="question-group"><div class="question-label">5. pasear en el bosque →</div><textarea id="q10_5" placeholder="Ha..."></textarea><div class="feedback" id="fb10_5"></div></div>
+        <div class="question-group"><div class="question-label">6. volver de un viaje largo →</div><textarea id="q10_6" placeholder="Ha..."></textarea><div class="feedback" id="fb10_6"></div></div>
+        <div class="question-group"><div class="question-label">7. conocer a sus nuevos compañeros de trabajo →</div><textarea id="q10_7" placeholder="Ha..."></textarea><div class="feedback" id="fb10_7"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">10b</span>Actividades de tus compañeros</div>
+        <div class="exercise-instruction">¿Te acuerdas de las actividades que tus compañeros de curso hacen para practicar español? Escribe tres frases en pretérito perfecto.</div>
+        <div class="example-solved">✅ <strong>Ejemplo:</strong> <em>Marc ha hecho un intercambio con un chico mexicano.</em></div>
+        <div class="whatsapp-note"><span class="icon">📱</span><strong>تمرين مقالي:</strong> اكتب 3 جمل، ثم <strong>ابعتها على جروب الواتس اب</strong></div>
+    </div>
+
+    <div class="section-divider"><span>📖 Mis palabras</span></div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">11</span>Para aprender español<span class="teacher-review-badge">📝 يصححه المدرس</span></div>
+        <div class="exercise-instruction">¡Refresca tu vocabulario! Completa los mapas conceptuales con las expresiones que correspondan.</div>
+        <div class="word-bank"><span>en una tertulia</span><span>los deberes</span><span>palabras nuevas</span><span>las audiciones</span><span>un idioma</span><span>a clase</span><span>un intercambio</span><span>en clase</span><span>canciones</span><span>vocabulario</span><span>un curso en línea</span></div>
+        <div class="teacher-review-note">📝 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>
+        <div class="question-group"><div class="question-label">APRENDER:</div><textarea id="q11_1" placeholder="..."></textarea><div class="feedback" id="fb11_1"></div></div>
+        <div class="question-group"><div class="question-label">PARTICIPAR:</div><textarea id="q11_2" placeholder="..."></textarea><div class="feedback" id="fb11_2"></div></div>
+        <div class="question-group"><div class="question-label">ASISTIR:</div><textarea id="q11_3" placeholder="..."></textarea><div class="feedback" id="fb11_3"></div></div>
+        <div class="question-group"><div class="question-label">HACER:</div><textarea id="q11_4" placeholder="..."></textarea><div class="feedback" id="fb11_4"></div></div>
+        <div class="question-group"><div class="question-label">ESCUCHAR:</div><textarea id="q11_5" placeholder="..."></textarea><div class="feedback" id="fb11_5"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">12</span>Actividades de ocio<span class="teacher-review-badge">📝 يصححه المدرس</span></div>
+        <div class="exercise-instruction">Completa las expresiones con las siguientes palabras. Hay varias posibilidades.</div>
+        <div class="word-bank"><span>tarde</span><span>en un coro</span><span>mensajes</span><span>música</span><span>un curso de cocina</span><span>de vacaciones</span><span>con los amigos</span><span>la guitarra</span><span>películas en versión original</span></div>
+        <div class="teacher-review-note">📝 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>
+        <div class="question-group"><div class="question-label">1. escribir ___</div><textarea id="q12_1" placeholder="..."></textarea><div class="feedback" id="fb12_1"></div></div>
+        <div class="question-group"><div class="question-label">2. ver ___</div><textarea id="q12_2" placeholder="..."></textarea><div class="feedback" id="fb12_2"></div></div>
+        <div class="question-group"><div class="question-label">3. tocar ___</div><textarea id="q12_3" placeholder="..."></textarea><div class="feedback" id="fb12_3"></div></div>
+        <div class="question-group"><div class="question-label">4. hacer ___</div><textarea id="q12_4" placeholder="..."></textarea><div class="feedback" id="fb12_4"></div></div>
+        <div class="question-group"><div class="question-label">5. ir ___</div><textarea id="q12_5" placeholder="..."></textarea><div class="feedback" id="fb12_5"></div></div>
+        <div class="question-group"><div class="question-label">6. escuchar ___</div><textarea id="q12_6" placeholder="..."></textarea><div class="feedback" id="fb12_6"></div></div>
+        <div class="question-group"><div class="question-label">7. acostarse ___</div><textarea id="q12_7" placeholder="..."></textarea><div class="feedback" id="fb12_7"></div></div>
+        <div class="question-group"><div class="question-label">8. cantar ___</div><textarea id="q12_8" placeholder="..."></textarea><div class="feedback" id="fb12_8"></div></div>
+        <div class="question-group"><div class="question-label">9. quedar ___</div><textarea id="q12_9" placeholder="..."></textarea><div class="feedback" id="fb12_9"></div></div>
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">13</span>¿Quién es?</div>
+        <div class="exercise-instruction">¿A qué tipo de relación personal corresponden las siguientes definiciones?</div>
+        <div class="question-group"><div class="question-text">1. Es una persona que hace el mismo curso que tú.</div><select id="q13_1"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_1"></div></div>
+        <div class="question-group"><div class="question-text">2. Es la persona que enseña en sus clases.</div><select id="q13_2"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_2"></div></div>
+        <div class="question-group"><div class="question-text">3. Es la persona que recibe una clase.</div><select id="q13_3"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_3"></div></div>
+        <div class="question-group"><div class="question-text">4. Es una persona con la que tienes una buena relación y con la que haces muchas actividades en tu tiempo libre.</div><select id="q13_4"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_4"></div></div>
+        <div class="question-group"><div class="question-text">5. Es una persona con la que trabajas.</div><select id="q13_5"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_5"></div></div>
+        <div class="question-group"><div class="question-text">6. Es una persona que vive al lado de tu casa.</div><select id="q13_6"><option value="">-- اختر --</option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option></select><div class="feedback" id="fb13_6"></div></div>
+    </div>
+
+    <div class="section-divider"><span>🔊 Sonidos del español</span></div>
+
+    <div class="exercise">
+        <div class="exercise-title"><span class="num">14</span>Separación de sílabas</div>
+        <div class="exercise-instruction">Lee en voz alta las siguientes palabras y separa las sílabas como en el ejemplo.</div>
+        <div class="syllable-example"><span>per - so - na</span></div>
+        <div class="audio-note"><span class="icon">🎧</span>للاستماع والتحقق (14b)، ارجع لجروب الواتس اب</div>
+        <div class="example-solved">✅ <strong>1. persona →</strong> per - so - na</div>
+        <div class="question-group"><div class="question-label">2. tarjeta →</div><input type="text" id="q14_2" placeholder="..."><div class="feedback" id="fb14_2"></div></div>
+        <div class="question-group"><div class="question-label">3. forma →</div><input type="text" id="q14_3" placeholder="..."><div class="feedback" id="fb14_3"></div></div>
+        <div class="question-group"><div class="question-label">4. amigos →</div><input type="text" id="q14_4" placeholder="..."><div class="feedback" id="fb14_4"></div></div>
+        <div class="question-group"><div class="question-label">5. películas →</div><input type="text" id="q14_5" placeholder="..."><div class="feedback" id="fb14_5"></div></div>
+        <div class="question-group"><div class="question-label">6. activa →</div><input type="text" id="q14_6" placeholder="..."><div class="feedback" id="fb14_6"></div></div>
+        <div class="question-group"><div class="question-label">7. algunos →</div><input type="text" id="q14_7" placeholder="..."><div class="feedback" id="fb14_7"></div></div>
+        <div class="question-group"><div class="question-label">8. español →</div><input type="text" id="q14_8" placeholder="..."><div class="feedback" id="fb14_8"></div></div>
+        <div class="question-group"><div class="question-label">9. traducir →</div><input type="text" id="q14_9" placeholder="..."><div class="feedback" id="fb14_9"></div></div>
+        <div class="question-group"><div class="question-label">10. libro →</div><input type="text" id="q14_10" placeholder="..."><div class="feedback" id="fb14_10"></div></div>
+    </div>
+
+</div>
+
+<div class="btn-container">
+    <button class="btn-submit" id="submitBtn" onclick="prepareSubmit()">✅ إرسال الإجابات</button>
+</div>
+
+<div class="results-box" id="batchResultsBox">
+    <h2>📊 نتيجة المحاولة</h2>
+    <div class="batch-result"><div class="label">عدد الأسئلة المُرسلة</div><div class="value" id="batchAnswered">0</div></div>
+    <div class="batch-result"><div class="label">✅ صح | ❌ خطأ | ⏳ بانتظار المدرس</div><div class="value">
+        <span style="color:#2ecc71" id="batchCorrect">0</span> | 
+        <span style="color:#e74c3c" id="batchWrong">0</span> | 
+        <span style="color:#9b59b6" id="batchPending">0</span>
+    </div></div>
+    <div class="status-message" id="batchStatusMessage"></div>
+</div>
+
+<div class="results-box final" id="finalResultsBox">
+    <h2>🎉 الواجب اكتمل!</h2>
+    <div class="final-score-display" id="finalScoreDisplay"></div>
+    <div class="progress-bar-container"><div class="progress-bar" id="finalProgressBar" style="width: 0%"></div></div>
+    <p id="finalMessage" style="font-size: 1.15em; margin-top: 15px; text-align:center; font-weight:600;"></p>
+</div>
+
+</div>
+
+<script>
+const LESSON_CONFIG = {
+    lessonId: 'A2.1_L1',
+    lessonName: 'Nueva Etapa',
+    levelDisplay: 'A2.1 - Lección 1',
+    totalQuestions: 92
+};
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loginLessonInfo').textContent = LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
+    document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
+    document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
+    document.getElementById('psTotal').textContent = LESSON_CONFIG.totalQuestions;
+    document.getElementById('psRemaining').textContent = LESSON_CONFIG.totalQuestions;
+    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
+});
+
+const safeStorage = {
+    _data: {},
+    setItem: function(key, value) { try { if (typeof localStorage !== 'undefined') { localStorage.setItem(key, value); return; } } catch(e) {} this._data[key] = value; },
+    getItem: function(key) { try { if (typeof localStorage !== 'undefined') { return localStorage.getItem(key); } } catch(e) {} return this._data[key] || null; },
+    removeItem: function(key) { try { if (typeof localStorage !== 'undefined') { localStorage.removeItem(key); return; } } catch(e) {} delete this._data[key]; }
+};
+
+let currentUser = { username: '', fullName: '' };
+let lockedAnswers = {};
+let totalCorrect = 0;
+let totalWrong = 0;
+let totalAnswered = 0;
+let totalPending = 0;
+let pendingSubmit = null;
+let lastFailedData = null;
+
+// ============================================================
+// 📚 الأسئلة الموضوعية - تصحيح تلقائي
+// ============================================================
+const AUTO_GRADED = {
+    q1_1: { answers: ['divertidos'], type: 'text' },
+    q1_2: { answers: ['aprender'], type: 'text' },
+    q1_3: { answers: ['bailan'], type: 'text' },
+    q1_4: { answers: ['escuchan'], type: 'text' },
+    q1_5: { answers: ['chilenos'], type: 'text' },
+    q1_6: { answers: ['escriben'], type: 'text' },
+    q1_7: { answers: ['se acuestan'], type: 'text' },
+    q1_8: { answers: ['latinos'], type: 'text' },
+    q1_9: { answers: ['españolas','espanolas'], type: 'text' },
+    
+    q2a_1: { answers: ['se acuesta'], type: 'text' },
+    q2a_2: { answers: ['hablas'], type: 'text' },
+    q2a_3: { answers: ['sigo'], type: 'text' },
+    q2a_4: { answers: ['juegan'], type: 'text' },
+    q2a_5: { answers: ['pide'], type: 'text' },
+    q2a_6: { answers: ['creemos'], type: 'text' },
+    q2a_7: { answers: ['tiene'], type: 'text' },
+    q2a_8: { answers: ['subís','subis'], type: 'text' },
+    q2a_9: { answers: ['encuentro'], type: 'text' },
+    q2a_10: { answers: ['te ríes','te ries'], type: 'text' },
+    
+    q2b_1: { answers: ['identificarse'], type: 'text' },
+    q2b_2: { answers: ['elegir'], type: 'text' },
+    q2b_3: { answers: ['poder'], type: 'text' },
+    q2b_4: { answers: ['saber'], type: 'text' },
+    q2b_5: { answers: ['conocer'], type: 'text' },
+    q2b_6: { answers: ['salir'], type: 'text' },
+    q2b_7: { answers: ['volver'], type: 'text' },
+    q2b_8: { answers: ['estar'], type: 'text' },
+    q2b_9: { answers: ['sentirse'], type: 'text' },
+    q2b_10: { answers: ['soñar','sonar'], type: 'text' },
+    
+    q5_1: { answers: ['desde'], type: 'select' },
+    q5_2: { answers: ['desde hace'], type: 'select' },
+    q5_3: { answers: ['desde hace'], type: 'select' },
+    q5_4: { answers: ['desde'], type: 'select' },
+    q5_5: { answers: ['desde hace'], type: 'select' },
+    q5_6: { answers: ['desde'], type: 'select' },
+    
+    q8_1: { answers: ['f'], display: 'f. hecho', type: 'select' },
+    q8_2: { answers: ['a'], display: 'a. visto', type: 'select' },
+    q8_3: { answers: ['c'], display: 'c. escrito', type: 'select' },
+    q8_4: { answers: ['g'], display: 'g. roto', type: 'select' },
+    q8_5: { answers: ['h'], display: 'h. vuelto', type: 'select' },
+    q8_6: { answers: ['e'], display: 'e. puesto', type: 'select' },
+    q8_7: { answers: ['d'], display: 'd. dicho', type: 'select' },
+    q8_8: { answers: ['b'], display: 'b. abierto', type: 'select' },
+    
+    q13_1: { answers: ['compañero/-a de clase'], type: 'select' },
+    q13_2: { answers: ['profesor(a)'], type: 'select' },
+    q13_3: { answers: ['alumno/-a'], type: 'select' },
+    q13_4: { answers: ['amigo/-a'], type: 'select' },
+    q13_5: { answers: ['colega'], type: 'select' },
+    q13_6: { answers: ['vecino/-a'], type: 'select' },
+    
+    q14_2: { answers: ['tar-je-ta'], type: 'syllable' },
+    q14_3: { answers: ['for-ma'], type: 'syllable' },
+    q14_4: { answers: ['a-mi-gos'], type: 'syllable' },
+    q14_5: { answers: ['pe-lí-cu-las','pe-li-cu-las'], type: 'syllable' },
+    q14_6: { answers: ['ac-ti-va'], type: 'syllable' },
+    q14_7: { answers: ['al-gu-nos'], type: 'syllable' },
+    q14_8: { answers: ['es-pa-ñol','es-pa-nol'], type: 'syllable' },
+    q14_9: { answers: ['tra-du-cir'], type: 'syllable' },
+    q14_10: { answers: ['li-bro'], type: 'syllable' }
+};
+
+// ============================================================
+// 📝 الأسئلة الكتابية - يصححها المدرس (مع السياق الكامل)
+// ============================================================
+const TEACHER_GRADED_CONTEXT = {
+    q3_1: {
+        questionText: 'usted / aburrir los ejercicios de gramática',
+        expectedAnswer: 'A usted le aburren los ejercicios de gramática',
+        rule: 'usted → le، والفعل جمع (los ejercicios) → aburren'
+    },
+    q3_2: {
+        questionText: 'yo / encantar estudiar español',
+        expectedAnswer: 'A mí me encanta estudiar español',
+        rule: 'yo → a mí + me، المصدر مفرد → encanta'
+    },
+    q3_3: {
+        questionText: 'vosotros / interesar la información cultural',
+        expectedAnswer: 'A vosotros os interesa la información cultural',
+        rule: 'vosotros → os، la información مفرد → interesa'
+    },
+    q3_4: {
+        questionText: 'Regina / costar la gramática',
+        expectedAnswer: 'A Regina le cuesta la gramática',
+        rule: 'اسم علم → le، la gramática مفرد → cuesta'
+    },
+    q3_5: {
+        questionText: 'tú / aburrir leer varias veces el mismo texto',
+        expectedAnswer: 'A ti te aburre leer varias veces el mismo texto',
+        rule: 'tú → a ti + te، المصدر مفرد → aburre'
+    },
+    q3_6: {
+        questionText: 'nosotros / gustar hablar con hispanohablantes',
+        expectedAnswer: 'A nosotros nos gusta hablar con hispanohablantes',
+        rule: 'nosotros → nos، المصدر مفرد → gusta'
+    },
+    
+    q7a_1: {
+        questionText: 'Ej 7a.1 - نصيحة لطالب (استمع للحوار)',
+        expectedAnswer: 'Lo mejor es leer libros de lectura graduada',
+        rule: 'استخدم: Tienes que / Lo mejor es / Es útil / Puedes + نصيحة منطقية'
+    },
+    q7a_2: {
+        questionText: 'Ej 7a.2 - نصيحة للحوار الثاني',
+        expectedAnswer: 'Es muy útil escuchar la radio y cantar canciones',
+        rule: 'نصيحة منطقية للاستماع'
+    },
+    q7a_3: {
+        questionText: 'Ej 7a.3 - نصيحة للحوار الثالث',
+        expectedAnswer: 'Puedes hacer un intercambio',
+        rule: 'نصيحة منطقية للمحادثة'
+    },
+    q7a_4: {
+        questionText: 'Ej 7a.4 - نصيحة للحوار الرابع',
+        expectedAnswer: 'Tienes que escribir a amigos hispanohablantes',
+        rule: 'نصيحة منطقية للكتابة'
+    },
+    
+    q7b_1: {
+        questionText: 'Diálogo 1 - النصيحة المسموعة',
+        expectedAnswer: 'Puedes escribir frases con las palabras nuevas de cada clase',
+        rule: 'نصيحة للمفردات'
+    },
+    q7b_2: {
+        questionText: 'Diálogo 2 - النصيحة المسموعة',
+        expectedAnswer: 'Es muy útil escuchar la radio y cantar canciones',
+        rule: 'نصيحة للاستماع'
+    },
+    q7b_3: {
+        questionText: 'Diálogo 3 - النصيحة المسموعة',
+        expectedAnswer: 'Tienes que participar en las tertulias con nativos de lengua inglesa',
+        rule: 'نصيحة للممارسة'
+    },
+    q7b_4: {
+        questionText: 'Diálogo 4 - النصيحة المسموعة',
+        expectedAnswer: 'Lo mejor es leer libros de lectura graduada y escribir a amigos hispanohablantes',
+        rule: 'نصيحة شاملة'
+    },
+    
+    q10_2: {
+        questionText: 'Emilio + (trabajar en un proyecto interesante) في pretérito perfecto',
+        expectedAnswer: 'Ha trabajado en un proyecto interesante',
+        rule: 'ha + participio (trabajar → trabajado)'
+    },
+    q10_3: {
+        questionText: 'Emilio + (poner sus cosas en la maleta) في pretérito perfecto',
+        expectedAnswer: 'Ha puesto sus cosas en la maleta',
+        rule: 'participio غير منتظم: poner → puesto'
+    },
+    q10_4: {
+        questionText: 'Emilio + (invitar a una chica al cine) في pretérito perfecto',
+        expectedAnswer: 'Ha invitado a una chica al cine',
+        rule: 'participio: invitar → invitado'
+    },
+    q10_5: {
+        questionText: 'Emilio + (pasear en el bosque) في pretérito perfecto',
+        expectedAnswer: 'Ha paseado en el bosque',
+        rule: 'participio: pasear → paseado'
+    },
+    q10_6: {
+        questionText: 'Emilio + (volver de un viaje largo) في pretérito perfecto',
+        expectedAnswer: 'Ha vuelto de un viaje largo',
+        rule: 'participio غير منتظم: volver → vuelto'
+    },
+    q10_7: {
+        questionText: 'Emilio + (conocer a sus nuevos compañeros de trabajo) في pretérito perfecto',
+        expectedAnswer: 'Ha conocido a sus nuevos compañeros de trabajo',
+        rule: 'participio: conocer → conocido'
+    },
+    
+    q11_1: {
+        questionText: 'APRENDER + ? (اختر من Word Bank)',
+        expectedAnswer: 'palabras nuevas / un idioma / vocabulario / canciones',
+        rule: 'كلمات تتعلق بالتعلم'
+    },
+    q11_2: {
+        questionText: 'PARTICIPAR + ? (اختر من Word Bank)',
+        expectedAnswer: 'en una tertulia / en clase',
+        rule: 'PARTICIPAR EN + شيء'
+    },
+    q11_3: {
+        questionText: 'ASISTIR + ? (اختر من Word Bank)',
+        expectedAnswer: 'a clase',
+        rule: 'ASISTIR A + مكان'
+    },
+    q11_4: {
+        questionText: 'HACER + ? (اختر من Word Bank)',
+        expectedAnswer: 'los deberes / un intercambio / un curso en línea',
+        rule: 'HACER + أنشطة'
+    },
+    q11_5: {
+        questionText: 'ESCUCHAR + ? (اختر من Word Bank)',
+        expectedAnswer: 'las audiciones / canciones',
+        rule: 'ESCUCHAR + أشياء صوتية'
+    },
+    
+    q12_1: { questionText: 'escribir + ?', expectedAnswer: 'mensajes', rule: 'escribir + شيء يُكتب' },
+    q12_2: { questionText: 'ver + ?', expectedAnswer: 'películas en versión original', rule: 'ver + شيء يُشاهَد' },
+    q12_3: { questionText: 'tocar + ?', expectedAnswer: 'la guitarra / música', rule: 'tocar + آلة موسيقية أو موسيقى' },
+    q12_4: { questionText: 'hacer + ?', expectedAnswer: 'un curso de cocina / música', rule: 'hacer + نشاط' },
+    q12_5: { questionText: 'ir + ?', expectedAnswer: 'de vacaciones / con los amigos', rule: 'ir + de/con' },
+    q12_6: { questionText: 'escuchar + ?', expectedAnswer: 'música', rule: 'escuchar + شيء صوتي' },
+    q12_7: { questionText: 'acostarse + ?', expectedAnswer: 'tarde', rule: 'acostarse + ظرف زمن' },
+    q12_8: { questionText: 'cantar + ?', expectedAnswer: 'en un coro', rule: 'cantar en + مكان' },
+    q12_9: { questionText: 'quedar + ?', expectedAnswer: 'con los amigos', rule: 'quedar con + أشخاص' }
+};
+
+const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
+const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
+
+const explanations = {
+    q1_1: 'صفة جمع مذكر تتبع nuestros estudiantes',
+    q1_2: 'بعد algo que نستخدم المصدر',
+    q1_3: 'الفاعل ellos → bailan',
+    q1_4: 'الفاعل ellos → escuchan',
+    q1_5: 'صفة جمع مذكر تتبع vinos',
+    q1_6: 'الفاعل ellos → escriben',
+    q1_7: 'فعل انعكاسي + o→ue مع ellos',
+    q1_8: 'صفة جمع مذكر تتبع bailes',
+    q1_9: 'صفة جمع مؤنث تتبع películas',
+    q2a_1: 'acostarse انعكاسي + o→ue',
+    q2a_3: 'seguir: g→ج تختفي u: sigo',
+    q5_1: 'el otoño = نقطة زمنية → desde',
+    q5_2: 'unos días = فترة → desde hace',
+    q14_9: 'tr لا تنفصل في المقاطع'
+};
+
+function normalize(str) {
+    return String(str || '').trim().toLowerCase()
+        .replace(/\s+/g, ' ').replace(/\./g, '').replace(/,$/g, '')
+        .replace(/¿/g, '').replace(/¡/g, '').replace(/→/g, '').replace(/\u00a0/g, ' ');
+}
+
+function normalizeSyllable(str) {
+    return String(str || '').trim().toLowerCase()
+        .replace(/\s+/g, '').replace(/–/g, '-').replace(/—/g, '-').replace(/\s*-\s*/g, '-');
+}
+
+function gradeAutoQuestion(qId, value) {
+    const model = AUTO_GRADED[qId];
+    if (!model) return null;
+    const userAns = String(value || '').trim();
+    if (!userAns) return null;
+    
+    let isCorrect = false;
+    if (model.type === 'syllable') {
+        isCorrect = model.answers.some(a => normalizeSyllable(a) === normalizeSyllable(userAns));
+    } else if (model.type === 'select') {
+        isCorrect = model.answers.some(a => String(a).toLowerCase() === userAns.toLowerCase());
+    } else {
+        isCorrect = model.answers.some(a => normalize(a) === normalize(userAns));
+    }
+    
+    const correctDisplay = model.display || model.answers[0];
+    return {
+        isCorrect: isCorrect,
+        feedback: isCorrect ? '✅ صحيح!' : `❌ الإجابة الصحيحة: ${correctDisplay}` + (explanations[qId] ? `<br>💡 ${explanations[qId]}` : '')
+    };
+}
+
+function showLoading(text, subText) {
+    document.getElementById('loadingText').textContent = text || 'جاري التحميل...';
+    document.getElementById('loadingSubText').textContent = subText || '';
+    document.getElementById('loadingOverlay').classList.add('show');
+}
+
+function hideLoading() {
+    document.getElementById('loadingOverlay').classList.remove('show');
+}
+
+async function sendDataViaGET(data) {
+    const dataStr = JSON.stringify(data);
+    if (dataStr.length > 7000) return sendDataViaForm(data);
+    const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(dataStr);
+    try { await fetch(url, { mode: 'no-cors' }); return { success: 'unknown' }; }
+    catch (err) { throw err; }
+}
+
+function sendDataViaForm(data) {
+    return new Promise((resolve, reject) => {
+        const iframeName = 'submit_iframe_' + Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = SCRIPT_URL;
+        form.target = iframeName;
+        form.style.display = 'none';
+        const payloadInput = document.createElement('input');
+        payloadInput.type = 'hidden';
+        payloadInput.name = 'data';
+        payloadInput.value = JSON.stringify(data);
+        form.appendChild(payloadInput);
+        const actionInput = document.createElement('input');
+        actionInput.type = 'hidden';
+        actionInput.name = 'action';
+        actionInput.value = 'saveProgress';
+        form.appendChild(actionInput);
+        document.body.appendChild(form);
+        let resolved = false;
+        const timeout = setTimeout(() => { if (!resolved) { resolved = true; cleanup(); resolve({ success: 'unknown' }); } }, 5000);
+        const cleanup = () => {
+            try { document.body.removeChild(form); } catch(e){}
+            setTimeout(() => { try { document.body.removeChild(iframe); } catch(e){} }, 500);
+        };
+        iframe.onload = function() { if (!resolved) { resolved = true; clearTimeout(timeout); cleanup(); resolve({ success: 'unknown' }); } };
+        iframe.onerror = function() { if (!resolved) { resolved = true; clearTimeout(timeout); cleanup(); reject(new Error('Form failed')); } };
+        try { form.submit(); } catch (err) { resolved = true; clearTimeout(timeout); cleanup(); reject(err); }
+    });
+}
+
+async function sendAndVerify(data) {
+    try { await sendDataViaGET(data); } catch (err) {
+        return { verified: false, error: err.message };
+    }
+    await new Promise(r => setTimeout(r, 2500));
+    try {
+        const verifyUrl = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(data.username) + '&lessonId=' + encodeURIComponent(data.lessonId) + '&_t=' + Date.now();
+        const response = await fetch(verifyUrl);
+        const result = await response.json();
+        if (result.status === 'success') {
+            const serverAnswered = parseInt(result.totalAnswered) || 0;
+            const serverPending = parseInt(result.totalPending) || 0;
+            if (serverAnswered + serverPending >= data.totalAnswered + data.totalPending) return { verified: true };
+            return { verified: false, error: 'البيانات لم تصل بالكامل' };
+        }
+    } catch (err) {
+        return { verified: false, error: 'فشل التحقق' };
+    }
+    return { verified: false, error: 'فشل التحقق' };
+}
+
+async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+    let lastError;
+    for (let i = 0; i < maxRetries; i++) {
+        try { return await fetch(url, options); }
+        catch (err) { lastError = err; if (i < maxRetries - 1) await new Promise(r => setTimeout(r, 1000 * (i + 1))); }
+    }
+    throw lastError;
+}
+
+async function doLogin() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const errBox = document.getElementById('loginError');
+    errBox.style.display = 'none';
+    if (!username || !password) {
+        errBox.textContent = '⚠️ ادخل اسم المستخدم وكلمة السر';
+        errBox.style.display = 'block';
+        return;
+    }
+    showLoading('جاري التحقق...');
+    try {
+        const url = SCRIPT_URL + '?action=login&username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
+        const response = await fetchWithRetry(url);
+        const result = await response.json();
+        if (result.status === 'success') {
+            currentUser.username = result.username;
+            currentUser.fullName = result.fullName;
+            safeStorage.setItem('ia_currentUser_' + LESSON_CONFIG.lessonId, JSON.stringify(currentUser));
+            await loadProgress();
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('userFullName').textContent = currentUser.fullName;
+            hideLoading();
+        } else {
+            hideLoading();
+            errBox.textContent = '❌ ' + (result.message || 'بيانات غير صحيحة');
+            errBox.style.display = 'block';
+        }
+    } catch (err) {
+        hideLoading();
+        errBox.textContent = '❌ خطأ في الاتصال';
+        errBox.style.display = 'block';
+    }
+}
+
+function logout() {
+    if (confirm('هل تريد تسجيل الخروج؟')) {
+        safeStorage.removeItem('ia_currentUser_' + LESSON_CONFIG.lessonId);
+        location.reload();
+    }
+}
+
+async function loadProgress() {
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const response = await fetchWithRetry(url);
+        const result = await response.json();
+        if (result.status === 'success') {
+            totalCorrect = parseInt(result.totalCorrect) || 0;
+            totalWrong = parseInt(result.totalWrong) || 0;
+            totalAnswered = parseInt(result.totalAnswered) || 0;
+            totalPending = parseInt(result.totalPending) || 0;
+            if (result.lockedAnswers && result.lockedAnswers !== '{}') {
+                try {
+                    lockedAnswers = JSON.parse(result.lockedAnswers);
+                    Object.keys(lockedAnswers).forEach(qId => displayLockedAnswer(qId, lockedAnswers[qId]));
+                } catch (e) { console.error('parse error', e); }
+            }
+            updateProgressDisplay();
+            checkIfComplete();
+        }
+    } catch (err) { console.error('خطأ:', err); }
+}
+
+function displayLockedAnswer(qId, info) {
+    const el = document.getElementById(qId);
+    if (!el) return;
+    el.value = info.value;
+    el.disabled = true;
+    const fb = document.getElementById('fb' + qId.substring(1));
+    
+    if (info.status === 'pending') {
+        el.classList.add('locked-pending');
+        if (fb) {
+            fb.className = 'feedback pending';
+            fb.innerHTML = `<span class="lock-badge pending">⏳ بانتظار المدرس</span>تم استلام إجابتك وسيتم تصحيحها قريباً`;
+        }
+    } else if (info.isCorrect) {
+        el.classList.add('locked-correct');
+        if (fb) {
+            fb.className = 'feedback correct';
+            const reviewBy = info.reviewedBy ? `<br><small style="color:#bdc3c7">✏️ صححها المدرس</small>` : '';
+            fb.innerHTML = `<span class="lock-badge">🔒 صحيح</span>${info.feedback || '✅ إجابة صحيحة!'}${reviewBy}`;
+        }
+    } else {
+        el.classList.add('locked-wrong');
+        const model = AUTO_GRADED[qId];
+        const correctDisplay = model ? (model.display || model.answers[0]) : (info.expectedAnswer || '');
+        const reviewBy = info.reviewedBy ? `<br><small style="color:#bdc3c7">✏️ صححها المدرس</small>` : '';
+        if (fb) {
+            fb.className = 'feedback wrong';
+            let html = `<span class="lock-badge wrong">🔒 خطأ</span>❌ <strong>إجابتك:</strong> ${info.value}<br>`;
+            if (correctDisplay) html += `✅ <strong>الإجابة الصحيحة:</strong> ${correctDisplay}<br>`;
+            html += `💡 ${info.feedback || ''}${reviewBy}`;
+            fb.innerHTML = html;
+        }
+    }
+}
+
+function updateProgressDisplay() {
+    document.getElementById('psCorrect').textContent = totalCorrect;
+    document.getElementById('psWrong').textContent = totalWrong;
+    document.getElementById('psPending').textContent = totalPending;
+    document.getElementById('psAnswered').textContent = totalAnswered + totalPending;
+    document.getElementById('psRemaining').textContent = LESSON_CONFIG.totalQuestions - totalAnswered - totalPending;
+    const percentage = LESSON_CONFIG.totalQuestions > 0 
+        ? Math.round(((totalAnswered + totalPending) / LESSON_CONFIG.totalQuestions) * 100) : 0;
+    document.getElementById('psProgressBar').style.width = percentage + '%';
+}
+
+function checkIfComplete() {
+    if (totalAnswered + totalPending >= LESSON_CONFIG.totalQuestions && totalPending === 0) {
+        showFinalResult();
+    }
+}
+
+function showFinalResult() {
+    const finalBox = document.getElementById('finalResultsBox');
+    const sd = document.getElementById('finalScoreDisplay');
+    const msg = document.getElementById('finalMessage');
+    const pb = document.getElementById('finalProgressBar');
+    const percentage = Math.round((totalCorrect / LESSON_CONFIG.totalQuestions) * 100);
+    sd.textContent = `${totalCorrect} / ${LESSON_CONFIG.totalQuestions}  (${percentage}%)`;
+    pb.style.width = percentage + '%';
+    if (percentage >= 90) { sd.className = 'final-score-display excellent'; msg.innerHTML = '🌟 ممتاز! ¡Excelente!'; }
+    else if (percentage >= 70) { sd.className = 'final-score-display good'; msg.innerHTML = '👍 جيد جداً!'; }
+    else if (percentage >= 50) { sd.className = 'final-score-display average'; msg.innerHTML = '📖 راجع الدرس'; }
+    else { sd.className = 'final-score-display poor'; msg.innerHTML = '💪 محتاج تذاكر كويس'; }
+    finalBox.style.display = 'block';
+    document.getElementById('submitBtn').style.display = 'none';
+}
+
+function collectNewAnswers() {
+    const newAnswers = [];
+    ALL_QUESTIONS.forEach(qId => {
+        if (lockedAnswers[qId]) return;
+        const el = document.getElementById(qId);
+        if (!el) return;
+        const value = el.value;
+        if (!String(value).trim()) return;
+        newAnswers.push({ id: qId, value: value });
+    });
+    return newAnswers;
+}
+
+function prepareSubmit() {
+    const newAnswers = collectNewAnswers();
+    if (newAnswers.length === 0) {
+        alert('⚠️ لم تحل أي سؤال جديد!');
+        return;
+    }
+    pendingSubmit = newAnswers;
+    document.getElementById('confirmDialog').classList.add('show');
+}
+
+function cancelSubmit() {
+    document.getElementById('confirmDialog').classList.remove('show');
+    pendingSubmit = null;
+}
+
+async function confirmSubmit() {
+    document.getElementById('confirmDialog').classList.remove('show');
+    if (!pendingSubmit) return;
+    const newAnswers = pendingSubmit;
+    pendingSubmit = null;
+    
+    showLoading('⏳ جاري التصحيح والإرسال...', `${newAnswers.length} سؤال`);
+    
+    let batchCorrect = 0;
+    let batchWrong = 0;
+    let batchPending = 0;
+    const finalResults = [];
+    
+    newAnswers.forEach(ans => {
+        if (AUTO_GRADED[ans.id]) {
+            const result = gradeAutoQuestion(ans.id, ans.value);
+            finalResults.push({
+                id: ans.id,
+                value: ans.value,
+                status: 'reviewed',
+                isCorrect: result.isCorrect,
+                feedback: result.feedback
+            });
+            if (result.isCorrect) batchCorrect++;
+            else batchWrong++;
+        } else {
+            const context = TEACHER_GRADED_CONTEXT[ans.id] || {};
+            finalResults.push({
+                id: ans.id,
+                value: ans.value,
+                status: 'pending',
+                isCorrect: false,
+                feedback: 'بانتظار تصحيح المدرس',
+                questionText: context.questionText || ans.id,
+                expectedAnswer: context.expectedAnswer || '',
+                rule: context.rule || ''
+            });
+            batchPending++;
+        }
+    });
+    
+    const tempLockedAnswers = JSON.parse(JSON.stringify(lockedAnswers));
+    const newAnswersObj = {};
+    finalResults.forEach(r => {
+        const obj = { 
+            value: r.value, 
+            status: r.status, 
+            isCorrect: r.isCorrect, 
+            feedback: r.feedback 
+        };
+        if (r.status === 'pending') {
+            obj.questionText = r.questionText;
+            obj.expectedAnswer = r.expectedAnswer;
+            obj.rule = r.rule;
+        }
+        tempLockedAnswers[r.id] = obj;
+        newAnswersObj[r.id] = obj;
+    });
+    
+    const newTotalCorrect = totalCorrect + batchCorrect;
+    const newTotalWrong = totalWrong + batchWrong;
+    const newTotalAnswered = totalAnswered + (batchCorrect + batchWrong);
+    const newTotalPending = totalPending + batchPending;
+    
+    const data = {
+        action: 'saveProgress',
+        username: currentUser.username,
+        fullName: currentUser.fullName,
+        lessonId: LESSON_CONFIG.lessonId,
+        lessonName: LESSON_CONFIG.lessonName,
+        totalCorrect: newTotalCorrect,
+        totalWrong: newTotalWrong,
+        totalAnswered: newTotalAnswered,
+        totalPending: newTotalPending,
+        totalQuestions: LESSON_CONFIG.totalQuestions,
+        batchCorrect: batchCorrect,
+        batchWrong: batchWrong,
+        batchAnswered: batchCorrect + batchWrong,
+        batchPending: batchPending,
+        details: `${newAnswers.length} سؤال | صح ${batchCorrect} | خطأ ${batchWrong} | بانتظار ${batchPending}`,
+        newAnswers: JSON.stringify(newAnswersObj)
+    };
+    
+    const result = await sendAndVerify(data);
+    hideLoading();
+    
+    if (result.verified) {
+        lockedAnswers = tempLockedAnswers;
+        totalCorrect = newTotalCorrect;
+        totalWrong = newTotalWrong;
+        totalAnswered = newTotalAnswered;
+        totalPending = newTotalPending;
+        
+        finalResults.forEach(r => displayLockedAnswer(r.id, r));
+        
+        document.getElementById('batchAnswered').textContent = newAnswers.length;
+        document.getElementById('batchCorrect').textContent = batchCorrect;
+        document.getElementById('batchWrong').textContent = batchWrong;
+        document.getElementById('batchPending').textContent = batchPending;
+        
+        const statusMsg = document.getElementById('batchStatusMessage');
+        statusMsg.className = 'status-message success';
+        let statusText = '✅ تم الحفظ بنجاح!';
+        if (batchPending > 0) statusText += ` (${batchPending} إجابة كتابية بانتظار تصحيح المدرس)`;
+        statusMsg.innerHTML = statusText;
+        statusMsg.style.display = 'block';
+        
+        document.getElementById('batchResultsBox').style.display = 'block';
+        document.getElementById('retryBanner').style.display = 'none';
+        lastFailedData = null;
+        safeStorage.removeItem('ia_pending_' + LESSON_CONFIG.lessonId);
+        
+        updateProgressDisplay();
+        checkIfComplete();
+        document.getElementById('batchResultsBox').scrollIntoView({ behavior: 'smooth' });
+    } else {
+        lastFailedData = data;
+        try {
+            safeStorage.setItem('ia_pending_' + LESSON_CONFIG.lessonId, JSON.stringify({ data: data, timestamp: Date.now() }));
+        } catch(e) {}
+        document.getElementById('retryBanner').style.display = 'block';
+        document.getElementById('retryBanner').scrollIntoView({ behavior: 'smooth' });
+        alert('⚠️ فشل الإرسال!\n\n' + (result.error || ''));
+    }
+}
+
+async function retrySubmit() {
+    if (!lastFailedData) {
+        try {
+            const pending = safeStorage.getItem('ia_pending_' + LESSON_CONFIG.lessonId);
+            if (pending) lastFailedData = JSON.parse(pending).data;
+        } catch(e) {}
+        if (!lastFailedData) { alert('⚠️ مفيش بيانات'); return; }
+    }
+    showLoading('جاري إعادة المحاولة...');
+    const result = await sendAndVerify(lastFailedData);
+    hideLoading();
+    if (result.verified) {
+        safeStorage.removeItem('ia_pending_' + LESSON_CONFIG.lessonId);
+        lastFailedData = null;
+        alert('✅ تم بنجاح!');
+        setTimeout(() => location.reload(), 1000);
+    } else {
+        alert('❌ فشلت المحاولة.\n\n' + (result.error || ''));
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
+    const saved = safeStorage.getItem('ia_currentUser_' + LESSON_CONFIG.lessonId);
+    if (saved) {
+        try {
+            currentUser = JSON.parse(saved);
+            if (currentUser.username && currentUser.fullName) {
+                showLoading('استعادة الجلسة...');
+                await loadProgress();
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userFullName').textContent = currentUser.fullName;
+                hideLoading();
+                try {
+                    const pending = safeStorage.getItem('ia_pending_' + LESSON_CONFIG.lessonId);
+                    if (pending) {
+                        lastFailedData = JSON.parse(pending).data;
+                        document.getElementById('retryBanner').style.display = 'block';
+                    }
+                } catch(e) {}
+            }
+        } catch (e) {
+            safeStorage.removeItem('ia_currentUser_' + LESSON_CONFIG.lessonId);
+        }
+    }
+    document.getElementById('loginPassword').addEventListener('keypress', function(e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('loginUsername').addEventListener('keypress', function(e) { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
+});
+</script>
+
+</body>
+</html>
