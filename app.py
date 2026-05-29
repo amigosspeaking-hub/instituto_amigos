@@ -218,6 +218,9 @@ def serve_page(filename):
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+@app.route('/healthz')
+def health_check():
+    return "Instituto Amigos is Awake!", 200
 
 if __name__ == '__main__':
     app.run(debug=True)
