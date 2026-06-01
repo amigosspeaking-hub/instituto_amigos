@@ -3,12 +3,13 @@ import pandas as pd
 from flask import Flask, render_template_string, request, redirect, url_for, session, abort, render_template
 
 app = Flask(__name__)
-app.secret_key = 'instituto_amigos_ultra_secure_2026'
+# استخدام مفتاح سري ثابت، ويفضل دائماً قراءته من البيئة المحيطة Environment Variables في بيئة الإنتاج
+app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
-# رابط جوجل شيت الذي أرسلته
+# رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
-# الفهرس الكامل للمستويات
+# الفهرس الكامل للمستويات التعليمية
 syllabus = {
     "A1.1": ["HOLA, ¿QUÉ TAL?", "EL ESPAÑOL Y YO", "TRABAJO AQUÍ", "¡ME GUSTAN LAS TAPAS!"],
     "A1.2": ["EN FAMILIA", "MI BARRIO", "MI DÍA A DÍA", "DE VACACIONES"],
@@ -19,7 +20,7 @@ syllabus = {
     "B1.1": ["SEGUIMOS JUNTOS", "UN VIAJE INOLVIDABLE", "UN MUNDO MEJOR", "HABLANDO DEL FUTURO"],
     "B1.2": ["ENTRE NOSOTROS", "NUESTRO PLANETA", "¡CÁMARA, ACCIÓN!", "BUENO Y SANO"],
     "B1.3": ["MENSAJES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
-    "B2.1": ["ASÍ HABLAMOS, ASÍ SOMOS", "LA ESCUELA DE LA VIDA", "NUEVOS MUNDOS LABORALES", "¡QUÉ ILUSIÓN!"],
+    "B2.1": ["ASÍ HABLAMوس، ASÍ SOMOS", "LA ESCUELA DE LA VIDA", "NUEVOS MUNDOS LABORALES", "¡QUÉ ILUSIÓN!"],
     "B2.2": ["PEGADOS AL MÓVIL", "MENTE SANA EN CUERPO SANO", "¡HOGAR, DULCE HOGAR!", "A FLOR DE PIEL"],
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
@@ -209,18 +210,22 @@ def serve_page(filename):
         abort(403)
         
     try:
-        # تمرير بيانات الطالب لصفحات الـ HTML الفرعية
+        # Flask يبحث دائماً داخل مجلد اسمه templates بشكل تلقائي
         return render_template(filename, student=student)
-    except:
+    except Exception as e:
+        print(f"Template load error: {e}")
         abort(404)
 
 @app.route('/logout')
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+
 @app.route('/healthz')
 def health_check():
-    return "Instituto Amigos is Awake!", 200
+    # رد بسيط ومباشر جداً نصياً لتفادي مشكلة الـ Output too large
+    return "OK", 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # للتشغيل المحلي فقط، عند الرفع لـ Render سيتم استخدام gunicorn بدلاً منه
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
