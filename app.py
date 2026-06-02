@@ -7,10 +7,10 @@ app = Flask(__name__)
 # استخدام مفتاح سري ثابت، ويفضل دائماً قراءته من البيئة المحيطة Environment Variables في بيئة الإنتاج
 app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
-# رابط جوجل شيت المباشر بصيغة CSV (لم يتم تغييره)
+# رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
-# الفهرس الكامل للمستويات التعليمية (تم تصحيح الأخطاء الكتابية في الأسبانية)
+# الفهرس الكامل للمستويات التعليمية
 syllabus = {
     "A1.1": ["HOLA, ¿QUÉ TAL?", "EL ESPAÑOL Y YO", "TRABAJO AQUÍ", "¡ME GUSTAN LAS TAPAS!"],
     "A1.2": ["EN FAMILIA", "MI BARRIO", "MI DÍA A DÍA", "DE VACACIONES"],
@@ -30,17 +30,21 @@ syllabus = {
 motivation_quotes = [
     "شد حيلك يا بطل، الإسباني محتاج استمرارية بس!",
     "كل يوم ربع ساعة مذاكرة بتعمل فرق كبير.. كمل!",
-    "احنا وراك لحد ما تبقى برنس في اللغة.. يالا بينا!",
+    "احنا وراك لحد ما تبقى فل في اللغة.. يالا بينا!",
     "تعب النهاردة هو نجاح بكرة.. متكسلش عن درس النهاردة!"
 ]
 
 def get_student_data(username, password):
     try:
-        df = pd.read_csv(GOOGLE_SHEET_CSV_URL)
+        # قراءة البيانات كنصوص بشكل إجباري لحل مشكلة عدم الدخول
+        df = pd.read_csv(GOOGLE_SHEET_CSV_URL, dtype=str)
+        # ملء الخانات الفارغة لتجنب أخطاء المقارنة
+        df.fillna('', inplace=True)
+        
         df.columns = df.columns.str.strip()
-        df['username'] = df['username'].astype(str).str.strip()
-        df['password'] = df['password'].astype(str).str.strip()
-        df['level'] = df['level'].astype(str).str.strip()
+        df['username'] = df['username'].str.strip()
+        df['password'] = df['password'].str.strip()
+        df['level'] = df['level'].str.strip()
         
         user_row = df[(df['username'] == str(username).strip()) & (df['password'] == str(password).strip())]
         if not user_row.empty:
@@ -50,7 +54,6 @@ def get_student_data(username, password):
         print(f"Error checking Google Sheet: {e}")
         return None
 
-# --- واجهة تسجيل الدخول: Hand-written & Spanish Vibe ---
 LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -63,28 +66,32 @@ LOGIN_HTML = """
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
         body { 
             background: #fdfcf5; 
-            /* خلفية بتأثير ورق خفيف */
             background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png');
             font-family: 'Cairo', sans-serif; 
             display: flex; align-items: center; justify-content: center; height: 100vh; margin:0; 
             overflow: hidden;
             position: relative;
         }
-        /* عناصر زخرفية إسبانية بخط يدوي */
-        .spain-doodle {
-            position: absolute; font-family: 'Reenie Beanie', cursive; font-size: 40px; color: rgba(229, 36, 33, 0.2); transform: rotate(-15deg);
+        /* تنسيق الرسومات اليدوية */
+        .spain-doodle { position: absolute; z-index: 0; opacity: 0.8; }
+        .doodle-1 { top: 15%; left: 10%; width: 120px; animation: float 6s ease-in-out infinite; }
+        .doodle-2 { bottom: 15%; right: 10%; width: 140px; transform: rotate(15deg); animation: float 5s ease-in-out infinite reverse; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
-        .doodle-1 { top: 10%; left: 10%; }
-        .doodle-2 { bottom: 15%; right: 10%; transform: rotate(10deg); }
-        .doodle-3 { top: 50%; left: 5%; color: rgba(255, 209, 0, 0.3); }
 
         .card { 
             background: white; padding: 40px; border-radius: 15px; 
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.05); /* ظل مسطح كأنه مرسوم */
-            border: 3px solid #333; /* إطار أسود سميك قليلاً */
-            text-align: center; width: 360px; position: relative;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.05); 
+            border: 3px solid #333; 
+            text-align: center; width: 360px; position: relative; z-index: 1;
         }
-        .logo-area { font-family: 'Reenie Beanie', cursive; font-size: 50px; color: var(--primary-red); margin-bottom: 5px; line-height: 1; }
+        
+        .logo-img { width: 120px; height: auto; margin-bottom: 15px; }
+        
         h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 700; }
         p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
         
@@ -112,16 +119,31 @@ LOGIN_HTML = """
             color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold;
             background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red);
         }
-        .handwritten-noto { font-family: 'Reenie Beanie', cursive; font-size: 22px; color: #888; margin-top: 15px; }
+        .handwritten-noto { font-family: 'Reenie Beanie', cursive; font-size: 24px; color: #888; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <div class="spain-doodle doodle-1">¡Ole! 💃💃💃</div>
-    <div class="spain-doodle doodle-2">Paella time 🥘🥘🥘</div>
-    <div class="spain-doodle doodle-3">Madrid / Barcelona ⚽⚽</div>
+    <svg viewBox="0 0 100 100" class="spain-doodle doodle-1">
+      <circle cx="50" cy="50" r="20" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" fill="none" />
+      <line x1="50" y1="10" x2="50" y2="22" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="78" x2="50" y2="90" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="10" y1="50" x2="22" y2="50" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="78" y1="50" x2="90" y2="50" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="22" x2="30" y2="30" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="78" y1="78" x2="70" y2="70" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="78" x2="30" y2="70" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+      <line x1="78" y1="22" x2="70" y2="30" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+
+    <svg viewBox="0 0 100 100" class="spain-doodle doodle-2">
+      <path d="M30 70 C20 80, 10 70, 20 60 C30 50, 40 60, 50 50 C60 40, 70 30, 80 20 L85 25 C75 35, 65 45, 55 55 C45 65, 35 75, 30 70 Z" stroke="rgba(255, 209, 0, 0.6)" stroke-width="3" fill="none" stroke-linejoin="round"/>
+      <circle cx="35" cy="65" r="8" stroke="rgba(255, 209, 0, 0.6)" stroke-width="3" fill="none"/>
+      <line x1="35" y1="65" x2="80" y2="20" stroke="rgba(255, 209, 0, 0.6)" stroke-width="2"/>
+    </svg>
 
     <div class="card">
-        <div class="logo-area">Instituto Amigos</div>
+        <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" class="logo-img" onerror="this.style.display='none'">
+        
         <h1>بوابتك للأسباني 👋</h1>
         <p class="subtitle">اكتب بياناتك ويالا بينا ع المنصة التعليمية</p>
         
@@ -143,7 +165,6 @@ LOGIN_HTML = """
 </html>
 """
 
-# --- واجهة لوحة الطالب (Dashboard): بريميوم وعصرية جداً ---
 DASHBOARD_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -169,16 +190,12 @@ DASHBOARD_HTML = """
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); padding: 0; margin: 0; }
         
-        /* الهيدر الرئيسي - شكل عصري مستطيل */
         .top-nav {
             background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
             box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
         }
-        .brand-area { display: flex; align-items: center; gap: 10px; }
-        .brand-area .logo-circle {
-            width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900;
-        }
+        .brand-area { display: flex; align-items: center; gap: 15px; }
+        .brand-area img { width: 50px; height: auto; border-radius: 50%; border: 2px solid var(--accent); }
         .brand-area h1 { font-size: 18px; font-weight: 900; color: var(--secondary); }
         .brand-area h1 span { color: var(--primary); }
 
@@ -187,10 +204,8 @@ DASHBOARD_HTML = """
         .logout-btn { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
         .logout-btn:hover { color: var(--primary); }
 
-        /* منطقة المحتوى - أقصى جمال */
         .main-content { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
         
-        /* كارت الترحيب والتحفيز المزدوج */
         .welcome-section {
             background: linear-gradient(135deg, var(--secondary) 0%, #1a2530 100%);
             color: white; padding: 40px; border-radius: 24px;
@@ -213,7 +228,6 @@ DASHBOARD_HTML = """
         .motivation-box i { font-size: 24px; margin-bottom: 10px; display: block; }
         .motivation-box p { font-size: 14px; font-weight: 700; line-height: 1.5; color: white; }
 
-        /* منطقة التبوبيات */
         .tabs-nav { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
         .tab-trigger { 
             background: none; border: none; font-size: 16px; font-weight: 700; color: var(--text-muted); 
@@ -225,7 +239,6 @@ DASHBOARD_HTML = """
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
 
-        /* منطقة الكروت - أقصى تضبيط */
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
         
         .course-card { 
@@ -252,11 +265,9 @@ DASHBOARD_HTML = """
             padding: 14px; text-decoration: none; border-radius: 12px; 
             font-weight: 700; font-size: 15px; transition: all 0.2s ease; 
         }
-        /* زر المحاضرات: أحمر بريميوم */
         .btn-lecture { background: var(--primary); color: white; }
         .btn-lecture:hover { background: var(--primary-dark); }
         
-        /* زر التمارين: ذهبي مميز */
         .btn-exercise { background: var(--accent); color: var(--secondary); }
         .btn-exercise:hover { background: var(--accent-hover); }
 
@@ -266,7 +277,7 @@ DASHBOARD_HTML = """
 <body>
     <nav class="top-nav">
         <div class="brand-area">
-            <div class="logo-circle">IA</div>
+            <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" onerror="this.style.display='none'">
             <h1>Instituto <span>Amigos</span></h1>
         </div>
         <div class="user-actions">
@@ -278,8 +289,8 @@ DASHBOARD_HTML = """
     <div class="main-content">
         <header class="welcome-section">
             <div class="user-welcome-info">
-                <h2>اهلا يا {{ student.username }}!</h2>
-                <p>يالا بينا نشد حيلنا النهاردة ع المذاكرة.. الاسباني مستنيك يا بطل!</p>
+                <h2>منور يا {{ student.username }}!</h2>
+                <p>يالا بينا نشد حيلنا النهاردة ع المذاكرة.. الإسباني مستنيك يا بطل!</p>
             </div>
             <div class="motivation-box">
                 <i class="fa-solid fa-lightbulb"></i>
@@ -331,15 +342,12 @@ DASHBOARD_HTML = """
 
     <script>
         function switchTab(evt, tabId) {
-            // إخفاء كل المحتويات
             const tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) tabContents[i].classList.remove("active");
             
-            // إلغاء تفعيل كل الأزرار
             const tabTriggers = document.getElementsByClassName("tab-trigger");
             for (let i = 0; i < tabTriggers.length; i++) tabTriggers[i].classList.remove("active");
             
-            // إظهار المحتوى المحدد وتفعيل الزر المضغوط
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
@@ -347,8 +355,6 @@ DASHBOARD_HTML = """
 </body>
 </html>
 """
-
-# --- راوتات Flask المحفوظة بالكامل ---
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -361,7 +367,6 @@ def login():
             session['user'] = student
             return redirect(url_for('dashboard'))
         else:
-            # رسالة خطأ بالمصري
             error = "اسم المستخدم أو الباسورد غلط.. جرب تاني!"
     return render_template_string(LOGIN_HTML, error=error)
 
@@ -372,11 +377,9 @@ def dashboard():
     
     student = session['user']
     level = student['level']
-    # جلب الدروس، مع تصحيح الأخطاء الكتابية الافتراضية
     level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
     
-    # اختيار جملة تحفيزية عشوائية
-    random_quote = random.choice(motivational_quotes)
+    random_quote = random.choice(motivation_quotes)
     
     return render_template_string(DASHBOARD_HTML, student=student, lessons=level_lessons, quote=random_quote)
 
@@ -388,16 +391,14 @@ def serve_page(filename):
     student = session['user']
     student_level = student['level']
     
-    # التحقق من أن ملف الطالب يخص مستواه فقط
     if not filename.startswith(student_level + "/"):
-        abort(403) # Forbidden
+        abort(403)
         
     try:
-        # Flask يبحث دائماً داخل مجلد اسمه templates بشكل تلقائي
         return render_template(filename, student=student)
     except Exception as e:
         print(f"Template load error: {e}")
-        abort(404) # Not Found
+        abort(404)
 
 @app.route('/logout')
 def logout():
@@ -406,9 +407,7 @@ def logout():
 
 @app.route('/healthz')
 def health_check():
-    # رد بسيط للـ Render للتأكد من أن الأبلكيشن شغال
     return "OK", 200
 
 if __name__ == '__main__':
-    # للتشغيل المحلي، سيتم قراءة البورت من البيئة المحيطة أو استخدام 5000 كافتراضي
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
