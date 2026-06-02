@@ -4,13 +4,10 @@ import random
 from flask import Flask, render_template_string, request, redirect, url_for, session, abort, render_template
 
 app = Flask(__name__)
-# استخدام مفتاح سري ثابت، ويفضل دائماً قراءته من البيئة المحيطة Environment Variables في بيئة الإنتاج
 app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
-# رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
-# الفهرس الكامل للمستويات التعليمية
 syllabus = {
     "A1.1": ["HOLA, ¿QUÉ TAL?", "EL ESPAÑOL Y YO", "TRABAJO AQUÍ", "¡ME GUSTAN LAS TAPAS!"],
     "A1.2": ["EN FAMILIA", "MI BARRIO", "MI DÍA A DÍA", "DE VACACIONES"],
@@ -26,21 +23,18 @@ syllabus = {
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
 
-# جمل تحفيزية بالمصري
 motivation_quotes = [
     "شد حيلك يا بطل، الإسباني محتاج استمرارية بس!",
     "كل يوم ربع ساعة مذاكرة بتعمل فرق كبير.. كمل!",
-    "احنا وراك لحد ما تبقى فل في اللغة.. يالا بينا!",
+    "خيالك النهاردة.. حقيقة بكرة لما تتكلم أسباني زي البلبُل!",
+    "Instituto Amigos وراك لحد ما تبقى فل في اللغة.. يالا بينا!",
     "تعب النهاردة هو نجاح بكرة.. متكسلش عن درس النهاردة!"
 ]
 
 def get_student_data(username, password):
     try:
-        # قراءة البيانات كنصوص بشكل إجباري لحل مشكلة عدم الدخول
         df = pd.read_csv(GOOGLE_SHEET_CSV_URL, dtype=str)
-        # ملء الخانات الفارغة لتجنب أخطاء المقارنة
         df.fillna('', inplace=True)
-        
         df.columns = df.columns.str.strip()
         df['username'] = df['username'].str.strip()
         df['password'] = df['password'].str.strip()
@@ -62,24 +56,31 @@ LOGIN_HTML = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>يالا بينا.. دخول | Instituto Amigos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
         body { 
-            background: #fdfcf5; 
-            background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png');
+            background: #fcfbf7; /* لون كريمي هادي سادة بدون كراسة */
             font-family: 'Cairo', sans-serif; 
             display: flex; align-items: center; justify-content: center; height: 100vh; margin:0; 
-            overflow: hidden;
-            position: relative;
+            overflow: hidden; position: relative;
         }
-        /* تنسيق الرسومات اليدوية */
+        
+        /* الأشكال المرسومة بالإيد (Doodles) */
         .spain-doodle { position: absolute; z-index: 0; opacity: 0.8; }
-        .doodle-1 { top: 15%; left: 10%; width: 120px; animation: float 6s ease-in-out infinite; }
-        .doodle-2 { bottom: 15%; right: 10%; width: 140px; transform: rotate(15deg); animation: float 5s ease-in-out infinite reverse; }
+        
+        /* فقاعة Hola */
+        .doodle-hola { top: 10%; left: 15%; width: 130px; animation: float 6s ease-in-out infinite; }
+        
+        /* علم إسبانيا وقلب */
+        .doodle-flag { top: 15%; right: 10%; width: 160px; animation: float 5s ease-in-out infinite reverse; }
+        
+        /* جيتار */
+        .doodle-guitar { bottom: 10%; left: 10%; width: 140px; transform: rotate(15deg); animation: float 7s ease-in-out infinite; }
         
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
@@ -87,10 +88,11 @@ LOGIN_HTML = """
             background: white; padding: 40px; border-radius: 15px; 
             box-shadow: 5px 5px 0px rgba(0,0,0,0.05); 
             border: 3px solid #333; 
-            text-align: center; width: 360px; position: relative; z-index: 1;
+            text-align: center; width: 380px; position: relative; z-index: 1;
         }
         
-        .logo-img { width: 120px; height: auto; margin-bottom: 15px; }
+        /* اللوجو: استخدمت مسار محلي، عدله للمسار بتاعك لما ترفعه */
+        .logo-img { width: 120px; height: auto; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--primary-gold); }
         
         h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 700; }
         p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
@@ -99,9 +101,7 @@ LOGIN_HTML = """
         input { 
             width: 100%; padding: 12px; border: 2px solid #333; border-radius: 8px; 
             text-align: center; box-sizing: border-box; font-size: 15px;
-            font-family: 'Cairo', sans-serif;
-            background: #fff;
-            transition: all 0.2s;
+            font-family: 'Cairo', sans-serif; transition: all 0.2s;
         }
         input:focus { border-color: var(--primary-red); outline: none; box-shadow: 3px 3px 0px rgba(229, 36, 33, 0.2); }
         
@@ -109,40 +109,54 @@ LOGIN_HTML = """
             width: 100%; padding: 12px; background: var(--primary-red); color: white; 
             border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; 
             font-size: 16px; font-family: 'Cairo', sans-serif; transition: all 0.2s;
-            margin-top: 10px;
-            box-shadow: 3px 3px 0px #333;
+            margin-top: 10px; box-shadow: 3px 3px 0px #333;
         }
         button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #333; }
-        button:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0px #333; }
-
-        .error { 
-            color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold;
-            background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red);
+        
+        .error { color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold; background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red); }
+        
+        /* السوشيال ميديا */
+        .social-links { margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
+        .social-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 50%; color: white; text-decoration: none;
+            font-size: 18px; transition: 0.3s; border: 2px solid #333; box-shadow: 2px 2px 0px #333;
         }
-        .handwritten-noto { font-family: 'Reenie Beanie', cursive; font-size: 24px; color: #888; margin-top: 15px; }
+        .social-btn:hover { transform: translateY(-3px); box-shadow: 4px 4px 0px #333; }
+        .fb { background: #1877F2; }
+        .ig { background: #E4405F; }
+        .tt { background: #000000; }
+        .wa { background: #25D366; }
     </style>
 </head>
 <body>
-    <svg viewBox="0 0 100 100" class="spain-doodle doodle-1">
-      <circle cx="50" cy="50" r="20" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" fill="none" />
-      <line x1="50" y1="10" x2="50" y2="22" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="50" y1="78" x2="50" y2="90" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="10" y1="50" x2="22" y2="50" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="78" y1="50" x2="90" y2="50" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="22" y1="22" x2="30" y2="30" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="78" y1="78" x2="70" y2="70" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="22" y1="78" x2="30" y2="70" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
-      <line x1="78" y1="22" x2="70" y2="30" stroke="rgba(229, 36, 33, 0.4)" stroke-width="4" stroke-linecap="round"/>
+    <!-- فقاعة Hola -->
+    <svg viewBox="0 0 100 100" class="spain-doodle doodle-hola">
+        <path d="M10,40 C10,15 90,15 90,40 C90,60 60,70 50,85 C45,70 10,65 10,40 Z" fill="#fff" stroke="#333" stroke-width="3" stroke-linejoin="round"/>
+        <text x="50" y="48" font-family="'Reenie Beanie', cursive" font-size="28" fill="#e52421" text-anchor="middle" font-weight="bold">¡Hola!</text>
     </svg>
 
-    <svg viewBox="0 0 100 100" class="spain-doodle doodle-2">
-      <path d="M30 70 C20 80, 10 70, 20 60 C30 50, 40 60, 50 50 C60 40, 70 30, 80 20 L85 25 C75 35, 65 45, 55 55 C45 65, 35 75, 30 70 Z" stroke="rgba(255, 209, 0, 0.6)" stroke-width="3" fill="none" stroke-linejoin="round"/>
-      <circle cx="35" cy="65" r="8" stroke="rgba(255, 209, 0, 0.6)" stroke-width="3" fill="none"/>
-      <line x1="35" y1="65" x2="80" y2="20" stroke="rgba(255, 209, 0, 0.6)" stroke-width="2"/>
+    <!-- علم إسبانيا مرسوم مع قلب -->
+    <svg viewBox="0 0 150 100" class="spain-doodle doodle-flag">
+        <rect x="10" y="20" width="80" height="50" fill="none" stroke="#333" stroke-width="3" transform="rotate(-5)"/>
+        <line x1="10" y1="36" x2="90" y2="36" stroke="#333" stroke-width="2" transform="rotate(-5)"/>
+        <line x1="10" y1="53" x2="90" y2="53" stroke="#333" stroke-width="2" transform="rotate(-5)"/>
+        <text x="25" y="50" font-family="'Reenie Beanie', cursive" font-size="20" fill="#333" transform="rotate(-5)">España</text>
+        <path d="M110,30 A10,10 0 0,0 95,30 A10,10 0 0,0 80,30 Q80,45 95,60 Q110,45 110,30 Z" fill="#e52421" stroke="#333" stroke-width="2"/>
+    </svg>
+
+    <!-- جيتار وكلمة -->
+    <svg viewBox="0 0 150 100" class="spain-doodle doodle-guitar">
+        <path d="M30 70 C20 80, 10 70, 20 60 C30 50, 40 60, 50 50 C60 40, 70 30, 80 20 L85 25 C75 35, 65 45, 55 55 C45 65, 35 75, 30 70 Z" stroke="#333" stroke-width="3" fill="none" stroke-linejoin="round"/>
+        <circle cx="35" cy="65" r="8" stroke="#333" stroke-width="3" fill="none"/>
+        <line x1="35" y1="65" x2="80" y2="20" stroke="#333" stroke-width="2"/>
+        <text x="75" y="80" font-family="'Reenie Beanie', cursive" font-size="24" fill="#e52421" transform="rotate(-15)">Música</text>
     </svg>
 
     <div class="card">
-        <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" class="logo-img" onerror="this.style.display='none'">
+        <!-- مسار اللوجو -->
+        <!-- لو مسار ال assets مش شغال معاك حاليا ممكن تحط لينك اللوجو بتاعك المباشر هنا -->
+        <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421&size=120'">
         
         <h1>بوابتك للأسباني 👋</h1>
         <p class="subtitle">اكتب بياناتك ويالا بينا ع المنصة التعليمية</p>
@@ -158,9 +172,15 @@ LOGIN_HTML = """
             </div>
             <button type="submit">ادخل للمنصة <i class="fa-solid fa-arrow-left"></i></button>
         </form>
-        <div class="handwritten-noto">¡Vamos a estudiar!</div>
+
+        <!-- روابط السوشيال ميديا -->
+        <div class="social-links">
+            <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" class="social-btn ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@espanolconamigos" target="_blank" class="social-btn tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/+201108425280" target="_blank" class="social-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>
 """
@@ -176,33 +196,33 @@ DASHBOARD_HTML = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { 
-            --primary: #e52421; 
-            --primary-dark: #c31e1b; 
-            --accent: #ffd100; 
-            --accent-hover: #ffdf4d;
-            --secondary: #2c3e50; 
-            --bg-body: #f4f7f6; 
-            --text-main: #1e293b; 
-            --text-muted: #64748b; 
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+            --primary: #e52421; --primary-dark: #c31e1b; 
+            --accent: #ffd100; --secondary: #2c3e50; 
+            --bg-body: #f4f7f6; --text-main: #1e293b; --text-muted: #64748b; 
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); padding: 0; margin: 0; }
+        body { background-color: var(--bg-body); color: var(--text-main); }
         
         .top-nav {
             background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100;
         }
         .brand-area { display: flex; align-items: center; gap: 15px; }
-        .brand-area img { width: 50px; height: auto; border-radius: 50%; border: 2px solid var(--accent); }
-        .brand-area h1 { font-size: 18px; font-weight: 900; color: var(--secondary); }
+        
+        /* مكان اللوجو في المنصة */
+        .brand-area img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); }
+        
+        .brand-area h1 { font-size: 18px; font-weight: 900; color: var(--secondary); margin: 0; }
         .brand-area h1 span { color: var(--primary); }
+
+        .nav-socials { display: flex; gap: 10px; margin-right: 20px; border-right: 2px solid #eee; padding-right: 20px; }
+        .nav-socials a { color: var(--text-muted); font-size: 18px; transition: 0.3s; }
+        .nav-socials a:hover { color: var(--primary); }
 
         .user-actions { display: flex; align-items: center; gap: 15px; }
         .level-tag { background: #eef2f5; color: var(--secondary); padding: 8px 15px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1px solid #d1d9e0; }
-        .logout-btn { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
-        .logout-btn:hover { color: var(--primary); }
+        .logout-btn { background: #ffebeb; color: var(--primary); padding: 8px 15px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 700; transition: 0.3s; }
+        .logout-btn:hover { background: var(--primary); color: white; }
 
         .main-content { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
         
@@ -210,12 +230,7 @@ DASHBOARD_HTML = """
             background: linear-gradient(135deg, var(--secondary) 0%, #1a2530 100%);
             color: white; padding: 40px; border-radius: 24px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: var(--shadow-md); margin-bottom: 35px;
-            position: relative; overflow: hidden;
-        }
-        .welcome-section::before {
-            content: '¡Hola!'; position: absolute; font-size: 150px; font-weight: 900;
-            color: rgba(255,255,255,0.03); bottom: -30px; left: -20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 35px; overflow: hidden; position: relative;
         }
         .user-welcome-info h2 { font-size: 32px; font-weight: 900; margin-bottom: 10px; }
         .user-welcome-info p { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 500px; }
@@ -225,64 +240,45 @@ DASHBOARD_HTML = """
             color: var(--accent); padding: 20px; border-radius: 16px; text-align: center;
             width: 300px; backdrop-filter: blur(5px); z-index: 1;
         }
-        .motivation-box i { font-size: 24px; margin-bottom: 10px; display: block; }
-        .motivation-box p { font-size: 14px; font-weight: 700; line-height: 1.5; color: white; }
 
         .tabs-nav { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .tab-trigger { 
-            background: none; border: none; font-size: 16px; font-weight: 700; color: var(--text-muted); 
-            padding: 10px 25px; cursor: pointer; transition: all 0.3s; border-radius: 12px;
-        }
-        .tab-trigger:hover { background: rgba(0,0,0,0.03); color: var(--secondary); }
-        .tab-trigger.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+        .tab-trigger { background: none; border: none; font-size: 16px; font-weight: 700; color: var(--text-muted); padding: 10px 25px; cursor: pointer; transition: 0.3s; border-radius: 12px; }
+        .tab-trigger.active { background: var(--primary); color: white; }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
 
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        
-        .course-card { 
-            background: white; border-radius: 20px; overflow: hidden; 
-            box-shadow: var(--shadow-sm); border: 1px solid #f0f3f5; 
-            transition: all 0.3s ease; display: flex; flex-direction: column; 
-        }
-        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #d1d9e0; }
-
-        .card-header { 
-            padding: 20px; background: #fafbfc; border-bottom: 1px solid #eee;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+        .course-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f0f3f5; transition: 0.3s; display: flex; flex-direction: column; }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        .card-header { padding: 20px; background: #fafbfc; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
         .lesson-number { font-size: 13px; font-weight: 800; color: var(--primary); background: rgba(229, 36, 33, 0.1); padding: 5px 12px; border-radius: 50px; }
-        .lesson-icon { font-size: 20px; color: var(--text-muted); }
-
-        .card-body { padding: 25px 30px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .card-body h4 { font-size: 18px; font-weight: 800; color: var(--secondary); margin-bottom: 10px; line-height: 1.4; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .card-body p { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; }
-
-        .card-action-btn { 
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; text-align: center; 
-            padding: 14px; text-decoration: none; border-radius: 12px; 
-            font-weight: 700; font-size: 15px; transition: all 0.2s ease; 
-        }
+        .card-body { padding: 25px 30px; text-align: center; flex-grow: 1; }
+        .card-body h4 { font-size: 18px; font-weight: 800; color: var(--secondary); margin-bottom: 25px; }
+        .card-action-btn { display: block; width: 100%; padding: 14px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; transition: 0.2s; }
         .btn-lecture { background: var(--primary); color: white; }
-        .btn-lecture:hover { background: var(--primary-dark); }
-        
         .btn-exercise { background: var(--accent); color: var(--secondary); }
-        .btn-exercise:hover { background: var(--accent-hover); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <nav class="top-nav">
         <div class="brand-area">
-            <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" onerror="this.style.display='none'">
+            <!-- مسار اللوجو في المنصة -->
+            <img src="/static/assets/logo.png" alt="Logo" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421'">
             <h1>Instituto <span>Amigos</span></h1>
         </div>
-        <div class="user-actions">
-            <span class="level-tag"><i class="fa-solid fa-graduation-cap"></i> مستواك: {{ student.level }}</span>
-            <a href="/logout" class="logout-btn"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+        
+        <div style="display: flex; align-items: center;">
+            <div class="nav-socials">
+                <a href="https://www.facebook.com/institutoamigos1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/instituto_amigos1/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@espanolconamigos" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/+201108425280" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="user-actions">
+                <span class="level-tag"><i class="fa-solid fa-graduation-cap"></i> مستواك: {{ student.level }}</span>
+                <a href="/logout" class="logout-btn"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            </div>
         </div>
     </nav>
 
@@ -309,11 +305,10 @@ DASHBOARD_HTML = """
                 <div class="course-card">
                     <div class="card-header">
                         <span class="lesson-number">Unidad {{ loop.index }}</span>
-                        <i class="fa-solid fa-book-open lesson-icon"></i>
+                        <i class="fa-solid fa-book-open" style="color: #888;"></i>
                     </div>
                     <div class="card-body">
                         <h4>{{ lesson }}</h4>
-                        <p>ادخل وشوف شرح المحاضرة دي بالتفصيل يا بطل.</p>
                         <a href="/page/{{ student.level }}/lesson{{ loop.index }}.html" class="card-action-btn btn-lecture">ابدأ الشرح <i class="fa-solid fa-play-circle"></i></a>
                     </div>
                 </div>
@@ -326,12 +321,11 @@ DASHBOARD_HTML = """
                 {% for lesson in lessons %}
                 <div class="course-card">
                     <div class="card-header">
-                        <span class="lesson-number">Ejercicio {{ loop.index }}</span>
-                        <i class="fa-solid fa-star lesson-icon" style="color: var(--accent);"></i>
+                        <span class="lesson-number" style="color: var(--secondary);">Ejercicio {{ loop.index }}</span>
+                        <i class="fa-solid fa-star" style="color: var(--accent);"></i>
                     </div>
                     <div class="card-body">
                         <h4>{{ lesson }}</h4>
-                        <p>تمرين سريع على المحاضرة عشان تثبت المعلومة في دماغك.</p>
                         <a href="/page/{{ student.level }}/exercise{{ loop.index }}.html" class="card-action-btn btn-exercise">ابدأ التمرين <i class="fa-solid fa-pencil"></i></a>
                     </div>
                 </div>
@@ -344,10 +338,8 @@ DASHBOARD_HTML = """
         function switchTab(evt, tabId) {
             const tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) tabContents[i].classList.remove("active");
-            
             const tabTriggers = document.getElementsByClassName("tab-trigger");
             for (let i = 0; i < tabTriggers.length; i++) tabTriggers[i].classList.remove("active");
-            
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
@@ -378,7 +370,6 @@ def dashboard():
     student = session['user']
     level = student['level']
     level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
-    
     random_quote = random.choice(motivation_quotes)
     
     return render_template_string(DASHBOARD_HTML, student=student, lessons=level_lessons, quote=random_quote)
