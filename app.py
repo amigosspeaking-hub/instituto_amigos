@@ -23,12 +23,15 @@ syllabus = {
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
 
+# الجمل التحفيزية الجديدة (بدون إنجليزي وبدون جملة البلبل)
 motivation_quotes = [
-    "شد حيلك يا بطل، الإسباني محتاج استمرارية بس!",
-    "كل يوم ربع ساعة مذاكرة بتعمل فرق كبير.. كمل!",
-    "خيالك النهاردة.. حقيقة بكرة لما تتكلم أسباني زي البلبُل!",
-    "Instituto Amigos وراك لحد ما تبقى فل في اللغة.. يالا بينا!",
-    "تعب النهاردة هو نجاح بكرة.. متكسلش عن درس النهاردة!"
+    "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
+    "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!",
+    "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك!",
+    "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك!",
+    "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس.",
+    "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك.",
+    "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!"
 ]
 
 def get_student_data(username, password):
@@ -60,27 +63,31 @@ LOGIN_HTML = """
     <style>
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
         body { 
-            background: #fcfbf7; /* لون كريمي هادي سادة بدون كراسة */
+            background: #fcfbf7; 
             font-family: 'Cairo', sans-serif; 
             display: flex; align-items: center; justify-content: center; height: 100vh; margin:0; 
             overflow: hidden; position: relative;
         }
         
-        /* الأشكال المرسومة بالإيد (Doodles) */
-        .spain-doodle { position: absolute; z-index: 0; opacity: 0.8; }
+        /* تصميم الأشكال المرسومة والخلفيات الثقافية */
+        .doodle-container {
+            position: absolute; display: flex; flex-direction: column; align-items: center;
+            opacity: 0.65; z-index: 0; color: #333;
+        }
+        .doodle-container i { font-size: 38px; margin-bottom: 5px; color: #444; }
+        .doodle-container span { font-family: 'Reenie Beanie', cursive; font-size: 28px; font-weight: bold; color: var(--primary-red); }
         
-        /* فقاعة Hola */
-        .doodle-hola { top: 10%; left: 15%; width: 130px; animation: float 6s ease-in-out infinite; }
-        
-        /* علم إسبانيا وقلب */
-        .doodle-flag { top: 15%; right: 10%; width: 160px; animation: float 5s ease-in-out infinite reverse; }
-        
-        /* جيتار */
-        .doodle-guitar { bottom: 10%; left: 10%; width: 140px; transform: rotate(15deg); animation: float 7s ease-in-out infinite; }
-        
+        /* توزيع الأشكال على الشاشة */
+        .d-1 { top: 12%; left: 15%; animation: float 6s ease-in-out infinite; transform: rotate(-10deg); }
+        .d-2 { bottom: 15%; right: 15%; animation: float 5s ease-in-out infinite reverse; transform: rotate(15deg); }
+        .d-3 { bottom: 15%; left: 15%; animation: float 7s ease-in-out infinite; transform: rotate(-8deg); }
+        .d-4 { top: 15%; right: 15%; animation: float 8s ease-in-out infinite; transform: rotate(12deg); }
+        .d-5 { top: 45%; left: 8%; transform: rotate(-15deg); opacity: 0.4; }
+        .d-6 { top: 50%; right: 8%; transform: rotate(12deg); opacity: 0.4; }
+
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
@@ -91,9 +98,7 @@ LOGIN_HTML = """
             text-align: center; width: 380px; position: relative; z-index: 1;
         }
         
-        /* اللوجو: استخدمت مسار محلي، عدله للمسار بتاعك لما ترفعه */
         .logo-img { width: 120px; height: auto; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--primary-gold); }
-        
         h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 700; }
         p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
         
@@ -115,7 +120,7 @@ LOGIN_HTML = """
         
         .error { color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold; background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red); }
         
-        /* السوشيال ميديا */
+        /* أزرار السوشيال ميديا في صفحة الدخول */
         .social-links { margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
         .social-btn {
             display: inline-flex; align-items: center; justify-content: center;
@@ -130,32 +135,36 @@ LOGIN_HTML = """
     </style>
 </head>
 <body>
-    <!-- فقاعة Hola -->
-    <svg viewBox="0 0 100 100" class="spain-doodle doodle-hola">
-        <path d="M10,40 C10,15 90,15 90,40 C90,60 60,70 50,85 C45,70 10,65 10,40 Z" fill="#fff" stroke="#333" stroke-width="3" stroke-linejoin="round"/>
-        <text x="50" y="48" font-family="'Reenie Beanie', cursive" font-size="28" fill="#e52421" text-anchor="middle" font-weight="bold">¡Hola!</text>
-    </svg>
+    <!-- أشكال الثقافة واللغة -->
+    <div class="doodle-container d-1">
+        <i class="fa-regular fa-sun"></i>
+        <span>Sol</span>
+    </div>
+    
+    <div class="doodle-container d-2">
+        <i class="fa-solid fa-guitar"></i>
+        <span>Música</span>
+    </div>
 
-    <!-- علم إسبانيا مرسوم مع قلب -->
-    <svg viewBox="0 0 150 100" class="spain-doodle doodle-flag">
-        <rect x="10" y="20" width="80" height="50" fill="none" stroke="#333" stroke-width="3" transform="rotate(-5)"/>
-        <line x1="10" y1="36" x2="90" y2="36" stroke="#333" stroke-width="2" transform="rotate(-5)"/>
-        <line x1="10" y1="53" x2="90" y2="53" stroke="#333" stroke-width="2" transform="rotate(-5)"/>
-        <text x="25" y="50" font-family="'Reenie Beanie', cursive" font-size="20" fill="#333" transform="rotate(-5)">España</text>
-        <path d="M110,30 A10,10 0 0,0 95,30 A10,10 0 0,0 80,30 Q80,45 95,60 Q110,45 110,30 Z" fill="#e52421" stroke="#333" stroke-width="2"/>
-    </svg>
+    <div class="doodle-container d-3">
+        <i class="fa-solid fa-pepper-hot"></i>
+        <span>Picante</span>
+    </div>
 
-    <!-- جيتار وكلمة -->
-    <svg viewBox="0 0 150 100" class="spain-doodle doodle-guitar">
-        <path d="M30 70 C20 80, 10 70, 20 60 C30 50, 40 60, 50 50 C60 40, 70 30, 80 20 L85 25 C75 35, 65 45, 55 55 C45 65, 35 75, 30 70 Z" stroke="#333" stroke-width="3" fill="none" stroke-linejoin="round"/>
-        <circle cx="35" cy="65" r="8" stroke="#333" stroke-width="3" fill="none"/>
-        <line x1="35" y1="65" x2="80" y2="20" stroke="#333" stroke-width="2"/>
-        <text x="75" y="80" font-family="'Reenie Beanie', cursive" font-size="24" fill="#e52421" transform="rotate(-15)">Música</text>
-    </svg>
+    <div class="doodle-container d-4">
+        <i class="fa-regular fa-comment-dots"></i>
+        <span>¡Hola!</span>
+    </div>
+
+    <div class="doodle-container d-5">
+        <span style="font-size: 35px; color: #333;">Familia</span>
+    </div>
+
+    <div class="doodle-container d-6">
+        <span style="font-size: 35px; color: #333;">Gracias</span>
+    </div>
 
     <div class="card">
-        <!-- مسار اللوجو -->
-        <!-- لو مسار ال assets مش شغال معاك حاليا ممكن تحط لينك اللوجو بتاعك المباشر هنا -->
         <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421&size=120'">
         
         <h1>بوابتك للأسباني 👋</h1>
@@ -173,7 +182,6 @@ LOGIN_HTML = """
             <button type="submit">ادخل للمنصة <i class="fa-solid fa-arrow-left"></i></button>
         </form>
 
-        <!-- روابط السوشيال ميديا -->
         <div class="social-links">
             <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" class="social-btn ig" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -203,25 +211,40 @@ DASHBOARD_HTML = """
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); }
         
+        /* الشريط العلوي */
         .top-nav {
-            background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+            background: white; padding: 12px 30px; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100;
         }
         .brand-area { display: flex; align-items: center; gap: 15px; }
-        
-        /* مكان اللوجو في المنصة */
         .brand-area img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); }
-        
         .brand-area h1 { font-size: 18px; font-weight: 900; color: var(--secondary); margin: 0; }
         .brand-area h1 span { color: var(--primary); }
 
-        .nav-socials { display: flex; gap: 10px; margin-right: 20px; border-right: 2px solid #eee; padding-right: 20px; }
-        .nav-socials a { color: var(--text-muted); font-size: 18px; transition: 0.3s; }
-        .nav-socials a:hover { color: var(--primary); }
+        /* منطقة اليسار (السوشيال + الأزرار) - تنسيق جديد وواسع */
+        .top-left-container { display: flex; align-items: center; gap: 25px; }
+        
+        /* السوشيال ميديا */
+        .social-icons { display: flex; gap: 12px; align-items: center; }
+        .social-icons a {
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #f0f3f5; color: var(--text-muted); text-decoration: none;
+            font-size: 16px; transition: all 0.3s ease;
+        }
+        .social-icons a:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+        
+        /* الخط الفاصل */
+        .v-divider { width: 2px; height: 30px; background-color: #e2e8f0; }
 
-        .user-actions { display: flex; align-items: center; gap: 15px; }
-        .level-tag { background: #eef2f5; color: var(--secondary); padding: 8px 15px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1px solid #d1d9e0; }
-        .logout-btn { background: #ffebeb; color: var(--primary); padding: 8px 15px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 700; transition: 0.3s; }
+        /* أزرار المستخدم */
+        .user-buttons { display: flex; align-items: center; gap: 15px; }
+        .level-badge { background: #eef2f5; color: var(--secondary); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1px solid #d1d9e0; }
+        .logout-btn { 
+            display: flex; align-items: center; gap: 8px;
+            background: #ffebeb; color: var(--primary); padding: 8px 18px; border-radius: 8px; 
+            text-decoration: none; font-size: 14px; font-weight: 700; transition: 0.3s; 
+        }
         .logout-btn:hover { background: var(--primary); color: white; }
 
         .main-content { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
@@ -263,21 +286,23 @@ DASHBOARD_HTML = """
 <body>
     <nav class="top-nav">
         <div class="brand-area">
-            <!-- مسار اللوجو في المنصة -->
             <img src="/static/assets/logo.png" alt="Logo" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421'">
             <h1>Instituto <span>Amigos</span></h1>
         </div>
         
-        <div style="display: flex; align-items: center;">
-            <div class="nav-socials">
-                <a href="https://www.facebook.com/institutoamigos1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/instituto_amigos1/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@espanolconamigos" target="_blank"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/+201108425280" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <div class="top-left-container">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/institutoamigos1" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@espanolconamigos" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/+201108425280" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <div class="user-actions">
-                <span class="level-tag"><i class="fa-solid fa-graduation-cap"></i> مستواك: {{ student.level }}</span>
-                <a href="/logout" class="logout-btn"><i class="fa-solid fa-sign-out-alt"></i> خروج</a>
+            
+            <div class="v-divider"></div>
+            
+            <div class="user-buttons">
+                <span class="level-badge"><i class="fa-solid fa-graduation-cap"></i> مستواك: {{ student.level }}</span>
+                <a href="/logout" class="logout-btn">خروج <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
             </div>
         </div>
     </nav>
@@ -285,8 +310,8 @@ DASHBOARD_HTML = """
     <div class="main-content">
         <header class="welcome-section">
             <div class="user-welcome-info">
-                <h2>منور يا {{ student.username }}!</h2>
-                <p>يالا بينا نشد حيلنا النهاردة ع المذاكرة.. الإسباني مستنيك يا بطل!</p>
+                <h2>أهلاً بيك يا {{ student.username }}! 👋</h2>
+                <p>جاهز لدرس النهاردة؟ كمل في طريقك وإحنا في ضهرك دايماً!</p>
             </div>
             <div class="motivation-box">
                 <i class="fa-solid fa-lightbulb"></i>
