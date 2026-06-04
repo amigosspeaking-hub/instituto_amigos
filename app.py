@@ -10,61 +10,126 @@ app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_202
 # رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
-# الفهرس الكامل للمستويات التعليمية
+# 1. الفهرس الكامل للمستويات التعليمية
 syllabus = {
     "A1.1": ["HOLA, ¿QUÉ TAL?", "EL ESPAÑOL Y YO", "TRABAJO AQUÍ", "¡ME GUSTAN LAS TAPAS!"],
     "A1.2": ["EN FAMILIA", "MI BARRIO", "MI DÍA A DÍA", "DE VACACIONES"],
     "A1.3": ["COMPRAR Y COMER EN ALICANTE", "¡BUEN FIN DE SEMANA!", "INTERCAMBIO DE CASA", "ESTA ES MI VIDA"],
     "A2.1": ["NUEVA ETAPA", "PARA TI Y PARA MÍ", "UN AÑO ESPECIAL", "CON TUS MANOS"],
     "A2.2": ["¿CÓMO ERA ANTES?", "¿Y QUÉ PASÓ?", "HOY COCINO YO", "¡ME SIENTO BIEN!"],
-    "A2.3": ["TE INVITO", "UNA CIUDAD IDEAL", "NOSOTROS Y EL TRABAJO", "¡ESTAMOS AL DÍA!"],
+    "A2.3": ["TE INVITO", "UNA CIUDAD IDEAL", "NOSOTROS Y ال TRABAJO", "¡ESTAMOS AL DÍA!"],
     "B1.1": ["SEGUIMOS JUNTOS", "UN VIAJE INOLVIDABLE", "UN MUNDO MEJOR", "HABLANDO DEL FUTURO"],
     "B1.2": ["ENTRE NOSOTROS", "NUESTRO PLANETA", "¡CÁMARA, ACCIÓN!", "BUENO Y SANO"],
-    "B1.3": ["MENSAJES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
+    "B1.3": ["MENSAجES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
     "B2.1": ["ASÍ HABLAMOS, ASÍ SOMOS", "LA ESCUELA DE LA VIDA", "NUEVOS MUNDOS LABORALES", "¡QUÉ ILUSIÓN!"],
     "B2.2": ["PEGADOS AL MÓVIL", "MENTE SANA EN CUERPO SANO", "¡HOGAR, DULCE HOGAR!", "A FLOR DE PIEL"],
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
 
-# مواضيع التحدث لعجلة المحادثة (دقيقة أو دقيقتين) - مقسمة حسب المستويات
-wheel_topics = {
-    "A1": [
-        "تكلم عن نفسك (الاسم، العمر، العمل، من أين أنت؟).",
-        "صف أفراد عائلتك بالتفصيل.",
-        "كيف تقضي روتينك اليومي من الصباح للمساء؟",
-        "صف الحي الذي تسكن فيه وماذا يوجد به.",
-        "ما هي أكلتك المفضلة؟ ولماذا؟",
-        "تحدث عن يوم عطلتك المفضل وكيف تقضيه.",
-        "ماذا تفعل في وقت فراغك؟"
+# 2. روابط جداول المذاكرة من GitHub (استبدل الروابط الافتراضية بروابط صفحاتك الحقيقية)
+SCHEDULE_DATA = {
+    "A1.1": "https://yourusername.github.io/your-repo/schedules/a1_1.html",
+    "A1.2": "https://yourusername.github.io/your-repo/schedules/a1_2.html",
+    "A1.3": "https://yourusername.github.io/your-repo/schedules/a1_3.html",
+    "A2.1": "https://yourusername.github.io/your-repo/schedules/a2_1.html",
+    "A2.2": "https://yourusername.github.io/your-repo/schedules/a2_2.html",
+    "A2.3": "https://yourusername.github.io/your-repo/schedules/a2_3.html",
+    "B1.1": "https://yourusername.github.io/your-repo/schedules/b1_1.html",
+    "B1.2": "https://yourusername.github.io/your-repo/schedules/b1_2.html",
+    "B1.3": "https://yourusername.github.io/your-repo/schedules/b1_3.html",
+    "B2.1": "https://yourusername.github.io/your-repo/schedules/b2_1.html",
+    "B2.2": "https://yourusername.github.io/your-repo/schedules/b2_2.html",
+    "B2.3": "https://yourusername.github.io/your-repo/schedules/b2_3.html"
+}
+
+# 3. روابط الألعاب من GitHub (استبدل الروابط الافتراضية بروابط صفحاتك الحقيقية)
+GAMES_DATA = {
+    "A1.1": "https://yourusername.github.io/your-repo/games/a1_1.html",
+    "A1.2": "https://yourusername.github.io/your-repo/games/a1_2.html",
+    "A1.3": "https://yourusername.github.io/your-repo/games/a1_3.html",
+    "A2.1": "https://yourusername.github.io/your-repo/games/a2_1.html",
+    "A2.2": "https://yourusername.github.io/your-repo/games/a2_2.html",
+    "A2.3": "https://yourusername.github.io/your-repo/games/a2_3.html",
+    "B1.1": "https://yourusername.github.io/your-repo/games/b1_1.html",
+    "B1.2": "https://yourusername.github.io/your-repo/games/b1_2.html",
+    "B1.3": "https://yourusername.github.io/your-repo/games/b1_3.html",
+    "B2.1": "https://yourusername.github.io/your-repo/games/b2_1.html",
+    "B2.2": "https://yourusername.github.io/your-repo/games/b2_2.html",
+    "B2.3": "https://yourusername.github.io/your-repo/games/b2_3.html"
+}
+
+# 4. مكتبة فيديوهات اليوتيوب (تعديل الروابط يتم من هنا مباشرة)
+VIDEOS_DATA = [
+    {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
+    {"title": "أهم 50 تعبير مستخدم في الحياة اليومية", "youtube_id": "dQw4w9WgXcQ"},
+    {"title": "كيف تتجنب الأخطاء الشائعة في المحادثة", "youtube_id": "dQw4w9WgXcQ"}
+]
+
+# 5. مواضيع عجلة التحدث مخصصة ومولدة تلقائياً لكل مستوى فرعي بدقة
+WHEEL_TOPICS = {
+    "A1.1": [
+        "قدم نفسك بالكامل (الاسم، العمر، الجنسية، ومكان السكن).",
+        "تحدث عن الألوان والأسماء المفضلة لديك داخل غرفتك.",
+        "اذكر خمسة أشياء تستخدمها يومياً في حقيبتك أو فصلك الدراسية."
     ],
-    "A2": [
-        "احكِ لنا عن رحلة لا تنساها أبداً.",
-        "كيف كانت حياتك قبل 5 سنوات مقارنة باليوم؟",
-        "تحدث عن شخص مشهور يعجبك واذكر سيرته الذاتية.",
-        "ما هي وصفتك المفضلة وكيف تقوم بطبخها؟",
-        "احكِ عن موقف مضحك أو غريب حدث لك في الماضي.",
-        "كيف تخطط لمستقبلك في العام القادم؟",
-        "تحدث عن فيلم أو كتاب أثر فيك مؤخراً."
+    "A1.2": [
+        "صف عائلتك (عدد الأفراد، وظائفهم، وأشكالهم).",
+        "تحدث بالتفصيل عن روتينك الصباحي من وقت الاستيقاظ.",
+        "ما هو طعامك المفضل؟ واذكر المكونات الأساسية له بالأسبانية."
     ],
-    "B1": [
-        "ما رأيك في مشكلة التلوث البيئي وما هي الحلول؟",
-        "كيف ترى تأثير وسائل التواصل الاجتماعي على العلاقات؟",
-        "تحدث عن أهمية تعلم اللغات في سوق العمل الحالي.",
-        "ما هي العادات الصحية التي يجب أن نتبعها في حياتنا؟",
-        "تخيل حياتك بعد 10 سنوات، أين ستكون وماذا ستفعل؟",
-        "احكِ لنا عن تجربة ثقافية أو سفر غيرت نظرتك للحياة."
+    "A1.3": [
+        "تخيل أنك في السوبرماركت، تحدث عن المنتجات التي تشتريها.",
+        "صف مدينتك الحالية وما هي الأماكن المفضلة للزوار فيها.",
+        "كيف تقضي عطلة نهاية الأسبوع النموذجية بالنسبة لك؟"
     ],
-    "B2": [
-        "كيف أثرت التكنولوجيا الحديثة على سوق العمل؟",
-        "عبر عن رأيك في التغير المناخي ودور الفرد في مواجهته.",
-        "كيف تتعامل مع الضغوط والمشاعر السلبية في حياتك؟",
-        "ناقش أهمية الفن والموسيقى في تشكيل ثقافة المجتمع.",
-        "تحدث عن مكان خاص جداً بالنسبة لك ولماذا يمثل لك الكثير.",
-        "ما رأيك في التغيرات الاجتماعية السريعة في عصرنا الحالي؟"
+    "A2.1": [
+        "تحدث عن الهواية المفضلة التي بدأت ممارستها مؤخراً ولماذا اخترتها.",
+        "صف أعز أصدقائك واذكر الموقف الذي جمعكم أول مرة.",
+        "تحدث عما فعلته في عطلة الأسبوع الماضي بالكامل باستخدام زمن الماضي."
+    ],
+    "A2.2": [
+        "احكِ لنا كيف كانت حياتك وشكلك في مرحلة الطفولة وزمن المدرسة.",
+        "تحدث عن وصفة طبخ أعددتها بنفسك سابقاً واشرح خطواتها.",
+        "ماذا تفعل عندما تشعر بالمرض أو التعب؟ صف تجربة سابقة."
+    ],
+    "A2.3": [
+        "وجه دعوة لصديق لزيارة مكان ما واقترح عليه الأنشطة والوقت المحتمل.",
+        "صف ملامح مدينتك المثالية التي تتمنى العيش فيها في المستقبل.",
+        "تحدث عن وظيفة أحلامك وما هي المهارات المطلوبة للعمل بها."
+    ],
+    "B1.1": [
+        "احكِ لنا عن رحلة مميزة قمت بها ولا يمكن أن تنساها أبدًا.",
+        "ما هي خططك وطموحاتك الشخصية والمهنية للسنوات الثلاث القادمة؟",
+        "تحدث عن فيلم سينمائي أو كتاب قرأته مؤخراً واشرح فكرته الأساسية."
+    ],
+    "B1.2": [
+        "تحدث عن إيجابيات وسلبيات وسائل التواصل الاجتماعي وتأثيرها علينا.",
+        "ما هو أسلوب الحياة الصحي من وجهة نظرك؟ واذكر عاداتك اليومية.",
+        "كيف يمكن للأفراد المساهمة في حماية كوكب الأرض من التلوث؟"
+    ],
+    "B1.3": [
+        "تحدث عن أهمية الفنون والموسيقى وتأثيرها في ثقافات الشعوب المختلفة.",
+        "احكِ عن تجربة شخصية صعبة مررت بها وكيف تغلبت عليها بنجاح.",
+        "عبر عن رأيك الشخصي حول التعليم عن بُعد مقارنة بالتعليم التقليدي."
+    ],
+    "B2.1": [
+        "كيف تطورت شخصيتك وأفكارك مقارنة بما كنت عليه قبل خمس سنوات؟",
+        "ما هي أهم التحديات التي تواجه الشباب في سوق العمل المعاصر؟",
+        "تحدث عن مفهوم النجاح الشخصي وكيف تقيسه في حياتك."
+    ],
+    "B2.2": [
+        "ناقش ظاهرة إدمان الهواتف الذكية وكيف تؤثر على الترابط الأسري.",
+        "ما هي برأيك أفضل الطرق للحفاظ على التوازن بين الصحة النفسية والجسدية؟",
+        "احكِ عن موقف حرج جداً واجهته وكيف تداركت الأمر بذكاء."
+    ],
+    "B2.3": [
+        "تحدث عن مكان استثنائي وغريب زرته أو قرأت عنه وتمنيت الذهاب إليه.",
+        "عبر عن تطلعاتك المستقبلية طويلة المدى ودور لغة الإسبانية في تحقيقها.",
+        "كيف تتعامل مع المشكلات والشكاوى اليومية في محيط العمل أو الدراسة؟"
     ]
 }
 
-# جمل تحفيزية
+# 6. الجمل التحفيزية
 motivation_quotes = [
     "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
     "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!",
@@ -227,15 +292,12 @@ DASHBOARD_HTML = """
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); }
         
-        /* الشريط العلوي - تعديل الاتجاهات */
         .top-nav {
             background: white; padding: 12px 30px; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100;
         }
 
-        /* اليمين (أزرار الخروج والمستوى) */
         .top-right-container { display: flex; align-items: center; gap: 20px; }
-        
         .user-buttons { display: flex; align-items: center; gap: 15px; }
         .logout-btn { 
             display: flex; align-items: center; gap: 8px;
@@ -256,7 +318,6 @@ DASHBOARD_HTML = """
         }
         .social-icons a:hover { background: var(--primary); color: white; transform: translateY(-2px); }
 
-        /* الشمال (اللوجو) - اتجاه LTR */
         .brand-area { display: flex; align-items: center; gap: 15px; }
         .brand-area img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); }
         .brand-area h1 { font-size: 20px; font-weight: 900; color: var(--secondary); margin: 0; }
@@ -279,7 +340,6 @@ DASHBOARD_HTML = """
             width: 300px; backdrop-filter: blur(5px); z-index: 1;
         }
 
-        /* التبويبات الجديدة */
         .tabs-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
         .tab-trigger { 
             background: none; border: none; font-size: 15px; font-weight: 700; color: var(--text-muted); 
@@ -293,7 +353,6 @@ DASHBOARD_HTML = """
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* الكروت والشبكات */
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
         .course-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f0f3f5; transition: 0.3s; display: flex; flex-direction: column; }
         .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
@@ -305,17 +364,13 @@ DASHBOARD_HTML = """
         .btn-lecture { background: var(--primary); color: white; }
         .btn-exercise { background: var(--accent); color: var(--secondary); }
         
-        /* تنسيقات الجدول والفيديوهات */
-        .schedule-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .schedule-table th { background: var(--secondary); color: white; padding: 15px; text-align: right; }
-        .schedule-table td { padding: 15px; border-bottom: 1px solid #eee; color: var(--text-main); font-weight: 600;}
-        .schedule-table tr:last-child td { border-bottom: none; }
-        .schedule-table tr:hover { background: #f8fafc; }
+        /* تصميم الـ iFrame لصفحات GitHub */
+        .github-frame-container { width: 100%; height: 75vh; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #e2e8f0; background: white; }
+        .github-iframe { width: 100%; height: 100%; border: none; }
 
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* تنسيقات عجلة التحدث */
         .wheel-box { text-align: center; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         .wheel-display { 
             font-size: 22px; font-weight: 800; color: var(--secondary); padding: 40px 20px; 
@@ -339,7 +394,6 @@ DASHBOARD_HTML = """
 </head>
 <body>
     <nav class="top-nav">
-        <!-- اليمين -->
         <div class="top-right-container">
             <div class="user-buttons">
                 <a href="/logout" class="logout-btn">خروج <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
@@ -354,7 +408,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- الشمال (كلمة المعهد من الشمال لليمين) -->
         <div class="brand-area" dir="ltr">
             <img src="/static/assets/logo.png" alt="Logo" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421'">
             <h1>Instituto <span>Amigos</span></h1>
@@ -379,10 +432,9 @@ DASHBOARD_HTML = """
             <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')"><i class="fa-solid fa-calendar-days"></i> جدول المذاكرة</button>
             <button class="tab-trigger" onclick="switchTab(event, 'games-tab')"><i class="fa-solid fa-gamepad"></i> الألعاب</button>
             <button class="tab-trigger" onclick="switchTab(event, 'videos-tab')"><i class="fa-brands fa-youtube"></i> الفيديوهات</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> عجلة التحدث (1-2 دقيقة)</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> عجلة التحدث</button>
         </nav>
 
-        <!-- 1. تبويب المحاضرات -->
         <div id="lectures-tab" class="tab-content active">
             <div class="cards-grid">
                 {% for lesson in lessons %}
@@ -400,7 +452,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- 2. تبويب التمارين -->
         <div id="exercises-tab" class="tab-content">
             <div class="cards-grid">
                 {% for lesson in lessons %}
@@ -418,89 +469,36 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- 3. تبويب جدول المذاكرة -->
         <div id="schedule-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-calendar-check"></i> خطتك الأسبوعية للمذاكرة</h3>
-            <table class="schedule-table">
-                <thead>
-                    <tr>
-                        <th>اليوم</th>
-                        <th>المهام المطلوبة</th>
-                        <th>المدة المقترحة</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>الأحد</td>
-                        <td>مشاهدة المحاضرة الأساسية (Unidad 1) وتسجيل الملاحظات</td>
-                        <td>45 دقيقة</td>
-                    </tr>
-                    <tr>
-                        <td>الثلاثاء</td>
-                        <td>حل التمارين الخاصة بالمحاضرة ومراجعة الكلمات الجديدة</td>
-                        <td>30 دقيقة</td>
-                    </tr>
-                    <tr>
-                        <td>الخميس</td>
-                        <td>استخدام عجلة التحدث وتسجيل مقطع صوتي للتدريب</td>
-                        <td>15 دقيقة</td>
-                    </tr>
-                    <tr>
-                        <td>الجمعة</td>
-                        <td>لعب ألعاب تفاعلية ومراجعة سريعة للأسبوع</td>
-                        <td>20 دقيقة</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="github-frame-container">
+                <iframe src="{{ schedule_url }}" class="github-iframe"></iframe>
+            </div>
         </div>
 
-        <!-- 4. تبويب الألعاب -->
         <div id="games-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-puzzle-piece"></i> العب واتعلم</h3>
-            <div class="cards-grid">
-                <!-- يمكنك تغيير الروابط لاحقاً لألعابك الفعلية على Wordwall أو غيره -->
-                <div class="course-card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-chess-knight" style="font-size: 40px; color: var(--accent); margin-bottom: 15px;"></i>
-                        <h4>لعبة توصيل الكلمات</h4>
-                        <a href="#" class="card-action-btn" style="background: #2ecc71; color: white;">ابدأ اللعب <i class="fa-solid fa-play"></i></a>
-                    </div>
-                </div>
-                <div class="course-card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-trophy" style="font-size: 40px; color: #f39c12; margin-bottom: 15px;"></i>
-                        <h4>اختبار السرعة Kahoot</h4>
-                        <a href="#" class="card-action-btn" style="background: #9b59b6; color: white;">ادخل التحدي <i class="fa-solid fa-bolt"></i></a>
-                    </div>
-                </div>
+            <div class="github-frame-container">
+                <iframe src="{{ game_url }}" class="github-iframe"></iframe>
             </div>
         </div>
 
-        <!-- 5. تبويب الفيديوهات -->
         <div id="videos-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الفيديوهات الإضافية</h3>
+            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الشروحات المرئية</h3>
             <div class="cards-grid">
-                <div class="course-card" style="padding: 15px;">
-                    <!-- ضع لينك الفيديو الخاص بك مكان src -->
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <h4 style="margin-top: 15px; font-size: 16px;">مراجعة أساسيات النطق</h4>
-                </div>
+                {% for video in videos_list %}
                 <div class="course-card" style="padding: 15px;">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/{{ video.youtube_id }}" title="{{ video.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <h4 style="margin-top: 15px; font-size: 16px;">أهم 50 كلمة في الإسبانية</h4>
+                    <h4 style="margin-top: 15px; font-size: 16px;">{{ video.title }}</h4>
                 </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- 6. تبويب عجلة التحدث -->
         <div id="wheel-tab" class="tab-content">
             <div class="wheel-box">
-                <h3 style="color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-microphone-lines"></i> عجلة التحدث (الطلاقة)</h3>
-                <p style="color: var(--text-muted);">اضغط على الزر ليتم اختيار موضوع عشوائي مناسب لمستواك ({{ student.level }}). تحدث عنه لمدة دقيقة إلى دقيقتين بدون توقف!</p>
+                <h3 style="color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-microphone-lines"></i> عجلة التحدث والطلاقة</h3>
+                <p style="color: var(--text-muted);">اضغط على الزر ليتم اختيار موضوع عشوائي مناسب لمستواك الحالي ({{ student.level }}). تحدث عنه لمدة دقيقة إلى دقيقتين بدون توقف!</p>
                 
                 <div id="topicDisplay" class="wheel-display">
                     اضغط على "لف العجلة" لبدء التحدي!
@@ -513,9 +511,7 @@ DASHBOARD_HTML = """
 
     </div>
 
-    <!-- كود الجافاسكربت للتبويبات والعجلة -->
     <script>
-        // دالة التبديل بين التبويبات
         function switchTab(evt, tabId) {
             const tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) tabContents[i].classList.remove("active");
@@ -525,7 +521,6 @@ DASHBOARD_HTML = """
             evt.currentTarget.classList.add("active");
         }
 
-        // بيانات العجلة جاية من البايثون
         const levelTopics = {{ topics_json | safe }};
         
         function spinWheel() {
@@ -539,30 +534,25 @@ DASHBOARD_HTML = """
             
             let counter = 0;
             let spinInterval = setInterval(() => {
-                // تقليب عشوائي سريع
                 const randomTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
                 display.innerText = randomTopic;
                 counter++;
                 
-                // توقف العجلة بعد فترة
                 if(counter > 20) {
                     clearInterval(spinInterval);
                     display.classList.remove("spinning");
                     
-                    // النتيجة النهائية
                     const finalTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
                     display.innerHTML = `<span style="color: var(--primary); font-size: 26px;">🎯 ${finalTopic}</span>`;
                     
                     btn.innerText = "جرب موضوع تاني";
                     btn.disabled = false;
                     
-                    // تشغيل التايمر دقيقتين
                     startTimer(120, timerDisplay);
                 }
             }, 100);
         }
 
-        // دالة التايمر
         let timerInterval;
         function startTimer(duration, display) {
             clearInterval(timerInterval);
@@ -610,14 +600,17 @@ def dashboard():
     
     student = session['user']
     level = student['level']
+    
     level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
+    
+    # جلب روابط GitHub المخصصة للمستوى الحالي أوتوماتيكياً
+    student_schedule_url = SCHEDULE_DATA.get(level, "https://yourusername.github.io/your-repo/schedules/default.html")
+    student_game_url = GAMES_DATA.get(level, "https://yourusername.github.io/your-repo/games/default.html")
+    
     random_quote = random.choice(motivation_quotes)
     
-    # تحديد المواضيع الخاصة بعجلة التحدث بناءً على مستوى الطالب
-    # نأخذ الحرف والرقم الأول فقط (مثل A1 من A1.1)
-    base_level = level.split('.')[0] if '.' in level else level
-    # إذا لم يكن المستوى موجوداً، نعرض مواضيع A1 كافتراضي
-    student_wheel_topics = wheel_topics.get(base_level, wheel_topics["A1"])
+    # سحب داتا العجلة للمستوى بالكامل (مثل A1.1) مباشرة بدون قص
+    student_wheel_topics = WHEEL_TOPICS.get(level, ["تحدث عن مهاراتك اللغوية الحالية."])
     topics_json = json.dumps(student_wheel_topics, ensure_ascii=False)
     
     return render_template_string(
@@ -625,7 +618,10 @@ def dashboard():
         student=student, 
         lessons=level_lessons, 
         quote=random_quote,
-        topics_json=topics_json
+        topics_json=topics_json,
+        schedule_url=student_schedule_url,
+        game_url=student_game_url,
+        videos_list=VIDEOS_DATA
     )
 
 @app.route('/page/<path:filename>')
