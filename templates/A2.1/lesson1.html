@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Unidad 1 – Nueva Etapa | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;height:100%;}
+body{background:#1a1a2e;font-family:'Open Sans',sans-serif;height:100%;}
+.slide{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;}
+.slide>*{position:relative;z-index:1;}
+.slide-content::before{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:8rem;font-weight:900;color:rgba(245,124,0,0.05);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+.slide-cover{background:linear-gradient(135deg,#f57c00 0%,#e65100 40%,#bf360c 100%);justify-content:center;align-items:center;text-align:center;color:#fff;padding:60px;}
+.unit-circle{width:120px;height:120px;background:#ffd60a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:#bf360c;font-family:'Playfair Display',serif;margin-bottom:30px;box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.slide-cover h1{font-family:'Playfair Display',serif;font-size:56px;letter-spacing:6px;text-transform:uppercase;margin-bottom:20px;text-shadow:3px 3px 10px rgba(0,0,0,0.4);}
+.obj-box{background:rgba(255,255,255,0.15);border-radius:16px;padding:25px 40px;margin-top:30px;max-width:900px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);}
+.obj-box p{font-size:17px;line-height:1.8;}
+.instituto-label{margin-top:40px;font-size:16px;letter-spacing:4px;text-transform:uppercase;opacity:0.7;}
+.slide-content{background:#fff;padding:20px 35px;position:relative;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:6px;border-bottom:3px solid #f57c00;}
+.topbar-left{display:flex;flex-direction:column;gap:3px;}
+.topbar .ulabel{font-family:'Playfair Display',serif;font-size:13px;color:#e65100;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
+.topbar .pnum{font-size:12px;color:#999;font-weight:600;}
+.topbar-right{display:flex;align-items:center;gap:15px;}
+.brand-badge{font-family:'Playfair Display',serif;font-size:13px;color:#e65100;font-weight:800;opacity:0.6;text-transform:uppercase;letter-spacing:1px;}
+.act-head{display:flex;align-items:center;margin-bottom:8px;gap:10px;}
+.act-num{width:36px;height:36px;background:#f57c00;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;font-family:'Playfair Display',serif;flex-shrink:0;}
+.act-title{font-family:'Playfair Display',serif;font-size:21px;color:#2c2c2c;text-decoration:underline;text-decoration-color:#f57c00;text-underline-offset:5px;text-decoration-thickness:3px;}
+.sub{margin-bottom:10px;}
+.sub-l{font-weight:700;font-size:13.5px;color:#e65100;margin-bottom:5px;background:#fff3e0;padding:5px 10px;border-radius:6px;border-left:4px solid #f57c00;}
+.inst{font-size:13px;color:#333;line-height:1.5;margin-bottom:4px;}
+.audio-wrap{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:1.5px solid #f57c00;border-radius:8px;padding:5px 10px;margin:5px 0;}
+.audio-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.audio-label{font-weight:700;color:#e65100;font-size:11.5px;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.audio-row audio{flex:1;min-width:200px;height:28px;max-width:400px;}
+.trans-btn{background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff;border:none;padding:4px 10px;border-radius:12px;font-size:10.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:'Open Sans',sans-serif;white-space:nowrap;transition:all 0.3s;}
+.trans-btn:hover{transform:translateY(-1px);}
+.trans-btn.active{background:linear-gradient(135deg,#e65100,#bf360c);}
+.trans-btn .arrow{transition:transform 0.3s;font-size:10px;}
+.trans-btn.active .arrow{transform:rotate(180deg);}
+.trans-content{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s ease,margin-top 0.3s ease;background:#f5f5f5;border:1px solid #ccc;border-radius:6px;margin-top:0;padding:0 12px;}
+.trans-content.show{max-height:3000px;padding:8px 12px;margin-top:6px;}
+.trans-content .ttitle{font-family:'Playfair Display',serif;font-size:12.5px;color:#0d47a1;margin-bottom:4px;text-decoration:underline;font-weight:700;}
+.trans-content p{font-size:11.5px;line-height:1.6;color:#333;margin:2px 0;}
+.fill-blank{display:inline-block;min-width:80px;border-bottom:2px dashed #999;padding:0 3px;transition:all 0.4s;color:transparent;user-select:none;}
+.fill-blank.show{border-bottom:2px solid #2e8b57;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#1b5e20;font-weight:700;border-radius:3px;padding:1px 6px;}
+.order-num{display:inline-flex;width:24px;height:24px;background:#fff;border:2px dashed #f57c00;border-radius:50%;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:transparent;transition:all 0.4s;flex-shrink:0;}
+.order-num .ans-text{display:none;}
+.order-num.show{background:#f57c00;border:2px solid #f57c00;color:#fff;}
+.order-num.show .ans-text{display:inline;}
+.opt-mark{display:inline-block;width:14px;height:14px;border:2px solid #999;border-radius:50%;vertical-align:middle;margin-right:5px;transition:all 0.4s;}
+.opt-mark.correct.show{background:#2e8b57;border-color:#2e8b57;box-shadow:0 0 0 3px #c8e6c9;}
+.opt-mark.correct.show::after{content:"✓";color:#fff;font-size:10px;font-weight:900;display:block;text-align:center;line-height:10px;}
+.ans-inline{display:inline-block;border-bottom:2px dashed #999;min-width:80px;padding:0 4px;transition:all 0.4s;}
+.ans-inline .ans-text{display:none;}
+.ans-inline .placeholder-text{display:inline-block;min-width:60px;}
+.ans-inline.show{background:linear-gradient(135deg,#c8e6c9,#a5d6a7);border-bottom:2px solid #2e8b57;color:#1b5e20;font-weight:700;border-radius:3px;padding:1px 6px;}
+.ans-inline.show .ans-text{display:inline;}
+.ans-inline.show .placeholder-text{display:none;}
+.show-ans-row{display:flex;justify-content:flex-end;margin:6px 0 4px;}
+.show-ans-btn{background:linear-gradient(135deg,#2e8b57,#1e6e3f);color:#fff;border:none;padding:5px 14px;border-radius:18px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.3s;}
+.show-ans-btn:hover{transform:translateY(-2px);}
+.show-ans-btn .arrow{transition:transform 0.3s;font-size:12px;}
+.show-ans-btn.active{background:linear-gradient(135deg,#e65100,#bf360c);}
+.show-ans-btn.active .arrow{transform:rotate(180deg);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.grid-23{display:grid;grid-template-columns:2fr 1fr;gap:14px;}
+.grid-32{display:grid;grid-template-columns:1fr 2fr;gap:14px;}
+.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0;}
+.ar{background:linear-gradient(135deg,#fff8e1,#fff3cd);border-right:5px solid #f5a623;border-radius:12px 0 0 12px;padding:10px 14px;font-family:'Amiri',serif;font-size:13px;line-height:1.9;color:#5a4100;direction:rtl;text-align:right;}
+.ar-full{margin:8px 0;}
+.ar .es-word{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:0 5px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffe0b2;}
+.ar-instr{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:2px solid #f5a623;border-radius:10px;padding:7px 12px;margin:5px 0;font-family:'Amiri',serif;font-size:12.5px;color:#5a4100;direction:rtl;text-align:right;line-height:1.7;}
+.ar-instr .ar-title{font-weight:700;color:#bf6a00;display:block;margin-bottom:3px;font-size:13px;}
+.ar-instr .es-word{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:0 5px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffe0b2;}
+.tblock{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;font-size:12.5px;line-height:1.7;color:#333;}
+.gbox{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid #7c4dff;border-radius:12px;padding:10px 14px;margin:5px 0;}
+.gbox h3{font-family:'Playfair Display',serif;font-size:14.5px;color:#5a2dba;text-decoration:underline;text-underline-offset:4px;margin-bottom:5px;}
+.gbox p,.gbox li{font-size:12.5px;line-height:1.6;color:#3a2070;}
+.infobox{background:linear-gradient(135deg,#fbe9e7,#ffccbc);border:2px solid #e64a19;border-radius:10px;padding:8px 12px;margin:5px 0;}
+.infobox h4{color:#bf360c;font-size:12.5px;margin-bottom:4px;text-decoration:underline;}
+.infobox p{font-size:12px;color:#5d1b00;line-height:1.55;}
+.teacuerdas{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid #2e7d32;border-radius:10px;padding:8px 12px;margin:5px 0;}
+.teacuerdas h4{color:#1b5e20;font-size:12.5px;margin-bottom:3px;text-decoration:underline;font-family:'Playfair Display',serif;}
+.teacuerdas p{font-size:12px;color:#1b5e20;line-height:1.55;}
+table{border-collapse:collapse;width:100%;margin:4px 0;font-size:12px;}
+table th{background:#f57c00;color:#fff;padding:5px 8px;font-weight:700;text-align:center;}
+table td{padding:4px 8px;border:1px solid #ddd;text-align:center;}
+table tr:nth-child(even){background:#fff8e1;}
+.dia{margin:5px 0;font-size:12.5px;line-height:1.6;background:#fafafa;padding:7px 11px;border-radius:6px;border-left:3px solid #f57c00;}
+.dia p{margin:2px 0;}
+.sb{color:#e65100;font-weight:700;}
+.st{color:#2e8b57;font-weight:700;}
+.sq{color:#1976d2;font-weight:700;}
+.wbank{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0;}
+.wbank span{background:#fff3e0;border:1px solid #f57c00;border-radius:8px;padding:3px 9px;font-size:11.5px;color:#bf360c;}
+.img-placeholder{background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border:2px dashed #999;border-radius:10px;padding:14px 10px;text-align:center;color:#888;font-style:italic;font-size:11px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.img-placeholder .icon{font-size:28px;margin-bottom:5px;color:#bbb;}
+.foto-rel{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:6px 0;}
+.foto-card{background:#fafafa;border:2px solid #f57c00;border-radius:10px;padding:6px;text-align:center;}
+.foto-card .letter{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#e65100;background:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;border:2px solid #f57c00;}
+.foto-card .img-placeholder{padding:8px 4px;min-height:50px;font-size:9px;}
+.foto-card .ans-line{margin-top:3px;font-size:10px;padding-top:3px;border-top:1px dashed #ddd;min-height:14px;}
+.ejn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#2c2c54;color:#fff;border-radius:50%;font-weight:700;font-size:11px;margin-right:5px;flex-shrink:0;}
+.slide-div{background:linear-gradient(135deg,#2c2c54,#1a1a2e);justify-content:center;align-items:center;text-align:center;color:#fff;padding:60px;}
+.slide-div h2{font-family:'Playfair Display',serif;font-size:52px;letter-spacing:6px;text-transform:uppercase;margin-bottom:12px;color:#ffd60a;}
+.divline{width:200px;height:4px;background:#f57c00;border-radius:2px;margin:12px 0;}
+.slide-div p{font-size:18px;opacity:0.7;max-width:600px;}
+.slide-cons{background:linear-gradient(135deg,#fff8e1,#fffde7);border:4px solid #f5a623;}
+.consbadge{display:inline-block;background:#f5a623;color:#fff;font-weight:900;font-size:11px;padding:4px 12px;border-radius:8px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;font-family:'Playfair Display',serif;}
+.testimonial{background:linear-gradient(135deg,#fff9c4,#fff59d);border:2px solid #fbc02d;border-radius:12px;padding:9px 12px;margin:5px 0;font-size:12px;line-height:1.6;color:#5a4100;}
+.testimonial .name-badge{display:inline-flex;align-items:center;gap:6px;background:#fbc02d;color:#5a4100;padding:2px 9px;border-radius:12px;font-weight:700;font-size:11px;margin-bottom:4px;}
+.ficha{background:#e1f5fe;border:2px dashed #0288d1;border-radius:10px;padding:9px 12px;margin:5px 0;font-size:12px;line-height:1.8;color:#01579b;}
+.ficha p{margin:2px 0;}
+.ficha-line{display:inline-block;min-width:130px;border-bottom:1px dotted #0288d1;padding:0 4px;}
+.hex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:5px 0;}
+.hex-cell{background:#4dd0e1;color:#fff;text-align:center;padding:8px 5px;border-radius:7px;font-size:10.5px;line-height:1.3;font-weight:700;}
+.hex-cell.center{background:#006064;font-size:11px;}
+.consejos-box{background:#fff3e0;border:2px solid #ef6c00;border-radius:10px;padding:8px 12px;margin:5px 0;font-size:12px;color:#bf360c;}
+.consejos-box h4{color:#e65100;margin-bottom:4px;font-family:'Playfair Display',serif;font-size:13px;}
+.note-yellow{background:#fff9c4;border:1.5px solid #fbc02d;border-radius:8px;padding:7px 11px;margin:4px 0;font-size:11.5px;color:#5a4100;line-height:1.6;}
+.slide-shadow{background:linear-gradient(135deg,#1a237e,#283593);padding:25px 40px;}
+.shadow-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.shadow-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all 0.3s;}
+.shadow-box:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px);}
+.shadow-box.playing{background:rgba(255,214,10,0.2);border-color:#ffd60a;}
+.shadow-box .sh-es{font-size:13px;color:#e8eaf6;line-height:1.6;margin-bottom:4px;display:flex;align-items:flex-start;gap:8px;}
+.shadow-box .sh-ar{font-family:'Amiri',serif;font-size:12px;color:#ffcc80;direction:rtl;text-align:right;line-height:1.7;border-top:1px solid rgba(255,255,255,0.12);padding-top:4px;}
+.shadow-title{font-family:'Playfair Display',serif;font-size:28px;color:#ffd60a;text-align:center;margin-bottom:4px;letter-spacing:3px;text-transform:uppercase;}
+.shadow-sub{text-align:center;color:rgba(255,255,255,0.65);font-size:12px;margin-bottom:10px;}
+.shadow-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#ffd60a;color:#1a237e;border-radius:50%;font-weight:900;font-size:11px;flex-shrink:0;}
+.shadow-topbar{display:flex;justify-content:space-between;margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid #ffd60a;}
+.shadow-topbar .lbl{color:#ffd60a;font-family:'Playfair Display',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;}
+.shadow-topbar .num{color:rgba(255,255,255,0.5);font-size:11px;}
+.play-icon{width:18px;height:18px;background:#ffd60a;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#1a237e;font-size:9px;flex-shrink:0;margin-top:2px;}
+.shadow-box.playing .play-icon{background:#fff;animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+.shadow-instr{background:rgba(255,214,10,0.15);border:1px dashed #ffd60a;border-radius:8px;padding:8px 12px;margin-bottom:10px;color:#fff;font-size:12px;text-align:center;font-family:'Amiri',serif;direction:rtl;line-height:1.8;}
+.study-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px;direction:rtl;}
+.study-table th{background:#f57c00;color:#fff;padding:7px 10px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;letter-spacing:1px;}
+.study-table td{padding:7px 10px;border:1px solid #ddd;vertical-align:top;line-height:1.5;}
+.study-table tr:nth-child(even){background:#fff8e1;}
+.study-table .day{font-weight:700;color:#e65100;font-family:'Playfair Display',serif;font-size:14px;text-align:center;white-space:nowrap;}
+.study-table .task-cell{direction:rtl;text-align:right;}
+.study-table .task-es{color:#333;font-size:11.5px;direction:ltr;text-align:left;background:#fff;border-radius:5px;padding:6px 8px;margin-bottom:5px;border:1px solid #eee;unicode-bidi:isolate;}
+.study-table .task-ar{font-family:'Amiri',serif;color:#5a4100;font-size:12.5px;direction:rtl;text-align:right;background:#fff8e1;border-radius:5px;padding:6px 8px;line-height:1.7;border-right:3px solid #f5a623;}
+.study-table .mins{color:#1976d2;font-weight:700;font-size:11.5px;text-align:center;white-space:nowrap;}
+.task-cons{background:#fffde7;border:2px solid #f5a623;border-radius:10px;padding:10px 14px;margin:6px 0;font-size:12px;line-height:1.7;color:#5a4100;}
+.task-cons strong{color:#bf6a00;}
+
+/* === ملخص Comunicación الجديد === */
+.com-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:8px 0;}
+.com-card{background:#fff;border:2px solid #2e7d32;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+.com-card-head{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:6px 10px;font-family:'Playfair Display',serif;font-size:12.5px;font-weight:700;text-align:center;letter-spacing:1px;}
+.com-card-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.com-formula{background:#f5f0ff;border:1px dashed #7c4dff;border-radius:5px;padding:4px 7px;font-size:10.5px;color:#5a2dba;text-align:center;font-weight:600;font-family:'Courier New',monospace;}
+.com-example{background:#e8f5e9;border-left:3px solid #2e8b57;border-radius:3px;padding:4px 8px;font-size:11px;color:#1b5e20;line-height:1.4;}
+.com-example strong{color:#bf360c;}
+.com-ar-mini{background:#fff8e1;border-right:3px solid #f5a623;border-radius:3px;padding:4px 8px;font-family:'Amiri',serif;font-size:11.5px;color:#5a4100;direction:rtl;text-align:right;line-height:1.5;}
+.com-ar-mini strong{color:#bf6a00;}
+.com-tip-row{background:#fff3e0;border:1.5px solid #ef6c00;border-radius:8px;padding:6px 11px;margin-top:6px;font-family:'Amiri',serif;font-size:12px;color:#bf360c;direction:rtl;text-align:right;line-height:1.6;display:flex;align-items:center;gap:8px;}
+.com-tip-row .tip-icon{font-size:18px;flex-shrink:0;}
+.com-tip-row .es-tag{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:1px 6px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffcc80;font-size:11px;}
+</style>
+</head>
+<body>
+
+<div class="slide slide-cover">
+<div class="unit-circle">1</div>
+<h1>NUEVA ETAPA</h1>
+<div class="obj-box"><p>Conocerse • Hablar de dificultades y preferencias a la hora de estudiar español • Situar acontecimientos en un momento concreto o en un periodo de tiempo • Dar consejos</p></div>
+<p class="instituto-label">Instituto Amigos</p>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 8 – Actividad previa</span></div></div>
+<div class="act-head"><div class="act-num">📷</div><h2 class="act-title">Actividad previa – ¿Qué ves en las fotos?</h2></div>
+
+<div class="sub">
+<div class="sub-l">Mira las 6 fotos de la portada de la unidad y describe lo que ves en cada una.</div>
+<div class="foto-rel">
+<div class="foto-card"><div class="letter">1</div><img src="رابط_صورة_1.jpg" alt="Foto 1" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+<div class="foto-card"><div class="letter">2</div><img src="رابط_صورة_2.jpg" alt="Foto 2" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+<div class="foto-card"><div class="letter">3</div><img src="رابط_صورة_3.jpg" alt="Foto 3" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+<div class="foto-card"><div class="letter">4</div><img src="رابط_صورة_4.jpg" alt="Foto 4" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+<div class="foto-card"><div class="letter">5</div><img src="رابط_صورة_5.jpg" alt="Foto 5" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+<div class="foto-card"><div class="letter">6</div><img src="رابط_صورة_6.jpg" alt="Foto 6" style="width: 100%; height: 60px; object-fit: cover; border-radius: 6px; margin-top: 5px;"></div>
+</div>
+</div>
+
+<div class="tblock" style="background:#e8f5e9;border:2px solid #4caf50;">
+<p style="font-weight:700;color:#1b5e20;margin-bottom:5px;">💡 Solución:</p>
+<div class="grid-2" style="font-size:11.5px;line-height:1.7;">
+<div>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto uno</strong> veo el mar, la playa, el cielo, las nubes.</span></span></p>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto dos</strong> veo una mujer joven, está contenta, veo también unos cuadros en la pared, parece que está en una exposición.</span></span></p>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto tres</strong> veo personas que pasean en una ciudad, hace calor y llevan pantalones cortos.</span></span></p>
+</div>
+<div>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto cuatro</strong> veo un edificio antiguo, es una universidad.</span></span></p>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto cinco</strong> veo el sol, el cielo azul, una ciudad grande, algunas montañas.</span></span></p>
+<p><span class="ans-inline" data-group="prev"><span class="placeholder-text">______</span><span class="ans-text"><strong>En la foto seis</strong> veo una pareja que baila tango, ella lleva un vestido rojo, están al aire libre.</span></span></p>
+</div>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'prev')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar-grid">
+<div class="ar">
+<strong>📝 مفردات وصف الصور:</strong>
+<br>▸ <span class="es-word">veo</span> = أشوف
+<br>▸ <span class="es-word">el mar</span> = البحر
+<br>▸ <span class="es-word">la playa</span> = الشاطئ
+<br>▸ <span class="es-word">el cielo</span> = السماء
+<br>▸ <span class="es-word">las nubes</span> = السحاب
+<br>▸ <span class="es-word">una mujer joven</span> = ست شابة
+<br>▸ <span class="es-word">cuadros</span> = لوحات
+<br>▸ <span class="es-word">una exposición</span> = معرض
+</div>
+<div class="ar">
+<strong>📝 المزيد من المفردات:</strong>
+<br>▸ <span class="es-word">pasean</span> = يتمشون
+<br>▸ <span class="es-word">hace calor</span> = الجو حر
+<br>▸ <span class="es-word">pantalones cortos</span> = شورت
+<br>▸ <span class="es-word">un edificio antiguo</span> = مبنى قديم
+<br>▸ <span class="es-word">la universidad</span> = الجامعة
+<br>▸ <span class="es-word">el sol</span> = الشمس
+<br>▸ <span class="es-word">montañas</span> = جبال
+<br>▸ <span class="es-word">una pareja</span> = ثنائي / كوبل
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 8</span></div></div>
+<div class="act-head"><div class="act-num">1</div><h2 class="act-title">"E" de español</h2></div>
+
+<div class="grid-23">
+<div>
+<div class="sub-l">a. En parejas. ¿Qué representan las fotos? Completa la frase secreta con la primera letra de lo que se ve en cada foto.</div>
+<img src="رابط_صورة_النشاط_1a.jpg" alt="Fotos Actividad 1a" style="width: 100%; max-width: 600px; border-radius: 10px; display: block; margin: 0 auto; border: 2px solid #f57c00;">
+
+<div class="tblock" style="background:#fffde7;border:2px dashed #f5a623;text-align:center;margin-top:5px;">
+<p style="font-size:14px;">El español…</p>
+<p style="font-size:20px;letter-spacing:8px;font-family:'Courier New';font-weight:700;color:#bf360c;margin-top:5px;">
+<span class="fill-blank" data-group="1a" style="min-width:22px;">M</span><span class="fill-blank" data-group="1a" style="min-width:22px;">E</span> &nbsp;
+<span class="fill-blank" data-group="1a" style="min-width:22px;">G</span><span class="fill-blank" data-group="1a" style="min-width:22px;">U</span><span class="fill-blank" data-group="1a" style="min-width:22px;">S</span><span class="fill-blank" data-group="1a" style="min-width:22px;">T</span><span class="fill-blank" data-group="1a" style="min-width:22px;">A</span>
+</p>
+<p style="font-size:10px;color:#888;">1 &nbsp; 2 &nbsp;&nbsp; 3 &nbsp; 4 &nbsp; 5 &nbsp; 6 &nbsp; (a)</p>
+<p style="font-size:11.5px;color:#1b5e20;font-weight:700;margin-top:5px;"><span class="ans-inline" data-group="1a"><span class="placeholder-text">________</span><span class="ans-text"><strong>Solución:</strong> El español me gusta.</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'1a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l" style="margin-top:5px;">b. En grupos. Mis letras de la A a la Z. Elige dos palabras con las que te identificas. Di la primera letra de esas palabras y preséntate a tus compañeros, como en el ejemplo. ¿Tenéis algo en común?</div>
+<div class="dia"><p><span class="sb">●</span> <em>Hola, yo me llamo Sandra. Mis letras son la H y la C. La H porque soy de Hamburgo, y la C porque me gusta cocinar.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 1b: abierta</p>
+</div>
+
+<div>
+<div class="ar">
+<strong>📝 العبارة السرية:</strong>
+<br>الإجابة الصحيحة:
+<br><span class="es-word">"El español me gusta"</span>
+<br>= "الإسبانية بتعجبني"
+<br><br><strong>📌 مفردات:</strong>
+<br>▸ <span class="es-word">representar</span> = يمثّل
+<br>▸ <span class="es-word">la frase secreta</span> = العبارة السرية
+<br>▸ <span class="es-word">identificarse con</span> = يتماهى مع
+<br>▸ <span class="es-word">en parejas</span> = في أزواج
+<br>▸ <span class="es-word">en grupos</span> = في مجموعات
+<br>▸ <span class="es-word">en común</span> = مشترك
+</div>
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+1️⃣ شوف 6 صور واكتب أول حرف من كل صورة.
+<br>2️⃣ الحروف تكوّن العبارة السرية: <span class="es-word">"me gusta"</span>
+<br>3️⃣ في 1b: اختر كلمتين تعبران عنك وقدّم نفسك.
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 9</span></div></div>
+<div class="act-head"><div class="act-num">2</div><h2 class="act-title">Retrato robot del estudiante de español</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l">a. En parejas. Mira la imagen del retrato robot. ¿Cómo es el estudiante de español? ¿Qué crees que le gusta hacer? Descríbelo.</div>
+<img src="رابط_صورة_الـ_Retrato_Robot.jpg" alt="Retrato Robot" style="width: 100%; max-width: 400px; border-radius: 10px; display: block; margin: 0 auto; border: 2px solid #f57c00;">
+<div class="dia"><p><span class="sb">●</span> <em>Yo creo que al estudiante de español le gusta hablar y es una persona alegre.</em></p></div>
+</div>
+
+<div>
+<div class="teacuerdas">
+<h4>¿TE ACUERDAS?</h4>
+<p><strong>• Verbos reflexivos:</strong><br>identificarse → <strong>me</strong> identifico</p>
+<p style="margin-top:3px;"><strong>• Verbos con cambio vocálico:</strong><br>
+reírse → me r<strong>í</strong>o (e&gt;i)<br>
+entender → ent<strong>ie</strong>ndo (e&gt;ie)<br>
+soñar → s<strong>ue</strong>ño (o&gt;ue)</p>
+<p style="margin-top:3px;"><strong>• Primera persona del singular irregular:</strong><br>
+salir → sal<strong>g</strong>o | reconocer → recono<strong>zc</strong>o<br>
+saber → <strong>sé</strong> | estar → <strong>estoy</strong></p>
+<p style="margin-top:3px;color:#666;font-size:10.5px;">→ A1 U3, U7, U10, U12</p>
+</div>
+
+<div class="tblock" style="background:#e8f5e9;border:1px solid #2e7d32;">
+<p style="color:#1b5e20;font-size:11.5px;font-weight:700;margin-bottom:4px;">💡 Solución:</p>
+<p style="font-size:11.5px;line-height:1.6;"><span class="ans-inline" data-group="2a"><span class="placeholder-text">______________</span><span class="ans-text"><strong>Objetos:</strong> el sombrero, las castañuelas, la concha del Camino de Santiago, la guitarra, los zapatos de flamenco.</span></span></p>
+<p style="font-size:11.5px;line-height:1.6;margin-top:4px;"><span class="ans-inline" data-group="2a"><span class="placeholder-text">______________</span><span class="ans-text"><strong>Al alumno de español le gusta:</strong> cantar, hacer viajes a países de habla hispana, recorrer el Camino de Santiago, bailar flamenco, escuchar música hispana, etc.</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'2a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط 2a:</span>
+1️⃣ <strong>retrato robot</strong> = صورة تجميعية نمطية لشخصية.
+<br>2️⃣ تأمل الصورة والأشياء المعها.
+<br>3️⃣ مع زميلك، اوصفه: شكله؟ شخصيته؟ إيه بيحب يعمل؟
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 9</span></div></div>
+<div class="act-head"><div class="act-num">2</div><h2 class="act-title">Retrato robot (cont.) – Lectura y ficha</h2></div>
+
+<div class="sub-l">b. Ahora lee el artículo y completa la ficha de abajo con la información del texto. ¿Qué aspectos coinciden con tu descripción de 2a?</div>
+
+<div class="grid-23">
+<div class="tblock" style="background:#fff8e1;border:2px solid #f5a623;">
+<p style="font-family:'Playfair Display',serif;text-align:center;font-size:13px;color:#00838f;letter-spacing:2px;margin-bottom:5px;">RETRATO ROBOT DEL ESTUDIANTE DE ESPAÑOL</p>
+<p style="font-size:10.5px;line-height:1.55;">Según fuentes consultadas, el estudiante de español es una persona <strong>dinámica</strong> y con una actitud joven ante la vida. Tiene entre 20 y 70 años y entiende bien nuestra cultura y nuestra forma de vida.</p>
+<p style="font-size:10.5px;line-height:1.55;margin-top:4px;">¿Cómo reconocer a nuestros estudiantes entre miles? Pues porque son <strong>divertidos</strong>, están siempre alegres, se ríen a menudo, se sienten bien en compañía de otros y siempre encuentran algo que aprender. Saben varios idiomas y son muy inteligentes. ¡Buena prueba de ello es que eligen nuestra lengua! En su tiempo libre van a clases de salsa, de tango o de flamenco, escuchan música latina, tocan la guitarra o beben mojitos, vinos chilenos o cervezas mexicanas. Les gusta quedar con sus amigos hispanohablantes o les escriben mensajes con frecuencia. ¡Así también pueden practicar!</p>
+<p style="font-size:10.5px;line-height:1.55;margin-top:4px;">Salen mucho y, con frecuencia, se acuestan tarde, especialmente los fines de semana. Otros hacen cursos de cocina, cantan en un coro y siempre ven películas españolas en versión original. De vacaciones van a España o a algún país latinoamericano y sueñan con poder hacer alguna vez el Camino de Santiago o el Camino del Inca. En definitiva, es gente <strong>simpática y activa</strong>. ¿Te identificas con ellos? 😊</p>
+</div>
+
+<div>
+<div class="ficha">
+<p style="font-family:'Playfair Display',serif;color:#01579b;font-size:12.5px;text-align:center;margin-bottom:4px;">📋 Ficha</p>
+<p><strong>Edad:</strong> <span class="ficha-line"></span></p>
+<p><strong>Carácter:</strong> <span class="ficha-line"></span></p>
+<p><strong>Actividades de tiempo libre:</strong> <span class="ficha-line"></span></p>
+<p><strong>Viajes:</strong> <span class="ficha-line"></span></p>
+<p><strong>Otras características:</strong> <span class="ficha-line"></span></p>
+</div>
+
+<div class="sub-l" style="margin-top:5px;">c. En parejas. Y tú, ¿qué tienes en común con el retrato robot? ¿Qué aspectos son diferentes?</div>
+<div class="dia"><p><span class="sb">●</span> <em>Yo entiendo bien a los hispanohablantes, y me siento bien en compañía de otros, pero no voy a clases de baile.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 2c: abierta</p>
+</div>
+</div>
+
+<div class="ar">
+<strong>📝 مفردات النص:</strong>
+<span class="es-word">dinámica</span>=نشيطة | <span class="es-word">divertidos</span>=مرحون | <span class="es-word">se ríen a menudo</span>=يضحكون كتير | <span class="es-word">se sienten bien</span>=يشعرون بالراحة | <span class="es-word">eligen</span>=يختارون | <span class="es-word">quedar con</span>=يتواعدون مع | <span class="es-word">hispanohablantes</span>=ناطقون بالإسبانية | <span class="es-word">se acuestan tarde</span>=ينامون متأخراً | <span class="es-word">sueñan con</span>=يحلمون بـ | <span class="es-word">simpática y activa</span>=لطيفة ونشيطة
+<br><strong>📌 الأفعال الشاذة:</strong> reírse (e→i) | entender, sentirse (e→ie) | soñar, encontrar (o→ue) | salir→salgo, hacer→hago, poner→pongo | reconocer→reconozco, conocer→conozco, traducir→traduzco, conducir→conduzco | saber→sé, estar→estoy, dar→doy, ver→veo
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 10</span></div></div>
+<div class="act-head"><div class="act-num">3</div><h2 class="act-title">¡Nos gusta el español!</h2></div>
+
+<div class="sub-l">a. Paul y Jessica hablan sobre su experiencia de aprendizaje con el español. Lee los textos y contesta: ¿qué les gusta?, ¿qué les cuesta o les aburre? Habla con tu compañero.</div>
+
+<div class="grid-2">
+<div class="testimonial">
+<span class="name-badge">👨 Paul Kaufmann, Berlín</span>
+<p>Mi nombre es Paul Kaufmann y estudio español <strong>desde hace dos años</strong>. ¡El español me encanta! Las clases, también. Pero, claro, todavía <strong>me cuesta</strong> un poco entender las audiciones en clase, por eso también las escucho en casa. Algunos deberes <strong>me aburren</strong> un poco, pero sé que es necesario repasar lo que hacemos. ¡Ah!, y <strong>desde hace unas semanas</strong> hago un intercambio todos los lunes con Rubén, un colega peruano de la empresa.</p>
+</div>
+<div class="testimonial">
+<span class="name-badge">👩 Jessica Smith, Mánchester</span>
+<p>Yo soy Jessica y vivo en Mánchester. Estudio español <strong>desde el año pasado</strong>. El español me gusta mucho, me encanta la melodía de la lengua y me interesa la cultura de los países hispanohablantes. En clase me gusta trabajar en grupos y escuchar los diálogos, pero <strong>me cuesta</strong> mucho aprender palabras nuevas. <strong>Desde la semana pasada</strong> tenemos una nueva profesora. Es argentina y todos estamos encantados con ella.</p>
+</div>
+</div>
+
+<div class="grid-2">
+<div>
+<div class="dia"><p><span class="sb">●</span> <em>A Paul le cuesta entender las audiciones.</em></p></div>
+<div class="tblock" style="background:#e8f5e9;border:1px solid #2e7d32;">
+<p style="color:#1b5e20;font-size:11.5px;font-weight:700;">💡 Solución:</p>
+<p style="font-size:11px;line-height:1.55;"><span class="ans-inline" data-group="3a"><span class="placeholder-text">______</span><span class="ans-text"><strong>A Paul:</strong> le encantan el español y las clases, le cuesta entender las audiciones en clase, le aburren algunos deberes.</span></span></p>
+<p style="font-size:11px;line-height:1.55;margin-top:3px;"><span class="ans-inline" data-group="3a"><span class="placeholder-text">______</span><span class="ans-text"><strong>A Jessica:</strong> le gusta mucho el español, le encanta la melodía de la lengua y le interesa la cultura de los países hispanohablantes. Le gusta trabajar en grupos y escuchar los diálogos, pero le cuesta aprender palabras nuevas.</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div class="infobox" style="background:linear-gradient(135deg,#fff8e1,#fff3cd);border-color:#f5a623;">
+<h4 style="color:#bf6a00;">📝 Me cuesta, me aburre</h4>
+<p style="color:#5a4100;">A mí me cuest<strong>a</strong> hablar en clase.<br>
+Me cuest<strong>an</strong> un poco los ejercicios de gramática.<br>
+A mí me aburr<strong>e</strong> escribir textos.<br>
+A mí me aburr<strong>en</strong> las audiciones largas.<br>
+<em>Los verbos costar y aburrir funcionan como gustar, interesar y encantar.</em></p>
+</div>
+</div>
+
+<div class="sub-l">b. En parejas. Y a ti, ¿qué te gusta?, ¿qué te cuesta o te aburre?</div>
+<div class="grid-2">
+<div class="wbank"><span>los ejercicios de gramática</span><span>escuchar las audiciones</span><span>jugar en clase</span><span>aprender vocabulario</span><span>la pronunciación</span><span>hablar</span><span>escribir</span><span>la cultura</span><span>leer textos largos</span><span>hacer los deberes</span></div>
+<div class="dia"><p><span class="sb">●</span> <em>A mí me gustan los ejercicios de gramática y jugar en clase.</em></p><p><span class="st">▲</span> <em>Pues a mí me cuesta hacer los deberes, pero me gusta mucho escribir.</em></p></div>
+</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 3b: abierta</p>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 10</span></div></div>
+<div class="act-head"><div class="act-num">4</div><h2 class="act-title">¿Desde cuándo aprendes español?</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l">a. ¿"Desde" o "desde hace"? Lee otra vez los textos de 3a y completa las frases. Después marca la opción correcta en Mi gramática.</div>
+<div style="padding:7px 11px;background:#fafafa;border-radius:8px;font-size:12.5px;line-height:2.1;">
+<p>1. Paul aprende español <span class="fill-blank" data-group="4a" style="min-width:90px;">desde hace</span> dos años.</p>
+<p>2. Hace un intercambio <span class="fill-blank" data-group="4a" style="min-width:90px;">desde hace</span> unas semanas.</p>
+<p>3. Karin estudia español <span class="fill-blank" data-group="4a" style="min-width:90px;">desde</span> el año pasado.</p>
+<p>4. Tiene una nueva profesora <span class="fill-blank" data-group="4a" style="min-width:90px;">desde</span> la semana pasada.</p>
+</div>
+
+<div class="gbox" style="margin-top:5px;">
+<h3>MI GRAMÁTICA: Desde y desde hace</h3>
+<p><em><span class="fill-blank" data-group="4a" style="min-width:70px;">Desde</span></em>/<em>desde hace</em> se utiliza para indicar un <strong>momento concreto</strong>:<br>
+Trabajo en Madrid <em>desde</em>/<em>desde hace</em> <span class="fill-blank" data-group="4a" style="min-width:55px;">2017</span>.</p>
+<p style="margin-top:3px;"><em>Desde</em>/<em><span class="fill-blank" data-group="4a" style="min-width:90px;">desde hace</span></em> se utiliza para indicar un <strong>periodo de tiempo</strong>:<br>
+Trabajo en Madrid <em>desde</em>/<em>desde hace</em> <span class="fill-blank" data-group="4a" style="min-width:80px;">seis</span> meses.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'4a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l">b. En parejas. Vamos a conocernos mejor. Formula preguntas como en el ejemplo.</div>
+<div class="wbank"><span>vivir en la ciudad</span><span>estar casado/-a o divorciado/-a</span><span>estar jubilado/-a</span><span>estudiar español</span><span>trabajar o estudiar</span><span>asistir a esta clase</span><span>vivir solo/-a</span></div>
+<div class="dia"><p><span class="sb">●</span> <em>¿Desde cuándo vives aquí?</em></p><p><span class="st">▲</span> <em>Desde hace tres años. ¿Y tú?</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 4b: abierta</p>
+
+<div class="ar">
+<strong>📝 الفرق بين desde و desde hace (مهم جداً!):</strong>
+<br>1) <span class="es-word">desde</span> + لحظة محددة:
+<br>&nbsp;&nbsp;<span class="es-word">desde 2020</span> | <span class="es-word">desde enero</span> | <span class="es-word">desde el lunes</span> | <span class="es-word">desde ayer</span> | <span class="es-word">desde la semana pasada</span>
+<br>2) <span class="es-word">desde hace</span> + مدة زمنية:
+<br>&nbsp;&nbsp;<span class="es-word">desde hace 2 años</span> | <span class="es-word">desde hace 6 meses</span> | <span class="es-word">desde hace 3 días</span>
+<br>📌 السؤال: <span class="es-word">¿Desde cuándo...?</span> = "منذ متى؟"
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 11</span></div></div>
+<div class="act-head"><div class="act-num">5</div><h2 class="act-title">Tú y los idiomas</h2></div>
+
+<div class="sub-l">a. En parejas. Mira los gráficos y contesta: ¿qué idiomas hablan estas personas?, ¿en qué situaciones los utilizan?</div>
+
+<div class="grid-2">
+<div class="tblock" style="background:#e0f7fa;border:2px solid #00838f;padding:7px;">
+<p style="font-family:'Playfair Display',serif;text-align:center;color:#006064;font-size:13px;margin-bottom:4px;">👨 Pedro</p>
+<div class="hex-grid">
+<div class="hex-cell">En el trabajo: inglés</div>
+<div class="hex-cell center">Lengua materna: español</div>
+<div class="hex-cell">En casa: español y francés</div>
+<div class="hex-cell">Internet: español, francés, inglés</div>
+<div class="hex-cell" style="background:#fff;color:#006064;border:2px solid #006064;">📷</div>
+<div class="hex-cell">Vacaciones: italiano</div>
+<div class="hex-cell" style="grid-column:span 3;">Amigos: español, italiano</div>
+</div>
+</div>
+<div class="tblock" style="background:#e0f7fa;border:2px solid #00838f;padding:7px;">
+<p style="font-family:'Playfair Display',serif;text-align:center;color:#006064;font-size:13px;margin-bottom:4px;">👨 Marc</p>
+<div class="hex-grid">
+<div class="hex-cell">En el trabajo: alemán</div>
+<div class="hex-cell center">Lenguas maternas: catalán/español</div>
+<div class="hex-cell">Con sus hijos: catalán</div>
+<div class="hex-cell">Música: francés</div>
+<div class="hex-cell" style="background:#fff;color:#006064;border:2px solid #006064;">📷</div>
+<div class="hex-cell">Viajes de negocios: inglés</div>
+<div class="hex-cell" style="grid-column:span 3;">Vecinos de Argentina: español</div>
+</div>
+</div>
+</div>
+
+<div class="grid-23">
+<div>
+<div class="dia"><p><span class="sb">●</span> <em>Pedro habla español, es su lengua materna.</em></p><p><span class="st">▲</span> <em>Sí, y habla italiano en las vacaciones.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 5a: abierta</p>
+<div class="sub-l" style="margin-top:5px;">b. Escucha a las dos personas de 5a. ¿Quién es quién? Luego escucha otra vez y contesta a las preguntas.</div>
+
+<div class="audio-wrap"><div class="audio-row"><div class="audio-label">🔊 Audio 1 (Marc)</div><audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/01%20Pista%201.mp3" type="audio/mp3"></audio><button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button></div>
+<div class="trans-content"><div class="ttitle">🔊 Transcripción – Audio 1 (Marc)</div>
+<p>Hola, me llamo Marc Capdevila y soy de Sabadell, en la provincia de Barcelona. Soy bilingüe porque desde niño he hablado y aprendido catalán y español como lenguas maternas. Ahora vivo en Berlín y en el trabajo hablo alemán con los colegas e inglés con nuestros clientes en el extranjero. Con mis hijos hablo catalán, así lo aprenden y pueden hablar con sus abuelos y sus primos. Mi mujer lo entiende, pero no lo habla. Con ella hablo alemán porque es alemana, o a veces español. También hablo español con los amigos que no saben catalán, por ejemplo, con nuestros vecinos argentinos. ¡Ah!, y sé francés..., ¡me encanta! Creo que me gusta más que el inglés..., su sonido, sus palabras... Me gusta mucho escuchar rap francés.</p>
+</div></div>
+
+<div class="audio-wrap"><div class="audio-row"><div class="audio-label">🔊 Audio 2 (Pedro)</div><audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/02%20Pista%202.mp3" type="audio/mp3"></audio><button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button></div>
+<div class="trans-content"><div class="ttitle">🔊 Transcripción – Audio 2 (Pedro)</div>
+<p>Bueno, pues mi lengua materna es el español, pero en casa también hablo francés porque mi padre es canadiense, de Quebec. Pero ahora hablo mucho inglés también, por el trabajo. Trabajo en un banco internacional y, claro, tengo contacto con personas de muchos países. En el banco he hecho muchos amigos italianos, y con ellos hablo italiano. Es la lengua de la cultura, de la música... ¡Me encantan las óperas de Verdi! Estudio italiano desde hace más de tres años. Siempre voy de vacaciones a Italia y viajo con frecuencia a Roma. Me gusta mucho Roma, sus barrios, su historia... Pienso que hoy en día es muy importante saber idiomas. En internet leo periódicos en español, claro, pero también en francés y en inglés. También me gusta escuchar música en otros idiomas.</p>
+</div></div>
+
+<div style="padding:6px 11px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<p>Texto 1: <span class="fill-blank" data-group="5b" style="min-width:70px;">Marc</span> &nbsp; Texto 2: <span class="fill-blank" data-group="5b" style="min-width:70px;">Pedro</span></p>
+<p>a. ¿Por qué es bilingüe Marc? <span class="fill-blank" data-group="5b" style="min-width:240px;">Porque tiene dos lenguas maternas: catalán y español.</span></p>
+<p>b. ¿Qué idiomas habla Marc con su mujer? <span class="fill-blank" data-group="5b" style="min-width:150px;">Alemán o español.</span></p>
+<p>c. ¿En qué tipo de empresa trabaja Pedro? <span class="fill-blank" data-group="5b" style="min-width:160px;">En un banco.</span></p>
+<p>d. ¿Por qué habla francés Pedro? <span class="fill-blank" data-group="5b" style="min-width:250px;">Porque su padre es canadiense, de Quebec.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5b')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="infobox">
+<h4>◄ INFORMACIÓN</h4>
+<p>Además del <em>castellano</em> o <em>español</em>, en España hay otras tres lenguas oficiales: <strong>catalán</strong>, <strong>gallego</strong> y <strong>vasco</strong> o <strong>euskera</strong>.</p>
+</div>
+<div class="sub-l" style="margin-top:5px;">c. En parejas. Haz un gráfico como el de 5a sobre ti. Compara con tu compañero.</div>
+<div class="dia"><p><span class="sb">●</span> <em>Hablo inglés porque es mi lengua materna. Pero con mi marido hablo...</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 5c: abierta</p>
+<div class="ar">
+<strong>📝 مفردات:</strong> <span class="es-word">bilingüe</span>=ثنائي اللغة | <span class="es-word">lengua materna</span>=اللغة الأم | <span class="es-word">colegas</span>=زملاء | <span class="es-word">extranjero</span>=الخارج | <span class="es-word">vecinos</span>=جيران | <span class="es-word">hoy en día</span>=في يومنا هذا
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 12</span></div></div>
+<div class="act-head"><div class="act-num">6</div><h2 class="act-title">Aprender más y mejor</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l">a. En grupos. ¿Qué os parece útil para aprender más español? Elegid tres actividades.</div>
+<div class="grid-2" style="background:#fafafa;padding:7px;border-radius:6px;font-size:11px;line-height:1.8;">
+<div>
+<p>○ hacer un intercambio</p>
+<p>○ escuchar canciones en español</p>
+<p>○ escribir a amigos hispanohablantes</p>
+<p>○ ir a un país de lengua española y hacer un curso</p>
+<p>○ leer libros de lectura graduada</p>
+<p>○ traducir frases o textos</p>
+</div>
+<div>
+<p>○ ver películas de cine en versión original</p>
+<p>○ ver la televisión en español</p>
+<p>○ participar en una tertulia de hispanohablantes</p>
+<p>○ escuchar la radio en español</p>
+<p>○ trabajar el vocabulario con tarjetas</p>
+<p>○ hacer un curso en línea</p>
+</div>
+</div>
+<div class="dia"><p><span class="sb">●</span> <em>Yo creo que es útil hacer un intercambio.</em></p><p><span class="st">▲</span> <em>Sí, y yo creo que es muy útil ir a un país hispanohablante.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 6a: abierta</p>
+</div>
+
+<div>
+<div class="sub-l">c. En grupos. Cada miembro del grupo dice qué aspectos de su español quiere practicar o mejorar. El compañero de la derecha le da un consejo.</div>
+<div class="dia"><p><span class="sb">●</span> <em>Quiero mejorar mi pronunciación.</em></p><p><span class="st">▲</span> <em>Pues puedes hacer un intercambio.</em></p><p><span class="st">▲</span> <em>Me cuesta un poco entender las audiciones.</em></p><p><span class="sb">●</span> <em>Es muy útil ver la televisión en español.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 6c: abierta</p>
+<div class="consejos-box">
+<h4>📋 Dar consejos + infinitivo</h4>
+<p>Tienes que... | Lo mejor es... | Es (muy) útil... | Hay que... | Puedes... | Debes...</p>
+</div>
+</div>
+</div>
+
+<div class="sub-l">b. Aprender más. Completa los consejos con propuestas de 6a. Compara después con tu compañero. ¿Tenéis los mismos?</div>
+<div class="grid-2">
+<div class="note-yellow">«Si quieres aprender más vocabulario, <strong>tienes que</strong> ____________. Y <strong>es muy útil</strong> repasar siempre el vocabulario que has aprendido».</div>
+<div class="note-yellow">«Para hablar más y perder el miedo, <strong>lo mejor es</strong> ____________».</div>
+<div class="note-yellow">«¿Te sientes inseguro con la pronunciación? Pues <strong>puedes</strong> ____________. También <strong>es útil</strong> ____________».</div>
+<div class="note-yellow">«Para entender mejor a los hispanohablantes cuando hablan, <strong>hay que</strong> ____________. O también <strong>puedes</strong> ____________».</div>
+</div>
+<p style="font-size:10.5px;color:#888;margin-top:3px;font-style:italic;">solución 6b: abierta</p>
+
+<div class="ar">
+<strong>📝 تراكيب النصيحة (كلها + مصدر الفعل):</strong>
+<span class="es-word">Tienes que</span>=يجب عليك (نصيحة مباشرة قوية) | <span class="es-word">Debes</span>=عليك (واجب) | <span class="es-word">Hay que</span>=يجب (عام، مش شخصي) | <span class="es-word">Puedes</span>=يمكنك (اقتراح خفيف) | <span class="es-word">Lo mejor es</span>=الأفضل | <span class="es-word">Es (muy) útil</span>=مفيد (جداً)
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 1 – Nueva Etapa</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 13</span></div></div>
+<div class="act-head"><div class="act-num">7</div><h2 class="act-title">¿Has estudiado mucho?</h2></div>
+
+<div class="sub-l">a. El primer día del curso, Dolores habla con sus alumnas Karin y Beate de lo que han hecho durante estas vacaciones. Escucha la conversación y marca las frases correctas.</div>
+<div class="audio-wrap"><div class="audio-row"><div class="audio-label">🔊 Audio 3</div><audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/03%20Pista%203.mp3" type="audio/mp3"></audio><button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button></div>
+<div class="trans-content"><div class="ttitle">🔊 Transcripción – 7a (Audio 3)</div>
+<p>● Hola a todos, ¿qué tal estáis?<br>▲ ¡Muy bien! Hola...<br>■ Encantada de verte de nuevo, Dolores. Pareces muy relajada.<br>● ¡Ay, sí...! Estas vacaciones he hecho un viaje maravilloso... a Cuba. ¡Ay, qué país! Ha sido una experiencia fantástica.<br>▲ ¡Ah, qué bien! Yo también he tenido vacaciones, pero no he viajado.<br>● ¿Y habéis estudiado español?<br>■ Yo, sí. He hecho todos los ejercicios del libro de ejercicios.<br>● ¿Todos? ¡Qué trabajadora, Karin!<br>■ Bueno..., algunos, los menos aburridos. Además he hablado con mis amigos chilenos por Skype. ¡Y esta vez hemos hablado solo en español!<br>● ¡Qué bien, Karin! Te felicito. Y tú, Beate, ¿has hecho algo relacionado con el español?<br>▲ Pues sí, he comprado un audiolibro en español y lo he escuchado. Me ha gustado mucho. Y también he leído en la tableta una revista para principiantes. ¡Ah! Y he escrito mensajes a Elena, mi amiga española.<br>● Vaya, un audiolibro... Beate, tú también, ¡qué trabajadora! Bueno, pues hoy vamos a hacer...</p>
+</div></div>
+
+<div class="grid-2">
+<div>
+<div class="grid-2" style="background:#fafafa;padding:7px 11px;border-radius:6px;font-size:12px;line-height:1.85;">
+<div>
+<p><span class="opt-mark correct" data-group="7a"></span> Dolores ha estado en Cuba.</p>
+<p><span class="opt-mark" data-group="7a"></span> Karin no ha viajado.</p>
+</div>
+<div>
+<p><span class="opt-mark correct" data-group="7a"></span> Cuba le ha gustado mucho.</p>
+<p><span class="opt-mark" data-group="7a"></span> Beate ha estado en Chile.</p>
+</div>
+</div>
+<p style="font-size:10.5px;color:#1b5e20;margin-top:3px;"><span class="ans-inline" data-group="7a"><span class="placeholder-text">______</span><span class="ans-text"><strong>Frases correctas:</strong> Dolores ha estado en Cuba / Cuba le ha gustado mucho.</span></span></p>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'7a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div class="teacuerdas">
+<h4>¿TE ACUERDAS? – Pretérito perfecto</h4>
+<p>Estas vacaciones <strong>he estado</strong> en Cuba.<br>
+Hoy <strong>hemos comido</strong> en un buen restaurante.<br>
+Ella no <strong>ha vivido</strong> en México.</p>
+<p style="margin-top:3px;color:#666;font-size:10.5px;">→ A1 U8</p>
+</div>
+</div>
+
+<div class="sub-l">b. Escucha otra vez y marca qué han hecho Karin y Beate. Después escribe las frases en pretérito perfecto.</div>
+
+<div style="overflow-x:auto;">
+<table style="font-size:12px;border-collapse:collapse;width:100%;">
+<tr>
+<th style="background:#f57c00;color:#fff;padding:7px 10px;text-align:left;min-width:180px;">Actividad</th>
+<th style="background:#f57c00;color:#fff;padding:7px 10px;text-align:center;min-width:70px;">Karin ✓</th>
+<th style="background:#f57c00;color:#fff;padding:7px 10px;text-align:center;min-width:70px;">Beate ✓</th>
+<th style="background:#f57c00;color:#fff;padding:7px 10px;text-align:left;min-width:220px;">Frase en pretérito perfecto</th>
+</tr>
+<tr style="background:#fff;">
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;">hacer algunos ejercicios</td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark correct" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;"><span class="fill-blank" data-group="7b" style="min-width:180px;display:inline-block;">Karin ha hecho algunos ejercicios.</span></td>
+</tr>
+<tr style="background:#fff8e1;">
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;">escuchar un audiolibro</td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark correct" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;"><span class="fill-blank" data-group="7b" style="min-width:180px;display:inline-block;">Beate ha escuchado un audiolibro.</span></td>
+</tr>
+<tr style="background:#fff;">
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;">leer revistas</td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark correct" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;"><span class="fill-blank" data-group="7b" style="min-width:180px;display:inline-block;">Beate ha leído revistas.</span></td>
+</tr>
+<tr style="background:#fff8e1;">
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;">hablar con amigos por Skype</td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark correct" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;"><span class="fill-blank" data-group="7b" style="min-width:180px;display:inline-block;">Karin ha hablado con amigos por Skype.</span></td>
+</tr>
+<tr style="background:#fff;">
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;">escribir mensajes en español</td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:center;"><span class="opt-mark correct" data-group="7b" style="display:inline-block;"></span></td>
+<td style="padding:8px 10px;border:1px solid #ddd;text-align:left;"><span class="fill-blank" data-group="7b" style="min-width:180px;display:inline-block;">Beate ha escrito mensajes en español.</span></td>
+</tr>
+</table>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'7b')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="grid-2">
+<div class="sub" style="margin:0;">
+<div class="sub-l">c. Y vosotros, ¿qué habéis hecho últimamente? ¿Habéis practicado español?</div>
+<div class="dia"><p><span class="sb">●</span> <em>Yo he ido a un curso de salsa.</em></p><p><span class="st">▲</span> <em>Pues yo he trabajado mucho el vocabulario.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución 7c: abierta</p>
+</div>
+<div class="ar">
+<strong>📝 الماضي التام:</strong> haber + participio<br>
+he/has/ha/hemos/habéis/han + verbo (-ado/-ido)<br>
+<strong>📌 شواذ:</strong> hacer→<span class="es-word">hecho</span> | decir→<span class="es-word">dicho</span> | escribir→<span class="es-word">escrito</span> | ver→<span class="es-word">visto</span> | poner→<span class="es-word">puesto</span> | volver→<span class="es-word">vuelto</span>
+</div>
+</div>
+</div>
+
+<div class="slide slide-div"><h2>Gramática y Comunicación</h2><div class="divline"></div><p>Unidad 1 – Página 118</p></div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Gramática – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 118</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#7c4dff;">G</div><h2 class="act-title">Gramática – Resumen</h2></div>
+
+<div class="grid-2">
+<div class="gbox"><h3>Verbos con cambios vocálicos</h3>
+<p><strong>e → i:</strong> reírse → me río, te ríes, se ríe, nos reímos, os reís, se ríen</p>
+<p><strong>e → ie:</strong> entender → entiendo, entiendes, entiende, entendemos, entendéis, entienden</p>
+<p><strong>o → ue:</strong> soñar → sueño, sueñas, sueña, soñamos, soñáis, sueñan</p>
+<p style="margin-top:3px;font-size:11px;"><em>También: pedir (e→i); perder, sentirse (e→ie); encontrar (o→ue)</em></p>
+</div>
+<div class="gbox"><h3>Verbos con -g- en yo</h3>
+<p><strong>salir:</strong> sal<strong>g</strong>o, sales, sale, salimos, salís, salen</p>
+<p><strong>hacer:</strong> ha<strong>g</strong>o, haces, hace, hacemos, hacéis, hacen</p>
+<p><strong>poner:</strong> pon<strong>g</strong>o, pones, pone, ponemos, ponéis, ponen</p>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="gbox"><h3>Verbos con -zc- en yo</h3>
+<p><strong>reconocer:</strong> recono<strong>zc</strong>o, reconoces, reconoce, reconocemos, reconocéis, reconocen</p>
+<p style="margin-top:3px;font-size:11px;"><em>Otros con la misma irregularidad: conocer, traducir, conducir</em></p>
+</div>
+<div class="gbox"><h3>Otros verbos con yo irregular</h3>
+<p><strong>saber:</strong> <strong>sé</strong>, sabes, sabe, sabemos, sabéis, saben</p>
+<p><strong>estar:</strong> <strong>estoy</strong>, estás, está, estamos, estáis, están</p>
+<p><strong>dar:</strong> <strong>doy</strong>, das, da, damos, dais, dan</p>
+<p><strong>ver:</strong> <strong>veo</strong>, ves, ve, vemos, veis, ven</p>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="gbox"><h3>Verbos costar y aburrir</h3>
+<p>Funcionan como <em>gustar, interesar, encantar</em>. Con frecuencia se utilizan en 3ª persona singular/plural y siempre con pronombre de objeto indirecto.</p>
+<p style="margin-top:3px;">• Me gust<strong>a</strong> mucho la gramática.<br>
+• Nos cuest<strong>a</strong> la pronunciación de la "r".<br>
+• Le aburr<strong>en</strong> los textos muy largos.</p>
+</div>
+<div class="gbox"><h3>Desde y desde hace</h3>
+<p><strong>Desde</strong> se utiliza para indicar un <strong>tiempo concreto</strong>:<br><em>Estudio español desde febrero.</em></p>
+<p style="margin-top:3px;"><strong>Desde hace</strong> se utiliza para indicar un <strong>periodo de tiempo</strong>:<br><em>Vivo en Málaga desde hace dos meses.</em></p>
+</div>
+</div>
+
+<div class="gbox"><h3>Pretérito perfecto</h3>
+<p>Se usa para hablar de acciones terminadas en un periodo de tiempo no terminado: <em>este verano, hoy, esta mañana, este año</em>, etc.</p>
+<div class="grid-2" style="margin-top:5px;">
+<table style="font-size:10.5px;">
+<tr><th colspan="3">auxiliar haber + participio</th></tr>
+<tr><td>(yo)</td><td>he</td><td rowspan="6" style="vertical-align:middle;">trabaj<strong>ado</strong> (-ar)<br>ten<strong>ido</strong> (-er)<br>viv<strong>ido</strong> (-ir)</td></tr>
+<tr><td>(tú)</td><td>has</td></tr>
+<tr><td>(él/ella/usted)</td><td>ha</td></tr>
+<tr><td>(nosotros/-as)</td><td>hemos</td></tr>
+<tr><td>(vosotros/-as)</td><td>habéis</td></tr>
+<tr><td>(ellos/-as/ustedes)</td><td>han</td></tr>
+</table>
+<table style="font-size:10.5px;">
+<tr><th colspan="2">Participios irregulares</th></tr>
+<tr><td>decir</td><td><strong>dicho</strong></td></tr>
+<tr><td>hacer</td><td><strong>hecho</strong></td></tr>
+<tr><td>poner</td><td><strong>puesto</strong></td></tr>
+<tr><td>ver</td><td><strong>visto</strong></td></tr>
+<tr><td>escribir</td><td><strong>escrito</strong></td></tr>
+<tr><td>volver</td><td><strong>vuelto</strong></td></tr>
+</table>
+</div>
+</div>
+
+<div class="ar ar-full">
+<strong>📝 ملخص للمذاكرة - أهم القواعد في الوحدة 1:</strong>
+<br>1. <strong>الأفعال الشاذة (3 أنواع):</strong> تغيير صوتي (e→i, e→ie, o→ue) | -g- في yo | -zc- في yo | شواذ (sé, estoy, doy, veo)
+<br>2. <strong>gustar وأخواتها:</strong> gustar, encantar, interesar, costar, aburrir - تتبع المفعول (مفرد→gusta، جمع→gustan)
+<br>3. <strong>desde / desde hace:</strong> desde + لحظة محددة | desde hace + فترة زمنية
+<br>4. <strong>الماضي التام:</strong> haber + participio (للأحداث في زمن لم ينتهِ)
+<br>📌 <strong>احفظ الشواذ:</strong> dicho, hecho, puesto, visto, escrito, vuelto
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Comunicación – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 118 – Resumen</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2e7d32;">C</div><h2 class="act-title">Comunicación – ملخص الوظائف التواصلية</h2></div>
+
+<div class="com-summary">
+
+<div class="com-card">
+<div class="com-card-head">💬 1. Preferencias y dificultades</div>
+<div class="com-card-body">
+<div class="com-formula">(A + persona) + pron. + verbo + cosa</div>
+<div class="com-example">A Paul <strong>le gusta</strong> hacer ejercicios.</div>
+<div class="com-example">A nosotros <strong>nos aburren</strong> las explicaciones.</div>
+<div class="com-example">A mí <strong>me cuesta</strong> pronunciar la "r".</div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> للتعبير عن إعجابك أو صعوبة شيء عليك.</div>
+<div class="com-ar-mini"><strong>الأفعال:</strong> gustar, encantar, interesar, costar, aburrir</div>
+<div class="com-ar-mini"><strong>القاعدة:</strong> مفرد → <strong>-a</strong> / جمع → <strong>-an</strong></div>
+</div>
+</div>
+
+<div class="com-card" style="border-color:#1976d2;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#1976d2,#0d47a1);">🕒 2. Momento concreto / Periodo</div>
+<div class="com-card-body">
+<div class="com-formula" style="border-color:#1976d2;color:#0d47a1;">desde + momento</div>
+<div class="com-formula" style="border-color:#1976d2;color:#0d47a1;">desde hace + periodo</div>
+<div class="com-example">Estudio español <strong>desde</strong> el lunes.</div>
+<div class="com-example">Aprendo español <strong>desde hace</strong> 2 años.</div>
+<div class="com-ar-mini"><strong>desde:</strong> + لحظة محددة (تاريخ، يوم، شهر، حدث)</div>
+<div class="com-ar-mini"><strong>desde hace:</strong> + مدة (كذا سنة، شهر، يوم)</div>
+<div class="com-ar-mini"><strong>السؤال:</strong> ¿Desde cuándo...? = منذ متى؟</div>
+</div>
+</div>
+
+<div class="com-card" style="border-color:#ef6c00;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#ef6c00,#bf360c);">📋 3. Dar consejos</div>
+<div class="com-card-body">
+<div class="com-formula" style="border-color:#ef6c00;color:#bf360c;">[estructura] + INFINITIVO</div>
+<div class="com-example"><strong>Debes</strong> estudiar más.</div>
+<div class="com-example"><strong>Tienes que</strong> practicar.</div>
+<div class="com-example"><strong>Hay que</strong> repasar.</div>
+<div class="com-example"><strong>Lo mejor es</strong> viajar.</div>
+<div class="com-example"><strong>Es útil</strong> leer libros.</div>
+<div class="com-example"><strong>Puedes</strong> ver películas.</div>
+<div class="com-ar-mini"><strong>القاعدة الذهبية:</strong> الفعل بعدها <strong>دايماً في المصدر</strong>!</div>
+<div class="com-ar-mini"><strong>الترتيب:</strong> من الأقوى (debes) للأخف (puedes)</div>
+</div>
+</div>
+
+</div>
+
+<div class="com-tip-row"><span class="tip-icon">⚠️</span><span><strong>تنبيه 1:</strong> الضمير <span class="es-tag">me / te / le / nos / os / les</span> إجباري دايماً مع gustar وأخواتها.</span></div>
+
+<div class="com-tip-row" style="border-color:#1976d2;color:#0d47a1;"><span class="tip-icon">⚠️</span><span><strong>تنبيه 2:</strong> ما تقولش <span class="es-tag">desde 2 años</span> ❌ — الصح <span class="es-tag">desde hace 2 años</span> ✓</span></div>
+
+<div class="com-tip-row" style="border-color:#2e7d32;color:#1b5e20;"><span class="tip-icon">⚠️</span><span><strong>تنبيه 3:</strong> الفعل بعد تراكيب النصيحة في المصدر: <span class="es-tag">Debes estudiar</span> ✓ مش <span class="es-tag">Debes estudias</span> ❌</span></div>
+
+</div>
+
+<div class="slide slide-div"><h2>Ejercicios</h2><div class="divline"></div><p>Unidad 1 – Página 119</p></div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 119</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 1 – 2</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">1</span> Completa la tabla con los verbos que faltan.</div>
+<table style="font-size:11.5px;">
+<tr><th></th><th>pedir</th><th>sentirse</th><th>encontrar</th></tr>
+<tr><td>yo</td><td>pido</td><td><span class="fill-blank" data-group="ej1">me siento</span></td><td><span class="fill-blank" data-group="ej1">encuentro</span></td></tr>
+<tr><td>tú</td><td><span class="fill-blank" data-group="ej1">pides</span></td><td>te sientes</td><td><span class="fill-blank" data-group="ej1">encuentras</span></td></tr>
+<tr><td>él/ella/usted</td><td><span class="fill-blank" data-group="ej1">pide</span></td><td><span class="fill-blank" data-group="ej1">se siente</span></td><td>encuentra</td></tr>
+<tr><td>nosotros/-as</td><td>pedimos</td><td><span class="fill-blank" data-group="ej1">nos sentimos</span></td><td><span class="fill-blank" data-group="ej1">encontramos</span></td></tr>
+<tr><td>vosotros/-as</td><td><span class="fill-blank" data-group="ej1">pedís</span></td><td>os sentís</td><td><span class="fill-blank" data-group="ej1">encontráis</span></td></tr>
+<tr><td>ellos/ellas/ustedes</td><td><span class="fill-blank" data-group="ej1">piden</span></td><td><span class="fill-blank" data-group="ej1">se sienten</span></td><td>encuentran</td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej1')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">2</span> Completa las frases con el verbo más adecuado en la primera persona del singular.</div>
+<div class="wbank"><span>salir</span><span>saber</span><span>hacer</span><span>reconocer</span><span>ver</span><span>poner</span><span>conducir</span><span>dar</span><span>conocer</span></div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.85;">
+<p>1. ¿Dónde <span class="fill-blank" data-group="ej2">pongo</span> la chaqueta? ¿En el armario?</p>
+<p>2. Los fines de semana <span class="fill-blank" data-group="ej2">salgo</span> con mis amigos.</p>
+<p>3. ¿Esa es tu hermana? ¡No la <span class="fill-blank" data-group="ej2">reconozco</span>! ¡Qué mayor!</p>
+<p>4. No <span class="fill-blank" data-group="ej2">sé</span> dónde está Alberto. Hace dos horas que no lo <span class="fill-blank" data-group="ej2">veo</span>.</p>
+<p>5. Normalmente <span class="fill-blank" data-group="ej2">hago</span> los deberes antes de cenar.</p>
+<p>6. No <span class="fill-blank" data-group="ej2">conozco</span> Argentina y quiero ir de vacaciones este año.</p>
+<p>7. Cuando <span class="fill-blank" data-group="ej2">conduzco</span> por una carretera me gusta mucho escuchar música o la radio.</p>
+<p>8. Siempre <span class="fill-blank" data-group="ej2">doy</span> un paseo después de comer. Necesito mover las piernas.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej2')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 119</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 3 – 4 – 5</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">3</span> Elige la option correcta.</div>
+<div style="padding:7px 11px;background:#fafafa;border-radius:6px;font-size:12px;line-height:2;">
+<p>1. Me <span class="fill-blank" data-group="ej3">gusta</span> / gustan escuchar canciones en clase.</p>
+<p>2. Me aburre / <span class="fill-blank" data-group="ej3">aburren</span> los ejercicios de gramática.</p>
+<p>3. Me encanta / <span class="fill-blank" data-group="ej3">encantan</span> las audiciones.</p>
+<p>4. Me <span class="fill-blank" data-group="ej3">cuesta</span> / cuestan la pronunciación de la "r" y de la "j".</p>
+<p>5. No me <span class="fill-blank" data-group="ej3">interesa</span> / interesan el fútbol.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej3')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l" style="margin-top:5px;"><span class="ejn">5</span> Completa las frases con información sobre ti.</div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.85;">
+<p>1. Me aburren _____________________</p>
+<p>2. No me cuesta _____________________</p>
+<p>3. Me interesan mucho _____________________</p>
+<p>4. No me gusta _____________________</p>
+<p>5. Me encantan _____________________</p>
+</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">solución: abierta</p>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">4</span> Completa la tabla.</div>
+<table style="font-size:11.5px;">
+<tr><th>A</th><th>pron.</th><th rowspan="6" style="vertical-align:middle;">gusta<br>gustan<br>cuesta<br>cuestan<br>aburre<br>aburren</th></tr>
+<tr><td>A mí</td><td><span class="fill-blank" data-group="ej4">me</span></td></tr>
+<tr><td><span class="fill-blank" data-group="ej4">A ti</span></td><td>te</td></tr>
+<tr><td>A él/ella/usted</td><td><span class="fill-blank" data-group="ej4">le</span></td></tr>
+<tr><td><span class="fill-blank" data-group="ej4">A nosotros</span></td><td>nos</td></tr>
+<tr><td>A vosotros</td><td><span class="fill-blank" data-group="ej4">os</span></td></tr>
+<tr><td>A ellos/ellas/ustedes</td><td><span class="fill-blank" data-group="ej4">les</span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej4')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar">
+<strong>📝 ملخص:</strong> أفعال gustar وأخواتها (encantar, interesar, costar, aburrir) دايماً ضمير غير مباشر (me/te/le/nos/os/les) + الفعل في 3ª persona. مفرد→<span class="es-word">gusta</span> | جمع→<span class="es-word">gustan</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 119</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 6 – 7</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">6</span> Completa con <em>desde</em> o <em>desde hace</em>.</div>
+<div class="grid-2" style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<div>
+<p>1. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde</span> el martes</p>
+<p>2. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde hace</span> tres días</p>
+<p>3. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde</span> 2016</p>
+<p>4. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde</span> agosto</p>
+</div>
+<div>
+<p>5. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde hace</span> cuatro años</p>
+<p>6. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde</span> ayer</p>
+<p>7. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde hace</span> un mes</p>
+<p>8. <span class="fill-blank" data-group="ej6" style="min-width:80px;">Desde hace</span> cinco horas</p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej6')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">7</span> Relaciona las personas con los verbos.</div>
+<div class="wbank"><span>habéis comido</span><span>ha ido</span><span>hemos viajado</span><span>he trabajado</span><span>han hablado</span><span>has tenido</span></div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.9;">
+<p>• yo → <span class="fill-blank" data-group="ej7">he trabajado</span></p>
+<p>• Karin y yo → <span class="fill-blank" data-group="ej7">hemos viajado</span></p>
+<p>• tú y Carlos → <span class="fill-blank" data-group="ej7">habéis comido</span></p>
+<p>• ella → <span class="fill-blank" data-group="ej7">ha ido</span></p>
+<p>• tú → <span class="fill-blank" data-group="ej7">has tenido</span></p>
+<p>• Marta y Ruth → <span class="fill-blank" data-group="ej7">han hablado</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej7')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 119</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicio 8</h2></div>
+
+<div class="sub-l"><span class="ejn">8</span> Completa las frases con los verbos en pretérito perfecto.</div>
+<div class="grid-2" style="padding:7px 11px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.95;">
+<div>
+<p>1. ¿Vosotros <span class="fill-blank" data-group="ej8">habéis visto</span> (ver) hoy a la profesora?</p>
+<p>2. Este año <span class="fill-blank" data-group="ej8">hemos aprendido</span> (aprender) mucho.</p>
+<p>3. ¿Dónde <span class="fill-blank" data-group="ej8">ha estado</span> (estar) Luisa este verano?</p>
+<p>4. ¿Tú me <span class="fill-blank" data-group="ej8">has escrito</span> (escribir) un correo electrónico esta mañana?</p>
+<p>5. Berta y yo <span class="fill-blank" data-group="ej8">hemos hecho</span> (hacer) los deberes esta tarde.</p>
+</div>
+<div>
+<p>6. ¿Usted en qué países <span class="fill-blank" data-group="ej8">ha vivido</span> (vivir) estos años?</p>
+<p>7. No sé qué <span class="fill-blank" data-group="ej8">ha dicho</span> (decir) el profesor ahora.</p>
+<p>8. Susana <span class="fill-blank" data-group="ej8">ha vuelto</span> (volver) este lunes de su viaje.</p>
+<p>9. Toni y Xavi <span class="fill-blank" data-group="ej8">han viajado</span> (viajar) este año por Asia.</p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej8')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar">
+<strong>📝 تذكير الماضي التام:</strong>
+haber + participio | yo he, tú has, él ha, nosotros hemos, vosotros habéis, ellos han
+<br><strong>📌 شواذ مهمة احفظها:</strong>
+ver→<span class="es-word">visto</span> | escribir→<span class="es-word">escrito</span> | hacer→<span class="es-word">hecho</span> | decir→<span class="es-word">dicho</span> | volver→<span class="es-word">vuelto</span> | poner→<span class="es-word">puesto</span>
+</div>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 119</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 9 – 10</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">9</span> ¿Con qué estructuras puedes dar consejos? Completa el cuadro con las siguientes palabras.</div>
+<div class="wbank"><span>tienes</span><span>lo mejor</span><span>es</span><span>que</span><span>puedes</span></div>
+<div class="gbox" style="font-size:12.5px;line-height:1.95;">
+<h3>Dar consejos</h3>
+<p>• debes</p>
+<p>• <span class="fill-blank" data-group="ej9">tienes</span> <span class="fill-blank" data-group="ej9">que</span></p>
+<p>• hay <span class="fill-blank" data-group="ej9">que</span> &nbsp; → + <strong>infinitivo</strong></p>
+<p>• <span class="fill-blank" data-group="ej9">es</span> (muy) útil</p>
+<p>• <span class="fill-blank" data-group="ej9">lo mejor</span> es</p>
+<p>• <span class="fill-blank" data-group="ej9">puedes</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej9')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">10</span> Escribe un consejo para las siguientes situaciones con cada una de las estructuras anteriores.</div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<p>1. Para aprobar el examen __________</p>
+<p>2. Para hablar bien español __________</p>
+<p>3. Para tener éxito en el trabajo __________</p>
+<p>4. Para tener buena salud __________</p>
+<p>5. Para tener muchos amigos __________</p>
+<p>6. Para dormir bien __________</p>
+</div>
+<p style="font-size:10.5px;color:#888;margin-top:3px;font-style:italic;">solución: abierta</p>
+
+<div class="ar">
+<strong>📝 تراكيب النصيحة:</strong>
+كلها + مصدر الفعل. اختر التركيب حسب قوة النصيحة من الأقوى (debes/tienes que) للأخف (puedes/es útil).
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-div" style="background:linear-gradient(135deg,#1a237e,#283593);">
+<h2 style="color:#ffd60a;">🎙️ Shadowing</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.8);">اضغط على أي جملة لتسمعها بالإسباني وردد وراها<br>Haz clic en cualquier frase</p>
+</div>
+
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 1</span><span class="num">1/3 – Preferencias y dificultades</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Preferencias y dificultades – التفضيلات والصعوبات</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'Me gusta mucho estudiar español.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>Me gusta mucho estudiar español.</p><p class="sh-ar">أحب كتير دراسة الإسبانية.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Estudio español desde hace dos años.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>Estudio español desde hace dos años.</p><p class="sh-ar">أدرس الإسبانية من سنتين.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Me cuesta un poco entender las audiciones.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>Me cuesta un poco entender las audiciones.</p><p class="sh-ar">صعب عليّ شوية أفهم التسجيلات.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Me encanta la melodía de la lengua española.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>Me encanta la melodía de la lengua española.</p><p class="sh-ar">بعشق إيقاع اللغة الإسبانية.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Algunos deberes me aburren un poco.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>Algunos deberes me aburren un poco.</p><p class="sh-ar">بعض الواجبات بتمللني شوية.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Desde la semana pasada tenemos una nueva profesora.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>Desde la semana pasada tenemos una nueva profesora.</p><p class="sh-ar">من الأسبوع اللي فات عندنا مدرسة جديدة.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'¿Desde cuándo vives en esta ciudad?')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>¿Desde cuándo vives en esta ciudad?</p><p class="sh-ar">من إمتى عايش في المدينة دي؟</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Vivo aquí desde hace tres años.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Vivo aquí desde hace tres años.</p><p class="sh-ar">عايش هنا من تلات سنين.</p></div>
+</div>
+</div>
+
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 1</span><span class="num">2/3 – Idiomas y consejos</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Idiomas y consejos – اللغات والنصائح</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'Soy bilingüe porque hablo catalán y español.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>Soy bilingüe porque hablo catalán y español.</p><p class="sh-ar">أنا ثنائي اللغة لأني بتكلم كاتالاني وإسباني.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'En el trabajo hablo alemán con mis colegas.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>En el trabajo hablo alemán con mis colegas.</p><p class="sh-ar">في الشغل بتكلم ألماني مع زمايلي.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Mi padre es canadiense, de Quebec.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>Mi padre es canadiense, de Quebec.</p><p class="sh-ar">أبويا كندي، من كيبيك.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Trabajo en un banco internacional.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>Trabajo en un banco internacional.</p><p class="sh-ar">بشتغل في بنك دولي.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Para aprender vocabulario, es muy útil leer libros.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>Para aprender vocabulario, es muy útil leer libros.</p><p class="sh-ar">عشان تتعلم مفردات، مفيد جداً تقرأ كتب.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Lo mejor es hacer un intercambio con un hispanohablante.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>Lo mejor es hacer un intercambio con un hispanohablante.</p><p class="sh-ar">الأفضل تعمل تبادل لغوي.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Tienes que practicar todos los días.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>Tienes que practicar todos los días.</p><p class="sh-ar">لازم تتدرب كل يوم.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Puedes escuchar canciones en español.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Puedes escuchar canciones en español.</p><p class="sh-ar">ممكن تسمع أغاني بالإسباني.</p></div>
+</div>
+</div>
+
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 1</span><span class="num">3/3 – Pretérito perfecto</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Pretérito perfecto – الماضي التام</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'Estas vacaciones he hecho un viaje maravilloso a Cuba.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>Estas vacaciones he hecho un viaje maravilloso a Cuba.</p><p class="sh-ar">في الإجازة دي عملت رحلة رائعة لكوبا.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'He hecho todos los ejercicios del libro.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>He hecho todos los ejercicios del libro.</p><p class="sh-ar">عملت كل تمارين الكتاب.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'He comprado un audiolibro en español.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>He comprado un audiolibro en español.</p><p class="sh-ar">اشتريت كتاب صوتي بالإسباني.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'He escrito mensajes a mi amiga española.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>He escrito mensajes a mi amiga española.</p><p class="sh-ar">كتبت رسايل لصاحبتي الإسبانية.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'¿Habéis estudiado español durante las vacaciones?')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>¿Habéis estudiado español durante las vacaciones?</p><p class="sh-ar">ذاكرتوا إسباني في الإجازة؟</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Yo he ido a un curso de salsa.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>Yo he ido a un curso de salsa.</p><p class="sh-ar">أنا روحت كورس سالسا.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'No he viajado este verano, pero he leído mucho.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>No he viajado este verano, pero he leído mucho.</p><p class="sh-ar">ما سافرتش الصيف ده، بس قريت كتير.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Hemos hablado solo en español. ¡Qué bien!')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Hemos hablado solo en español. ¡Qué bien!</p><p class="sh-ar">اتكلمنا بالإسباني بس. حلو أوي!</p></div>
+</div>
+</div>
+
+<div class="slide slide-div" style="background:linear-gradient(135deg,#f5a623,#e8871e);">
+<h2 style="color:#fff;">¡Consolidamos!</h2>
+<div class="divline" style="background:#fff;"></div>
+<p style="color:rgba(255,255,255,0.9);">أنشطة التوحيد للطلاب – Actividades de consolidación</p>
+</div>
+
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 11</span></div></div>
+<div class="consbadge">¡Consolidamos! 1</div>
+<div class="act-head"><div class="act-num" style="background:#f5a623;">★</div><h2 class="act-title">El retrato robot de la clase</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #f57c00;font-size:12px;">
+<p><strong style="color:#bf360c;">🎯 Objetivos:</strong> formular preguntas para realizar una entrevista – interactuar haciendo preguntas para realizar un retrato robot del grupo.</p>
+</div>
+
+<div class="grid-23">
+<div>
+<div class="task-cons">
+<p><strong>a.</strong> Explique al grupo que entre todos van a realizar un retrato robot de la clase de español. Remítalos a la foto de la página 8 para recordarles lo que es un retrato robot (el conjunto de características de un tipo de personas). Para ello, se hacen preguntas. Forme grupos de tres a cuatro alumnos y pídales que formulen las preguntas que les ayuden a reunir información sobre la clase. Remítalos a la ficha en el lado derecho de la página 11. Léala en voz alta y aclare que aún no deben llenarla, pero los temas de la misma les darán ideas para postular sus preguntas. A pesar de escribir las preguntas en grupo, cada persona debe escribir las preguntas en su cuaderno. Pasee por las mesas para prestar ayuda y/o corregir discretamente las preguntas antes de pasar a la parte b de la actividad.</p>
+<p style="font-size:10.5px;color:#888;font-style:italic;margin-top:4px;">solución: abierta</p>
+</div>
+
+<div class="task-cons">
+<p><strong>b.</strong> Mezcle los grupos de manera que se puedan hacer sus preguntas mutuamente. Basta con que cada grupo entreviste a un grupo más. Al final de esta interacción, cada grupo rellena la ficha azul con la información obtenida del grupo entrevistado. Un portavoz de cada grupo lee los resultados así obtenidos, mientras los demás escuchan y anotan los mismos. Al final, cada grupo tendrá los datos de toda la clase.</p>
+<p style="font-size:10.5px;color:#888;font-style:italic;margin-top:4px;">solución: abierta</p>
+</div>
+
+<div class="dia"><p><span class="sb">●</span> <em>Una pregunta interesante es: ¿qué te gusta hacer en clase?</em></p><p><span class="st">▲</span> <em>Sí, y: ¿por qué aprendes español?</em></p></div>
+</div>
+
+<div>
+<div class="ficha">
+<p style="font-family:'Playfair Display',serif;color:#01579b;font-size:12.5px;text-align:center;margin-bottom:4px;">📋 Ficha del Grupo</p>
+<p><strong>Hombres/Mujeres:</strong></p>
+<p style="font-size:10.5px;color:#0288d1;"><em>Ej: En la clase somos siete mujeres y cuatro hombres.</em></p>
+<p><strong>Edad:</strong></p>
+<p style="font-size:10.5px;color:#0288d1;"><em>Ej: Tenemos entre 30 y 60 años.</em></p>
+<p><strong>Intereses:</strong> <span class="ficha-line"></span></p>
+<p><strong>Aficiones:</strong> <span class="ficha-line"></span></p>
+<p><strong>Experiencias con el español:</strong> <span class="ficha-line"></span></p>
+<p><strong>Otros (países, idiomas...):</strong> <span class="ficha-line"></span></p>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+1️⃣ في مجموعات (3-4)، صيغوا أسئلة عن الفصل.
+<br>2️⃣ كل طالب يكتب الأسئلة في دفتره.
+<br>3️⃣ اخلطوا المجموعات وكل مجموعة تجري مقابلة مع أخرى.
+<br>4️⃣ املأوا البطاقة الزرقاء.
+<br>5️⃣ متحدث من كل مجموعة يقرأ النتائج.
+</div>
+
+<div class="ar">
+<strong>📌 أسئلة مفيدة:</strong>
+<br>▸ <span class="es-word">¿De dónde eres?</span>
+<br>▸ <span class="es-word">¿Qué te gusta hacer?</span>
+<br>▸ <span class="es-word">¿Por qué aprendes español?</span>
+<br>▸ <span class="es-word">¿Qué idiomas hablas?</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 13</span></div></div>
+<div class="consbadge">¡Consolidamos! 2</div>
+<div class="act-head"><div class="act-num" style="background:#f5a623;">★</div><h2 class="act-title">Guía para practicar español en nuestra ciudad</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #f57c00;font-size:12px;">
+<p><strong style="color:#bf360c;">🎯 Objetivos:</strong> hacer una guía para practicar español en su ciudad – reflexionar sobre las actividades que más les interesan.</p>
+</div>
+
+<div class="grid-2">
+<div>
+<div class="task-cons">
+<p><strong>a.</strong> En grupos de tres o cuatro personas, los alumnos hablan sobre lo que hacen fuera de clase para practicar español y las posibilidades que tienen en su ciudad para hacerlo. Remítalos a la nota donde ya hay un consejo formulado. Después, escriben tres recomendaciones.</p>
+</div>
+
+<div class="note-yellow">
+<p><strong>1.</strong> Para hablar más español, lo mejor es ir a las fiestas que organiza el departamento de español de la escuela.</p>
+<p><strong>2.</strong> ________________________________</p>
+<p><strong>3.</strong> ________________________________</p>
+</div>
+
+<div class="task-cons">
+<p><strong>b.</strong> Escriba en la pizarra <em>Guía para practicar español en (su ciudad/localidad)</em>. Uno a uno, los grupos van leyendo sus recomendaciones y usted las anota en la pizarra.</p>
+</div>
+</div>
+
+<div>
+<div class="task-cons">
+<p><strong>c.</strong> Pida a los alumnos que piensen en las actividades de la pizarra que más les interesan. Dos alumnos leen el ejemplo en voz alta. Después, los alumnos se ponen de pie y buscan a compañeros que tengan los mismos intereses. Haga hincapié en que el objetivo de esta fase de la actividad es la interacción oral.</p>
+</div>
+
+<div class="tblock" style="background:#fffde7;border:3px solid #f5a623;">
+<p style="font-family:'Playfair Display',serif;text-align:center;font-size:13px;color:#bf6a00;letter-spacing:2px;margin-bottom:5px;">🇦🇷 🇲🇽 GUÍA PARA PRACTICAR ESPAÑOL EN <span style="border-bottom:2px solid #bf6a00;padding:0 20px;">Colonia</span></p>
+<div class="grid-2" style="font-size:11px;line-height:1.85;">
+<div>
+<p>1. ________________</p>
+<p>2. ________________</p>
+<p>3. ________________</p>
+</div>
+<div>
+<p>4. ________________</p>
+<p>5. ________________</p>
+<p>6. ________________</p>
+</div>
+</div>
+</div>
+
+<div class="dia">
+<p><span class="sb">●</span> <em>Yo voy a ir a las fiestas que organiza el departamento de español de la escuela.</em></p>
+<p><span class="st">▲</span> <em>Y yo también.</em></p>
+<p><span class="sb">●</span> <em>Helen y yo vamos a ir juntos a las fiestas...</em></p>
+</div>
+</div>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+1️⃣ في مجموعات، اتكلموا عن إيه بتعملوا لممارسة الإسبانية برّا الفصل. اكتبوا 3 توصيات.
+<br>2️⃣ كل مجموعة تقرأ توصياتها والمدرس يكتبها على السبورة.
+<br>3️⃣ فكّر في الأنشطة العاجبة وقم دور على زمايل ليهم نفس الاهتمام.
+<br>📌 الهدف الأساسي: <strong>التفاعل الشفهي</strong> - تكلموا بالإسبانية!
+</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;text-align:center;">solución (a, b, c): abierta</p>
+</div>
+
+<div class="slide slide-div" style="background:linear-gradient(135deg,#4caf50,#2e7d32);">
+<h2 style="color:#fff;">📅 جدول المذاكرة</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.9);">خطة أسبوعية لمذاكرة الوحدة الأولى<br>Plan semanal de estudio</p>
+</div>
+
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">جدول المذاكرة – الوحدة 1</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Plan de estudio</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#4caf50;">📅</div><h2 class="act-title">جدول المذاكرة الأسبوعي – Plan Semanal</h2></div>
+
+<div class="ar-instr" style="margin-bottom:8px;"><span class="ar-title">📌 إزاي تستخدم الجدول ده:</span>
+ده جدول مذاكرة مقترح لـ 7 أيام (أسبوع كامل) لإتقان وحدة "Nueva Etapa". كل يوم له هدف معين. ادي نفسك من 25-45 دقيقة يومياً. المهم تكون منتظم في المذاكرة!
+</div>
+
+<table class="study-table">
+<tr><th style="width:90px;">اليوم</th><th>المهمة</th><th style="width:70px;">المدة</th></tr>
+
+<tr>
+<td class="day">اليوم 1<br>السبت</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Actividad previa + Actividades 1-2 (Retrato robot)</strong><br>• Describir las 6 fotos de la portada<br>• Resolver "E de español" (1a): <em>El español me gusta</em><br>• Leer el texto del Retrato Robot y completar la ficha (2b)<br>• Repasar ¿Te acuerdas? – verbos irregulares</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تفهم نمط طالب الإسبانية وتراجع الأفعال الشاذة (reírse, entender, soñar, salir, reconocer, saber, estar).</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 2<br>الأحد</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 gustar y similares (Actividad 3)</strong><br>• Leer los textos de Paul y Jessica<br>• Memorizar: <span style="color:#bf360c;font-weight:700;">gustar, encantar, interesar, costar, aburrir</span><br>• Memorizar pronombres: me, te, le, nos, os, les<br>• Resolver ejercicios 3, 4 y 5</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن استخدام gustar وأخواتها بثقة. تذكر: مفرد→gusta، جمع→gustan.</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 3<br>الاتنين</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 desde / desde hace (Actividad 4)</strong><br>• Estudiar la difference: <span style="color:#bf360c;font-weight:700;">desde + momento concreto</span> | <span style="color:#bf360c;font-weight:700;">desde hace + periodo</span><br>• Resolver ejercicio 6<br>• Escribir 5 frases sobre tu vida<br>• Shadowing 1: repetir 3 veces</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن الفرق بين desde و desde hace.</div>
+</td>
+<td class="mins">30 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 4<br>التلات</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Idiomas - Tú y los idiomas (Actividad 5)</strong><br>• Leer las historias de Marc y Pedro<br>• Escuchar los audios 1-2<br>• Hacer tu propio gráfico de idiomas<br>• Shadowing 2: idiomas y consejos</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتعلم تتكلم عن اللغات اللي تعرفها وفي إيه مواقف تستخدمها.</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 5<br>الأربع</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Dar consejos (Actividad 6)</strong><br>• Memorizar las 6 estructuras: <span style="color:#bf360c;font-weight:700;">Tienes que, Debes, Hay que, Puedes, Lo mejor es, Es útil</span><br>• Todas + INFINITIVO<br>• Resolver ejercicios 9 y 10<br>• Dar consejos a un compañero principiante</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تعرف تقدم نصايح بـ 6 تراكيب مختلفة.</div>
+</td>
+<td class="mins">40 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 6<br>الخميس</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Pretérito Perfecto (Actividad 7)</strong><br>• Conjugar haber: <span style="color:#bf360c;font-weight:700;">he, has, ha, hemos, habéis, han</span><br>• Memorizar participios irregulares: <span style="color:#bf360c;font-weight:700;">dicho, hecho, puesto, visto, escrito, vuelto</span><br>• Resolver ejercicios 7 y 8<br>• Shadowing 3: pretérito perfecto</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن الماضي التام مع التصريفات الشاذة.</div>
+</td>
+<td class="mins">45 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 7<br>الجمعة</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Repaso general + ¡Consolidamos!</strong><br>• Repasar toda la sección de Gramática (p. 118)<br>• Resolver todos los ejercicios (1-10)<br>• Hacer ¡Consolidamos! 1 y 2<br>• Repetir todos los Shadowing 3 veces<br>• Autoevaluación: ¿puedes hablar sin libro?</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> مراجعة شاملة وتأكد إنك متقن كل حاجة في الوحدة.</div>
+</td>
+<td class="mins">45 دقيقة</td>
+</tr>
+</table>
+
+<div class="grid-2" style="margin-top:8px;">
+<div class="infobox" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-color:#2e7d32;">
+<h4 style="color:#1b5e20;">✅ معايير النجاح بعد الأسبوع:</h4>
+<p style="color:#1b5e20;">• تتكلم عن صعوبات وتفضيلات الدراسة<br>• تستخدم gustar وأخواتها بشكل صحيح<br>• تفرّق بين desde و desde hace<br>• تصرّف الماضي التام مع التصريفات الشاذة<br>• تقدم نصايح بـ 6 تراكيب مختلفة<br>• تفهم نصوص الاستماع<br>• تتكلم عن اللغات اللي بتعرفها</p>
+</div>
+<div class="infobox" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-color:#ef6c00;">
+<h4 style="color:#bf6a00;">💡 نصائح للمذاكرة الفعّالة:</h4>
+<p style="color:#5a4100;">• ذاكر يومياً (مش مرة في الأسبوع!)<br>• اكتب الأفعال الشاذة على بطاقات وراجعها<br>• استخدم Shadowing 5-10 دقايق يومياً<br>• اكتب جمل عن يومك بالإسباني<br>• ابحث عن شريك تبادل لغوي على Tandem<br>• شاهد فيديوهات قصيرة بالإسباني<br>• كرر الكلام بصوت عالي مش في سرك</p>
+</div>
+</div>
+</div>
+
+<div class="slide slide-div" style="background:linear-gradient(135deg,#f57c00,#bf360c);">
+<div class="unit-circle" style="margin-bottom:20px;">1</div>
+<h2 style="color:#fff;font-size:42px;">¡Fin de la Unidad 1!</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.85);font-size:20px;">Nueva Etapa – Completada ✓</p>
+<p style="color:rgba(255,255,255,0.5);margin-top:30px;font-size:14px;letter-spacing:3px;">INSTITUTO AMIGOS</p>
+</div>
+
+<script>
+function toggleGroupAns(btn, group) {
+  const elements = document.querySelectorAll('[data-group="' + group + '"]');
+  const text = btn.querySelector('.btn-text');
+  if (btn.classList.contains('active')) {
+    elements.forEach(el => el.classList.remove('show'));
+    btn.classList.remove('active');
+    text.textContent = 'اظهار الإجابة';
+  } else {
+    elements.forEach(el => el.classList.add('show'));
+    btn.classList.add('active');
+    text.textContent = 'اخفاء الإجابة';
+  }
+}
+
+function toggleTrans(btn) {
+  const content = btn.parentElement.nextElementSibling;
+  const text = btn.querySelector('.btn-text');
+  if (content.classList.contains('show')) {
+    content.classList.remove('show');
+    btn.classList.remove('active');
+    text.textContent = '📄 إظهار التفريغ';
+  } else {
+    content.classList.add('show');
+    btn.classList.add('active');
+    text.textContent = '✕ إخفاء التفريغ';
+  }
+}
+
+let currentBox = null;
+let spanishVoices = [];
+
+function loadSpanishVoices() {
+  const allVoices = window.speechSynthesis.getVoices();
+  spanishVoices = [
+    ...allVoices.filter(v => v.lang === 'es-ES'),
+    ...allVoices.filter(v => v.lang === 'es-MX'),
+    ...allVoices.filter(v => v.lang === 'es-US'),
+    ...allVoices.filter(v => v.lang === 'es-AR'),
+    ...allVoices.filter(v => v.lang === 'es-CO'),
+    ...allVoices.filter(v => v.lang.startsWith('es-')),
+    ...allVoices.filter(v => v.lang.startsWith('es'))
+  ];
+  spanishVoices = [...new Set(spanishVoices)];
+}
+
+if ('speechSynthesis' in window) {
+  loadSpanishVoices();
+  window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+  setTimeout(loadSpanishVoices, 100);
+  setTimeout(loadSpanishVoices, 500);
+  setTimeout(loadSpanishVoices, 1500);
+}
+
+function playShadow(box, text) {
+  if (!('speechSynthesis' in window)) {
+    alert('المتصفح بتاعك مش بيدعم الصوت. جرب Chrome أو Edge.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  if (currentBox) currentBox.classList.remove('playing');
+  if (spanishVoices.length === 0) loadSpanishVoices();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'es-ES';
+  if (spanishVoices.length > 0) {
+    utterance.voice = spanishVoices[0];
+    utterance.lang = spanishVoices[0].lang;
+  }
+  utterance.rate = 0.85;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+  box.classList.add('playing');
+  currentBox = box;
+  utterance.onend = () => { box.classList.remove('playing'); currentBox = null; };
+  utterance.onerror = () => { box.classList.remove('playing'); currentBox = null; };
+  window.speechSynthesis.speak(utterance);
+}
+</script>
+
+</body>
+</html>

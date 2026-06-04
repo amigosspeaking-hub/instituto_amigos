@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Semanal de Estudio | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #1a1a2e; font-family: 'Open Sans', sans-serif; padding: 40px 20px; display: flex; justify-content: center; }
+
+.slide-content { background: #fff; padding: 30px 45px; border-radius: 12px; width: 100%; max-width: 1100px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); position: relative; }
+.slide-content::before { content: "Instituto Amigos"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 6rem; font-weight: 900; color: rgba(245,124,0,0.03); pointer-events: none; z-index: 0; white-space: nowrap; letter-spacing: 5px; font-family: 'Playfair Display', serif; }
+.slide-content > * { position: relative; z-index: 1; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 3px solid #f57c00; }
+.topbar-left { display: flex; flex-direction: column; gap: 3px; }
+.topbar .ulabel { font-family: 'Playfair Display', serif; font-size: 14px; color: #e65100; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+.topbar .pnum { font-size: 13px; color: #999; font-weight: 600; }
+.brand-badge { font-family: 'Playfair Display', serif; font-size: 13px; color: #e65100; font-weight: 800; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+
+.act-head { display: flex; align-items: center; margin-bottom: 15px; gap: 12px; }
+.act-num { width: 42px; height: 42px; background: #4caf50; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; font-family: 'Playfair Display', serif; flex-shrink: 0; }
+.act-title { font-family: 'Playfair Display', serif; font-size: 24px; color: #2c2c2c; text-decoration: underline; text-decoration-color: #4caf50; text-underline-offset: 5px; text-decoration-thickness: 3px; }
+
+.ar-instr { background: linear-gradient(135deg, #fff8e1, #fff3cd); border: 2px solid #f5a623; border-radius: 10px; padding: 10px 15px; margin-bottom: 15px; font-family: 'Amiri', serif; font-size: 14.5px; color: #5a4100; direction: rtl; text-align: right; line-height: 1.8; }
+.ar-instr .ar-title { font-weight: 700; color: #bf6a00; display: block; margin-bottom: 4px; font-size: 15px; }
+
+.study-table { width: 100%; border-collapse: collapse; margin: 10px 0 15px; font-size: 13.5px; direction: rtl; }
+.study-table th { background: #f57c00; color: #fff; padding: 10px 12px; font-weight: 700; text-align: center; font-family: 'Playfair Display', serif; letter-spacing: 1px; font-size: 14px; }
+.study-table td { padding: 10px 12px; border: 1px solid #ddd; vertical-align: top; line-height: 1.6; }
+.study-table tr:nth-child(even) { background: #fff8e1; }
+.study-table .day { font-weight: 700; color: #e65100; font-family: 'Playfair Display', serif; font-size: 15px; text-align: center; white-space: nowrap; vertical-align: middle; }
+.study-table .task-cell { direction: rtl; text-align: right; }
+.study-table .task-es { color: #333; font-size: 13px; direction: ltr; text-align: left; background: #fff; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; border: 1px solid #eee; unicode-bidi: isolate; }
+.study-table .task-ar { font-family: 'Amiri', serif; color: #5a4100; font-size: 14px; direction: rtl; text-align: right; background: #fff8e1; border-radius: 6px; padding: 8px 10px; line-height: 1.7; border-right: 4px solid #f5a623; }
+.study-table .mins { color: #1976d2; font-weight: 700; font-size: 13px; text-align: center; white-space: nowrap; vertical-align: middle; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.infobox { border-radius: 10px; padding: 12px 15px; margin: 5px 0; direction: rtl; text-align: right; }
+.infobox h4 { font-size: 14.5px; margin-bottom: 6px; text-decoration: underline; font-family: 'Amiri', serif; font-weight: 700; }
+.infobox p { font-size: 13.5px; line-height: 1.7; font-family: 'Amiri', serif; }
+</style>
+</head>
+<body>
+
+<div class="slide-content">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="ulabel">جدول المذاكرة – الوحدة 1</span>
+      <span class="brand-badge">Instituto Amigos</span>
+    </div>
+    <div class="topbar-right">
+      <span class="pnum">Plan de estudio</span>
+    </div>
+  </div>
+
+  <div class="act-head">
+    <div class="act-num">📅</div>
+    <h2 class="act-title">جدول المذاكرة الأسبوعي – Plan Semanal</h2>
+  </div>
+
+  <div class="ar-instr">
+    <span class="ar-title">📌 إزاي تستخدم الجدول ده:</span>
+    ده جدول مذاكرة مقترح لـ 7 أيام (أسبوع كامل) لإتقان وحدة "Nueva Etapa". كل يوم له هدف معين. ادي نفسك من 25-45 دقيقة يومياً. المهم تكون منتظم في المذاكرة!
+  </div>
+
+  <table class="study-table">
+    <tr>
+      <th style="width:100px;">اليوم</th>
+      <th>المهمة</th>
+      <th style="width:80px;">المدة</th>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 1<br>السبت</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 Actividad previa + Actividades 1-2 (Retrato robot)</strong><br>• Describir las 6 fotos de la portada<br>• Resolver "E de español" (1a): <em>El español me gusta</em><br>• Leer el texto del Retrato Robot y completar la ficha (2b)<br>• Repasar ¿Te acuerdas? – verbos irregulares</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تفهم نمط طالب الإسبانية وتراجع الأفعال الشاذة (reírse, entender, soñar, salir, reconocer, saber, estar).</div>
+      </td>
+      <td class="mins">35 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 2<br>الأحد</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 gustar y similares (Actividad 3)</strong><br>• Leer los textos de Paul y Jessica<br>• Memorizar: <span style="color:#bf360c;font-weight:700;">gustar, encantar, interesar, costar, aburrir</span><br>• Memorizar pronombres: me, te, le, nos, os, les<br>• Resolver ejercicios 3, 4 y 5</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن استخدام gustar وأخواتها بثقة. تذكر: مفرد→gusta، جمع→gustan.</div>
+      </td>
+      <td class="mins">35 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 3<br>الاتنين</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 desde / desde hace (Actividad 4)</strong><br>• Estudiar la diferencia: <span style="color:#bf360c;font-weight:700;">desde + momento concreto</span> | <span style="color:#bf360c;font-weight:700;">desde hace + periodo</span><br>• Resolver ejercicio 6<br>• Escribir 5 frases sobre tu vida<br>• Shadowing 1: repetir 3 veces</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن الفرق بين desde و desde hace.</div>
+      </td>
+      <td class="mins">30 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 4<br>التلات</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 Idiomas - Tú y los idiomas (Actividad 5)</strong><br>• Leer las historias de Marc y Pedro<br>• Escuchar los audios 1-2<br>• Hacer tu propio gráfico de idiomas<br>• Shadowing 2: idiomas y consejos</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تتعلم تتكلم عن اللغات اللي تعرفها وفي إيه مواقف تستخدمها.</div>
+      </td>
+      <td class="mins">35 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 5<br>الأربع</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 Dar consejos (Actividad 6)</strong><br>• Memorizar las 6 estructuras: <span style="color:#bf360c;font-weight:700;">Tienes que, Debes, Hay que, Puedes, Lo mejor es, Es útil</span><br>• Todas + INFINITIVO<br>• Resolver ejercicios 9 y 10<br>• Dar consejos a un compañero principiante</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تعرف تقدم نصايح بـ 6 تراكيب مختلفة.</div>
+      </td>
+      <td class="mins">40 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 6<br>الخميس</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 Pretérito Perfecto (Actividad 7)</strong><br>• Conjugar haber: <span style="color:#bf360c;font-weight:700;">he, has, ha, hemos, habéis, han</span><br>• Memorizar participios irregulares: <span style="color:#bf360c;font-weight:700;">dicho, hecho, puesto, visto, escrito, vuelto</span><br>• Resolver ejercicios 7 y 8<br>• Shadowing 3: pretérito perfecto</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن الماضي التام مع التصريفات الشاذة.</div>
+      </td>
+      <td class="mins">45 دقيقة</td>
+    </tr>
+
+    <tr>
+      <td class="day">اليوم 7<br>الجمعة</td>
+      <td class="task-cell">
+        <div class="task-es"><strong>🎯 Repaso general + ¡Consolidamos!</strong><br>• Repasar toda la sección de Gramática (p. 118)<br>• Resolver todos los ejercicios (1-10)<br>• Hacer ¡Consolidamos! 1 y 2<br>• Repetir todos los Shadowing 3 veces<br>• Autoevaluación: ¿puedes hablar sin libro?</div>
+        <div class="task-ar"><strong>📝 هدف اليوم:</strong> مراجعة شاملة وتأكد إنك متقن كل حاجة في الوحدة.</div>
+      </td>
+      <td class="mins">45 دقيقة</td>
+    </tr>
+  </table>
+
+  <div class="grid-2">
+    <div class="infobox" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid #2e7d32;">
+      <h4 style="color:#1b5e20;">✅ معايير النجاح بعد الأسبوع:</h4>
+      <p style="color:#1b5e20;">
+        • تتكلم عن صعوبات وتفضيلات الدراسة<br>
+        • تستخدم gustar وأخواتها بشكل صحيح<br>
+        • تفرّق بين desde و desde hace<br>
+        • تصرّف الماضي التام مع التصريفات الشاذة<br>
+        • تقدم نصايح بـ 6 تراكيب مختلفة<br>
+        • تفهم نصوص الاستماع<br>
+        • تتكلم عن اللغات اللي بتعرفها
+      </p>
+    </div>
+    <div class="infobox" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ef6c00;">
+      <h4 style="color:#bf6a00;">💡 نصائح للمذاكرة الفعّالة:</h4>
+      <p style="color:#5a4100;">
+        • ذاكر يومياً (مش مرة في الأسبوع!)<br>
+        • اكتب الأفعال الشاذة على بطاقات وراجعها<br>
+        • استخدم Shadowing 5-10 دقايق يومياً<br>
+        • اكتب جمل عن يومك بالإسباني<br>
+        • ابحث عن شريك تبادل لغوي على Tandem<br>
+        • شاهد فيديوهات قصيرة بالإسباني<br>
+        • كرر الكلام بصوت عالي مش في سرك
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
