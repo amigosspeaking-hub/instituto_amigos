@@ -17,7 +17,7 @@ syllabus = {
     "A1.3": ["COMPRAR Y COMER EN ALICANTE", "¡BUEN FIN DE SEMANA!", "INTERCAMBIO DE CASA", "ESTA ES MI VIDA"],
     "A2.1": ["NUEVA ETAPA", "PARA TI Y PARA MÍ", "UN AÑO ESPECIAL", "CON TUS MANOS"],
     "A2.2": ["¿CÓMO ERA ANTES?", "¿Y QUÉ PASÓ?", "HOY COCINO YO", "¡ME SIENTO BIEN!"],
-    "A2.3": ["TE INVITO", "UNA CIUDAD IDEال", "NOSOTROS Y EL TRABAJO", "¡ESTAMOS AL DÍA!"],
+    "A2.3": ["TE INVITO", "UNA CIUDAD IDEAL", "NOSOTROS Y EL TRABAJO", "¡ESTAMOS AL DÍA!"],
     "B1.1": ["SEGUIMOS JUNTOS", "UN VIAJE INOLVIDABLE", "UN MUNDO MEJOR", "HABLANDO DEL FUTURO"],
     "B1.2": ["ENTRE NOSOTROS", "NUESTRO PLANETA", "¡CÁMARA, ACCIÓN!", "BUENO Y SANO"],
     "B1.3": ["MENSAJES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
@@ -26,7 +26,7 @@ syllabus = {
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
 
-# 2. روابط جداول المذاكرة من GitHub حسب المستوى
+# 2. روابط جداول المذاكرة من GitHub حسب المستوى (بتتفتح في شاشة تانية)
 SCHEDULE_DATA = {
     "A1.1": "https://yourusername.github.io/your-repo/schedules/a1_1.html",
     "A1.2": "https://yourusername.github.io/your-repo/schedules/a1_2.html",
@@ -42,12 +42,12 @@ SCHEDULE_DATA = {
     "B2.3": "https://yourusername.github.io/your-repo/schedules/b2_3.html"
 }
 
-# 3. روابط الألعاب من GitHub حسب المستوى
+# 3. روابط الألعاب من GitHub حسب المستوى (بتتفتح في شاشة تانية)
 GAMES_DATA = {
     "A1.1": "https://yourusername.github.io/your-repo/games/a1_1.html",
-    "A1.2": "https://instituto-amigos.onrender.com/page/A2.1/juego-estudiante1.htm",
+    "A1.2": "https://yourusername.github.io/your-repo/games/a1_2.html",
     "A1.3": "https://yourusername.github.io/your-repo/games/a1_3.html",
-    "A2.1": "https://yourusername.github.io/your-repo/games/a2_1.html",
+    "A1.2": "https://instituto-amigos.onrender.com/page/A2.1/juego-estudiante1.htm",
     "A2.2": "https://yourusername.github.io/your-repo/games/a2_2.html",
     "A2.3": "https://yourusername.github.io/your-repo/games/a2_3.html",
     "B1.1": "https://yourusername.github.io/your-repo/games/b1_1.html",
@@ -61,8 +61,8 @@ GAMES_DATA = {
 # 4. مكتبة فيديوهات اليوتيوب مقسمة تلقائياً حسب كل مستوى فرعي
 VIDEOS_DATA = {
     "A1.1": [
-        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
-        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
+        {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
+        {"title": "أدوات التعريف والتنكير في الإسبانية", "youtube_id": "dQw4w9WgXcQ"}
     ],
     "A1.2": [
         {"title": "شرح مفردات العائلة والأقارب بالتفصيل", "youtube_id": "dQw4w9WgXcQ"},
@@ -397,12 +397,10 @@ DASHBOARD_HTML = """
         .lesson-number { font-size: 13px; font-weight: 800; color: var(--primary); background: rgba(229, 36, 33, 0.1); padding: 5px 12px; border-radius: 50px; }
         .card-body { padding: 25px 30px; text-align: center; flex-grow: 1; }
         .card-body h4 { font-size: 18px; font-weight: 800; color: var(--secondary); margin-bottom: 25px; }
-        .card-action-btn { display: block; width: 100%; padding: 14px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; transition: 0.2s; }
+        
+        .card-action-btn { display: inline-block; width: 100%; padding: 14px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; transition: 0.2s; box-sizing: border-box; }
         .btn-lecture { background: var(--primary); color: white; }
         .btn-exercise { background: var(--accent); color: var(--secondary); }
-        
-        .github-frame-container { width: 100%; height: 75vh; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #e2e8f0; background: white; }
-        .github-iframe { width: 100%; height: 100%; border: none; }
 
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
@@ -471,6 +469,7 @@ DASHBOARD_HTML = """
             <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> عجلة التحدث</button>
         </nav>
 
+        <!-- 1. تبويب المحاضرات -->
         <div id="lectures-tab" class="tab-content active">
             <div class="cards-grid">
                 {% for lesson in lessons %}
@@ -488,6 +487,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
+        <!-- 2. تبويب التمارين -->
         <div id="exercises-tab" class="tab-content">
             <div class="cards-grid">
                 {% for lesson in lessons %}
@@ -505,18 +505,41 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
+        <!-- 3. تبويب جدول المذاكرة (يفتح في صفحة جديدة) -->
         <div id="schedule-tab" class="tab-content">
-            <div class="github-frame-container">
-                <iframe src="{{ schedule_url }}" class="github-iframe"></iframe>
+            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-calendar-check"></i> خطتك الأسبوعية للمذاكرة</h3>
+            <div class="cards-grid">
+                <div class="course-card">
+                    <div class="card-header" style="justify-content: center; background: #f8fafc; padding: 30px;">
+                        <i class="fa-solid fa-calendar-days" style="font-size: 50px; color: var(--secondary);"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>جدول المذاكرة لمستوى {{ student.level }}</h4>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">اضغط هنا عشان تفتح الخطة الأسبوعية الخاصة بمستواك في صفحة جديدة.</p>
+                        <a href="{{ schedule_url }}" target="_blank" class="card-action-btn" style="background: var(--secondary); color: white;">افتح الجدول <i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- 4. تبويب الألعاب (يفتح في صفحة جديدة) -->
         <div id="games-tab" class="tab-content">
-            <div class="github-frame-container">
-                <iframe src="{{ game_url }}" class="github-iframe"></iframe>
+            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-puzzle-piece"></i> العب واتعلم</h3>
+            <div class="cards-grid">
+                <div class="course-card">
+                    <div class="card-header" style="justify-content: center; background: #f8fafc; padding: 30px;">
+                        <i class="fa-solid fa-gamepad" style="font-size: 50px; color: #2ecc71;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>ألعاب وتدريبات مستوى {{ student.level }}</h4>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">استمتع بالتدريبات التفاعلية والأنشطة الممتعة الخاصة بمستواك، اضغط لتفتحها في صفحة جديدة.</p>
+                        <a href="{{ game_url }}" target="_blank" class="card-action-btn" style="background: #2ecc71; color: white;">ادخل العب <i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- 5. تبويب الفيديوهات -->
         <div id="videos-tab" class="tab-content">
             <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الشروحات المرئية لمستوى {{ student.level }}</h3>
             <div class="cards-grid">
@@ -531,6 +554,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
+        <!-- 6. تبويب عجلة التحدث -->
         <div id="wheel-tab" class="tab-content">
             <div class="wheel-box">
                 <h3 style="color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-microphone-lines"></i> عجلة التحدث والطلاقة</h3>
@@ -639,16 +663,13 @@ def dashboard():
     
     level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
     
-    # جلب روابط جيت هاب الخاصة بالطالب بناءً على مستواه الحالي
     student_schedule_url = SCHEDULE_DATA.get(level, "https://yourusername.github.io/your-repo/schedules/default.html")
     student_game_url = GAMES_DATA.get(level, "https://yourusername.github.io/your-repo/games/default.html")
     
-    # جلب قائمة الفيديوهات الخاصة بالمستوى الحالي تلقائياً
     student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي بالمستوى", "youtube_id": "dQw4w9WgXcQ"}])
     
     random_quote = random.choice(motivation_quotes)
     
-    # جلب مواضيع عجلة التحدث للمستوى بالكامل
     student_wheel_topics = WHEEL_TOPICS.get(level, ["تحدث عن مهاراتك اللغوية الحالية."])
     topics_json = json.dumps(student_wheel_topics, ensure_ascii=False)
     
