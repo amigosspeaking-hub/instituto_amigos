@@ -193,10 +193,10 @@ SCHEDULES_DATA = {
         {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
     ],
     "A2.1": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+        {"title": "جدول مذكرات الدرس الأول", "file": "gadwal1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "gadwal2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "gadwal3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "gadwal4.html"}
     ],
     "A2.2": [
         {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
@@ -342,7 +342,8 @@ VIDEOS_DATA = {
         {"title": "كيف تتسوق وتطلب الطعام داخل المطعم", "youtube_id": "dQw4w9WgXcQ"}
     ],
     "A2.1": [
-        {"title": "الفرق بين زمني الماضي المتصل والمنفصل", "youtube_id": "dQw4w9WgXcQ"}
+        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
+        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
     ],
     "A2.2": [
         {"title": "استخدامات زمن الماضي المستمر لوصف الطفولة", "youtube_id": "dQw4w9WgXcQ"}
