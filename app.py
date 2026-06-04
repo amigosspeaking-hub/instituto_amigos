@@ -2,63 +2,333 @@ import os
 import pandas as pd
 import random
 import json
+from datetime import timedelta
 from flask import Flask, render_template_string, request, redirect, url_for, session, abort, render_template
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
+# إغلاق الجلسة أوتوماتيكياً بعد ساعتين لزيادة الأمان
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
+
 # رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
-# 1. الفهرس الكامل للمستويات التعليمية
-syllabus = {
-    "A1.1": ["HOLA, ¿QUÉ TAL?", "EL ESPAÑOL Y YO", "TRABAJO AQUÍ", "¡ME GUSTAN LAS TAPAS!"],
-    "A1.2": ["EN FAMILIA", "MI BARRIO", "MI DÍA A DÍA", "DE VACACIONES"],
-    "A1.3": ["COMPRAR Y COMER EN ALICANTE", "¡BUEN FIN DE SEMANA!", "INTERCAMBIO DE CASA", "ESTA ES MI VIDA"],
-    "A2.1": ["NUEVA ETAPA", "PARA TI Y PARA MÍ", "UN AÑO ESPECIAL", "CON TUS MANOS"],
-    "A2.2": ["¿CÓMO ERA ANTES?", "¿Y QUÉ PASÓ?", "HOY COCINO YO", "¡ME SIENTO BIEN!"],
-    "A2.3": ["TE INVITO", "UNA CIUDAD IDEAL", "NOSOTROS Y EL TRABAJO", "¡ESTAMOS AL DÍA!"],
-    "B1.1": ["SEGUIMOS JUNTOS", "UN VIAJE INOLVIDABLE", "UN MUNDO MEJOR", "HABLANDO DEL FUTURO"],
-    "B1.2": ["ENTRE NOSOTROS", "NUESTRO PLANETA", "¡CÁMARA, ACCIÓN!", "BUENO Y SANO"],
-    "B1.3": ["MENSAJES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
-    "B2.1": ["ASÍ HABLAMOS, ASÍ SOMOS", "LA ESCUELA DE LA VIDA", "NUEVOS MUNDOS LABORALES", "¡QUÉ ILUSIÓN!"],
-    "B2.2": ["PEGADOS AL MÓVIL", "MENTE SANA EN CUERPO SANO", "¡HOGAR, DULCE HOGAR!", "A FLOR DE PIEL"],
-    "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
+# =====================================================================
+# [ 1. قاعدة بيانات المحاضرات - LESSONS_DATA ]
+# =====================================================================
+LESSONS_DATA = {
+    "A1.1": [
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"},
+        {"title": "TRABAJO AQUÍ", "file": "lesson3.html"},
+        {"title": "¡ME GUSTAN LAS TAPAS!", "file": "lesson4.html"}
+    ],
+    "A1.2": [
+        {"title": "EN FAMILIA", "file": "lesson1.html"},
+        {"title": "MI BARRIO", "file": "lesson2.html"},
+        {"title": "MI DÍA A DÍA", "file": "lesson3.html"},
+        {"title": "DE VACACIONES", "file": "lesson4.html"}
+    ],
+    "A1.3": [
+        {"title": "COMPRAR Y COMER EN ALICANTE", "file": "lesson1.html"},
+        {"title": "¡BUEN FIN DE SEMANA!", "file": "lesson2.html"},
+        {"title": "INTERCAMBIO DE CASA", "file": "lesson3.html"},
+        {"title": "ESTA ES MI VIDA", "file": "lesson4.html"}
+    ],
+    "A2.1": [
+        {"title": "NUEVA ETAPA", "file": "lesson1.html"},
+        {"title": "PARA TI Y PARA MÍ", "file": "lesson2.html"},
+        {"title": "UN AÑO ESPECIAL", "file": "lesson3.html"},
+        {"title": "CON TUS MANOS", "file": "lesson4.html"}
+    ],
+    "A2.2": [
+        {"title": "¿CÓMO ERA ANTES?", "file": "lesson1.html"},
+        {"title": "¿Y QUÉ PASÓ?", "file": "lesson2.html"},
+        {"title": "HOY COCINO YO", "file": "lesson3.html"},
+        {"title": "¡ME SIENTO BIEN!", "file": "lesson4.html"}
+    ],
+    "A2.3": [
+        {"title": "TE INVITO", "file": "lesson1.html"},
+        {"title": "UNA CIUDAD IDEAL", "file": "lesson2.html"},
+        {"title": "NOSOTROS Y EL TRABAJO", "file": "lesson3.html"},
+        {"title": "¡ESTAMOS AL DÍA!", "file": "lesson4.html"}
+    ],
+    "B1.1": [
+        {"title": "SEGUIMوس JUNTOS", "file": "lesson1.html"},
+        {"title": "UN VIAJE INOLVIDABLE", "file": "lesson2.html"},
+        {"title": "UN MUNDO MEJOR", "file": "lesson3.html"},
+        {"title": "HABLANDO DEL FUTURO", "file": "lesson4.html"}
+    ],
+    "B1.2": [
+        {"title": "ENTRE NOSOTROS", "file": "lesson1.html"},
+        {"title": "NUESTRO PLANETA", "file": "lesson2.html"},
+        {"title": "¡CÁMARA, ACCIÓN!", "file": "lesson3.html"},
+        {"title": "BUENO Y SANO", "file": "lesson4.html"}
+    ],
+    "B1.3": [
+        {"title": "MENSAJES CON EFECTO", "file": "lesson1.html"},
+        {"title": "UN PASEO CULTURAL", "file": "lesson2.html"},
+        {"title": "DE AQUÍ PARA ALLÁ", "file": "lesson3.html"},
+        {"title": "UN MUNDO IMPRESIONANTE", "file": "lesson4.html"}
+    ],
+    "B2.1": [
+        {"title": "ASÍ HABLAMOS, ASÍ SOMOS", "file": "lesson1.html"},
+        {"title": "LA ESCUELA DE LA VIDA", "file": "lesson2.html"},
+        {"title": "NUEVOS MUNDOS LABORALES", "file": "lesson3.html"},
+        {"title": "¡QUÉ ILUSIÓN!", "file": "lesson4.html"}
+    ],
+    "B2.2": [
+        {"title": "PEGADOS AL MÓVIL", "file": "lesson1.html"},
+        {"title": "MENTE SANA EN CUERPO SANO", "file": "lesson2.html"},
+        {"title": "¡HOGAR, DULCE HOGAR!", "file": "lesson3.html"},
+        {"title": "A FLOR DE PIEL", "file": "lesson4.html"}
+    ],
+    "B2.3": [
+        {"title": "LUGARES ESPECIALES", "file": "lesson1.html"},
+        {"title": "ROMPIENDO ESQUEMAS", "file": "lesson2.html"},
+        {"title": "¡NO TE QUEJES TANTO!", "file": "lesson3.html"},
+        {"title": "MIRANDO HACIA ADELANTE", "file": "lesson4.html"}
+    ]
 }
 
-# 2. روابط جداول المذاكرة من GitHub حسب المستوى (بتتفتح في شاشة تانية)
-SCHEDULE_DATA = {
-    "A1.1": "https://yourusername.github.io/your-repo/schedules/a1_1.html",
-    "A1.2": "https://yourusername.github.io/your-repo/schedules/a1_2.html",
-    "A1.3": "https://yourusername.github.io/your-repo/schedules/a1_3.html",
-    "A2.1": "https://yourusername.github.io/your-repo/schedules/a2_1.html",
-    "A2.2": "https://yourusername.github.io/your-repo/schedules/a2_2.html",
-    "A2.3": "https://yourusername.github.io/your-repo/schedules/a2_3.html",
-    "B1.1": "https://yourusername.github.io/your-repo/schedules/b1_1.html",
-    "B1.2": "https://yourusername.github.io/your-repo/schedules/b1_2.html",
-    "B1.3": "https://yourusername.github.io/your-repo/schedules/b1_3.html",
-    "B2.1": "https://yourusername.github.io/your-repo/schedules/b2_1.html",
-    "B2.2": "https://yourusername.github.io/your-repo/schedules/b2_2.html",
-    "B2.3": "https://yourusername.github.io/your-repo/schedules/b2_3.html"
+# =====================================================================
+# [ 2. قاعدة بيانات التمارين - EXERCISES_DATA ]
+# =====================================================================
+EXERCISES_DATA = {
+    "A1.1": [
+        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
+        {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"},
+        {"title": "تمرين: TRABAJO AQUÍ", "file": "exercise3.html"},
+        {"title": "تمرين: ¡ME GUSTAN LAS TAPAS!", "file": "exercise4.html"}
+    ],
+    "A1.2": [
+        {"title": "تمرين: EN FAMILIA", "file": "exercise1.html"},
+        {"title": "تمرين: MI BARRIO", "file": "exercise2.html"},
+        {"title": "تمرين: MI DÍA A DÍA", "file": "exercise3.html"},
+        {"title": "تمرين: DE VACACIONES", "file": "exercise4.html"}
+    ],
+    "A1.3": [
+        {"title": "تمرين: COMPRAR Y COMER EN ALICANTE", "file": "exercise1.html"},
+        {"title": "تمرين: ¡BUEN FIN DE SEMANA!", "file": "exercise2.html"},
+        {"title": "تمرين: INTERCAMBIO DE CASA", "file": "exercise3.html"},
+        {"title": "تمرين: ESTA ES MI VIDA", "file": "exercise4.html"}
+    ],
+    "A2.1": [
+        {"title": "تمرين: NUEVA ETAPA", "file": "exercise1.html"},
+        {"title": "تمرين: PARA TI Y PARA MÍ", "file": "exercise2.html"},
+        {"title": "تمرين: UN AÑO ESPECIAL", "file": "exercise3.html"},
+        {"title": "تمرين: CON TUS MANOS", "file": "exercise4.html"}
+    ],
+    "A2.2": [
+        {"title": "تمرين: ¿CÓMO ERA ANTES?", "file": "exercise1.html"},
+        {"title": "تمرين: ¿Y QUÉ PASÓ?", "file": "exercise2.html"},
+        {"title": "تمرين: HOY COCINO YO", "file": "exercise3.html"},
+        {"title": "تمرين: ¡ME SIENTO BIEN!", "file": "exercise4.html"}
+    ],
+    "A2.3": [
+        {"title": "تمرين: TE INVITO", "file": "exercise1.html"},
+        {"title": "تمرين: UNA CIUDاد IDEAL", "file": "exercise1.html"},
+        {"title": "تمرين: NOSOTROS Y EL TRABAJO", "file": "exercise3.html"},
+        {"title": "تمرين: ¡ESTAMOS AL DÍA!", "file": "exercise4.html"}
+    ],
+    "B1.1": [
+        {"title": "تمرين: SEGUIMOS JUNTOS", "file": "exercise1.html"},
+        {"title": "تمرين: UN VIAJE INOLVIDABLE", "file": "exercise2.html"},
+        {"title": "تمرين: UN MUNDO MEJOR", "file": "exercise3.html"},
+        {"title": "تمرين: HABLANDO DEL FUTURO", "file": "exercise4.html"}
+    ],
+    "B1.2": [
+        {"title": "تمرين: ENTRE NOSOTROS", "file": "exercise1.html"},
+        {"title": "تمرين: NUESTRO PLANETA", "file": "exercise2.html"},
+        {"title": "تمرين: ¡CÁMARA, ACCIÓN!", "file": "exercise3.html"},
+        {"title": "تمرين: BUENO Y SANO", "file": "exercise4.html"}
+    ],
+    "B1.3": [
+        {"title": "تمرين: MENSAJES CON EFECTO", "file": "exercise1.html"},
+        {"title": "تمرين: UN PASEO CULTURAL", "file": "exercise2.html"},
+        {"title": "تمرين: DE AQUÍ PARA ALLÁ", "file": "exercise3.html"},
+        {"title": "تمرين: UN MUNDO IMPRESIONANTE", "file": "exercise4.html"}
+    ],
+    "B2.1": [
+        {"title": "تمرين: ASÍ HABLAMOS, ASÍ SOMOS", "file": "exercise1.html"},
+        {"title": "تمرين: LA ESCUELA DE LA VIDA", "file": "exercise2.html"},
+        {"title": "تمرين: NUEVOS MUNDOS LABORALES", "file": "exercise3.html"},
+        {"title": "تمرين: ¡QUÉ ILUSIÓN!", "file": "exercise4.html"}
+    ],
+    "B2.2": [
+        {"title": "تمرين: PEGADOS AL MÓVIL", "file": "exercise1.html"},
+        {"title": "تمرين: MENTE SANA EN CUERPO SANO", "file": "exercise2.html"},
+        {"title": "تمرين: ¡HOGAR, DULCE HOGAR!", "file": "exercise3.html"},
+        {"title": "تمرين: A FLOR DE PIEL", "file": "exercise4.html"}
+    ],
+    "B2.3": [
+        {"title": "تمرين: LUGARES ESPECIALES", "file": "exercise1.html"},
+        {"title": "تمرين: ROMPIENDO ESQUEMAS", "file": "exercise2.html"},
+        {"title": "تمرين: ¡NO TE QUEJES TANTO!", "file": "exercise3.html"},
+        {"title": "تمرين: MIRANDO HACIA ADELANTE", "file": "exercise4.html"}
+    ]
 }
 
-# 3. روابط الألعاب من GitHub حسب المستوى (بتتفتح في شاشة تانية)
+# =====================================================================
+# [ 3. قاعدة بيانات جداول المذاكرة - SCHEDULES_DATA ]
+# =====================================================================
+SCHEDULES_DATA = {
+    "A1.1": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A1.2": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A1.3": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A2.1": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A2.2": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A2.3": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.1": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.2": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.3": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.1": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.2": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.3": [
+        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
+    ]
+}
+
+# =====================================================================
+# [ 4. قاعدة بيانات الألعاب - GAMES_DATA ]
+# =====================================================================
 GAMES_DATA = {
-    "A1.1": "https://yourusername.github.io/your-repo/games/a1_1.html",
-    "A1.2": "https://yourusername.github.io/your-repo/games/a1_2.html",
-    "A1.3": "https://yourusername.github.io/your-repo/games/a1_3.html",
-    "A2.1": "/page/A2.1/juego-estudiante1.htm",
-    "A2.2": "https://yourusername.github.io/your-repo/games/a2_2.html",
-    "A2.3": "https://yourusername.github.io/your-repo/games/a2_3.html",
-    "B1.1": "https://yourusername.github.io/your-repo/games/b1_1.html",
-    "B1.2": "https://yourusername.github.io/your-repo/games/b1_2.html",
-    "B1.3": "https://yourusername.github.io/your-repo/games/b1_3.html",
-    "B2.1": "https://yourusername.github.io/your-repo/games/b2_1.html",
-    "B2.2": "https://yourusername.github.io/your-repo/games/b2_2.html",
-    "B2.3": "https://yourusername.github.io/your-repo/games/b2_3.html"
+    "A1.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A1.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A1.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "juego-estudiante1.htm"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ]
 }
 
-# 4. مكتبة فيديوهات اليوتيوب مقسمة تلقائياً حسب كل مستوى فرعي
+# =====================================================================
+# [ 5. الفيديوهات - VIDEOS_DATA ]
+# =====================================================================
 VIDEOS_DATA = {
     "A1.1": [
         {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
@@ -69,12 +339,10 @@ VIDEOS_DATA = {
         {"title": "الأفعال الروتينية اليومية وتصريفها", "youtube_id": "dQw4w9WgXcQ"}
     ],
     "A1.3": [
-        {"title": "كيف تتسوق وتطلب الطعام داخل المطعم", "youtube_id": "dQw4w9WgXcQ"},
-        {"title": "وصف الأماكن والاتجاهات داخل المدينة", "youtube_id": "dQw4w9WgXcQ"}
+        {"title": "كيف تتسوق وتطلب الطعام داخل المطعم", "youtube_id": "dQw4w9WgXcQ"}
     ],
     "A2.1": [
-        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
-        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
+        {"title": "الفرق بين زمني الماضي المتصل والمنفصل", "youtube_id": "dQw4w9WgXcQ"}
     ],
     "A2.2": [
         {"title": "استخدامات زمن الماضي المستمر لوصف الطفولة", "youtube_id": "dQw4w9WgXcQ"}
@@ -102,71 +370,27 @@ VIDEOS_DATA = {
     ]
 }
 
-# 5. مواضيع عجلة التحدث مخصصة لكل مستوى
+# =====================================================================
+# [ 6. عجلة التحدث - WHEEL_TOPICS ]
+# =====================================================================
 WHEEL_TOPICS = {
-    "A1.1": [
-        "قدم نفسك بالكامل (الاسم، العمر، الجنسية، ومكان السكن).",
-        "تحدث عن الألوان والأسماء المفضلة لديك داخل غرفتك.",
-        "اذكر خمسة أشياء تستخدمها يومياً في حقيبتك أو فصلك الدراسي."
-    ],
-    "A1.2": [
-        "صف عائلتك (عدد الأفراد، وظائفهم، وأشكالهم).",
-        "تحدث بالتفصيل عن روتينك الصباحي من وقت الاستيقاظ.",
-        "ما هو طعامك المفضل؟ واذكر المكونات الأساسية له بالأسبانية."
-    ],
-    "A1.3": [
-        "تخيل أنك في السوبرماركت، تحدث عن المنتجات التي تشتريها.",
-        "صف مدينتك الحالية وما هي الأماكن المفضلة للزوار فيها.",
-        "كيف تقضي عطلة نهاية الأسبوع النموذجية بالنسبة لك؟"
-    ],
-    "A2.1": [
-        "تحدث عن الهواية المفضلة التي بدأت ممارستها مؤخراً ولماذا اخترتها.",
-        "صف أعز أصدقائك واذكر الموقف الذي جمعكم أول مرة.",
-        "تحدث عما فعلته في عطلة الأسبوع الماضي بالكامل باستخدام زمن الماضي."
-    ],
-    "A2.2": [
-        "احكِ لنا كيف كانت حياتك وشكلك في مرحلة الطفولة وزمن المدرسة.",
-        "تحدث عن وصفة طبخ أعددتها بنفسك سابقاً واشرح خطواتها.",
-        "ماذا تفعل عندما تشعر بالمرض أو التعب؟ صف تجربة سابقة."
-    ],
-    "A2.3": [
-        "وجه دعوة لصديق لزيارة مكان ما واقترح عليه الأنشطة والوقت المحتمل.",
-        "صف ملامح مدينتك المثالية التي تتمنى العيش فيها في المستقبل.",
-        "تحدث عن وظيفة أحلامك وما هي المهارات المطلوبة للعمل بها."
-    ],
-    "B1.1": [
-        "احكِ لنا عن رحلة مميزة قمت بها ولا يمكن أن تنساها أبدًا.",
-        "ما هي خططك وطموحاتك الشخصية والمهنية للسنوات الثلاث القادمة؟",
-        "تحدث عن فيلم سينمائي أو كتاب قرأته مؤخراً واشرح فكرته الأساسية."
-    ],
-    "B1.2": [
-        "تحدث عن إيجابيات وسلبيات وسائل التواصل الاجتماعي وتأثيرها علينا.",
-        "ما هو أسلوب الحياة الصحي من وجهة نظرك؟ واذكر عاداتك اليومية.",
-        "كيف يمكن للأفراد المساهمة في حماية كوكب الأرض من التلوث؟"
-    ],
-    "B1.3": [
-        "تحدث عن أهمية الفنون والموسيقى وتأثيرها في ثقافات الشعوب المختلفة.",
-        "احكِ عن تجربة شخصية صعبة مررت بها وكيف تغلبت عليها بنجاح.",
-        "عبر عن رأيك الشخصي حول التعليم عن بُعد مقارنة بالتعليم التقليدي."
-    ],
-    "B2.1": [
-        "كيف تطورت شخصيتك وأفكارك مقارنة بما كنت عليه قبل خمس سنوات؟",
-        "ما هي أهم التحديات التي تواجه الشباب في سوق العمل المعاصر؟",
-        "تحدث عن مفهوم النجاح الشخصي وكيف تقيسه في حياتك."
-    ],
-    "B2.2": [
-        "ناقش ظاهرة إدمان الهواتف الذكية وكيف تؤثر على الترابط الأسري.",
-        "ما هي برأيك أفضل الطرق للحفاظ على التوازن بين الصحة النفسية والجسدية؟",
-        "احكِ عن موقف حرج جداً واجهته وكيف تداركت الأمر بذكاء."
-    ],
-    "B2.3": [
-        "تحدث عن مكان استثنائي وغريب زرته أو قرأت عنه وتمنيت الذهاب إليه.",
-        "عبر عن تطلعاتك المستقبلية طويلة المدى ودور لغة الإسبانية في تحقيقها.",
-        "كيف تتعامل مع المشكلات والشكاوى اليومية في محيط العمل أو الدراسة؟"
-    ]
+    "A1.1": ["قدم نفسك بالكامل.", "تحدث عن الألوان المفضلة لديك.", "اذكر أشياء تستخدمها يومياً."],
+    "A1.2": ["صف عائلتك.", "تحدث عن روتينك الصباحي.", "ما هو طعامك المفضل؟"],
+    "A1.3": ["تخيل أنك في السوبرماركت.", "صف مدينتك الحالية.", "كيف تقضي عطلة نهاية الأسبوع؟"],
+    "A2.1": ["تحدث عن هواية جديدة.", "صف أعز أصدقائك.", "تحدث عما فعلته في عطلة الأسبوع الماضي."],
+    "A2.2": ["احكِ لنا كيف كانت مرحلة طفولتك.", "اشرح وصفة طبخ.", "ماذا تفعل عندما تشعر بالمرض؟"],
+    "A2.3": ["وجه دعوة لصديق.", "صف ملامح مدينتك المثالية.", "تحدث عن وظيفة أحلامك."],
+    "B1.1": ["احكِ لنا عن رحلة مميزة.", "ما هي خططك المستقبلية؟", "تحدث عن فيلم أثر فيك."],
+    "B1.2": ["إيجابيات وسلبيات السوشيال ميديا.", "ما هو أسلوب الحياة الصحي؟", "كيف نحمي كوكب الأرض؟"],
+    "B1.3": ["أهمية الفنون والموسيقى.", "احكِ عن تجربة شخصية صعبة.", "رأيك في التعليم عن بُعد."],
+    "B2.1": ["كيف تطورت شخصيتك؟", "تحديات الشباب في سوق العمل.", "مفهوم النجاح الشخصي."],
+    "B2.2": ["إدمان الهواتف الذكية.", "الحفاظ على الصحة النفسية.", "احكِ عن موقف حرج وكيف تعاملت معه."],
+    "B2.3": ["مكان استثنائي تمنيت زيارته.", "تطلعاتك المهنية الطويلة.", "التعامل مع مشكلات العمل."]
 }
 
-# 6. الجمل التحفيزية
+# =====================================================================
+# [ 7. الجمل التحفيزية ]
+# =====================================================================
 motivation_quotes = [
     "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
     "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!",
@@ -463,83 +687,80 @@ DASHBOARD_HTML = """
         <nav class="tabs-nav">
             <button class="tab-trigger active" onclick="switchTab(event, 'lectures-tab')"><i class="fa-solid fa-video"></i> المحاضرات والشرح</button>
             <button class="tab-trigger" onclick="switchTab(event, 'exercises-tab')"><i class="fa-solid fa-pen-ruler"></i> التمارين والتقييم</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')"><i class="fa-solid fa-calendar-days"></i> جدول المذاكرة</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')"><i class="fa-solid fa-calendar-days"></i> جداول المذاكرة</button>
             <button class="tab-trigger" onclick="switchTab(event, 'games-tab')"><i class="fa-solid fa-gamepad"></i> الألعاب</button>
             <button class="tab-trigger" onclick="switchTab(event, 'videos-tab')"><i class="fa-brands fa-youtube"></i> الفيديوهات</button>
             <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> عجلة التحدث</button>
         </nav>
 
-        <!-- 1. تبويب المحاضرات -->
         <div id="lectures-tab" class="tab-content active">
             <div class="cards-grid">
-                {% for lesson in lessons %}
+                {% for lesson in lessons_list %}
                 <div class="course-card">
                     <div class="card-header">
                         <span class="lesson-number">Unidad {{ loop.index }}</span>
                         <i class="fa-solid fa-book-open" style="color: #888;"></i>
                     </div>
                     <div class="card-body">
-                        <h4>{{ lesson }}</h4>
-                        <a href="/page/{{ student.level }}/lesson{{ loop.index }}.html" class="card-action-btn btn-lecture">ابدأ الشرح <i class="fa-solid fa-play-circle"></i></a>
+                        <h4>{{ lesson.title }}</h4>
+                        <a href="/page/{{ student.level }}/{{ lesson.file }}" class="card-action-btn btn-lecture">ابدأ الشرح <i class="fa-solid fa-play-circle"></i></a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- 2. تبويب التمارين -->
         <div id="exercises-tab" class="tab-content">
             <div class="cards-grid">
-                {% for lesson in lessons %}
+                {% for exercise in exercises_list %}
                 <div class="course-card">
                     <div class="card-header">
                         <span class="lesson-number" style="color: var(--secondary);">Ejercicio {{ loop.index }}</span>
                         <i class="fa-solid fa-star" style="color: var(--accent);"></i>
                     </div>
                     <div class="card-body">
-                        <h4>{{ lesson }}</h4>
-                        <a href="/page/{{ student.level }}/exercise{{ loop.index }}.html" class="card-action-btn btn-exercise">ابدأ التمرين <i class="fa-solid fa-pencil"></i></a>
+                        <h4>{{ exercise.title }}</h4>
+                        <a href="/page/{{ student.level }}/{{ exercise.file }}" class="card-action-btn btn-exercise">ابدأ التمرين <i class="fa-solid fa-pencil"></i></a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- 3. تبويب جدول المذاكرة (يفتح في صفحة جديدة) -->
         <div id="schedule-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-calendar-check"></i> خطتك الأسبوعية للمذاكرة</h3>
             <div class="cards-grid">
+                {% for schedule in schedules_list %}
                 <div class="course-card">
-                    <div class="card-header" style="justify-content: center; background: #f8fafc; padding: 30px;">
-                        <i class="fa-solid fa-calendar-days" style="font-size: 50px; color: var(--secondary);"></i>
+                    <div class="card-header" style="background: #f8fafc;">
+                        <span class="lesson-number" style="color: var(--secondary); background: rgba(0,140,186,0.1);">الجدول {{ loop.index }}</span>
+                        <i class="fa-solid fa-calendar-days" style="color: var(--secondary);"></i>
                     </div>
                     <div class="card-body">
-                        <h4>جدول المذاكرة لمستوى {{ student.level }}</h4>
-                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">اضغط هنا عشان تفتح الخطة الأسبوعية الخاصة بمستواك في صفحة جديدة.</p>
-                        <a href="{{ schedule_url }}" target="_blank" class="card-action-btn" style="background: var(--secondary); color: white;">افتح الجدول <i class="fa-solid fa-external-link-alt"></i></a>
+                        <h4>{{ schedule.title }}</h4>
+                        <a href="/page/{{ student.level }}/{{ schedule.file }}" target="_blank" class="card-action-btn" style="background: var(--secondary); color: white;">افتح الجدول <i class="fa-solid fa-external-link-alt"></i></a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- 4. تبويب الألعاب (يفتح في صفحة جديدة) -->
         <div id="games-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-puzzle-piece"></i> العب واتعلم</h3>
             <div class="cards-grid">
+                {% for game in games_list %}
                 <div class="course-card">
-                    <div class="card-header" style="justify-content: center; background: #f8fafc; padding: 30px;">
-                        <i class="fa-solid fa-gamepad" style="font-size: 50px; color: #2ecc71;"></i>
+                    <div class="card-header" style="background: #f8fafc;">
+                        <span class="lesson-number" style="color: #2ecc71; background: rgba(46,204,113,0.1);">لعبة {{ loop.index }}</span>
+                        <i class="fa-solid fa-gamepad" style="color: #2ecc71;"></i>
                     </div>
                     <div class="card-body">
-                        <h4>ألعاب وتدريبات مستوى {{ student.level }}</h4>
-                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">استمتع بالتدريبات التفاعلية والأنشطة الممتعة الخاصة بمستواك، اضغط لتفتحها في صفحة جديدة.</p>
-                        <a href="{{ game_url }}" target="_blank" class="card-action-btn" style="background: #2ecc71; color: white;">ادخل العب <i class="fa-solid fa-external-link-alt"></i></a>
+                        <h4>{{ game.title }}</h4>
+                        <a href="/page/{{ student.level }}/{{ game.file }}" target="_blank" class="card-action-btn" style="background: #2ecc71; color: white;">ادخل العب <i class="fa-solid fa-external-link-alt"></i></a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- 5. تبويب الفيديوهات -->
         <div id="videos-tab" class="tab-content">
             <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الشروحات المرئية لمستوى {{ student.level }}</h3>
             <div class="cards-grid">
@@ -554,7 +775,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- 6. تبويب عجلة التحدث -->
         <div id="wheel-tab" class="tab-content">
             <div class="wheel-box">
                 <h3 style="color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-microphone-lines"></i> عجلة التحدث والطلاقة</h3>
@@ -647,6 +867,7 @@ def login():
         password = request.form['password']
         student = get_student_data(username, password)
         if student:
+            session.permanent = True 
             session['user'] = student
             return redirect(url_for('dashboard'))
         else:
@@ -661,26 +882,28 @@ def dashboard():
     student = session['user']
     level = student['level']
     
-    level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
+    # جلب القوائم المخصصة والمستقلة بناءً على مستوى الطالب
+    student_lessons = LESSONS_DATA.get(level, [{"title": "درس غير متوفر", "file": "error.html"}])
+    student_exercises = EXERCISES_DATA.get(level, [{"title": "تمرين غير متوفر", "file": "error.html"}])
+    student_schedules = SCHEDULES_DATA.get(level, [{"title": "جدول غير متوفر", "file": "error.html"}])
+    student_games = GAMES_DATA.get(level, [{"title": "لعبة غير متوفرة", "file": "error.html"}])
     
-    student_schedule_url = SCHEDULE_DATA.get(level, "https://yourusername.github.io/your-repo/schedules/default.html")
-    student_game_url = GAMES_DATA.get(level, "https://yourusername.github.io/your-repo/games/default.html")
-    
-    student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي بالمستوى", "youtube_id": "dQw4w9WgXcQ"}])
+    student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي", "youtube_id": "dQw4w9WgXcQ"}])
     
     random_quote = random.choice(motivation_quotes)
     
-    student_wheel_topics = WHEEL_TOPICS.get(level, ["تحدث عن مهاراتك اللغوية الحالية."])
+    student_wheel_topics = WHEEL_TOPICS.get(level, ["تحدث عن مهاراتك."])
     topics_json = json.dumps(student_wheel_topics, ensure_ascii=False)
     
     return render_template_string(
         DASHBOARD_HTML, 
         student=student, 
-        lessons=level_lessons, 
+        lessons_list=student_lessons, 
+        exercises_list=student_exercises,
+        schedules_list=student_schedules,
+        games_list=student_games,
         quote=random_quote,
         topics_json=topics_json,
-        schedule_url=student_schedule_url,
-        game_url=student_game_url,
         videos_list=student_videos
     )
 
