@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Amigos - Unidad 1: Nueva Etapa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --secondary: #f39c12;
+            --secondary-dark: #e67e22;
+            --accent: #27ae60;
+            --accent-dark: #219a52;
+            --blue: #3498db;
+            --blue-dark: #2980b9;
+            --purple: #9b59b6;
+            --purple-dark: #8e44ad;
+            --teal: #1abc9c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --error: #e74c3c;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .header-title h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-title p {
+            font-size: 0.85em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .score-display {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lives-display {
+            font-size: 1.2em;
+        }
+
+        .home-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 35px;
+            color: white;
+        }
+
+        .dashboard-header h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .unit-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+        }
+
+        .game-card:nth-child(1)::before { background: var(--primary); }
+        .game-card:nth-child(2)::before { background: var(--blue); }
+        .game-card:nth-child(3)::before { background: var(--accent); }
+        .game-card:nth-child(4)::before { background: var(--purple); }
+        .game-card:nth-child(5)::before { background: var(--secondary); }
+        .game-card:nth-child(6)::before { background: var(--teal); }
+        .game-card:nth-child(7)::before { background: var(--primary-dark); }
+        .game-card:nth-child(8)::before { background: var(--blue-dark); }
+
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .game-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .game-card:nth-child(1) .game-icon { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .game-card:nth-child(2) .game-icon { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .game-card:nth-child(3) .game-icon { background: linear-gradient(135deg, #55efc4, #00b894); }
+        .game-card:nth-child(4) .game-icon { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .game-card:nth-child(5) .game-icon { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        .game-card:nth-child(6) .game-icon { background: linear-gradient(135deg, #81ecec, #00cec9); }
+        .game-card:nth-child(7) .game-icon { background: linear-gradient(135deg, #fab1a0, #e74c3c); }
+        .game-card:nth-child(8) .game-icon { background: linear-gradient(135deg, #dfe6e9, #636e72); }
+
+        .game-card h3 {
+            font-size: 1.15em;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .game-card p {
+            font-size: 0.85em;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .game-tag {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.72em;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .tag-grammar { background: #ffeaa7; color: #d35400; }
+        .tag-vocab { background: #dfe6e9; color: #2d3436; }
+        .tag-reading { background: #c8e6c9; color: #2e7d32; }
+        .tag-conversation { background: #e1bee7; color: #7b1fa2; }
+        .tag-game { background: #bbdefb; color: #1565c0; }
+
+        /* Game Container */
+        .game-container {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px 15px;
+        }
+
+        .game-container.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-box {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .game-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6em;
+            margin-bottom: 5px;
+        }
+
+        .game-subtitle {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .game-progress {
+            background: var(--light);
+            border-radius: 10px;
+            height: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .game-progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--teal));
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .question-counter {
+            text-align: right;
+            font-weight: 700;
+            color: var(--gray);
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .instruction-box {
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .instruction-box span { font-size: 1.4em; }
+
+        .options-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: var(--light);
+            border: 3px solid transparent;
+            padding: 14px 18px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: left;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--blue);
+            background: #ebf5fb;
+            transform: translateX(5px);
+        }
+
+        .option-btn.correct {
+            background: #d5f5e3;
+            border-color: var(--success);
+            animation: pulse 0.5s;
+        }
+
+        .option-btn.wrong {
+            background: #fadbd8;
+            border-color: var(--error);
+            animation: shake 0.5s;
+        }
+
+        .option-letter {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .fill-blank-input {
+            border: 3px solid var(--light);
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 1em;
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            max-width: 400px;
+            font-weight: 600;
+            transition: border-color 0.3s;
+        }
+
+        .fill-blank-input:focus { outline: none; border-color: var(--blue); }
+        .fill-blank-input.correct { border-color: var(--success); background: #d5f5e3; }
+        .fill-blank-input.wrong { border-color: var(--error); background: #fadbd8; }
+
+        .check-btn, .next-btn, .restart-btn, .back-dashboard-btn {
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s;
+            margin-top: 12px;
+            margin-right: 8px;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: white;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            display: none;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .back-dashboard-btn {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: white;
+        }
+
+        .check-btn:hover, .next-btn:hover, .restart-btn:hover, .back-dashboard-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: none;
+            font-size: 0.95em;
+        }
+
+        .feedback.show { display: block; animation: fadeInUp 0.3s; }
+        .feedback.correct { background: #d5f5e3; color: #27ae60; }
+        .feedback.wrong { background: #fadbd8; color: #e74c3c; }
+
+        .grammar-tip {
+            background: linear-gradient(135deg, #fdcb6e, #f39c12);
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 0.9em;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .grammar-tip.show { display: block; animation: fadeInUp 0.3s; }
+
+        /* Memory Card Game */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            border-radius: 14px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            min-height: 90px;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched .card-front,
+        .memory-card.matched .card-back {
+            box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.3;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 2em;
+        }
+
+        .card-back {
+            background: white;
+            border: 3px solid var(--light);
+            transform: rotateY(180deg);
+            color: var(--dark);
+        }
+
+        .card-back.es {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-color: var(--secondary);
+        }
+
+        .card-back.ar {
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            border-color: var(--gray);
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .memory-stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .memory-stat {
+            background: var(--light);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+        }
+
+        /* Wheel Spinner */
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .wheel-canvas {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 6px solid var(--dark);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .spin-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(231,76,60,0.4);
+        }
+
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(231,76,60,0.5);
+        }
+
+        .spin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .wheel-question-box {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Falling Words Game */
+        .falling-game-area {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg, #2c3e50, #34495e);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .falling-word {
+            position: absolute;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 5;
+            font-size: 0.95em;
+        }
+
+        .falling-word:hover {
+            transform: scale(1.15);
+        }
+
+        .falling-word.spanish {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: white;
+        }
+
+        .falling-prompt {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            padding: 12px 25px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.1em;
+            z-index: 10;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+
+        .falling-score {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            z-index: 10;
+        }
+
+        .falling-timer {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            z-index: 10;
+        }
+
+        /* Snake-like word chase */
+        .word-grid-game {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 500px;
+            margin: 0 auto 15px;
+        }
+
+        .word-grid-cell {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--light);
+            border: 2px solid transparent;
+        }
+
+        .word-grid-cell:hover {
+            transform: scale(1.05);
+            border-color: var(--blue);
+        }
+
+        .word-grid-cell.correct-cell {
+            background: #d5f5e3;
+            border-color: var(--success);
+            animation: pulse 0.5s;
+        }
+
+        .word-grid-cell.wrong-cell {
+            background: #fadbd8;
+            border-color: var(--error);
+            animation: shake 0.5s;
+        }
+
+        /* Reading text */
+        .reading-text {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 22px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 0.95em;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .reading-text .author {
+            font-weight: 800;
+            margin-top: 8px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        /* Chat */
+        .chat-container {
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 18px;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.5;
+            animation: fadeInUp 0.3s;
+            font-size: 0.95em;
+        }
+
+        .chat-bubble.bot {
+            background: white;
+            border-bottom-left-radius: 5px;
+            margin-right: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .chat-bubble.user {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: white;
+            border-bottom-right-radius: 5px;
+            margin-left: auto;
+        }
+
+        .chat-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-option {
+            background: white;
+            border: 2px solid var(--light);
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
+            text-align: left;
+        }
+
+        .chat-option:hover {
+            border-color: var(--blue);
+            background: #ebf5fb;
+            transform: translateX(5px);
+        }
+
+        .chat-option.correct { background: #d5f5e3; border-color: var(--success); }
+        .chat-option.wrong { background: #fadbd8; border-color: var(--error); }
+
+        /* Results */
+        .results-container {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .results-emoji { font-size: 70px; margin-bottom: 12px; }
+        .results-title { font-family: 'Fredoka One', cursive; font-size: 1.8em; margin-bottom: 8px; }
+        .results-score { font-size: 1.4em; font-weight: 700; margin-bottom: 8px; }
+        .results-stars { font-size: 35px; margin-bottom: 15px; }
+        .results-message { font-size: 1em; color: var(--gray); margin-bottom: 20px; }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confetti-fall linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Sentence unscramble */
+        .scramble-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .scramble-word {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .scramble-word:hover { transform: scale(1.08); }
+        .scramble-word.used { opacity: 0.25; cursor: default; pointer-events: none; }
+
+        .scramble-area {
+            min-height: 55px;
+            background: var(--light);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+            border: 3px dashed var(--gray);
+        }
+
+        .built-word {
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .built-word:hover { background: var(--error); }
+
+        /* Timer bar */
+        .timer-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .timer-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--error));
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+
+        @media (max-width: 768px) {
+            .header { flex-direction: column; gap: 8px; }
+            .header-title h1 { font-size: 1.2em; }
+            .games-grid { grid-template-columns: 1fr; }
+            .game-box { padding: 20px; }
+            .game-title { font-size: 1.3em; }
+            .dashboard-header h2 { font-size: 1.6em; }
+            .memory-grid { grid-template-columns: repeat(3, 1fr); }
+            .card-front { font-size: 1.5em; }
+            .card-back { font-size: 0.75em; }
+            .wheel-wrapper, .wheel-canvas { width: 250px; height: 250px; }
+            .falling-game-area { height: 300px; }
+            .word-grid-game { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .memory-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .memory-card { min-height: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left">
+        <div class="logo">IA</div>
+        <div class="header-title">
+            <h1>Instituto Amigos</h1>
+            <p>Unidad 1 — Nueva Etapa 🇪🇸</p>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="score-display">⭐ <span id="totalScore">0</span></div>
+        <div class="score-display lives-display" id="livesDisplay">❤️❤️❤️</div>
+        <button class="home-btn" onclick="showDashboard()">🏠 Inicio</button>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+    <div class="dashboard-header">
+        <div class="unit-badge">📚 UNIDAD 1</div>
+        <h2>¡Bienvenido a Nueva Etapa!</h2>
+        <p>Elige un juego interactivo para practicar 🎮</p>
+    </div>
+    <div class="games-grid">
+        <div class="game-card" onclick="startGame('game1')">
+            <div class="game-icon">🎰</div>
+            <h3>Ruleta de Verbos</h3>
+            <p>¡Gira la ruleta y conjuga el verbo irregular que te toque!</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-grammar">Gramática</span>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+            <div class="game-icon">⏱️</div>
+            <h3>Desde vs Desde hace</h3>
+            <p>¡Contrarreloj! Elige rápido entre "desde" y "desde hace".</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-grammar">Gramática</span>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+            <div class="game-icon">🧩</div>
+            <h3>Rompecabezas: Gustar</h3>
+            <p>Ordena las palabras para formar frases con gustar, costar, aburrir...</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-grammar">Gramática</span>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+            <div class="game-icon">🕵️</div>
+            <h3>Detective de Lectura</h3>
+            <p>Lee los textos de Paul y Jessica y encuentra las respuestas correctas.</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-reading">Lectura</span>
+        </div>
+        <div class="game-card" onclick="startGame('game5')">
+            <div class="game-icon">🃏</div>
+            <h3>Memoria</h3>
+            <p>Dale la vuelta a las tarjetas y relaciona la palabra en español con su significado en árabe!</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-vocab">Vocabulario</span>
+        </div>
+        <div class="game-card" onclick="startGame('game6')">
+            <div class="game-icon">💊</div>
+            <h3>Doctor de Consejos</h3>
+            <p>Los estudiantes tienen problemas. ¡Dales el mejor consejo!</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-conversation">Conversación</span>
+        </div>
+        <div class="game-card" onclick="startGame('game7')">
+            <div class="game-icon">🎯</div>
+            <h3>Diana del Perfecto</h3>
+            <p>¡Acierta la conjugación del pretérito perfecto y gana puntos!</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-grammar">Gramática</span>
+        </div>
+        <div class="game-card" onclick="startGame('game8')">
+            <div class="game-icon">🎭</div>
+            <h3>Rol: Primer Día</h3>
+            <p>Simula tu primer día de clase. ¡Conversa y haz amigos!</p>
+            <span class="game-tag tag-game">Juego</span>
+            <span class="game-tag tag-conversation">Conversación</span>
+        </div>
+    </div>
+</div>
+
+<!-- Game containers -->
+<div class="game-container" id="game1"><div class="game-box">
+    <div class="game-title">🎰 Ruleta de Verbos Irregulares</div>
+    <div class="game-subtitle">Gira la ruleta y conjuga el verbo</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress1"></div></div>
+    <div id="game1-content"></div>
+</div></div>
+
+<div class="game-container" id="game2"><div class="game-box">
+    <div class="game-title">⏱️ Desde vs Desde hace - ¡Rápido!</div>
+    <div class="game-subtitle">Elige la opción correcta antes de que se acabe el tiempo</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress2"></div></div>
+    <div class="timer-bar-container"><div class="timer-bar" id="timer2"></div></div>
+    <div class="question-counter" id="counter2"></div>
+    <div id="game2-content"></div>
+</div></div>
+
+<div class="game-container" id="game3"><div class="game-box">
+    <div class="game-title">🧩 Rompecabezas: Frases con Gustar</div>
+    <div class="game-subtitle">Ordena las palabras para formar la frase correcta</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress3"></div></div>
+    <div class="question-counter" id="counter3"></div>
+    <div id="game3-content"></div>
+</div></div>
+
+<div class="game-container" id="game4"><div class="game-box">
+    <div class="game-title">🕵️ Detective de Lectura</div>
+    <div class="game-subtitle">Lee con atención y encuentra la verdad</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress4"></div></div>
+    <div class="question-counter" id="counter4"></div>
+    <div id="game4-content"></div>
+</div></div>
+
+<div class="game-container" id="game5"><div class="game-box">
+    <div class="game-title">🃏 Tarjetas de Memoria</div>
+    <div class="game-subtitle">Relaciona la palabra en español con su significado en árabe.</div>
+    <div id="game5-content"></div>
+</div></div>
+
+<div class="game-container" id="game6"><div class="game-box">
+    <div class="game-title">💊 Doctor de Consejos</div>
+    <div class="game-subtitle">Cada paciente tiene un problema. ¡Dale el mejor consejo!</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress6"></div></div>
+    <div class="question-counter" id="counter6"></div>
+    <div id="game6-content"></div>
+</div></div>
+
+<div class="game-container" id="game7"><div class="game-box">
+    <div class="game-title">🎯 Diana del Pretérito Perfecto</div>
+    <div class="game-subtitle">Conjuga correctamente para dar en el centro de la diana</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress7"></div></div>
+    <div class="question-counter" id="counter7"></div>
+    <div id="game7-content"></div>
+</div></div>
+
+<div class="game-container" id="game8"><div class="game-box">
+    <div class="game-title">🎭 Rol: Primer Día de Clase</div>
+    <div class="game-subtitle">Simula una conversación real en tu primer día</div>
+    <div class="game-progress"><div class="game-progress-bar" id="progress8"></div></div>
+    <div id="game8-content"></div>
+</div></div>
+
+<div class="confetti-container" id="confetti-container"></div>
+
+<script>
+let totalScore = 0;
+let totalLives = 3;
+let gameStates = {};
+let timerIntervals = {};
+
+function updateScore(pts) {
+    totalScore += pts;
+    document.getElementById('totalScore').textContent = totalScore;
+}
+
+function updateLives(n) {
+    totalLives = Math.max(0, Math.min(5, n));
+    document.getElementById('livesDisplay').textContent = '❤️'.repeat(totalLives) + (totalLives < 3 ? '🖤'.repeat(3 - totalLives) : '');
+}
+
+function showDashboard() {
+    Object.values(timerIntervals).forEach(id => clearInterval(id));
+    timerIntervals = {};
+    document.getElementById('dashboard').style.display = 'block';
+    document.querySelectorAll('.game-container').forEach(g => g.classList.remove('active'));
+    totalLives = 3;
+    updateLives(3);
+}
+
+function startGame(id) {
+    document.getElementById('dashboard').style.display = 'none';
+    document.querySelectorAll('.game-container').forEach(g => g.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    totalLives = 3;
+    updateLives(3);
+
+    const inits = { game1: initGame1, game2: initGame2, game3: initGame3, game4: initGame4, game5: initGame5, game6: initGame6, game7: initGame7, game8: initGame8 };
+    inits[id]();
+}
+
+function showConfetti() {
+    const c = document.getElementById('confetti-container');
+    c.innerHTML = '';
+    const cols = ['#e74c3c','#f39c12','#27ae60','#3498db','#9b59b6','#1abc9c','#e91e63','#ff9800'];
+    for (let i = 0; i < 80; i++) {
+        const d = document.createElement('div');
+        d.className = 'confetti';
+        d.style.left = Math.random()*100+'%';
+        d.style.backgroundColor = cols[Math.floor(Math.random()*cols.length)];
+        d.style.animationDuration = (Math.random()*2+1.5)+'s';
+        d.style.animationDelay = Math.random()*1.5+'s';
+        d.style.width = (Math.random()*8+5)+'px';
+        d.style.height = (Math.random()*8+5)+'px';
+        c.appendChild(d);
+    }
+    setTimeout(() => c.innerHTML = '', 4000);
+}
+
+function showResults(containerId, correct, total, gameKey) {
+    const pct = Math.round((correct/total)*100);
+    let emoji, msg, stars;
+    if (pct >= 90) { emoji='🏆'; msg='¡Excelente! ¡Eres un/a crack!'; stars='⭐⭐⭐'; showConfetti(); }
+    else if (pct >= 70) { emoji='🎉'; msg='¡Muy bien! Estás progresando mucho.'; stars='⭐⭐'; }
+    else if (pct >= 50) { emoji='💪'; msg='¡Buen intento! Sigue practicando.'; stars='⭐'; }
+    else { emoji='📚'; msg='Necesitas repasar. ¡Tú puedes!'; stars=''; }
+    updateScore(correct * 10);
+    document.getElementById(containerId).innerHTML = `
+        <div class="results-container">
+            <div class="results-emoji">${emoji}</div>
+            <div class="results-title">¡Juego completado!</div>
+            <div class="results-score">${correct} / ${total} (${pct}%)</div>
+            <div class="results-stars">${stars}</div>
+            <div class="results-message">${msg}</div>
+            <button class="restart-btn" onclick="startGame('${gameKey}')">🔄 Jugar de nuevo</button>
+            <button class="back-dashboard-btn" onclick="showDashboard()">🏠 Inicio</button>
+        </div>`;
+}
+
+// ============ GAME 1: Wheel of Verbs ============
+function initGame1() {
+    const verbs = [
+        { inf: 'salir', person: 'yo', answer: 'salgo', color: '#e74c3c' },
+        { inf: 'hacer', person: 'yo', answer: 'hago', color: '#3498db' },
+        { inf: 'poner', person: 'yo', answer: 'pongo', color: '#27ae60' },
+        { inf: 'saber', person: 'yo', answer: 'sé', color: '#9b59b6' },
+        { inf: 'reconocer', person: 'yo', answer: 'reconozco', color: '#f39c12' },
+        { inf: 'dar', person: 'yo', answer: 'doy', color: '#1abc9c' },
+        { inf: 'entender', person: 'ella', answer: 'entiende', color: '#e91e63' },
+        { inf: 'soñar', person: 'él', answer: 'sueña', color: '#ff5722' },
+        { inf: 'pedir', person: 'nosotros', answer: 'pedimos', color: '#607d8b' },
+        { inf: 'conducir', person: 'yo', answer: 'conduzco', color: '#795548' },
+    ];
+
+    gameStates.game1 = { verbs, current: 0, correct: 0, spinning: false };
+    const content = document.getElementById('game1-content');
+    content.innerHTML = `
+        <div class="wheel-container">
+            <div class="wheel-wrapper">
+                <div class="wheel-pointer">🔽</div>
+                <canvas class="wheel-canvas" id="wheelCanvas" width="300" height="300"></canvas>
+            </div>
+            <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 ¡GIRAR!</button>
+            <div class="wheel-question-box" id="wheelQuestion">
+                <p style="color:var(--gray);font-weight:700;">¡Gira la ruleta para empezar!</p>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+        <div style="text-align:center;margin-top:10px;font-weight:700;color:var(--gray);" id="wheelScore">Aciertos: 0 / ${verbs.length}</div>
+    `;
+    drawWheel();
+}
+
+function drawWheel() {
+    const canvas = document.getElementById('wheelCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const verbs = gameStates.game1.verbs;
+    const sliceAngle = (2 * Math.PI) / verbs.length;
+    const cx = 150, cy = 150, r = 145;
+
+    verbs.forEach((v, i) => {
+        const start = i * sliceAngle;
+        const end = start + sliceAngle;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, start, end);
+        ctx.fillStyle = v.color;
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(start + sliceAngle / 2);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 12px Nunito';
+        ctx.textAlign = 'center';
+        ctx.fillText(v.inf.toUpperCase(), r * 0.65, 5);
+        ctx.restore();
+    });
+}
+
+function spinWheel() {
+    const state = gameStates.game1;
+    if (state.spinning || state.current >= state.verbs.length) return;
+    state.spinning = true;
+    document.getElementById('spinBtn').disabled = true;
+
+    const canvas = document.getElementById('wheelCanvas');
+    const totalSpins = 3 + Math.random() * 3;
+    const targetIndex = state.current;
+    const sliceAngle = 360 / state.verbs.length;
+    const targetAngle = totalSpins * 360 + (360 - targetIndex * sliceAngle - sliceAngle / 2);
+
+    let currentAngle = 0;
+    const duration = 3000;
+    const startTime = Date.now();
+
+    function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        currentAngle = eased * targetAngle;
+        canvas.style.transform = `rotate(${currentAngle}deg)`;
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            state.spinning = false;
+            showWheelQuestion();
+        }
+    }
+    animate();
+}
+
+function showWheelQuestion() {
+    const state = gameStates.game1;
+    const v = state.verbs[state.current];
+    const progress = ((state.current) / state.verbs.length) * 100;
+    document.getElementById('progress1').style.width = progress + '%';
+
+    document.getElementById('wheelQuestion').innerHTML = `
+        <p style="font-size:1.3em;font-weight:800;margin-bottom:10px;">🎯 ${v.inf.toUpperCase()} → ${v.person}</p>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;">
+            <input type="text" class="fill-blank-input" id="wheelInput" placeholder="Conjugación..." 
+                   onkeydown="if(event.key==='Enter')checkWheelAnswer()" style="max-width:200px;text-align:center;">
+            <button class="check-btn" onclick="checkWheelAnswer()">✓</button>
+        </div>
+    `;
+    document.getElementById('wheelInput').focus();
+}
+
+function checkWheelAnswer() {
+    const state = gameStates.game1;
+    const v = state.verbs[state.current];
+    const input = document.getElementById('wheelInput');
+    const val = input.value.trim().toLowerCase();
+    const feedback = document.getElementById('feedback1');
+
+    input.disabled = true;
+
+    if (val === v.answer) {
+        input.classList.add('correct');
+        feedback.textContent = `✅ ¡Correcto! ${v.person} ${v.answer}`;
+        feedback.className = 'feedback show correct';
+        state.correct++;
+        updateScore(5);
+    } else {
+        input.classList.add('wrong');
+        feedback.textContent = `❌ La respuesta es: ${v.person} ${v.answer}`;
+        feedback.className = 'feedback show wrong';
+        updateLives(totalLives - 1);
+    }
+
+    document.getElementById('wheelScore').textContent = `Aciertos: ${state.correct} / ${state.verbs.length}`;
+    state.current++;
+
+    if (state.current >= state.verbs.length) {
+        setTimeout(() => showResults('game1-content', state.correct, state.verbs.length, 'game1'), 1500);
+    } else {
+        setTimeout(() => {
+            feedback.className = 'feedback';
+            document.getElementById('spinBtn').disabled = false;
+            document.getElementById('wheelQuestion').innerHTML = `<p style="color:var(--gray);font-weight:700;">¡Gira la ruleta para la siguiente!</p>`;
+        }, 1500);
+    }
+}
+
+// ============ GAME 2: Desde vs Desde hace (Timed) ============
+function initGame2() {
+    const questions = [
+        { q: 'Estudio español _______ febrero.', a: 'desde' },
+        { q: 'Vivo en Málaga _______ dos meses.', a: 'desde hace' },
+        { q: 'Paul aprende español _______ dos años.', a: 'desde hace' },
+        { q: 'Karin estudia español _______ el año pasado.', a: 'desde' },
+        { q: 'Tiene una nueva profesora _______ la semana pasada.', a: 'desde' },
+        { q: 'Hace un intercambio _______ unas semanas.', a: 'desde hace' },
+        { q: 'Trabajo en Madrid _______ 2017.', a: 'desde' },
+        { q: 'Trabajo en Madrid _______ seis meses.', a: 'desde hace' },
+        { q: '_______ el martes no he ido a clase.', a: 'Desde' },
+        { q: 'Corre _______ dos meses.', a: 'desde hace' },
+        { q: 'Estudio aquí _______ septiembre.', a: 'desde' },
+        { q: 'Vivimos juntos _______ tres años.', a: 'desde hace' },
+    ];
+
+    gameStates.game2 = { questions: questions.sort(() => Math.random()-0.5), current: 0, correct: 0, timeLeft: 100 };
+    startTimer2();
+    renderGame2();
+}
+
+function startTimer2() {
+    const state = gameStates.game2;
+    state.timeLeft = 100;
+    if (timerIntervals.game2) clearInterval(timerIntervals.game2);
+    timerIntervals.game2 = setInterval(() => {
+        state.timeLeft -= 1;
+        const bar = document.getElementById('timer2');
+        if (bar) bar.style.width = state.timeLeft + '%';
+        if (state.timeLeft <= 0) {
+            clearInterval(timerIntervals.game2);
+            // Time's up - auto wrong
+            autoWrongGame2();
+        }
+    }, 80);
+}
+
+function autoWrongGame2() {
+    const state = gameStates.game2;
+    if (state.current >= state.questions.length) return;
+    state.current++;
+    updateLives(totalLives - 1);
+    if (state.current >= state.questions.length || totalLives <= 0) {
+        clearInterval(timerIntervals.game2);
+        showResults('game2-content', state.correct, state.questions.length, 'game2');
+    } else {
+        state.timeLeft = 100;
+        renderGame2();
+    }
+}
+
+function renderGame2() {
+    const state = gameStates.game2;
+    if (state.current >= state.questions.length) {
+        clearInterval(timerIntervals.game2);
+        showResults('game2-content', state.correct, state.questions.length, 'game2');
+        return;
+    }
+
+    const q = state.questions[state.current];
+    const prog = (state.current / state.questions.length) * 100;
+    document.getElementById('progress2').style.width = prog + '%';
+    document.getElementById('counter2').textContent = `${state.current + 1} / ${state.questions.length}`;
+
+    document.getElementById('game2-content').innerHTML = `
+        <div class="instruction-box"><span>⚡</span> ¡Rápido! Elige antes de que se acabe el tiempo.</div>
+        <div class="question-text">${q.q}</div>
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+            <button class="option-btn" style="justify-content:center;font-size:1.1em;" onclick="checkGame2('desde','${q.a.toLowerCase()}',this)">
+                desde
+            </button>
+            <button class="option-btn" style="justify-content:center;font-size:1.1em;" onclick="checkGame2('desde hace','${q.a.toLowerCase()}',this)">
+                desde hace
+            </button>
+        </div>
+        <div class="feedback" id="feedback2"></div>
+    `;
+}
+
+function checkGame2(sel, correct, btn) {
+    clearInterval(timerIntervals.game2);
+    const btns = btn.parentElement.querySelectorAll('.option-btn');
+    btns.forEach(b => b.style.pointerEvents = 'none');
+    const feedback = document.getElementById('feedback2');
+    const state = gameStates.game2;
+
+    if (sel === correct) {
+        btn.classList.add('correct');
+        feedback.textContent = '✅ ¡Correcto!';
+        feedback.className = 'feedback show correct';
+        state.correct++;
+        updateScore(5);
+    } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => { if (b.textContent.trim().toLowerCase() === correct) b.classList.add('correct'); });
+        feedback.textContent = `❌ → ${correct}`;
+        feedback.className = 'feedback show wrong';
+        updateLives(totalLives - 1);
+    }
+
+    state.current++;
+    setTimeout(() => {
+        if (totalLives <= 0 || state.current >= state.questions.length) {
+            showResults('game2-content', state.correct, state.questions.length, 'game2');
+        } else {
+            state.timeLeft = 100;
+            startTimer2();
+            renderGame2();
+        }
+    }, 1000);
+}
+
+// ============ GAME 3: Sentence Scramble (Gustar) ============
+function initGame3() {
+    const sentences = [
+        { words: ['Me', 'gusta', 'mucho', 'escribir'], correct: 'Me gusta mucho escribir' },
+        { words: ['Nos', 'encantan', 'las', 'clases', 'de', 'español'], correct: 'Nos encantan las clases de español' },
+        { words: ['Le', 'cuesta', 'entender', 'las', 'audiciones'], correct: 'Le cuesta entender las audiciones' },
+        { words: ['Me', 'aburren', 'los', 'textos', 'largos'], correct: 'Me aburren los textos largos' },
+        { words: ['Te', 'interesan', 'los', 'ejercicios', 'de', 'gramática'], correct: 'Te interesan los ejercicios de gramática' },
+        { words: ['A', 'mí', 'me', 'encanta', 'la', 'melodía', 'de', 'la', 'lengua'], correct: 'A mí me encanta la melodía de la lengua' },
+        { words: ['Nos', 'cuestan', 'las', 'audiciones', 'largas'], correct: 'Nos cuestan las audiciones largas' },
+        { words: ['Les', 'gusta', 'trabajar', 'en', 'grupos'], correct: 'Les gusta trabajar en grupos' },
+    ];
+
+    gameStates.game3 = { sentences, current: 0, correct: 0, builtWords: [] };
+    renderGame3();
+}
+
+function renderGame3() {
+    const state = gameStates.game3;
+    if (state.current >= state.sentences.length) {
+        showResults('game3-content', state.correct, state.sentences.length, 'game3');
+        return;
+    }
+
+    const s = state.sentences[state.current];
+    state.builtWords = [];
+    const shuffled = [...s.words].sort(() => Math.random() - 0.5);
+    const prog = (state.current / state.sentences.length) * 100;
+    document.getElementById('progress3').style.width = prog + '%';
+    document.getElementById('counter3').textContent = `${state.current + 1} / ${state.sentences.length}`;
+
+    document.getElementById('game3-content').innerHTML = `
+        <div class="instruction-box"><span>🧩</span> Haz clic en las palabras en orden para formar la frase correcta.</div>
+        <div class="scramble-area" id="buildArea3"></div>
+        <div class="scramble-words" id="wordPool3">
+            ${shuffled.map((w, i) => `<div class="scramble-word" data-word="${w}" data-idx="${i}" onclick="addWord3(this)">${w}</div>`).join('')}
+        </div>
+        <button class="check-btn" onclick="checkGame3()">Comprobar ✓</button>
+        <button class="next-btn" id="next3" onclick="nextGame3()">Siguiente →</button>
+        <div class="feedback" id="feedback3"></div>
+    `;
+}
+
+function addWord3(el) {
+    if (el.classList.contains('used')) return;
+    el.classList.add('used');
+    gameStates.game3.builtWords.push(el.dataset.word);
+
+    const area = document.getElementById('buildArea3');
+    const built = document.createElement('div');
+    built.className = 'built-word';
+    built.textContent = el.dataset.word;
+    built.dataset.idx = el.dataset.idx;
+    built.onclick = function() {
+        // Remove word
+        const idx = gameStates.game3.builtWords.indexOf(this.textContent);
+        if (idx > -1) gameStates.game3.builtWords.splice(idx, 1);
+        this.remove();
+        el.classList.remove('used');
+    };
+    area.appendChild(built);
+}
+
+function checkGame3() {
+    const state = gameStates.game3;
+    const built = state.builtWords.join(' ');
+    const correct = state.sentences[state.current].correct;
+    const feedback = document.getElementById('feedback3');
+
+    if (built === correct) {
+        feedback.textContent = '✅ ¡Perfecto! Frase correcta.';
+        feedback.className = 'feedback show correct';
+        state.correct++;
+        updateScore(10);
+    } else {
+        feedback.innerHTML = `❌ La frase correcta es: <strong>"${correct}"</strong>`;
+        feedback.className = 'feedback show wrong';
+        updateLives(totalLives - 1);
+    }
+
+    document.querySelector('#game3-content .check-btn').style.display = 'none';
+    document.getElementById('next3').style.display = 'inline-block';
+    document.querySelectorAll('#wordPool3 .scramble-word').forEach(w => w.style.pointerEvents = 'none');
+    document.querySelectorAll('#buildArea3 .built-word').forEach(w => w.style.pointerEvents = 'none');
+}
+
+function nextGame3() {
+    gameStates.game3.current++;
+    renderGame3();
+}
+
+// ============ GAME 4: Detective Reading ============
+function initGame4() {
+    const questions = [
+        {
+            text: `Mi nombre es Paul Kaufmann y estudio español desde hace dos años. ¡El español me encanta! Las clases, también. Pero, claro, todavía me cuesta un poco entender las audiciones en clase, por eso también las escucho en casa. Algunos deberes me aburren un poco, pero sé que es necesario repasar lo que hacemos. ¡Ah!, y desde hace unas semanas hago un intercambio todos los lunes con Rubén, un colega peruano de la empresa.`,
+            author: '— Paul Kaufmann, Berlín',
+            q: '🔍 ¿Qué le cuesta a Paul?',
+            a: 'Entender las audiciones',
+            opts: ['Hacer los deberes', 'Entender las audiciones', 'Hablar en clase', 'Escribir textos'],
+            clue: 'Busca: "me cuesta un poco..."'
+        },
+        {
+            text: `Mi nombre es Paul Kaufmann y estudio español desde hace dos años. ¡El español me encanta! Las clases, también. Pero, claro, todavía me cuesta un poco entender las audiciones en clase, por eso también las escucho en casa. Algunos deberes me aburren un poco, pero sé que es necesario repasar lo que hacemos. ¡Ah!, y desde hace unas semanas hago un intercambio todos los lunes con Rubén, un colega peruano de la empresa.`,
+            author: '— Paul Kaufmann, Berlín',
+            q: '🔍 ¿Quién es Rubén?',
+            a: 'Un colega peruano',
+            opts: ['Su profesor', 'Un amigo alemán', 'Un colega peruano', 'Su hermano'],
+            clue: 'Busca: "Rubén, un colega..."'
+        },
+        {
+            text: `Yo soy Jessica y vivo en Mánchester. Estudio español desde el año pasado. El español me gusta mucho, me encanta la melodía de la lengua y me interesa la cultura de los países hispanohablantes. En clase me gusta trabajar en grupos y escuchar los diálogos, pero me cuesta mucho aprender palabras nuevas.`,
+            author: '— Jessica Smith, Mánchester',
+            q: '🔍 ¿Qué le encanta a Jessica?',
+            a: 'La melodía de la lengua',
+            opts: ['Los deberes', 'La melodía de la lengua', 'Las audiciones', 'Los exámenes'],
+            clue: 'Busca: "me encanta la..."'
+        },
+        {
+            text: `Yo soy Jessica y vivo en Mánchester. Estudio español desde el año pasado. Desde la semana pasada tenemos una nueva profesora. Es argentina y todos estamos encantados con ella.`,
+            author: '— Jessica Smith, Mánchester',
+            q: '🔍 ¿De dónde es la nueva profesora?',
+            a: 'Argentina',
+            opts: ['España', 'México', 'Argentina', 'Colombia'],
+            clue: 'Busca: "Es argentina..."'
+        },
+        {
+            text: `Yo soy Jessica y vivo en Mánchester. Estudio español desde el año pasado. El español me gusta mucho, me encanta la melodía de la lengua y me interesa la cultura de los países hispanohablantes. En clase me gusta trabajar en grupos y escuchar los diálogos, pero me cuesta mucho aprender palabras nuevas.`,
+            author: '— Jessica Smith, Mánchester',
+            q: '🔍 ¿Desde cuándo estudia Jessica español?',
+            a: 'Desde el año pasado',
+            opts: ['Desde hace dos años', 'Desde el año pasado', 'Desde hace un mes', 'Desde 2015'],
+            clue: 'Busca: "Estudio español desde..."'
+        },
+        {
+            text: `Mi nombre es Paul Kaufmann y estudio español desde hace dos años. Algunos deberes me aburren un poco, pero sé que es necesario repasar lo que hacemos.`,
+            author: '— Paul Kaufmann, Berlín',
+            q: '🔍 ¿Qué le aburre a Paul?',
+            a: 'Algunos deberes',
+            opts: ['Las clases', 'El intercambio', 'Algunos deberes', 'Las canciones'],
+            clue: 'Busca: "me aburren..."'
+        },
+    ];
+
+    gameStates.game4 = { questions, current: 0, correct: 0, showClue: false };
+    renderGame4();
+}
+
+function renderGame4() {
+    const state = gameStates.game4;
+    if (state.current >= state.questions.length) {
+        showResults('game4-content', state.correct, state.questions.length, 'game4');
+        return;
+    }
+
+    const q = state.questions[state.current];
+    const prog = (state.current / state.questions.length) * 100;
+    document.getElementById('progress4').style.width = prog + '%';
+    document.getElementById('counter4').textContent = `Caso ${state.current + 1} / ${state.questions.length}`;
+
+    const shuffled = [...q.opts].sort(() => Math.random() - 0.5);
+    const letters = ['A','B','C','D'];
+
+    document.getElementById('game4-content').innerHTML = `
+        <div class="reading-text">${q.text}<div class="author">${q.author}</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <div class="question-text" style="margin-bottom:0;">${q.q}</div>
+            <button class="check-btn" style="margin:0;background:linear-gradient(135deg,#f39c12,#e67e22);" onclick="showClue4()">💡 Pista</button>
+        </div>
+        <div class="grammar-tip" id="clue4">🔎 ${q.clue}</div>
+        <div class="options-grid">
+            ${shuffled.map((o, i) => `
+                <button class="option-btn" onclick="checkGame4(this,'${o}','${q.a}')">
+                    <span class="option-letter">${letters[i]}</span>${o}
+                </button>`).join('')}
+        </div>
+        <div class="feedback" id="feedback4"></div>
+        <button class="next-btn" id="next4" onclick="nextGame4()">Siguiente caso →</button>
+    `;
+}
+
+function showClue4() {
+    document.getElementById('clue4').classList.add('show');
+}
+
+function checkGame4(btn, sel, correct) {
+    const btns = btn.parentElement.querySelectorAll('.option-btn');
+    btns.forEach(b => b.style.pointerEvents = 'none');
+    const feedback = document.getElementById('feedback4');
+
+    if (sel === correct) {
+        btn.classList.add('correct');
+        feedback.textContent = '✅ ¡Caso resuelto, detective!';
+        feedback.className = 'feedback show correct';
+        gameStates.game4.correct++;
+        updateScore(10);
+    } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => { if (b.textContent.trim().includes(correct)) b.classList.add('correct'); });
+        feedback.textContent = `❌ La respuesta es: "${correct}"`;
+        feedback.className = 'feedback show wrong';
+        updateLives(totalLives - 1);
+    }
+    document.getElementById('next4').style.display = 'inline-block';
+}
+
+function nextGame4() { gameStates.game4.current++; renderGame4(); }
+
+// ============ GAME 5: Memory Cards (Arabic) ============
+function initGame5() {
+    const pairs = [
+        { es: 'la audición', ar: 'تمرين الاستماع' },
+        { es: 'la lengua materna', ar: 'اللغة الأم' },
+        { es: 'hacer un intercambio', ar: 'عمل تبادل لغوي' },
+        { es: 'los deberes', ar: 'الواجبات' },
+        { es: 'repasar', ar: 'مراجعة' },
+        { es: 'la pronunciación', ar: 'النطق' },
+        { es: 'traducir', ar: 'ترجمة' },
+        { es: 'el/la colega', ar: 'الزميل/ة' },
+        { es: 'la lectura graduada', ar: 'قراءة متدرجة' },
+        { es: 'aburrir', ar: 'يُمِلّ' },
+        { es: 'la tertulia', ar: 'حلقة نقاش' },
+        { es: 'aprender vocabulario', ar: 'تعلّم مفردات' },
+    ];
+
+    // Take 8 pairs for 4x4 grid
+    const selectedPairs = pairs.sort(() => Math.random()-0.5).slice(0, 8);
+    let cards = [];
+    selectedPairs.forEach(p => {
+        cards.push({ text: p.es, type: 'es', pairId: p.es });
+        cards.push({ text: p.ar, type: 'ar', pairId: p.es });
+    });
+    cards = cards.sort(() => Math.random() - 0.5);
+
+    gameStates.game5 = {
+        cards, flipped: [], matched: 0, moves: 0, total: selectedPairs.length,
+        locked: false
+    };
+
+    document.getElementById('game5-content').innerHTML = `
+        <div class="memory-stats">
+            <div class="memory-stat">🔄 Intentos: <span id="memMoves">0</span></div>
+            <div class="memory-stat">✅ Parejas: <span id="memMatched">0</span> / ${selectedPairs.length}</div>
+        </div>
+        <div class="memory-grid" id="memoryGrid">
+            ${cards.map((c, i) => `
+                <div class="memory-card" data-idx="${i}" onclick="flipCard5(${i})">
+                    <div class="card-front">❓</div>
+                    <div class="card-back ${c.type}">${c.text}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function flipCard5(idx) {
+    const state = gameStates.game5;
+    if (state.locked) return;
+    const card = document.querySelector(`.memory-card[data-idx="${idx}"]`);
+    if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    if (state.flipped.length >= 2) return;
+
+    card.classList.add('flipped');
+    state.flipped.push(idx);
+
+    if (state.flipped.length === 2) {
+        state.moves++;
+        document.getElementById('memMoves').textContent = state.moves;
+        state.locked = true;
+
+        const c1 = state.cards[state.flipped[0]];
+        const c2 = state.cards[state.flipped[1]];
+
+        if (c1.pairId === c2.pairId && c1.type !== c2.type) {
+            // Match!
+            setTimeout(() => {
+                document.querySelector(`.memory-card[data-idx="${state.flipped[0]}"]`).classList.add('matched');
+                document.querySelector(`.memory-card[data-idx="${state.flipped[1]}"]`).classList.add('matched');
+                state.matched++;
+                document.getElementById('memMatched').textContent = state.matched;
+                state.flipped = [];
+                state.locked = false;
+                updateScore(5);
+
+                if (state.matched === state.total) {
+                    setTimeout(() => {
+                        const score = Math.max(0, state.total - Math.floor(state.moves / 3));
+                        showResults('game5-content', state.total, state.total, 'game5');
+                    }, 500);
+                }
+            }, 500);
+        } else {
+            // No match
+            setTimeout(() => {
+                document.querySelector(`.memory-card[data-idx="${state.flipped[0]}"]`).classList.remove('flipped');
+                document.querySelector(`.memory-card[data-idx="${state.flipped[1]}"]`).classList.remove('flipped');
+                state.flipped = [];
+                state.locked = false;
+            }, 1000);
+        }
+    }
+}
+
+// ============ GAME 6: Doctor de Consejos ============
+function initGame6() {
+    const scenarios = [
+        {
+            patient: '😟',
+            problem: 'Doctor, ¡me cuesta mucho hablar en español! Tengo miedo de cometer errores.',
+            answer: 'Lo mejor es hacer un intercambio con un hispanohablante.',
+            opts: [
+                'Lo mejor es hacer un intercambio con un hispanohablante.',
+                'Tienes que comer más frutas.',
+                'Puedes dormir 12 horas.',
+                'Debes ver películas en alemán.'
+            ]
+        },
+        {
+            patient: '😰',
+            problem: 'No entiendo cuando los hispanohablantes hablan rápido. ¡Ayuda!',
+            answer: 'Hay que escuchar la radio en español todos los días.',
+            opts: [
+                'Hay que escuchar la radio en español todos los días.',
+                'Lo mejor es no escuchar nada.',
+                'Puedes leer menos.',
+                'Tienes que hablar más rápido tú.'
+            ]
+        },
+        {
+            patient: '📝',
+            problem: 'Quiero aprender más vocabulario pero siempre se me olvida todo.',
+            answer: 'Tienes que trabajar el vocabulario con tarjetas y repasar siempre.',
+            opts: [
+                'Tienes que trabajar el vocabulario con tarjetas y repasar siempre.',
+                'Lo mejor es no estudiar vocabulario.',
+                'Puedes comprar un coche nuevo.',
+                'Debes olvidar todo.'
+            ]
+        },
+        {
+            patient: '🗣️',
+            problem: 'Me siento inseguro con la pronunciación de la "r".',
+            answer: 'Puedes escuchar canciones en español y repetir.',
+            opts: [
+                'Puedes escuchar canciones en español y repetir.',
+                'Tienes que no hablar nunca.',
+                'Lo mejor es hablar solo en inglés.',
+                'Hay que escribir mucho.'
+            ]
+        },
+        {
+            patient: '😴',
+            problem: 'Las clases de gramática me aburren mucho.',
+            answer: 'Es muy útil hacer los ejercicios de forma interactiva y jugar en clase.',
+            opts: [
+                'Es muy útil hacer los ejercicios de forma interactiva y jugar en clase.',
+                'Tienes que dormir en clase.',
+                'Lo mejor es no ir a clase.',
+                'Puedes ver televisión en clase.'
+            ]
+        },
+        {
+            patient: '📖',
+            problem: 'Quiero leer más en español pero los libros son muy difíciles.',
+            answer: 'Puedes leer libros de lectura graduada.',
+            opts: [
+                'Puedes leer libros de lectura graduada.',
+                'Hay que leer diccionarios completos.',
+                'Tienes que escribir un libro.',
+                'Lo mejor es no leer nada.'
+            ]
+        },
+    ];
+
+    gameStates.game6 = { scenarios, current: 0, correct: 0 };
+    renderGame6();
+}
+
+function renderGame6() {
+    const state = gameStates.game6;
+    if (state.current >= state.scenarios.length) {
+        showResults('game6-content', state.correct, state.scenarios.length, 'game6');
+        return;
+    }
+
+    const s = state.scenarios[state.current];
+    const prog = (state.current / state.scenarios.length) * 100;
+    document.getElementById('progress6').style.width = prog + '%';
+    document.getElementById('counter6').textContent = `Paciente ${state.current + 1} / ${state.scenarios.length}`;
+
+    const shuffled = [...s.opts].sort(() => Math.random()-0.5);
+    const letters = ['A','B','C','D'];
+
+    document.getElementById('game6-content').innerHTML = `
+        <div class="instruction-box"><span>💊</span> Eres el Doctor de Español. ¡Da el mejor consejo!</div>
+        <div style="background:linear-gradient(135deg,#dfe6e9,#b2bec3);padding:20px;border-radius:16px;margin-bottom:18px;text-align:center;">
+            <div style="font-size:3em;margin-bottom:8px;">${s.patient}</div>
+            <div style="font-size:1.1em;font-weight:700;font-style:italic;">"${s.problem}"</div>
+        </div>
+        <p style="font-weight:700;color:var(--gray);margin-bottom:10px;">Tu receta / consejo:</p>
+        <div class="options-grid">
+            ${shuffled.map((o, i) => `
+                <button class="option-btn" onclick="checkGame6(this,${JSON.stringify(o)},${JSON.stringify(s.answer)})">
+                    <span class="option-letter">${letters[i]}</span>${o}
+                </button>`).join('')}
+        </div>
+        <div class="feedback" id="feedback6"></div>
+        <button class="next-btn" id="next6" onclick="nextGame6()">Siguiente paciente →</button>
+    `;
+}
+
+function checkGame6(btn, sel, correct) {
+    const btns = btn.parentElement.querySelectorAll('.option-btn');
+    btns.forEach(b => b.style.pointerEvents = 'none');
+    const feedback = document.getElementById('feedback6');
+
+    if (sel === correct) {
+        btn.classList.add('correct');
+        feedback.textContent = '✅ ¡Excelente receta, doctor!';
+        feedback.className = 'feedback show correct';
+        gameStates.game6.correct++;
+        updateScore(10);
+    } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => { if (b.textContent.trim() === correct) b.classList.add('correct'); });
+        feedback.textContent = `❌ La mejor receta es: "${correct}"`;
+        feedback.className = 'feedback show wrong';
+        updateLives(totalLives - 1);
+    }
+    document.getElementById('next6').style.display = 'inline-block';
+}
+
+function nextGame6() { gameStates.game6.current++; renderGame6(); }
+
+// ============ GAME 7: Target - Pretérito Perfecto ============
+function initGame7() {
+    const questions = [
+        { q: '¿Vosotros _____ (ver) hoy a la profesora?', a: 'habéis visto', hint: 'ver → visto', pts: '🎯' },
+        { q: 'Este año _____ (aprender/nosotros) mucho.', a: 'hemos aprendido', hint: 'aprender → aprendido', pts: '🎯' },
+        { q: 'Tú me _____ (escribir) un correo esta mañana.', a: 'has escrito', hint: 'escribir → escrito ⚠️', pts: '🎯🎯' },
+        { q: 'Berta y yo _____ (hacer) los deberes.', a: 'hemos hecho', hint: 'hacer → hecho ⚠️', pts: '🎯🎯' },
+        { q: 'Yo _____ (viajar) a Cuba este verano.', a: 'he viajado', hint: 'viajar → viajado', pts: '🎯' },
+        { q: 'Ella no _____ (vivir) en México.', a: 'ha vivido', hint: 'vivir → vivido', pts: '🎯' },
+        { q: 'Susana _____ (volver) de su viaje.', a: 'ha vuelto', hint: 'volver → vuelto ⚠️', pts: '🎯🎯' },
+        { q: '¿Tú _____ (decir) algo?', a: 'has dicho', hint: 'decir → dicho ⚠️', pts: '🎯🎯' },
+        { q: 'Nosotros _____ (comer) en un restaurante.', a: 'hemos comido', hint: 'comer → comido', pts: '🎯' },
+        { q: 'Ellos _____ (poner) la mesa.', a: 'han puesto', hint: 'poner → puesto ⚠️', pts: '🎯🎯' },
+    ];
+
+    gameStates.game7 = { questions, current: 0, correct: 0, totalPts: 0 };
+    renderGame7();
+}
+
+function renderGame7() {
+    const state = gameStates.game7;
+    if (state.current >= state.questions.length) {
+        showResults('game7-content', state.correct, state.questions.length, 'game7');
+        return;
+    }
+
+    const q = state.questions[state.current];
+    const prog = (state.current / state.questions.length) * 100;
+    document.getElementById('progress7').style.width = prog + '%';
+    document.getElementById('counter7').textContent = `Diana ${state.current + 1} / ${state.questions.length} | ${q.pts}`;
+
+    document.getElementById('game7-content').innerHTML = `
+        <div class="instruction-box"><span>🎯</span> Escribe la conjugación en pretérito perfecto. ¡Cuidado con los participios irregulares!</div>
+        <div style="text-align:center;margin-bottom:15px;">
+            <div style="font-size:4em;">🎯</div>
+            <div style="font-weight:800;color:var(--gray);font-size:0.85em;">Dificultad: ${q.pts}</div>
+        </div>
+        <div class="question-text" style="text-align:center;">${q.q}</div>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;">
+            <input type="text" class="fill-blank-input" id="ans7" placeholder="he/has/ha... + participio" 
+                   onkeydown="if(event.key==='Enter')checkGame7()" style="text-align:center;">
+            <button class="check-btn" id="checkBtn7" onclick="checkGame7()">🏹 Lanzar</button>
+        </div>
+        <button class="check-btn" style="background:linear-gradient(135deg,#f39c12,#e67e22);" onclick="showHint7()">💡 Pista</button>
+        <div class="grammar-tip" id="hint7">📘 ${q.hint}</div>
+        <div class="feedback" id="feedback7"></div>
+        <button class="next-btn" id="next7" onclick="nextGame7()">Siguiente diana →</button>
+    `;
+    document.getElementById('ans7').focus();
+}
+
+function showHint7() { document.getElementById('hint7').classList.add('show'); }
+
+function checkGame7() {
+    const state = gameStates.game7;
+    const q = state.questions[state.current];
+    const input = document.getElementById('ans7');
+    const val = input.value.trim().toLowerCase();
+    const feedback = document.getElementById('feedback7');
+
+    input.disabled = true;
+    document.getElementById('checkBtn7').style.display = 'none';
+
+    if (val === q.a.toLowerCase()) {
+        input.classList.add('correct');
+        feedback.textContent = `✅ ¡Diana! ${q.a} 🎯`;
+        feedback.className = 'feedback show correct';
+        state.correct++;
+        updateScore(q.pts.length * 5);
+    } else {
+        input.classList.add('wrong');
+        feedback.textContent = `❌ Fallaste. La respuesta es: "${q.a}"`;
+        feedback.className = 'feedback show wrong';
+        document.getElementById('hint7').classList.add('show');
+        updateLives(totalLives - 1);
+    }
+    document.getElementById('next7').style.display = 'inline-block';
+}
+
+function nextGame7() { gameStates.game7.current++; renderGame7(); }
+
+// ============ GAME 8: Role Play Conversation ============
+function initGame8() {
+    const steps = [
+        {
+            bot: '¡Hola! Soy tu nueva compañera de clase. ¿Cómo te llamas y desde cuándo estudias español?',
+            opts: [
+                { text: '¡Hola! Me llamo Ana. Estudio español desde hace un año.', correct: true },
+                { text: 'Hola. Yo español desde un año estudio.', correct: false },
+                { text: 'Sí, español bueno.', correct: false }
+            ]
+        },
+        {
+            bot: '¡Qué bien, Ana! ¿Y qué te gusta hacer en clase de español?',
+            opts: [
+                { text: 'A mí me gusta trabajar en grupos y escuchar los diálogos.', correct: true },
+                { text: 'Me gustan dormir.', correct: false },
+                { text: 'Yo gusta clase mucho sí.', correct: false }
+            ]
+        },
+        {
+            bot: '¿Hay algo que te cuesta o que te aburre?',
+            opts: [
+                { text: 'Me cuesta un poco la pronunciación, pero me encanta la gramática.', correct: true },
+                { text: 'Me cuesta pizza y hamburguesa.', correct: false },
+                { text: 'Yo cuestan todo.', correct: false }
+            ]
+        },
+        {
+            bot: '¿Has hecho algo interesante este verano para practicar español?',
+            opts: [
+                { text: 'Sí, he leído un libro en español y he visto series españolas.', correct: true },
+                { text: 'Sí, he leí un película.', correct: false },
+                { text: 'No he hacido nada este verano.', correct: false }
+            ]
+        },
+        {
+            bot: '¡Genial! ¿Qué consejo me darías para mejorar mi español?',
+            opts: [
+                { text: 'Puedes hacer un intercambio y escuchar canciones en español. ¡Es muy útil!', correct: true },
+                { text: 'Tienes que no estudiar nada.', correct: false },
+                { text: 'Lo mejor es olvidar todo.', correct: false }
+            ]
+        },
+        {
+            bot: '¿Conoces a alguien hispanohablante?',
+            opts: [
+                { text: 'Sí, tengo una amiga colombiana. Hablamos en español desde hace seis meses.', correct: true },
+                { text: 'Sí, yo conoco un persona de España desde mucho.', correct: false },
+                { text: 'No, pero quiero encontrar uno amigo.', correct: false }
+            ]
+        },
+    ];
+
+    gameStates.game8 = { steps, current: 0, correct: 0 };
+    document.getElementById('game8-content').innerHTML = `
+        <div class="instruction-box"><span>🎭</span> Estás en tu primer día de clase. ¡Conversa con tu compañera!</div>
+        <div class="chat-container" id="chatBox"></div>
+        <div class="chat-options" id="chatOpts"></div>
+        <div class="feedback" id="feedback8"></div>
+    `;
+    renderGame8();
+}
+
+function renderGame8() {
+    const state = gameStates.game8;
+    if (state.current >= state.steps.length) {
+        const prog = 100;
+        document.getElementById('progress8').style.width = prog + '%';
+        setTimeout(() => showResults('game8-content', state.correct, state.steps.length, 'game8'), 500);
+        return;
+    }
+
+    const step = state.steps[state.current];
+    const prog = (state.current / state.steps.length) * 100;
+    document.getElementById('progress8').style.width = prog + '%';
+
+    const chat = document.getElementById('chatBox');
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bot';
+    bubble.textContent = '👩‍🏫 ' + step.bot;
+    chat.appendChild(bubble);
+    chat.scrollTop = chat.scrollHeight;
+
+    const shuffled = [...step.opts].sort(() => Math.random()-0.5);
+    document.getElementById('chatOpts').innerHTML = shuffled.map(o => `
+        <button class="chat-option" onclick="pickChat8(this, ${o.correct}, '${o.text.replace(/'/g, "\\'")}')">${o.text}</button>
+    `).join('');
+}
+
+function pickChat8(btn, isCorrect, text) {
+    const opts = document.querySelectorAll('.chat-option');
+    opts.forEach(o => o.style.pointerEvents = 'none');
+    const feedback = document.getElementById('feedback8');
+    const chat = document.getElementById('chatBox');
+    const state = gameStates.game8;
+
+    let displayText = text;
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        feedback.textContent = '✅ ¡Perfecto! Muy natural.';
+        feedback.className = 'feedback show correct';
+        state.correct++;
+        updateScore(10);
+    } else {
+        btn.classList.add('wrong');
+        const correctOpt = state.steps[state.current].opts.find(o => o.correct);
+        feedback.textContent = `❌ Mejor: "${correctOpt.text}"`;
+        feedback.className = 'feedback show wrong';
+        displayText = correctOpt.text;
+        updateLives(totalLives - 1);
+    }
+
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble user';
+    userBubble.textContent = displayText;
+    chat.appendChild(userBubble);
+    chat.scrollTop = chat.scrollHeight;
+
+    state.current++;
+    setTimeout(() => {
+        feedback.className = 'feedback';
+        renderGame8();
+    }, 2000);
+}
+</script>
+</body>
+</html>

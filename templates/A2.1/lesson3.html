@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Unidad 3 – Un año especial | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;height:100%;}
+body{background:#1a1a2e;font-family:'Open Sans',sans-serif;height:100%;}
+.slide{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;}
+.slide>*{position:relative;z-index:1;}
+.slide-content::before{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:8rem;font-weight:900;color:rgba(216,67,21,0.05);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+/* Theme Colors for Unidad 3: Deep Orange/Red */
+.slide-cover{background:linear-gradient(135deg,#e64a19 0%,#d84315 40%,#bf360c 100%);justify-content:center;align-items:center;text-align:center;color:#fff;padding:60px;}
+.unit-circle{width:120px;height:120px;background:#ffd60a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:#bf360c;font-family:'Playfair Display',serif;margin-bottom:30px;box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.slide-cover h1{font-family:'Playfair Display',serif;font-size:56px;letter-spacing:6px;text-transform:uppercase;margin-bottom:20px;text-shadow:3px 3px 10px rgba(0,0,0,0.4);}
+.obj-box{background:rgba(255,255,255,0.15);border-radius:16px;padding:25px 40px;margin-top:30px;max-width:900px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);}
+.obj-box p{font-size:17px;line-height:1.8;}
+.instituto-label{margin-top:40px;font-size:16px;letter-spacing:4px;text-transform:uppercase;opacity:0.7;}
+.slide-content{background:#fff;padding:20px 35px;position:relative;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:6px;border-bottom:3px solid #d84315;}
+.topbar-left{display:flex;flex-direction:column;gap:3px;}
+.topbar .ulabel{font-family:'Playfair Display',serif;font-size:13px;color:#d84315;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
+.topbar .pnum{font-size:12px;color:#999;font-weight:600;}
+.topbar-right{display:flex;align-items:center;gap:15px;}
+.brand-badge{font-family:'Playfair Display',serif;font-size:13px;color:#d84315;font-weight:800;opacity:0.6;text-transform:uppercase;letter-spacing:1px;}
+.act-head{display:flex;align-items:center;margin-bottom:8px;gap:10px;}
+.act-num{width:36px;height:36px;background:#d84315;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;font-family:'Playfair Display',serif;flex-shrink:0;}
+.act-title{font-family:'Playfair Display',serif;font-size:21px;color:#2c2c2c;text-decoration:underline;text-decoration-color:#d84315;text-underline-offset:5px;text-decoration-thickness:3px;}
+.sub{margin-bottom:10px;}
+.sub-l{font-weight:700;font-size:13.5px;color:#d84315;margin-bottom:5px;background:#fbe9e7;padding:5px 10px;border-radius:6px;border-left:4px solid #d84315;}
+.inst{font-size:13px;color:#333;line-height:1.5;margin-bottom:4px;}
+.audio-wrap{background:linear-gradient(135deg,#fbe9e7,#ffccbc);border:1.5px solid #d84315;border-radius:8px;padding:5px 10px;margin:5px 0;}
+.audio-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.audio-label{font-weight:700;color:#d84315;font-size:11.5px;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.audio-row audio{flex:1;min-width:200px;height:28px;max-width:400px;}
+.trans-btn{background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff;border:none;padding:4px 10px;border-radius:12px;font-size:10.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:'Open Sans',sans-serif;white-space:nowrap;transition:all 0.3s;}
+.trans-btn:hover{transform:translateY(-1px);}
+.trans-btn.active{background:linear-gradient(135deg,#d84315,#bf360c);}
+.trans-btn .arrow{transition:transform 0.3s;font-size:10px;}
+.trans-btn.active .arrow{transform:rotate(180deg);}
+.trans-content{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s ease,margin-top 0.3s ease;background:#f5f5f5;border:1px solid #ccc;border-radius:6px;margin-top:0;padding:0 12px;}
+.trans-content.show{max-height:3000px;padding:8px 12px;margin-top:6px;}
+.trans-content .ttitle{font-family:'Playfair Display',serif;font-size:12.5px;color:#0d47a1;margin-bottom:4px;text-decoration:underline;font-weight:700;}
+.trans-content p{font-size:11.5px;line-height:1.6;color:#333;margin:2px 0;}
+.fill-blank{display:inline-block;min-width:80px;border-bottom:2px dashed #999;padding:0 3px;transition:all 0.4s;color:transparent;user-select:none;}
+.fill-blank.show{border-bottom:2px solid #2e8b57;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#1b5e20;font-weight:700;border-radius:3px;padding:1px 6px;}
+.order-num{display:inline-flex;width:24px;height:24px;background:#fff;border:2px dashed #d84315;border-radius:50%;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:transparent;transition:all 0.4s;flex-shrink:0;}
+.order-num .ans-text{display:none;}
+.order-num.show{background:#d84315;border:2px solid #d84315;color:#fff;}
+.order-num.show .ans-text{display:inline;}
+.opt-mark{display:inline-block;width:14px;height:14px;border:2px solid #999;border-radius:50%;vertical-align:middle;margin-right:5px;transition:all 0.4s;}
+.opt-mark.correct.show{background:#2e8b57;border-color:#2e8b57;box-shadow:0 0 0 3px #c8e6c9;}
+.opt-mark.correct.show::after{content:"✓";color:#fff;font-size:10px;font-weight:900;display:block;text-align:center;line-height:10px;}
+.ans-inline{display:inline-block;border-bottom:2px dashed #999;min-width:80px;padding:0 4px;transition:all 0.4s;}
+.ans-inline .ans-text{display:none;}
+.ans-inline .placeholder-text{display:inline-block;min-width:60px;}
+.ans-inline.show{background:linear-gradient(135deg,#c8e6c9,#a5d6a7);border-bottom:2px solid #2e8b57;color:#1b5e20;font-weight:700;border-radius:3px;padding:1px 6px;}
+.ans-inline.show .ans-text{display:inline;}
+.ans-inline.show .placeholder-text{display:none;}
+.show-ans-row{display:flex;justify-content:flex-end;margin:6px 0 4px;}
+.show-ans-btn{background:linear-gradient(135deg,#2e8b57,#1e6e3f);color:#fff;border:none;padding:5px 14px;border-radius:18px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.3s;}
+.show-ans-btn:hover{transform:translateY(-2px);}
+.show-ans-btn .arrow{transition:transform 0.3s;font-size:12px;}
+.show-ans-btn.active{background:linear-gradient(135deg,#d84315,#bf360c);}
+.show-ans-btn.active .arrow{transform:rotate(180deg);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.grid-23{display:grid;grid-template-columns:2fr 1fr;gap:14px;}
+.grid-32{display:grid;grid-template-columns:1fr 2fr;gap:14px;}
+.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0;}
+.ar{background:linear-gradient(135deg,#fff8e1,#fff3cd);border-right:5px solid #f5a623;border-radius:12px 0 0 12px;padding:10px 14px;font-family:'Amiri',serif;font-size:13px;line-height:1.9;color:#5a4100;direction:rtl;text-align:right;}
+.ar-full{margin:8px 0;}
+.ar .es-word{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:0 5px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffe0b2;}
+.ar-instr{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:2px solid #f5a623;border-radius:10px;padding:7px 12px;margin:5px 0;font-family:'Amiri',serif;font-size:12.5px;color:#5a4100;direction:rtl;text-align:right;line-height:1.7;}
+.ar-instr .ar-title{font-weight:700;color:#bf6a00;display:block;margin-bottom:3px;font-size:13px;}
+.ar-instr .es-word{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:0 5px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffe0b2;}
+.tblock{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;font-size:12.5px;line-height:1.7;color:#333;}
+.gbox{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid #7c4dff;border-radius:12px;padding:10px 14px;margin:5px 0;}
+.gbox h3{font-family:'Playfair Display',serif;font-size:14.5px;color:#5a2dba;text-decoration:underline;text-underline-offset:4px;margin-bottom:5px;}
+.gbox p,.gbox li{font-size:12.5px;line-height:1.6;color:#3a2070;}
+.infobox{background:linear-gradient(135deg,#fbe9e7,#ffccbc);border:2px solid #e64a19;border-radius:10px;padding:8px 12px;margin:5px 0;}
+.infobox h4{color:#bf360c;font-size:12.5px;margin-bottom:4px;text-decoration:underline;}
+.infobox p{font-size:12px;color:#5d1b00;line-height:1.55;}
+.teacuerdas{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid #2e7d32;border-radius:10px;padding:8px 12px;margin:5px 0;}
+.teacuerdas h4{color:#1b5e20;font-size:12.5px;margin-bottom:3px;text-decoration:underline;font-family:'Playfair Display',serif;}
+.teacuerdas p{font-size:12px;color:#1b5e20;line-height:1.55;}
+table{border-collapse:collapse;width:100%;margin:4px 0;font-size:12px;}
+table th{background:#d84315;color:#fff;padding:5px 8px;font-weight:700;text-align:center;}
+table td{padding:4px 8px;border:1px solid #ddd;text-align:center;}
+table tr:nth-child(even){background:#fbe9e7;}
+.dia{margin:5px 0;font-size:12.5px;line-height:1.6;background:#fafafa;padding:7px 11px;border-radius:6px;border-left:3px solid #d84315;}
+.dia p{margin:2px 0;}
+.sb{color:#d84315;font-weight:700;}
+.st{color:#2e8b57;font-weight:700;}
+.sq{color:#1976d2;font-weight:700;}
+.wbank{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0;}
+.wbank span{background:#fbe9e7;border:1px solid #d84315;border-radius:8px;padding:3px 9px;font-size:11.5px;color:#bf360c;}
+.img-placeholder{background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border:2px dashed #999;border-radius:10px;padding:14px 10px;text-align:center;color:#888;font-style:italic;font-size:11px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.img-placeholder .icon{font-size:28px;margin-bottom:5px;color:#bbb;}
+.ejn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#2c2c54;color:#fff;border-radius:50%;font-weight:700;font-size:11px;margin-right:5px;flex-shrink:0;}
+.slide-div{background:linear-gradient(135deg,#2c2c54,#1a1a2e);justify-content:center;align-items:center;text-align:center;color:#fff;padding:60px;}
+.slide-div h2{font-family:'Playfair Display',serif;font-size:52px;letter-spacing:6px;text-transform:uppercase;margin-bottom:12px;color:#ffd60a;}
+.divline{width:200px;height:4px;background:#d84315;border-radius:2px;margin:12px 0;}
+.slide-div p{font-size:18px;opacity:0.7;max-width:600px;}
+.slide-cons{background:linear-gradient(135deg,#fff8e1,#fffde7);border:4px solid #f5a623;}
+.consbadge{display:inline-block;background:#f5a623;color:#fff;font-weight:900;font-size:11px;padding:4px 12px;border-radius:8px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;font-family:'Playfair Display',serif;}
+.testimonial{background:linear-gradient(135deg,#fff9c4,#fff59d);border:2px solid #fbc02d;border-radius:12px;padding:9px 12px;margin:5px 0;font-size:12px;line-height:1.6;color:#5a4100;}
+.testimonial .name-badge{display:inline-flex;align-items:center;gap:6px;background:#fbc02d;color:#5a4100;padding:2px 9px;border-radius:12px;font-weight:700;font-size:11px;margin-bottom:4px;}
+.ficha{background:#e1f5fe;border:2px dashed #0288d1;border-radius:10px;padding:9px 12px;margin:5px 0;font-size:12px;line-height:1.8;color:#01579b;}
+.ficha p{margin:2px 0;}
+.ficha-line{display:inline-block;min-width:130px;border-bottom:1px dotted #0288d1;padding:0 4px;}
+.slide-shadow{background:linear-gradient(135deg,#1a237e,#283593);padding:25px 40px;}
+.shadow-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.shadow-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all 0.3s;}
+.shadow-box:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px);}
+.shadow-box.playing{background:rgba(255,214,10,0.2);border-color:#ffd60a;}
+.shadow-box .sh-es{font-size:13px;color:#e8eaf6;line-height:1.6;margin-bottom:4px;display:flex;align-items:flex-start;gap:8px;}
+.shadow-box .sh-ar{font-family:'Amiri',serif;font-size:12px;color:#ffcc80;direction:rtl;text-align:right;line-height:1.7;border-top:1px solid rgba(255,255,255,0.12);padding-top:4px;}
+.shadow-title{font-family:'Playfair Display',serif;font-size:28px;color:#ffd60a;text-align:center;margin-bottom:4px;letter-spacing:3px;text-transform:uppercase;}
+.shadow-sub{text-align:center;color:rgba(255,255,255,0.65);font-size:12px;margin-bottom:10px;}
+.shadow-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#ffd60a;color:#1a237e;border-radius:50%;font-weight:900;font-size:11px;flex-shrink:0;}
+.shadow-topbar{display:flex;justify-content:space-between;margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid #ffd60a;}
+.shadow-topbar .lbl{color:#ffd60a;font-family:'Playfair Display',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;}
+.shadow-topbar .num{color:rgba(255,255,255,0.5);font-size:11px;}
+.play-icon{width:18px;height:18px;background:#ffd60a;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#1a237e;font-size:9px;flex-shrink:0;margin-top:2px;}
+.shadow-box.playing .play-icon{background:#fff;animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+.shadow-instr{background:rgba(255,214,10,0.15);border:1px dashed #ffd60a;border-radius:8px;padding:8px 12px;margin-bottom:10px;color:#fff;font-size:12px;text-align:center;font-family:'Amiri',serif;direction:rtl;line-height:1.8;}
+.study-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px;direction:rtl;}
+.study-table th{background:#d84315;color:#fff;padding:7px 10px;font-weight:700;text-align:center;font-family:'Playfair Display',serif;letter-spacing:1px;}
+.study-table td{padding:7px 10px;border:1px solid #ddd;vertical-align:top;line-height:1.5;}
+.study-table tr:nth-child(even){background:#fbe9e7;}
+.study-table .day{font-weight:700;color:#d84315;font-family:'Playfair Display',serif;font-size:14px;text-align:center;white-space:nowrap;}
+.study-table .task-cell{direction:rtl;text-align:right;}
+.study-table .task-es{color:#333;font-size:11.5px;direction:ltr;text-align:left;background:#fff;border-radius:5px;padding:6px 8px;margin-bottom:5px;border:1px solid #eee;unicode-bidi:isolate;}
+.study-table .task-ar{font-family:'Amiri',serif;color:#5a4100;font-size:12.5px;direction:rtl;text-align:right;background:#fff8e1;border-radius:5px;padding:6px 8px;line-height:1.7;border-right:3px solid #f5a623;}
+.study-table .mins{color:#1976d2;font-weight:700;font-size:11.5px;text-align:center;white-space:nowrap;}
+.task-cons{background:#fffde7;border:2px solid #f5a623;border-radius:10px;padding:10px 14px;margin:6px 0;font-size:12px;line-height:1.7;color:#5a4100;}
+.task-cons strong{color:#bf6a00;}
+
+/* === ملخص Comunicación === */
+.com-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:8px 0;}
+.com-card{background:#fff;border:2px solid #2e7d32;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+.com-card-head{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:6px 10px;font-family:'Playfair Display',serif;font-size:12.5px;font-weight:700;text-align:center;letter-spacing:1px;}
+.com-card-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.com-formula{background:#f5f0ff;border:1px dashed #7c4dff;border-radius:5px;padding:4px 7px;font-size:10.5px;color:#5a2dba;text-align:center;font-weight:600;font-family:'Courier New',monospace;}
+.com-example{background:#e8f5e9;border-left:3px solid #2e8b57;border-radius:3px;padding:4px 8px;font-size:11px;color:#1b5e20;line-height:1.4;}
+.com-example strong{color:#bf360c;}
+.com-ar-mini{background:#fff8e1;border-right:3px solid #f5a623;border-radius:3px;padding:4px 8px;font-family:'Amiri',serif;font-size:11.5px;color:#5a4100;direction:rtl;text-align:right;line-height:1.5;}
+.com-ar-mini strong{color:#bf6a00;}
+.com-tip-row{background:#fbe9e7;border:1.5px solid #d84315;border-radius:8px;padding:6px 11px;margin-top:6px;font-family:'Amiri',serif;font-size:12px;color:#bf360c;direction:rtl;text-align:right;line-height:1.6;display:flex;align-items:center;gap:8px;}
+.com-tip-row .tip-icon{font-size:18px;flex-shrink:0;}
+.com-tip-row .es-tag{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:1px 6px;border-radius:4px;margin:0 3px;font-family:'Open Sans',sans-serif;font-weight:700;color:#bf360c;border:1px solid #ffccbc;font-size:11px;}
+</style>
+</head>
+<body>
+
+<!-- ====== COVER ====== -->
+<div class="slide slide-cover">
+<div class="unit-circle">3</div>
+<h1>UN AÑO ESPECIAL</h1>
+<div class="obj-box"><p>Hablar de acontecimientos del pasado • Hablar de vivencias especiales •<br>Valorar una experiencia pasada</p></div>
+<p class="instituto-label">Instituto Amigos</p>
+</div>
+
+<!-- ====== ACT 1 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 24</span></div></div>
+<div class="act-head"><div class="act-num">1</div><h2 class="act-title">¡Pasó algo importante!</h2></div>
+
+<div class="sub-l">a. Lee los testimonios de estas personas sobre años especiales en su vida y relaciónalos con las fotos.</div>
+
+<div class="grid-3">
+<div class="tblock">
+<p style="font-family:'Playfair Display',serif;color:#d84315;text-align:center;font-size:13.5px;letter-spacing:1px;margin-bottom:4px;">JUANFRAN:</p>
+<p>«Un año especial para mí fue el 2010. Ese año se celebró el Mundial de Fútbol en Sudáfrica, y mi mujer y yo viajamos a África por primera vez. ¡Y la selección ganó la copa!».</p>
+<p style="margin-top:8px;font-weight:700;">Foto: <span class="ans-inline" data-group="1a"><span class="placeholder-text">____</span><span class="ans-text">3 (Fútbol)</span></span></p>
+</div>
+<div class="tblock">
+<p style="font-family:'Playfair Display',serif;color:#d84315;text-align:center;font-size:13.5px;letter-spacing:1px;margin-bottom:4px;">ALMUDENA:</p>
+<p>«En 2011 participé con unos amigos en el movimiento del 15 de mayo en la Puerta del Sol de Madrid. Después fuimos juntos a otros encuentros en muchas ciudades. Fue un año muy importante en España».</p>
+<p style="margin-top:8px;font-weight:700;">Foto: <span class="ans-inline" data-group="1a"><span class="placeholder-text">____</span><span class="ans-text">1 (Manifestación)</span></span></p>
+</div>
+<div class="tblock">
+<p style="font-family:'Playfair Display',serif;color:#d84315;text-align:center;font-size:13.5px;letter-spacing:1px;margin-bottom:4px;">MARINA:</p>
+<p>«El 6 de mayo de 2015 Enrique Iglesias, mi cantante favorito, dio un megaconcierto en Veracruz, México, y yo estuve allí. ¡Fue fantástico! Pero lo mejor de todo es que en el concierto conocí a Toni, mi marido, ¡y ese mismo año nos casamos!».</p>
+<p style="margin-top:8px;font-weight:700;">Foto: <span class="ans-inline" data-group="1a"><span class="placeholder-text">____</span><span class="ans-text">2 (Concierto)</span></span></p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'1a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l" style="margin-top:5px;">b. En grupos. ¿Qué año fue especial para ti o para tu país?</div>
+<div class="dia"><p><span class="sb">●</span> <em>Un año especial para mí fue el 2016 porque terminé los estudios y viajé por Asia durante tres meses.</em></p></div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">Solución: Respuesta libre. إجابة شخصية حسب سنة مهمة لك أو لبلدك.</p>
+
+<div class="ar-grid">
+<div class="ar">
+<strong>📝 بداية الزمن الجديد (الماضي البسيط - Indefinido):</strong>
+<br>يُستخدم للتعبير عن أحداث منتهية في الماضي ليس لها صلة بالحاضر.
+<br>▸ <span class="es-word">fue</span> = كان
+<br>▸ <span class="es-word">viajamos</span> = سافرنا
+<br>▸ <span class="es-word">ganó</span> = فاز
+<br>▸ <span class="es-word">participé</span> = شاركت
+<br>▸ <span class="es-word">fuimos</span> = ذهبنا
+</div>
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+1️⃣ اقرأ النصوص الثلاثة واربط كل شخصية بالصورة المناسبة.
+<br>2️⃣ لاحظ الأفعال الماضية زي: 
+<span class="es-word">dio</span> (أقام حفلة)، 
+<span class="es-word">estuve</span> (كنت/تواجدت)، 
+<span class="es-word">conocí</span> (تعرفت)، 
+<span class="es-word">nos casamos</span> (تزوجنا).
+<br>3️⃣ في تدريب b: تحدث مع زملائك عن سنة مميزة في حياتك أو بلدك والسبب.
+</div>
+</div>
+</div>
+
+<!-- ====== ACT 2a ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 25</span></div></div>
+<div class="act-head"><div class="act-num">2</div><h2 class="act-title">Un gran año</h2></div>
+
+<div class="sub-l">a. Años que marcaron sus vidas. Lee estos textos sobre dos personajes famosos del mundo hispano. ¿Qué años marcaron la vida de cada uno? ¿Qué pasó en esos años? Compara con tu compañero.</div>
+
+<div class="grid-2">
+<div class="tblock">
+<p style="font-family:'Playfair Display',serif;color:#0d47a1;font-size:14.5px;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;">Mireia Belmonte</p>
+<p>La mejor nadadora española de todos los tiempos, campeona mundial y campeona de Europa, nació en 1990. Como la misma Mireia afirma: «Empecé a nadar muy joven». A los cuatro años los médicos le aconsejaron hacer natación, por eso, sus padres pidieron información en un club de su ciudad natal, Badalona (Barcelona), y Mireia empezó con las clases de natación inmediatamente. En 2008 participó por primera vez en unas olimpiadas. Uno de sus mejores años fue, sin duda, el 2014, cuando ganó dos medallas de oro en el Campeonato europeo y cuatro en el Mundial en distintas disciplinas. Dos años después, en las Olimpiadas de Río de Janeiro, consiguió de nuevo una medalla de oro.</p>
+</div>
+
+<div class="tblock">
+<p style="font-family:'Playfair Display',serif;color:#0d47a1;font-size:14.5px;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;">Franklin Chang Díaz</p>
+<p>«La realidad superó mis sueños cuando llegué al espacio»; así resume su vida este exastronauta costarricense que viajó al espacio en siete misiones y que hoy tiene su propia empresa de tecnología espacial. El vuelo de Yuri Gagarin al espacio en 1961 marcó su vida. El pequeño Franklin quedó impresionado por ese acontecimiento, y así decidió su profesión de mayor: ser astronauta. En 1980 consiguió su primer contrato con la NASA y fue a trabajar a Houston: el primer paso de una gran carrera.</p>
+</div>
+</div>
+
+<div class="sub-l" style="margin-top:10px;">Solución - ¿Qué pasó en esos años?</div>
+<table style="font-size:11.5px;">
+<tr><th>Persona</th><th>Año</th><th>¿Qué pasó?</th></tr>
+<tr><td>Mireia Belmonte</td><td>1994</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">Empezó con clases de natación a los cuatro años.</span></span></td></tr>
+<tr><td>Mireia Belmonte</td><td>2008</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">Participó por primera vez en unas Olimpiadas.</span></span></td></tr>
+<tr><td>Mireia Belmonte</td><td>2014</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">Ganó un total de seis medallas de oro.</span></span></td></tr>
+<tr><td>Mireia Belmonte</td><td>2016</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">Ganó una medalla de oro en las Olimpiadas de Río de Janeiro.</span></span></td></tr>
+<tr><td>Franklin Chang Díaz</td><td>1961</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">El vuelo de Yuri Gagarin marcó su vida.</span></span></td></tr>
+<tr><td>Franklin Chang Díaz</td><td>1980</td><td><span class="ans-inline" data-group="2a"><span class="placeholder-text">_______</span><span class="ans-text">Consiguió su primer contrato con la NASA y fue a trabajar a Houston.</span></span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'2a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar-instr" style="margin-top:5px;"><span class="ar-title">📝 شرح النشاط 2a:</span>
+بنقرأ سيرة ذاتية مختصرة لشخصيتين واستخراج التواريخ الهامة.
+<br>💡 <strong>Vocabulario:</strong> 
+<span class="es-word">nadadora</span> = سبّاحة | <span class="es-word">aconsejaron</span> = نصحوا | <span class="es-word">astronauta</span> = رائد فضاء.
+</div>
+</div>
+
+<!-- ====== ACT 2b & 2c ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 25</span></div></div>
+<div class="act-head"><div class="act-num">2</div><h2 class="act-title">Un gran año (cont.)</h2></div>
+
+<div class="sub-l">b. Vuelve a leer los textos y subraya los verbos en indefinido. ¿Qué formas son regulares? ¿Cuáles son irregulares? Clasifícalas y añade el infinitivo.</div>
+
+<div class="grid-2">
+<div class="tblock" style="background:#e8f5e9;border-color:#2e7d32;">
+<p style="font-weight:700;color:#1b5e20;margin-bottom:4px;">Formas regulares (verbo - infinitivo)</p>
+<ul class="ans-list ans-list-compact" style="color:#1b5e20;">
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">empezó – empezar</span></span></li>
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">participó – participar</span></span></li>
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">ganó – ganar</span></span></li>
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">marcó – marcar</span></span></li>
+</ul>
+</div>
+<div class="tblock" style="background:#ffebee;border-color:#c62828;">
+<p style="font-weight:700;color:#b71c1c;margin-bottom:4px;">Formas irregulares (verbo - infinitivo)</p>
+<ul class="ans-list ans-list-compact" style="color:#b71c1c;">
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">consiguió – conseguir (cambio vocálico)</span></span></li>
+<li><span class="ans-inline" data-group="2b"><span class="placeholder-text">____</span><span class="ans-text">fue – ir</span></span></li>
+</ul>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'2b')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="grid-23" style="margin-top:5px;">
+<div>
+<div class="sub-l">c. En parejas. ¿Quieres conocer a otros personajes famosos y saber qué fechas marcaron sus vidas? Pregunta a tu compañero.</div>
+<div class="tblock" style="margin-bottom:8px;">
+<p style="font-weight:700;color:#0d47a1;">Celia Cruz</p>
+<p>
+<span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Fue una cantante, llamada la Reina de la Salsa.</span></span><br>
+Nacimiento: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Nació el 21 de octubre de 1925 en La Habana, Cuba.</span></span><br>
+1989: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Ganó su primer premio Grammy.</span></span><br>
+Muerte: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Murió el 16 de julio de 2003.</span></span></p>
+</div>
+<div class="tblock">
+<p style="font-weight:700;color:#0d47a1;">Gabriel García Márquez</p>
+<p>
+<span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Fue un escritor y periodista.</span></span><br>
+Nacimiento: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Nació el 6 de marzo de 1927 en Aracataca, Colombia.</span></span><br>
+1967: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Publicó su novela Cien años de soledad.</span></span><br>
+Muerte: <span class="ans-inline" data-group="2c"><span class="placeholder-text">____</span><span class="ans-text">Murió el 17 de abril de 2014.</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'2c')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="teacuerdas">
+<h4>Verbos con cambio vocálico</h4>
+<p>Solo en la 3ª persona del singular y plural:<br>
+<strong>pedir (e&gt;i):</strong> pedí, pediste, <strong>pidió</strong>, pedimos, pedisteis, <strong>pidieron</strong>.<br>
+<strong>dormir (o&gt;u):</strong> dormí, dormiste, <strong>durmió</strong>, dormimos, dormisteis, <strong>durmieron</strong>.</p>
+</div>
+<div class="teacuerdas" style="margin-top:5px;">
+<h4>Otras irregularidades</h4>
+<p>Para mantener la fonética en la 1ª persona (yo):<br>
+empezar: (yo) <strong>empecé</strong><br>
+buscar: (yo) <strong>busqué</strong><br>
+llegar: (yo) <strong>llegué</strong></p>
+<p style="margin-top:3px;">Cambio ortográfico en 3ª persona:<br>
+leer: (él) <strong>leyó</strong>, (ellos) <strong>leyeron</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== ACT 3a & 3b ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 26</span></div></div>
+<div class="act-head"><div class="act-num">3</div><h2 class="act-title">¡Yo estuve allí!</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l">a. En parejas. Mirad la foto: ¿dónde creéis que están las personas? Después escuchad la entrevista y comprobad. ¿De qué acontecimiento se trata realmente?</div>
+<div class="wbank"><span>un concierto al aire libre</span><span>una fiesta popular</span><span>una manifestación</span><span>un mercadillo</span></div>
+<div class="dia"><p><span class="sb">●</span> <em>Yo creo que están en un mercadillo porque...</em></p></div>
+<p style="font-size:12.5px;color:#1b5e20;font-weight:700;margin-top:5px;"><span class="ans-inline" data-group="3a"><span class="placeholder-text">_________</span><span class="ans-text">Respuesta: una manifestación</span></span></p>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 8</div>
+<audio controls preload="none"><source src="" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción – 3a (Audio 8)</div>
+<p>● Almudena, buenos días...<br>▲ Hola...<br>● Tú estuviste el 15 de mayo de 2011 en la Puerta del Sol de Madrid. ¿Qué pasó ese día?<br>▲ Pues ese domingo la gente por fin salió a la calle para protestar contra la situación de crisis en España. Fue un día increíble... y yo estuve allí con mis amigos, en el mismo centro de Madrid, y fui una más.<br>● Almudena, ¿y qué hiciste ese día?<br>▲ Pues llamé a unos amigos y decidimos ir a la Puerta del Sol. Estuvimos allí todo el día, después comimos algo en un bar, tomamos unas cervezas y volvimos a la plaza.<br>● Esa noche durmieron allí unas 40 personas, muchas de ellas en tiendas de campaña, ¿verdad? ¿Pasaste tú también la noche fuera?<br>▲ No, no, yo volví a casa. Pero la iniciativa tuvo tanto éxito que dos días más tarde se reunieron otra vez más de 10000 personas en Madrid y después en otras ciudades.<br>● El 15M fue para ti un día especial. ¿Por qué?<br>▲ Pues porque por fin salí a la calle y dije en voz alta mi opinión. Mis amigos y yo gritamos, cantamos y participamos con toda la gente en la manifestación. Creo que hice algo especial.<br>● ¿Crees que el movimiento del 15M fue importante?<br>▲ Sí, por supuesto, después de este día cambiaron algunas cosas en España. Fueron unos días muy intensos, de mucha alegría y mucha participación ciudadana. ¡Fue muy bonito!</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="sub-l" style="margin-top:10px;">b. Escucha otra vez y marca las frases correctas.</div>
+<div class="grid-2">
+<div style="background:#fafafa;padding:8px 12px;border-radius:6px;font-size:12px;line-height:1.8;">
+<p><span class="opt-mark correct" data-group="3b"></span> 1. Almudena y sus amigos estuvieron ese día en la Puerta del Sol, en el centro de Madrid.</p>
+<p><span class="opt-mark correct" data-group="3b"></span> 2. Ese día muchas personas salieron a la calle; al final de la jornada algunas "tomaron" la plaza y pusieron tiendas de campaña para dormir allí.</p>
+<p><span class="opt-mark" data-group="3b"></span> 3. Almudena pasó la noche en la calle.</p>
+</div>
+<div style="background:#fafafa;padding:8px 12px;border-radius:6px;font-size:12px;line-height:1.8;">
+<p><span class="opt-mark correct" data-group="3b"></span> 4. Para ella fue un día especial porque estuvo allí y pudo expresar sus ideas.</p>
+<p><span class="opt-mark" data-group="3b"></span> 5. El movimiento solo tuvo éxito en Madrid.</p>
+<p><span class="opt-mark correct" data-group="3b"></span> 6. La gente quiso un cambio e hizo algo importante para lograrlo.</p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3b')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar">
+<strong>💡 El movimiento 15M:</strong> مظاهرات 15 مايو 2011 (المعروفة بـحركة الغاضبين) كانت حركة احتجاجية سلمية ضخمة في إسبانيا ضد الأزمة الاقتصادية والسياسية. المتظاهرون نصبوا خيام (<span class="es-word">tiendas de campaña</span>) في ميدان (Puerta del Sol) في مدريد.
+</div>
+</div>
+
+<!-- ====== ACT 3c, 3d, 4 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 26</span></div></div>
+<div class="act-head"><div class="act-num">3</div><h2 class="act-title">¡Yo estuve allí! (cont.)</h2></div>
+
+<div class="grid-23">
+<div>
+<div class="sub-l">c. Busca en las frases las formas de indefinido de estos verbos.</div>
+<div class="grid-2" style="background:#fafafa;padding:8px;border-radius:6px;font-size:12.5px;line-height:1.9;">
+<div>
+<p>poder: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">pudo</span></span></p>
+<p>estar: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">estuvieron</span></span></p>
+<p>tener: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">tuvo</span></span></p>
+</div>
+<div>
+<p>hacer: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">hizo</span></span></p>
+<p>querer: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">quiso</span></span></p>
+<p>poner: <span class="ans-inline" data-group="3c"><span class="placeholder-text">____</span><span class="ans-text">pusieron</span></span></p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3c')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l" style="margin-top:5px;">d. En cadena. El ritmo del indefinido. Decid en voz alta las formas de indefinido de los verbos de 3c.</div>
+<div style="background:#fafafa;padding:8px;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<p>poder: (yo) <strong>pude</strong> - (él) <strong>pudo</strong></p>
+<p>estar: (yo) <strong>estuve</strong> - (él) <strong>estuvo</strong></p>
+<p>tener: (yo) <strong>tuve</strong> - (él) <strong>tuvo</strong></p>
+<p>hacer: (yo) <strong>hice</strong> - (él) <strong>hizo</strong></p>
+<p>querer: (yo) <strong>quise</strong> - (él) <strong>quiso</strong></p>
+<p>poner: (yo) <strong>puse</strong> - (él) <strong>puso</strong></p>
+</div>
+</div>
+
+<div>
+<div class="gbox">
+<h3>Verbos irregulares (Indefinido)</h3>
+<p>Tienen raíz irregular y las mismas terminaciones: <strong>-e, -iste, -o, -imos, -isteis, -ieron</strong>.</p>
+<div class="grid-2" style="margin-top:4px;">
+<ul style="list-style:none;">
+<li>estar → <strong>estuv-</strong></li>
+<li>poder → <strong>pud-</strong></li>
+<li>tener → <strong>tuv-</strong></li>
+<li>poner → <strong>pus-</strong></li>
+</ul>
+<ul style="list-style:none;">
+<li>hacer → <strong>hic-</strong> *(él hizo)*</li>
+<li>venir → <strong>vin-</strong></li>
+<li>querer → <strong>quis-</strong></li>
+<li>decir → <strong>dij-</strong> *(ellos dijeron)*</li>
+</ul>
+</div>
+</div>
+<div class="teacuerdas">
+<h4>Entonación</h4>
+<p>En los verbos irregulares en indefinido, el acento recae sobre la <strong>raíz</strong> en la primera y en la tercera persona del singular: (yo) <strong>es</strong>tuve, (él) <strong>es</strong>tuvo.</p>
+</div>
+</div>
+</div>
+
+<div class="act-head" style="margin-top:10px;"><div class="act-num">4</div><h2 class="act-title">La entrevista</h2></div>
+<div class="sub-l">En parejas. Lee las actividades de la lista y elige tres cosas que quieres saber de tu compañero. Formula las preguntas.</div>
+<div class="grid-2">
+<div class="wbank"><span>tener su primera bicicleta</span><span>irse de casa de sus padres</span><span>hacer su primer viaje sin sus padres</span><span>tener su primer móvil</span><span>empezar a aprender español</span><span>escribir una postal por última vez</span><span>dar una fiesta por última vez</span><span>terminar el colegio</span></div>
+<div class="tblock" style="background:#fff3e0;border-color:#f57c00;">
+<p style="font-weight:700;color:#bf360c;">Preguntas (Solución):</p>
+<ul style="font-size:11.5px;color:#d84315;padding-left:15px;">
+<li>¿Cuándo tuviste tu primera bicicleta?</li>
+<li>¿Cuándo hiciste tu primer viaje sin tus padres?</li>
+<li>¿Cuándo empezaste a aprender español?</li>
+<li>¿Cuándo diste una fiesta por última vez?</li>
+<li>¿Cuándo te fuiste de casa de tus padres?</li>
+<li>¿Cuándo tuviste tu primer móvil?</li>
+<li>¿Cuándo escribiste una postal por última vez?</li>
+<li>¿Cuándo terminaste el colegio?</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== ACT 5a & 5b ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Páginas 27–28</span></div></div>
+<div class="act-head"><div class="act-num">5</div><h2 class="act-title">Un 2 de febrero</h2></div>
+
+<div class="sub-l">a. Lee los diarios de estas tres personas. Después marca a quién corresponde cada información.</div>
+
+<div class="grid-3">
+<div class="tblock" style="background:#fffde7;border-color:#fbc02d;">
+<p style="font-weight:700;color:#f57f17;margin-bottom:4px;">NADIA (Puerto Ayora, 2 de feb)</p>
+<p style="font-size:11.5px;">Ayer llegué a las islas Galápagos. ¡Por fin aquí, rodeada de naturaleza y de tortugas! Vinieron a recibirme dos compañeros del proyecto, Cristina y Sebas, ¡mis primeros amigos en Ecuador! Hoy he visitado algunas islas con ellos y hemos ido juntos al centro de investigación, ¡desde que me dieron la beca para hacer mi máster aquí, estoy como en un sueño!</p>
+</div>
+<div class="tblock" style="background:#e0f2f1;border-color:#00897b;">
+<p style="font-weight:700;color:#00695c;margin-bottom:4px;">FELIPE (Valencia, 2 de feb)</p>
+<p style="font-size:11.5px;">Esta mañana ha sido mi primer día en la guardería. Ha sido muy bonito conocer a los niños y a mis nuevos compañeros de trabajo. En total tenemos 15 niños en nuestro grupo. Algunos, los más mayores, entraron en la guardería hace unos meses y ya están acostumbrados al ritmo de aquí, pero otros han empezado esta semana y necesitan más dedicación. ¡Espero hacerlo bien!</p>
+</div>
+<div class="tblock" style="background:#fce4ec;border-color:#d81b60;">
+<p style="font-weight:700;color:#ad1457;margin-bottom:4px;">ISABEL (Granada, 2 de feb)</p>
+<p style="font-size:11.5px;">El sábado pasado fue mi cumpleaños. Cumplí 60 años y preparé una comida en casa. Vinieron mi madre y mi hermana con su familia. Invité también a mis amigos de siempre: Tere, Alicia, Celia y Fermín. Celia se quedó a dormir en casa el sábado. ¡Lo pasamos fenomenal! Pero este fin de semana he vuelto a la normalidad. He hecho gimnasia, he ido al cine..., un fin de semana relajado sin gente en casa.</p>
+</div>
+</div>
+
+<div class="grid-2" style="margin-top:10px;">
+<div>
+<table style="font-size:11px;">
+<tr><th>Información</th><th>Nadia</th><th>Felipe</th><th>Isabel</th></tr>
+<tr><td style="text-align:left;">1. Vive sola.</td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark correct" data-group="5a"></span></td></tr>
+<tr><td style="text-align:left;">2. Es educador infantil.</td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark correct" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td></tr>
+<tr><td style="text-align:left;">3. Le gustan los animales.</td><td><span class="opt-mark correct" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td></tr>
+<tr><td style="text-align:left;">4. Ha sido su primer día de trabajo.</td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark correct" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td></tr>
+<tr><td style="text-align:left;">5. Vive en contacto con la naturaleza.</td><td><span class="opt-mark correct" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td></tr>
+<tr><td style="text-align:left;">6. Ha tenido un fin de semana tranquilo.</td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark" data-group="5a"></span></td><td><span class="opt-mark correct" data-group="5a"></span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l">b. Lee otra vez los textos de 5a y completa la tabla.</div>
+<table style="font-size:11px;">
+<tr><th>¿Quién?</th><th>¿Qué pasó?</th><th>¿Cuándo?</th></tr>
+<tr><td rowspan="2">Nadia</td><td>Llegó a las islas Galápagos.</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">ayer</span></span></td></tr>
+<tr><td>Ha visitado algunas islas.</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">hoy</span></span></td></tr>
+<tr><td rowspan="3">Felipe /<br>niños</td><td>Ha sido su primer día.</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">esta mañana</span></span></td></tr>
+<tr><td>Los mayores entraron...</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">hace unos meses</span></span></td></tr>
+<tr><td>Los más pequeños han empezado...</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">esta semana</span></span></td></tr>
+<tr><td rowspan="2">Isabel</td><td>Fue su cumpleaños.</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">el sábado pasado</span></span></td></tr>
+<tr><td>Ha hecho gimnasia y ha ido al cine.</td><td><span class="ans-inline" data-group="5b"><span class="placeholder-text">____</span><span class="ans-text">este fin de semana</span></span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5b')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+</div>
+</div>
+
+<!-- ====== ACT 5c & 5d ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 28</span></div></div>
+<div class="act-head"><div class="act-num">5</div><h2 class="act-title">Un 2 de febrero (cont.)</h2></div>
+
+<div class="sub-l">c. Ordena las expresiones de tiempo de 5b en el gráfico correspondiente y después completa Mi gramática.</div>
+
+<div class="grid-2">
+<div class="tblock" style="text-align:center;background:#fff8e1;border-color:#fbc02d;">
+<h4 style="color:#f57f17;font-family:'Playfair Display',serif;font-size:16px;">Pretérito perfecto (Periodo no terminado ⭕)</h4>
+<p style="font-size:13px;margin-top:6px;">esta semana, <span class="ans-inline" data-group="5c"><span class="placeholder-text">____</span><span class="ans-text">hoy</span></span>, <span class="ans-inline" data-group="5c"><span class="placeholder-text">____</span><span class="ans-text">esta mañana</span></span>, <span class="ans-inline" data-group="5c"><span class="placeholder-text">____</span><span class="ans-text">este fin de semana</span></span></p>
+</div>
+<div class="tblock" style="text-align:center;background:#e0f2f1;border-color:#00897b;">
+<h4 style="color:#00695c;font-family:'Playfair Display',serif;font-size:16px;">Indefinido (Periodo terminado | )</h4>
+<p style="font-size:13px;margin-top:6px;">el sábado pasado, <span class="ans-inline" data-group="5c"><span class="placeholder-text">____</span><span class="ans-text">ayer</span></span>, <span class="ans-inline" data-group="5c"><span class="placeholder-text">____</span><span class="ans-text">hace unos meses</span></span></p>
+</div>
+</div>
+
+<div class="gbox" style="margin-top:10px;">
+<h3 style="color:#d84315;">MI GRAMÁTICA</h3>
+<p>El <span class="ans-inline" data-group="5c"><span class="placeholder-text">_______</span><span class="ans-text">Pretérito perfecto</span></span> se utiliza para situaciones pasadas que <strong>tienen relación con el presente</strong>. Se sitúan en un periodo de tiempo que abarca hasta el momento en el que se expresan. Expresiones: <em>esta mañana, hoy, esta semana</em>, etc.</p>
+<p style="margin-top:6px;">El <span class="ans-inline" data-group="5c"><span class="placeholder-text">_______</span><span class="ans-text">Indefinido</span></span> se utiliza para situaciones pasadas que <strong>no tienen relación con el presente</strong>. Se sitúan en un periodo de tiempo finalizado antes del momento en el que se expresan. Expresiones: <em>ayer, la semana pasada, hace unos meses</em>, etc.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5c')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="grid-2" style="margin-top:10px;">
+<div>
+<div class="sub-l">d. En grupos. Escribe tres frases con cosas que has hecho hoy y tres con cosas que hiciste ayer. Dos datos son falsos. ¿Cuáles son? Tus compañeros lo tienen que adivinar.</div>
+<div class="dia">
+<p><span class="sb">●</span> <em>Hoy he desayunado un café. Ayer fui al cine.</em></p>
+<p><span class="st">▲</span> <em>Lo del cine es falso. Ayer trabajaste todo el día.</em></p>
+</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">Solución: Respuesta libre. تكتب 3 جمل فعلتها اليوم، و3 جمل أمس.</p>
+</div>
+<div class="infobox" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-color:#ef6c00;">
+<h4 style="color:#bf6a00;">📝 Expresiones de tiempo</h4>
+<div class="grid-2" style="font-size:11.5px;color:#5a4100;">
+<ul style="list-style:none;">
+<li><strong>Perfecto</strong></li>
+<li>hoy</li>
+<li>esta semana</li>
+<li>este mes / año</li>
+<li>ya, todavía no</li>
+<li>alguna vez</li>
+<li>últimamente</li>
+</ul>
+<ul style="list-style:none;">
+<li><strong>Indefinido</strong></li>
+<li>ayer</li>
+<li>la semana pasada</li>
+<li>el mes / año pasado</li>
+<li>en 2014</li>
+<li>hace dos años</li>
+<li>hace mucho</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== ACT 6 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 3 – Un año especial</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 29</span></div></div>
+<div class="act-head"><div class="act-num">6</div><h2 class="act-title">¿Cómo fue?</h2></div>
+
+<div class="sub-l">a. Escucha los diálogos. ¿Cómo son las experiencias de estas personas: positivas o negativas? 🔊 9-10</div>
+
+<div class="grid-2">
+<!-- Audio Jordi -->
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 9 (Jordi)</div>
+<audio controls preload="none"><source src="" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción (Jordi)</div>
+<p>● Hola, Jordi, ¿qué tal con Maribel? Habéis estado en los Picos de Europa, ¿no?<br>▲ Sí, sí, hemos pasado allí este fin de semana, los Picos de Europa nos han gustado mucho. Pero, bueno, es que... Maribel y yo... estamos regular, ¿sabes?<br>● ¡Qué me dices!<br>▲ Pues que hemos discutido todo el tiempo. Ella no me entiende, y yo no la entiendo. Vamos, que nos hemos separado. ¡Ha sido un fin de semana horrible!<br>● ¡Vaya, cuánto lo siento! Chico, ¡anímate...! ¿Tomamos un café y me lo cuentas todo tranquilamente?</p>
+</div>
+</div>
+
+<!-- Audio Lucía -->
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 10 (Lucía)</div>
+<audio controls preload="none"><source src="" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción (Lucía)</div>
+<p>● Bueno, Lucía, ¿y qué tal tu fiesta de cumpleaños ayer? Hiciste una fiesta muy grande, ¿no? ¿Qué tal salió todo?<br>▲ No, no, solo hice una comida en casa, con mi familia y con unos amigos. Una reunión bastante familiar. Es que no me gustan mucho las celebraciones con mucha gente.<br>● Pero... bien, ¿no?<br>▲ Sí, sí, ¡fue un día muy bonito! ¡Y lo pasamos muy bien!</p>
+</div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="tblock" style="background:#fafafa;">
+<p style="font-weight:700;color:#d84315;">Experiencias (6a):</p>
+<p>Jordi: <span class="ans-inline" data-group="6ab"><span class="placeholder-text">____</span><span class="ans-text">Negativa 😞</span></span></p>
+<p>Lucía: <span class="ans-inline" data-group="6ab"><span class="placeholder-text">____</span><span class="ans-text">Positiva 😊</span></span></p>
+</div>
+<div class="sub-l" style="margin-bottom:0;">b. Escucha otra vez y completa la tabla.</div>
+</div>
+
+<table style="font-size:11.5px;margin-top:5px;">
+<tr><th></th><th>¿Qué pasó?</th><th>¿Cuándo?</th><th>¿Cómo fue / ha sido?</th></tr>
+<tr><td>Jordi:</td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">Ha pasado un fin de semana con Maribel en los Picos de Europa. Han discutido todo el tiempo.</span></span></td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">este fin de semana</span></span></td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">Ha sido horrible.</span></span></td></tr>
+<tr><td>Lucía:</td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">Hizo una comida en casa con la familia y sus amigos para celebrar su cumpleaños.</span></span></td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">ayer</span></span></td><td><span class="ans-inline" data-group="6ab"><span class="placeholder-text">_______</span><span class="ans-text">Fue un día muy bonito.</span></span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'6ab')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="grid-2" style="margin-top:5px;">
+<div>
+<div class="sub-l">c. En movimiento. Detectives de historias. ¿Quién de la clase...? Busca a compañeros a los que les ha pasado alguna vez una de estas cosas.</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">Solución: Respuesta libre. تسأل زملاءك عن تجاربهم وتكتب الإجابات باستخدام indefinido أو pretérito perfecto حسب الوقت.</p>
+</div>
+<div class="gbox">
+<h3>Valorar una experiencia pasada</h3>
+<p><span class="sb">●</span> ¿Qué tal hoy?<br><span class="st">▲</span> ¡<strong>Ha sido</strong> fantástico! El concierto me ha encantado.</p>
+<p style="margin-top:4px;"><span class="sb">●</span> ¿Qué tal el sábado pasado?<br><span class="st">▲</span> ¡<strong>Fue</strong> horrible! La fiesta no me gustó nada.</p>
+</div>
+</div>
+</div>
+
+<!-- ====== DIVIDER GRAMÁTICA ====== -->
+<div class="slide slide-div"><h2>Gramática y Comunicación</h2><div class="divline"></div><p>Unidad 3 – Página 122</p></div>
+
+<!-- ====== GRAMÁTICA ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Gramática – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 122</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#7c4dff;">G</div><h2 class="act-title">Gramática – Resumen</h2></div>
+
+<div class="grid-2">
+<div class="gbox"><h3>Verbos irregulares en indefinido</h3>
+<p>Cambian la raíz. Todos tienen las mismas terminaciones sin tilde: <strong>-e, -iste, -o, -imos, -isteis, -ieron</strong>.</p>
+<div class="grid-2" style="margin-top:5px;">
+<ul style="list-style:none;">
+<li><strong>estar:</strong> estuve, estuviste, estuvo...</li>
+<li><strong>tener:</strong> tuve, tuviste, tuvo...</li>
+<li><strong>poder:</strong> pude, pudiste, pudo...</li>
+<li><strong>poner:</strong> puse, pusiste, puso...</li>
+</ul>
+<ul style="list-style:none;">
+<li><strong>hacer:</strong> hice, hiciste, hizo...</li>
+<li><strong>venir:</strong> vine, viniste, vino...</li>
+<li><strong>querer:</strong> quise, quisiste, quiso...</li>
+<li><strong>saber:</strong> supe, supiste, supo...</li>
+</ul>
+</div>
+<p style="margin-top:4px;"><strong>decir*:</strong> dije, dijiste, dijo, dijimos, dijisteis, <strong>dijeron</strong> (sin 'i')</p>
+</div>
+
+<div class="gbox"><h3>Otros verbos irregulares</h3>
+<div class="grid-2">
+<div>
+<p><strong>ir / ser</strong><br>fui<br>fuiste<br>fue<br>fuimos<br>fuisteis<br>fueron</p>
+</div>
+<div>
+<p><strong>dar</strong><br>di<br>diste<br>dio<br>dimos<br>disteis<br>dieron</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="gbox"><h3>Casos especiales del indefinido</h3>
+<p><strong>Cambio vocálico en 3ª persona (él, ellos):</strong><br>
+La -e- pasa a -i- : elegir (eligió), pedir (pidió), despedir (despidió), sentir (sintió).<br>
+La -o- pasa a -u- : morir (murió), dormir (durmió).</p>
+<p style="margin-top:6px;"><strong>La -i- cambia por -y- (él, ellos):</strong><br>
+oír (oyó, oyeron), construir (construyó, construyeron), leer (leyó, leyeron).</p>
+<p style="margin-top:6px;"><strong>Cambio ortográfico en 1ª persona (yo):</strong><br>
+empezar (empecé), realizar (realicé)<br>
+llegar (llegué)<br>
+buscar (busqué)</p>
+</div>
+<div class="gbox"><h3>Diferencias Perfecto y el Indefinido</h3>
+<p><strong>El pretérito perfecto</strong> se utiliza para acciones ocurridas en el pasado que tienen conexión con el presente. Suceden en un periodo de tiempo no cerrado. El perfecto aparece con expresiones de tiempo como: <em>hoy, esta semana, este mes, este año, ya, últimamente</em>, etc.</p>
+<p style="margin-top:6px;"><strong>El indefinido</strong> se utiliza para acciones ocurridas en el pasado que no tienen ya ningún tipo de conexión con el presente. Suceden en un periodo de tiempo cerrado. El indefinido aparece con expresiones de tiempo como: <em>ayer, el fin de semana pasado, el año pasado, en 2015</em>, etc.</p>
+</div>
+</div>
+
+<div class="ar ar-full">
+<strong>📝 ملخص للمذاكرة - أهم قواعد الوحدة 3:</strong>
+<br>1. <strong>الماضي البسيط للأفعال المنتظمة:</strong> (ar: -é, -aste, -ó, -amos, -asteis, -aron) / (er,ir: -í, -iste, -ió, -imos, -isteis, -ieron). النبرة على آخر حرف لـ yo و él.
+<br>2. <strong>الأفعال الشاذة كلياً:</strong> بيتغير جدر الكلمة تماماً وتاخد نهايات خاصة من غير Tildes: (-e, -iste, -o, -imos, -isteis, -ieron). النبرة على الجدر مش على النهاية.
+<br>3. <strong>الشواذ الجزئية:</strong> أفعال بيتغير حرف العلة فيها مع (él, ellos) بس زي (pedir → pidió, pidieron) و (dormir → durmió, durmieron). وأفعال بتتغير إملائياً مع (yo) للحفاظ على النطق زي (empezar → empecé).
+</div>
+</div>
+
+<!-- ====== COMUNICACIÓN ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Comunicación – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 122 – Resumen</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2e7d32;">C</div><h2 class="act-title">Comunicación – ملخص الوظائف التواصلية</h2></div>
+
+<div class="com-summary">
+<!-- كارت 1 -->
+<div class="com-card">
+<div class="com-card-head">📅 1. Acontecimientos del pasado</div>
+<div class="com-card-body">
+<div class="com-formula">Expresión + Indefinido</div>
+<div class="com-example">Un año especial para mí <strong>fue</strong> el 2010.</div>
+<div class="com-example">Ese año <strong>se celebró</strong> el Mundial de Fútbol en Sudáfrica.</div>
+<div class="com-example">Y mi mujer y yo <strong>viajamos</strong> a África por primera vez.</div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> سرد أحداث حصلت في سنة أو فترة منتهية.</div>
+<div class="com-ar-mini">الزمن المستخدم: <strong>Pretérito Indefinido</strong>.</div>
+</div>
+</div>
+
+<!-- كارت 2 -->
+<div class="com-card" style="border-color:#1976d2;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#1976d2,#0d47a1);">⭐ 2. Hablar de vivencias especiales</div>
+<div class="com-card-body">
+<div class="com-formula" style="border-color:#1976d2;color:#0d47a1;">Indefinido o Perfecto</div>
+<div class="com-example">El año pasado <strong>perdí</strong> el avión para ir a Tenerife.</div>
+<div class="com-example"><strong>Estuve</strong> un día entero en el aeropuerto.</div>
+<div class="com-example">Hoy <strong>he perdido</strong> el tren y <strong>he llegado</strong> tarde a la clase.</div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> سرد تجارب شخصية مميزة.</div>
+<div class="com-ar-mini"><strong>القاعدة:</strong> اختار الزمن حسب الكلمة الدالة (el año pasado vs hoy).</div>
+</div>
+</div>
+
+<!-- كارت 3 -->
+<div class="com-card" style="border-color:#ef6c00;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#ef6c00,#bf360c);">👍👎 3. Valorar una experiencia pasada</div>
+<div class="com-card-body">
+<div class="com-formula" style="border-color:#ef6c00;color:#bf360c;">¿Qué tal...? + Fue / Ha sido...</div>
+<div class="com-example">¿Qué tal hoy? - ¡<strong>Ha sido</strong> fantástico! El concierto me <strong>ha encantado</strong>.</div>
+<div class="com-example">¿Qué tal ayer? - <strong>Fue</strong> horrible. La excursión no me <strong>gustó</strong> nada.</div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> تقييم تجربة. بنستخدم فعل <strong>ser</strong>.</div>
+<div class="com-ar-mini"><strong>ha sido</strong> لفترة لسه مخلصتش، و <strong>fue</strong> لفترة خلصت وانتهت.</div>
+</div>
+</div>
+</div>
+
+<div class="com-tip-row"><span class="tip-icon">⚠️</span><span><strong>تنبيه 1:</strong> فعل <span class="es-tag">ser</span> وفعل <span class="es-tag">ir</span> ليهم نفس التصريف بالظبط في الماضي البسيط (fui, fuiste, fue...). بتعرفهم من سياق الجملة.</span></div>
+<div class="com-tip-row" style="border-color:#1976d2;color:#0d47a1;"><span class="tip-icon">⚠️</span><span><strong>تنبيه 2:</strong> مع فعل <strong>gustar</strong> في الماضي بنستخدم نفس قاعدة الوحدة الأولى (ضمير المفعول + gusta/gustan). بس بنصرف الفعل في الماضي: <span class="es-tag">me ha gustado / me gustó</span>.</span></div>
+
+</div>
+
+<!-- ====== DIVIDER EJERCICIOS ====== -->
+<div class="slide slide-div"><h2>Ejercicios</h2><div class="divline"></div><p>Unidad 3 – Página 123</p></div>
+
+<!-- ====== EJ 1+2 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 123</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 1 – 2</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">1</span> Completa la tabla con los verbos en indefinido que faltan.</div>
+<table style="font-size:11.5px;">
+<tr><th></th><th>elegir</th><th>sentir</th><th>dormir</th></tr>
+<tr><td>yo</td><td>elegí</td><td><span class="fill-blank" data-group="ej1">sentí</span></td><td><span class="fill-blank" data-group="ej1">dormí</span></td></tr>
+<tr><td>tú</td><td><span class="fill-blank" data-group="ej1">elegiste</span></td><td>sentiste</td><td><span class="fill-blank" data-group="ej1">dormiste</span></td></tr>
+<tr><td>él/ella/usted</td><td><span class="fill-blank" data-group="ej1">eligió</span></td><td><span class="fill-blank" data-group="ej1">sintió</span></td><td>durmió</td></tr>
+<tr><td>nosotros/-as</td><td><span class="fill-blank" data-group="ej1">elegimos</span></td><td>sentimos</td><td><span class="fill-blank" data-group="ej1">dormimos</span></td></tr>
+<tr><td>vosotros/-as</td><td><span class="fill-blank" data-group="ej1">elegisteis</span></td><td><span class="fill-blank" data-group="ej1">sentisteis</span></td><td>dormisteis</td></tr>
+<tr><td>ellos/ellas/ustedes</td><td>eligieron</td><td><span class="fill-blank" data-group="ej1">sintieron</span></td><td><span class="fill-blank" data-group="ej1">durmieron</span></td></tr>
+</table>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej1')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">2</span> Escribe las siguientes frases en indefinido.</div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.85;">
+<p>1. ellos oyen: <span class="fill-blank" data-group="ej2">oyeron</span></p>
+<p>2. usted empieza: <span class="fill-blank" data-group="ej2">empezó</span></p>
+<p>3. yo llego: <span class="fill-blank" data-group="ej2">llegué</span></p>
+<p>4. ella construye: <span class="fill-blank" data-group="ej2">construyó</span></p>
+<p>5. ellos leen: <span class="fill-blank" data-group="ej2">leyeron</span></p>
+<p>6. yo realizo: <span class="fill-blank" data-group="ej2">realicé</span></p>
+<p>7. él despide: <span class="fill-blank" data-group="ej2">despidió</span></p>
+<p>8. yo busco: <span class="fill-blank" data-group="ej2">busqué</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej2')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+</div>
+</div>
+
+<!-- ====== EJ 3 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 123</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicio 3</h2></div>
+
+<div class="sub-l"><span class="ejn">3</span> Completa las tablas con los verbos en indefinido que faltan.</div>
+
+<div class="grid-3">
+<table style="font-size:11.5px;">
+<tr><th></th><th>estar</th><th>tener</th><th>poder</th></tr>
+<tr><td>yo</td><td>estuve</td><td><span class="fill-blank" data-group="ej3a">tuve</span></td><td><span class="fill-blank" data-group="ej3a">pude</span></td></tr>
+<tr><td>tú</td><td><span class="fill-blank" data-group="ej3a">estuviste</span></td><td>tuviste</td><td><span class="fill-blank" data-group="ej3a">pudiste</span></td></tr>
+<tr><td>él/ella/ud.</td><td><span class="fill-blank" data-group="ej3a">estuvo</span></td><td><span class="fill-blank" data-group="ej3a">tuvo</span></td><td>pudo</td></tr>
+<tr><td>nosotros</td><td>estuvimos</td><td><span class="fill-blank" data-group="ej3a">tuvimos</span></td><td><span class="fill-blank" data-group="ej3a">pudimos</span></td></tr>
+<tr><td>vosotros</td><td><span class="fill-blank" data-group="ej3a">estuvisteis</span></td><td>tuvisteis</td><td><span class="fill-blank" data-group="ej3a">pudisteis</span></td></tr>
+<tr><td>ellos/uds.</td><td><span class="fill-blank" data-group="ej3a">estuvieron</span></td><td><span class="fill-blank" data-group="ej3a">tuvieron</span></td><td>pudieron</td></tr>
+</table>
+
+<table style="font-size:11.5px;">
+<tr><th></th><th>poner</th><th>decir</th><th>hacer</th></tr>
+<tr><td>yo</td><td><span class="fill-blank" data-group="ej3a">puse</span></td><td>dije</td><td><span class="fill-blank" data-group="ej3a">hice</span></td></tr>
+<tr><td>tú</td><td>pusiste</td><td><span class="fill-blank" data-group="ej3a">dijiste</span></td><td><span class="fill-blank" data-group="ej3a">hiciste</span></td></tr>
+<tr><td>él/ella/ud.</td><td><span class="fill-blank" data-group="ej3a">puso</span></td><td><span class="fill-blank" data-group="ej3a">dijo</span></td><td>hizo</td></tr>
+<tr><td>nosotros</td><td><span class="fill-blank" data-group="ej3a">pusimos</span></td><td>dijimos</td><td><span class="fill-blank" data-group="ej3a">hicimos</span></td></tr>
+<tr><td>vosotros</td><td>pusisteis</td><td><span class="fill-blank" data-group="ej3a">dijisteis</span></td><td><span class="fill-blank" data-group="ej3a">hicisteis</span></td></tr>
+<tr><td>ellos/uds.</td><td><span class="fill-blank" data-group="ej3a">pusieron</span></td><td><span class="fill-blank" data-group="ej3a">dijeron</span></td><td>hicieron</td></tr>
+</table>
+
+<table style="font-size:11.5px;">
+<tr><th></th><th>venir</th><th>querer</th><th>saber</th></tr>
+<tr><td>yo</td><td><span class="fill-blank" data-group="ej3a">vine</span></td><td><span class="fill-blank" data-group="ej3a">quise</span></td><td>supe</td></tr>
+<tr><td>tú</td><td><span class="fill-blank" data-group="ej3a">viniste</span></td><td>quisiste</td><td><span class="fill-blank" data-group="ej3a">supiste</span></td></tr>
+<tr><td>él/ella/ud.</td><td>vino</td><td><span class="fill-blank" data-group="ej3a">quiso</span></td><td><span class="fill-blank" data-group="ej3a">supo</span></td></tr>
+<tr><td>nosotros</td><td><span class="fill-blank" data-group="ej3a">vinimos</span></td><td><span class="fill-blank" data-group="ej3a">quisimos</span></td><td>supimos</td></tr>
+<tr><td>vosotros</td><td><span class="fill-blank" data-group="ej3a">vinisteis</span></td><td>quisisteis</td><td><span class="fill-blank" data-group="ej3a">supisteis</span></td></tr>
+<tr><td>ellos/uds.</td><td>vinieron</td><td><span class="fill-blank" data-group="ej3a">quisieron</span></td><td><span class="fill-blank" data-group="ej3a">supieron</span></td></tr>
+</table>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej3a')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar" style="margin-top:10px;">
+<strong>📝 تذكير:</strong> هذه الأفعال الشاذة كلياً تشترك في نفس النهايات (e, iste, o, imos, isteis, ieron) وبدون أي علامات ترقيم Tildes.
+</div>
+</div>
+
+<!-- ====== EJ 4+5+6 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 123</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicios 4 – 5 – 6</h2></div>
+
+<div class="grid-2">
+<div>
+<div class="sub-l"><span class="ejn">4</span> Completa con el indefinido de los verbos ser, ir o dar.</div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<p>1. Ayer mis amigos y yo <span class="fill-blank" data-group="ej4">fuimos</span> al cine.</p>
+<p>2. El fin de semana pasado mi hermano me <span class="fill-blank" data-group="ej4">dio</span> un regalo por mi cumpleaños.</p>
+<p>3. Ángela, ¿a qué lugar <span class="fill-blank" data-group="ej4">fuiste</span> el verano pasado de vacaciones?</p>
+<p>4. Un año especial para mí <span class="fill-blank" data-group="ej4">fue</span> el 2017.</p>
+<p>5. La clase de ayer <span class="fill-blank" data-group="ej4">fue</span> muy divertida.</p>
+<p>6. Anoche mis padres me <span class="fill-blank" data-group="ej4">dieron</span> una sorpresa y <span class="fill-blank" data-group="ej4">fuimos</span> a cenar a un restaurante mexicano.</p>
+<p>7. ¿Vosotros <span class="fill-blank" data-group="ej4">fuisteis</span> a Argentina el año pasado?</p>
+<p>8. Picasso y Dalí <span class="fill-blank" data-group="ej4">fueron</span> pintores.</p>
+<p>9. Normalmente van al centro en coche, pero ayer <span class="fill-blank" data-group="ej4">fueron</span> a pie.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej4')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+
+<div>
+<div class="sub-l"><span class="ejn">5</span> ¿Hiciste algo especial? Escribe frases sobre ti a partir de las siguientes expresiones de tiempo.</div>
+<p style="font-size:10.5px;color:#888;font-style:italic;">Solución: Respuesta libre.</p>
+
+<div class="sub-l" style="margin-top:10px;"><span class="ejn">6</span> Elige la opción correcta.</div>
+<div style="padding:6px 10px;background:#fafafa;border-radius:6px;font-size:11.5px;line-height:1.9;">
+<p>1. Esta semana <span class="fill-blank" data-group="ej6">he estudiado</span> / estudié muy poco.</p>
+<p>2. Llegaron / Han llegado hace tres días y se <span class="fill-blank" data-group="ej6">han ido</span> / fueron hoy.</p>
+<p>3. Esta mañana Luisa <span class="fill-blank" data-group="ej6">ha hecho</span> / hizo gimnasia.</p>
+<p>4. "Che" Guevara nació / ha nacido en 1928. (<span class="fill-blank" data-group="ej6">nació</span>)</p>
+<p>5. ¿Todavía no saliste / <span class="fill-blank" data-group="ej6">has salido</span> de clase?</p>
+<p>6. ¿Trabajaste / <span class="fill-blank" data-group="ej6">Has trabajado</span> en un restaurante alguna vez?</p>
+<p>7. La selección española de fútbol <span class="fill-blank" data-group="ej6">ganó</span> / ha ganado la copa del Mundial hace muchos años.</p>
+<p>8. Ha visto / <span class="fill-blank" data-group="ej6">Vio</span> a su amigo Alberto en la playa ayer.</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej6')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+</div>
+</div>
+</div>
+
+<!-- ====== EJ 7 ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 123</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#2c2c54;">Ej</div><h2 class="act-title">Ejercicio 7</h2></div>
+
+<div class="sub-l"><span class="ejn">7</span> Completa el diario personal de Sandra con pretérito perfecto o indefinido.</div>
+
+<div class="tblock" style="background:#fffde7;border-color:#fbc02d;font-size:13.5px;line-height:2.2;padding:15px 20px;">
+<p style="font-family:'Playfair Display',serif;font-size:14px;color:#f57f17;margin-bottom:8px;">15 de febrero, 23:30</p>
+<p>Ayer (ser) <span class="fill-blank" data-group="ej7">fue</span> un día muy largo porque (trabajar) <span class="fill-blank" data-group="ej7">trabajé</span> hasta las siete y después (ir) <span class="fill-blank" data-group="ej7">fui</span> al médico. Cuando (salir) <span class="fill-blank" data-group="ej7">salí</span> de la consulta del médico (pasar) <span class="fill-blank" data-group="ej7">pasé</span> por el supermercado e (hacer) <span class="fill-blank" data-group="ej7">hice</span> la compra. (Llegar) <span class="fill-blank" data-group="ej7">Llegué</span> a casa a las 10 de la noche, (preparar) <span class="fill-blank" data-group="ej7">preparé</span> la cena, (hablar) <span class="fill-blank" data-group="ej7">hablé</span> con mi amiga Laura por teléfono, (ver) <span class="fill-blank" data-group="ej7">vi</span> la tele y finalmente (acostarse) <span class="fill-blank" data-group="ej7">me acosté</span> después de las doce. (Ser) <span class="fill-blank" data-group="ej7">Fue</span> un día poco interesante.</p>
+
+<p>Hoy (ser) <span class="fill-blank" data-group="ej7">ha sido</span> un día muy bonito. (Levantarse) <span class="fill-blank" data-group="ej7">Me he levantado</span> muy contenta porque hoy hace veinticinco años que (nacer) <span class="fill-blank" data-group="ej7">nací</span>. Esta mañana (recibir) <span class="fill-blank" data-group="ej7">he recibido</span> muchos mensajes de mis amigos para felicitarme. En la oficina (celebrar) <span class="fill-blank" data-group="ej7">he celebrado / celebramos</span> mi cumpleaños con mis compañeros y después del trabajo (quedar) <span class="fill-blank" data-group="ej7">he quedado</span> con unos amigos para tomar algo en una cafetería. ¡Este fin de semana voy a dar una fiesta en casa!</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej7')"><span class="btn-text">اظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar">
+<strong>📝 تلميح للحل:</strong>
+في الفقرة الأولى، كلمة السر هي <strong>Ayer</strong> (أمس)، ولذلك كل أفعالها لازم تكون <strong>Indefinido</strong> (ماضي بسيط).
+<br>في الفقرة التانية، الكلمات الدالة هي <strong>Hoy</strong> و <strong>Esta mañana</strong> (اليوم/هذا الصباح)، ولذلك معظم الأفعال هتكون <strong>Perfecto</strong> (ماضي قريب). الاستثناء الوحيد هو الفعل <strong>nacer</strong> (يولد) لأن الولادة حدث منتهي تماماً في الماضي ومحدد بـ 25 سنة، فيُصرف في الـ Indefinido كـ <span class="es-word">nací</span>.
+</div>
+</div>
+
+<!-- ====== DIVIDER SHADOWING ====== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#1a237e,#283593);">
+<h2 style="color:#ffd60a;">🎙️ Shadowing</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.8);">اضغط على أي جملة لتسمعها بالإسباني وردد وراها<br>Haz clic en cualquier frase</p>
+</div>
+
+<!-- ====== SHADOWING 1 ====== -->
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 3</span><span class="num">1/3 – Acontecimientos pasados</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Acontecimientos pasados – التحدث عن أحداث من الماضي</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'Un año especial para mí fue el 2010.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>Un año especial para mí fue el 2010.</p><p class="sh-ar">سنة مميزة بالنسبة لي كانت 2010.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Ese año se celebró el Mundial de Fútbol en Sudáfrica.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>Ese año se celebró el Mundial de Fútbol en Sudáfrica.</p><p class="sh-ar">السنة دي أُقيمت كأس العالم في جنوب أفريقيا.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Y mi mujer y yo viajamos a África por primera vez.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>Y mi mujer y yo viajamos a África por primera vez.</p><p class="sh-ar">ومراتي وأنا سافرنا أفريقيا لأول مرة.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'En 2011 participé con unos amigos en una manifestación.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>En 2011 participé con unos amigos en una manifestación.</p><p class="sh-ar">في 2011 شاركت مع أصحابي في مظاهرة.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Después fuimos juntos a otros encuentros en muchas ciudades.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>Después fuimos juntos a otros encuentros en muchas ciudades.</p><p class="sh-ar">بعد كده رحنا مع بعض تجمعات تانية في مدن كتير.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Fue un año muy importante en España.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>Fue un año muy importante en España.</p><p class="sh-ar">كانت سنة مهمة جداً في إسبانيا.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Mi cantante favorito dio un megaconcierto en Veracruz.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>Mi cantante favorito dio un megaconcierto en Veracruz.</p><p class="sh-ar">مغنيّ المفضل عمل حفلة ضخمة في فيراكروز.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Y lo mejor de todo es que allí conocí a mi marido.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Y lo mejor de todo es que allí conocí a mi marido.</p><p class="sh-ar">وأحلى حاجة إني هناك اتعرفت على جوزي.</p></div>
+</div>
+</div>
+
+<!-- ====== SHADOWING 2 ====== -->
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 3</span><span class="num">2/3 – Vivencias y verbos irregulares</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Vivencias y verbos irregulares – تجارب شخصية والأفعال الشاذة</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'A los cuatro años los médicos le aconsejaron hacer natación.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>A los cuatro años los médicos le aconsejaron hacer natación.</p><p class="sh-ar">في سن 4 سنين الدكاترة نصحوها تمارس سباحة.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Mireia empezó con las clases inmediatamente.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>Mireia empezó con las clases inmediatamente.</p><p class="sh-ar">ميريا بدأت حصص السباحة فوراً.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Consiguió de nuevo una medalla de oro.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>Consiguió de nuevo una medalla de oro.</p><p class="sh-ar">حصلت من جديد على ميدالية ذهبية.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'El pequeño Franklin quedó impresionado por ese acontecimiento.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>El pequeño Franklin quedó impresionado por ese acontecimiento.</p><p class="sh-ar">فرانكلين الصغير انبهر بالحدث ده.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Ayer llegué a las islas Galápagos. ¡Por fin aquí!')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>Ayer llegué a las islas Galápagos. ¡Por fin aquí!</p><p class="sh-ar">إمبارح وصلت جزر الجالاباجوس. أخيراً هنا!</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Vinieron a recibirme dos compañeros del proyecto.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>Vinieron a recibirme dos compañeros del proyecto.</p><p class="sh-ar">جم يستقبلوني اتنين زمايلي من المشروع.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Hoy he visitado algunas islas con ellos.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>Hoy he visitado algunas islas con ellos.</p><p class="sh-ar">النهارده زرت شوية جزر معاهم.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Esta mañana ha sido mi primer día en la guardería.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Esta mañana ha sido mi primer día en la guardería.</p><p class="sh-ar">النهارده الصبح كان أول يوم ليا في الحضانة.</p></div>
+</div>
+</div>
+
+<!-- ====== SHADOWING 3 ====== -->
+<div class="slide slide-shadow">
+<div class="shadow-topbar"><span class="lbl">Shadowing – Unidad 3</span><span class="num">3/3 – Valorar y marcadores de tiempo</span></div>
+<div class="shadow-title">🎙️ Shadowing</div>
+<p class="shadow-sub">Valorar experiencias – تقييم التجارب الماضية</p>
+<div class="shadow-instr">📌 اضغط على أي جملة لسماعها بالإسباني، ثم رددها بنفس النطق</div>
+<div class="shadow-grid">
+<div class="shadow-box" onclick="playShadow(this,'El sábado pasado fue mi cumpleaños, cumplí 60 años.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">1</span>El sábado pasado fue mi cumpleaños, cumplí 60 años.</p><p class="sh-ar">السبت اللي فات كان عيد ميلادي. تميت 60 سنة.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Celia se quedó a dormir en casa el sábado. ¡Lo pasamos fenomenal!')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">2</span>Celia se quedó a dormir en casa el sábado. ¡Lo pasamos fenomenal!</p><p class="sh-ar">ثيليا قعدت تبات في البيت يوم السبت. قضينا وقت رائع!</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Pero este fin de semana he vuelto a la normalidad.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">3</span>Pero este fin de semana he vuelto a la normalidad.</p><p class="sh-ar">لكن الويك إند ده رجعت للوضع الطبيعي.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'¿Qué tal tu fiesta de cumpleaños ayer? ¿Qué tal salió todo?')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">4</span>¿Qué tal tu fiesta de cumpleaños ayer? ¿Qué tal salió todo?</p><p class="sh-ar">إيه أخبار حفلة عيد ميلادك إمبارح؟ كل حاجة طلعت إزاي؟</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Solo hice una comida en casa con mi familia y unos amigos.')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">5</span>Solo hice una comida en casa con mi familia y unos amigos.</p><p class="sh-ar">عملت بس عزومة غداء في البيت مع عيلتي وشوية أصحاب.</p></div>
+<div class="shadow-box" onclick="playShadow(this,'¡Fue un día muy bonito! ¡Y lo pasamos muy bien!')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">6</span>¡Fue un día muy bonito! ¡Y lo pasamos muy bien!</p><p class="sh-ar">كان يوم جميل جداً! وقضينا وقت حلو أوي!</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Habéis estado en los Picos de Europa, ¿no?')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">7</span>Habéis estado en los Picos de Europa, ¿no?</p><p class="sh-ar">كنتوا في جبال الـ Picos de Europa مش كده؟</p></div>
+<div class="shadow-box" onclick="playShadow(this,'Nos hemos separado. ¡Ha sido un fin de semana horrible!')"><p class="sh-es"><span class="play-icon">▶</span><span class="shadow-num">8</span>Nos hemos separado. ¡Ha sido un fin de semana horrible!</p><p class="sh-ar">إحنا انفصلنا. كان ويك إند فظيع!</p></div>
+</div>
+</div>
+
+<!-- ====== DIVIDER CONSOLIDAMOS ====== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#f5a623,#e8871e);">
+<h2 style="color:#fff;">¡Consolidamos!</h2>
+<div class="divline" style="background:#fff;"></div>
+<p style="color:rgba(255,255,255,0.9);">أنشطة التوحيد للطلاب – Actividades de consolidación</p>
+</div>
+
+<!-- ====== CONSOLIDAMOS 1 ====== -->
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 29</span></div></div>
+<div class="consbadge">¡Consolidamos! 1</div>
+<div class="act-head"><div class="act-num" style="background:#f5a623;">★</div><h2 class="act-title">El año del grupo</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #d84315;font-size:12px;">
+<p><strong style="color:#bf360c;">🎯 Objetivos:</strong> interactuar hablando sobre un año concreto – escribir un pequeño reportaje utilizando el pretérito indefinido.</p>
+</div>
+
+<div class="grid-23">
+<div>
+<div class="task-cons">
+<p><strong>a.</strong> En grupos. Elegid un año. ¿Qué pasó en ese año en vuestro país? Completad la ficha con acontecimientos importantes que recordéis (deportivos, sociales, culturales o personales).</p>
+</div>
+<div class="task-cons">
+<p><strong>b.</strong> Escribid un pequeño reportaje sobre ese año utilizando el vocabulario adecuado y los verbos en pretérito indefinido. Después leedlo en la clase para que los demás grupos lo escuchen y puedan hacer preguntas.</p>
+</div>
+</div>
+
+<div>
+<div class="tblock" style="background:#fffde7;border:3px dashed #f5a623;">
+<p style="font-family:'Playfair Display',serif;font-size:15px;color:#bf6a00;letter-spacing:2px;margin-bottom:8px;text-align:center;">NUESTRO AÑO: _________</p>
+<p style="text-align:left;font-size:12px;line-height:2;">
+⚽ Acontecimiento deportivo:<br><span style="display:block;border-bottom:1px solid #ccc;height:15px;margin-bottom:5px;"></span>
+🎭 Acontecimiento social/cultural:<br><span style="display:block;border-bottom:1px solid #ccc;height:15px;margin-bottom:5px;"></span>
+👤 Personaje famoso:<br><span style="display:block;border-bottom:1px solid #ccc;height:15px;margin-bottom:5px;"></span>
+📌 Otros:<br><span style="display:block;border-bottom:1px solid #ccc;height:15px;"></span>
+</p>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+المشروع الأول: اختاروا سنة مهمة في بلدكم (مثال: سنة ثورة أو حدث رياضي كبير، أو سنة 2016 زي المثال) واكتبوا تقرير قصير باستخدام الماضي البسيط.
+<br>Solución: إجابة جماعية حسب السنة والأحداث التي تختارونها.
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== CONSOLIDAMOS 2 ====== -->
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 29</span></div></div>
+<div class="consbadge">¡Consolidamos! 2</div>
+<div class="act-head"><div class="act-num" style="background:#f5a623;">★</div><h2 class="act-title">Nuestro diario del fin de semana</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #d84315;font-size:12px;">
+<p><strong style="color:#bf360c;">🎯 Objetivos:</strong> combinar el uso del pretérito perfecto y el indefinido – redactar un diario grupal.</p>
+</div>
+
+<div class="grid-2">
+<div>
+<div class="task-cons">
+<p><strong>a.</strong> En grupos. Imaginad que hoy es domingo por la noche. Cada miembro del grupo piensa en una actividad que hizo ayer (sábado) y en una que ha hecho hoy (domingo). Después ordenad cronológicamente las actividades de todos en el diario del grupo.</p>
+</div>
+<div class="dia">
+<p><span class="sb">●</span> <em>Yo ayer por la noche estuve en el cumpleaños de un amigo. Y hoy he ido al cine con mi familia.</em></p>
+</div>
+<div class="task-cons">
+<p><strong>b.</strong> Leed vuestros diarios en la clase. Elegid las mejores actividades del fin de semana de toda la clase.</p>
+</div>
+</div>
+
+<div>
+<div class="tblock" style="background:#e0f7fa;border:3px solid #00838f;">
+<p style="font-family:'Playfair Display',serif;font-size:15px;color:#006064;margin-bottom:8px;text-align:center;">Domingo, 23 de junio</p>
+<p style="font-size:13px;font-style:italic;color:#004d40;">¡Este fin de semana ha sido increíble!</p>
+<p style="font-size:13px;margin-top:10px;"><strong>Ayer sábado...</strong><br>
+<span style="color:#666;font-size:11.5px;">(escribid lo que hicisteis en Indefinido)</span><br>
+___________________________________<br>
+___________________________________</p>
+<p style="font-size:13px;margin-top:10px;"><strong>Hoy hemos ido...</strong><br>
+<span style="color:#666;font-size:11.5px;">(escribid lo que habéis hecho en Perfecto)</span><br>
+___________________________________<br>
+___________________________________</p>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+المشروع الثاني: اكتبوا يوميات خيالية لنهاية الأسبوع لجروبكم. ادمجوا بين حدث حصل "إمبارح - ayer" باستخدام Indefinido، وحدث حصل "النهارده - hoy" باستخدام Perfecto.
+<br>Solución: تكتبون أنشطة يوم السبت والأحد وتختارون أفضل أنشطة نهاية الأسبوع.
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== DIVIDER STUDY ====== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#4caf50,#2e7d32);">
+<h2 style="color:#fff;">📅 جدول المذاكرة</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.9);">خطة أسبوعية لمذاكرة الوحدة الثالثة<br>Plan semanal de estudio</p>
+</div>
+
+<!-- ====== STUDY PLAN ====== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">جدول المذاكرة – الوحدة 3</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Plan de estudio</span></div></div>
+<div class="act-head"><div class="act-num" style="background:#4caf50;">📅</div><h2 class="act-title">جدول المذاكرة الأسبوعي – Plan Semanal</h2></div>
+
+<div class="ar-instr" style="margin-bottom:8px;"><span class="ar-title">📌 إزاي تستخدم الجدول ده:</span>
+ده جدول مذاكرة مقترح لـ 7 أيام (أسبوع كامل) لإتقان وحدة "Un año especial". كل يوم له هدف معين. ادي نفسك من 30-45 دقيقة يومياً. ركز جداً في الوحدة دي لأنها أساس أزمنة الماضي في الإسباني!
+</div>
+
+<table class="study-table">
+<tr><th style="width:90px;">اليوم</th><th>المهمة</th><th style="width:70px;">المدة</th></tr>
+
+<tr>
+<td class="day">اليوم 1<br>السبت</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Actividad 1 y 2 (El Indefinido regular)</strong><br>• Leer testimonios (1a) y biografías (2a)<br>• Extraer verbos en indefinido<br>• Estudiar y memorizar las terminaciones de los verbos regulares: <em>-é, -aste, -ó, -amos, -asteis, -aron</em> y <em>-í, -iste, -ió, -imos, -isteis, -ieron</em></div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تفهم شكل ونهايات الماضي البسيط للأفعال المنتظمة.</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 2<br>الأحد</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Actividad 3 y 4 (Irregulares puros)</strong><br>• Escuchar audio de Almudena (15M)<br>• Estudiar la raíz de los verbos irregulares: <em>estuv-, tuv-, pud-, pus-, hic-, quis-, vin-</em><br>• Entender que no llevan tildes y comparten la misma terminación (-e, -iste, -o...)</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تحفظ جذور الأفعال الشاذة كلياً (عن ظهر قلب بالورقة والقلم).</div>
+</td>
+<td class="mins">40 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 3<br>الاتنين</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Actividad 5 (Perfecto vs Indefinido)</strong><br>• Leer los diarios de Nadia, Felipe e Isabel<br>• Completar el cuadro de marcadores temporales (5c)<br>• Escribir 6 frases alternando <em>hoy he...</em> y <em>ayer...</em><br>• Shadowing 1: repetir 3 veces</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتقن متى تستخدم Perfecto (فترة لم تنتهِ) ومتى تستخدم Indefinido (فترة انتهت).</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 4<br>التلات</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Actividad 6 (Valorar experiencias)</strong><br>• Escuchar audios de Jordi y Lucía<br>• Estudiar la diferencia entre <em>Ha sido fantástico</em> y <em>Fue horrible</em><br>• Repasar verbos con cambio vocálico (e>i, o>u) y ortográfico (pág. 122)</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> تتعلم تعبر عن رأيك في أحداث وتجارب ماضية.</div>
+</td>
+<td class="mins">35 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 5<br>الأربع</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Ejercicios (Pág. 123) - Parte 1</strong><br>• Resolver ejercicios 1, 2, 3 y 4<br>• Practicar la conjugación en tablas sin mirar los apuntes<br>• Shadowing 2: repetir en voz alta</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> التطبيق العملي على تصريفات الأفعال.</div>
+</td>
+<td class="mins">40 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 6<br>الخميس</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Ejercicios (Pág. 123) - Parte 2</strong><br>• Resolver ejercicios 5, 6 y 7<br>• Prestar especial atención al diario de Sandra (ej. 7) combinando ambos tiempos<br>• Shadowing 3: valorar experiencias</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> حل تمارين الربط والتمييز بين الزمنين.</div>
+</td>
+<td class="mins">40 دقيقة</td>
+</tr>
+
+<tr>
+<td class="day">اليوم 7<br>الجمعة</td>
+<td class="task-cell">
+<div class="task-es"><strong>🎯 Repaso general + ¡Consolidamos!</strong><br>• Repasar toda la sección de Gramática y Comunicación (p. 122)<br>• Hacer las actividades del Consolidamos: escribir el reportaje de un año y el diario de fin de semana<br>• Repetir todos los Shadowing</div>
+<div class="task-ar"><strong>📝 هدف اليوم:</strong> الكتابة الحرة (Redacción) لترسيخ الأزمنة، ومراجعة شاملة.</div>
+</td>
+<td class="mins">45 دقيقة</td>
+</tr>
+</table>
+
+<div class="grid-2" style="margin-top:8px;">
+<div class="infobox" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-color:#2e7d32;">
+<h4 style="color:#1b5e20;">✅ معايير النجاح بعد الأسبوع:</h4>
+<p style="color:#1b5e20;">• أقدر أصرف أي فعل منتظم في الماضي البسيط (Indefinido).<br>• حافظ أهم الأفعال الشاذة كلياً (ser, ir, tener, estar, hacer...).<br>• أعرف أمتى استخدم Perfecto وأمتى استخدم Indefinido بناءً على الكلمة الدالة.</p>
+</div>
+<div class="infobox" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-color:#ef6c00;">
+<h4 style="color:#bf6a00;">💡 نصائح للمذاكرة الفعّالة:</h4>
+<p style="color:#5a4100;">• الأفعال الشاذة مبتتحفظش بالقراءة بس، لازم ورقة وقلم وتكتب التصريف الـ 6 كامل.<br>• اربط الـ Indefinido دايماً بكلمة Ayer، واربط الـ Perfecto دايماً بكلمة Hoy في دماغك.<br>• تمرين الـ Shadowing تعمله بصوت عالي جداً كأنك بتكلم حد بجد.</p>
+</div>
+</div>
+</div>
+
+<!-- ====== FINAL ====== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#d84315,#bf360c);">
+<div class="unit-circle" style="margin-bottom:20px;">3</div>
+<h2 style="color:#fff;font-size:42px;">¡Fin de la Unidad 3!</h2>
+<div class="divline" style="background:#ffd60a;"></div>
+<p style="color:rgba(255,255,255,0.85);font-size:20px;">Un año especial – Completada ✓</p>
+<p style="color:rgba(255,255,255,0.5);margin-top:30px;font-size:14px;letter-spacing:3px;">INSTITUTO AMIGOS</p>
+</div>
+
+<script>
+function toggleGroupAns(btn, group) {
+  const elements = document.querySelectorAll('[data-group="' + group + '"]');
+  const text = btn.querySelector('.btn-text');
+  if (btn.classList.contains('active')) {
+    elements.forEach(el => el.classList.remove('show'));
+    btn.classList.remove('active');
+    text.textContent = 'اظهار الإجابة';
+  } else {
+    elements.forEach(el => el.classList.add('show'));
+    btn.classList.add('active');
+    text.textContent = 'اخفاء الإجابة';
+  }
+}
+
+function toggleTrans(btn) {
+  const content = btn.parentElement.nextElementSibling;
+  const text = btn.querySelector('.btn-text');
+  if (content.classList.contains('show')) {
+    content.classList.remove('show');
+    btn.classList.remove('active');
+    text.textContent = '📄 إظهار التفريغ';
+  } else {
+    content.classList.add('show');
+    btn.classList.add('active');
+    text.textContent = '✕ إخفاء التفريغ';
+  }
+}
+
+let currentBox = null;
+let spanishVoices = [];
+
+function loadSpanishVoices() {
+  const allVoices = window.speechSynthesis.getVoices();
+  spanishVoices = [
+    ...allVoices.filter(v => v.lang === 'es-ES'),
+    ...allVoices.filter(v => v.lang === 'es-MX'),
+    ...allVoices.filter(v => v.lang === 'es-US'),
+    ...allVoices.filter(v => v.lang === 'es-AR'),
+    ...allVoices.filter(v => v.lang === 'es-CO'),
+    ...allVoices.filter(v => v.lang.startsWith('es-')),
+    ...allVoices.filter(v => v.lang.startsWith('es'))
+  ];
+  spanishVoices = [...new Set(spanishVoices)];
+}
+
+if ('speechSynthesis' in window) {
+  loadSpanishVoices();
+  window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+  setTimeout(loadSpanishVoices, 100);
+  setTimeout(loadSpanishVoices, 500);
+  setTimeout(loadSpanishVoices, 1500);
+}
+
+function playShadow(box, text) {
+  if (!('speechSynthesis' in window)) {
+    alert('المتصفح بتاعك مش بيدعم الصوت. جرب Chrome أو Edge.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  if (currentBox) currentBox.classList.remove('playing');
+  if (spanishVoices.length === 0) loadSpanishVoices();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'es-ES';
+  if (spanishVoices.length > 0) {
+    utterance.voice = spanishVoices[0];
+    utterance.lang = spanishVoices[0].lang;
+  }
+  utterance.rate = 0.85;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+  box.classList.add('playing');
+  currentBox = box;
+  utterance.onend = () => { box.classList.remove('playing'); currentBox = null; };
+  utterance.onerror = () => { box.classList.remove('playing'); currentBox = null; };
+  window.speechSynthesis.speak(utterance);
+}
+</script>
+
+</body>
+</html>
