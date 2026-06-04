@@ -47,7 +47,7 @@ GAMES_DATA = {
     "A1.1": "https://yourusername.github.io/your-repo/games/a1_1.html",
     "A1.2": "https://yourusername.github.io/your-repo/games/a1_2.html",
     "A1.3": "https://yourusername.github.io/your-repo/games/a1_3.html",
-    "A2.1": "/page/A2.1/juego-estudiante1.html",
+    "A2.1": "/page/A2.1/juego-estudiante1.htm",
     "A2.2": "https://yourusername.github.io/your-repo/games/a2_2.html",
     "A2.3": "https://yourusername.github.io/your-repo/games/a2_3.html",
     "B1.1": "https://yourusername.github.io/your-repo/games/b1_1.html",
