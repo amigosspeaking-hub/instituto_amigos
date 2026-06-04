@@ -17,16 +17,16 @@ syllabus = {
     "A1.3": ["COMPRAR Y COMER EN ALICANTE", "¡BUEN FIN DE SEMANA!", "INTERCAMBIO DE CASA", "ESTA ES MI VIDA"],
     "A2.1": ["NUEVA ETAPA", "PARA TI Y PARA MÍ", "UN AÑO ESPECIAL", "CON TUS MANOS"],
     "A2.2": ["¿CÓMO ERA ANTES?", "¿Y QUÉ PASÓ?", "HOY COCINO YO", "¡ME SIENTO BIEN!"],
-    "A2.3": ["TE INVITO", "UNA CIUDAD IDEAL", "NOSOTROS Y ال TRABAJO", "¡ESTAMOS AL DÍA!"],
+    "A2.3": ["TE INVITO", "UNA CIUDAD IDEال", "NOSOTROS Y EL TRABAJO", "¡ESTAMOS AL DÍA!"],
     "B1.1": ["SEGUIMOS JUNTOS", "UN VIAJE INOLVIDABLE", "UN MUNDO MEJOR", "HABLANDO DEL FUTURO"],
     "B1.2": ["ENTRE NOSOTROS", "NUESTRO PLANETA", "¡CÁMARA, ACCIÓN!", "BUENO Y SANO"],
-    "B1.3": ["MENSAجES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
+    "B1.3": ["MENSAJES CON EFECTO", "UN PASEO CULTURAL", "DE AQUÍ PARA ALLÁ", "UN MUNDO IMPRESIONANTE"],
     "B2.1": ["ASÍ HABLAMOS, ASÍ SOMOS", "LA ESCUELA DE LA VIDA", "NUEVOS MUNDOS LABORALES", "¡QUÉ ILUSIÓN!"],
     "B2.2": ["PEGADOS AL MÓVIL", "MENTE SANA EN CUERPO SANO", "¡HOGAR, DULCE HOGAR!", "A FLOR DE PIEL"],
     "B2.3": ["LUGARES ESPECIALES", "ROMPIENDO ESQUEMAS", "¡NO TE QUEJES TANTO!", "MIRANDO HACIA ADELANTE"]
 }
 
-# 2. روابط جداول المذاكرة من GitHub (استبدل الروابط الافتراضية بروابط صفحاتك الحقيقية)
+# 2. روابط جداول المذاكرة من GitHub حسب المستوى
 SCHEDULE_DATA = {
     "A1.1": "https://yourusername.github.io/your-repo/schedules/a1_1.html",
     "A1.2": "https://yourusername.github.io/your-repo/schedules/a1_2.html",
@@ -42,10 +42,10 @@ SCHEDULE_DATA = {
     "B2.3": "https://yourusername.github.io/your-repo/schedules/b2_3.html"
 }
 
-# 3. روابط الألعاب من GitHub (استبدل الروابط الافتراضية بروابط صفحاتك الحقيقية)
+# 3. روابط الألعاب من GitHub حسب المستوى
 GAMES_DATA = {
     "A1.1": "https://yourusername.github.io/your-repo/games/a1_1.html",
-    "A1.2": "https://yourusername.github.io/your-repo/games/a1_2.html",
+    "A1.2": "https://instituto-amigos.onrender.com/page/A2.1/juego-estudiante1.htm",
     "A1.3": "https://yourusername.github.io/your-repo/games/a1_3.html",
     "A2.1": "https://yourusername.github.io/your-repo/games/a2_1.html",
     "A2.2": "https://yourusername.github.io/your-repo/games/a2_2.html",
@@ -58,19 +58,56 @@ GAMES_DATA = {
     "B2.3": "https://yourusername.github.io/your-repo/games/b2_3.html"
 }
 
-# 4. مكتبة فيديوهات اليوتيوب (تعديل الروابط يتم من هنا مباشرة)
-VIDEOS_DATA = [
-    {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "7dgZvDijGP0"},
-    {"title": "أهم 50 تعبير مستخدم في الحياة اليومية", "youtube_id": "dQw4w9WgXcQ"},
-    {"title": "كيف تتجنب الأخطاء الشائعة في المحادثة", "youtube_id": "dQw4w9WgXcQ"}
-]
+# 4. مكتبة فيديوهات اليوتيوب مقسمة تلقائياً حسب كل مستوى فرعي
+VIDEOS_DATA = {
+    "A1.1": [
+        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
+        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
+    ],
+    "A1.2": [
+        {"title": "شرح مفردات العائلة والأقارب بالتفصيل", "youtube_id": "dQw4w9WgXcQ"},
+        {"title": "الأفعال الروتينية اليومية وتصريفها", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "A1.3": [
+        {"title": "كيف تتسوق وتطلب الطعام داخل المطعم", "youtube_id": "dQw4w9WgXcQ"},
+        {"title": "وصف الأماكن والاتجاهات داخل المدينة", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "A2.1": [
+        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
+        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
+    ],
+    "A2.2": [
+        {"title": "استخدامات زمن الماضي المستمر لوصف الطفولة", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "A2.3": [
+        {"title": "صيغ الأمر والطلب بطريقة مهذبة", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B1.1": [
+        {"title": "قواعد التعبير عن المستقبل والخطط البعيدة", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B1.2": [
+        {"title": "تعبيرات النقاش وإبداء الرأي الشخصي بحرية", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B1.3": [
+        {"title": "روابط الجمل المتقدمة وكتابة المقالات", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B2.1": [
+        {"title": "التعمق في صيغ الشك والاحتمالية الصعبة", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B2.2": [
+        {"title": "مصطلحات تقنية متقدمة لإدارة حوار عملي", "youtube_id": "dQw4w9WgXcQ"}
+    ],
+    "B2.3": [
+        {"title": "مراجعة شاملة لإتقان المحادثة السريعة والطلاقة", "youtube_id": "dQw4w9WgXcQ"}
+    ]
+}
 
-# 5. مواضيع عجلة التحدث مخصصة ومولدة تلقائياً لكل مستوى فرعي بدقة
+# 5. مواضيع عجلة التحدث مخصصة لكل مستوى
 WHEEL_TOPICS = {
     "A1.1": [
         "قدم نفسك بالكامل (الاسم، العمر، الجنسية، ومكان السكن).",
         "تحدث عن الألوان والأسماء المفضلة لديك داخل غرفتك.",
-        "اذكر خمسة أشياء تستخدمها يومياً في حقيبتك أو فصلك الدراسية."
+        "اذكر خمسة أشياء تستخدمها يومياً في حقيبتك أو فصلك الدراسي."
     ],
     "A1.2": [
         "صف عائلتك (عدد الأفراد، وظائفهم، وأشكالهم).",
@@ -364,7 +401,6 @@ DASHBOARD_HTML = """
         .btn-lecture { background: var(--primary); color: white; }
         .btn-exercise { background: var(--accent); color: var(--secondary); }
         
-        /* تصميم الـ iFrame لصفحات GitHub */
         .github-frame-container { width: 100%; height: 75vh; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #e2e8f0; background: white; }
         .github-iframe { width: 100%; height: 100%; border: none; }
 
@@ -482,7 +518,7 @@ DASHBOARD_HTML = """
         </div>
 
         <div id="videos-tab" class="tab-content">
-            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الشروحات المرئية</h3>
+            <h3 style="margin-bottom: 20px; color: var(--secondary);"><i class="fa-solid fa-film"></i> مكتبة الشروحات المرئية لمستوى {{ student.level }}</h3>
             <div class="cards-grid">
                 {% for video in videos_list %}
                 <div class="course-card" style="padding: 15px;">
@@ -603,13 +639,16 @@ def dashboard():
     
     level_lessons = syllabus.get(level, ["Unidad 1", "Unidad 2", "Unidad 3", "Unidad 4"])
     
-    # جلب روابط GitHub المخصصة للمستوى الحالي أوتوماتيكياً
+    # جلب روابط جيت هاب الخاصة بالطالب بناءً على مستواه الحالي
     student_schedule_url = SCHEDULE_DATA.get(level, "https://yourusername.github.io/your-repo/schedules/default.html")
     student_game_url = GAMES_DATA.get(level, "https://yourusername.github.io/your-repo/games/default.html")
     
+    # جلب قائمة الفيديوهات الخاصة بالمستوى الحالي تلقائياً
+    student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي بالمستوى", "youtube_id": "dQw4w9WgXcQ"}])
+    
     random_quote = random.choice(motivation_quotes)
     
-    # سحب داتا العجلة للمستوى بالكامل (مثل A1.1) مباشرة بدون قص
+    # جلب مواضيع عجلة التحدث للمستوى بالكامل
     student_wheel_topics = WHEEL_TOPICS.get(level, ["تحدث عن مهاراتك اللغوية الحالية."])
     topics_json = json.dumps(student_wheel_topics, ensure_ascii=False)
     
@@ -621,7 +660,7 @@ def dashboard():
         topics_json=topics_json,
         schedule_url=student_schedule_url,
         game_url=student_game_url,
-        videos_list=VIDEOS_DATA
+        videos_list=student_videos
     )
 
 @app.route('/page/<path:filename>')
