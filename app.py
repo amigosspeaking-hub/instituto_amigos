@@ -8,19 +8,17 @@ from flask import Flask, render_template_string, request, redirect, url_for, ses
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
-# إغلاق الجلسة أوتوماتيكياً بعد ساعتين لزيادة الأمان
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
-# رابط جوجل شيت المباشر بصيغة CSV
 GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
 # =====================================================================
-# [ 1. قاعدة بيانات المحاضرات - LESSONS_DATA ]
+# [ 1. المحاضرات - LESSONS_DATA ]
 # =====================================================================
 LESSONS_DATA = {
     "A1.1": [
         {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "lesson.html"},
         {"title": "TRABAJO AQUÍ", "file": "lesson3.html"},
         {"title": "¡ME GUSTAN LAS TAPAS!", "file": "lesson4.html"}
     ],
@@ -38,7 +36,7 @@ LESSONS_DATA = {
     ],
     "A2.1": [
         {"title": "NUEVA ETAPA", "file": "lesson1.html"},
-        {"title": "PARA TI Y PARA MÍ", "file": "lesson2.html"},
+        {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
         {"title": "UN AÑO ESPECIAL", "file": "lesson3.html"},
         {"title": "CON TUS MANOS", "file": "lesson4.html"}
     ],
@@ -93,7 +91,7 @@ LESSONS_DATA = {
 }
 
 # =====================================================================
-# [ 2. قاعدة بيانات التمارين - EXERCISES_DATA ]
+# [ 2. التمارين - EXERCISES_DATA ]
 # =====================================================================
 EXERCISES_DATA = {
     "A1.1": [
@@ -171,163 +169,7 @@ EXERCISES_DATA = {
 }
 
 # =====================================================================
-# [ 3. قاعدة بيانات جداول المذاكرة - SCHEDULES_DATA ]
-# =====================================================================
-SCHEDULES_DATA = {
-    "A1.1": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "A1.2": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "A1.3": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "A2.1": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "gadwal1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "gadwal2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "gadwal3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "gadwal4.html"}
-    ],
-    "A2.2": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "A2.3": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B1.1": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B1.2": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B1.3": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B2.1": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B2.2": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ],
-    "B2.3": [
-        {"title": "جدول مذكرات الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذكرات الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذكرات الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذكرات الدرس الرابع", "file": "schedule4.html"}
-    ]
-}
-
-# =====================================================================
-# [ 4. قاعدة بيانات الألعاب - GAMES_DATA ]
-# =====================================================================
-GAMES_DATA = {
-    "A1.1": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "A1.2": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "A1.3": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "A2.1": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "juego-estudiante1.htm"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "A2.2": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "A2.3": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B1.1": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B1.2": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B1.3": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B2.1": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B2.2": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ],
-    "B2.3": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
-    ]
-}
-
-# =====================================================================
-# [ 5. قاعدة بيانات الكلمات - VOCAB_DATA ] ★ جديد ★
+# [ 3. الكلمات - VOCAB_DATA ]
 # =====================================================================
 VOCAB_DATA = {
     "A1.1": [
@@ -350,7 +192,7 @@ VOCAB_DATA = {
     ],
     "A2.1": [
         {"title": "كلمات: NUEVA ETAPA", "file": "vocab1.html"},
-        {"title": "كلمات: PARA TI Y PARA MÍ", "file": "vocab2.html"},
+        {"title": "كلمات: PARA TI Y PARA MÍ", "file": "Unidad 02 - Palabras.htm"},
         {"title": "كلمات: UN AÑO ESPECIAL", "file": "vocab3.html"},
         {"title": "كلمات: CON TUS MANOS", "file": "vocab4.html"}
     ],
@@ -405,7 +247,241 @@ VOCAB_DATA = {
 }
 
 # =====================================================================
-# [ 6. الفيديوهات - VIDEOS_DATA ]
+# [ 4. جداول المذاكرة - SCHEDULES_DATA ]
+# =====================================================================
+SCHEDULES_DATA = {
+    "A1.1": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A1.2": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A1.3": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A2.1": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "gadwal1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "Unidad 02 - Study_Plan.htm"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "gadwal3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "gadwal4.html"}
+    ],
+    "A2.2": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "A2.3": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.1": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.2": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B1.3": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.1": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.2": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ],
+    "B2.3": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+    ]
+}
+
+# =====================================================================
+# [ 5. الألعاب - GAMES_DATA ]
+# =====================================================================
+GAMES_DATA = {
+    "A1.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A1.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A1.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "juego-estudiante1.htm"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "Unidad 02 - Juego _Est.htm"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "A2.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B1.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.1": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.2": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ],
+    "B2.3": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
+        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
+        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+    ]
+}
+
+# =====================================================================
+# [ 6. الشادوينج - SHADOWING_DATA ]
+# =====================================================================
+SHADOWING_DATA = {
+    "A1.1": [
+        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
+        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"},
+        {"title": "شادوينج: TRABAJO AQUÍ", "file": "shadowing3.html"},
+        {"title": "شادوينج: ¡ME GUSTAN LAS TAPAS!", "file": "shadowing4.html"}
+    ],
+    "A1.2": [
+        {"title": "شادوينج: EN FAMILIA", "file": "shadowing1.html"},
+        {"title": "شادوينج: MI BARRIO", "file": "shadowing2.html"},
+        {"title": "شادوينج: MI DÍA A DÍA", "file": "shadowing3.html"},
+        {"title": "شادوينج: DE VACACIONES", "file": "shadowing4.html"}
+    ],
+    "A1.3": [
+        {"title": "شادوينج: COMPRAR Y COMER EN ALICANTE", "file": "shadowing1.html"},
+        {"title": "شادوينج: ¡BUEN FIN DE SEMANA!", "file": "shadowing2.html"},
+        {"title": "شادوينج: INTERCAMBIO DE CASA", "file": "shadowing3.html"},
+        {"title": "شادوينج: ESTA ES MI VIDA", "file": "shadowing4.html"}
+    ],
+    "A2.1": [
+        {"title": "شادوينج: NUEVA ETAPA", "file": "shadowing1.html"},
+        {"title": "شادوينج: PARA TI Y PARA MÍ", "file": "Unidad 02 - Shadowing.htm"},
+        {"title": "شادوينج: UN AÑO ESPECIAL", "file": "shadowing3.html"},
+        {"title": "شادوينج: CON TUS MANOS", "file": "shadowing4.html"}
+    ],
+    "A2.2": [
+        {"title": "شادوينج: ¿CÓMO ERA ANTES?", "file": "shadowing1.html"},
+        {"title": "شادوينج: ¿Y QUÉ PASÓ?", "file": "shadowing2.html"},
+        {"title": "شادوينج: HOY COCINO YO", "file": "shadowing3.html"},
+        {"title": "شادوينج: ¡ME SIENTO BIEN!", "file": "shadowing4.html"}
+    ],
+    "A2.3": [
+        {"title": "شادوينج: TE INVITO", "file": "shadowing1.html"},
+        {"title": "شادوينج: UNA CIUDAD IDEAL", "file": "shadowing2.html"},
+        {"title": "شادوينج: NOSOTROS Y EL TRABAJO", "file": "shadowing3.html"},
+        {"title": "شادوينج: ¡ESTAMOS AL DÍA!", "file": "shadowing4.html"}
+    ],
+    "B1.1": [
+        {"title": "شادوينج: SEGUIMOS JUNTOS", "file": "shadowing1.html"},
+        {"title": "شادوينج: UN VIAJE INOLVIDABLE", "file": "shadowing2.html"},
+        {"title": "شادوينج: UN MUNDO MEJOR", "file": "shadowing3.html"},
+        {"title": "شادوينج: HABLANDO DEL FUTURO", "file": "shadowing4.html"}
+    ],
+    "B1.2": [
+        {"title": "شادوينج: ENTRE NOSOTROS", "file": "shadowing1.html"},
+        {"title": "شادوينج: NUESTRO PLANETA", "file": "shadowing2.html"},
+        {"title": "شادوينج: ¡CÁMARA, ACCIÓN!", "file": "shadowing3.html"},
+        {"title": "شادوينج: BUENO Y SANO", "file": "shadowing4.html"}
+    ],
+    "B1.3": [
+        {"title": "شادوينج: MENSAJES CON EFECTO", "file": "shadowing1.html"},
+        {"title": "شادوينج: UN PASEO CULTURAL", "file": "shadowing2.html"},
+        {"title": "شادوينج: DE AQUÍ PARA ALLÁ", "file": "shadowing3.html"},
+        {"title": "شادوينج: UN MUNDO IMPRESIONANTE", "file": "shadowing4.html"}
+    ],
+    "B2.1": [
+        {"title": "شادوينج: ASÍ HABLAMOS, ASÍ SOMOS", "file": "shadowing1.html"},
+        {"title": "شادوينج: LA ESCUELA DE LA VIDA", "file": "shadowing2.html"},
+        {"title": "شادوينج: NUEVOS MUNDOS LABORALES", "file": "shadowing3.html"},
+        {"title": "شادوينج: ¡QUÉ ILUSIÓN!", "file": "shadowing4.html"}
+    ],
+    "B2.2": [
+        {"title": "شادوينج: PEGADOS AL MÓVIL", "file": "shadowing1.html"},
+        {"title": "شادوينج: MENTE SANA EN CUERPO SANO", "file": "shadowing2.html"},
+        {"title": "شادوينج: ¡HOGAR, DULCE HOGAR!", "file": "shadowing3.html"},
+        {"title": "شادوينج: A FLOR DE PIEL", "file": "shadowing4.html"}
+    ],
+    "B2.3": [
+        {"title": "شادوينج: LUGARES ESPECIALES", "file": "shadowing1.html"},
+        {"title": "شادوينج: ROMPIENDO ESQUEMAS", "file": "shadowing2.html"},
+        {"title": "شادوينج: ¡NO TE QUEJES TANTO!", "file": "shadowing3.html"},
+        {"title": "شادوينج: MIRANDO HACIA ADELANTE", "file": "shadowing4.html"}
+    ]
+}
+
+# =====================================================================
+# [ 7. الفيديوهات - VIDEOS_DATA ]
 # =====================================================================
 VIDEOS_DATA = {
     "A1.1": [
@@ -450,25 +526,157 @@ VIDEOS_DATA = {
 }
 
 # =====================================================================
-# [ 7. عجلة التحدث - WHEEL_TOPICS ]
+# [ 8. عجلة التحدث - WHEEL_TOPICS - 10 مواضيع لكل مستوى ]
 # =====================================================================
 WHEEL_TOPICS = {
-    "A1.1": ["قدم نفسك بالكامل.", "تحدث عن الألوان المفضلة لديك.", "اذكر أشياء تستخدمها يومياً."],
-    "A1.2": ["صف عائلتك.", "تحدث عن روتينك الصباحي.", "ما هو طعامك المفضل؟"],
-    "A1.3": ["تخيل أنك في السوبرماركت.", "صف مدينتك الحالية.", "كيف تقضي عطلة نهاية الأسبوع؟"],
-    "A2.1": ["تحدث عن هواية جديدة.", "صف أعز أصدقائك.", "تحدث عما فعلته في عطلة الأسبوع الماضي."],
-    "A2.2": ["احكِ لنا كيف كانت مرحلة طفولتك.", "اشرح وصفة طبخ.", "ماذا تفعل عندما تشعر بالمرض؟"],
-    "A2.3": ["وجه دعوة لصديق.", "صف ملامح مدينتك المثالية.", "تحدث عن وظيفة أحلامك."],
-    "B1.1": ["احكِ لنا عن رحلة مميزة.", "ما هي خططك المستقبلية؟", "تحدث عن فيلم أثر فيك."],
-    "B1.2": ["إيجابيات وسلبيات السوشيال ميديا.", "ما هو أسلوب الحياة الصحي؟", "كيف نحمي كوكب الأرض؟"],
-    "B1.3": ["أهمية الفنون والموسيقى.", "احكِ عن تجربة شخصية صعبة.", "رأيك في التعليم عن بُعد."],
-    "B2.1": ["كيف تطورت شخصيتك؟", "تحديات الشباب في سوق العمل.", "مفهوم النجاح الشخصي."],
-    "B2.2": ["إدمان الهواتف الذكية.", "الحفاظ على الصحة النفسية.", "احكِ عن موقف حرج وكيف تعاملت معه."],
-    "B2.3": ["مكان استثنائي تمنيت زيارته.", "تطلعاتك المهنية الطويلة.", "التعامل مع مشكلات العمل."]
+    "A1.1": [
+        "قدم نفسك بالكامل: اسمك وسنك وبلدك.",
+        "تحدث عن الألوان المفضلة لديك ولماذا.",
+        "اذكر 5 أشياء تستخدمها كل يوم.",
+        "اوصف الطقس النهاردة بالإسباني.",
+        "قول أيام الأسبوع وقول بتعمل إيه كل يوم.",
+        "اتكلم عن أكلتك المفضلة.",
+        "عرّف صاحبك المقرب: اسمه وشكله.",
+        "قول الأرقام من 1 لـ 20 وبعدين العد العكسي.",
+        "اوصف أوضتك: فيها إيه؟",
+        "سلم على حد جديد وعرّفه بنفسك."
+    ],
+    "A1.2": [
+        "صف أفراد عائلتك واحد واحد.",
+        "تحدث عن روتينك الصباحي خطوة بخطوة.",
+        "ما هو طعامك المفضل وليه؟",
+        "اوصف حيك أو شارعك.",
+        "اتكلم عن هوايتك المفضلة.",
+        "إيه اللي بتعمله يوم الجمعة؟",
+        "اوصف صاحبك: شكله وطبعه.",
+        "اتكلم عن مدرستك أو شغلك.",
+        "قول 5 حاجات بتحبها و5 مبتحبهاش.",
+        "خطط لعطلة نهاية الأسبوع الجاية."
+    ],
+    "A1.3": [
+        "تخيل أنك في السوبرماركت وبتشتري أكل.",
+        "صف مدينتك: فيها إيه؟",
+        "كيف تقضي عطلة نهاية الأسبوع عادةً؟",
+        "اوصف بيتك: كام أوضة وشكله عامل إزاي.",
+        "اتكلم عن آخر حاجة اشتريتها.",
+        "اطلب أكل في مطعم إسباني.",
+        "اوصف الطقس في بلدك في الصيف والشتاء.",
+        "اتكلم عن رحلة عملتها قبل كده.",
+        "إيه الحاجات اللي بتعملها في الأجازة؟",
+        "صف يوم مثالي بالنسبالك."
+    ],
+    "A2.1": [
+        "تحدث عن هواية جديدة بدأتها مؤخراً.",
+        "صف أعز أصدقائك: شخصيته وهواياته.",
+        "تحدث عما فعلته في عطلة الأسبوع الماضي.",
+        "اوصف تجربة تعلمك الإسبانية.",
+        "اتكلم عن أحلامك وأهدافك.",
+        "لو سافرت لإسبانيا هتعمل إيه؟",
+        "اوصف عيد ميلادك الأخير.",
+        "اتكلم عن فيلم أو مسلسل شفته مؤخراً.",
+        "صف شخص بتحبه وبتقدره.",
+        "قارن بين حياتك دلوقتي وقبل 5 سنين."
+    ],
+    "A2.2": [
+        "احكِ لنا كيف كانت مرحلة طفولتك.",
+        "اشرح وصفة طبخ بسيطة خطوة بخطوة.",
+        "ماذا تفعل عندما تشعر بالمرض؟",
+        "اتكلم عن ذكرى جميلة من أيام المدرسة.",
+        "صف مكان زرته وعجبك أوي.",
+        "اتكلم عن عادات كنت بتعملها وأنت صغير.",
+        "قارن بين الحياة في المدينة والريف.",
+        "اوصف أجمل يوم في حياتك.",
+        "اتكلم عن حاجة اتعلمتها من غلطة عملتها.",
+        "صف شخصيتك لما كنت طفل."
+    ],
+    "A2.3": [
+        "وجه دعوة لصديقك لحفلة عندك.",
+        "صف ملامح مدينتك المثالية.",
+        "تحدث عن وظيفة أحلامك.",
+        "اقترح خطة لعطلة مع أصحابك.",
+        "اتكلم عن مهارة نفسك تتعلمها.",
+        "اوصف مطعمك المفضل.",
+        "اتكلم عن مشكلة في شغلك وإزاي حليتها.",
+        "لو عندك سوبر باور هتختار إيه؟",
+        "انصح حد بدأ يتعلم إسباني.",
+        "اتكلم عن التكنولوجيا في حياتك اليومية."
+    ],
+    "B1.1": [
+        "احكِ لنا عن رحلة لا تُنسى في حياتك.",
+        "ما هي خططك المستقبلية للسنة الجاية؟",
+        "تحدث عن فيلم أثر فيك كتير.",
+        "اوصف شخصية تاريخية بتعجبك.",
+        "لو تقدر تغير حاجة في العالم تغير إيه؟",
+        "اتكلم عن تجربة صعبة واتعلمت منها.",
+        "قارن بين الدراسة أونلاين والدراسة العادية.",
+        "اتكلم عن كتاب قرأته وأثر فيك.",
+        "صف أحسن معلم أو أستاذ قابلته في حياتك.",
+        "اتكلم عن عادات صحية بتحاول تعملها."
+    ],
+    "B1.2": [
+        "إيجابيات وسلبيات السوشيال ميديا في حياتنا.",
+        "ما هو أسلوب الحياة الصحي من وجهة نظرك؟",
+        "كيف يمكننا حماية كوكب الأرض؟",
+        "اتكلم عن تأثير الموسيقى على المزاج.",
+        "لو أنت رئيس بلد يوم واحد تعمل إيه؟",
+        "اتكلم عن أهمية الرياضة في حياة الإنسان.",
+        "صف مشكلة بيئية وإزاي نحلها.",
+        "اتكلم عن تجربة تطوع عملتها أو نفسك تعملها.",
+        "قارن بين الأجيال المختلفة في التفكير.",
+        "اتكلم عن أهمية السفر والتعرف على ثقافات تانية."
+    ],
+    "B1.3": [
+        "أهمية الفنون والموسيقى في المجتمع.",
+        "احكِ عن تجربة شخصية صعبة وإزاي تغلبت عليها.",
+        "رأيك في التعليم عن بُعد: مميزاته وعيوبه.",
+        "اتكلم عن تأثير الأخبار على حياتنا اليومية.",
+        "صف ثقافة بلد تاني بتعجبك وليه.",
+        "اتكلم عن أهمية القراءة في العصر الحديث.",
+        "لو عندك آلة زمن تروح فين ولأي عصر؟",
+        "اتكلم عن موقف غيّر تفكيرك في حاجة.",
+        "صف مشروع نفسك تبدأه في المستقبل.",
+        "اتكلم عن الفرق بين الحياة في الماضي والحاضر."
+    ],
+    "B2.1": [
+        "كيف تطورت شخصيتك على مدار السنين؟",
+        "تحديات الشباب في سوق العمل الحديث.",
+        "ما هو مفهوم النجاح الشخصي بالنسبالك؟",
+        "ناقش تأثير العولمة على الثقافات المحلية.",
+        "اتكلم عن الذكاء الاصطناعي وتأثيره على المستقبل.",
+        "لو تقدر تعيش في أي عصر تاني تختار أنهي؟",
+        "ناقش أهمية تعلم لغات متعددة في عالم اليوم.",
+        "اتكلم عن العلاقة بين المال والسعادة.",
+        "صف قدوتك في الحياة وإيه اللي اتعلمته منها.",
+        "ناقش مفهوم التوازن بين العمل والحياة الشخصية."
+    ],
+    "B2.2": [
+        "إدمان الهواتف الذكية: مشكلة حقيقية ولا مبالغة؟",
+        "أهمية الحفاظ على الصحة النفسية في عصرنا.",
+        "احكِ عن موقف حرج وكيف تعاملت معه بذكاء.",
+        "ناقش تأثير وسائل التواصل على العلاقات الإنسانية.",
+        "اتكلم عن أهمية الخروج من منطقة الراحة.",
+        "صف تجربة فشلت فيها وإيه اللي اتعلمته منها.",
+        "ناقش ظاهرة العمل عن بُعد: مستقبل ولا موضة؟",
+        "اتكلم عن أهمية الوعي البيئي للأجيال الجديدة.",
+        "لو تقدر تنصح نفسك من 10 سنين تقول إيه؟",
+        "ناقش تأثير الثقافة الشعبية على قيم المجتمع."
+    ],
+    "B2.3": [
+        "مكان استثنائي تمنيت زيارته واوصفه بالتفصيل.",
+        "تطلعاتك المهنية على المدى الطويل.",
+        "كيف تتعامل مع مشكلات وضغوط العمل؟",
+        "ناقش أخلاقيات استخدام التكنولوجيا الحديثة.",
+        "اتكلم عن دور الفن في التغيير الاجتماعي.",
+        "صف لحظة حسيت فيها بفخر كبير بنفسك.",
+        "ناقش العلاقة بين التعليم التقليدي والتعليم الذاتي.",
+        "لو هتكتب كتاب عن حياتك عنوانه يبقى إيه؟",
+        "اتكلم عن أهمية التنوع الثقافي في بيئة العمل.",
+        "ناقش مستقبل اللغات في عالم الترجمة الآلية."
+    ]
 }
 
 # =====================================================================
-# [ 8. الجمل التحفيزية ]
+# [ 9. الجمل التحفيزية ]
 # =====================================================================
 motivation_quotes = [
     "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
@@ -488,7 +696,6 @@ def get_student_data(username, password):
         df['username'] = df['username'].str.strip()
         df['password'] = df['password'].str.strip()
         df['level'] = df['level'].str.strip()
-        
         user_row = df[(df['username'] == str(username).strip()) & (df['password'] == str(password).strip())]
         if not user_row.empty:
             return user_row.iloc[0].to_dict()
@@ -497,6 +704,9 @@ def get_student_data(username, password):
         print(f"Error checking Google Sheet: {e}")
         return None
 
+# =====================================================================
+# صفحة تسجيل الدخول
+# =====================================================================
 LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -509,13 +719,10 @@ LOGIN_HTML = """
     <style>
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
         body { 
-            background: #fcfbf7; 
-            font-family: 'Cairo', sans-serif; 
+            background: #fcfbf7; font-family: 'Cairo', sans-serif; 
             display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; 
             overflow: hidden; position: relative;
         }
-        
-        /* كلمات عربي واسباني عائمة في الخلفية */
         .float-word {
             position: absolute; font-family: 'Reenie Beanie', cursive;
             font-size: 26px; color: rgba(0,0,0,0.06); font-weight: bold;
@@ -531,37 +738,30 @@ LOGIN_HTML = """
         .fw8 { top: 70%; right: 8%; transform: rotate(-5deg); font-size: 30px; }
         .fw9 { top: 20%; left: 40%; transform: rotate(3deg); font-size: 22px; }
         .fw10 { bottom: 25%; right: 35%; transform: rotate(-8deg); font-size: 24px; }
-
         .doodle-container {
             position: absolute; display: flex; flex-direction: column; align-items: center;
             opacity: 0.65; z-index: 0; color: #333;
         }
         .doodle-container i { font-size: 38px; margin-bottom: 5px; color: #444; }
         .doodle-container span { font-family: 'Reenie Beanie', cursive; font-size: 28px; font-weight: bold; color: var(--primary-red); }
-        
         .d-1 { top: 12%; left: 15%; animation: float 6s ease-in-out infinite; transform: rotate(-10deg); }
         .d-2 { bottom: 15%; right: 15%; animation: float 5s ease-in-out infinite reverse; transform: rotate(15deg); }
         .d-3 { bottom: 15%; left: 15%; animation: float 7s ease-in-out infinite; transform: rotate(-8deg); }
         .d-4 { top: 15%; right: 15%; animation: float 8s ease-in-out infinite; transform: rotate(12deg); }
-
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-12px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
-
         .card { 
             background: white; padding: 40px; border-radius: 15px; 
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.05); 
-            border: 3px solid #333; 
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.05); border: 3px solid #333; 
             text-align: center; width: 400px; position: relative; z-index: 1;
         }
-        
         .logo-img { width: 110px; height: auto; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--primary-gold); }
         h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 900; }
         h1 .es-word { color: var(--primary-red); font-family: 'Reenie Beanie', cursive; font-size: 30px; }
         p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
-        
         .input-group { position: relative; margin: 15px 0; }
         .input-group i.field-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; }
         input { 
@@ -570,7 +770,6 @@ LOGIN_HTML = """
             font-family: 'Cairo', sans-serif; transition: all 0.2s;
         }
         input:focus { border-color: var(--primary-red); outline: none; box-shadow: 3px 3px 0px rgba(229, 36, 33, 0.2); }
-        
         button { 
             width: 100%; padding: 12px; background: var(--primary-red); color: white; 
             border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; 
@@ -578,9 +777,7 @@ LOGIN_HTML = """
             margin-top: 10px; box-shadow: 3px 3px 0px #333;
         }
         button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #333; }
-        
         .error { color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold; background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red); }
-        
         .lang-strip {
             display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 15px;
             border-top: 2px dashed #eee;
@@ -588,7 +785,6 @@ LOGIN_HTML = """
         .lang-strip .lang-item { text-align: center; }
         .lang-strip .es { font-family: 'Reenie Beanie', cursive; font-size: 22px; color: var(--primary-red); font-weight: bold; }
         .lang-strip .ar { font-size: 13px; color: #888; }
-
         .social-links { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
         .social-btn {
             display: inline-flex; align-items: center; justify-content: center;
@@ -596,11 +792,8 @@ LOGIN_HTML = """
             font-size: 18px; transition: 0.3s; border: 2px solid #333; box-shadow: 2px 2px 0px #333;
         }
         .social-btn:hover { transform: translateY(-3px); box-shadow: 4px 4px 0px #333; }
-        .fb { background: #1877F2; }
-        .ig { background: #E4405F; }
-        .tt { background: #000000; }
-        .wa { background: #25D366; }
-        
+        .fb { background: #1877F2; } .ig { background: #E4405F; }
+        .tt { background: #000000; } .wa { background: #25D366; }
         @media (max-width: 500px) {
             .card { width: 92%; padding: 25px; }
             .doodle-container { display: none; }
@@ -608,7 +801,6 @@ LOGIN_HTML = """
     </style>
 </head>
 <body>
-    <!-- كلمات إسباني ومصري عائمة في الخلفية -->
     <span class="float-word fw1">¡Hola!</span>
     <span class="float-word fw2">أهلاً</span>
     <span class="float-word fw3">Amigos</span>
@@ -619,20 +811,15 @@ LOGIN_HTML = """
     <span class="float-word fw8">عيلة</span>
     <span class="float-word fw9">Bonito</span>
     <span class="float-word fw10">جميل</span>
-
     <div class="doodle-container d-1"><i class="fa-regular fa-sun"></i><span>Sol</span></div>
     <div class="doodle-container d-2"><i class="fa-solid fa-guitar"></i><span>Música</span></div>
     <div class="doodle-container d-3"><i class="fa-solid fa-pepper-hot"></i><span>Picante</span></div>
     <div class="doodle-container d-4"><i class="fa-regular fa-comment-dots"></i><span>¡Vamos!</span></div>
-
     <div class="card">
-        <img src="/static/assets/logo.png" alt="Instituto Amigos Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421&size=120'">
-        
+        <img src="/static/assets/logo.png" alt="Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421&size=120'">
         <h1>بوابتك لـ <span class="es-word">Español</span> 👋</h1>
         <p class="subtitle">اكتب بياناتك ويالا بينا ع المنصة التعليمية</p>
-        
         {% if error %} <div class="error"><i class="fa-solid fa-triangle-exclamation"></i> {{ error }}</div> {% endif %}
-        
         <form method="POST">
             <div class="input-group">
                 <i class="fa-solid fa-user field-icon"></i>
@@ -644,24 +831,25 @@ LOGIN_HTML = """
             </div>
             <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> ادخل للمنصة</button>
         </form>
-
         <div class="lang-strip">
             <div class="lang-item"><span class="es">Aprender</span><br><span class="ar">يتعلم</span></div>
             <div class="lang-item"><span class="es">Hablar</span><br><span class="ar">يتكلم</span></div>
             <div class="lang-item"><span class="es">Practicar</span><br><span class="ar">يتمرن</span></div>
         </div>
-
         <div class="social-links">
-            <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" class="social-btn ig" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@espanolconamigos" target="_blank" class="social-btn tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="https://wa.me/+201108425280" target="_blank" class="social-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" class="social-btn ig"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@espanolconamigos" target="_blank" class="social-btn tt"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/+201108425280" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
         </div>
     </div>
 </body>
 </html>
 """
 
+# =====================================================================
+# لوحة التحكم الرئيسية (الداشبورد)
+# =====================================================================
 DASHBOARD_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -677,15 +865,14 @@ DASHBOARD_HTML = """
             --accent: #ffd100; --secondary: #2c3e50; 
             --bg-body: #f4f7f6; --text-main: #1e293b; --text-muted: #64748b;
             --vocab-color: #8e44ad; --vocab-light: rgba(142, 68, 173, 0.1);
+            --shadow-color: #e67e22; --shadow-light: rgba(230, 126, 34, 0.1);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); }
-        
         .top-nav {
             background: white; padding: 12px 30px; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100;
         }
-
         .top-right-container { display: flex; align-items: center; gap: 20px; }
         .user-buttons { display: flex; align-items: center; gap: 15px; }
         .logout-btn { 
@@ -695,9 +882,7 @@ DASHBOARD_HTML = """
         }
         .logout-btn:hover { background: var(--primary); color: white; }
         .level-badge { background: #eef2f5; color: var(--secondary); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1px solid #d1d9e0; }
-        
         .v-divider { width: 2px; height: 30px; background-color: #e2e8f0; }
-
         .social-icons { display: flex; gap: 10px; align-items: center; }
         .social-icons a {
             display: flex; align-items: center; justify-content: center;
@@ -706,21 +891,17 @@ DASHBOARD_HTML = """
             font-size: 16px; transition: all 0.3s ease;
         }
         .social-icons a:hover { background: var(--primary); color: white; transform: translateY(-2px); }
-
         .brand-area { display: flex; align-items: center; gap: 15px; }
         .brand-area img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); }
         .brand-area h1 { font-size: 20px; font-weight: 900; color: var(--secondary); margin: 0; }
         .brand-area h1 span { color: var(--primary); }
-
         .main-content { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
-        
         .welcome-section {
             background: linear-gradient(135deg, var(--secondary) 0%, #1a2530 100%);
             color: white; padding: 40px; border-radius: 24px;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 35px; overflow: hidden; position: relative;
         }
-        /* ديكور كلمات عائمة في الهيدر */
         .welcome-section::before {
             content: "¡Hola!  Amigos  Español  يلا  هيا بينا";
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -732,34 +913,28 @@ DASHBOARD_HTML = """
         .user-welcome-info h2 { font-size: 32px; font-weight: 900; margin-bottom: 10px; }
         .user-welcome-info h2 .es-greet { font-family: 'Reenie Beanie', cursive; color: var(--accent); font-size: 38px; }
         .user-welcome-info p { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 500px; }
-        
         .motivation-box {
             background: rgba(255, 209, 0, 0.15); border: 1px solid var(--accent);
             color: var(--accent); padding: 20px; border-radius: 16px; text-align: center;
             width: 300px; backdrop-filter: blur(5px); z-index: 1;
         }
-
-        /* ===== التابات المحسّنة ===== */
         .tabs-nav { 
             display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; 
             background: white; padding: 12px; border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
         .tab-trigger { 
-            background: none; border: 2px solid transparent; font-size: 14px; font-weight: 700; color: var(--text-muted); 
-            padding: 10px 18px; cursor: pointer; transition: 0.3s; border-radius: 12px; 
-            display: flex; align-items: center; gap: 8px; white-space: nowrap;
+            background: none; border: 2px solid transparent; font-size: 13px; font-weight: 700; color: var(--text-muted); 
+            padding: 10px 16px; cursor: pointer; transition: 0.3s; border-radius: 12px; 
+            display: flex; align-items: center; gap: 6px; white-space: nowrap;
         }
         .tab-trigger:hover { background: #f0f3f5; border-color: #e2e8f0; }
         .tab-trigger.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .tab-trigger .tab-icon { font-size: 18px; }
-        .tab-trigger .tab-es { font-family: 'Reenie Beanie', cursive; font-size: 16px; opacity: 0.7; }
-
+        .tab-trigger .tab-icon { font-size: 16px; }
+        .tab-trigger .tab-es { font-family: 'Reenie Beanie', cursive; font-size: 15px; opacity: 0.7; }
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ===== قسم العنوان فوق كل تاب ===== */
         .section-header {
             display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
             padding: 15px 20px; background: white; border-radius: 16px;
@@ -768,18 +943,15 @@ DASHBOARD_HTML = """
         .section-header.vocab-header { border-right-color: var(--vocab-color); }
         .section-header.schedule-header { border-right-color: var(--secondary); }
         .section-header.games-header { border-right-color: #2ecc71; }
+        .section-header.shadow-header { border-right-color: var(--shadow-color); }
         .section-header .sec-icon { font-size: 28px; }
         .section-header .sec-title { font-size: 20px; font-weight: 800; color: var(--secondary); }
         .section-header .sec-subtitle { font-size: 13px; color: var(--text-muted); }
         .section-header .sec-es { font-family: 'Reenie Beanie', cursive; font-size: 22px; color: var(--primary); margin-right: auto; }
-
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        
-        /* ===== كروت محسّنة ===== */
         .course-card { 
             background: white; border-radius: 20px; overflow: hidden; 
             border: 1px solid #f0f3f5; transition: 0.3s; display: flex; flex-direction: column;
-            position: relative;
         }
         .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
         .course-card .card-accent { height: 4px; width: 100%; }
@@ -788,7 +960,7 @@ DASHBOARD_HTML = """
         .card-accent-blue { background: linear-gradient(90deg, var(--secondary), #3498db); }
         .card-accent-green { background: linear-gradient(90deg, #2ecc71, #27ae60); }
         .card-accent-purple { background: linear-gradient(90deg, var(--vocab-color), #9b59b6); }
-        
+        .card-accent-orange { background: linear-gradient(90deg, var(--shadow-color), #f39c12); }
         .card-header { padding: 18px 20px; background: #fafbfc; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;}
         .lesson-number { font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 50px; }
         .ln-red { color: var(--primary); background: rgba(229, 36, 33, 0.1); }
@@ -796,11 +968,10 @@ DASHBOARD_HTML = """
         .ln-blue { color: var(--secondary); background: rgba(0,140,186,0.1); }
         .ln-green { color: #2ecc71; background: rgba(46,204,113,0.1); }
         .ln-purple { color: var(--vocab-color); background: var(--vocab-light); }
-        
+        .ln-orange { color: var(--shadow-color); background: var(--shadow-light); }
         .card-body { padding: 25px 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .card-body h4 { font-size: 16px; font-weight: 800; color: var(--secondary); margin-bottom: 8px; }
         .card-body .card-es-hint { font-family: 'Reenie Beanie', cursive; font-size: 18px; color: #bbb; margin-bottom: 15px; }
-        
         .card-action-btn { 
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             width: 100%; padding: 13px; text-decoration: none; border-radius: 12px; 
@@ -812,10 +983,9 @@ DASHBOARD_HTML = """
         .btn-schedule { background: var(--secondary); color: white; }
         .btn-game { background: #2ecc71; color: white; }
         .btn-vocab { background: var(--vocab-color); color: white; }
-
+        .btn-shadow { background: var(--shadow-color); color: white; }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
         .wheel-box { text-align: center; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         .wheel-display { 
             font-size: 22px; font-weight: 800; color: var(--secondary); padding: 40px 20px; 
@@ -828,20 +998,18 @@ DASHBOARD_HTML = """
             background: var(--primary); color: white; border: none; padding: 15px 40px; 
             font-size: 20px; font-weight: 900; border-radius: 50px; cursor: pointer; 
             transition: 0.3s; box-shadow: 0 5px 15px rgba(229, 36, 33, 0.3);
+            font-family: 'Cairo', sans-serif;
         }
         .spin-btn:hover { background: var(--primary-dark); transform: translateY(-3px); }
         .spin-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none;}
         .spinning { animation: shake 0.1s infinite; color: var(--primary); }
         @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-2px); } 50% { transform: translateX(2px); } 100% { transform: translateX(0); } }
-        
         .timer-display { font-size: 30px; font-weight: 900; color: var(--primary); margin-top: 20px; display: none;}
-
-        /* ===== ريسبونسيف ===== */
         @media (max-width: 768px) {
             .welcome-section { flex-direction: column; gap: 20px; padding: 25px; }
             .motivation-box { width: 100%; }
             .tabs-nav { gap: 5px; padding: 8px; }
-            .tab-trigger { padding: 8px 12px; font-size: 12px; }
+            .tab-trigger { padding: 8px 10px; font-size: 11px; }
             .tab-trigger .tab-es { display: none; }
             .cards-grid { grid-template-columns: 1fr; }
             .top-nav { flex-direction: column; gap: 10px; padding: 10px; }
@@ -859,13 +1027,12 @@ DASHBOARD_HTML = """
             </div>
             <div class="v-divider"></div>
             <div class="social-icons">
-                <a href="https://www.facebook.com/institutoamigos1" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/instituto_amigos1/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@espanolconamigos" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/+201108425280" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/institutoamigos1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/instituto_amigos1/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@espanolconamigos" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/+201108425280" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
-
         <div class="brand-area" dir="ltr">
             <img src="/static/assets/logo.png" alt="Logo" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421'">
             <h1>Instituto <span>Amigos</span></h1>
@@ -886,16 +1053,19 @@ DASHBOARD_HTML = """
 
         <nav class="tabs-nav">
             <button class="tab-trigger active" onclick="switchTab(event, 'lectures-tab')">
-                <i class="fa-solid fa-video tab-icon"></i> المحاضرات <span class="tab-es">Lecciones</span>
+                <i class="fa-solid fa-video tab-icon"></i> الدروس <span class="tab-es">Lecciones</span>
             </button>
             <button class="tab-trigger" onclick="switchTab(event, 'exercises-tab')">
                 <i class="fa-solid fa-pen-ruler tab-icon"></i> التمارين <span class="tab-es">Ejercicios</span>
             </button>
             <button class="tab-trigger" onclick="switchTab(event, 'vocab-tab')">
-                <i class="fa-solid fa-spell-check tab-icon" style="color: inherit;"></i> الكلمات <span class="tab-es">Vocabulario</span>
+                <i class="fa-solid fa-spell-check tab-icon"></i> الكلمات <span class="tab-es">Vocabulario</span>
             </button>
             <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')">
                 <i class="fa-solid fa-calendar-days tab-icon"></i> الجداول <span class="tab-es">Horarios</span>
+            </button>
+            <button class="tab-trigger" onclick="switchTab(event, 'shadowing-tab')">
+                <i class="fa-solid fa-headphones tab-icon"></i> الشادوينج <span class="tab-es">Shadowing</span>
             </button>
             <button class="tab-trigger" onclick="switchTab(event, 'games-tab')">
                 <i class="fa-solid fa-gamepad tab-icon"></i> الألعاب <span class="tab-es">Juegos</span>
@@ -908,12 +1078,12 @@ DASHBOARD_HTML = """
             </button>
         </nav>
 
-        <!-- ========== تاب المحاضرات ========== -->
+        <!-- ========== 1. الدروس ========== -->
         <div id="lectures-tab" class="tab-content active">
             <div class="section-header">
                 <i class="fa-solid fa-book-open sec-icon" style="color: var(--primary);"></i>
                 <div>
-                    <div class="sec-title">المحاضرات والشرح</div>
+                    <div class="sec-title">الدروس والشرح</div>
                     <div class="sec-subtitle">شروحات مفصلة لكل درس في مستوى {{ student.level }}</div>
                 </div>
                 <span class="sec-es">Las Lecciones</span>
@@ -936,7 +1106,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب التمارين ========== -->
+        <!-- ========== 2. التمارين ========== -->
         <div id="exercises-tab" class="tab-content">
             <div class="section-header">
                 <i class="fa-solid fa-pen-ruler sec-icon" style="color: #b8860b;"></i>
@@ -964,7 +1134,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب الكلمات ★ جديد ★ ========== -->
+        <!-- ========== 3. الكلمات ========== -->
         <div id="vocab-tab" class="tab-content">
             <div class="section-header vocab-header">
                 <i class="fa-solid fa-language sec-icon" style="color: var(--vocab-color);"></i>
@@ -992,7 +1162,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب الجداول ========== -->
+        <!-- ========== 4. الجداول ========== -->
         <div id="schedule-tab" class="tab-content">
             <div class="section-header schedule-header">
                 <i class="fa-solid fa-calendar-check sec-icon" style="color: var(--secondary);"></i>
@@ -1020,7 +1190,35 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب الألعاب ========== -->
+        <!-- ========== 5. الشادوينج ========== -->
+        <div id="shadowing-tab" class="tab-content">
+            <div class="section-header shadow-header">
+                <i class="fa-solid fa-headphones sec-icon" style="color: var(--shadow-color);"></i>
+                <div>
+                    <div class="sec-title">🎧 الشادوينج - Shadowing</div>
+                    <div class="sec-subtitle">اسمع وردد وراهم عشان نطقك يبقى زي الإسبان بالظبط</div>
+                </div>
+                <span class="sec-es" style="color: var(--shadow-color);">Repetir y Mejorar</span>
+            </div>
+            <div class="cards-grid">
+                {% for shadow in shadowing_list %}
+                <div class="course-card">
+                    <div class="card-accent card-accent-orange"></div>
+                    <div class="card-header" style="background: #fff8f0;">
+                        <span class="lesson-number ln-orange"><i class="fa-solid fa-headphones"></i> الدرس {{ loop.index }}</span>
+                        <i class="fa-solid fa-microphone" style="color: var(--shadow-color);"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>{{ shadow.title }}</h4>
+                        <div class="card-es-hint" style="color: var(--shadow-color); opacity: 0.6;">Shadowing {{ loop.index }}</div>
+                        <a href="/page/{{ student.level }}/{{ shadow.file }}" class="card-action-btn btn-shadow"><i class="fa-solid fa-headphones"></i> ابدأ الشادوينج</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- ========== 6. الألعاب ========== -->
         <div id="games-tab" class="tab-content">
             <div class="section-header games-header">
                 <i class="fa-solid fa-puzzle-piece sec-icon" style="color: #2ecc71;"></i>
@@ -1048,7 +1246,7 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب الفيديوهات ========== -->
+        <!-- ========== 7. الفيديوهات ========== -->
         <div id="videos-tab" class="tab-content">
             <div class="section-header">
                 <i class="fa-brands fa-youtube sec-icon" style="color: #ff0000;"></i>
@@ -1071,16 +1269,15 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== تاب العجلة ========== -->
+        <!-- ========== 8. عجلة التحدث ========== -->
         <div id="wheel-tab" class="tab-content">
             <div class="wheel-box">
-                <h3 style="color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-microphone-lines"></i> عجلة التحدث والطلاقة - <span style="font-family: 'Reenie Beanie', cursive; color: var(--primary); font-size: 28px;">La Ruleta</span></h3>
-                <p style="color: var(--text-muted);">اضغط على الزر ليتم اختيار موضوع عشوائي مناسب لمستواك الحالي ({{ student.level }}). تحدث عنه لمدة دقيقة إلى دقيقتين بدون توقف!</p>
-                
-                <div id="topicDisplay" class="wheel-display">
-                    اضغط على "لف العجلة" لبدء التحدي! 🎯
-                </div>
-                
+                <h3 style="color: var(--secondary); margin-bottom: 10px;">
+                    <i class="fa-solid fa-microphone-lines"></i> عجلة التحدث والطلاقة - 
+                    <span style="font-family: 'Reenie Beanie', cursive; color: var(--primary); font-size: 28px;">La Ruleta</span>
+                </h3>
+                <p style="color: var(--text-muted);">اضغط على الزر ليتم اختيار موضوع عشوائي مناسب لمستواك ({{ student.level }}). تحدث عنه لمدة دقيقتين بدون توقف!</p>
+                <div id="topicDisplay" class="wheel-display">اضغط على "لف العجلة" لبدء التحدي! 🎯</div>
                 <button id="spinBtn" class="spin-btn" onclick="spinWheel()"><i class="fa-solid fa-rotate"></i> لف العجلة</button>
                 <div id="timerDisplay" class="timer-display">02:00</div>
             </div>
@@ -1097,54 +1294,41 @@ DASHBOARD_HTML = """
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
-
         const levelTopics = {{ topics_json | safe }};
-        
         function spinWheel() {
             const btn = document.getElementById("spinBtn");
             const display = document.getElementById("topicDisplay");
             const timerDisplay = document.getElementById("timerDisplay");
-            
             btn.disabled = true;
             timerDisplay.style.display = "none";
             display.classList.add("spinning");
-            
             let counter = 0;
             let spinInterval = setInterval(() => {
                 const randomTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
                 display.innerText = randomTopic;
                 counter++;
-                
                 if(counter > 20) {
                     clearInterval(spinInterval);
                     display.classList.remove("spinning");
-                    
                     const finalTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
-                    display.innerHTML = `<span style="color: var(--primary); font-size: 26px;">🎯 ${finalTopic}</span>`;
-                    
+                    display.innerHTML = '<span style="color: var(--primary); font-size: 26px;">🎯 ' + finalTopic + '</span>';
                     btn.innerHTML = '<i class="fa-solid fa-rotate"></i> جرب موضوع تاني';
                     btn.disabled = false;
-                    
                     startTimer(120, timerDisplay);
                 }
             }, 100);
         }
-
         let timerInterval;
         function startTimer(duration, display) {
             clearInterval(timerInterval);
             display.style.display = "block";
             let timer = duration, minutes, seconds;
-            
             timerInterval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
                 display.textContent = minutes + ":" + seconds;
-
                 if (--timer < 0) {
                     clearInterval(timerInterval);
                     display.textContent = "انتهى الوقت! أحسنت 👏";
@@ -1155,6 +1339,10 @@ DASHBOARD_HTML = """
 </body>
 </html>
 """
+
+# =====================================================================
+# الراوتات (Routes)
+# =====================================================================
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -1179,12 +1367,12 @@ def dashboard():
     student = session['user']
     level = student['level']
     
-    # جلب القوائم المخصصة بناءً على مستوى الطالب
     student_lessons = LESSONS_DATA.get(level, [{"title": "درس غير متوفر", "file": "error.html"}])
     student_exercises = EXERCISES_DATA.get(level, [{"title": "تمرين غير متوفر", "file": "error.html"}])
-    student_schedules = SCHEDULES_DATA.get(level, [{"title": "جدول غير متوفر", "file": "error.html"}])
-    student_games = GAMES_DATA.get(level, [{"title": "لعبة غير متوفرة", "file": "error.html"}])
     student_vocab = VOCAB_DATA.get(level, [{"title": "كلمات غير متوفرة", "file": "error.html"}])
+    student_schedules = SCHEDULES_DATA.get(level, [{"title": "جدول غير متوفر", "file": "error.html"}])
+    student_shadowing = SHADOWING_DATA.get(level, [{"title": "شادوينج غير متوفر", "file": "error.html"}])
+    student_games = GAMES_DATA.get(level, [{"title": "لعبة غير متوفرة", "file": "error.html"}])
     student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي", "youtube_id": "dQw4w9WgXcQ"}])
     
     random_quote = random.choice(motivation_quotes)
@@ -1197,9 +1385,10 @@ def dashboard():
         student=student, 
         lessons_list=student_lessons, 
         exercises_list=student_exercises,
-        schedules_list=student_schedules,
-        games_list=student_games,
         vocab_list=student_vocab,
+        schedules_list=student_schedules,
+        shadowing_list=student_shadowing,
+        games_list=student_games,
         quote=random_quote,
         topics_json=topics_json,
         videos_list=student_videos
@@ -1209,13 +1398,10 @@ def dashboard():
 def serve_page(filename):
     if 'user' not in session:
         return redirect(url_for('login'))
-    
     student = session['user']
     student_level = student['level']
-    
     if not filename.startswith(student_level + "/"):
         abort(403)
-        
     try:
         return render_template(filename, student=student)
     except Exception as e:
