@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unidad 2 – Para ti y para mí | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Tajawal:wght@400;500;700;900&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;height:100%;scroll-behavior:smooth;}
+body{background:#0d3b3e;font-family:'Open Sans',sans-serif;height:100%;}
+.slide{width:100vw;min-height:100vh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;}
+.slide>*{position:relative;z-index:1;}
+.slide-content::before{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,8vw,8rem);font-weight:900;color:rgba(0,150,136,0.04);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+.ar, .ar-instr, .ar-line, .com-ar-mini, .com-tip-row, [dir="rtl"]{font-family:'Cairo','Tajawal',sans-serif !important;font-weight:500;letter-spacing:0;}
+
+/* ===== WELCOME ===== */
+.slide-welcome{background:linear-gradient(135deg,#00897b 0%,#00695c 50%,#004d40 100%);justify-content:flex-start;align-items:center;text-align:center;color:#fff;padding:clamp(20px,4vw,40px);overflow-y:auto;}
+.welcome-title{font-family:'Cairo','Tajawal',sans-serif;font-size:clamp(22px,3.5vw,34px);font-weight:900;margin-top:15px;text-shadow:2px 2px 8px rgba(0,0,0,0.3);direction:rtl;}
+.welcome-sub{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.6vw,16px);opacity:0.9;margin:8px 0 18px;direction:rtl;}
+.welcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;max-width:1100px;width:100%;margin-bottom:15px;}
+.welcome-card{background:rgba(255,255,255,0.13);border:1.5px solid rgba(255,255,255,0.25);border-radius:14px;padding:13px 15px;text-align:right;direction:rtl;backdrop-filter:blur(8px);transition:transform 0.3s;}
+.welcome-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.2);}
+.welcome-card h4{font-family:'Cairo',sans-serif;font-size:14.5px;font-weight:700;margin-bottom:6px;color:#ffd54f;}
+.welcome-card p{font-family:'Cairo',sans-serif;font-size:13px;line-height:1.7;font-weight:500;}
+.golden-tip{background:linear-gradient(90deg,#ffd54f,#ffb300);color:#3e2723;padding:11px 18px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;margin:12px 0;direction:rtl;max-width:900px;box-shadow:0 4px 12px rgba(255,179,0,0.3);}
+.scroll-down{background:#ffd54f;color:#004d40;padding:10px 25px;border-radius:25px;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;animation:bounce 2s ease-in-out infinite;margin-top:10px;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ===== COVER ===== */
+.slide-cover{background:linear-gradient(135deg,#00897b 0%,#00695c 50%,#004d40 100%);justify-content:center;align-items:center;text-align:center;color:#fff;padding:clamp(20px,5vw,60px);}
+.unit-circle{width:clamp(80px,15vw,120px);height:clamp(80px,15vw,120px);background:#ffd54f;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(40px,8vw,64px);font-weight:900;color:#004d40;font-family:'Playfair Display',serif;margin-bottom:30px;box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.slide-cover h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,56px);letter-spacing:clamp(2px,1vw,6px);text-transform:uppercase;margin-bottom:20px;text-shadow:3px 3px 10px rgba(0,0,0,0.4);}
+.obj-box{background:rgba(255,255,255,0.15);border-radius:16px;padding:clamp(15px,3vw,25px) clamp(20px,4vw,40px);margin-top:30px;max-width:900px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);}
+.obj-box p{font-size:clamp(13px,1.5vw,17px);line-height:1.8;}
+.instituto-label{margin-top:40px;font-size:clamp(12px,1.4vw,16px);letter-spacing:4px;text-transform:uppercase;opacity:0.7;}
+
+/* ===== Content ===== */
+.slide-content{background:#fff;padding:clamp(15px,2vw,22px) clamp(15px,3vw,38px);position:relative;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:3px solid #00897b;flex-wrap:wrap;gap:8px;}
+.topbar-left{display:flex;flex-direction:column;gap:3px;}
+.topbar .ulabel{font-family:'Playfair Display',serif;font-size:clamp(11px,1.2vw,13px);color:#00695c;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
+.topbar .pnum{font-size:clamp(10px,1vw,12px);color:#999;font-weight:600;}
+.topbar-right{display:flex;align-items:center;gap:15px;}
+.brand-badge{font-family:'Playfair Display',serif;font-size:clamp(11px,1.2vw,13px);color:#00695c;font-weight:800;opacity:0.6;text-transform:uppercase;letter-spacing:1px;}
+.act-head{display:flex;align-items:center;margin-bottom:10px;gap:12px;}
+.act-num{width:40px;height:40px;background:linear-gradient(135deg,#00897b,#00695c);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;font-family:'Playfair Display',serif;flex-shrink:0;box-shadow:0 3px 10px rgba(0,105,92,0.3);}
+.act-title{font-family:'Playfair Display',serif;font-size:clamp(18px,2.3vw,22px);color:#2c2c2c;text-decoration:underline;text-decoration-color:#00897b;text-underline-offset:5px;text-decoration-thickness:3px;}
+.sub-l{font-weight:700;font-size:clamp(12.5px,1.4vw,14px);color:#00695c;margin:8px 0 5px;background:linear-gradient(90deg,#e0f2f1,#f5fafa);padding:6px 12px;border-radius:6px;border-left:4px solid #00897b;}
+
+/* ===== Audio ===== */
+.audio-wrap{background:linear-gradient(135deg,#e0f2f1,#b2dfdb);border:1.5px solid #00897b;border-radius:10px;padding:6px 12px;margin:6px 0;box-shadow:0 1px 3px rgba(0,137,123,0.1);}
+.audio-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.audio-label{font-weight:700;color:#00695c;font-size:11.5px;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.audio-row audio{flex:1;min-width:200px;height:30px;max-width:420px;}
+.trans-btn{background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff;border:none;padding:5px 11px;border-radius:14px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-family:'Open Sans',sans-serif;white-space:nowrap;transition:all 0.3s;}
+.trans-btn:hover{transform:translateY(-1px);}
+.trans-btn.active{background:linear-gradient(135deg,#00695c,#004d40);}
+.trans-btn .arrow{transition:transform 0.3s;font-size:10px;}
+.trans-btn.active .arrow{transform:rotate(180deg);}
+.trans-content{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s ease,margin-top 0.3s ease;background:#f5f5f5;border:1px solid #ccc;border-radius:6px;margin-top:0;padding:0 12px;}
+.trans-content.show{max-height:5000px;padding:10px 14px;margin-top:6px;}
+.trans-content .ttitle{font-family:'Playfair Display',serif;font-size:13px;color:#0d47a1;margin-bottom:5px;text-decoration:underline;font-weight:700;}
+.trans-content p{font-size:12px;line-height:1.85;color:#333;margin:3px 0;}
+
+/* ===== Answer Reveal ===== */
+.fill-blank{display:inline-block;min-width:80px;border-bottom:2px dashed #999;padding:0 4px;transition:all 0.4s;color:transparent;user-select:none;font-weight:600;}
+.fill-blank.show{border-bottom:2px solid #2e8b57;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#1b5e20;font-weight:700;border-radius:4px;padding:2px 7px;}
+.opt-mark{display:inline-block;width:14px;height:14px;border:2px solid #999;border-radius:50%;vertical-align:middle;margin-right:5px;transition:all 0.4s;}
+.opt-mark.correct.show{background:#2e8b57;border-color:#2e8b57;box-shadow:0 0 0 3px #c8e6c9;}
+.opt-mark.correct.show::after{content:"✓";color:#fff;font-size:10px;font-weight:900;display:block;text-align:center;line-height:10px;}
+.ans-inline{display:inline-block;border-bottom:2px dashed #999;min-width:80px;padding:0 4px;transition:all 0.4s;}
+.ans-inline .ans-text{display:none;}
+.ans-inline .placeholder-text{display:inline-block;min-width:60px;}
+.ans-inline.show{background:linear-gradient(135deg,#c8e6c9,#a5d6a7);border-bottom:2px solid #2e8b57;color:#1b5e20;font-weight:700;border-radius:4px;padding:2px 7px;}
+.ans-inline.show .ans-text{display:inline;}
+.ans-inline.show .placeholder-text{display:none;}
+.show-ans-row{display:flex;justify-content:flex-end;margin:6px 0 4px;}
+.show-ans-btn{background:linear-gradient(135deg,#2e8b57,#1e6e3f);color:#fff;border:none;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.3s;font-family:'Cairo','Open Sans',sans-serif;box-shadow:0 2px 6px rgba(46,139,87,0.25);}
+.show-ans-btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(46,139,87,0.4);}
+.show-ans-btn .arrow{transition:transform 0.3s;font-size:12px;}
+.show-ans-btn.active{background:linear-gradient(135deg,#00695c,#004d40);}
+.show-ans-btn.active .arrow{transform:rotate(180deg);}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+.ar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px;margin:10px 0;}
+
+/* ===== Arabic boxes ===== */
+.ar{background:linear-gradient(135deg,#fff8e1,#fff3cd);border-right:5px solid #f5a623;border-radius:14px 0 0 14px;padding:14px 18px;font-family:'Cairo','Tajawal',sans-serif;font-size:clamp(14px,1.5vw,15.5px);line-height:2.1;color:#5a4100;direction:rtl;text-align:right;font-weight:500;box-shadow:0 2px 8px rgba(245,166,35,0.12);}
+.ar strong{color:#bf6a00;font-weight:700;}
+.ar-full{margin:10px 0;}
+.ar-instr{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:2px solid #f5a623;border-radius:12px;padding:12px 16px;margin:8px 0;font-family:'Cairo','Tajawal',sans-serif;font-size:clamp(13.5px,1.5vw,15px);color:#5a4100;direction:rtl;text-align:right;line-height:2.05;font-weight:500;box-shadow:0 2px 8px rgba(245,166,35,0.1);}
+.ar-instr .ar-title{font-weight:700;color:#bf6a00;display:block;margin-bottom:6px;font-size:15.5px;letter-spacing:0.3px;}
+
+/* ===== 🌟 NUEVO: Sistema de palabras hablables - COLORES ===== */
+/* Palabra normal hablable (cualquier texto español) */
+.es-speak{cursor:pointer;transition:all 0.2s;display:inline;border-radius:3px;padding:0 2px;position:relative;}
+.es-speak:hover{background:#fff3e0;color:#bf360c;}
+.es-speak.speaking{background:#ffd54f !important;color:#bf360c !important;animation:wordPulse 0.6s ease-in-out infinite;}
+@keyframes wordPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+
+/* Caja naranja para palabras importantes (vocabulario) */
+.es-word{display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fff;padding:3px 11px;border-radius:7px;border:1.5px solid #26a69a;font-weight:700;margin:0 5px;color:#00695c;font-family:'Open Sans',sans-serif;cursor:pointer;transition:all 0.25s;position:relative;font-size:0.95em;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.es-word::before{content:"🔊";font-size:0.75em;margin-right:5px;opacity:0.55;}
+.es-word:hover{background:#e0f2f1;border-color:#00695c;color:#004d40;transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,105,92,0.28);}
+.es-word:hover::before{opacity:1;}
+.es-word.speaking{background:#ffd54f;border-color:#00695c;animation:wordPulse 0.6s ease-in-out infinite;}
+
+/* 🟣 GRAMÁTICA - Pronombres (morado) */
+.es-pron{cursor:pointer;display:inline;background:linear-gradient(transparent 55%, #e1bee7 55%);color:#6a1b9a;font-weight:700;padding:0 3px;border-radius:3px;transition:all 0.2s;border-bottom:2px solid #8e24aa;}
+.es-pron:hover{background:#ce93d8;color:#4a148c;}
+.es-pron.speaking{background:#ffd54f !important;color:#6a1b9a !important;animation:wordPulse 0.6s ease-in-out infinite;}
+
+/* 🔴 VERBOS - Conjugados (rojo) */
+.es-verb{cursor:pointer;display:inline;color:#c62828;font-weight:700;padding:0 3px;border-radius:3px;transition:all 0.2s;border-bottom:2px dotted #c62828;}
+.es-verb:hover{background:#ffcdd2;}
+.es-verb.speaking{background:#ffd54f !important;color:#c62828 !important;animation:wordPulse 0.6s ease-in-out infinite;}
+
+/* 🔵 GERUNDIO (azul) */
+.es-ger{cursor:pointer;display:inline;color:#1565c0;font-weight:700;padding:0 3px;border-radius:3px;transition:all 0.2s;border-bottom:2px wavy #1976d2;}
+.es-ger:hover{background:#bbdefb;}
+.es-ger.speaking{background:#ffd54f !important;color:#1565c0 !important;animation:wordPulse 0.6s ease-in-out infinite;}
+
+/* 🟢 INDEFINIDOS (verde) */
+.es-ind{cursor:pointer;display:inline;color:#1b5e20;font-weight:700;padding:0 3px;border-radius:3px;transition:all 0.2s;background:linear-gradient(transparent 55%, #c8e6c9 55%);}
+.es-ind:hover{background:#a5d6a7;}
+.es-ind.speaking{background:#ffd54f !important;color:#1b5e20 !important;animation:wordPulse 0.6s ease-in-out infinite;}
+
+/* ===== Generic Blocks ===== */
+.tblock{background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:11px 15px;font-size:clamp(12px,1.3vw,13px);line-height:1.75;color:#333;}
+.gbox{background:linear-gradient(135deg,#f3e5f5,#e1bee7);border:2px solid #8e24aa;border-radius:12px;padding:11px 16px;margin:6px 0;box-shadow:0 2px 6px rgba(142,36,170,0.1);}
+.gbox h3{font-family:'Playfair Display',serif;font-size:15px;color:#6a1b9a;text-decoration:underline;text-underline-offset:4px;margin-bottom:6px;}
+.gbox p,.gbox li{font-size:clamp(12px,1.3vw,13px);line-height:1.75;color:#4a148c;margin:3px 0;}
+.infobox{background:linear-gradient(135deg,#e0f2f1,#b2dfdb);border:2px solid #00897b;border-radius:10px;padding:10px 14px;margin:6px 0;}
+.infobox h4{color:#004d40;font-size:13px;margin-bottom:5px;text-decoration:underline;font-family:'Playfair Display',serif;}
+.infobox p{font-size:12.5px;color:#004d40;line-height:1.65;}
+.teacuerdas{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ef6c00;border-radius:10px;padding:10px 14px;margin:6px 0;}
+.teacuerdas h4{color:#bf360c;font-size:13px;margin-bottom:4px;text-decoration:underline;font-family:'Playfair Display',serif;}
+.teacuerdas p{font-size:12.5px;color:#bf360c;line-height:1.65;}
+
+.table-responsive{overflow-x:auto;border-radius:10px;}
+table{border-collapse:collapse;width:100%;margin:6px 0;font-size:clamp(11.5px,1.2vw,12.5px);border-radius:10px;overflow:hidden;}
+table th{background:linear-gradient(135deg,#00897b,#00695c);color:#fff;padding:7px 10px;font-weight:700;text-align:center;font-family:'Cairo','Open Sans',sans-serif;}
+table td{padding:6px 10px;border:1px solid #ddd;text-align:center;line-height:1.7;}
+table tr:nth-child(even){background:#f5fafa;}
+
+.dia{margin:6px 0;font-size:12.5px;line-height:1.85;background:#fafafa;padding:8px 12px;border-radius:6px;border-left:3px solid #00897b;}
+.dia p{margin:3px 0;}
+.sb{color:#00695c;font-weight:700;}
+.st{color:#bf360c;font-weight:700;}
+.wbank{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.wbank span{background:#e0f2f1;border:1px solid #00897b;border-radius:8px;padding:4px 10px;font-size:12px;color:#00695c;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.wbank span:hover{background:#b2dfdb;transform:translateY(-1px);}
+.wbank span.speaking{background:#ffd54f !important;animation:wordPulse 0.6s ease-in-out infinite;}
+.img-placeholder{background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border:2px dashed #999;border-radius:10px;padding:14px 10px;text-align:center;color:#888;font-style:italic;font-size:11.5px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:6px 0;font-family:'Cairo',sans-serif;}
+.img-placeholder .icon{font-size:30px;margin-bottom:6px;color:#bbb;}
+.ejn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#2c2c54;color:#fff;border-radius:50%;font-weight:700;font-size:11px;margin-right:6px;flex-shrink:0;}
+
+.slide-div{background:linear-gradient(135deg,#2c2c54,#1a1a2e);justify-content:center;align-items:center;text-align:center;color:#fff;padding:clamp(30px,6vw,60px);}
+.slide-div h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);letter-spacing:clamp(2px,1vw,6px);text-transform:uppercase;margin-bottom:12px;color:#ffd54f;}
+.divline{width:200px;height:4px;background:#00897b;border-radius:2px;margin:12px 0;}
+.slide-div p{font-size:clamp(14px,1.8vw,18px);opacity:0.75;max-width:600px;font-family:'Cairo','Open Sans',sans-serif;}
+
+.slide-cons{background:linear-gradient(135deg,#fff8e1,#fffde7);border:4px solid #f5a623;}
+.consbadge{display:inline-block;background:#f5a623;color:#fff;font-weight:900;font-size:11.5px;padding:5px 13px;border-radius:8px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;font-family:'Playfair Display',serif;}
+
+.com-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:11px;margin:8px 0;}
+.com-card{background:#fff;border:2px solid #2e7d32;border-radius:11px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 6px rgba(46,125,50,0.1);}
+.com-card-head{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:7px 12px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;text-align:center;letter-spacing:1px;}
+.com-card-body{padding:9px 11px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.com-formula{background:#f5f0ff;border:1px dashed #7c4dff;border-radius:6px;padding:5px 8px;font-size:11px;color:#5a2dba;text-align:center;font-weight:600;font-family:'Courier New',monospace;}
+.com-example{background:#e8f5e9;border-left:3px solid #2e8b57;border-radius:4px;padding:5px 9px;font-size:11.5px;color:#1b5e20;line-height:1.8;}
+.com-example strong{color:#00695c;}
+.com-ar-mini{background:#fff8e1;border-right:3px solid #f5a623;border-radius:4px;padding:6px 10px;font-family:'Cairo','Tajawal',sans-serif;font-size:13.5px;color:#5a4100;direction:rtl;text-align:right;line-height:1.75;font-weight:600;}
+.com-ar-mini strong{color:#bf6a00;font-weight:700;}
+.com-tip-row{background:linear-gradient(90deg,#e0f2f1,#e8f5f4);border:1.5px solid #00897b;border-radius:10px;padding:9px 14px;margin-top:7px;font-family:'Cairo','Tajawal',sans-serif;font-size:14px;color:#004d40;direction:rtl;text-align:right;line-height:1.9;display:flex;align-items:flex-start;gap:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,137,123,0.1);}
+.com-tip-row .tip-icon{font-size:20px;flex-shrink:0;}
+
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:8px 0;}
+.shop-card{background:#fff;border:2px solid #00897b;border-radius:10px;padding:10px;text-align:center;font-size:12px;}
+.shop-card .letter{display:inline-block;background:#00695c;color:#fff;width:24px;height:24px;border-radius:50%;line-height:24px;font-weight:900;margin-bottom:6px;}
+.shop-card .label{font-weight:700;color:#00695c;font-size:11.5px;}
+.shop-card .ans-row{margin-top:5px;}
+
+/* ===== Color Legend (top of lesson) ===== */
+.color-legend{background:#fafafa;border:2px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin:8px 0 14px;font-size:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;}
+.color-legend .lg-title{font-family:'Cairo',sans-serif;font-weight:700;color:#333;direction:rtl;font-size:13px;}
+.color-legend .lg-item{display:inline-flex;align-items:center;gap:5px;font-family:'Cairo',sans-serif;direction:rtl;}
+
+</style>
+</head>
+<body>
+
+<!-- ========== WELCOME ========== -->
+<div class="slide slide-welcome">
+<div class="unit-circle">2</div>
+<h1 class="welcome-title">أهلاً بيك في الوحدة الثانية – Para ti y para mí</h1>
+<p class="welcome-sub">دليلك السريع لاستخدام الصفحة والاستفادة القصوى من الدرس</p>
+
+<div class="welcome-grid">
+<div class="welcome-card"><h4>📄 1. التنقل بين الشرائح</h4><p>كل شريحة في صفحة كاملة على شاشتك. اعمل Scroll لأسفل بإصبعك أو بعجلة الماوس للانتقال للشريحة التالية بسلاسة.</p></div>
+<div class="welcome-card"><h4>🔊 2. تشغيل الصوتيات</h4><p>هتلاقي مشغل صوت في كل تمرين فيه استماع. اضغط زر التشغيل (▶) لسماع الأوديو الأصلي من الكتاب. كل أوديو منفصل عن التاني.</p></div>
+<div class="welcome-card"><h4>📄 3. التفريغ النصي</h4><p>تحت كل أوديو هتلاقي زر "إظهار التفريغ". اضغطه عشان تقرأ النص اللي بيقوله الأوديو ده.</p></div>
+<div class="welcome-card"><h4>✏️ 4. التعامل مع التمارين</h4><p>التمارين مصممة عشان تحاول تحلها لوحدك الأول! بعد ما تحاول، اضغط زر "إظهار الإجابة" الأخضر عشان تتأكد من حلك.</p></div>
+<div class="welcome-card"><h4>🗣️ 5. كل كلمة قابلة للنطق!</h4><p>أي كلمة أو جملة إسبانية في الصفحة قابلة للضغط لسماع نطقها. والكلمات النحوية المهمة بألوان مميزة عشان تفرّقها بسهولة.</p></div>
+<div class="welcome-card"><h4>🎨 6. نظام الألوان النحوي</h4><p>🟣 بنفسجي = ضمائر | 🔴 أحمر = أفعال مُصرَّفة | 🔵 أزرق = Gerundio | 🟢 أخضر = Indefinidos</p></div>
+<div class="welcome-card"><h4>📚 7. الكلمات المهمة</h4><p>كل الكلمات الجديدة موجودة في ملف مستقل خاص بالـ Vocabulario. تقدر تذاكر منه وتسمع نطق كل كلمة.</p></div>
+<div class="welcome-card"><h4>💡 8. الشرح العربي</h4><p>الصناديق الصفراء فيها شرح عربي مبسط وتعليقات تعليمية مفيدة. اقرأها كويس عشان تفهم كل قاعدة بسهولة.</p></div>
+</div>
+
+<div class="golden-tip">⭐️ نصيحة ذهبية: اضغط على أي نص إسباني أو كلمة ملونة لسماع نطقها الصحيح بصوت إسباني أصلي!</div>
+<div class="scroll-down">⬇️ اعمل Scroll للأسفل عشان تبدأ الدرس ⬇️</div>
+</div>
+
+<!-- ========== COVER ========== -->
+<div class="slide slide-cover">
+<div class="unit-circle">2</div>
+<h1>PARA TI Y PARA MÍ</h1>
+<div class="obj-box"><p>Hablar de regalos • Expresar que algo está sucediendo en un momento dado<br>Comprar en una tienda • Referirse a objetos o a personas</p></div>
+<p class="instituto-label">Instituto Amigos</p>
+</div>
+
+<!-- ========== ACT 1 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 16</span></div></div>
+<div class="act-head"><div class="act-num">1</div><h2 class="act-title">¿Qué les compro?</h2></div>
+
+<div class="color-legend">
+<span class="lg-title">🎨 دليل الألوان:</span>
+<span class="lg-item"><span class="es-pron">le</span> = ضمائر</span>
+<span class="lg-item"><span class="es-verb">compro</span> = أفعال</span>
+<span class="lg-item"><span class="es-ger">comprando</span> = Gerundio</span>
+<span class="lg-item"><span class="es-ind">algo</span> = Indefinidos</span>
+<span class="lg-item" style="font-size:11px;color:#666;">👆 اضغط على أي كلمة لسماعها</span>
+</div>
+
+<div class="grid-2">
+<div class="img-placeholder"><div class="icon">📷</div><div>صورة Raúl: ولد مراهق يقرأ كتاب على العشب – "Mi sobrino"</div></div>
+<div class="img-placeholder"><div class="icon">📷</div><div>صورة Cecilia: سيدة كبيرة بقميص وردي تمارس رياضة المشي بالعصا – "Mi madre"</div></div>
+<div class="img-placeholder"><div class="icon">📷</div><div>صورة Silvia: فتاة شابة تجلس أمام الكمبيوتر وتبدو متعبة – "Mi hermana"</div></div>
+<div class="img-placeholder"><div class="icon">📷</div><div>صورة Nacho: شاب يفكر ويضع إصبعه على ذقنه – بطل الحوار</div></div>
+</div>
+
+<div class="sub-l">a. En parejas. <span class="es-speak">Nacho busca regalos de Navidad para su familia.</span> Mira las fotos. <span class="es-speak">¿Qué regalos crees que elige?</span> ¿Por qué? Después escucha el diálogo y comprueba.</div>
+
+<div class="wbank">
+<span data-speak="un perfume">un perfume</span>
+<span data-speak="una tableta">una tableta</span>
+<span data-speak="unos patines">unos patines</span>
+<span data-speak="un libro">un libro</span>
+<span data-speak="un vale para una sesión de spa">un vale para una sesión de spa</span>
+<span data-speak="un pañuelo de seda">un pañuelo de seda</span>
+<span data-speak="un ramo de flores">un ramo de flores</span>
+<span data-speak="una película en DVD">una película en DVD</span>
+<span data-speak="un pulsómetro">un pulsómetro</span>
+</div>
+
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 4</div>
+<audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/04%20Pista%204.mp3" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción – Audio 4</div>
+<p>● <span class="es-speak">Nacho, ¿has pensado ya en los regalos de Navidad?</span><br>
+▲ <span class="es-speak">Pues no del todo.</span> <span class="es-speak">Bueno, el regalo para mi sobrino sí lo he pensado ya.</span> <span class="es-speak">Creo que voy a buscar un libro.</span><br>
+● <span class="es-speak">¿Un libro?, ¿tú crees que <span class="es-pron">le</span> va a gustar?</span><br>
+▲ <span class="es-speak">A él <span class="es-pron">le</span> gusta leer..., pero la verdad es que lo que él realmente quiere es una tableta.</span><br>
+● <span class="es-speak">Pues ya está, puedes comprar<span class="es-pron">le</span> una tableta.</span> <span class="es-speak">Así puede leer o bajarse juegos.</span><br>
+▲ <span class="es-speak">Ah, muy bien, muy buena idea.</span><br>
+● <span class="es-speak">¿Y para tu hermana? ¿Tienes ya alguna idea?</span><br>
+▲ <span class="es-speak">Bueno, he pensado en un vale para una sesión de spa.</span> <span class="es-speak">¿Qué te parece?</span> <span class="es-speak">Es que tiene muchísimo estrés en el trabajo.</span><br>
+● <span class="es-speak">¡Pobre...! Un vale para hacer spa es una idea estupenda.</span> <span class="es-speak">Claro, así puede relajarse y olvidarse de todo.</span><br>
+▲ <span class="es-speak">Eso creo yo.</span> <span class="es-speak">Y para mi madre quiero mirar antes un poco en internet.</span> <span class="es-speak">Seguro que hay un blog de regalos... ¡A ver si recomiendan algo!</span><br>
+● <span class="es-speak">A ver..., a tu madre <span class="es-pron">le</span> gusta hacer deporte, ¿verdad?</span> <span class="es-speak">¿No me has dicho que ha empezado a correr hace poco?</span><br>
+▲ <span class="es-speak">Sí, corre desde hace dos meses, es verdad.</span> <span class="es-speak">Y cada vez <span class="es-pron">le</span> gusta más.</span><br>
+● <span class="es-speak">¡Ah, pues ya está! Un pulsómetro.</span> <span class="es-speak">Así puede controlarse el pulso mientras corre.</span> <span class="es-speak">Es muy útil.</span> <span class="es-speak">Lo recomiendan muchos médicos y deportistas.</span><br>
+▲ <span class="es-speak">¡Ah!, pues no me parece mal, entonces <span class="es-pron">le</span> compro eso.</span></p>
+</div>
+</div>
+
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">Yo creo que el perfume es para su madre.</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak">No sé. Mira, su madre es una persona deportista...</span></em></p>
+</div>
+
+<div class="sub-l">b. <span class="es-speak">Escucha otra vez y responde a las preguntas.</span></div>
+<div class="table-responsive">
+<table>
+<tr><th></th><th>¿Qué compra Nacho?</th><th>¿Qué pueden hacer con el regalo?</th></tr>
+<tr><td><strong>Para Raúl:</strong></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Una tableta</span></span></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Puede leer o bajarse juegos en la tableta.</span></span></td></tr>
+<tr><td><strong>Para Silvia:</strong></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Un vale para una sesión de spa</span></span></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Puede relajarse y olvidarse de todo.</span></span></td></tr>
+<tr><td><strong>Para Cecilia:</strong></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Un pulsómetro</span></span></td><td><span class="ans-inline" data-group="1b"><span class="placeholder-text">________</span><span class="ans-text">Puede controlarse el pulso mientras corre.</span></span></td></tr>
+</table>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'1b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">c. <span class="es-speak">En grupos. ¿Qué regalos compras tú normalmente en Navidad u otra fecha especial? ¿Para quién?, ¿por qué?</span></div>
+<div class="dia"><p><span class="sb">●</span> <em><span class="es-speak">Yo normalmente compro regalos para mi novia y para mis padres. Para mi novia compro libros porque <span class="es-pron">le</span> gusta leer.</span></em></p></div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta — تكلم عن هدياتك الشخصية.</p>
+
+<div class="ar-grid">
+<div class="ar"><strong>📝 الجمل الأساسية للحديث عن الهدايا:</strong><br>
+▸ <span class="es-word">Le compro</span> = أشتري له/لها<br>
+▸ <span class="es-word">Le regalo</span> = أهديه/أهديها<br>
+▸ <span class="es-word">Puede + infinitivo</span> = يقدر/تقدر (يعمل كذا)<br>
+▸ <span class="es-word">Le va a gustar</span> = هيعجبه/هيعجبها</div>
+<div class="ar-instr"><span class="ar-title">📝 شرح النشاط:</span>
+1️⃣ شوف صور أفراد عيلة ناتشو (راؤول، سيلفيا، سيسيليا).<br>
+2️⃣ خمن إيه الهدية المناسبة لكل واحد فيهم من قائمة الهدايا.<br>
+3️⃣ اسمع الحوار وتأكد من إجابتك.<br>
+💡 لاحظ ضمائر المفعول غير المباشر زي <span class="es-word">le</span> و <span class="es-word">les</span> — دي درس مهم جداً في الوحدة دي!</div>
+</div>
+</div>
+
+<!-- ========== ACT 2 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 17</span></div></div>
+<div class="act-head"><div class="act-num">2</div><h2 class="act-title">Las mejores ideas para regalos</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">Lee el blog Milregalos, de Lorena Rubio.</span> <span class="es-speak">¿Qué regalos propone?</span> <span class="es-speak">¿Has regalado alguna vez alguna de estas cosas?</span></div>
+
+<div class="grid-2">
+<div class="tblock" style="background:#e8f5e9;border-color:#2e7d32;">
+<p style="text-align:center;color:#2e7d32;">●●●</p>
+<p style="font-family:'Playfair Display',serif;font-size:16px;color:#2e7d32;text-align:center;letter-spacing:2px;margin-bottom:8px;"><span class="es-speak">MILREGALOS DE LORENA</span></p>
+<p style="font-size:12px;font-style:italic;margin-bottom:6px;"><span class="es-speak">Navidad, cumpleaños, aniversarios de bodas... ¿Qué regalas para cada ocasión? ¿Y qué <span class="es-pron">te</span> regalan tus seres queridos? ¡En este blog voy a dar<span class="es-pron">te</span> algunas ideas para hacer regalos especiales!</span></p>
+<hr style="margin:6px 0;border:none;border-top:1px dashed #2e7d32;">
+<p><strong style="color:#2e7d32;">PARA AMANTES DE LA CULTURA:</strong> <span class="es-speak">A mi amigo Julián a veces <span class="es-pron">le</span> regalo por su cumpleaños una entrada para una exposición.</span> <span class="es-speak">Como es un amante del arte, es el mejor regalo que <span class="es-pron">le</span> puedo hacer.</span> <span class="es-speak">Este año <span class="es-pron">le</span> voy a comprar una entrada para la exposición temporal de Sorolla en el Prado.</span></p>
+<p><strong style="color:#2e7d32;">PARA PADRES ROMÁNTICOS:</strong> <span class="es-speak">A mis padres siempre <span class="es-pron">les</span> reservo en su aniversario una mesa en un restaurante elegante.</span> <span class="es-speak">Esta es una foto de la comida del año pasado.</span> <span class="es-speak">Bonita, ¿no?</span></p>
+<p><strong style="color:#2e7d32;">PARA GENTE JOVEN:</strong> <span class="es-speak">Con mis sobrinos no tengo problemas.</span> <span class="es-speak">A ellos siempre puedo comprar<span class="es-pron">les</span> en internet un vale para una tienda online de ropa o de juegos.</span> <span class="es-speak">Es lo que más <span class="es-pron">les</span> gusta.</span></p>
+</div>
+<div>
+<div class="img-placeholder"><div class="icon">👩</div><div>صورة Lorena Rubio: مدوّنة شابة مبتسمة بشعر طويل بني</div></div>
+<div class="img-placeholder"><div class="icon">🖼️</div><div>صورة 1: رجل يشاهد لوحة فنية في معرض</div></div>
+<div class="img-placeholder"><div class="icon">💑</div><div>صورة 2: زوجان رومانسيان يحتضنان بعض</div></div>
+<div class="img-placeholder"><div class="icon">👫</div><div>صورة 3: مراهقان شاب وفتاة يلعبان على تابلت</div></div>
+</div>
+</div>
+
+<div class="gbox" style="background:#fff8e1;border-color:#fbc02d;">
+<h3 style="color:#bf6a00;">📌 Pronombres de objeto indirecto</h3>
+<p><span class="sb">●</span> <span class="es-speak">¿Qué <span class="es-pron">te</span> regalan tus amigos?</span><br>◆ <span class="es-speak"><span class="es-pron">Me</span> regalan un vale.</span></p>
+<p><span class="sb">●</span> <span class="es-speak">¿Qué <span class="es-pron">les</span> regaláis a vuestros amigos?</span><br>◆ <span class="es-speak">A mi amigo Julián <span class="es-pron">le</span> compro un pañuelo.</span><br>▲ <span class="es-speak">Yo <span class="es-pron">le</span> regalo un perfume a María.</span></p>
+<p style="margin-top:6px;"><strong>Posición:</strong> <span class="es-speak"><span class="es-pron">Te</span> doy un regalo.</span> | <span class="es-speak"><span class="es-pron">Les</span> puedo comprar un libro.</span> / <span class="es-speak">Puedo comprar<span class="es-pron">les</span> un libro.</span></p>
+</div>
+
+<div class="sub-l">b. <span class="es-speak">En parejas. Añade una idea de regalo más para cada categoría.</span></div>
+<div class="tblock">
+<p>• A un amante de la cultura <em>le podemos regalar/comprar...</em> → <span class="ans-inline" data-group="2b"><span class="placeholder-text">______</span><span class="ans-text">le podemos regalar un libro sobre arte / una entrada para un museo</span></span></p>
+<p>• A unos padres románticos → <span class="ans-inline" data-group="2b"><span class="placeholder-text">______</span><span class="ans-text">les podemos regalar un fin de semana en un hotel romántico</span></span></p>
+<p>• A gente joven → <span class="ans-inline" data-group="2b"><span class="placeholder-text">______</span><span class="ans-text">les podemos regalar una entrada para un concierto / un videojuego</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'2b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">c. <span class="es-speak">En grupos. Elegid tres regalos para vuestros compañeros de clase. ¿Por qué elegís esos regalos?</span></div>
+<div class="dia"><p><span class="sb">●</span> <em><span class="es-speak">A Thomas <span class="es-pron">le</span> podemos regalar una entrada para una exposición porque es un amante del arte.</span></em></p></div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar"><strong>📝 ضمائر المفعول غير المباشر (Pronombres de objeto indirecto):</strong><br>
+دي ضمائر بنستخدمها لما نتكلم عن مين هيستفيد من الفعل:<br>
+▸ <span class="es-word">me</span> = لي / <span class="es-word">te</span> = لك / <span class="es-word">le</span> = له/لها<br>
+▸ <span class="es-word">nos</span> = لنا / <span class="es-word">os</span> = لكم / <span class="es-word">les</span> = لهم<br>
+💡 موقعها: قبل الفعل المُصرَّف، أو ملصوقة بنهاية الـ infinitivo.</div>
+</div>
+
+<!-- ========== ACT 3 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 17-18</span></div></div>
+<div class="act-head"><div class="act-num">3</div><h2 class="act-title">¡Regalar hace feliz!</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">En parejas. ¿Qué haces tú con las cosas que ya no necesitas?</span></div>
+<div class="grid-2">
+<div class="wbank">
+<span data-speak="ropa usada">ropa usada</span>
+<span data-speak="muebles viejos">muebles viejos</span>
+<span data-speak="objetos de decoración">objetos de decoración</span>
+<span data-speak="electrodomésticos">electrodomésticos</span>
+<span data-speak="bicicletas">bicicletas</span>
+</div>
+<div class="wbank">
+<span data-speak="vender">vender</span>
+<span data-speak="regalar">regalar</span>
+<span data-speak="tirar">tirar</span>
+<span data-speak="llevar a un contenedor">llevar a un contenedor</span>
+</div>
+</div>
+
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">¿Qué haces con la ropa usada?</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak">Pues <span class="es-pron">la</span> regalo, ¿y tú?</span></em></p>
+<p><span class="sb">●</span> <em><span class="es-speak">Yo <span class="es-pron">la</span> tiro.</span></em></p>
+</div>
+
+<div class="teacuerdas">
+<h4>¿TE ACUERDAS?</h4>
+<p>La ropa: <span class="es-speak"><span class="es-pron">La</span> regalo.</span> | Los muebles: <span class="es-speak"><span class="es-pron">Los</span> vendo.</span> → A1 U9</p>
+</div>
+
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="sub-l">b. <span class="es-speak">¿Sabes qué son las "gratiferias"?</span> Escucha el reportaje y marca la opción correcta. ¿Existen en tu país?</div>
+
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 5</div>
+<audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/05%20Pista%205.mp3" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción – Audio 5</div>
+<p><span class="es-speak">Buenos días y bienvenidos a nuestro programa.</span> <span class="es-speak">Hoy vamos a hablar de las "gratiferias".</span> <span class="es-speak">¿Que no saben lo que son? Pues vamos a descubrir<span class="es-pron">las</span> juntos.</span><br>
+<span class="es-speak">Según investigaciones de Michael Norton, de la Harvard Business School, para ser feliz el secreto es dar a otros sin esperar <span class="es-ind">nada</span> a cambio.</span> <span class="es-speak">Es decir, regalar o dar nos hace más felices.</span> <span class="es-speak">Y ese es el modelo que siguen hoy las "gratiferias".</span> <span class="es-speak">La palabra lo dice todo: feria, gratis.</span> <span class="es-speak">A diferencia de una tienda normal o de un mercadillo, en las gratiferias no hay dinero, no hay precios, no es el "<span class="es-pron">te lo</span> vendo-<span class="es-pron">me lo</span> compras".</span> <span class="es-speak">Tampoco tiene que haber necesariamente intercambio.</span> <span class="es-speak">Simplemente uno lleva <span class="es-ind">algo</span> y lo deja allí sin más.</span> <span class="es-speak">Y si uno encuentra una cosa que <span class="es-pron">le</span> gusta, pues <span class="es-pron">se la</span> lleva.</span> <span class="es-speak">¡¿No es fantástico?!</span></p>
+</div>
+</div>
+
+<div class="infobox">
+<h4>ℹ️ INFORMACIÓN</h4>
+<p><span class="es-speak">La primera gratiferia surgió en Buenos Aires en el año 2010. La idea fue retomada enseguida por otros países de Latinoamérica y por España.</span></p>
+</div>
+
+<div class="tblock">
+<p><span class="opt-mark" data-group="3b"></span> <span class="es-speak">Una "gratiferia" es un mercadillo donde vendes las cosas que ya no necesitas.</span></p>
+<p><span class="opt-mark" data-group="3b"></span> <span class="es-speak">En una "gratiferia" puedes comprar todo tipo de cosas: ropa usada, objetos de decoración, libros...</span></p>
+<p><span class="opt-mark correct" data-group="3b"></span> <span class="es-speak">Una "gratiferia" es un tipo de mercadillo, pero sin dinero. Si encuentras una cosa que <span class="es-pron">te</span> gusta, <span class="es-pron">te la</span> llevas gratis.</span></p>
+<p><span class="opt-mark" data-group="3b"></span> <span class="es-speak">En una "gratiferia" hay un intercambio de objetos con otra persona.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">c. <span class="es-speak">Escucha otra vez. ¿Qué frase no es adecuada en una "gratiferia"?</span> Contesta y después relaciona las frases con los dibujos.</div>
+
+<div class="grid-2">
+<div class="img-placeholder"><div class="icon">🚲</div><div>صورة 1: دراجة هوائية زرقاء</div></div>
+<div class="img-placeholder"><div class="icon">💻</div><div>صورة 2: لاب توب</div></div>
+<div class="img-placeholder"><div class="icon">🪑</div><div>صورة 3: كرسيان خشبيان أحمران</div></div>
+<div class="img-placeholder"><div class="icon">📚</div><div>صورة 4: كومة كتب</div></div>
+</div>
+
+<div class="tblock">
+<p><span class="ans-inline" data-group="3c"><span class="placeholder-text">__</span><span class="ans-text">4</span></span> <span class="es-speak"><span class="es-pron">Os los</span> damos.</span> (los libros)</p>
+<p><span class="ans-inline" data-group="3c"><span class="placeholder-text">__</span><span class="ans-text">3</span></span> <span class="es-speak">¿<span class="es-pron">Nos las</span> regalas?</span> (las sillas)</p>
+<p><span class="ans-inline" data-group="3c"><span class="placeholder-text">__</span><span class="ans-text">2</span></span> <span class="es-speak"><span class="es-pron">Te lo</span> vendo.</span> (el portátil) — <strong style="color:#b71c1c;">⚠️ Esta NO es adecuada en una "gratiferia"</strong></p>
+<p><span class="ans-inline" data-group="3c"><span class="placeholder-text">__</span><span class="ans-text">1</span></span> <span class="es-speak">¿<span class="es-pron">Me la</span> enseñas?</span> (la bicicleta)</p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'3c')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">d. <span class="es-speak">En grupos. Nuestra "gratiferia". Presenta a tus compañeros cuatro objetos que tú ya no necesitas. ¿Quién <span class="es-pron">los</span> quiere?</span></div>
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">Tengo una bicicleta usada.</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak">¿<span class="es-pron">Me la</span> das?</span></em></p>
+<p><span class="sb">●</span> <em><span class="es-speak">Sí, claro, <span class="es-pron">te la</span> regalo.</span></em></p>
+</div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar"><strong>💡 معلومة ثقافية رائعة:</strong> الـ <span class="es-word">gratiferia</span> فكرة جميلة! هي كلمة مكونة من <span class="es-word">feria</span> (سوق) + <span class="es-word">gratis</span> (مجاناً)، يعني "سوق مجاني". الفكرة ظهرت في الأرجنتين سنة 2010 وانتشرت في أمريكا اللاتينية وإسبانيا.</div>
+</div>
+
+<!-- ========== ACT 4 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 18</span></div></div>
+<div class="act-head"><div class="act-num">4</div><h2 class="act-title">No todo son regalos...</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">Sara se va un año a Londres. ¿Qué hace con sus cosas?</span> Escucha y relaciona.</div>
+
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 6</div>
+<audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/06%20Pista%206.mp3" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción – Audio 6</div>
+<p>● <span class="es-speak">Uf, Sara..., dentro de un mes <span class="es-pron">te</span> vas a Londres... ¡Qué nervios!</span> <span class="es-speak">¿Y qué vas a hacer con tus cosas? ¿Qué vas a hacer con el piso?</span><br>
+▲ <span class="es-speak">Pues tengo unos amigos de Barcelona que van a venir a vivir aquí.</span> <span class="es-speak">Y ya está, <span class="es-pron">se lo</span> voy a alquilar a ellos.</span><br>
+● <span class="es-speak">¡Qué suerte! ¡Y qué buena idea!</span><br>
+▲ <span class="es-speak">Sí, una suerte...</span><br>
+● <span class="es-speak">Oye, ¿y tu bicicleta? ¿<span class="es-pron">Te la</span> llevas?</span><br>
+▲ <span class="es-speak">No, no <span class="es-pron">me la</span> llevo... Es muy caro el transporte en avión...</span> <span class="es-speak">La bicicleta <span class="es-pron">se la</span> vendo a una compañera.</span> <span class="es-speak">Es que necesita una y me ha preguntado si puedo vendér<span class="es-pron">sela</span>.</span><br>
+● <span class="es-speak">Ah, claro. ¿Y todas estas plantas? ¿<span class="es-pron">Las</span> dejas en el piso?</span><br>
+▲ <span class="es-speak">No, no. A mis amigos de Barcelona no <span class="es-pron">les</span> gustan las plantas.</span> <span class="es-speak">Además están siempre de viaje.</span> <span class="es-speak">He pensado que <span class="es-pron">se las</span> voy a dar a mi vecina.</span> <span class="es-speak">Tiene una terraza muy grande, y yo creo que <span class="es-pron">le</span> puede gustar la idea.</span><br>
+● <span class="es-speak">Oye, ¿y el coche? ¿Qué haces con él?</span><br>
+▲ <span class="es-speak">El coche <span class="es-pron">se lo</span> voy a dejar a Miguel, pero solo por un año, ¿eh?</span> <span class="es-speak">Así puede llevar<span class="es-pron">me</span> y recoger<span class="es-pron">me</span> del aeropuerto.</span><br>
+● <span class="es-speak">Ay, sí, ¡es una buena idea! Y si no, <span class="es-pron">me lo</span> dejas a mí..., que yo no tengo coche...</span></p>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="tblock" style="background:#fffde7;border-color:#fbc02d;">
+<p>1. Su piso: <span class="es-speak"><span class="es-pron">se lo</span> alquila</span></p>
+<p>2. La bicicleta: <span class="es-speak"><span class="es-pron">se la</span> vende</span></p>
+<p>3. Las plantas: <span class="es-speak"><span class="es-pron">se las</span> da</span></p>
+<p>4. El coche: <span class="es-speak"><span class="es-pron">se lo</span> deja</span></p>
+</div>
+<div class="tblock">
+<p>a. <span class="es-speak">a una compañera</span></p>
+<p>b. <span class="es-speak">a su vecina</span></p>
+<p>c. <span class="es-speak">a su novio, Miguel</span></p>
+<p>d. <span class="es-speak">a sus amigos de Barcelona</span></p>
+</div>
+</div>
+
+<div class="tblock">
+<p>1 → <span class="ans-inline" data-group="4a"><span class="placeholder-text">__</span><span class="ans-text">d</span></span> &nbsp; 2 → <span class="ans-inline" data-group="4a"><span class="placeholder-text">__</span><span class="ans-text">a</span></span> &nbsp; 3 → <span class="ans-inline" data-group="4a"><span class="placeholder-text">__</span><span class="ans-text">b</span></span> &nbsp; 4 → <span class="ans-inline" data-group="4a"><span class="placeholder-text">__</span><span class="ans-text">c</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'4a')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="gbox" style="background:#fff8e1;border-color:#fbc02d;">
+<h3 style="color:#bf6a00;">Combinación de dos pronombres</h3>
+<p>Cuando aparecen dos pronombres seguidos, el de complemento indirecto se sitúa <strong>delante</strong> del de complemento directo.</p>
+<p><span class="es-speak">Tú <span class="es-pron">me la</span> regalas.</span> | <span class="es-speak"><span class="es-pron">Te los</span> voy a dar.</span> / <span class="es-speak">Voy a dár<span class="es-pron">telos</span>.</span></p>
+<p style="margin-top:6px;"><strong>Le, les → se</strong> (en combinación con lo, la, los, las)</p>
+<p>La bicicleta: <s><span class="es-pron">Le</span> vendo la bicicleta</s> → <span class="es-speak"><span class="es-pron">Se la</span> vendo.</span><br>
+Los libros: <s><span class="es-pron">Le</span> doy los libros</s> → <span class="es-speak"><span class="es-pron">Se los</span> doy.</span></p>
+</div>
+
+<div class="sub-l">b. <span class="es-speak">Lee otra vez las frases. ¿A quién se refiere "se" en cada una?</span></div>
+<div class="tblock">
+<p>1. se = <span class="ans-inline" data-group="4b"><span class="placeholder-text">_____</span><span class="ans-text">a sus amigos de Barcelona</span></span></p>
+<p>2. se = <span class="ans-inline" data-group="4b"><span class="placeholder-text">_____</span><span class="ans-text">a una compañera</span></span></p>
+<p>3. se = <span class="ans-inline" data-group="4b"><span class="placeholder-text">_____</span><span class="ans-text">a su vecina</span></span></p>
+<p>4. se = <span class="ans-inline" data-group="4b"><span class="placeholder-text">_____</span><span class="ans-text">a su novio (Miguel)</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'4b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">c. <span class="es-speak">Imagina que te vas un año a Londres. ¿Qué haces con las siguientes cosas?</span> Completa la tabla y habla con tu compañero.</div>
+<div class="wbank">
+<span data-speak="mis dos bicicletas">mis dos bicicletas</span>
+<span data-speak="la plaza de garaje">la plaza de garaje</span>
+<span data-speak="el acuario con los peces">el acuario con los peces</span>
+<span data-speak="el piano">el piano</span>
+<span data-speak="los tres bonsáis">los tres bonsáis</span>
+<span data-speak="el coche">el coche</span>
+<span data-speak="el piso">el piso</span>
+<span data-speak="la guitarra">la guitarra</span>
+</div>
+
+<div class="table-responsive">
+<table>
+<tr><th>¿qué?</th><th>¿a quién...</th><th>regalo/dejo/vendo/alquilo?</th></tr>
+<tr><td>la guitarra</td><td>a Conny</td><td>regalo</td></tr>
+<tr><td>_______</td><td>_______</td><td>_______</td></tr>
+<tr><td>_______</td><td>_______</td><td>_______</td></tr>
+</table>
+</div>
+
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">¿Qué haces con la guitarra?</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak"><span class="es-pron">Se la</span> regalo a Conny.</span></em></p>
+</div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar-instr"><span class="ar-title">⚠️ القاعدة الذهبية لضمائر المفعولين معاً:</span>
+لما يجي ضميرين مع بعض في الجملة:<br>
+1️⃣ ضمير المفعول <strong>غير المباشر</strong> (me, te, le, nos, os, les) بييجي قبل ضمير المفعول <strong>المباشر</strong> (lo, la, los, las).<br>
+2️⃣ مثال: <span class="es-word">Te lo doy</span> = أعطيهولك (te = لك / lo = ه).<br><br>
+🔥 <strong>قاعدة مهمة جداً:</strong> لما <span class="es-word">le</span> أو <span class="es-word">les</span> يجوا قبل lo/la/los/las، بيتحولوا لـ <span class="es-word">se</span>! ليه؟ عشان النطق يبقى أحلى.<br>
+مثال: <s>Le lo doy</s> ❌ → <span class="es-word">Se lo doy</span> ✅</div>
+</div>
+
+<!-- ========== ACT 5 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 19</span></div></div>
+<div class="act-head"><div class="act-num">5</div><h2 class="act-title">¡Estamos comprando!</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">En el centro comercial Maravillas. ¿Qué establecimientos hay?</span> Coloca los carteles que faltan.</div>
+<div class="wbank">
+<span data-speak="Peluquería">Peluquería</span>
+<span data-speak="Tienda de deportes">Tienda de deportes</span>
+<span data-speak="Regalos y complementos">Regalos y complementos</span>
+<span data-speak="Papelería">Papelería</span>
+</div>
+
+<div class="img-placeholder"><div class="icon">🏬</div><div>صورة صفحة 19: رسم توضيحي لمركز تجاري كبير "Maravillas" يحتوي على 9 متاجر مرقمة من A إلى I</div></div>
+
+<div class="shop-grid">
+<div class="shop-card"><div class="letter">A</div><div class="label"><span class="es-speak">La Colombiana</span></div><div class="ans-row" style="font-size:11px;color:#999;">(cafetería)</div></div>
+<div class="shop-card"><div class="letter">B</div><div class="label">?</div><div class="ans-row"><span class="ans-inline" data-group="5a"><span class="placeholder-text">__</span><span class="ans-text">Peluquería</span></span></div></div>
+<div class="shop-card"><div class="letter">C</div><div class="label">?</div><div class="ans-row"><span class="ans-inline" data-group="5a"><span class="placeholder-text">__</span><span class="ans-text">Papelería</span></span></div></div>
+<div class="shop-card"><div class="letter">D</div><div class="label"><span class="es-speak">Los Calamares</span></div><div class="ans-row" style="font-size:11px;color:#999;">(restaurante)</div></div>
+<div class="shop-card"><div class="letter">E</div><div class="label">?</div><div class="ans-row"><span class="ans-inline" data-group="5a"><span class="placeholder-text">__</span><span class="ans-text">Regalos y complementos</span></span></div></div>
+<div class="shop-card"><div class="letter">F</div><div class="label"><span class="es-speak">Productos informáticos</span></div></div>
+<div class="shop-card"><div class="letter">G</div><div class="label"><span class="es-speak">Panadería</span></div></div>
+<div class="shop-card"><div class="letter">H</div><div class="label">?</div><div class="ans-row"><span class="ans-inline" data-group="5a"><span class="placeholder-text">__</span><span class="ans-text">Tienda de deportes</span></span></div></div>
+<div class="shop-card"><div class="letter">I</div><div class="label">(2 mujeres)</div></div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5a')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">b. <span class="es-speak">En parejas. ¿Dónde están? Buscad en el centro comercial a las personas que están haciendo las siguientes cosas.</span></div>
+
+<div class="tblock">
+<p><strong>H</strong> <span class="es-speak">Está <span class="es-ger">pagando</span> en la caja.</span></p>
+<p><span class="ans-inline" data-group="5b"><span class="placeholder-text">__</span><span class="ans-text">A</span></span> <span class="es-speak">Está <span class="es-ger">hablando</span> por teléfono.</span></p>
+<p><span class="ans-inline" data-group="5b"><span class="placeholder-text">__</span><span class="ans-text">D</span></span> <span class="es-speak">Están <span class="es-ger">comiendo</span> en el restaurante.</span></p>
+<p><span class="ans-inline" data-group="5b"><span class="placeholder-text">__</span><span class="ans-text">G</span></span> <span class="es-speak">Está <span class="es-ger">escribiendo</span> un mensaje.</span></p>
+<p><span class="ans-inline" data-group="5b"><span class="placeholder-text">__</span><span class="ans-text">E</span></span> <span class="es-speak"><span class="es-pron">Se</span> está <span class="es-ger">probando</span> unas gafas.</span></p>
+<p><span class="ans-inline" data-group="5b"><span class="placeholder-text">__</span><span class="ans-text">B</span></span> <span class="es-speak">Está <span class="es-ger">leyendo</span> una revista.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="gbox" style="background:#fff8e1;border-color:#fbc02d;">
+<h3 style="color:#bf6a00;">Estar + gerundio</h3>
+<p><span class="es-verb">estoy</span> / <span class="es-verb">estás</span> / <span class="es-verb">está</span> / <span class="es-verb">estamos</span> / <span class="es-verb">estáis</span> / <span class="es-verb">están</span> + <span class="es-ger">hablando</span> / <span class="es-ger">comiendo</span> / <span class="es-ger">escribiendo</span></p>
+<p><strong>Gerundios irregulares:</strong> dormir → <span class="es-ger">durmiendo</span> | leer → <span class="es-ger">leyendo</span> | oír → <span class="es-ger">oyendo</span> | pedir → <span class="es-ger">pidiendo</span></p>
+<p style="margin-top:5px;">Se utiliza para expresar que algo está sucediendo en un momento dado.<br>
+<span class="es-speak"><span class="es-pron">Me</span> estoy <span class="es-ger">probando</span> unas gafas.</span> / <span class="es-speak">Estoy <span class="es-ger">probándome</span> unas gafas.</span></p>
+</div>
+
+<div class="sub-l">c. <span class="es-speak">En parejas. Y estas personas, ¿qué están haciendo en el centro comercial?</span></div>
+<div class="tblock">
+<p>• El hombre (C): <span class="ans-inline" data-group="5c"><span class="placeholder-text">______</span><span class="ans-text">Está escuchando música.</span></span></p>
+<p>• El niño (F): <span class="ans-inline" data-group="5c"><span class="placeholder-text">______</span><span class="ans-text">Está jugando con la tableta.</span></span></p>
+<p>• Las mujeres (I): <span class="ans-inline" data-group="5c"><span class="placeholder-text">______</span><span class="ans-text">Se están haciendo una foto.</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'5c')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">d. <span class="es-speak">En grupos. Imagina que te encuentras en el centro comercial Maravillas. Describe con mímica qué estás haciendo. Tus compañeros lo adivinan.</span></div>
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">¿<span class="es-pron">Te</span> estás <span class="es-ger">probando</span> unas gafas?</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak">Sí.</span></em></p>
+</div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar"><strong>📝 Estar + Gerundio = الحاضر المستمر بالإسباني:</strong><br>
+لما تحب تقول إن حد بيعمل حاجة دلوقتي في هذه اللحظة، استخدم <span class="es-word">estar</span> + الفعل في صيغة الـ gerundio:<br>
+▸ -ar verbs → -ando (مثال: hablar → <span class="es-word">hablando</span>)<br>
+▸ -er/-ir verbs → -iendo (مثال: comer → <span class="es-word">comiendo</span>)<br>
+💡 شواذ مهمة: leer → <span class="es-word">leyendo</span> / dormir → <span class="es-word">durmiendo</span> / pedir → <span class="es-word">pidiendo</span> / oír → <span class="es-word">oyendo</span></div>
+</div>
+
+<!-- ========== ACT 6 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 20</span></div></div>
+<div class="act-head"><div class="act-num">6</div><h2 class="act-title">¿Me quedan bien?</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">¿Qué compra Juan en la tienda de regalos y complementos?</span> Escucha el diálogo y anota.</div>
+
+<div class="audio-wrap">
+<div class="audio-row">
+<div class="audio-label">🔊 Audio 7</div>
+<audio controls preload="none"><source src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/07%20Pista%207.mp3" type="audio/mp3"></audio>
+<button class="trans-btn" onclick="toggleTrans(this)"><span class="btn-text">📄 إظهار التفريغ</span><span class="arrow">▼</span></button>
+</div>
+<div class="trans-content">
+<div class="ttitle">🔊 Transcripción – Audio 7</div>
+<p>● <span class="es-speak">Buenos días.</span><br>
+▲ <span class="es-speak">Hola, buenos días. Estoy <span class="es-ger">buscando</span> un sombrero para el sol.</span><br>
+● <span class="es-speak">Sí, mire, los sombreros están ahí, al fondo.</span><br>
+▲ <span class="es-speak">¡Ah, sí, ya <span class="es-pron">los</span> veo...! Este <span class="es-pron">me</span> gusta, ¿<span class="es-pron">me lo</span> puedo probar?</span><br>
+● <span class="es-speak">Sí, claro. También <span class="es-pron">lo</span> tenemos en negro.</span><br>
+▲ <span class="es-speak">No, <span class="es-pron">lo</span> prefiero en blanco.</span><br>
+● <span class="es-speak">¿Qué tal <span class="es-pron">le</span> queda?</span><br>
+▲ <span class="es-speak">No sé... No <span class="es-pron">me</span> queda bien, ¿no? <span class="es-pron">Me</span> queda demasiado pequeño. ¿<span class="es-pron">Lo</span> tiene en otra talla?</span><br>
+● <span class="es-speak">Mmm... No, lo siento.</span><br>
+▲ <span class="es-speak">Entonces mejor voy a mirar otra cosa... A ver..., unas gafas de sol. ¿Puedo probar<span class="es-pron">me</span> estas gafas?</span><br>
+● <span class="es-speak">Sí, sí, por favor.</span><br>
+▲ <span class="es-speak">¡Ajá!, no <span class="es-pron">me</span> quedan <span class="es-ind">nada</span> mal y son muy bonitas. ¿Cuánto cuestan?</span><br>
+● <span class="es-speak">Todas las gafas están rebajadas. Cuestan 56 euros.</span><br>
+▲ <span class="es-speak">¡Ajá, muy bien! Pues <span class="es-pron">me las</span> llevo.</span><br>
+● <span class="es-speak">¿Paga en efectivo o con tarjeta?</span><br>
+▲ <span class="es-speak">Con tarjeta.</span></p>
+</div>
+</div>
+
+<div class="grid-3">
+<div class="img-placeholder"><div class="icon">🎩</div><div data-speak="sombrero">sombrero (قبعة بيج)</div></div>
+<div class="img-placeholder"><div class="icon">🧣</div><div data-speak="pañuelo">pañuelo (شال أزرق)</div></div>
+<div class="img-placeholder"><div class="icon">👓</div><div data-speak="gafas de sol">gafas de sol (نظارة شمس)</div></div>
+<div class="img-placeholder"><div class="icon">📿</div><div data-speak="collar">collar (سلسلة حمراء)</div></div>
+<div class="img-placeholder"><div class="icon">👕</div><div data-speak="camiseta">camiseta (تيشيرت أخضر)</div></div>
+<div class="img-placeholder"><div class="icon">💍</div><div data-speak="anillo">anillo (خاتم بحجر أزرق)</div></div>
+<div class="img-placeholder"><div class="icon">🧢</div><div data-speak="gorra">gorra (كاب أسود)</div></div>
+</div>
+
+<div class="tblock">
+<p><strong>Juan compra:</strong> <span class="ans-inline" data-group="6a"><span class="placeholder-text">________</span><span class="ans-text">unas gafas de sol</span></span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'6a')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">b. <span class="es-speak">Ahora lee las frases y marca qué dice el vendedor (V) y qué dice Juan, el cliente (C).</span> Escucha otra vez y comprueba.</div>
+
+<div class="grid-2">
+<div class="tblock">
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak">Estoy <span class="es-ger">buscando</span> un sombrero.</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak">¿<span class="es-pron">Me lo</span> puedo probar?</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">V</span></span> <span class="es-speak">¿Qué tal <span class="es-pron">le</span> queda?</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak"><span class="es-pron">Me</span> queda demasiado pequeño.</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak">¿<span class="es-pron">Lo</span> tiene en otra talla?</span></p>
+</div>
+<div class="tblock">
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak">¿Puedo probar<span class="es-pron">me</span> estas gafas?</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">V</span></span> <span class="es-speak">Las gafas están rebajadas.</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">V</span></span> <span class="es-speak">Cuestan 56 euros.</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">C</span></span> <span class="es-speak"><span class="es-pron">Me las</span> llevo.</span></p>
+<p><span class="ans-inline" data-group="6b"><span class="placeholder-text">_</span><span class="ans-text">V</span></span> <span class="es-speak">¿Paga en efectivo o con tarjeta?</span></p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'6b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="gbox" style="background:#fff8e1;border-color:#fbc02d;">
+<h3 style="color:#bf6a00;">Compras (التسوق)</h3>
+<p><span class="es-speak">El sombrero <span class="es-pron">me</span> queda pequeño.</span> | <span class="es-speak">La camiseta <span class="es-pron">me</span> queda pequeña.</span> | <span class="es-speak">Las gafas <span class="es-pron">me</span> quedan bien/mal.</span></p>
+<p>El bolso: <span class="es-speak"><span class="es-pron">Me lo</span> llevo.</span> | La camiseta: <span class="es-speak"><span class="es-pron">Me la</span> llevo.</span><br><span class="es-speak">Este sombrero <span class="es-pron">me</span> gusta, ¿<span class="es-pron">me lo</span> puedo probar?</span></p>
+</div>
+
+<div class="sub-l">c. <span class="es-speak">¿Qué dicen estas personas?</span> Completa los textos con ayuda del recuadro.</div>
+<div class="grid-2">
+<div class="img-placeholder"><div class="icon">😊</div><div>صورة فتاة سعيدة بشال أصفر ترفع إبهامها</div></div>
+<div class="img-placeholder"><div class="icon">😒</div><div>صورة شاب بقميص أزرق ونظارة شمس ينزل إبهامه</div></div>
+</div>
+
+<div class="grid-2">
+<div class="tblock">
+<p><span class="sb">●</span> <span class="es-speak">¿Qué tal <span class="es-pron">te</span> queda el pañuelo?</span></p>
+<p><span class="st">▲</span> <span class="es-pron">Me</span> <span class="ans-inline" data-group="6c"><span class="placeholder-text">_____</span><span class="ans-text">queda</span></span> muy bien.</p>
+<p><span class="sb">●</span> <span class="es-speak">¿<span class="es-pron">Te lo</span> llevas?</span></p>
+<p><span class="st">▲</span> Sí, <span class="es-pron">me</span> <span class="ans-inline" data-group="6c"><span class="placeholder-text">_____</span><span class="ans-text">lo</span></span> llevo.</p>
+</div>
+<div class="tblock">
+<p><span class="sb">●</span> <span class="es-speak">¿<span class="es-pron">Te</span> gustan las gafas?</span></p>
+<p><span class="st">▲</span> No, no. No <span class="es-pron">me</span> <span class="ans-inline" data-group="6c"><span class="placeholder-text">_____</span><span class="ans-text">quedan</span></span> bien.</p>
+<p>No <span class="ans-inline" data-group="6c"><span class="placeholder-text">_____</span><span class="ans-text">las</span></span> llevo.</p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'6c')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">d. <span class="es-speak">En parejas. Un juego de roles. A es el/la vendedor/-a. B es el/la cliente/-a y quiere comprar uno de los objetos de 6a. Después intercambiad los roles.</span></div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar"><strong>🛍️ مصطلحات التسوق المهمة:</strong><br>
+▸ <span class="es-word">¿Me lo puedo probar?</span> = ممكن أجربه؟<br>
+▸ <span class="es-word">¿Qué tal le queda?</span> = شكله إيه عليك؟<br>
+▸ <span class="es-word">Me queda bien/mal</span> = مظبوط عليّ / مش مظبوط<br>
+▸ <span class="es-word">¿Lo tiene en otra talla?</span> = عندك مقاس تاني؟<br>
+▸ <span class="es-word">Me lo llevo</span> = هاخده<br>
+▸ <span class="es-word">¿Paga en efectivo o con tarjeta?</span> = هتدفع كاش ولا فيزا؟<br>
+▸ <span class="es-word">Está(n) rebajado(s)</span> = عليه تخفيض</div>
+</div>
+
+<!-- ========== ACT 7 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Unidad 2 – Para ti y para mí</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 21</span></div></div>
+<div class="act-head"><div class="act-num">7</div><h2 class="act-title">En la tienda de regalos y complementos</h2></div>
+
+<div class="sub-l">a. <span class="es-speak">¿Qué está pasando en la tienda?</span> Mira el dibujo y decide con tu compañero si estas frases son correctas o no.</div>
+
+<div class="img-placeholder"><div class="icon">🛍️</div><div>صورة صفحة 21: رسم لمتجر هدايا وإكسسوارات فيه بائعة عند الكاشير وعدد من الزبائن يجربون أشياء مختلفة</div></div>
+
+<div class="table-responsive">
+<table>
+<tr><th>الجملة</th><th>V</th><th>F</th></tr>
+<tr><td><span class="es-speak">1. En la tienda no hay <span class="es-ind">ningún</span> niño.</span></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td><td></td></tr>
+<tr><td><span class="es-speak">2. <span class="es-ind">Algunos</span> clientes están <span class="es-ger">hablando</span> entre sí.</span></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td><td></td></tr>
+<tr><td><span class="es-speak">3. <span class="es-ind">Alguien</span> está <span class="es-ger">pagando</span> en la caja.</span></td><td></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td></tr>
+<tr><td><span class="es-speak">4. <span class="es-ind">Algunos</span> pañuelos son rojos.</span></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td><td></td></tr>
+<tr><td><span class="es-speak">5. No hay <span class="es-ind">nada</span> sobre la mesa.</span></td><td></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td></tr>
+<tr><td><span class="es-speak">6. <span class="es-ind">Algunas</span> cosas tienen el precio.</span></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td><td></td></tr>
+<tr><td><span class="es-speak">7. <span class="es-ind">Algún</span> cliente está <span class="es-ger">probándose</span> una gorra.</span></td><td></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td></tr>
+<tr><td><span class="es-speak">8. No hay <span class="es-ind">ninguna</span> clienta en la tienda.</span></td><td></td><td><span class="ans-inline" data-group="7a"><span class="placeholder-text">_</span><span class="ans-text">✓</span></span></td></tr>
+</table>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'7a')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="gbox" style="background:#fff8e1;border-color:#fbc02d;">
+<h3 style="color:#bf6a00;">La doble negación</h3>
+<p><span class="es-speak">No encuentro <span class="es-ind">nada</span>.</span> | <span class="es-speak">No tengo <span class="es-ind">ningún</span> pañuelo verde.</span> | <span class="es-speak">No hay <span class="es-ind">ninguna</span> tienda aquí.</span></p>
+</div>
+
+<div class="sub-l">b. <span class="es-speak">Lee de nuevo las frases de 7a y completa la tabla con las formas que faltan.</span></div>
+<div class="table-responsive">
+<table>
+<tr><th colspan="2">Positivo</th><th colspan="2">Negativo</th></tr>
+<tr><th>delante del sustantivo</th><th>solo</th><th>delante del sustantivo</th><th>solo</th></tr>
+<tr><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">algún</span></span> cliente</td><td><span class="es-ind">alguno</span></td><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">ningún</span></span> niño</td><td><span class="es-ind">ninguno</span></td></tr>
+<tr><td><span class="es-ind">alguna</span> tienda</td><td><span class="es-ind">alguna</span></td><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">ninguna</span></span> clienta</td><td><span class="es-ind">ninguna</span></td></tr>
+<tr><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">algunos</span></span> pañuelos</td><td><span class="es-ind">algunos</span></td><td>—</td><td>—</td></tr>
+<tr><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">algunas</span></span> cosas</td><td><span class="es-ind">algunas</span></td><td>—</td><td>—</td></tr>
+<tr><td>—</td><td><span class="es-ind">algo</span> / <span class="es-ind">alguien</span></td><td>—</td><td><span class="ans-inline" data-group="7b"><span class="placeholder-text">_____</span><span class="ans-text">nada / nadie</span></span></td></tr>
+</table>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'7b')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l">c. <span class="es-speak">En parejas. Mira el dibujo del centro comercial Maravillas en 5a. Formula cuatro frases como en 7a. Dos frases son falsas. Tu compañero descubre qué frases son correctas y cuáles no.</span></div>
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">En la tienda no hay <span class="es-ind">ninguna</span> dependienta.</span></em></p>
+<p><span class="st">▲</span> <em><span class="es-speak">Es falso. En la tienda hay una dependienta, en la caja.</span></em></p>
+</div>
+<p style="font-size:11.5px;color:#888;font-style:italic;font-family:'Cairo',sans-serif;">💡 Solución: Respuesta abierta.</p>
+
+<div class="ar"><strong>📝 الكلمات المُبهمة (Indefinidos) – درس مهم:</strong><br>
+في الإسباني فيه كلمات بنستخدمها لما نتكلم عن أشياء أو ناس بشكل غير محدد:<br>
+✅ <strong>الإيجابية:</strong> <span class="es-word">algo</span> (حاجة) / <span class="es-word">alguien</span> (حد) / <span class="es-word">algún/alguna</span> (بعض)<br>
+❌ <strong>السلبية:</strong> <span class="es-word">nada</span> (ولا حاجة) / <span class="es-word">nadie</span> (ولا حد) / <span class="es-word">ningún/ninguna</span> (ولا واحد)<br><br>
+⚠️ <strong>قاعدة النفي المزدوج:</strong> لما السلبيات دي تيجي بعد الفعل، لازم تحط <span class="es-word">no</span> قبل الفعل:<br>
+✅ <span class="es-word">No tengo nada.</span> (مفيش عندي حاجة)<br>
+❌ <s>Tengo nada.</s></div>
+</div>
+
+<!-- ========== DIVIDER GRAMÁTICA ========== -->
+<div class="slide slide-div"><h2>Gramática y Comunicación</h2><div class="divline"></div><p>Unidad 2 – Página 120</p></div>
+
+<!-- ========== GRAMÁTICA ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Gramática – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 120</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#7c4dff,#5a2dba);">G</div><h2 class="act-title" style="text-decoration-color:#7c4dff;">Gramática – Resumen</h2></div>
+
+<div class="gbox">
+<h3>Los complementos de objeto indirecto</h3>
+<p><span class="es-speak">Hago un regalo a mis padres.</span> → <span class="es-speak"><span class="es-pron">Les</span> hago un regalo.</span><br>
+<span class="es-speak"><span class="es-pron">Te</span> doy algunas ideas para hacer un regalo.</span></p>
+<p><span class="sb">●</span> <span class="es-speak">¿Qué <span class="es-pron">les</span> regaláis a vuestros amigos?</span><br>
+▲ <span class="es-speak">A mi amigo Julián <span class="es-pron">le</span> compro un vale.</span><br>
+■ <span class="es-speak">Pues a mí no <span class="es-pron">me</span> gustan los vales.</span></p>
+<p style="margin-top:6px;font-size:11.5px;font-style:italic;">Cuando se quiere resaltar la persona, se utilizan, además de los pronombres átonos (me, te, le...), los pronombres tónicos (a mí, a ti, a él...) o se nombra a la persona a la que se refieren.</p>
+<p style="margin-top:6px;"><em><span class="es-speak">El vale <span class="es-pron">se lo</span> regalo a él / a Julián.</span></em></p>
+</div>
+
+<div class="grid-2">
+<div class="gbox">
+<h3>Posición de los pronombres</h3>
+<p>Los pronombres en español se sitúan siempre <strong>delante</strong> del verbo conjugado. En las construcciones con un verbo conjugado y un infinitivo los pronombres pueden estar, bien delante del verbo conjugado, o bien añadidos al infinitivo:</p>
+<p><span class="es-speak">A Lola (no) <span class="es-pron">le</span> podemos comprar una tableta.</span><br>
+<span class="es-speak">A Lola (no) podemos comprar<span class="es-pron">le</span> una tableta.</span></p>
+</div>
+
+<div class="gbox">
+<h3>Complemento directo + indirecto</h3>
+<p>Cuando aparecen dos complementos en una misma frase, el complemento <strong>indirecto</strong> se sitúa <strong>delante</strong> del complemento <strong>directo</strong>:</p>
+<p><span class="es-speak">Yo <span class="es-pron">te lo</span> doy.</span> | <span class="es-speak">Tú <span class="es-pron">me la</span> regalas.</span> | <span class="es-speak">Él <span class="es-pron">nos los</span> vende.</span></p>
+<p style="margin-top:5px;">Los pronombres <strong>le</strong> y <strong>les</strong> se convierten en <strong>se</strong> cuando se combinan con los pronombres lo, la, los, las:</p>
+<p>La bicicleta: <span class="es-speak"><span class="es-pron">Se la</span> regalo a Elena.</span><br>El coche: <span class="es-speak">No <span class="es-pron">se lo</span> dejamos a nuestra hija.</span></p>
+<p style="margin-top:5px;"><span class="es-speak"><span class="es-pron">Te los</span> voy a dar.</span> / <span class="es-speak">Voy a dár<span class="es-pron">telos</span>.</span></p>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="gbox">
+<h3>Estar + gerundio</h3>
+<p><span class="es-verb">estoy</span> / <span class="es-verb">estás</span> / <span class="es-verb">está</span> / <span class="es-verb">estamos</span> / <span class="es-verb">estáis</span> / <span class="es-verb">están</span> + <span class="es-ger">hablando</span> / <span class="es-ger">comiendo</span> / <span class="es-ger">escribiendo</span></p>
+<p><strong>Gerundios irregulares:</strong><br>
+leer → <span class="es-ger">leyendo</span> | dormir → <span class="es-ger">durmiendo</span> | oír → <span class="es-ger">oyendo</span> | pedir → <span class="es-ger">pidiendo</span></p>
+<p style="margin-top:5px;">Se utiliza para expresar que algo está sucediendo en un momento dado.</p>
+<p>Los pronombres reflexivos se sitúan delante del verbo conjugado estar o se añaden al gerundio:<br>
+<span class="es-speak">(No) <span class="es-pron">me</span> estoy <span class="es-ger">probando</span> un anillo.</span> / <span class="es-speak">(No) estoy <span class="es-ger">probándome</span> un anillo.</span></p>
+</div>
+
+<div class="gbox">
+<h3>Los indefinidos</h3>
+<p><em><span class="es-ind">Alguien</span>, <span class="es-ind">nadie</span>, <span class="es-ind">algo</span> y <span class="es-ind">nada</span> son invariables.</em></p>
+<p><span class="sb">●</span> <span class="es-speak">Seguro que en esa tienda tienen <span class="es-ind">algo</span> bonito.</span><br>
+▲ <span class="es-speak">Pues yo no he visto <span class="es-ind">nada</span>.</span></p>
+<p style="margin-top:5px;"><em><span class="es-ind">Alguno/-a/-os/-as</span> y <span class="es-ind">ninguno/-a</span> pueden aparecer solos o acompañar a un sustantivo. Delante de un sustantivo, alguno y ninguno se convierten en <strong>algún</strong> y <strong>ningún</strong>.</em></p>
+<p><span class="sb">●</span> <span class="es-speak">¿Conoces <span class="es-ind">algún</span> sitio para comprar bicicletas usadas?</span><br>
+▲ <span class="es-speak">No, no conozco <span class="es-ind">ninguno</span>.</span></p>
+<p style="margin-top:5px;"><em>Tenemos que añadir <strong>no</strong> antes del verbo cuando este va seguido de nada, nadie, ningún, ninguno/-a.</em></p>
+<p><span class="sb">●</span> <span class="es-speak">¿Has comprado <span class="es-ind">algún</span> regalo para Sara?</span><br>
+▲ <span class="es-speak">No, aún no he comprado <span class="es-ind">nada</span>.</span></p>
+</div>
+</div>
+
+<div class="ar ar-full"><strong>📝 ملخص للمذاكرة – أهم 4 قواعد في الوحدة 2:</strong><br>
+1. <strong>ضمائر المفعول غير المباشر:</strong> me, te, le, nos, os, les — بنستخدمها لما نتكلم عن مين بنعمله الفعل.<br>
+2. <strong>دمج ضميرين:</strong> indirecto + directo. لو الـ indirecto هو <span class="es-word">le</span> أو <span class="es-word">les</span>، بيتحول إلى <span class="es-word">se</span>.<br>
+3. <strong>Estar + Gerundio:</strong> للحديث عن حدث جاري الآن. -ando للأفعال -ar / -iendo للأفعال -er و -ir.<br>
+4. <strong>Indefinidos:</strong> algo/nada، alguien/nadie، algún/ningún. ولاحظ قاعدة النفي المزدوج (no... nada).</div>
+</div>
+
+<!-- ========== COMUNICACIÓN ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Comunicación – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 120</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#2e7d32,#1b5e20);">C</div><h2 class="act-title" style="text-decoration-color:#2e7d32;">Comunicación – الوظائف التواصلية</h2></div>
+
+<div class="com-summary">
+<div class="com-card">
+<div class="com-card-head">🎁 1. Hablar de regalos</div>
+<div class="com-card-body">
+<div class="com-formula">A + persona + le/les + regalo/compro</div>
+<div class="com-example"><span class="es-speak">A mi hermano <span class="es-pron">le</span> regalo un libro porque <span class="es-pron">le</span> gusta leer.</span></div>
+<div class="com-example"><span class="es-speak">A mis amigos puedo regalar<span class="es-pron">les</span> una cena en un restaurante porque <span class="es-pron">les</span> gusta salir a cenar.</span></div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> الحديث عن الهدايا — مين بتشتري له إيه وليه.</div>
+</div>
+</div>
+
+<div class="com-card" style="border-color:#1976d2;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#1976d2,#0d47a1);">⏱️ 2. Algo está sucediendo</div>
+<div class="com-card-body">
+<div class="com-formula" style="border-color:#1976d2;color:#0d47a1;">Estar + Gerundio</div>
+<div class="com-example"><span class="es-speak">Estoy <span class="es-ger">pagando</span> en la caja.</span></div>
+<div class="com-example"><span class="es-speak">Estoy <span class="es-ger">comprando</span> unos patines.</span></div>
+<div class="com-example"><span class="es-speak">Está <span class="es-ger">leyendo</span> una revista.</span></div>
+<div class="com-example"><span class="es-speak">Está <span class="es-ger">probándose</span> unas gafas.</span></div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> التعبير عن حدث جاري في اللحظة دي.</div>
+</div>
+</div>
+
+<div class="com-card" style="border-color:#ef6c00;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#ef6c00,#bf360c);">🛍️ 3. Comprar en una tienda</div>
+<div class="com-card-body">
+<div class="com-example"><span class="es-speak">Estoy <span class="es-ger">buscando</span> camisetas de algodón.</span></div>
+<div class="com-example"><span class="es-speak">Este jersey <span class="es-pron">me</span> gusta mucho. ¿<span class="es-pron">Me lo</span> puedo probar?</span></div>
+<div class="com-example"><span class="es-speak">La falda <span class="es-pron">me</span> queda muy bien. <span class="es-pron">Me la</span> llevo.</span></div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> جمل التسوق الأساسية — البحث، التجربة، الشراء.</div>
+</div>
+</div>
+
+<div class="com-card" style="border-color:#7c4dff;">
+<div class="com-card-head" style="background:linear-gradient(135deg,#7c4dff,#5a2dba);">🔍 4. Referirse a objetos/personas</div>
+<div class="com-card-body">
+<div class="com-example"><span class="sb">●</span> <span class="es-speak">No conozco <span class="es-ind">ningún</span> sitio para comprar regalos originales.</span></div>
+<div class="com-example"><span class="sb">●</span> <span class="es-speak">¿Conoces <span class="es-ind">alguna</span> tienda barata por aquí?</span><br><span class="st">▲</span> <span class="es-speak">No, no conozco <span class="es-ind">ninguna</span>.</span></div>
+<div class="com-example"><span class="sb">●</span> <span class="es-speak">¿Has comprado ya <span class="es-ind">algo</span> para Luis?</span><br><span class="st">▲</span> <span class="es-speak">No, todavía no he encontrado <span class="es-ind">nada</span>.</span></div>
+<div class="com-ar-mini"><strong>الفكرة:</strong> استخدام الكلمات المُبهمة للإشارة لأشياء أو ناس.</div>
+</div>
+</div>
+</div>
+
+<div class="com-tip-row"><span class="tip-icon">💡</span><span><strong>نصيحة 1:</strong> لما تستخدم <span class="es-word">A + شخص + le/les</span>، ده تأكيد. مثلاً: <span class="es-word">A María le compro flores</span> = أنا بشتري لماريا (تحديداً) ورد.</span></div>
+<div class="com-tip-row" style="border-color:#1976d2;color:#0d47a1;background:linear-gradient(90deg,#e3f2fd,#e8f4ff);"><span class="tip-icon">⚠️</span><span><strong>نصيحة 2:</strong> <span class="es-word">Estar + gerundio</span> مش زي <span class="es-word">presente</span> العادي. الأول للحدث الجاري دلوقتي، التاني لكلام عام.</span></div>
+</div>
+
+<!-- ========== DIVIDER EJERCICIOS ========== -->
+<div class="slide slide-div"><h2>Ejercicios</h2><div class="divline"></div><p>Unidad 2 – Página 121</p></div>
+
+<!-- ========== EJ 1+2 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 121</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#3949ab,#1a237e);">Ej</div><h2 class="act-title" style="text-decoration-color:#3949ab;">Ejercicios 1 – 2</h2></div>
+
+<div class="sub-l"><span class="ejn">1</span> <span class="es-speak">Escribe de nuevo las frases sustituyendo las palabras subrayadas por un pronombre.</span></div>
+<div class="tblock">
+<p>1. <span class="es-speak">Compramos un libro a Marisa.</span> → <span class="fill-blank" data-group="ej1">Le compramos un libro.</span></p>
+<p>2. <span class="es-speak">Haces un regalo a tus amigos.</span> → <span class="fill-blank" data-group="ej1">Les haces un regalo.</span></p>
+<p>3. <span class="es-speak">Digo la verdad a vosotros.</span> → <span class="fill-blank" data-group="ej1">Os digo la verdad.</span></p>
+<p>4. <span class="es-speak">Das un euro a mí.</span> → <span class="fill-blank" data-group="ej1">Me das un euro.</span></p>
+<p>5. <span class="es-speak">Enseñáis el nuevo coche a vuestros padres.</span> → <span class="fill-blank" data-group="ej1">Les enseñáis el nuevo coche.</span></p>
+<p>6. <span class="es-speak">Isabel regala una entrada para un concierto a su novio.</span> → <span class="fill-blank" data-group="ej1">Isabel le regala una entrada para un concierto.</span></p>
+<p>7. <span class="es-speak">Usted entrega el certificado a sus alumnos.</span> → <span class="fill-blank" data-group="ej1">Usted les entrega el certificado.</span></p>
+<p>8. <span class="es-speak">Ellas ofrecen ayuda a nosotros.</span> → <span class="fill-blank" data-group="ej1">Ellas nos ofrecen ayuda.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej1')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l"><span class="ejn">2</span> <span class="es-speak">Lee las siguientes frases. ¿Cuáles son incorrectas? Corrígelas.</span></div>
+<div class="tblock">
+<p>1. <span class="es-speak">¿Qué vas a regalar<span class="es-pron">les</span> a tus padres por su aniversario?</span> → <span class="fill-blank" data-group="ej2">✅ Correcta</span></p>
+<p>2. <span class="es-speak">Mañana vamos a <span class="es-pron">le</span> dar una sorpresa.</span> → <span class="fill-blank" data-group="ej2">❌ Mañana vamos a darle una sorpresa. / Mañana le vamos a dar una sorpresa.</span></p>
+<p>3. <span class="es-speak"><span class="es-pron">Te</span> puedo enviar las fotografías esta tarde.</span> → <span class="fill-blank" data-group="ej2">✅ Correcta</span></p>
+<p>4. <span class="es-speak">¿Puedes <span class="es-pron">les</span> decir que llegamos tarde?</span> → <span class="fill-blank" data-group="ej2">❌ ¿Puedes decirles que llegamos tarde? / ¿Les puedes decir...?</span></p>
+<p>5. <span class="es-speak">Vamos a regalar<span class="es-pron">os</span> una camiseta.</span> → <span class="fill-blank" data-group="ej2">✅ Correcta</span></p>
+<p>6. <span class="es-speak"><span class="es-pron">Les</span> quiero decir una cosa.</span> → <span class="fill-blank" data-group="ej2">✅ Correcta</span></p>
+<p>7. <span class="es-speak">¿Van a <span class="es-pron">le</span> ayudar a pagar sus vacaciones?</span> → <span class="fill-blank" data-group="ej2">❌ ¿Van a ayudarle...? / ¿Le van a ayudar...?</span></p>
+<p>8. <span class="es-speak"><span class="es-pron">Me</span> van a regalar un viaje, pero no sé adónde.</span> → <span class="fill-blank" data-group="ej2">✅ Correcta</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej2')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar"><strong>📝 تذكير:</strong> الضمير دايماً قبل الفعل المُصرَّف أو ملصوق بنهاية الـ infinitivo. ممنوع تضعه بينهم!</div>
+</div>
+
+<!-- ========== EJ 3+4 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 121</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#3949ab,#1a237e);">Ej</div><h2 class="act-title" style="text-decoration-color:#3949ab;">Ejercicios 3 – 4</h2></div>
+
+<div class="sub-l"><span class="ejn">3</span> <span class="es-speak">Sustituye las palabras subrayadas por pronombres, como en el ejemplo.</span></div>
+<div class="tblock">
+<p>1. <span class="es-speak">Doy un beso a mi abuela.</span> → <strong><span class="es-speak"><span class="es-pron">Se lo</span> doy.</span></strong></p>
+<p>2. <span class="es-speak">Regalamos a mis padres una noche en un hotel de lujo por su cumpleaños.</span> → <span class="fill-blank" data-group="ej3">Se la regalamos.</span></p>
+<p>3. <span class="es-speak">No damos dinero a los niños.</span> → <span class="fill-blank" data-group="ej3">No se lo damos.</span></p>
+<p>4. <span class="es-speak">Voy a comprar un regalo a Paulina.</span> → <span class="fill-blank" data-group="ej3">Voy a comprárselo. / Se lo voy a comprar.</span></p>
+<p>5. <span class="es-speak">¿Puedo cantar una canción al bebé?</span> → <span class="fill-blank" data-group="ej3">¿Puedo cantársela? / ¿Se la puedo cantar?</span></p>
+<p>6. <span class="es-speak">Ella vendió a María el sombrero.</span> → <span class="fill-blank" data-group="ej3">Ella se lo vendió.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej3')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l"><span class="ejn">4</span> <span class="es-speak">Escribe el gerundio de los siguientes verbos.</span></div>
+<div class="grid-2">
+<div class="tblock">
+<p>1. <span class="es-speak">trabajar</span>: <span class="fill-blank" data-group="ej4">trabajando</span></p>
+<p>2. <span class="es-speak">dormir</span>: <span class="fill-blank" data-group="ej4">durmiendo</span></p>
+<p>3. <span class="es-speak">vivir</span>: <span class="fill-blank" data-group="ej4">viviendo</span></p>
+<p>4. <span class="es-speak">beber</span>: <span class="fill-blank" data-group="ej4">bebiendo</span></p>
+<p>5. <span class="es-speak">recibir</span>: <span class="fill-blank" data-group="ej4">recibiendo</span></p>
+<p>6. <span class="es-speak">pedir</span>: <span class="fill-blank" data-group="ej4">pidiendo</span></p>
+</div>
+<div class="tblock">
+<p>7. <span class="es-speak">dar</span>: <span class="fill-blank" data-group="ej4">dando</span></p>
+<p>8. <span class="es-speak">aprender</span>: <span class="fill-blank" data-group="ej4">aprendiendo</span></p>
+<p>9. <span class="es-speak">buscar</span>: <span class="fill-blank" data-group="ej4">buscando</span></p>
+<p>10. <span class="es-speak">oír</span>: <span class="fill-blank" data-group="ej4">oyendo</span></p>
+<p>11. <span class="es-speak">comprar</span>: <span class="fill-blank" data-group="ej4">comprando</span></p>
+<p>12. <span class="es-speak">leer</span>: <span class="fill-blank" data-group="ej4">leyendo</span></p>
+</div>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej4')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar"><strong>⚠️ شواذ الـ Gerundio المهمة جداً:</strong><br>
+▸ أفعال تتغير حروف العلة فيها: dormir → <span class="es-word">durmiendo</span> / pedir → <span class="es-word">pidiendo</span><br>
+▸ أفعال تنتهي بحرف علة + er/ir: leer → <span class="es-word">leyendo</span> / oír → <span class="es-word">oyendo</span><br>
+دي الـ -i- بتتحول لـ -y- لتسهيل النطق.</div>
+</div>
+
+<!-- ========== EJ 5+6 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 121</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#3949ab,#1a237e);">Ej</div><h2 class="act-title" style="text-decoration-color:#3949ab;">Ejercicios 5 – 6</h2></div>
+
+<div class="sub-l"><span class="ejn">5</span> <span class="es-speak">Completa las frases.</span></div>
+<div class="wbank">
+<span data-speak="alguien">alguien</span>
+<span data-speak="algún">algún</span>
+<span data-speak="ninguna">ninguna</span>
+<span data-speak="nada">nada</span>
+<span data-speak="algo">algo</span>
+<span data-speak="ninguno">ninguno</span>
+<span data-speak="nadie">nadie</span>
+<span data-speak="ningún">ningún</span>
+</div>
+
+<div class="tblock">
+<p>1. <span class="sb">●</span> <span class="es-speak">¿Hay <span class="fill-blank" data-group="ej5">algo</span> para cenar?</span><br>
+<span class="st">▲</span> <span class="es-speak">No, no hay <span class="fill-blank" data-group="ej5">nada</span>. ¿Pedimos una pizza?</span></p>
+<p>2. <span class="sb">●</span> <span class="es-speak">¿Tienen <span class="fill-blank" data-group="ej5">algún</span> vestido rojo?</span><br>
+<span class="st">▲</span> <span class="es-speak">Lo siento, no tenemos <span class="fill-blank" data-group="ej5">ninguno</span>, pero tenemos unos vestidos muy bonitos de otros colores.</span></p>
+<p>3. <span class="sb">●</span> <span class="es-speak">¿Hay <span class="fill-blank" data-group="ej5">alguien</span> en clase?</span><br>
+<span class="st">▲</span> <span class="es-speak">No, no hay <span class="fill-blank" data-group="ej5">nadie</span>. Están todos en la cafetería.</span></p>
+<p>4. <span class="sb">●</span> <span class="es-speak">Mira, ahí están Alberto y Jorge. Están <span class="es-ger">jugando</span> en el parque.</span><br>
+<span class="st">▲</span> <span class="es-speak">¿Dónde? Yo no veo a <span class="fill-blank" data-group="ej5">ningún</span> niño en el parque.</span></p>
+<p>5. <span class="sb">●</span> <span class="es-speak">De postre quiero una naranja.</span><br>
+<span class="st">▲</span> <span class="es-speak">Ay, no queda <span class="fill-blank" data-group="ej5">ninguna</span>. ¿Quieres un yogur o una manzana?</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej5')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="sub-l"><span class="ejn">6</span> <span class="es-speak">Completa las frases con "no" si es necesario.</span></div>
+<div class="tblock">
+<p>1. <span class="fill-blank" data-group="ej6">No</span> <span class="es-speak">hay <span class="es-ind">nadie</span> en la playa.</span></p>
+<p>2. <span class="fill-blank" data-group="ej6">—</span> <span class="es-speak"><span class="es-ind">Nadie</span> quiere hacer el examen.</span></p>
+<p>3. <span class="fill-blank" data-group="ej6">No</span> <span class="es-speak">tienen <span class="es-ind">ninguna</span> falda larga.</span></p>
+<p>4. <span class="fill-blank" data-group="ej6">—</span> <span class="es-speak"><span class="es-ind">Ningún</span> alumno llega puntual.</span></p>
+<p>5. <span class="fill-blank" data-group="ej6">No</span> <span class="es-speak">hay <span class="es-ind">ningún</span> alumno en la clase.</span></p>
+<p>6. <span class="fill-blank" data-group="ej6">No</span> <span class="es-speak">quiero <span class="es-ind">ningún</span> sombrero.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej6')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar"><strong>🔑 القاعدة الذهبية للنفي:</strong><br>
+▸ لو <span class="es-word">nadie/nada/ningún</span> جاي <strong>قبل</strong> الفعل → مش بنحط "no" (مثال: <em>Nadie quiere venir.</em>)<br>
+▸ لو جاي <strong>بعد</strong> الفعل → لازم نحط "no" قبل الفعل (مثال: <em>No quiero nada.</em>)</div>
+</div>
+
+<!-- ========== EJ 7 ========== -->
+<div class="slide slide-content">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">Ejercicios – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 121</span></div></div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#3949ab,#1a237e);">Ej</div><h2 class="act-title" style="text-decoration-color:#3949ab;">Ejercicio 7</h2></div>
+
+<div class="sub-l"><span class="ejn">7</span> <span class="es-speak">¿Qué preguntas corresponden a estas respuestas?</span></div>
+
+<div class="tblock" style="background:#fffde7;border-color:#fbc02d;">
+<p>• <span class="es-speak">¿Qué tal <span class="es-pron">te</span> quedan los pantalones?</span></p>
+<p>• <span class="es-speak">¿Cuánto cuesta este vestido?</span></p>
+<p>• <span class="es-speak">¿<span class="es-pron">Me lo</span> puedo probar?</span></p>
+<p>• <span class="es-speak">Buenos días. ¿En qué <span class="es-pron">le</span> puedo ayudar?</span></p>
+<p>• <span class="es-speak">¿Paga en efectivo o con tarjeta?</span></p>
+<p>• <span class="es-speak">¿Vas a comprar la falda?</span></p>
+</div>
+
+<div class="tblock" style="margin-top:8px;">
+<p>1. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">¿Me lo puedo probar?</span><br>
+<span class="st">▲</span> <span class="es-speak">Sí, claro.</span></p>
+<p>2. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">¿Qué tal te quedan los pantalones?</span><br>
+<span class="st">▲</span> <span class="es-speak">¡Muy bien!</span></p>
+<p>3. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">¿Cuánto cuesta este vestido?</span><br>
+<span class="st">▲</span> <span class="es-speak">Cincuenta euros.</span></p>
+<p>4. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">¿Paga en efectivo o con tarjeta?</span><br>
+<span class="st">▲</span> <span class="es-speak">Prefiero con tarjeta.</span></p>
+<p>5. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">¿Vas a comprar la falda?</span><br>
+<span class="st">▲</span> <span class="es-speak">¡Sí, me encanta! <span class="es-pron">Me la</span> llevo.</span></p>
+<p>6. <span class="sb">●</span> <span class="fill-blank" data-group="ej7">Buenos días. ¿En qué le puedo ayudar?</span><br>
+<span class="st">▲</span> <span class="es-speak">Estoy <span class="es-ger">buscando</span> una camisa negra.</span></p>
+</div>
+<div class="show-ans-row"><button class="show-ans-btn" onclick="toggleGroupAns(this,'ej7')"><span class="btn-text">إظهار الإجابة</span><span class="arrow">▼</span></button></div>
+
+<div class="ar"><strong>💡 ملحوظة:</strong> دي كل الجمل الأساسية اللي هتسمعها أو تقولها في أي محل ملابس بإسبانيا أو أمريكا اللاتينية. احفظها كويس!</div>
+</div>
+
+<!-- ========== DIVIDER CONSOLIDAMOS ========== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#f5a623,#e8871e);"><h2 style="color:#fff;">¡Consolidamos!</h2><div class="divline" style="background:#fff;"></div><p style="color:rgba(255,255,255,0.9);">أنشطة التوحيد للطلاب</p></div>
+
+<!-- ========== CONSOLIDAMOS 1 ========== -->
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 19</span></div></div>
+<div class="consbadge">¡Consolidamos! 1</div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#f5a623,#e8871e);">★</div><h2 class="act-title" style="text-decoration-color:#f5a623;">Un catálogo de regalos</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #00897b;font-size:12.5px;">
+<p><strong style="color:#00695c;">🎯 Objetivos:</strong> compartir ideas de regalos con el grupo – elaborar un catálogo grupal de regalos – usar pronombres de objeto indirecto y combinaciones.</p>
+</div>
+
+<p style="font-weight:700;color:#bf6a00;margin:8px 0;font-family:'Cairo','Open Sans',sans-serif;"><strong>a.</strong> <span class="es-speak">En grupos. Pensad en regalos que habéis hecho alguna vez con estas características. Después completad la tabla y comparad con vuestros compañeros.</span></p>
+
+<div class="table-responsive">
+<table>
+<tr><th>Regalo</th><th>¿A quién?</th><th>¿Por qué?</th></tr>
+<tr><td>El más barato:</td><td><span class="es-speak">una planta de 2 €</span></td><td><span class="es-speak">a mi vecina (porque ha regado mis plantas)</span></td></tr>
+<tr><td>El más original:</td><td>_______</td><td>_______</td></tr>
+<tr><td>El más útil:</td><td>_______</td><td>_______</td></tr>
+<tr><td>El más caro:</td><td>_______</td><td>_______</td></tr>
+</table>
+</div>
+
+<div class="dia">
+<p><span class="sb">●</span> <em><span class="es-speak">El regalo más barato ha sido una planta de 2 euros. <span class="es-pron">Se la</span> he regalado esta semana a mi vecina porque ha regado mis plantas.</span></em></p>
+</div>
+
+<p style="font-weight:700;color:#bf6a00;margin:10px 0;font-family:'Cairo','Open Sans',sans-serif;"><strong>b.</strong> <span class="es-speak">Con las propuestas de cada miembro del grupo elaborad un catálogo y después presentadlo en la clase.</span></p>
+
+<div class="tblock" style="background:#fffde7;border:3px dashed #f5a623;max-width:500px;margin:10px auto;">
+<p style="font-family:'Playfair Display',serif;font-size:16px;color:#bf6a00;text-align:center;letter-spacing:2px;margin-bottom:10px;">📒 NUESTRO CATÁLOGO DE REGALOS</p>
+<p style="font-size:13px;line-height:2.2;">
+Regalos baratos: _______________<br>
+Regalos originales: _______________<br>
+Regalos útiles: _______________<br>
+Regalos caros: _______________
+</p>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح المشروع الأول:</span>
+🔹 <strong>الفكرة:</strong> اعمل مع جروبك "كاتالوج هدايا" مميز.<br>
+🔹 <strong>الخطوات:</strong><br>
+1️⃣ كل واحد في الجروب يفكر في 4 هدايا قدمها قبل كده (أرخص، أصلي، أنفع، أغلى).<br>
+2️⃣ يكتب لمين وليه قدمها — مع استخدام ضمائر زي <span class="es-word">se la regalé</span> أو <span class="es-word">le compré</span>.<br>
+3️⃣ بعد ما كل الأعضاء يخلصوا، اجمعوا كل الإجابات في "كاتالوج" واحد.<br>
+4️⃣ قدموا الكاتالوج للفصل!<br>
+✅ Solución: إجابة جماعية حسب أعضاء الجروب.</div>
+</div>
+
+<!-- ========== CONSOLIDAMOS 2 ========== -->
+<div class="slide slide-content slide-cons">
+<div class="topbar"><div class="topbar-left"><span class="ulabel">¡Consolidamos! – Unidad 2</span><span class="brand-badge">Instituto Amigos</span></div><div class="topbar-right"><span class="pnum">Página 21</span></div></div>
+<div class="consbadge">¡Consolidamos! 2</div>
+<div class="act-head"><div class="act-num" style="background:linear-gradient(135deg,#f5a623,#e8871e);">★</div><h2 class="act-title" style="text-decoration-color:#f5a623;">Comprando en el centro comercial</h2></div>
+
+<div class="tblock" style="background:#fff3e0;border-left:5px solid #00897b;font-size:12.5px;">
+<p><strong style="color:#00695c;">🎯 Objetivos:</strong> simular una situación real de compra en una tienda – practicar las expresiones útiles del comprador y del vendedor – usar pronombres en contexto auténtico.</p>
+</div>
+
+<p style="font-weight:700;color:#bf6a00;margin:8px 0;font-family:'Cairo','Open Sans',sans-serif;"><strong>a.</strong> <span class="es-speak">Elige uno de estos vales para comprar en una tienda del centro comercial. ¿Qué quieres comprar?</span></p>
+
+<div class="grid-2">
+<div class="tblock" style="background:#fff8e1;border-color:#fbc02d;text-align:center;">
+<p style="font-size:30px;">🎁</p>
+<p style="font-weight:700;"><span class="es-speak">Complementos y regalos</span></p>
+<p style="font-size:18px;color:#bf6a00;font-weight:900;">50 €</p>
+</div>
+<div class="tblock" style="background:#fff3e0;border-color:#ef6c00;text-align:center;">
+<p style="font-size:30px;">👠</p>
+<p style="font-weight:700;"><span class="es-speak">Zapatería</span></p>
+<p style="font-size:18px;color:#bf360c;font-weight:900;">75 €</p>
+</div>
+<div class="tblock" style="background:#e0f2f1;border-color:#00897b;text-align:center;">
+<p style="font-size:30px;">⚽</p>
+<p style="font-weight:700;"><span class="es-speak">Tienda de deportes</span></p>
+<p style="font-size:18px;color:#00695c;font-weight:900;">60 €</p>
+</div>
+<div class="tblock" style="background:#e8f5e9;border-color:#2e7d32;text-align:center;">
+<p style="font-size:30px;">👗</p>
+<p style="font-weight:700;"><span class="es-speak">Tienda de ropa</span></p>
+<p style="font-size:18px;color:#1b5e20;font-weight:900;">99 €</p>
+</div>
+</div>
+
+<p style="font-weight:700;color:#bf6a00;margin:10px 0;font-family:'Cairo','Open Sans',sans-serif;"><strong>b.</strong> <span class="es-speak">En parejas. Un juego de roles. Preparad un diálogo para comprar con vuestro vale en la tienda elegida. Tu compañero es el vendedor, después cambiáis los roles. Al final, representad una de las situaciones de compra en la clase, a ser posible sin leer el guion.</span></p>
+
+<div class="infobox">
+<h4>🎯 ESTRATEGIA</h4>
+<p><span class="es-speak">Para preparar una conversación es bueno anotar previamente algunas expresiones útiles.</span></p>
+</div>
+
+<div class="ar-instr"><span class="ar-title">📝 شرح المشروع الثاني:</span>
+🔹 <strong>الفكرة:</strong> العب لعبة الأدوار (Role Play) — واحد بائع وواحد زبون!<br>
+🔹 <strong>الخطوات:</strong><br>
+1️⃣ اختار قسيمة شراء (vale) من الأربعة.<br>
+2️⃣ مع زميلك: حضّروا حوار للشراء بالقسيمة دي (واحد بائع، واحد زبون).<br>
+3️⃣ بدّلوا الأدوار وعملوا حوار تاني.<br>
+4️⃣ في الآخر، قدموا حوار قدام الفصل بدون قراية!<br><br>
+💡 <strong>عبارات مفيدة لازم تحضرها:</strong><br>
+• <span class="es-word">Buenos días, ¿en qué le puedo ayudar?</span><br>
+• <span class="es-word">Estoy buscando...</span><br>
+• <span class="es-word">¿Me lo/la puedo probar?</span><br>
+• <span class="es-word">¿Cuánto cuesta(n)?</span><br>
+• <span class="es-word">Me lo/la llevo. / No me lo/la llevo.</span><br>
+• <span class="es-word">¿Paga en efectivo o con tarjeta?</span><br>
+✅ Solución: إجابة جماعية حسب الاختيار.</div>
+</div>
+
+<!-- ========== FINAL ========== -->
+<div class="slide slide-div" style="background:linear-gradient(135deg,#00897b,#004d40);">
+<div class="unit-circle" style="margin-bottom:20px;">2</div>
+<h2 style="color:#fff;font-size:clamp(28px,5vw,42px);">¡Fin de la Unidad 2!</h2>
+<div class="divline" style="background:#ffd54f;"></div>
+<p style="color:rgba(255,255,255,0.85);font-size:clamp(15px,2vw,20px);">Para ti y para mí – Completada ✓</p>
+<p style="color:rgba(255,255,255,0.5);margin-top:30px;font-size:14px;letter-spacing:3px;">INSTITUTO AMIGOS</p>
+</div>
+
+<script>
+/* ========== Reveal System ========== */
+function toggleGroupAns(btn, group) {
+  const elements = document.querySelectorAll('[data-group="' + group + '"]');
+  const text = btn.querySelector('.btn-text');
+  if (btn.classList.contains('active')) {
+    elements.forEach(el => el.classList.remove('show'));
+    btn.classList.remove('active');
+    text.textContent = 'إظهار الإجابة';
+  } else {
+    elements.forEach(el => el.classList.add('show'));
+    btn.classList.add('active');
+    text.textContent = 'إخفاء الإجابة';
+  }
+}
+
+function toggleTrans(btn) {
+  const content = btn.parentElement.nextElementSibling;
+  const text = btn.querySelector('.btn-text');
+  if (content.classList.contains('show')) {
+    content.classList.remove('show');
+    btn.classList.remove('active');
+    text.textContent = '📄 إظهار التفريغ';
+  } else {
+    content.classList.add('show');
+    btn.classList.add('active');
+    text.textContent = '✕ إخفاء التفريغ';
+  }
+}
+
+/* ========== Spanish Speech Synthesis ========== */
+let spanishVoices = [];
+let currentSpeakingEl = null;
+
+function loadSpanishVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const allVoices = window.speechSynthesis.getVoices();
+  spanishVoices = [
+    ...allVoices.filter(v => v.lang === 'es-ES'),
+    ...allVoices.filter(v => v.lang === 'es-MX'),
+    ...allVoices.filter(v => v.lang === 'es-US'),
+    ...allVoices.filter(v => v.lang.startsWith('es-')),
+    ...allVoices.filter(v => v.lang.startsWith('es'))
+  ];
+  spanishVoices = [...new Set(spanishVoices)];
+}
+
+if ('speechSynthesis' in window) {
+  loadSpanishVoices();
+  window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+  setTimeout(loadSpanishVoices, 100);
+  setTimeout(loadSpanishVoices, 500);
+  setTimeout(loadSpanishVoices, 1500);
+}
+
+function speakES(el, text) {
+  if (!('speechSynthesis' in window)) { alert('المتصفح بتاعك مش بيدعم الصوت.'); return; }
+  window.speechSynthesis.cancel();
+  if (currentSpeakingEl) currentSpeakingEl.classList.remove('speaking');
+  if (spanishVoices.length === 0) loadSpanishVoices();
+  const cleanText = text.trim().replace(/^🔊\s*/,'').replace(/[¿¡]/g,'');
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = 'es-ES';
+  if (spanishVoices.length > 0) { u.voice = spanishVoices[0]; u.lang = spanishVoices[0].lang; }
+  u.rate = 0.9; u.pitch = 1; u.volume = 1;
+  if (el) { el.classList.add('speaking'); currentSpeakingEl = el; }
+  u.onend = () => { if (el) el.classList.remove('speaking'); currentSpeakingEl = null; };
+  u.onerror = () => { if (el) el.classList.remove('speaking'); currentSpeakingEl = null; };
+  window.speechSynthesis.speak(u);
+}
+
+/* ========== Auto-bind all Spanish elements ========== */
+document.addEventListener('DOMContentLoaded', () => {
+  
+  /* Bind individual word classes (es-word, es-pron, es-verb, es-ger, es-ind) */
+  document.querySelectorAll('.es-word, .es-pron, .es-verb, .es-ger, .es-ind').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = el.textContent.trim().replace(/^🔊\s*/,'');
+      speakES(el, text);
+    });
+  });
+  
+  /* Bind .es-speak (full phrases) - clicks on phrase speak the whole phrase */
+  document.querySelectorAll('.es-speak').forEach(el => {
+    el.addEventListener('click', (e) => {
+      /* Check if the click target is a nested colored word */
+      const target = e.target;
+      if (target.classList.contains('es-pron') || 
+          target.classList.contains('es-verb') || 
+          target.classList.contains('es-ger') || 
+          target.classList.contains('es-ind') ||
+          target.classList.contains('es-word')) {
+        return; /* Let the nested handler take over */
+      }
+      e.stopPropagation();
+      const text = el.textContent.trim().replace(/^🔊\s*/,'');
+      speakES(el, text);
+    });
+  });
+  
+  /* Bind wbank spans with data-speak */
+  document.querySelectorAll('.wbank span[data-speak]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = el.getAttribute('data-speak') || el.textContent.trim();
+      speakES(el, text);
+    });
+  });
+  
+  /* Bind any element with data-speak attribute */
+  document.querySelectorAll('[data-speak]').forEach(el => {
+    if (el.classList.contains('wbank') || el.parentElement.classList.contains('wbank')) return;
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = el.getAttribute('data-speak');
+      speakES(el, text);
+    });
+  });
+});
+</script>
+</body>
+</html>
