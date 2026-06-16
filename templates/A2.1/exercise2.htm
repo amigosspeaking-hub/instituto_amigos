@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instituto Amigos - A2.1 L2 - Para ti y para mí</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:#e0e0e0;overflow-x:hidden}
+
+.header{background:linear-gradient(135deg,#e74c3c,#c0392b 50%,#f39c12);padding:16px 20px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'🇪🇸';position:absolute;font-size:90px;opacity:.1;top:-15px;right:20px}
+.header h1{font-size:1.4em;font-weight:900;color:#fff;margin-bottom:3px}
+.header h2{font-size:1em;font-weight:600;color:#ffeaa7}
+.header .lesson-badge{display:inline-block;background:rgba(255,255,255,.25);padding:4px 14px;border-radius:18px;margin-top:5px;font-size:.85em;color:#fff;font-weight:700}
+
+.user-bar{background:rgba(0,0,0,.4);padding:8px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.user-bar .welcome{color:#f39c12;font-weight:700;font-size:.9em}
+.user-bar .logout-btn{background:#c0392b;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600;font-size:.85em;text-decoration:none}
+
+.progress-summary{max-width:1000px;margin:12px auto;padding:12px 18px;background:rgba(30,45,69,.6);backdrop-filter:blur(15px);border-radius:14px;border:1px solid rgba(52,152,219,.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.progress-summary .item{display:flex;flex-direction:column;align-items:center;min-width:55px}
+.progress-summary .item .num{font-size:1.3em;font-weight:900}
+.progress-summary .item .label{font-size:.7em;color:#bdc3c7}
+.progress-summary .item.correct .num{color:#2ecc71}
+.progress-summary .item.half .num{color:#f1c40f}
+.progress-summary .item.wrong .num{color:#e74c3c}
+.progress-summary .item.pending .num{color:#9b59b6}
+.progress-summary .item.remaining .num{color:#f39c12}
+.progress-summary .item.total .num{color:#3498db}
+.progress-summary .progress-bar-mini{flex:1;min-width:120px;height:10px;background:#0f1e33;border-radius:5px;overflow:hidden;margin:0 8px}
+.progress-summary .progress-bar-mini .fill{height:100%;background:linear-gradient(90deg,#2ecc71,#27ae60);transition:width 1s}
+
+.slider-wrapper{max-width:920px;margin:0 auto;padding:15px}
+.top-nav{background:rgba(30,45,69,.7);backdrop-filter:blur(10px);padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.08);margin-bottom:15px}
+.top-nav-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.top-nav .slide-counter{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;padding:7px 16px;border-radius:20px;font-weight:800;font-size:.95em}
+.top-nav .progress-track{flex:1;min-width:150px;height:8px;background:#0f1e33;border-radius:4px;overflow:hidden}
+.top-nav .progress-fill{height:100%;background:linear-gradient(90deg,#e74c3c,#f39c12,#2ecc71);transition:width .5s}
+.top-nav .slide-jump{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.top-nav .jump-btn{background:rgba(52,73,94,.6);color:#bdc3c7;border:1px solid rgba(255,255,255,.1);width:32px;height:32px;border-radius:50%;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.8em;transition:all .2s}
+.top-nav .jump-btn:hover{transform:scale(1.1);background:rgba(52,152,219,.3)}
+.top-nav .jump-btn.active{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;box-shadow:0 3px 10px rgba(52,152,219,.4)}
+.top-nav .jump-btn.completed{background:rgba(39,174,96,.3);color:#2ecc71;border-color:#27ae60}
+.top-nav .jump-btn.has-pending{background:rgba(155,89,182,.3);color:#d5a6f0;border-color:#9b59b6}
+
+.slide{display:none;animation:fadeSlide .3s ease}
+.slide.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.exercise{background:linear-gradient(145deg,rgba(30,45,69,.92),rgba(26,37,64,.92));backdrop-filter:blur(20px);border-radius:18px;border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.4);overflow:hidden}
+.ex-header{padding:14px 18px;background:linear-gradient(135deg,rgba(231,76,60,.15),rgba(243,156,18,.1));border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;direction:rtl}
+.ex-header.teacher{background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(142,68,173,.1))}
+.ex-header.whatsapp{background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(18,140,126,.1))}
+.ex-title-wrap{display:flex;align-items:center;gap:10px;flex:1;min-width:0;direction:rtl;order:2;justify-content:flex-end}
+.ex-num{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;min-width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.95em;padding:0 8px;flex-shrink:0;box-shadow:0 4px 12px rgba(231,76,60,.4);order:2}
+.ex-header.teacher .ex-num{background:linear-gradient(135deg,#9b59b6,#8e44ad);box-shadow:0 4px 12px rgba(155,89,182,.4)}
+.ex-header.whatsapp .ex-num{background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.ex-title{font-size:1.05em;font-weight:800;color:#ecf0f1;direction:ltr;text-align:right;order:1;unicode-bidi:embed}
+.ex-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;order:1}
+.ex-type-badge{padding:4px 10px;border-radius:12px;font-size:.7em;font-weight:700;white-space:nowrap}
+.badge-auto{background:rgba(52,152,219,.25);color:#5dade2;border:1px solid #3498db}
+.badge-teacher{background:rgba(155,89,182,.25);color:#d5a6f0;border:1px solid #9b59b6}
+.badge-whatsapp{background:rgba(37,211,102,.25);color:#7eecaf;border:1px solid #25d366}
+.ex-page-btn{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;border:none;padding:7px 14px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em;white-space:nowrap;transition:transform .2s}
+.ex-page-btn:hover{transform:scale(1.05)}
+.ex-body{padding:18px}
+
+.arabic-box{background:rgba(243,156,18,.08);border:1px solid rgba(243,156,18,.3);border-radius:10px;padding:10px 14px;margin-bottom:14px;color:#ffeaa7;font-size:.9em;line-height:1.7;direction:rtl;text-align:right;font-weight:600}
+.arabic-box::before{content:'📌 ';font-size:1em}
+.spanish-box{direction:ltr;text-align:left}
+.spanish-box *{direction:ltr;text-align:left}
+.sub-section{margin-top:22px;padding-top:18px;border-top:2px dashed rgba(52,152,219,.3)}
+.sub-section-title{font-size:1.05em;font-weight:700;color:#3498db;margin-bottom:12px;padding:8px 14px;background:rgba(52,152,219,.1);border-radius:8px;border-left:3px solid #3498db;direction:ltr;text-align:left}
+.es-instruction{color:#d0d8e0;margin-bottom:15px;line-height:1.8;font-size:.95em;background:rgba(52,73,94,.25);padding:12px 16px;border-radius:12px;border-left:4px solid #e74c3c;direction:ltr;text-align:left}
+.es-instruction strong{color:#f39c12}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:14px;background:linear-gradient(135deg,rgba(243,156,18,.08),rgba(230,126,34,.05));border-radius:12px;border:1px dashed rgba(243,156,18,.4);direction:ltr}
+.word-bank span{background:linear-gradient(135deg,#2c3e50,#34495e);color:#ffeaa7;padding:6px 14px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(243,156,18,.5);user-select:none}
+.question-card{background:rgba(15,30,51,.5);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:border-color .3s;direction:ltr;text-align:left}
+.question-card:focus-within{border-color:rgba(52,152,219,.5)}
+.q-label{font-weight:700;color:#ecf0f1;font-size:.95em;margin-bottom:8px;display:flex;align-items:center;gap:6px;direction:ltr;text-align:left;flex-wrap:wrap}
+.q-label .num-bullet{background:rgba(52,152,219,.2);color:#5dade2;min-width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85em;font-weight:800;flex-shrink:0}
+.q-text{color:#bdc3c7;margin-bottom:10px;font-size:.93em;line-height:1.8;direction:ltr;text-align:left}
+.text-paragraph{background:rgba(52,73,94,.3);padding:16px;border-radius:12px;margin-bottom:15px;line-height:2;font-size:.95em;color:#ecf0f1;direction:ltr;text-align:left;border-left:4px solid #f39c12}
+.audio-card{background:linear-gradient(135deg,rgba(155,89,182,.15),rgba(52,152,219,.1));border:1px solid rgba(155,89,182,.3);padding:12px;border-radius:12px;margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;direction:ltr}
+.audio-card .audio-icon{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.audio-card .audio-info{flex:1;min-width:200px}
+.audio-card .audio-label{color:#d5a6f0;font-weight:700;font-size:.85em;margin-bottom:4px;direction:ltr;text-align:left}
+.audio-card audio{width:100%;height:36px;outline:none}
+
+input[type="text"],select,textarea{width:100%;padding:11px 14px;border-radius:10px;border:2px solid rgba(52,73,94,.6);background:rgba(15,30,51,.7);color:#ecf0f1;font-size:1em;font-family:'Cairo',sans-serif;direction:ltr;text-align:left;transition:all .2s}
+input[type="text"]:focus,select:focus,textarea:focus{outline:none;border-color:#3498db;background:rgba(15,30,51,.9);box-shadow:0 0 0 3px rgba(52,152,219,.15)}
+textarea{resize:vertical;min-height:70px}
+input:disabled,select:disabled,textarea:disabled{cursor:not-allowed;opacity:.95;-webkit-user-select:text;user-select:text}
+.locked-correct{border-color:#27ae60!important;background:rgba(39,174,96,.12)!important;color:#2ecc71!important;font-weight:700}
+.locked-half{border-color:#f1c40f!important;background:rgba(241,196,15,.12)!important;color:#f1c40f!important;font-weight:700}
+.locked-wrong{border-color:#e74c3c!important;background:rgba(231,76,60,.12)!important;color:#ff7675!important;font-weight:700}
+.locked-pending{border-color:#9b59b6!important;background:rgba(155,89,182,.12)!important;color:#d5a6f0!important;font-weight:600}
+select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ecf0f1' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 12px) center;padding-right:35px}
+select option{background:#1a2540;color:#ecf0f1}
+
+.feedback{margin-top:10px;padding:0;border-radius:10px;display:none;font-size:.9em;line-height:1.7;overflow:hidden}
+.feedback.correct,.feedback.half,.feedback.wrong,.feedback.pending{display:block}
+.fb-spanish{direction:ltr;text-align:left;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);unicode-bidi:embed}
+.fb-spanish strong{font-weight:800}
+.fb-arabic{direction:rtl;text-align:right;padding:10px 14px;font-size:.9em;background:rgba(0,0,0,.15)}
+.fb-arabic strong{color:#f39c12;font-weight:800}
+.fb-arabic .es{direction:ltr;text-align:left;display:inline-block;unicode-bidi:embed;font-family:'Cairo',sans-serif}
+.fb-arabic .es-line{direction:ltr;text-align:left;display:block;margin:4px 0;padding:4px 8px;background:rgba(52,152,219,.08);border-radius:4px;border-left:2px solid #3498db;unicode-bidi:embed;font-family:'Cairo',sans-serif}
+.feedback.correct{background:rgba(39,174,96,.12);border:1px solid #27ae60;color:#2ecc71}
+.feedback.half{background:rgba(241,196,15,.12);border:1px solid #f1c40f;color:#f1c40f}
+.feedback.wrong{background:rgba(231,76,60,.12);border:1px solid #e74c3c;color:#ff7675}
+.feedback.pending{background:rgba(155,89,182,.12);border:1px solid #9b59b6;color:#d5a6f0}
+.feedback .teacher-comment{background:rgba(0,0,0,.2);padding:8px 10px;border-radius:6px;margin-top:8px;border-right:3px solid #f39c12;direction:rtl;text-align:right}
+.feedback .teacher-comment strong{color:#f39c12}
+.feedback .reviewed-by{display:block;margin-top:6px;font-size:.8em;color:#95a5a6;direction:rtl;text-align:right}
+
+.whatsapp-note{background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(18,140,126,.15));border:2px solid #25d366;border-radius:14px;padding:18px 20px;margin:15px 0;text-align:center;color:#d4ffe4;font-weight:600;line-height:1.8;direction:rtl}
+.whatsapp-note .wa-icon{font-size:2em;display:block;margin-bottom:8px}
+.whatsapp-note strong{color:#25d366}
+.teacher-note{background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(142,68,173,.12));border:1px solid rgba(155,89,182,.5);border-radius:10px;padding:10px 14px;margin:10px 0 14px 0;text-align:center;color:#d5a6f0;font-weight:600;font-size:.9em;direction:rtl}
+.hint-box{background:linear-gradient(135deg,rgba(52,152,219,.15),rgba(41,128,185,.1));border:1px solid #3498db;border-radius:10px;padding:10px 14px;margin-bottom:14px;color:#7ec8e3;font-weight:600;font-size:.88em;direction:rtl;text-align:right}
+.hint-box::before{content:'💡 ';font-size:1.1em}
+.example-solved{background:rgba(39,174,96,.12);border:1px solid rgba(39,174,96,.4);border-radius:10px;padding:10px 14px;color:#2ecc71;font-size:.92em;direction:ltr;text-align:left;margin-bottom:12px}
+.lock-badge{display:inline-block;background:#27ae60;color:#fff;padding:3px 10px;border-radius:12px;font-size:.75em;margin-right:8px;font-weight:700}
+.lock-badge.half{background:#f1c40f;color:#2c3e50}
+.lock-badge.wrong{background:#e74c3c}
+.lock-badge.pending{background:#9b59b6}
+.options-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;direction:ltr}
+.options-list .opt{background:rgba(52,152,219,.12);border:1px solid rgba(52,152,219,.3);padding:5px 12px;border-radius:8px;color:#7ec8e3;font-size:.85em;font-weight:600}
+
+.transcript-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em;margin-bottom:12px;transition:all .3s}
+.transcript-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 14px rgba(22,160,133,.4)}
+.transcript-btn:disabled{background:#555;cursor:not-allowed;opacity:.6}
+.transcript-btn .lock-icon{font-size:1.1em}
+.transcript-btn .progress-text{font-size:.75em;background:rgba(0,0,0,.25);padding:2px 8px;border-radius:10px;margin-right:4px}
+.transcript-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:10003;padding:20px;backdrop-filter:blur(8px)}
+.transcript-modal.show{display:flex}
+.transcript-box{background:linear-gradient(145deg,#1e2d45,#1a2540);border:2px solid #16a085;border-radius:18px;max-width:650px;width:100%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:popIn .3s ease;overflow:hidden}
+.transcript-header{padding:18px 22px;background:linear-gradient(135deg,rgba(22,160,133,.2),transparent);border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.transcript-header h3{color:#1abc9c;font-size:1.1em;font-weight:800;direction:ltr;text-align:left;flex:1}
+.transcript-close{background:#e74c3c;color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:1.1em;cursor:pointer;font-weight:900;flex-shrink:0}
+.transcript-body{padding:20px;overflow-y:auto;flex:1;color:#ecf0f1;line-height:2;font-size:.95em;direction:ltr;text-align:left;white-space:pre-line;font-family:'Cairo',sans-serif}
+.transcript-body strong{color:#1abc9c;font-weight:800;display:inline-block;margin-top:8px}
+
+.bottom-nav{display:flex;gap:8px;margin-top:15px;justify-content:space-between;align-items:center;flex-wrap:wrap;direction:rtl}
+.nav-btn{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;border:none;padding:11px 20px;border-radius:12px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.95em;box-shadow:0 4px 14px rgba(52,152,219,.3);transition:all .3s;display:flex;align-items:center;gap:6px}
+.nav-btn:hover:not(:disabled){transform:translateY(-2px)}
+.nav-btn:disabled{background:#555;cursor:not-allowed;opacity:.5;box-shadow:none}
+.nav-btn.next{background:linear-gradient(135deg,#27ae60,#16a085)}
+.nav-btn.submit-final{background:linear-gradient(135deg,#e74c3c,#c0392b);font-weight:800;flex:1;justify-content:center;max-width:280px}
+
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:10000;padding:20px;backdrop-filter:blur(8px);animation:fadeIn .25s ease}
+.popup-overlay.show{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.popup-box{background:linear-gradient(145deg,#1e2d45,#1a2540);padding:0;border-radius:20px;border:2px solid #f39c12;max-width:480px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:popIn .3s ease;overflow:hidden}
+@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.popup-box.success{border-color:#2ecc71}
+.popup-box.error{border-color:#e74c3c}
+.popup-box.warning{border-color:#f39c12}
+.popup-box.info{border-color:#3498db}
+.popup-header{padding:25px 20px 12px;background:linear-gradient(135deg,rgba(243,156,18,.15),transparent)}
+.popup-box.success .popup-header{background:linear-gradient(135deg,rgba(46,204,113,.15),transparent)}
+.popup-box.error .popup-header{background:linear-gradient(135deg,rgba(231,76,60,.15),transparent)}
+.popup-box.info .popup-header{background:linear-gradient(135deg,rgba(52,152,219,.15),transparent)}
+.popup-icon{font-size:3em;margin-bottom:6px}
+.popup-title{color:#f39c12;font-size:1.3em;font-weight:800}
+.popup-box.success .popup-title{color:#2ecc71}
+.popup-box.error .popup-title{color:#e74c3c}
+.popup-box.info .popup-title{color:#3498db}
+.popup-body{padding:5px 22px 18px;color:#ecf0f1;line-height:1.8;font-size:1em}
+.popup-body .popup-detail{background:rgba(0,0,0,.25);padding:12px;border-radius:10px;margin-top:12px;text-align:right;font-size:.92em;line-height:1.7}
+.popup-actions{padding:0 20px 22px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.popup-btn{padding:11px 22px;border:none;border-radius:10px;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.95em;flex:1;min-width:110px;transition:transform .2s}
+.popup-btn:hover{transform:translateY(-2px)}
+.popup-btn.primary{background:linear-gradient(135deg,#27ae60,#16a085);color:#fff}
+.popup-btn.danger{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}
+.popup-btn.secondary{background:#7f8c8d;color:#fff}
+
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:10001;flex-direction:column;color:#fff;font-size:1.15em;font-weight:700;padding:20px;backdrop-filter:blur(8px)}
+.loading-overlay.show{display:flex}
+.loading-overlay .spinner-big{width:55px;height:55px;border:5px solid rgba(255,255,255,.1);border-top:5px solid #e74c3c;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:15px}
+.loading-overlay .sub-text{font-size:.9em;color:#bdc3c7;margin-top:8px;font-weight:400;max-width:400px;text-align:center}
+
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:10002;padding:20px;flex-direction:column;backdrop-filter:blur(5px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:100%;max-height:85vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.lightbox-close{position:absolute;top:18px;right:18px;background:#e74c3c;color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:1.3em;cursor:pointer;font-weight:900}
+.lightbox-title{color:#fff;margin-bottom:12px;font-size:1.1em;font-weight:700}
+
+.retry-banner{background:rgba(243,156,18,.15);border:1px solid #f39c12;padding:10px 14px;border-radius:10px;margin:10px auto;max-width:900px;color:#ffeaa7;text-align:center;display:none;font-size:.9em}
+.retry-banner button{background:#f39c12;color:#fff;border:none;padding:5px 12px;border-radius:6px;margin-right:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em}
+
+@media(max-width:768px){
+.header h1{font-size:1.2em}.header h2{font-size:.85em}.ex-body{padding:14px}.ex-header{padding:12px 14px}.ex-title{font-size:.95em}.ex-num{min-width:36px;height:36px;font-size:.85em}
+input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px;gap:8px}.progress-summary .item{min-width:45px}.progress-summary .item .num{font-size:1em}.progress-summary .item .label{font-size:.65em}.progress-summary .progress-bar-mini{order:10;width:100%;min-width:100%;margin:5px 0 0 0}
+.slider-wrapper{padding:10px}.top-nav{padding:10px}.top-nav .jump-btn{width:28px;height:28px;font-size:.7em}.nav-btn{padding:10px 14px;font-size:.88em}
+.audio-card{padding:10px;gap:8px}.audio-card .audio-icon{width:32px;height:32px;font-size:1em}.audio-card .audio-info{min-width:100%}
+.question-card{padding:12px}.text-paragraph{padding:12px;font-size:.9em}.word-bank{padding:10px}.word-bank span{padding:5px 10px;font-size:.85em}
+}
+@media(max-width:480px){
+.ex-header{flex-direction:column;align-items:stretch}.ex-title-wrap{justify-content:flex-end;order:1}.ex-actions{justify-content:flex-start;width:100%;order:2}.ex-page-btn{flex:1;text-align:center;justify-content:center;display:flex}
+.popup-actions{flex-direction:column}.popup-btn{width:100%}.bottom-nav{flex-direction:column}.nav-btn{width:100%;justify-content:center}.nav-btn.submit-final{max-width:100%;order:-1}
+}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+<div class="spinner-big"></div>
+<div id="loadingText">جاري التحميل...</div>
+<div class="sub-text" id="loadingSubText"></div>
+</div>
+
+<div class="popup-overlay" id="popupOverlay">
+<div class="popup-box" id="popupBox">
+<div class="popup-header">
+<div class="popup-icon" id="popupIcon">⚠️</div>
+<div class="popup-title" id="popupTitle">عنوان</div>
+</div>
+<div class="popup-body" id="popupBody">المحتوى</div>
+<div class="popup-actions" id="popupActions"></div>
+</div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<div class="lightbox-title" id="lightboxTitle"></div>
+<img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="transcript-modal" id="transcriptModal" onclick="if(event.target===this)closeTranscript()">
+<div class="transcript-box">
+<div class="transcript-header">
+<h3 id="trModalTitle">Transcripción</h3>
+<button class="transcript-close" onclick="closeTranscript()">✕</button>
+</div>
+<div class="transcript-body" id="trModalBody"></div>
+</div>
+</div>
+
+<div class="header">
+<h1>📚 Instituto Amigos</h1>
+<h2 id="lessonHeaderName">Para ti y para mí</h2>
+<div class="lesson-badge" id="lessonHeaderBadge">A2.1 - Lección 2</div>
+</div>
+
+<div class="user-bar">
+<div class="welcome">👤 أهلاً <span id="userFullName">{{ student.username }}</span></div>
+<a href="/dashboard" class="logout-btn">🔙 العودة للمنصة</a>
+</div>
+
+<div class="progress-summary">
+<div class="item correct"><div class="num" id="psCorrect">0</div><div class="label">✅ صح</div></div>
+<div class="item half"><div class="num" id="psHalf">0</div><div class="label">⚠️ نص</div></div>
+<div class="item wrong"><div class="num" id="psWrong">0</div><div class="label">❌ خطأ</div></div>
+<div class="item pending"><div class="num" id="psPending">0</div><div class="label">⏳ انتظار</div></div>
+<div class="item remaining"><div class="num" id="psRemaining">0</div><div class="label">📝 متبقي</div></div>
+<div class="progress-bar-mini"><div class="fill" id="psProgressBar" style="width:0%"></div></div>
+<div class="item total"><div class="num"><span id="psAnswered">0</span>/<span id="psTotal">0</span></div><div class="label">📊 التقدم</div></div>
+</div>
+
+<div class="retry-banner" id="retryBanner">
+⚠️ يوجد محاولة لم تُرسل بنجاح.
+<button onclick="retrySubmit()">🔄 إعادة الإرسال</button>
+</div>
+
+<div class="slider-wrapper">
+<div class="top-nav">
+<div class="top-nav-row">
+<div class="slide-counter"><span id="currentSlideNum">1</span> / <span id="totalSlidesNum">16</span></div>
+<div class="progress-track"><div class="progress-fill" id="slideProgressFill" style="width:6%"></div></div>
+</div>
+<div class="slide-jump" id="slideJumpButtons"></div>
+</div>
+
+<div class="slides-container" id="slidesContainer"></div>
+
+<div class="bottom-nav">
+<button class="nav-btn" id="prevBtn" onclick="prevSlide()">▶ السابق</button>
+<button class="nav-btn submit-final" onclick="prepareSubmit()">✅ إرسال الإجابات</button>
+<button class="nav-btn next" id="nextBtn" onclick="nextSlide()">التالي ◀</button>
+</div>
+</div>
+
+<script>
+const LESSON_CONFIG = { lessonId:'A2.1_L2', lessonName:'Para ti y para mí', levelDisplay:'A2.1 - Lección 2', totalQuestions:0 };
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
+const PAGE_BASE = 'https://ia903101.us.archive.org/0/items/A2.1-Eje-Pages/Page';
+const AUDIO_BASE = 'https://archive.org/download/A2_Eje/A2_Eje/';
+
+function getPageURL(p) { return PAGE_BASE + p + '.jpg'; }
+
+const AUTO_GRADED = {
+    q1_1:{a:['c'],t:'select'}, q1_2:{a:['e'],t:'select'}, q1_3:{a:['a'],t:'select'}, q1_4:{a:['d'],t:'select'}, q1_5:{a:['b'],t:'select'},
+    q2_1:{a:['le']}, q2_2:{a:['les']}, q2_3:{a:['te']}, q2_4:{a:['me']}, q2_5:{a:['le']}, q2_6:{a:['nos']}, q2_7:{a:['os']}, q2_8:{a:['nos']},
+    q3_2a:{a:['los abuelos']}, q3_2b:{a:['dinero para viajar','dinero']}, q3_2c:{a:['nos','a nosotros']},
+    q3_3a:{a:['tú','tu']}, q3_3b:{a:['libro de viajes','tu libro de viajes']}, q3_3c:{a:['me','a mí','a mi']},
+    q3_4a:{a:['sofía','sofia']}, q3_4b:{a:['las fotos']}, q3_4c:{a:['os','a vosotros']},
+    q3_5a:{a:['yo']}, q3_5b:{a:['un helado','helado']}, q3_5c:{a:['les','a ellos']},
+    q3_6a:{a:['nosotros']}, q3_6b:{a:['el libro que quieres','el libro']}, q3_6c:{a:['te','a ti']},
+    q5a_1:{a:['c'],t:'select'}, q5a_2:{a:['a'],t:'select'}, q5a_3:{a:['d'],t:'select'}, q5a_4:{a:['b'],t:'select'}, q5a_5:{a:['e'],t:'select'},
+    q5b_1n:{a:['4']}, q5b_2n:{a:['3']}, q5b_3n:{a:['2']}, q5b_4n:{a:['1']},
+    q6_1:{a:['nos las']}, q6_2:{a:['os los']}, q6_3:{a:['me la']}, q6_4:{a:['te lo']}, q6_5:{a:['nos los']},
+    q10a_1:{a:['alquilando']}, q10a_2:{a:['dar']}, q10a_3:{a:['nadando']}, q10a_4:{a:['hacer']}, q10a_5:{a:['ver']}, q10a_6:{a:['pedir']}, q10a_7:{a:['yendo']},
+    q10b_1:{a:['está leyendo','esta leyendo']}, q10b_2:{a:['están jugando','estan jugando']}, q10b_3:{a:['están estudiando','estan estudiando']},
+    q10b_4:{a:['está durmiendo','esta durmiendo']}, q10b_5:{a:['se está duchando','está duchándose','se esta duchando','esta duchandose']},
+    q10b_6:{a:['se está levantando','está levantándose','se esta levantando','esta levantandose']},
+    q12_1:{a:['ninguno']}, q12_2:{a:['alguno']}, q12_3:{a:['ninguna']}, q12_4:{a:['alguna']}, q12_5:{a:['algunos']}, q12_6:{a:['ninguno']},
+    q12_7:{a:['algún','algun']}, q12_8:{a:['ningún','ningun']}, q12_9:{a:['nadie']}, q12_10:{a:['nada']}, q12_11:{a:['alguien']}, q12_12:{a:['algo']},
+    q15_1:{a:['c'],t:'select',d:'c. de bodas'}, q15_2:{a:['d'],t:'select',d:'d. para una exposición'}, q15_3:{a:['b'],t:'select',d:'b. de decoración'},
+    q15_4:{a:['g'],t:'select',d:'g. de seda'}, q15_5:{a:['a'],t:'select',d:'a. de garaje'}, q15_6:{a:['h'],t:'select',d:'h. de flores'},
+    q15_7:{a:['e'],t:'select',d:'e. para una sesión de spa'}, q15_8:{a:['f'],t:'select',d:'f. de sol'},
+    q16_1:{a:['b'],t:'select',d:'b (beso)'}, q16_2:{a:['p'],t:'select',d:'p (ropa)'}, q16_3:{a:['b'],t:'select',d:'b (bollo)'},
+    q16_4:{a:['p'],t:'select',d:'p (capa)'}, q16_5:{a:['v'],t:'select',d:'v (veces)'}, q16_6:{a:['p'],t:'select',d:'p (pista)'},
+    q16_7:{a:['r'],t:'select',d:'r (pero)'}, q16_8:{a:['rr'],t:'select',d:'rr (carro)'}
+};
+
+const EXPLANATIONS = {
+    q1_1:{ar:'le = مفعول غير مباشر مفرد.',es:'La secretaria le reserva el vuelo a su jefe.'},
+    q1_2:{ar:'les = مفعول غير مباشر جمع.',es:'Puedes comprarles los zapatos a los niños.'},
+    q1_3:{ar:'nos = لنا.',es:'Luis va a enviarnos el paquete.'},
+    q1_4:{ar:'te = لك.',es:'Te puedo comprar la entrada (a ti).'},
+    q1_5:{ar:'os = لكم.',es:'Os reservo la mesa (a Lara y a ti).'},
+    q2_1:{ar:'a mi madre مفرد → le.',es:'Le he comprado un libro a mi madre.'},
+    q2_2:{ar:'a nuestros padres جمع → les.',es:'Les regalamos un vale.'},
+    q2_3:{ar:'a ti → te.',es:'¿Qué te ha comprado?'},
+    q2_4:{ar:'a mí → me.',es:'Me ha preparado una cena.'},
+    q2_5:{ar:'a mi padre → le.',es:'Le ha comprado una corbata.'},
+    q2_6:{ar:'a todos nosotros → nos.',es:'Nos envía regalos.'},
+    q2_7:{ar:'a vosotros → os.',es:'¿Qué os regalan?'},
+    q2_8:{ar:'a nosotros → nos.',es:'Nos compran ropa.'},
+    q3_2a:{ar:'الفاعل = los abuelos (الأجداد).'},
+    q3_2b:{ar:'المفعول المباشر = dinero para viajar.'},
+    q3_2c:{ar:'nos = a nosotros (لنا).'},
+    q3_3a:{ar:'الفاعل = tú من has dado.'},
+    q3_3b:{ar:'المفعول المباشر = tu libro de viajes.'},
+    q3_3c:{ar:'me = a mí (لي).'},
+    q3_4a:{ar:'الفاعل = Sofía.'},
+    q3_4b:{ar:'المفعول المباشر = las fotos.'},
+    q3_4c:{ar:'os = a vosotros.'},
+    q3_5a:{ar:'الفاعل = yo من compro.'},
+    q3_5b:{ar:'المفعول المباشر = un helado.'},
+    q3_5c:{ar:'les = a ellos.'},
+    q3_6a:{ar:'الفاعل = nosotros من regalamos.'},
+    q3_6b:{ar:'المفعول المباشر = el libro que quieres.'},
+    q3_6c:{ar:'te = a ti (لك).'},
+    q5a_1:{ar:'Lo (مذكر مفرد) = el móvil viejo.',es:'Lo vendo por internet.'},
+    q5a_2:{ar:'Las (مؤنث جمع) = las medicinas.',es:'Las llevo a la farmacia.'},
+    q5a_3:{ar:'Los (مذكر جمع) = los juguetes.',es:'Los cambio en un mercadillo.'},
+    q5a_4:{ar:'La (مؤنث مفرد) = la ropa.',es:'La utilizo para hacer bolsas.'},
+    q5a_5:{ar:'Las (مؤنث جمع) = las botellas.',es:'Las tiro en el contenedor.'},
+    q5b_1n:{ar:'الحوار 4 عن الكمبيوتر.'},
+    q5b_2n:{ar:'الحوار 3 عن الكتب.'},
+    q5b_3n:{ar:'الحوار 2 عن العلب.'},
+    q5b_4n:{ar:'الحوار 1 عن الطرابيزة.'},
+    q6_1:{ar:'las plantas (مؤنث جمع) = las، لنا = nos → nos las.',es:'Nos las han dado los vecinos.'},
+    q6_2:{ar:'los cuadros (مذكر جمع) = los، لكم = os → os los.',es:'¿Quién os los ha regalado?'},
+    q6_3:{ar:'la alfombra (مؤنث مفرد) = la، لي = me → me la.',es:'Me la regaló mi madre.'},
+    q6_4:{ar:'el balcón (مذكر مفرد) = lo، لك = te → te lo.',es:'Te lo enseño.'},
+    q6_5:{ar:'los muebles (مذكر جمع) = los، لنا = nos → nos los.',es:'Nos los compraron.'},
+    q10a_1:{ar:'أفعال -ar → -ando.',es:'alquilar → alquilando.'},
+    q10a_2:{ar:'الجيروندي dando من dar.',es:'dar → dando.'},
+    q10a_3:{ar:'أفعال -ar → -ando.',es:'nadar → nadando.'},
+    q10a_4:{ar:'haciendo من hacer (شاذ).',es:'hacer → haciendo.'},
+    q10a_5:{ar:'viendo من ver.',es:'ver → viendo.'},
+    q10a_6:{ar:'pidiendo من pedir (e→i).',es:'pedir → pidiendo.'},
+    q10a_7:{ar:'ir → yendo (حالة شاذة).',es:'ir → yendo.'},
+    q10b_1:{ar:'leer → leyendo (شاذ). الفاعل مفرد → está.',es:'El papá está leyendo.'},
+    q10b_2:{ar:'jugar → jugando. الفاعل جمع → están.',es:'Los niños están jugando.'},
+    q10b_3:{ar:'estudiar → estudiando. جمع → están.',es:'Emma y Julián están estudiando.'},
+    q10b_4:{ar:'dormir → durmiendo (o→u).',es:'Marianita está durmiendo.'},
+    q10b_5:{ar:'فعل انعكاسي ducharse، شكلين ممكنين.',es:'se está duchando / está duchándose.'},
+    q10b_6:{ar:'فعل انعكاسي levantarse.',es:'se está levantando / está levantándose.'},
+    q12_1:{ar:'ninguno = ولا واحد (مذكر مفرد، نفي).',es:'No me gusta ninguno.'},
+    q12_2:{ar:'alguno = واحد ما (مذكر، تأكيد).',es:'Seguro que alguno te queda bien.'},
+    q12_3:{ar:'ninguna + اسم مؤنث (tienda).',es:'No hay ninguna tienda.'},
+    q12_4:{ar:'alguna = واحدة (ضمير مؤنث).',es:'Hasta encontrar alguna.'},
+    q12_5:{ar:'algunos = بعض (جمع مذكر).',es:'Tienes algunos muy bonitos.'},
+    q12_6:{ar:'ninguno = ولا واحد.',es:'¡Ninguno me queda bien!'},
+    q12_7:{ar:'algún + اسم مذكر مفرد (يُحذف -o).',es:'¿Te pones algún vestido?'},
+    q12_8:{ar:'ningún + اسم مذكر مفرد.',es:'No tengo ningún vestido.'},
+    q12_9:{ar:'nadie = لا أحد (للأشخاص).',es:'Nadie se pone vestido.'},
+    q12_10:{ar:'nada = لا شيء.',es:'No entiendo nada de moda.'},
+    q12_11:{ar:'alguien = شخص ما.',es:'Ve con alguien más moderno.'},
+    q12_12:{ar:'algo = شيء ما.',es:'Tomar algo.'},
+    q15_1:{ar:'ذكرى الزواج.',es:'aniversario de bodas.'},
+    q15_2:{ar:'تذكرة معرض.',es:'entrada para una exposición.'},
+    q15_3:{ar:'قطعة ديكور.',es:'objeto de decoración.'},
+    q15_4:{ar:'منديل حرير.',es:'pañuelo de seda.'},
+    q15_5:{ar:'موقف سيارة.',es:'plaza de garaje.'},
+    q15_6:{ar:'باقة ورد.',es:'ramo de flores.'},
+    q15_7:{ar:'قسيمة سبا.',es:'vale para una sesión de spa.'},
+    q15_8:{ar:'نظارة شمس.',es:'gafas de sol.'},
+    q16_1:{ar:'beso = بوسة، حرف b.',es:'beso (b).'},
+    q16_2:{ar:'ropa = هدوم، حرف p.',es:'ropa (p).'},
+    q16_3:{ar:'bollo = كعكة، حرف b. مختلف عن pollo.',es:'bollo ≠ pollo.'},
+    q16_4:{ar:'capa = عباية، حرف p.',es:'capa (p).'},
+    q16_5:{ar:'veces = مرات، حرف v.',es:'veces (v).'},
+    q16_6:{ar:'pista = ملعب، حرف p.',es:'pista (p).'},
+    q16_7:{ar:'pero = لكن، r مفردة. مختلف عن perro (كلب).',es:'pero ≠ perro.'},
+    q16_8:{ar:'carro = عربية، rr مكررة قوية. مختلف عن caro (غالي).',es:'carro ≠ caro.'}
+};
+
+const TEACHER_GRADED_CONTEXT = {
+    q4_1:{questionText:'A los vecinos les podéis comprar una botella de vino.',expectedAnswer:'A los vecinos podéis comprarles una botella de vino.',rule:'إلصاق les بالمصدر.'},
+    q4_2:{questionText:'A la profesora le podemos comprar unas flores.',expectedAnswer:'A la profesora podemos comprarle unas flores.',rule:'إلصاق le بالمصدر.'},
+    q4_3:{questionText:'A Carmen y a ti os puedo comprar unas entradas.',expectedAnswer:'A vosotros puedo compraros unas entradas para la ópera.',rule:'a Carmen y a ti = a vosotros + os ملصق.'},
+    q4_4:{questionText:'A mí me pueden comprar el perfume.',expectedAnswer:'A mí pueden comprarme el perfume que tanto me gusta.',rule:'me ملصق بالمصدر.'},
+    q5b_1f:{questionText:'Diálogo 4: ordenador - الجملة',expectedAnswer:'Lo va a reciclar.',rule:'lo = ordenador + reciclar.'},
+    q5b_2f:{questionText:'Diálogo 3: libros - الجملة',expectedAnswer:'Los regala.',rule:'los = libros + regalar.'},
+    q5b_3f:{questionText:'Diálogo 2: latas - الجملة',expectedAnswer:'Las lleva al contenedor de metales.',rule:'las = latas + llevar.'},
+    q5b_4f:{questionText:'Diálogo 1: mesa - الجملة',expectedAnswer:'La va a vender por internet.',rule:'la = mesa + vender.'},
+    q7_1:{questionText:'una foto / la mujer / el policía',expectedAnswer:'La mujer le enseña una foto al policía.',rule:'enseñar + le.'},
+    q7_2:{questionText:'Magdalena / su bicicleta / Rodrigo',expectedAnswer:'Magdalena le deja su bicicleta a Rodrigo.',rule:'dejar + le.'},
+    q7_3:{questionText:'su nieto / el libro / la abuela',expectedAnswer:'La abuela le regala el libro a su nieto.',rule:'regalar + le.'},
+    q7_4:{questionText:'los alumnos / el profesor / sus cuadernos',expectedAnswer:'El profesor les da sus cuadernos a los alumnos.',rule:'dar + les.'},
+    q8_1:{questionText:'regalar, tú / las flores / tu novia',expectedAnswer:'a. Tú le regalas las flores a tu novia.\nb. Tú se las regalas a tu novia.',rule:'le + las = se las.'},
+    q8_2:{questionText:'dar, nosotros / los juguetes / tú',expectedAnswer:'a. Nosotros te damos los juguetes a ti.\nb. Nosotros te los damos a ti.',rule:'te + los.'},
+    q8_3:{questionText:'dejar, Laura / la bicicleta / nosotros',expectedAnswer:'a. Laura nos deja la bicicleta a nosotros.\nb. Laura nos la deja a nosotros.',rule:'nos + la.'},
+    q8_4:{questionText:'enseñar, Juan y tú / la ciudad / la nueva estudiante',expectedAnswer:'a. Juan y tú le enseñáis la ciudad a la nueva estudiante.\nb. Juan y tú se la enseñáis a la nueva estudiante.',rule:'le + la = se la.'},
+    q8_5:{questionText:'vender, yo / el coche / usted',expectedAnswer:'a. Yo le vendo el coche a usted.\nb. Yo se lo vendo a usted.',rule:'le + lo = se lo.'},
+    q9_1:{questionText:'Ellos os van a enseñar la ciudad.',expectedAnswer:'Ellos os la van a enseñar. / Ellos van a enseñárosla.',rule:'شكلين.'},
+    q9_2:{questionText:'Mamá no me puede leer el cuento.',expectedAnswer:'Mamá no me lo puede leer. / Mamá no puede leérmelo.',rule:'me + lo.'},
+    q9_3:{questionText:'Yo les puedo mandar un correo.',expectedAnswer:'Yo se lo puedo mandar. / Yo puedo mandárselo.',rule:'les + lo = se lo.'},
+    q9_4:{questionText:'Nosotros te podemos dejar nuestro piso.',expectedAnswer:'Nosotros te lo podemos dejar. / Nosotros podemos dejártelo.',rule:'te + lo.'},
+    q11_1:{questionText:'Dibujo 1 (شخصين بيتكلموا)',expectedAnswer:'Están hablando.',rule:'estar + gerundio.'},
+    q11_2:{questionText:'Dibujo 2 (بيقرأ)',expectedAnswer:'Está leyendo.',rule:'leer → leyendo.'},
+    q11_3:{questionText:'Dibujo 3 (في مطعم)',expectedAnswer:'Están comiendo.',rule:'comer → comiendo.'},
+    q11_4:{questionText:'Dibujo 4 (في الكاشير)',expectedAnswer:'Está pagando.',rule:'pagar → pagando.'},
+    q11_5:{questionText:'Dibujo 5 (قدام المراية)',expectedAnswer:'Está probándose. / Se está probando.',rule:'probarse انعكاسي.'},
+    q11_6:{questionText:'Dibujo 6 (سيلفي)',expectedAnswer:'Están haciéndose un selfie.',rule:'hacerse انعكاسي.'},
+    q11_7:{questionText:'Dibujo 7 (الكوافير)',expectedAnswer:'Está cortando el pelo a un cliente.',rule:'cortar → cortando.'},
+    q11_8:{questionText:'Dibujo 8 (تابلت)',expectedAnswer:'Está jugando con la tableta.',rule:'jugar → jugando.'},
+    q14_1:{questionText:'Panadería - حاجتين',expectedAnswer:'pan y galletas',rule:'منتجات المخبز.'},
+    q14_2:{questionText:'Zapatería - حاجتين',expectedAnswer:'zapatos y botas',rule:'محل أحذية.'},
+    q14_3:{questionText:'Papelería - حاجتين',expectedAnswer:'un bolígrafo, un cuaderno',rule:'قرطاسية.'},
+    q14_4:{questionText:'Tienda de ropa - حاجتين',expectedAnswer:'un vestido y un pantalón',rule:'هدوم.'},
+    q14_5:{questionText:'Tienda de deportes - حاجتين',expectedAnswer:'mochila y zapatillas deportivas',rule:'رياضة.'},
+    q14_6:{questionText:'Tienda de productos informáticos - حاجتين',expectedAnswer:'un ordenador y una pantalla',rule:'كمبيوتر.'},
+    q14_7:{questionText:'Tienda de regalos - حاجتين',expectedAnswer:'un juguete y un bolso',rule:'هدايا.'}
+};
+
+const TRANSCRIPTIONS = {
+    'ex5b': {
+        title: 'Transcripción - Ej. 5b (Pistas 10-14)',
+        requiredQuestions: ['q5b_1n','q5b_1f','q5b_2n','q5b_2f','q5b_3n','q5b_3f','q5b_4n','q5b_4f'],
+        text: `<strong>Diálogo 1:</strong>
+• Mira, vamos a moverla a la otra habitación.
+▲ Susana, no está tan vieja. ¿Qué vas a hacer con ella?
+• La voy a vender por internet. Seguro que alguien la compra, es muy clásica.
+
+<strong>Diálogo 2:</strong>
+▲ ¡Uy, son muchas! No las vas a tirar a la basura, ¿verdad?
+• No, no. Una vez a la semana las llevo al contenedor de metales que está en la calle.
+
+<strong>Diálogo 3:</strong>
+▲ Tienes muchos... y estos sobre fotografía seguro que son muy interesantes.
+• Si quieres, te los regalo. Yo ya no los necesito.
+
+<strong>Diálogo 4:</strong>
+• Ves, no funciona. La verdad es que no sé qué hacer con él.
+▲ Pues lo puedes reciclar en alguno de los puntos de reciclaje de la ciudad.
+• Sí, es verdad. Lo voy a reciclar.
+
+<strong>Diálogo 5:</strong>
+• Mira, te doy estas dos para poner los libros. Aquí hay muchas. Las uso de nuevo para comprar en el súper.
+▲ Susana, eres toda una experta del reciclaje.`
+    },
+    'ex6': {
+        title: 'Transcripción - Ej. 6 (Pista 15)',
+        requiredQuestions: ['q6_1','q6_2','q6_3','q6_4','q6_5'],
+        text: `<strong>1.</strong>
+• ¡Qué bonito es tu piso! ¡Felicidades! ¿Y esas plantas?
+▲ Pues nos las han dado nuestros vecinos. ¿Te gustan?
+• Sí, son preciosas. ¡Qué simpáticos vuestros vecinos!
+
+<strong>2.</strong>
+• Y estos cuadros, ¿quién os los ha regalado?
+▲ No, no son un regalo. Los ha pintado Carlos.
+
+<strong>3.</strong>
+▲ Mira, este es el dormitorio.
+• ¡Qué luminoso! Oye, ¿dónde has comprado la alfombra?
+▲ Me la regaló mi madre el año pasado, antes de la boda.
+
+<strong>4.</strong>
+• ¿Y el piso tiene balcón?
+▲ Sí, claro. Ahora mismo te lo enseño.
+
+<strong>5.</strong>
+▲ Y los muebles del salón, ¿te gustan?
+• Sí, son muy modernos.
+▲ Nos los compraron los padres de Carlos como regalo de boda.`
+    },
+    'ex10b': {
+        title: 'Transcripción - Ej. 10b (Pista 16)',
+        requiredQuestions: ['q10b_1','q10b_2','q10b_3','q10b_4','q10b_5','q10b_6'],
+        text: `<strong>1.</strong>
+• Hola mamá. ¿Qué hace papá? ¿Dónde está?
+▲ Pues se ha llevado el periódico y está en el sofá, en el salón.
+
+<strong>2.</strong>
+• ¿Los niños están en el jardín?
+▲ Mmm... Sí, claro, como hace buen tiempo, han salido. ¿No los oyes?
+
+<strong>3.</strong>
+• Ya estoy muy cansado. ¿Nos vamos?
+▲ Sí, yo también estoy cansada. Pero el examen es mañana. Nos quedamos un poco más, ¿de acuerdo?
+
+<strong>4.</strong>
+• ¡Hola! ¿Hay alguien en casa?
+▲ ¡Shhh, Manuel! ¡Habla más bajo, por favor! Marianita está en la cama.
+
+<strong>5.</strong>
+• ¿Dígame?
+▲ ¿Está Marta? Soy Alberto, un compañero de la uni.
+• Pues está en la ducha. Un momento... ¡Marta, te llama un compañero de la universidad!
+
+<strong>6.</strong>
+• Alejandro, ¿ya te has despertado? El desayuno está en la mesa.
+▲ ¡Sí, mamá, ya voy!`
+    },
+    'ex16': {
+        title: 'Transcripción - Ej. 16 (Pista 17)',
+        requiredQuestions: ['q16_1','q16_2','q16_3','q16_4','q16_5','q16_6','q16_7','q16_8'],
+        text: `1. beso
+2. ropa
+3. bollo
+4. capa
+5. veces
+6. pista
+7. pero
+8. carro`
+    }
+};
+
+const SLIDES = [
+    {n:1,title:'&#191;De qui&#233;n se trata?',page:12,type:'auto',
+     arabic:'اربط الضمائر (المكتوبة بالخط العريض) مع الأشخاص المناسبين.',
+     spanish:'Relaciona los pronombres en negrita con las personas de la derecha.',
+     options:['a. a Carla y a m&#237;','b. a Lara y a ti','c. a su jefe','d. a ti','e. a los ni&#241;os'],
+     questions:[
+        {id:'q1_1',text:'1. La secretaria <b>le</b> reserva el vuelo.',sel:'abcde'},
+        {id:'q1_2',text:'2. &#191;Puedes comprar<b>les</b> t&#250; los zapatos?',sel:'abcde'},
+        {id:'q1_3',text:'3. Luis va a enviar<b>nos</b> el paquete esta tarde.',sel:'abcde'},
+        {id:'q1_4',text:'4. <b>Te</b> puedo comprar la entrada del cine, si quieres.',sel:'abcde'},
+        {id:'q1_5',text:'5. <b>Os</b> reservo la mesa en el restaurante, &#191;vale?',sel:'abcde'}
+     ]},
+    {n:2,title:'Regalos para todos',page:12,type:'auto',
+     arabic:'أكمل بضمائر المفعول غير المباشر (me, te, le, nos, os, les). لاحظ الكلمات اللي تحتها خط.',
+     spanish:'Completa con los pronombres adecuados. F&#237;jate en las palabras subrayadas.',
+     questions:[
+        {id:'q2_1',n:1,text:'_____ he comprado un libro de cocina <u>a mi madre</u>.',input:true},
+        {id:'q2_2',n:2,text:'En Navidad Susana y yo _____ regalamos <u>a nuestros padres</u> un vale.',input:true},
+        {id:'q2_3',n:3,text:'&#9679; Y <u>a ti</u>, Luc&#237;a, &#191;qu&#233; _____ ha comprado tu marido?',input:true},
+        {id:'q2_4',n:4,text:'&#9650; Pues, _____ ha preparado una cena rom&#225;ntica.',input:true},
+        {id:'q2_5',n:5,text:'La abuela _____ ha comprado <u>a mi padre</u> una corbata.',input:true},
+        {id:'q2_6',n:6,text:'Mi t&#237;o Eduardo siempre _____ env&#237;a <u>a todos nosotros</u> regalos.',input:true},
+        {id:'q2_7',n:7,text:'&#9679; Y <u>a vosotros</u>, &#191;qu&#233; _____ regalan vuestros abuelos?',input:true},
+        {id:'q2_8',n:8,text:'&#9650; Normalmente _____ compran ropa.',input:true}
+     ]},
+    {n:3,title:'&#191;Qui&#233;n? &#191;Qu&#233;? &#191;A qui&#233;n?',page:12,type:'auto',
+     arabic:'اقرأ الجمل واملأ: مَن (الفاعل) - ماذا (المفعول المباشر) - لمَن (المفعول غير المباشر).',
+     spanish:'Lee las frases y completa la tabla como en el ejemplo.',
+     example:'1. &#191;Le has dado la maleta a V&#237;ctor? → <em>t&#250; / la maleta / le-a V&#237;ctor</em>',
+     triples:[
+        {n:2,sentence:'Los abuelos nos regalan dinero para viajar.',ids:['q3_2a','q3_2b','q3_2c']},
+        {n:3,sentence:'&#191;T&#250; me has dado tu libro de viajes?',ids:['q3_3a','q3_3b','q3_3c']},
+        {n:4,sentence:'&#191;Os ha mostrado Sof&#237;a las fotos?',ids:['q3_4a','q3_4b','q3_4c']},
+        {n:5,sentence:'Les compro un helado a la salida del colegio.',ids:['q3_5a','q3_5b','q3_5c']},
+        {n:6,sentence:'&#161;Al fin te regalamos el libro que quieres!',ids:['q3_6a','q3_6b','q3_6c']}
+     ]},
+    {n:4,title:'&#191;Qu&#233; les podemos regalar?',page:12,type:'teacher',
+     arabic:'حوّل الجمل كما في المثال. استبدل الضمائر بعبارات (a + شخص).',
+     spanish:'Transforma las frases como en el ejemplo.',
+     example:'1. A la abuela y a m&#237; <b>nos</b> puedes comprar unas tazas. → <em>A nosotros puedes comprarnos unas tazas.</em>',
+     teacherNote:true,
+     questions:[
+        {id:'q4_1',n:2,text:'A los vecinos <b>les</b> pod&#233;is comprar una botella de vino. →',textarea:true},
+        {id:'q4_2',n:3,text:'A la profesora <b>le</b> podemos comprar unas flores. →',textarea:true},
+        {id:'q4_3',n:4,text:'A Carmen y a ti <b>os</b> puedo comprar unas entradas para la &#243;pera. →',textarea:true},
+        {id:'q4_4',n:5,text:'A m&#237; <b>me</b> pueden comprar el perfume que tanto me gusta. →',textarea:true}
+     ]},
+    {n:5,title:'Susana y el reciclaje',page:13,type:'auto',custom:'slide5'},
+    {n:6,title:'Francisca y su nuevo piso',page:13,type:'auto',
+     arabic:'ماريسا تزور صاحبتها فرانسيسكا. أكمل بدمج الضمائر. بعدين اسمع وتأكد.',
+     spanish:'Completa con los pronombres que correspondan. Despu&#233;s escucha y comprueba.',
+     audios:[15], transcriptKey:'ex6',
+     wordBank:['os los','nos las','te lo','nos los','me la'],
+     questions:[
+        {id:'q6_1',n:1,text:'&#191;Y esas plantas?<br>&#9650; Pues _____ han dado nuestros vecinos.',input:true},
+        {id:'q6_2',n:2,text:'Y estos cuadros, &#191;qui&#233;n _____ ha regalado?',input:true},
+        {id:'q6_3',n:3,text:'&#191;D&#243;nde has comprado la alfombra?<br>&#9650; _____ regal&#243; mi madre.',input:true},
+        {id:'q6_4',n:4,text:'&#191;Y el piso tiene balc&#243;n?<br>&#9650; Ahora mismo _____ ense&#241;o.',input:true},
+        {id:'q6_5',n:5,text:'Los muebles del sal&#243;n.<br>&#9650; _____ compraron los padres de Carlos.',input:true}
+     ]},
+    {n:7,title:'Buscamos el sentido',page:14,type:'teacher',
+     arabic:'اجمع العناصر لتكوّن جمل. استخدم: dar, regalar, dejar, enseñar.',
+     spanish:'Combina los elementos para formar frases. Usa los verbos del recuadro.',
+     hint:'اضغط على زر "📄 صفحة 14" فوق عشان تشوف الرسومات.',
+     wordBank:['dar','regalar','dejar','ense&#241;ar'],
+     example:'1. el osito / Ra&#250;l / Mariela → <em>Ra&#250;l le da el osito a Mariela.</em>',
+     teacherNote:true,
+     questions:[
+        {id:'q7_1',n:2,text:'una foto / la mujer / el polic&#237;a →',textarea:true},
+        {id:'q7_2',n:3,text:'Magdalena / su bicicleta / Rodrigo →',textarea:true},
+        {id:'q7_3',n:4,text:'su nieto / el libro / la abuela →',textarea:true},
+        {id:'q7_4',n:5,text:'los alumnos / el profesor / sus cuadernos →',textarea:true}
+     ]},
+    {n:8,title:'&#161;A combinar pronombres!',page:14,type:'teacher',
+     arabic:'كوّن جمل في خطوتين كما في المثال. (le/les → se مع lo/la/los/las)',
+     spanish:'Construye frases en dos pasos como en el ejemplo. Los pronombres <strong>le</strong> y <strong>les</strong> se convierten en <strong>se</strong> en combinaci&#243;n con lo, la, los, las.',
+     example:'1. alquilar, ellos / el piso / sus amigos<br>a. <em>Ellos les alquilan el piso a sus amigos.</em><br>b. <em>Ellos se lo alquilan a sus amigos.</em>',
+     teacherNote:true,
+     questions:[
+        {id:'q8_1',n:2,text:'regalar, t&#250; / las flores / tu novia',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_2',n:3,text:'dar, nosotros / los juguetes / t&#250;',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_3',n:4,text:'dejar, Laura / la bicicleta / nosotros',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_4',n:5,text:'ense&#241;ar, Juan y t&#250; / la ciudad / la nueva estudiante',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_5',n:6,text:'vender, yo / el coche / usted',textarea:true,placeholder:'a. ...\nb. ...'}
+     ]},
+    {n:9,title:'Combinamos m&#225;s',page:14,type:'teacher',
+     arabic:'حوّل الجمل. اكتب شكلين: الضمائر قبل الفعل + الضمائر ملصقة بالمصدر.',
+     spanish:'Transforma las frases como en el ejemplo.',
+     example:'1. T&#250; nos vas a regalar unos libros. → <em>T&#250; nos los vas a regalar. / T&#250; vas a regal&#225;rnoslos.</em>',
+     teacherNote:true,
+     questions:[
+        {id:'q9_1',n:2,text:'Ellos os van a ense&#241;ar la ciudad. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
+        {id:'q9_2',n:3,text:'Mam&#225; no me puede leer el cuento. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
+        {id:'q9_3',n:4,text:'Yo les puedo mandar un correo electr&#243;nico. →',textarea:true,placeholder:'...'},
+        {id:'q9_4',n:5,text:'Nosotros te podemos dejar nuestro piso. →',textarea:true,placeholder:'...'}
+     ]},
+    {n:10,title:'Gerundio',page:14,type:'auto',custom:'slide10'},
+    {n:11,title:'&#191;Qu&#233; est&#225;n haciendo?',page:15,type:'teacher',
+     arabic:'شوف الرسومات واكتب إيه اللي بيعملوه الأشخاص. استخدم estar + gerundio.',
+     spanish:'Observa los dibujos y escribe qu&#233; est&#225;n haciendo las personas.',
+     hint:'اضغط على زر "📄 صفحة 15" فوق عشان تشوف الرسومات.',
+     teacherNote:true,
+     questions:[
+        {id:'q11_1',n:1,text:'Dibujo 1 (شخصين بيتكلموا)',textarea:true,placeholder:'Est&#225;n...'},
+        {id:'q11_2',n:2,text:'Dibujo 2 (شخص بيقرأ)',textarea:true,placeholder:'...'},
+        {id:'q11_3',n:3,text:'Dibujo 3 (ناس في مطعم)',textarea:true,placeholder:'...'},
+        {id:'q11_4',n:4,text:'Dibujo 4 (شخص بيدفع في الكاشير)',textarea:true,placeholder:'...'},
+        {id:'q11_5',n:5,text:'Dibujo 5 (شخص قدام المراية)',textarea:true,placeholder:'Est&#225; prob&#225;ndose...'},
+        {id:'q11_6',n:6,text:'Dibujo 6 (ناس بياخدوا سيلفي)',textarea:true,placeholder:'...'},
+        {id:'q11_7',n:7,text:'Dibujo 7 (في الكوافير)',textarea:true,placeholder:'...'},
+        {id:'q11_8',n:8,text:'Dibujo 8 (ولد بيلعب تابلت)',textarea:true,placeholder:'...'}
+     ]},
+    {n:12,title:'Mary y Luzma van de compras',page:15,type:'auto',
+     arabic:'أكمل الحوار بالكلمات (nada, ninguno, alguien, algo...).',
+     spanish:'Completa el di&#225;logo con las siguientes palabras.',
+     wordBank:['nada','ninguno (&#215;2)','alguna','ning&#250;n','alguno','nadie','algunos','ninguna','algo','alg&#250;n','alguien'],
+     questions:[
+        {id:'q12_1',n:1,text:'&#9650; Es que no me gusta _____.',input:true},
+        {id:'q12_2',n:2,text:'&#9679; Seguro que _____ te queda bien.',input:true},
+        {id:'q12_3',n:3,text:'&#9679; No hay _____ tienda por aqu&#237; cerca.',input:true},
+        {id:'q12_4',n:4,text:'&#9650; Vamos a caminar hasta encontrar _____.',input:true},
+        {id:'q12_5',n:5,text:'&#9679; Pero tienes _____ muy bonitos en el armario.',input:true},
+        {id:'q12_6',n:6,text:'&#9650; &#161;Pero _____ me queda bien!',input:true},
+        {id:'q12_7',n:7,text:'&#9679; &#191;Y si te pones _____ vestido?',input:true},
+        {id:'q12_8',n:8,text:'&#9650; &#161;No tengo _____ vestido bonito!',input:true},
+        {id:'q12_9',n:9,text:'Y seguro que _____ se pone vestido en la fiesta.',input:true},
+        {id:'q12_10',n:10,text:'&#9679; Yo no entiendo _____ de moda.',input:true},
+        {id:'q12_11',n:11,text:'&#9650; &#191;Por qu&#233; no vas con _____ m&#225;s moderno?',input:true},
+        {id:'q12_12',n:12,text:'&#9679; &#191;Por qu&#233; no nos sentamos a tomar _____?',input:true}
+     ]},
+    {n:13,title:'Cinco regalos para cada persona',page:16,type:'whatsapp',custom:'slide13'},
+    {n:14,title:'Establecimientos',page:16,type:'teacher',
+     arabic:'اكتب حاجتين ممكن تشتريهم من كل محل.',
+     spanish:'&#191;Qu&#233; cosas puedes comprar en estos establecimientos? Escribe dos cosas en cada uno.',
+     teacherNote:true,
+     questions:[
+        {id:'q14_1',label:'🥖 <strong>Panader&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_2',label:'👞 <strong>Zapater&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_3',label:'✏️ <strong>Papeler&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_4',label:'👗 <strong>Tienda de ropa:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_5',label:'⚽ <strong>Tienda de deportes:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_6',label:'💻 <strong>Tienda de productos inform&#225;ticos:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_7',label:'🎁 <strong>Tienda de regalos:</strong>',textarea:true,placeholder:'1. ... , 2. ...'}
+     ]},
+    {n:15,title:'&#191;Con qu&#233; palabra van?',page:16,type:'auto',
+     arabic:'اربط كل كلمة بالعبارة المناسبة.',
+     spanish:'Relaciona las siguientes palabras.',
+     hint:'اضغط على زر "📄 صفحة 16" فوق عشان تشوف التمرين بالكامل.',
+     options:['a. de garaje','b. de decoraci&#243;n','c. de bodas','d. para una exposici&#243;n','e. para una sesi&#243;n de spa','f. de sol','g. de seda','h. de flores'],
+     questions:[
+        {id:'q15_1',text:'1. el aniversario',sel:'abcdefgh'},
+        {id:'q15_2',text:'2. la entrada',sel:'abcdefgh'},
+        {id:'q15_3',text:'3. el objeto',sel:'abcdefgh'},
+        {id:'q15_4',text:'4. el pa&#241;uelo',sel:'abcdefgh'},
+        {id:'q15_5',text:'5. la plaza',sel:'abcdefgh'},
+        {id:'q15_6',text:'6. el ramo',sel:'abcdefgh'},
+        {id:'q15_7',text:'7. el vale',sel:'abcdefgh'},
+        {id:'q15_8',text:'8. las gafas',sel:'abcdefgh'}
+     ]},
+    {n:16,title:'Sonidos del espa&#241;ol - &#191;Qu&#233; letras faltan?',page:17,type:'auto',
+     arabic:'اسمع واكتب الحروف الناقصة.',
+     spanish:'&#191;Qu&#233; letras encajan? Escucha y anota las letras correctas.',
+     audios:[17], transcriptKey:'ex16',
+     questions:[
+        {id:'q16_1',text:'1. ___eso',sel:'bp'},
+        {id:'q16_2',text:'2. ro___a',sel:'bp'},
+        {id:'q16_3',text:'3. ___ollo',sel:'bp'},
+        {id:'q16_4',text:'4. ca___a',sel:'pv'},
+        {id:'q16_5',text:'5. ___eces',sel:'pv'},
+        {id:'q16_6',text:'6. ___ista',sel:'pv'},
+        {id:'q16_7',text:'7. pe___o',sel:['r','rr']},
+        {id:'q16_8',text:'8. ca___o',sel:['r','rr']}
+     ]}
+];
+
+const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
+let currentUser = { username:'{{ student.username }}', fullName:'{{ student.username }}' };
+let lockedAnswers = {};
+let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
+let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
+const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
+const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
+LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
+
+function buildSelect(id, letters) {
+    const arr = Array.isArray(letters) ? letters : letters.split('');
+    let opts = '<option value="">-- اختر --</option>';
+    arr.forEach(l => opts += `<option value="${l}">${l}</option>`);
+    return `<select id="${id}">${opts}</select><div class="feedback" id="fb${id.substring(1)}"></div>`;
+}
+function buildInput(id, ph) { return `<input type="text" id="${id}" placeholder="${ph||'...'}"><div class="feedback" id="fb${id.substring(1)}"></div>`; }
+function buildTextarea(id, ph) { return `<textarea id="${id}" placeholder="${ph||'...'}"></textarea><div class="feedback" id="fb${id.substring(1)}"></div>`; }
+function buildAudio(p) { return `<div class="audio-card"><div class="audio-icon">🎧</div><div class="audio-info"><div class="audio-label">Pista ${p}</div><audio controls preload="none"><source src="${AUDIO_BASE}${String(p).padStart(2,'0')}%20Pista%20${p}.mp3" type="audio/mpeg"></audio></div></div>`; }
+function buildWordBank(w) { return `<div class="word-bank">${w.map(x=>`<span>${x}</span>`).join('')}</div>`; }
+function buildOptionsList(o) { return `<div class="options-list">${o.map(x=>`<span class="opt">${x}</span>`).join('')}</div>`; }
+function buildTranscriptBtn(k) {
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return '';
+    return `<button class="transcript-btn" id="trBtn_${k}" onclick="openTranscript('${k}')" disabled><span class="lock-icon">🔒</span><span>📝 عرض النص (Transcripción)</span><span class="progress-text" id="trProg_${k}">0/${tr.requiredQuestions.length}</span></button>`;
+}
+function buildQuestion(q) {
+    let h = '';
+    if (q.label) h = `<div class="q-label">${q.label}</div>`;
+    else if (q.n) h = `<div class="q-label"><span class="num-bullet">${q.n}</span></div>`;
+    if (q.text) h += `<div class="q-text">${q.text}</div>`;
+    if (q.sel) h += buildSelect(q.id, q.sel);
+    else if (q.input) h += buildInput(q.id, q.placeholder);
+    else if (q.textarea) h += buildTextarea(q.id, q.placeholder);
+    return `<div class="question-card">${h}</div>`;
+}
+function buildSlide(s) {
+    const hClass = s.type==='teacher'?'teacher':s.type==='whatsapp'?'whatsapp':'';
+    const badge = s.type==='teacher'?'<span class="ex-type-badge badge-teacher">👨‍🏫 يصححه المدرس</span>':s.type==='whatsapp'?'<span class="ex-type-badge badge-whatsapp">📱 واتس اب</span>':'<span class="ex-type-badge badge-auto">🤖 تصحيح تلقائي</span>';
+    let body = '';
+    if (s.arabic) body += `<div class="arabic-box">${s.arabic}</div>`;
+    if (s.hint) body += `<div class="hint-box">${s.hint}</div>`;
+    if (s.custom==='slide5') body += buildSlide5();
+    else if (s.custom==='slide10') body += buildSlide10();
+    else if (s.custom==='slide13') body += buildSlide13();
+    else {
+        body += `<div class="spanish-box">`;
+        if (s.spanish) body += `<div class="es-instruction">${s.spanish}</div>`;
+        if (s.audios) {
+            s.audios.forEach(p => body += buildAudio(p));
+            if (s.transcriptKey) body += buildTranscriptBtn(s.transcriptKey);
+        }
+        if (s.wordBank) body += buildWordBank(s.wordBank);
+        if (s.options) body += buildOptionsList(s.options);
+        if (s.example) body += `<div class="example-solved">✅ ${s.example}</div>`;
+        if (s.teacherNote) body += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
+        if (s.questions) s.questions.forEach(q => body += buildQuestion(q));
+        if (s.triples) {
+            s.triples.forEach(t => {
+                body += `<div class="question-card"><div class="q-label"><span class="num-bullet">${t.n}</span> ${t.sentence}</div>`;
+                body += `<div class="q-text">&#191;Qui&#233;n?</div><input type="text" id="${t.ids[0]}" placeholder="..."><div class="feedback" id="fb${t.ids[0].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;Qu&#233;?</div><input type="text" id="${t.ids[1]}" placeholder="..."><div class="feedback" id="fb${t.ids[1].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;A qui&#233;n?</div><input type="text" id="${t.ids[2]}" placeholder="..."><div class="feedback" id="fb${t.ids[2].substring(1)}"></div>`;
+                body += `</div>`;
+            });
+        }
+        body += `</div>`;
+    }
+    return `<div class="slide" data-slide="${s.n-1}"><div class="exercise"><div class="ex-header ${hClass}"><div class="ex-title-wrap"><div class="ex-num">${s.n}</div><div class="ex-title">${s.title}</div></div><div class="ex-actions">${badge}<button class="ex-page-btn" onclick="openPage(${s.page})">📄 صفحة ${s.page}</button></div></div><div class="ex-body">${body}</div></div></div>`;
+}
+
+function buildSlide5() {
+    let h = `<div class="sub-section-title">5a. Clasifica</div><div class="arabic-box">جار سوزانا بينصحها بإعادة التدوير. صنّف كل جملة مع الشيء المناسب.</div><div class="spanish-box"><div class="es-instruction">&#191;Qu&#233; hace &#233;l con las cosas? &#161;Clasif&#237;calas!</div>`;
+    h += buildOptionsList(['a. Medicinas','b. Ropa de los ni&#241;os','c. M&#243;vil viejo','d. Juguetes usados','e. Botellas de vidrio']);
+    [{id:'q5a_1',t:'1. Lo vendo por internet.'},{id:'q5a_2',t:'2. Las llevo a la farmacia.'},{id:'q5a_3',t:'3. Los cambio en un mercadillo.'},{id:'q5a_4',t:'4. La utilizo para hacer bolsas.'},{id:'q5a_5',t:'5. Las tiro en el contenedor.'}].forEach(q => h += `<div class="question-card"><div class="q-text">${q.t}</div>${buildSelect(q.id,'abcde')}</div>`);
+    h += `</div><div class="sub-section"><div class="sub-section-title">5b. Escucha y relaciona 🎧</div><div class="arabic-box">اسمع الحوارات واكتب رقم الحوار + اكتب الجملة بالأفعال المناسبة.</div><div class="spanish-box">`;
+    [10,11,12,13,14].forEach(p => h += buildAudio(p));
+    h += buildTranscriptBtn('ex5b');
+    h += buildWordBank(['usar','vender','llevar','reciclar','regalar']);
+    h += `<div class="example-solved">✅ <strong>Di&#225;logo 5: bolsas de pl&#225;stico</strong> → <em>Las usa de nuevo para comprar en el s&#250;per.</em></div>`;
+    [{n:1,obj:'ordenador',idN:'q5b_1n',idF:'q5b_1f'},{n:2,obj:'libros',idN:'q5b_2n',idF:'q5b_2f'},{n:3,obj:'latas',idN:'q5b_3n',idF:'q5b_3f'},{n:4,obj:'mesa',idN:'q5b_4n',idF:'q5b_4f'}].forEach(q => {
+        h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> Di&#225;logo ___ : ${q.obj}</div><input type="text" id="${q.idN}" placeholder="رقم الحوار" style="margin-bottom:6px"><textarea id="${q.idF}" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb${q.idN.substring(1)}"></div><div class="feedback" id="fb${q.idF.substring(1)}"></div></div>`;
+    });
+    h += `</div></div>`;
+    return h;
+}
+
+function buildSlide10() {
+    let h = `<div class="sub-section-title">10a. Completa las formas que faltan</div><div class="arabic-box">أكمل أشكال الجيروندي الناقصة.<br>القاعدة: -ar → -ando | -er/-ir → -iendo</div><div class="spanish-box">`;
+    [{n:1,t:'alquilar →',id:'q10a_1'},{n:2,t:'___ → dando',id:'q10a_2',ph:'المصدر...'},{n:3,t:'nadar →',id:'q10a_3'},{n:4,t:'___ → haciendo',id:'q10a_4',ph:'المصدر...'},{n:5,t:'___ → viendo',id:'q10a_5',ph:'المصدر...'},{n:6,t:'___ → pidiendo',id:'q10a_6',ph:'المصدر...'},{n:7,t:'ir →',id:'q10a_7'}].forEach(q => h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> ${q.t}</div>${buildInput(q.id,q.ph)}</div>`);
+    h += `</div><div class="sub-section"><div class="sub-section-title">10b. Escucha y escribe estar + gerundio 🎧</div><div class="arabic-box">اسمع الحوارات واكتب جمل بـ estar + gerundio.</div><div class="spanish-box">${buildAudio(16)}${buildTranscriptBtn('ex10b')}${buildWordBank(['jugar','dormir','levantarse','estudiar','leer','ducharse'])}`;
+    [{n:1,t:'El pap&#225;...',id:'q10b_1',ph:'est&#225; + gerundio'},{n:2,t:'Los ni&#241;os...',id:'q10b_2',ph:'est&#225;n + gerundio'},{n:3,t:'Emma y Juli&#225;n...',id:'q10b_3'},{n:4,t:'Marianita...',id:'q10b_4'},{n:5,t:'Marta...',id:'q10b_5',ph:'se est&#225;... / est&#225;...se'},{n:6,t:'Alejandro...',id:'q10b_6',ph:'se est&#225;... / est&#225;...se'}].forEach(q => h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> ${q.t}</div>${buildInput(q.id,q.ph)}</div>`);
+    h += `</div></div>`;
+    return h;
+}
+
+function buildSlide13() {
+    return `<div class="arabic-box">اختار 5 هدايا لكل شخص من الأشخاص الأربعة، مع السبب.</div><div class="hint-box">اضغط على زر "📄 صفحة 16" فوق عشان تشوف صور الأشخاص ومعلوماتهم.</div><div class="spanish-box"><div class="es-instruction">&#191;Qu&#233; les regalar&#237;as a estas personas? Busca cuatro regalos y piensa t&#250; en un quinto.</div><div class="text-paragraph"><strong>1. Jaime</strong> (68 a&#241;os, deportista)<br><strong>2. Jimena</strong> (35 a&#241;os, madre de dos ni&#241;os)<br><strong>3. Raquel</strong> (20 a&#241;os, estudiante de biolog&#237;a)<br><strong>4. Sim&#243;n</strong> (7 a&#241;os, va al colegio)</div></div><div class="whatsapp-note"><span class="wa-icon">📱</span><strong>تمرين مقالي كبير</strong><br>اكتب 5 هدايا لكل شخص مع السبب. مثال:<br><em>A Jaime le regalar&#237;a unas zapatillas deportivas porque es deportista.</em><br><br>ابعت الإجابة على <strong>جروب الواتس اب</strong> ليصححها المدرس</div>`;
+}
+
+function renderSlides() { document.getElementById('slidesContainer').innerHTML = SLIDES.map(buildSlide).join(''); }
+
+function initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    document.getElementById('totalSlidesNum').textContent = totalSlides;
+    const jc = document.getElementById('slideJumpButtons');
+    jc.innerHTML = '';
+    for (let i=0; i<totalSlides; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'jump-btn'; btn.textContent = i+1;
+        btn.onclick = () => goToSlide(i); btn.id = 'jumpBtn_'+i;
+        jc.appendChild(btn);
+    }
+    if (slides.length > 0) slides[0].classList.add('active');
+    updateSlider();
+}
+function goToSlide(i) {
+    if (i<0 || i>=totalSlides) return;
+    document.querySelectorAll('audio').forEach(a => { try{a.pause();}catch(e){} });
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.slide')[i].classList.add('active');
+    currentSlide = i;
+    updateSlider();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides-1) goToSlide(currentSlide+1); }
+function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide-1); }
+function updateSlider() {
+    document.getElementById('currentSlideNum').textContent = currentSlide+1;
+    document.getElementById('slideProgressFill').style.width = ((currentSlide+1)/totalSlides*100)+'%';
+    document.getElementById('prevBtn').disabled = currentSlide===0;
+    document.getElementById('nextBtn').disabled = currentSlide===totalSlides-1;
+    for (let i=0; i<totalSlides; i++) {
+        const btn = document.getElementById('jumpBtn_'+i);
+        if (btn) btn.classList.toggle('active', i===currentSlide);
+    }
+    updateJumpButtonStatus();
+}
+function updateJumpButtonStatus() {
+    document.querySelectorAll('.slide').forEach((slide,i) => {
+        const btn = document.getElementById('jumpBtn_'+i);
+        if (!btn) return;
+        const inputs = slide.querySelectorAll('input, select, textarea');
+        let total=0, locked=0, pending=0;
+        inputs.forEach(el => {
+            if (!el.id || !el.id.startsWith('q')) return;
+            total++;
+            if (lockedAnswers[el.id]) {
+                if (lockedAnswers[el.id].status==='pending') pending++;
+                else locked++;
+            }
+        });
+        btn.classList.remove('completed','has-pending');
+        if (pending > 0) btn.classList.add('has-pending');
+        else if (total > 0 && locked >= total) btn.classList.add('completed');
+    });
+}
+document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key==='ArrowLeft') nextSlide();
+    if (e.key==='ArrowRight') prevSlide();
+});
+
+function showPopup(o) {
+    const ov = document.getElementById('popupOverlay');
+    document.getElementById('popupBox').className = 'popup-box '+(o.type||'info');
+    document.getElementById('popupIcon').textContent = o.icon || (o.type==='success'?'✅':o.type==='error'?'❌':o.type==='warning'?'⚠️':'ℹ️');
+    document.getElementById('popupTitle').textContent = o.title || 'تنبيه';
+    document.getElementById('popupBody').innerHTML = o.body || '';
+    const ac = document.getElementById('popupActions');
+    ac.innerHTML = '';
+    (o.buttons || [{text:'حسناً',class:'primary',action:closePopup}]).forEach(b => {
+        const btn = document.createElement('button');
+        btn.className = 'popup-btn '+(b.class||'primary');
+        btn.textContent = b.text;
+        btn.onclick = b.action || closePopup;
+        ac.appendChild(btn);
+    });
+    ov.classList.add('show');
+}
+function closePopup() { document.getElementById('popupOverlay').classList.remove('show'); }
+function openPage(p) {
+    document.getElementById('lightboxTitle').textContent = '📄 صفحة '+p+' من الكتاب';
+    document.getElementById('lightboxImg').src = getPageURL(p);
+    document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(e) {
+    if (e && e.target.tagName==='IMG') return;
+    document.getElementById('lightbox').classList.remove('show');
+}
+
+function checkTranscriptStatus(k) {
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return;
+    const btn = document.getElementById('trBtn_'+k);
+    const prog = document.getElementById('trProg_'+k);
+    if (!btn || !prog) return;
+    let answered = 0;
+    tr.requiredQuestions.forEach(qId => { if (lockedAnswers[qId]) answered++; });
+    prog.textContent = answered + '/' + tr.requiredQuestions.length;
+    if (answered >= tr.requiredQuestions.length) {
+        btn.disabled = false;
+        btn.querySelector('.lock-icon').textContent = '🔓';
+    } else {
+        btn.disabled = true;
+        btn.querySelector('.lock-icon').textContent = '🔒';
+    }
+}
+function checkAllTranscripts() { Object.keys(TRANSCRIPTIONS).forEach(checkTranscriptStatus); }
+function openTranscript(k) {
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return;
+    const btn = document.getElementById('trBtn_'+k);
+    if (btn && btn.disabled) {
+        const answered = parseInt(document.getElementById('trProg_'+k).textContent.split('/')[0]);
+        const remaining = tr.requiredQuestions.length - answered;
+        showPopup({type:'warning',icon:'🔒',title:'النص مقفول',body:`<p>لازم <strong>ترسل إجابات كل أسئلة التمرين</strong> الأول.</p><div class="popup-detail">📤 لسه محتاج ترسل: <strong>${remaining}</strong> إجابة<br>✅ مُرسل: <strong>${answered}</strong> من <strong>${tr.requiredQuestions.length}</strong><br><br>💡 ملحوظة: الكتابة في الخانات مش كفاية، لازم تضغط زر "إرسال الإجابات".</div>`,buttons:[{text:'حسناً',class:'primary'}]});
+        return;
+    }
+    document.getElementById('trModalTitle').textContent = tr.title;
+    document.getElementById('trModalBody').innerHTML = tr.text;
+    document.getElementById('transcriptModal').classList.add('show');
+}
+function closeTranscript() { document.getElementById('transcriptModal').classList.remove('show'); }
+
+function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
+function gradeAutoQuestion(qId, value) {
+    const m = AUTO_GRADED[qId]; if (!m) return null;
+    const ua = String(value||'').trim(); if (!ua) return null;
+    let ok = false;
+    if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
+    else ok = m.a.some(x => normalize(x) === normalize(ua));
+    return { isCorrect:ok, correctAnswer: m.d || m.a[0] };
+}
+
+function lockField(el) {
+    if (!el) return;
+    el.disabled = true; el.readOnly = true; el.setAttribute('data-locked','true');
+    el.addEventListener('input', preventEdit);
+    el.addEventListener('beforeinput', preventEdit);
+    el.addEventListener('paste', preventEdit);
+    el.addEventListener('cut', preventEdit);
+    el.addEventListener('keydown', preventEditKey);
+}
+function preventEdit(e) { if (e.target.getAttribute('data-locked')==='true') { e.preventDefault(); return false; } }
+function preventEditKey(e) {
+    if (e.target.getAttribute('data-locked')==='true') {
+        const allowed = ['Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','PageUp','PageDown'];
+        if (allowed.includes(e.key)) return;
+        if (e.ctrlKey && (e.key==='c' || e.key==='a')) return;
+        e.preventDefault(); return false;
+    }
+}
+
+// دالة لبناء جزء الشرح العربي مع الإسباني (مع span dir=ltr)
+function buildExplanationHTML(exp) {
+    if (!exp) return '';
+    let html = '';
+    if (typeof exp === 'string') {
+        // متوافق مع النسخ القديمة (string)
+        return `💡 <strong>الشرح:</strong><br>${esc(exp).replace(/\n/g,'<br>')}`;
+    }
+    if (exp.ar) html += `💡 <strong>الشرح:</strong> ${esc(exp.ar)}`;
+    if (exp.es) html += `<span class="es-line">📝 ${esc(exp.es)}</span>`;
+    return html;
+}
+
+function displayLockedAnswer(qId, info) {
+    const el = document.getElementById(qId); if (!el) return;
+    el.value = info.value; lockField(el);
+    const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
+    const exp = EXPLANATIONS[qId];
+    if (info.status === 'pending') {
+        el.classList.add('locked-pending');
+        fb.className = 'feedback pending';
+        let html = `<div class="fb-spanish"><span class="lock-badge pending">⏳ Pendiente</span><br><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div><div class="fb-arabic"><strong>⏳ بانتظار تصحيح المدرس</strong><br>تم استلام إجابتك.`;
+        if (info.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.expectedAnswer) html += `<span class="es-line">📝 ${esc(info.expectedAnswer)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    } else if (info.isHalf || info.verdict==='half') {
+        el.classList.add('locked-half');
+        fb.className = 'feedback half';
+        let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
+        html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
+        if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    } else if (info.isCorrect) {
+        el.classList.add('locked-correct');
+        fb.className = 'feedback correct';
+        let html = `<div class="fb-spanish"><span class="lock-badge">✅ ¡Correcto!</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div>`;
+        if (exp || info.reviewedBy) {
+            html += `<div class="fb-arabic">`;
+            if (exp) html += buildExplanationHTML(exp);
+            if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+            html += `</div>`;
+        }
+        fb.innerHTML = html;
+    } else {
+        el.classList.add('locked-wrong');
+        fb.className = 'feedback wrong';
+        const m = AUTO_GRADED[qId];
+        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || '');
+        let html = `<div class="fb-spanish"><span class="lock-badge wrong">❌ Incorrecto</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (cd) html += `<strong>✅ Respuesta correcta:</strong> ${esc(cd)}`;
+        html += `</div><div class="fb-arabic">`;
+        if (exp) html += buildExplanationHTML(exp);
+        else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    }
+}
+function esc(t) { if (t==null) return ''; const d=document.createElement('div'); d.textContent=String(t); return d.innerHTML; }
+
+function updateProgressDisplay() {
+    document.getElementById('psCorrect').textContent = Math.floor(totalCorrect);
+    document.getElementById('psHalf').textContent = totalHalf;
+    document.getElementById('psWrong').textContent = totalWrong;
+    document.getElementById('psPending').textContent = totalPending;
+    document.getElementById('psAnswered').textContent = totalAnswered + totalPending;
+    document.getElementById('psTotal').textContent = LESSON_CONFIG.totalQuestions;
+    document.getElementById('psRemaining').textContent = Math.max(0, LESSON_CONFIG.totalQuestions - totalAnswered - totalPending);
+    const pct = LESSON_CONFIG.totalQuestions > 0 ? Math.round(((totalAnswered + totalPending) / LESSON_CONFIG.totalQuestions) * 100) : 0;
+    document.getElementById('psProgressBar').style.width = pct+'%';
+}
+function checkIfComplete() {
+    if (totalAnswered + totalPending >= LESSON_CONFIG.totalQuestions && totalPending === 0) {
+        const es = totalCorrect + (totalHalf * 0.5);
+        const p = Math.round((es / LESSON_CONFIG.totalQuestions) * 100);
+        let i='🌟', t='ممتاز!', c='success';
+        if (p < 50) { i='💪'; t='محتاج تذاكر كويس'; c='error'; }
+        else if (p < 70) { i='📖'; t='راجع الدرس'; c='warning'; }
+        else if (p < 90) { i='👍'; t='جيد جداً!'; c='info'; }
+        showPopup({type:c,icon:i,title:t,body:`<div style="font-size:2.5em;font-weight:900;margin:15px 0">${es} / ${LESSON_CONFIG.totalQuestions}</div><div style="font-size:1.3em;font-weight:700">${p}%</div>`,buttons:[{text:'👍 حسناً',class:'primary'}]});
+    }
+}
+function showLoading(t,s) {
+    document.getElementById('loadingText').textContent = t || 'جاري التحميل...';
+    document.getElementById('loadingSubText').textContent = s || '';
+    document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+
+async function sendDataViaGET(data) {
+    const ds = JSON.stringify(data);
+    if (ds.length > 7000) return sendDataViaForm(data);
+    const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(ds);
+    try { await fetch(url, {mode:'no-cors'}); return {success:'unknown'}; } catch(e) { throw e; }
+}
+function sendDataViaForm(data) {
+    return new Promise((res,rej) => {
+        const ifn = 'sub_'+Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = ifn; iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const form = document.createElement('form');
+        form.method='POST'; form.action=SCRIPT_URL; form.target=ifn; form.style.display='none';
+        const pi = document.createElement('input');
+        pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
+        const ai = document.createElement('input');
+        ai.type='hidden'; ai.name='action'; ai.value='saveProgress'; form.appendChild(ai);
+        document.body.appendChild(form);
+        let r=false;
+        const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
+        const cu = () => { try{document.body.removeChild(form);}catch(e){} setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}}, 500); };
+        iframe.onload = ()=>{if(!r){r=true;clearTimeout(to);cu();res({success:'unknown'});}};
+        iframe.onerror = ()=>{if(!r){r=true;clearTimeout(to);cu();rej(new Error('Form failed'));}};
+        try{form.submit();}catch(e){r=true;clearTimeout(to);cu();rej(e);}
+    });
+}
+async function sendAndVerify(data) {
+    try { await sendDataViaGET(data); } catch(e) { return {verified:false, error:e.message}; }
+    await new Promise(r => setTimeout(r, 2500));
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(data.username) + '&lessonId=' + encodeURIComponent(data.lessonId) + '&_t=' + Date.now();
+        const r = await fetch(url); const res = await r.json();
+        if (res.status === 'success') {
+            const sA = parseInt(res.totalAnswered) || 0;
+            const sP = parseInt(res.totalPending) || 0;
+            if (sA + sP >= data.totalAnswered + data.totalPending) return {verified:true};
+            return {verified:false, error:'البيانات لم تصل بالكامل'};
+        }
+    } catch(e) { return {verified:false, error:'فشل التحقق'}; }
+    return {verified:false, error:'فشل التحقق'};
+}
+async function fetchWithRetry(url, opts={}, max=3) {
+    let lastErr;
+    for (let i=0; i<max; i++) {
+        try { return await fetch(url, opts); }
+        catch(e) { lastErr=e; if (i<max-1) await new Promise(r=>setTimeout(r,1000*(i+1))); }
+    }
+    throw lastErr;
+}
+async function loadProgress() {
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const r = await fetchWithRetry(url); const res = await r.json();
+        if (res.status === 'success') {
+            totalCorrect = parseFloat(res.totalCorrect) || 0;
+            totalWrong = parseInt(res.totalWrong) || 0;
+            totalAnswered = parseInt(res.totalAnswered) || 0;
+            totalPending = parseInt(res.totalPending) || 0;
+            totalHalf = parseInt(res.totalHalf) || 0;
+            if (res.lockedAnswers && res.lockedAnswers !== '{}') {
+                try {
+                    lockedAnswers = JSON.parse(res.lockedAnswers);
+                    Object.keys(lockedAnswers).forEach(qId => displayLockedAnswer(qId, lockedAnswers[qId]));
+                } catch(e){}
+            }
+            updateProgressDisplay();
+            updateJumpButtonStatus();
+            checkIfComplete();
+            checkAllTranscripts();
+        }
+    } catch(e) { console.error(e); }
+}
+
+function collectNewAnswers() {
+    const na = [];
+    ALL_QUESTIONS.forEach(qId => {
+        if (lockedAnswers[qId]) return;
+        const el = document.getElementById(qId); if (!el) return;
+        const v = el.value;
+        if (!String(v).trim()) return;
+        na.push({id:qId, value:v});
+    });
+    return na;
+}
+function prepareSubmit() {
+    const na = collectNewAnswers();
+    if (na.length === 0) {
+        showPopup({type:'warning',icon:'⚠️',title:'لا توجد إجابات جديدة',body:'لم تحل أي سؤال جديد. الرجاء حل بعض الأسئلة أولاً.',buttons:[{text:'حسناً',class:'primary'}]});
+        return;
+    }
+    pendingSubmit = na;
+    let ac=0, tc=0;
+    na.forEach(a => { if (AUTO_GRADED[a.id]) ac++; else tc++; });
+    showPopup({
+        type:'warning', icon:'🤔', title:'تأكيد الإرسال',
+        body:`<p>هل أنت متأكد من إرسال إجاباتك؟</p><div class="popup-detail">📊 <strong>عدد الإجابات:</strong> ${na.length}<br>🤖 تصحيح فوري: <strong>${ac}</strong><br>👨‍🏫 يصححها المدرس: <strong>${tc}</strong><br>⚠️ لن تتمكن من تعديل الإجابات بعد الإرسال!</div>`,
+        buttons:[{text:'✅ نعم، أرسل',class:'primary',action:confirmSubmit},{text:'❌ إلغاء',class:'secondary',action:()=>{pendingSubmit=null;closePopup();}}]
+    });
+}
+async function confirmSubmit() {
+    closePopup();
+    if (!pendingSubmit) return;
+    const na = pendingSubmit; pendingSubmit = null;
+    showLoading('⏳ جاري التصحيح والإرسال...', na.length+' سؤال');
+    let bc=0, bw=0, bp=0;
+    const fr = [];
+    na.forEach(ans => {
+        if (AUTO_GRADED[ans.id]) {
+            const r = gradeAutoQuestion(ans.id, ans.value);
+            fr.push({id:ans.id, value:ans.value, status:'reviewed', isCorrect:r.isCorrect});
+            if (r.isCorrect) bc++; else bw++;
+        } else {
+            const ctx = TEACHER_GRADED_CONTEXT[ans.id] || {};
+            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false, feedback:'بانتظار تصحيح المدرس', questionText:ctx.questionText || ans.id, expectedAnswer:ctx.expectedAnswer || '', rule:ctx.rule || ''});
+            bp++;
+        }
+    });
+    const tl = JSON.parse(JSON.stringify(lockedAnswers));
+    const nao = {};
+    fr.forEach(r => {
+        const o = {value:r.value, status:r.status, isCorrect:r.isCorrect};
+        if (r.feedback) o.feedback = r.feedback;
+        if (r.status==='pending') { o.questionText=r.questionText; o.expectedAnswer=r.expectedAnswer; o.rule=r.rule; }
+        tl[r.id] = o; nao[r.id] = o;
+    });
+    const ntc = totalCorrect + bc;
+    const ntw = totalWrong + bw;
+    const nta = totalAnswered + (bc + bw);
+    const ntp = totalPending + bp;
+    const data = {
+        action:'saveProgress', username:currentUser.username, fullName:currentUser.fullName,
+        lessonId:LESSON_CONFIG.lessonId, lessonName:LESSON_CONFIG.lessonName,
+        totalCorrect:ntc, totalWrong:ntw, totalAnswered:nta, totalPending:ntp, totalQuestions:LESSON_CONFIG.totalQuestions,
+        batchCorrect:bc, batchWrong:bw, batchAnswered:bc+bw, batchPending:bp,
+        details:`${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
+        newAnswers:JSON.stringify(nao)
+    };
+    const r = await sendAndVerify(data);
+    hideLoading();
+    if (r.verified) {
+        lockedAnswers = tl;
+        totalCorrect=ntc; totalWrong=ntw; totalAnswered=nta; totalPending=ntp;
+        fr.forEach(x => displayLockedAnswer(x.id, x));
+        document.getElementById('retryBanner').style.display = 'none';
+        lastFailedData = null;
+        safeStorage.removeItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        updateProgressDisplay();
+        updateJumpButtonStatus();
+        checkAllTranscripts();
+        showPopup({
+            type:'success', icon:'✅', title:'تم الإرسال بنجاح!',
+            body:`<div class="popup-detail">✅ صح: <strong style="color:#2ecc71">${bc}</strong><br>❌ خطأ: <strong style="color:#e74c3c">${bw}</strong><br>⏳ بانتظار المدرس: <strong style="color:#9b59b6">${bp}</strong></div>`,
+            buttons:[{text:'👍 حسناً',class:'primary',action:()=>{closePopup();checkIfComplete();}}]
+        });
+    } else {
+        lastFailedData = data;
+        try { safeStorage.setItem('ia_pending_'+LESSON_CONFIG.lessonId, JSON.stringify({data:data, timestamp:Date.now()})); } catch(e){}
+        document.getElementById('retryBanner').style.display = 'block';
+        showPopup({
+            type:'error', icon:'❌', title:'فشل الإرسال',
+            body:`<p>حدث خطأ أثناء الإرسال.</p><div class="popup-detail">${esc(r.error || 'خطأ غير معروف')}</div>`,
+            buttons:[{text:'🔄 إعادة المحاولة',class:'primary',action:()=>{closePopup();retrySubmit();}},{text:'إغلاق',class:'secondary'}]
+        });
+    }
+}
+async function retrySubmit() {
+    if (!lastFailedData) {
+        try { const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId); if (p) lastFailedData = JSON.parse(p).data; } catch(e){}
+        if (!lastFailedData) {
+            showPopup({type:'warning',title:'لا توجد بيانات',body:'مفيش بيانات للإعادة.',buttons:[{text:'حسناً',class:'primary'}]});
+            return;
+        }
+    }
+    showLoading('جاري إعادة المحاولة...');
+    const r = await sendAndVerify(lastFailedData);
+    hideLoading();
+    if (r.verified) {
+        safeStorage.removeItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        lastFailedData = null;
+        showPopup({type:'success',title:'تم بنجاح!',body:'تم حفظ بياناتك. سيتم إعادة تحميل الصفحة.',buttons:[{text:'حسناً',class:'primary',action:()=>location.reload()}]});
+    } else {
+        showPopup({type:'error',title:'فشلت المحاولة',body:esc(r.error || 'حاول مرة أخرى لاحقاً.'),buttons:[{text:'حسناً',class:'primary'}]});
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
+    document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
+    document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
+    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
+    renderSlides();
+    initSlider();
+    updateProgressDisplay();
+    checkAllTranscripts();
+    showLoading('جاري مزامنة بياناتك...');
+    await loadProgress();
+    hideLoading();
+    try {
+        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        if (p) {
+            lastFailedData = JSON.parse(p).data;
+            document.getElementById('retryBanner').style.display = 'block';
+        }
+    } catch(e){}
+});
+</script>
+</body>
+</html>
