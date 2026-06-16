@@ -17,7 +17,7 @@ GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVA
 # =====================================================================
 LESSONS_DATA = {
     "A1.1": [
-        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
+        {"title": ", ¿QUÉ TAL?", "file": "lesson1.html"},
         {"title": "EL ESPAÑOL Y YO", "file": "lesson.html"},
         {"title": "TRABAJO AQUÍ", "file": "lesson3.html"},
         {"title": "¡ME GUSTAN LAS TAPAS!", "file": "lesson4.html"}
@@ -95,7 +95,7 @@ LESSONS_DATA = {
 # =====================================================================
 EXERCISES_DATA = {
     "A1.1": [
-        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
+        {"title": "تمرين: , ¿QUÉ TAL?", "file": "exercise1.html"},
         {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"},
         {"title": "تمرين: TRABAJO AQUÍ", "file": "exercise3.html"},
         {"title": "تمرين: ¡ME GUSTAN LAS TAPAS!", "file": "exercise4.html"}
@@ -173,7 +173,7 @@ EXERCISES_DATA = {
 # =====================================================================
 VOCAB_DATA = {
     "A1.1": [
-        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
+        {"title": "كلمات: , ¿QUÉ TAL?", "file": "vocab1.html"},
         {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"},
         {"title": "كلمات: TRABAJO AQUÍ", "file": "vocab3.html"},
         {"title": "كلمات: ¡ME GUSTAN LAS TAPAS!", "file": "vocab4.html"}
@@ -407,7 +407,7 @@ GAMES_DATA = {
 # =====================================================================
 SHADOWING_DATA = {
     "A1.1": [
-        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
+        {"title": "شادوينج: , ¿QUÉ TAL?", "file": "shadowing1.html"},
         {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"},
         {"title": "شادوينج: TRABAJO AQUÍ", "file": "shadowing3.html"},
         {"title": "شادوينج: ¡ME GUSTAN LAS TAPAS!", "file": "shadowing4.html"}
@@ -802,7 +802,7 @@ LOGIN_HTML = """
 </head>
 <body>
     <span class="float-word fw1">¡Hola!</span>
-    <span class="float-word fw2">أهلاً</span>
+    <span class="float-word fw2">ازيك!</span>
     <span class="float-word fw3">Amigos</span>
     <span class="float-word fw4">صحاب</span>
     <span class="float-word fw5">Gracias</span>
@@ -832,9 +832,9 @@ LOGIN_HTML = """
             <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> ادخل للمنصة</button>
         </form>
         <div class="lang-strip">
-            <div class="lang-item"><span class="es">Aprender</span><br><span class="ar">يتعلم</span></div>
-            <div class="lang-item"><span class="es">Hablar</span><br><span class="ar">يتكلم</span></div>
-            <div class="lang-item"><span class="es">Practicar</span><br><span class="ar">يتمرن</span></div>
+            <div class="lang-item"><span class="es">Aprende!</span><br><span class="ar">اتعلم!</span></div>
+            <div class="lang-item"><span class="es">Habla!</span><br><span class="ar">اتكلم!</span></div>
+            <div class="lang-item"><span class="es">Practica!</span><br><span class="ar">اتمرن!</span></div>
         </div>
         <div class="social-links">
             <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
@@ -903,7 +903,7 @@ DASHBOARD_HTML = """
             box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 35px; overflow: hidden; position: relative;
         }
         .welcome-section::before {
-            content: "¡Hola!  Amigos  Español  يلا  هيا بينا";
+            content: "¡Hola!  Amigos  Español  ازيك  يلا بينا";
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             font-family: 'Reenie Beanie', cursive; font-size: 60px; color: rgba(255,255,255,0.03);
             display: flex; align-items: center; justify-content: center;
@@ -1042,7 +1042,7 @@ DASHBOARD_HTML = """
     <div class="main-content">
         <header class="welcome-section">
             <div class="user-welcome-info">
-                <h2><span class="es-greet">¡Hola!</span> أهلاً بيك يا {{ student.username }}! 👋</h2>
+                <h2><span class="es-greet">¡!</span> أهلاً بيك يا {{ student.username }}! 👋</h2>
                 <p>جاهز لدرس النهاردة؟ كمل في طريقك وإحنا في ضهرك دايماً!</p>
             </div>
             <div class="motivation-box">
