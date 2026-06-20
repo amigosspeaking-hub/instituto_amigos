@@ -16,7 +16,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 STUDENT_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
 
 # حط لينك الـ CSV بتاع تاب المدرسين هنا
-TEACHER_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?gid=854861638&single=true&output=csv" 
+TEACHER_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8XNmds7FrrXWcDd8mwrD0AGc7e1tU_-ACrJ-vVF7UYsL36COnRtxiEoaMq9VhauxPyUGJqfEGak8X/pub?gid=854861638&single=true&output=csv" 
 
 # رابط السكربت الخاص بحفظ التقييمات
 SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec'
