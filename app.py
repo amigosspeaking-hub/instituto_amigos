@@ -10,15 +10,24 @@ app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_202
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
-GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
+# =====================================================================
+# [ روابط جوجل شيت ]
+# =====================================================================
+STUDENT_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?output=csv"
+
+# حط لينك الـ CSV بتاع تاب المدرسين هنا
+TEACHER_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdTMPVAfLN18RG6mLNXwycXhra4STzYPIiy7fvzCpeio0SfksLG4YNw78vA-djsSTG4rNSv2qdoXS8/pub?gid=854861638&single=true&output=csv" 
+
+# رابط السكربت الخاص بحفظ التقييمات
+SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec'
 
 # =====================================================================
 # [ 1. المحاضرات - LESSONS_DATA ]
 # =====================================================================
 LESSONS_DATA = {
     "A1.1": [
-        {"title": ", ¿QUÉ TAL?", "file": "lesson1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "lesson.html"},
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"},
         {"title": "TRABAJO AQUÍ", "file": "lesson3.html"},
         {"title": "¡ME GUSTAN LAS TAPAS!", "file": "lesson4.html"}
     ],
@@ -95,7 +104,7 @@ LESSONS_DATA = {
 # =====================================================================
 EXERCISES_DATA = {
     "A1.1": [
-        {"title": "تمرين: , ¿QUÉ TAL?", "file": "exercise1.html"},
+        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
         {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"},
         {"title": "تمرين: TRABAJO AQUÍ", "file": "exercise3.html"},
         {"title": "تمرين: ¡ME GUSTAN LAS TAPAS!", "file": "exercise4.html"}
@@ -173,7 +182,7 @@ EXERCISES_DATA = {
 # =====================================================================
 VOCAB_DATA = {
     "A1.1": [
-        {"title": "كلمات: , ¿QUÉ TAL?", "file": "vocab1.html"},
+        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
         {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"},
         {"title": "كلمات: TRABAJO AQUÍ", "file": "vocab3.html"},
         {"title": "كلمات: ¡ME GUSTAN LAS TAPAS!", "file": "vocab4.html"}
@@ -407,7 +416,7 @@ GAMES_DATA = {
 # =====================================================================
 SHADOWING_DATA = {
     "A1.1": [
-        {"title": "شادوينج: , ¿QUÉ TAL?", "file": "shadowing1.html"},
+        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
         {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"},
         {"title": "شادوينج: TRABAJO AQUÍ", "file": "shadowing3.html"},
         {"title": "شادوينج: ¡ME GUSTAN LAS TAPAS!", "file": "shadowing4.html"}
@@ -526,7 +535,15 @@ VIDEOS_DATA = {
 }
 
 # =====================================================================
-# [ 8. عجلة التحدث - WHEEL_TOPICS - 10 مواضيع لكل مستوى ]
+# [ الألعاب الجماعية - MULTIPLAYER_GAMES_DATA (خاصة بالمدرس) ]
+# =====================================================================
+MULTIPLAYER_GAMES_DATA = {
+    "A1.1": [{"title": "لعبة تفاعلية للفصل - الدرس الأول", "file": "multi1.html"}],
+    "A2.1": [{"title": "مسابقة كلمات جماعية", "file": "multi_a2.html"}],
+}
+
+# =====================================================================
+# [ 8. عجلة التحدث - WHEEL_TOPICS ]
 # =====================================================================
 WHEEL_TOPICS = {
     "A1.1": [
@@ -688,26 +705,27 @@ motivation_quotes = [
     "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!"
 ]
 
-def get_student_data(username, password):
+def get_user_data(username, password, role='student'):
+    url = TEACHER_SHEET_CSV_URL if role == 'teacher' else STUDENT_SHEET_CSV_URL
     try:
-        df = pd.read_csv(GOOGLE_SHEET_CSV_URL, dtype=str)
+        df = pd.read_csv(url, dtype=str)
         df.fillna('', inplace=True)
         df.columns = df.columns.str.strip()
         df['username'] = df['username'].str.strip()
         df['password'] = df['password'].str.strip()
-        df['level'] = df['level'].str.strip()
+        
         user_row = df[(df['username'] == str(username).strip()) & (df['password'] == str(password).strip())]
         if not user_row.empty:
             return user_row.iloc[0].to_dict()
         return None
     except Exception as e:
-        print(f"Error checking Google Sheet: {e}")
+        print(f"Error checking Google Sheet ({role}): {e}")
         return None
 
 # =====================================================================
-# صفحة تسجيل الدخول
+# صفحات تسجيل الدخول
 # =====================================================================
-LOGIN_HTML = """
+STUDENT_LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -718,16 +736,8 @@ LOGIN_HTML = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
-        body { 
-            background: #fcfbf7; font-family: 'Cairo', sans-serif; 
-            display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; 
-            overflow: hidden; position: relative;
-        }
-        .float-word {
-            position: absolute; font-family: 'Reenie Beanie', cursive;
-            font-size: 26px; color: rgba(0,0,0,0.06); font-weight: bold;
-            pointer-events: none; z-index: 0;
-        }
+        body { background: #fcfbf7; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; overflow: hidden; position: relative; }
+        .float-word { position: absolute; font-family: 'Reenie Beanie', cursive; font-size: 26px; color: rgba(0,0,0,0.06); font-weight: bold; pointer-events: none; z-index: 0; }
         .fw1 { top: 5%; left: 10%; transform: rotate(-12deg); font-size: 40px; color: rgba(229,36,33,0.08); }
         .fw2 { top: 8%; right: 12%; transform: rotate(8deg); font-size: 35px; }
         .fw3 { bottom: 12%; left: 8%; transform: rotate(5deg); font-size: 38px; color: rgba(255,209,0,0.15); }
@@ -738,85 +748,47 @@ LOGIN_HTML = """
         .fw8 { top: 70%; right: 8%; transform: rotate(-5deg); font-size: 30px; }
         .fw9 { top: 20%; left: 40%; transform: rotate(3deg); font-size: 22px; }
         .fw10 { bottom: 25%; right: 35%; transform: rotate(-8deg); font-size: 24px; }
-        .doodle-container {
-            position: absolute; display: flex; flex-direction: column; align-items: center;
-            opacity: 0.65; z-index: 0; color: #333;
-        }
+        .doodle-container { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0.65; z-index: 0; color: #333; }
         .doodle-container i { font-size: 38px; margin-bottom: 5px; color: #444; }
         .doodle-container span { font-family: 'Reenie Beanie', cursive; font-size: 28px; font-weight: bold; color: var(--primary-red); }
         .d-1 { top: 12%; left: 15%; animation: float 6s ease-in-out infinite; transform: rotate(-10deg); }
         .d-2 { bottom: 15%; right: 15%; animation: float 5s ease-in-out infinite reverse; transform: rotate(15deg); }
         .d-3 { bottom: 15%; left: 15%; animation: float 7s ease-in-out infinite; transform: rotate(-8deg); }
         .d-4 { top: 15%; right: 15%; animation: float 8s ease-in-out infinite; transform: rotate(12deg); }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-        .card { 
-            background: white; padding: 40px; border-radius: 15px; 
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.05); border: 3px solid #333; 
-            text-align: center; width: 400px; position: relative; z-index: 1;
-        }
+        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 5px 5px 0px rgba(0,0,0,0.05); border: 3px solid #333; text-align: center; width: 400px; position: relative; z-index: 1; }
         .logo-img { width: 110px; height: auto; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--primary-gold); }
         h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 900; }
         h1 .es-word { color: var(--primary-red); font-family: 'Reenie Beanie', cursive; font-size: 30px; }
         p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
         .input-group { position: relative; margin: 15px 0; }
         .input-group i.field-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; }
-        input { 
-            width: 100%; padding: 12px 40px 12px 12px; border: 2px solid #333; border-radius: 8px; 
-            text-align: center; box-sizing: border-box; font-size: 15px;
-            font-family: 'Cairo', sans-serif; transition: all 0.2s;
-        }
+        input { width: 100%; padding: 12px 40px 12px 12px; border: 2px solid #333; border-radius: 8px; text-align: center; box-sizing: border-box; font-size: 15px; font-family: 'Cairo', sans-serif; transition: all 0.2s; }
         input:focus { border-color: var(--primary-red); outline: none; box-shadow: 3px 3px 0px rgba(229, 36, 33, 0.2); }
-        button { 
-            width: 100%; padding: 12px; background: var(--primary-red); color: white; 
-            border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; 
-            font-size: 16px; font-family: 'Cairo', sans-serif; transition: all 0.2s;
-            margin-top: 10px; box-shadow: 3px 3px 0px #333;
-        }
+        button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; transition: all 0.2s; margin-top: 10px; box-shadow: 3px 3px 0px #333; }
         button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #333; }
         .error { color: var(--primary-red); margin-bottom: 15px; font-size: 13px; font-weight: bold; background: #ffebeb; padding: 8px; border-radius: 5px; border: 1px solid var(--primary-red); }
-        .lang-strip {
-            display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 15px;
-            border-top: 2px dashed #eee;
-        }
+        .lang-strip { display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 15px; border-top: 2px dashed #eee; }
         .lang-strip .lang-item { text-align: center; }
         .lang-strip .es { font-family: 'Reenie Beanie', cursive; font-size: 22px; color: var(--primary-red); font-weight: bold; }
         .lang-strip .ar { font-size: 13px; color: #888; }
         .social-links { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
-        .social-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px; border-radius: 50%; color: white; text-decoration: none;
-            font-size: 18px; transition: 0.3s; border: 2px solid #333; box-shadow: 2px 2px 0px #333;
-        }
+        .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: white; text-decoration: none; font-size: 18px; transition: 0.3s; border: 2px solid #333; box-shadow: 2px 2px 0px #333; }
         .social-btn:hover { transform: translateY(-3px); box-shadow: 4px 4px 0px #333; }
-        .fb { background: #1877F2; } .ig { background: #E4405F; }
-        .tt { background: #000000; } .wa { background: #25D366; }
-        @media (max-width: 500px) {
-            .card { width: 92%; padding: 25px; }
-            .doodle-container { display: none; }
-        }
+        .fb { background: #1877F2; } .ig { background: #E4405F; } .tt { background: #000000; } .wa { background: #25D366; }
+        .teacher-link { display: inline-block; margin-top: 20px; color: #555; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 2px dashed #ccc; padding-bottom: 2px; transition: 0.3s; }
+        .teacher-link:hover { color: #e52421; border-color: #e52421; }
+        @media (max-width: 500px) { .card { width: 92%; padding: 25px; } .doodle-container { display: none; } }
     </style>
 </head>
 <body>
-    <span class="float-word fw1">¡Hola!</span>
-    <span class="float-word fw2">ازيك!</span>
-    <span class="float-word fw3">Amigos</span>
-    <span class="float-word fw4">صحاب</span>
-    <span class="float-word fw5">Gracias</span>
-    <span class="float-word fw6">شكراً</span>
-    <span class="float-word fw7">Familia</span>
-    <span class="float-word fw8">عيلة</span>
-    <span class="float-word fw9">Bonito</span>
-    <span class="float-word fw10">جميل</span>
+    <span class="float-word fw1">¡Hola!</span><span class="float-word fw2">ازيك!</span><span class="float-word fw3">Amigos</span><span class="float-word fw4">صحاب</span><span class="float-word fw5">Gracias</span><span class="float-word fw6">شكراً</span><span class="float-word fw7">Familia</span><span class="float-word fw8">عيلة</span><span class="float-word fw9">Bonito</span><span class="float-word fw10">جميل</span>
     <div class="doodle-container d-1"><i class="fa-regular fa-sun"></i><span>Sol</span></div>
     <div class="doodle-container d-2"><i class="fa-solid fa-guitar"></i><span>Música</span></div>
     <div class="doodle-container d-3"><i class="fa-solid fa-pepper-hot"></i><span>Picante</span></div>
     <div class="doodle-container d-4"><i class="fa-regular fa-comment-dots"></i><span>¡Vamos!</span></div>
     <div class="card">
-        <img src="/static/assets/logo.png" alt="Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421&size=120'">
+        <img src="/static/assets/logo.png" alt="Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=IA&background=ffd100&color=e52421'">
         <h1>بوابتك لـ <span class="es-word">Español</span> 👋</h1>
         <p class="subtitle">اكتب بياناتك ويالا بينا ع المنصة التعليمية</p>
         {% if error %} <div class="error"><i class="fa-solid fa-triangle-exclamation"></i> {{ error }}</div> {% endif %}
@@ -831,6 +803,7 @@ LOGIN_HTML = """
             </div>
             <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> ادخل للمنصة</button>
         </form>
+        <a href="/teacher_login" class="teacher-link"><i class="fa-solid fa-chalkboard-user"></i> الدخول كمدرس</a>
         <div class="lang-strip">
             <div class="lang-item"><span class="es">Aprende!</span><br><span class="ar">اتعلم!</span></div>
             <div class="lang-item"><span class="es">Habla!</span><br><span class="ar">اتكلم!</span></div>
@@ -847,8 +820,45 @@ LOGIN_HTML = """
 </html>
 """
 
+TEACHER_LOGIN_HTML = """
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>دخول المدرسين | Instituto Amigos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #1a1a2e; color: white; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; }
+        .card { background: #16213e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid #0f3460; text-align: center; width: 400px; }
+        h1 { color: #f39c12; font-size: 26px; font-weight: 900; margin-bottom: 5px; }
+        .input-group { margin: 15px 0; }
+        input { width: 100%; padding: 12px; border: 2px solid #0f3460; background: #1a1a2e; color: white; border-radius: 8px; text-align: center; font-family: 'Cairo'; }
+        button { width: 100%; padding: 12px; background: #e67e22; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .student-link { display: inline-block; margin-top: 20px; color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .student-link:hover { color: #fff; }
+        .error { color: #fff; margin-bottom: 15px; font-weight: bold; background: #e74c3c; padding: 8px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <i class="fa-solid fa-chalkboard-user" style="font-size: 50px; color: #f39c12; margin-bottom: 15px;"></i>
+        <h1>بوابة المدرسين 👨‍🏫</h1>
+        <p style="color: #aaa; margin-bottom: 25px;">أدخل بياناتك للوصول للوحة التحكم</p>
+        {% if error %} <div class="error">{{ error }}</div> {% endif %}
+        <form method="POST">
+            <div class="input-group"><input type="text" name="username" placeholder="اسم المستخدم" required></div>
+            <div class="input-group"><input type="password" name="password" placeholder="كلمة المرور" required></div>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+        <a href="/" class="student-link"><i class="fa-solid fa-arrow-right"></i> رجوع لصفحة الطلبة</a>
+    </div>
+</body>
+</html>
+"""
+
 # =====================================================================
-# لوحة التحكم الرئيسية (الداشبورد)
+# لوحة الطالب (DASHBOARD_HTML)
 # =====================================================================
 DASHBOARD_HTML = """
 <!DOCTYPE html>
@@ -1078,7 +1088,6 @@ DASHBOARD_HTML = """
             </button>
         </nav>
 
-        <!-- ========== 1. الدروس ========== -->
         <div id="lectures-tab" class="tab-content active">
             <div class="section-header">
                 <i class="fa-solid fa-book-open sec-icon" style="color: var(--primary);"></i>
@@ -1099,14 +1108,13 @@ DASHBOARD_HTML = """
                     <div class="card-body">
                         <h4>{{ lesson.title }}</h4>
                         <div class="card-es-hint">Lección {{ loop.index }}</div>
-                        <a href="/page/{{ student.level }}/{{ lesson.file }}" class="card-action-btn btn-lecture"><i class="fa-solid fa-play-circle"></i> ابدأ الشرح</a>
+                        <a href="/page/{{ student.level }}/{{ lesson.file }}" class="card-action-btn btn-lecture" target="_blank"><i class="fa-solid fa-play-circle"></i> ابدأ الشرح</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- ========== 2. التمارين ========== -->
         <div id="exercises-tab" class="tab-content">
             <div class="section-header">
                 <i class="fa-solid fa-pen-ruler sec-icon" style="color: #b8860b;"></i>
@@ -1127,14 +1135,13 @@ DASHBOARD_HTML = """
                     <div class="card-body">
                         <h4>{{ exercise.title }}</h4>
                         <div class="card-es-hint">Práctica {{ loop.index }}</div>
-                        <a href="/page/{{ student.level }}/{{ exercise.file }}" class="card-action-btn btn-exercise"><i class="fa-solid fa-pencil"></i> ابدأ التمرين</a>
+                        <a href="/page/{{ student.level }}/{{ exercise.file }}" class="card-action-btn btn-exercise" target="_blank"><i class="fa-solid fa-pencil"></i> ابدأ التمرين</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- ========== 3. الكلمات ========== -->
         <div id="vocab-tab" class="tab-content">
             <div class="section-header vocab-header">
                 <i class="fa-solid fa-language sec-icon" style="color: var(--vocab-color);"></i>
@@ -1155,14 +1162,13 @@ DASHBOARD_HTML = """
                     <div class="card-body">
                         <h4>{{ vocab.title }}</h4>
                         <div class="card-es-hint" style="color: var(--vocab-color); opacity: 0.6;">Vocabulario {{ loop.index }}</div>
-                        <a href="/page/{{ student.level }}/{{ vocab.file }}" class="card-action-btn btn-vocab"><i class="fa-solid fa-book-bookmark"></i> افتح الكلمات</a>
+                        <a href="/page/{{ student.level }}/{{ vocab.file }}" class="card-action-btn btn-vocab" target="_blank"><i class="fa-solid fa-book-bookmark"></i> افتح الكلمات</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- ========== 4. الجداول ========== -->
         <div id="schedule-tab" class="tab-content">
             <div class="section-header schedule-header">
                 <i class="fa-solid fa-calendar-check sec-icon" style="color: var(--secondary);"></i>
@@ -1190,7 +1196,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== 5. الشادوينج ========== -->
         <div id="shadowing-tab" class="tab-content">
             <div class="section-header shadow-header">
                 <i class="fa-solid fa-headphones sec-icon" style="color: var(--shadow-color);"></i>
@@ -1211,14 +1216,13 @@ DASHBOARD_HTML = """
                     <div class="card-body">
                         <h4>{{ shadow.title }}</h4>
                         <div class="card-es-hint" style="color: var(--shadow-color); opacity: 0.6;">Shadowing {{ loop.index }}</div>
-                        <a href="/page/{{ student.level }}/{{ shadow.file }}" class="card-action-btn btn-shadow"><i class="fa-solid fa-headphones"></i> ابدأ الشادوينج</a>
+                        <a href="/page/{{ student.level }}/{{ shadow.file }}" class="card-action-btn btn-shadow" target="_blank"><i class="fa-solid fa-headphones"></i> ابدأ الشادوينج</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- ========== 6. الألعاب ========== -->
         <div id="games-tab" class="tab-content">
             <div class="section-header games-header">
                 <i class="fa-solid fa-puzzle-piece sec-icon" style="color: #2ecc71;"></i>
@@ -1246,7 +1250,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== 7. الفيديوهات ========== -->
         <div id="videos-tab" class="tab-content">
             <div class="section-header">
                 <i class="fa-brands fa-youtube sec-icon" style="color: #ff0000;"></i>
@@ -1269,7 +1272,6 @@ DASHBOARD_HTML = """
             </div>
         </div>
 
-        <!-- ========== 8. عجلة التحدث ========== -->
         <div id="wheel-tab" class="tab-content">
             <div class="wheel-box">
                 <h3 style="color: var(--secondary); margin-bottom: 10px;">
@@ -1341,28 +1343,387 @@ DASHBOARD_HTML = """
 """
 
 # =====================================================================
-# الراوتات (Routes)
+# لوحة المدرس (TEACHER_DASHBOARD_HTML)
 # =====================================================================
+TEACHER_DASHBOARD_HTML = """
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة المدرس | Instituto Amigos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background: #f4f7f6; color: #333; }
+        
+        .top-nav { background: #1a1a2e; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .brand { font-size: 20px; font-weight: 900; color: #f39c12; }
+        .user-actions a { color: white; text-decoration: none; background: #e74c3c; padding: 8px 15px; border-radius: 8px; font-weight: bold; }
+        
+        .main-tabs { display: flex; justify-content: center; gap: 20px; background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .m-tab { background: none; border: none; font-size: 18px; font-weight: bold; color: #555; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .m-tab.active { color: #1a1a2e; border-color: #f39c12; }
 
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px 50px; }
+        
+        .level-selector { background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .level-selector select { padding: 10px 20px; font-size: 16px; font-family: 'Cairo'; border: 2px solid #ccc; border-radius: 8px; font-weight: bold; }
+        
+        .content-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .c-tab { background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; color: #555; }
+        .c-tab.active { background: #f39c12; color: white; border-color: #f39c12; }
+        .c-tab.multi-games { background: #8e44ad; color: white; border-color: #8e44ad; }
+        .c-tab.multi-games.active { background: #9b59b6; box-shadow: 0 0 10px rgba(142, 68, 173, 0.5); }
+        
+        .tab-section { display: none; }
+        .tab-section.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .course-card { background: white; border-radius: 15px; border: 1px solid #eee; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); text-align: center; }
+        .course-card .header { background: #f8f9fa; padding: 15px; font-weight: bold; color: #1a1a2e; border-bottom: 1px solid #eee; }
+        .course-card .body { padding: 20px; }
+        .course-card a { display: inline-block; width: 100%; padding: 10px; background: #f39c12; color: #1a1a2e; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; }
+        .course-card a.multi-btn { background: #8e44ad; color: white; }
+
+        .grading-section { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .students-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+        .student-list-card { background: #f8f9fa; border: 1px solid #ddd; border-radius: 10px; padding: 15px; cursor: pointer; transition: 0.3s; }
+        .student-list-card:hover { border-color: #f39c12; transform: translateY(-2px); }
+        .badge { padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; margin-left: 5px; }
+        .badge.pending { background: #ffeaa7; color: #d35400; }
+        .badge.correct { background: #d4efdf; color: #27ae60; }
+        .badge.wrong { background: #fadbd8; color: #c0392b; }
+        
+        .student-detail { background: #fff; border: 2px solid #f39c12; border-radius: 15px; padding: 20px; margin-top: 20px; }
+        .pq-box { background: #fdfefe; border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 15px; border-right: 4px solid #f39c12; }
+        .pq-ans { background: #f4f6f7; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 16px; margin: 10px 0; direction: ltr; text-align: left;}
+        .v-btn { padding: 8px 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-left: 5px; }
+        .v-btn.correct { background: #e9f7ef; color: #27ae60; border: 1px solid #27ae60; }
+        .v-btn.correct.active { background: #27ae60; color: white; }
+        .v-btn.wrong { background: #fdedec; color: #c0392b; border: 1px solid #c0392b; }
+        .v-btn.wrong.active { background: #c0392b; color: white; }
+        .f-input { padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 250px; font-family: 'Cairo'; }
+        .submit-btn { background: #27ae60; color: white; padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="brand"><i class="fa-solid fa-chalkboard-user"></i> لوحة المدرس</div>
+        <div class="user-actions">
+            <span style="margin-left: 15px;">أهلاً يا أستاذ/ة <strong>{{ teacher.fullName if teacher.fullName else teacher.username }}</strong></span>
+            <a href="/logout">خروج <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+    </nav>
+
+    <div class="main-tabs">
+        <button class="m-tab active" onclick="switchMainTab('materials')"><i class="fa-solid fa-book"></i> المناهج والمواد</button>
+        <button class="m-tab" onclick="switchMainTab('grading'); refreshGradingData();"><i class="fa-solid fa-check-double"></i> تصحيح الواجبات</button>
+    </div>
+
+    <div class="container">
+        <div id="materials-view">
+            <div class="level-selector">
+                <label style="font-weight:bold; font-size:18px;">اختر المستوى لعرض محتواه:</label><br><br>
+                <select id="levelSelect" onchange="window.location.href='/teacher_dashboard?level=' + this.value">
+                    <option value="">-- اختر المستوى --</option>
+                    <option value="A1.1" {% if current_level == 'A1.1' %}selected{% endif %}>مستوى A1.1</option>
+                    <option value="A1.2" {% if current_level == 'A1.2' %}selected{% endif %}>مستوى A1.2</option>
+                    <option value="A1.3" {% if current_level == 'A1.3' %}selected{% endif %}>مستوى A1.3</option>
+                    <option value="A2.1" {% if current_level == 'A2.1' %}selected{% endif %}>مستوى A2.1</option>
+                    <option value="A2.2" {% if current_level == 'A2.2' %}selected{% endif %}>مستوى A2.2</option>
+                    <option value="A2.3" {% if current_level == 'A2.3' %}selected{% endif %}>مستوى A2.3</option>
+                    <option value="B1.1" {% if current_level == 'B1.1' %}selected{% endif %}>مستوى B1.1</option>
+                    <option value="B1.2" {% if current_level == 'B1.2' %}selected{% endif %}>مستوى B1.2</option>
+                    <option value="B1.3" {% if current_level == 'B1.3' %}selected{% endif %}>مستوى B1.3</option>
+                    <option value="B2.1" {% if current_level == 'B2.1' %}selected{% endif %}>مستوى B2.1</option>
+                    <option value="B2.2" {% if current_level == 'B2.2' %}selected{% endif %}>مستوى B2.2</option>
+                    <option value="B2.3" {% if current_level == 'B2.3' %}selected{% endif %}>مستوى B2.3</option>
+                </select>
+            </div>
+
+            {% if current_level %}
+            <div class="content-tabs">
+                <button class="c-tab active" onclick="switchContentTab('lectures')">الدروس</button>
+                <button class="c-tab" onclick="switchContentTab('exercises')">التمارين</button>
+                <button class="c-tab" onclick="switchContentTab('vocab')">الكلمات</button>
+                <button class="c-tab" onclick="switchContentTab('schedules')">الجداول</button>
+                <button class="c-tab" onclick="switchContentTab('shadowing')">الشادوينج</button>
+                <button class="c-tab" onclick="switchContentTab('games')">الألعاب الفردية</button>
+                <button class="c-tab multi-games" onclick="switchContentTab('multiplayer')"><i class="fa-solid fa-users"></i> ألعاب جماعية</button>
+            </div>
+
+            <div id="lectures" class="tab-section active">
+                <div class="cards-grid">
+                    {% for item in materials.lessons %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div id="exercises" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.exercises %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="vocab" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.vocab %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="schedules" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.schedules %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="shadowing" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.shadowing %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="games" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.games %}
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="multiplayer" class="tab-section">
+                <div class="cards-grid">
+                    {% for item in materials.multi_games %}
+                    <div class="course-card" style="border-color: #8e44ad;">
+                        <div class="header" style="background: #f4ecf7; color: #8e44ad;">{{ item.title }}</div>
+                        <div class="body">
+                            <p style="font-size: 13px; color: #666; margin-bottom: 10px;">خاصة بالعرض داخل الفصل</p>
+                            <a href="/page/{{ current_level }}/{{ item.file }}" target="_blank" class="multi-btn">تشغيل اللعبة <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p style="text-align:center; width:100%; color:#888;">لا توجد ألعاب جماعية لهذا المستوى حالياً.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% else %}
+            <p style="text-align:center; color:#777; font-size:18px; margin-top:50px;">يرجى اختيار المستوى من القائمة بالأعلى لعرض المحتوى.</p>
+            {% endif %}
+        </div>
+
+        <div id="grading-view" style="display:none;" class="grading-section">
+            <h2 style="color: #f39c12; margin-bottom: 15px;"><i class="fa-solid fa-file-pen"></i> تصحيح واجبات الطلبة</h2>
+            
+            <div id="studentsListView">
+                <button onclick="refreshGradingData()" style="padding:8px 15px; background:#3498db; color:white; border:none; border-radius:5px; cursor:pointer;">🔄 تحديث القائمة</button>
+                <div id="studentsListContent" class="students-list">جاري التحميل...</div>
+            </div>
+
+            <div id="studentDetailView" style="display:none;">
+                <button onclick="backToGradingList()" style="padding:8px 15px; background:#95a5a6; color:white; border:none; border-radius:5px; cursor:pointer; margin-bottom:15px;">⬅️ رجوع للقائمة</button>
+                <div id="studentDetailContent" class="student-detail"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchMainTab(tab) {
+            document.querySelectorAll('.m-tab').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('materials-view').style.display = tab === 'materials' ? 'block' : 'none';
+            document.getElementById('grading-view').style.display = tab === 'grading' ? 'block' : 'none';
+        }
+
+        function switchContentTab(tabId) {
+            document.querySelectorAll('.c-tab').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            if(document.getElementById(tabId)) document.getElementById(tabId).classList.add('active');
+        }
+
+        const SCRIPT_URL = '{{ script_url }}';
+        const TEACHER_USER = '{{ teacher.username }}';
+        let currentReviews = {};
+        let currentStudent = null;
+
+        async function refreshGradingData() {
+            const container = document.getElementById('studentsListContent');
+            container.innerHTML = 'جاري التحميل... ⏳';
+            try {
+                const res = await fetch(SCRIPT_URL + '?action=getPendingReviews&_t=' + Date.now());
+                const data = await res.json();
+                if (data.status === 'success') {
+                    if(!data.students || data.students.length === 0) {
+                        container.innerHTML = '<p style="color:green; font-weight:bold;">✅ كل الإجابات تم تصحيحها!</p>';
+                        return;
+                    }
+                    let html = '';
+                    data.students.forEach(s => {
+                        html += `
+                        <div class="student-list-card" onclick="openStudentGrading('${s.username}', '${s.lessonId}')">
+                            <h3 style="color:#2c3e50;">👤 ${s.fullName || s.username}</h3>
+                            <p style="color:#7f8c8d; font-size:14px; margin-bottom:10px;">الدرس: ${s.lessonId}</p>
+                            <div>
+                                <span class="badge pending">⏳ ${s.pendingCount} بانتظار</span>
+                            </div>
+                        </div>`;
+                    });
+                    container.innerHTML = html;
+                }
+            } catch (err) {
+                container.innerHTML = '❌ خطأ في تحميل البيانات';
+            }
+        }
+
+        async function openStudentGrading(username, lessonId) {
+            document.getElementById('studentsListView').style.display = 'none';
+            document.getElementById('studentDetailView').style.display = 'block';
+            const container = document.getElementById('studentDetailContent');
+            container.innerHTML = 'جاري تحميل إجابات الطالب... ⏳';
+            currentReviews = {};
+
+            try {
+                const res = await fetch(SCRIPT_URL + '?action=getStudentDetails&username=' + username + '&lessonId=' + lessonId);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    currentStudent = data.student;
+                    renderStudentDetails(container);
+                }
+            } catch (err) {
+                container.innerHTML = '❌ خطأ في التحميل';
+            }
+        }
+
+        function renderStudentDetails(container) {
+            const pending = currentStudent.pendingAnswers;
+            let html = `<h3>التصحيح للطالب: <span style="color:#e52421;">${currentStudent.fullName || currentStudent.username}</span></h3>`;
+            
+            Object.keys(pending).forEach(qId => {
+                const ans = pending[qId];
+                html += `
+                <div class="pq-box">
+                    <p><strong>السؤال:</strong> ${ans.questionText || qId}</p>
+                    <div class="pq-ans">${ans.value}</div>
+                    ${ans.expectedAnswer ? `<p style="color:green; font-size:14px;">الإجابة النموذجية: ${ans.expectedAnswer}</p>` : ''}
+                    <div style="margin-top:10px;">
+                        <button class="v-btn correct" onclick="setVerdict('${qId}', 'correct', this)">✅ صح</button>
+                        <button class="v-btn wrong" onclick="setVerdict('${qId}', 'wrong', this)">❌ خطأ</button>
+                        <input type="text" class="f-input" placeholder="ملاحظة (اختياري)" data-qid="${qId}">
+                    </div>
+                </div>`;
+            });
+            html += `<button class="submit-btn" onclick="submitReviews()">حفظ التصحيح</button>`;
+            container.innerHTML = html;
+        }
+
+        function setVerdict(qId, verdict, btn) {
+            currentReviews[qId] = { verdict: verdict };
+            btn.parentElement.querySelectorAll('.v-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function backToGradingList() {
+            document.getElementById('studentDetailView').style.display = 'none';
+            document.getElementById('studentsListView').style.display = 'block';
+            refreshGradingData();
+        }
+
+        async function submitReviews() {
+            if (Object.keys(currentReviews).length === 0) return alert('لم تقم بتصحيح أي سؤال!');
+            
+            Object.keys(currentReviews).forEach(qId => {
+                const inp = document.querySelector(`.f-input[data-qid="${qId}"]`);
+                if(inp) currentReviews[qId].feedback = inp.value;
+            });
+
+            const payload = {
+                action: 'submitReview',
+                username: currentStudent.username,
+                lessonId: currentStudent.lessonId,
+                teacher: TEACHER_USER,
+                reviews: JSON.stringify(currentReviews)
+            };
+
+            const url = SCRIPT_URL + '?action=submitReview&data=' + encodeURIComponent(JSON.stringify(payload));
+            await fetch(url, { mode: 'no-cors' });
+            alert('تم الحفظ بنجاح!');
+            backToGradingList();
+        }
+    </script>
+</body>
+</html>
+"""
+
+# =====================================================================
+# [ الراوتات (Routes) ]
+# =====================================================================
 @app.route('/', methods=['GET', 'POST'])
-def login():
+def login_student():
     error = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        student = get_student_data(username, password)
-        if student:
+        user = get_user_data(username, password, role='student')
+        if user:
             session.permanent = True 
-            session['user'] = student
+            session['user'] = user
+            session['role'] = 'student'
             return redirect(url_for('dashboard'))
         else:
-            error = "اسم المستخدم أو الباسورد غلط.. جرب تاني!"
-    return render_template_string(LOGIN_HTML, error=error)
+            error = "بيانات الطالب غير صحيحة!"
+    return render_template_string(STUDENT_LOGIN_HTML, error=error)
+
+@app.route('/teacher_login', methods=['GET', 'POST'])
+def login_teacher():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = get_user_data(username, password, role='teacher')
+        if user:
+            session.permanent = True 
+            session['user'] = user
+            session['role'] = 'teacher'
+            return redirect(url_for('teacher_dashboard'))
+        else:
+            error = "بيانات المدرس غير صحيحة!"
+    return render_template_string(TEACHER_LOGIN_HTML, error=error)
 
 @app.route('/dashboard')
 def dashboard():
-    if 'user' not in session:
-        return redirect(url_for('login'))
+    if 'user' not in session or session.get('role') != 'student':
+        return redirect(url_for('login_student'))
     
     student = session['user']
     level = student['level']
@@ -1394,24 +1755,57 @@ def dashboard():
         videos_list=student_videos
     )
 
+@app.route('/teacher_dashboard')
+def teacher_dashboard():
+    if 'user' not in session or session.get('role') != 'teacher':
+        return redirect(url_for('login_teacher'))
+    
+    teacher = session['user']
+    selected_level = request.args.get('level', '')
+    
+    materials = {}
+    if selected_level:
+        materials = {
+            'lessons': LESSONS_DATA.get(selected_level, []),
+            'exercises': EXERCISES_DATA.get(selected_level, []),
+            'vocab': VOCAB_DATA.get(selected_level, []),
+            'schedules': SCHEDULES_DATA.get(selected_level, []),
+            'shadowing': SHADOWING_DATA.get(selected_level, []),
+            'games': GAMES_DATA.get(selected_level, []),
+            'multi_games': MULTIPLAYER_GAMES_DATA.get(selected_level, [])
+        }
+
+    return render_template_string(
+        TEACHER_DASHBOARD_HTML, 
+        teacher=teacher, 
+        current_level=selected_level, 
+        materials=materials,
+        script_url=SCRIPT_URL
+    )
+
 @app.route('/page/<path:filename>')
 def serve_page(filename):
     if 'user' not in session:
-        return redirect(url_for('login'))
-    student = session['user']
-    student_level = student['level']
-    if not filename.startswith(student_level + "/"):
-        abort(403)
+        return redirect(url_for('login_student'))
+    
+    user = session['user']
+    role = session.get('role')
+    
+    # لو مدرس، يقدر يفتح أي ملف، لو طالب يفتح ملفات مستواه بس
+    if role == 'student':
+        if not filename.startswith(user['level'] + "/"):
+            abort(403)
+            
     try:
-        return render_template(filename, student=student)
+        return render_template(filename, student=user)
     except Exception as e:
         print(f"Template load error: {e}")
         abort(404)
 
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
-    return redirect(url_for('login'))
+    session.clear()
+    return redirect(url_for('login_student'))
 
 @app.route('/healthz')
 def health_check():
