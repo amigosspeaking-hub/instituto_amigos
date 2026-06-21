@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="script-url" content="https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec">
 <title>Instituto Amigos - A2.1 L2 - Para ti y para mí</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
@@ -18,17 +19,6 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#0f0c29,#3
 .user-bar{background:rgba(0,0,0,.4);padding:8px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .user-bar .welcome{color:#f39c12;font-weight:700;font-size:.9em}
 .user-bar .logout-btn{background:#c0392b;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600;font-size:.85em;text-decoration:none}
-
-/* وضع المعلم - شريط علوي مميز */
-.teacher-grading-bar{background:linear-gradient(135deg,rgba(155,89,182,.3),rgba(142,68,173,.2));border:2px solid #9b59b6;border-radius:14px;padding:14px 20px;margin:12px auto;max-width:1000px;display:none;flex-direction:column;gap:10px}
-.teacher-grading-bar.show{display:flex}
-.teacher-grading-bar .tg-title{font-size:1.1em;font-weight:800;color:#d5a6f0;text-align:center}
-.teacher-grading-bar .tg-student{font-size:.95em;color:#ffeaa7;text-align:center}
-.teacher-grading-bar .tg-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.teacher-grading-bar .tg-btn{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.9em;transition:transform .2s}
-.teacher-grading-bar .tg-btn:hover{transform:scale(1.05)}
-.teacher-grading-bar .tg-btn.save{background:linear-gradient(135deg,#27ae60,#16a085)}
-.teacher-grading-bar .tg-btn.skip{background:linear-gradient(135deg,#e67e22,#d35400)}
 
 .progress-summary{max-width:1000px;margin:12px auto;padding:12px 18px;background:rgba(30,45,69,.6);backdrop-filter:blur(15px);border-radius:14px;border:1px solid rgba(52,152,219,.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .progress-summary .item{display:flex;flex-direction:column;align-items:center;min-width:55px}
@@ -111,17 +101,21 @@ input:disabled,select:disabled,textarea:disabled{cursor:not-allowed;opacity:.95;
 select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ecf0f1' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 12px) center;padding-right:35px}
 select option{background:#1a2540;color:#ecf0f1}
 
-/* إخفاء التعليقات والتفسيرات في وضع الإرسال العادي */
 .feedback{margin-top:10px;padding:0;border-radius:10px;display:none;font-size:.9em;line-height:1.7;overflow:hidden}
 .feedback.correct,.feedback.half,.feedback.wrong,.feedback.pending{display:block}
 .fb-spanish{direction:ltr;text-align:left;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);unicode-bidi:embed}
 .fb-spanish strong{font-weight:800}
 .fb-arabic{direction:rtl;text-align:right;padding:10px 14px;font-size:.9em;background:rgba(0,0,0,.15)}
 .fb-arabic strong{color:#f39c12;font-weight:800}
+.fb-arabic .es{direction:ltr;text-align:left;display:inline-block;unicode-bidi:embed;font-family:'Cairo',sans-serif}
+.fb-arabic .es-line{direction:ltr;text-align:left;display:block;margin:4px 0;padding:4px 8px;background:rgba(52,152,219,.08);border-radius:4px;border-left:2px solid #3498db;unicode-bidi:embed;font-family:'Cairo',sans-serif}
 .feedback.correct{background:rgba(39,174,96,.12);border:1px solid #27ae60;color:#2ecc71}
 .feedback.half{background:rgba(241,196,15,.12);border:1px solid #f1c40f;color:#f1c40f}
 .feedback.wrong{background:rgba(231,76,60,.12);border:1px solid #e74c3c;color:#ff7675}
 .feedback.pending{background:rgba(155,89,182,.12);border:1px solid #9b59b6;color:#d5a6f0}
+.feedback .teacher-comment{background:rgba(0,0,0,.2);padding:8px 10px;border-radius:6px;margin-top:8px;border-right:3px solid #f39c12;direction:rtl;text-align:right}
+.feedback .teacher-comment strong{color:#f39c12}
+.feedback .reviewed-by{display:block;margin-top:6px;font-size:.8em;color:#95a5a6;direction:rtl;text-align:right}
 
 .whatsapp-note{background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(18,140,126,.15));border:2px solid #25d366;border-radius:14px;padding:18px 20px;margin:15px 0;text-align:center;color:#d4ffe4;font-weight:600;line-height:1.8;direction:rtl}
 .whatsapp-note .wa-icon{font-size:2em;display:block;margin-bottom:8px}
@@ -136,12 +130,6 @@ select option{background:#1a2540;color:#ecf0f1}
 .lock-badge.pending{background:#9b59b6}
 .options-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;direction:ltr}
 .options-list .opt{background:rgba(52,152,219,.12);border:1px solid rgba(52,152,219,.3);padding:5px 12px;border-radius:8px;color:#7ec8e3;font-size:.85em;font-weight:600}
-
-/* وضع المعلم - إخفاء عناصر الطالب */
-body.teacher-mode .user-bar{display:none}
-body.teacher-mode .progress-summary{display:none}
-body.teacher-mode .bottom-nav .submit-final{display:none}
-body.teacher-mode .top-nav{display:none}
 
 .transcript-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em;margin-bottom:12px;transition:all .3s}
 .transcript-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 14px rgba(22,160,133,.4)}
@@ -260,18 +248,6 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 <div class="lesson-badge" id="lessonHeaderBadge">A2.1 - Lección 2</div>
 </div>
 
-<!-- شريط المعلم - يظهر فقط في وضع التصحيح -->
-<div class="teacher-grading-bar" id="teacherGradingBar">
-<div class="tg-title">📋 وضع تصحيح المعلم</div>
-<div class="tg-student">👤 الطالب: <strong id="tgStudentName">---</strong></div>
-<div class="tg-actions">
-<button class="tg-btn save" onclick="teacherSaveAll()">💾 حفظ التصحيح</button>
-<button class="tg-btn" onclick="teacherGradePrev()">◀ السابق</button>
-<button class="tg-btn" onclick="teacherGradeNext()">التالي ▶</button>
-<button class="tg-btn skip" onclick="teacherSkipToNext()">⏭ تخطي غير المراجعة</button>
-</div>
-</div>
-
 <div class="user-bar">
 <div class="welcome">👤 أهلاً <span id="userFullName">{{ student.username }}</span></div>
 <a href="/dashboard" class="logout-btn">🔙 العودة للمنصة</a>
@@ -311,20 +287,19 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 </div>
 
 <script>
-// ==================== الوضع والمتغيرات ====================
 const LESSON_CONFIG = { lessonId:'A2.1_L2', lessonName:'Para ti y para mí', levelDisplay:'A2.1 - Lección 2', totalQuestions:0 };
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
+const scriptUrlMeta = document.querySelector('meta[name="script-url"]');
+const SCRIPT_URL = (scriptUrlMeta?.content && 
+                    scriptUrlMeta.content !== '{{ script_url }}' && 
+                    scriptUrlMeta.content.startsWith('https://')) 
+                   ? scriptUrlMeta.content 
+                   : DEFAULT_SCRIPT_URL;
 const PAGE_BASE = 'https://ia903101.us.archive.org/0/items/A2.1-Eje-Pages/Page';
 const AUDIO_BASE = 'https://archive.org/download/A2_Eje/A2_Eje/';
 
-// تحديد وضع المعلم
-const URL_PARAMS = new URLSearchParams(window.location.search);
-const IS_TEACHER_GRADING = URL_PARAMS.get('mode') === 'grading';
-const STUDENT_USERNAME = URL_PARAMS.get('student') || '{{ student.username }}';
-
 function getPageURL(p) { return PAGE_BASE + p + '.jpg'; }
 
-// ==================== التصحيح التلقائي ====================
 const AUTO_GRADED = {
     q1_1:{a:['c'],t:'select'}, q1_2:{a:['e'],t:'select'}, q1_3:{a:['a'],t:'select'}, q1_4:{a:['d'],t:'select'}, q1_5:{a:['b'],t:'select'},
     q2_1:{a:['le']}, q2_2:{a:['les']}, q2_3:{a:['te']}, q2_4:{a:['me']}, q2_5:{a:['le']}, q2_6:{a:['nos']}, q2_7:{a:['os']}, q2_8:{a:['nos']},
@@ -350,8 +325,93 @@ const AUTO_GRADED = {
     q16_7:{a:['r'],t:'select',d:'r (pero)'}, q16_8:{a:['rr'],t:'select',d:'rr (carro)'}
 };
 
-// ==================== التصحيح اليدوي (المعلم) ====================
-const TEACHER_GRADED = {
+const EXPLANATIONS = {
+    q1_1:{ar:'le = مفعول غير مباشر مفرد.',es:'La secretaria le reserva el vuelo a su jefe.'},
+    q1_2:{ar:'les = مفعول غير مباشر جمع.',es:'Puedes comprarles los zapatos a los niños.'},
+    q1_3:{ar:'nos = لنا.',es:'Luis va a enviarnos el paquete.'},
+    q1_4:{ar:'te = لك.',es:'Te puedo comprar la entrada (a ti).'},
+    q1_5:{ar:'os = لكم.',es:'Os reservo la mesa (a Lara y a ti).'},
+    q2_1:{ar:'a mi madre مفرد → le.',es:'Le he comprado un libro a mi madre.'},
+    q2_2:{ar:'a nuestros padres جمع → les.',es:'Les regalamos un vale.'},
+    q2_3:{ar:'a ti → te.',es:'¿Qué te ha comprado?'},
+    q2_4:{ar:'a mí → me.',es:'Me ha preparado una cena.'},
+    q2_5:{ar:'a mi padre → le.',es:'Le ha comprado una corbata.'},
+    q2_6:{ar:'a todos nosotros → nos.',es:'Nos envía regalos.'},
+    q2_7:{ar:'a vosotros → os.',es:'¿Qué os regalan?'},
+    q2_8:{ar:'a nosotros → nos.',es:'Nos compran ropa.'},
+    q3_2a:{ar:'الفاعل = los abuelos (الأجداد).'},
+    q3_2b:{ar:'المفعول المباشر = dinero para viajar.'},
+    q3_2c:{ar:'nos = a nosotros (لنا).'},
+    q3_3a:{ar:'الفاعل = tú من has dado.'},
+    q3_3b:{ar:'المفعول المباشر = tu libro de viajes.'},
+    q3_3c:{ar:'me = a mí (لي).'},
+    q3_4a:{ar:'الفاعل = Sofía.'},
+    q3_4b:{ar:'المفعول المباشر = las fotos.'},
+    q3_4c:{ar:'os = a vosotros.'},
+    q3_5a:{ar:'الفاعل = yo من compro.'},
+    q3_5b:{ar:'المفعول المباشر = un helado.'},
+    q3_5c:{ar:'les = a ellos.'},
+    q3_6a:{ar:'الفاعل = nosotros من regalamos.'},
+    q3_6b:{ar:'المفعول المباشر = el libro que quieres.'},
+    q3_6c:{ar:'te = a ti (لك).'},
+    q5a_1:{ar:'Lo (مذكر مفرد) = el móvil viejo.',es:'Lo vendo por internet.'},
+    q5a_2:{ar:'Las (مؤنث جمع) = las medicinas.',es:'Las llevo a la farmacia.'},
+    q5a_3:{ar:'Los (مذكر جمع) = los juguetes.',es:'Los cambio en un mercadillo.'},
+    q5a_4:{ar:'La (مؤنث مفرد) = la ropa.',es:'La utilizo para hacer bolsas.'},
+    q5a_5:{ar:'Las (مؤنث جمع) = las botellas.',es:'Las tiro en el contenedor.'},
+    q5b_1n:{ar:'الحوار 4 عن الكمبيوتر.'},
+    q5b_2n:{ar:'الحوار 3 عن الكتب.'},
+    q5b_3n:{ar:'الحوار 2 عن العلب.'},
+    q5b_4n:{ar:'الحوار 1 عن الطرابيزة.'},
+    q6_1:{ar:'las plantas (مؤنث جمع) = las، لنا = nos → nos las.',es:'Nos las han dado los vecinos.'},
+    q6_2:{ar:'los cuadros (مذكر جمع) = los، لكم = os → os los.',es:'¿Quién os los ha regalado?'},
+    q6_3:{ar:'la alfombra (مؤنث مفرد) = la، لي = me → me la.',es:'Me la regaló mi madre.'},
+    q6_4:{ar:'el balcón (مذكر مفرد) = lo، لك = te → te lo.',es:'Te lo enseño.'},
+    q6_5:{ar:'los muebles (مذكر جمع) = los، لنا = nos → nos los.',es:'Nos los compraron.'},
+    q10a_1:{ar:'أفعال -ar → -ando.',es:'alquilar → alquilando.'},
+    q10a_2:{ar:'الجيروندي dando من dar.',es:'dar → dando.'},
+    q10a_3:{ar:'أفعال -ar → -ando.',es:'nadar → nadando.'},
+    q10a_4:{ar:'haciendo من hacer (شاذ).',es:'hacer → haciendo.'},
+    q10a_5:{ar:'viendo من ver.',es:'ver → viendo.'},
+    q10a_6:{ar:'pidiendo من pedir (e→i).',es:'pedir → pidiendo.'},
+    q10a_7:{ar:'ir → yendo (حالة شاذة).',es:'ir → yendo.'},
+    q10b_1:{ar:'leer → leyendo (شاذ). الفاعل مفرد → está.',es:'El papá está leyendo.'},
+    q10b_2:{ar:'jugar → jugando. الفاعل جمع → están.',es:'Los niños están jugando.'},
+    q10b_3:{ar:'estudiar → estudiando. جمع → están.',es:'Emma y Julián están estudiando.'},
+    q10b_4:{ar:'dormir → durmiendo (o→u).',es:'Marianita está durmiendo.'},
+    q10b_5:{ar:'فعل انعكاسي ducharse، شكلين ممكنين.',es:'se está duchando / está duchándose.'},
+    q10b_6:{ar:'فعل انعكاسي levantarse.',es:'se está levantando / está levantándose.'},
+    q12_1:{ar:'ninguno = ولا واحد (مذكر مفرد، نفي).',es:'No me gusta ninguno.'},
+    q12_2:{ar:'alguno = واحد ما (مذكر، تأكيد).',es:'Seguro que alguno te queda bien.'},
+    q12_3:{ar:'ninguna + اسم مؤنث (tienda).',es:'No hay ninguna tienda.'},
+    q12_4:{ar:'alguna = واحدة (ضمير مؤنث).',es:'Hasta encontrar alguna.'},
+    q12_5:{ar:'algunos = بعض (جمع مذكر).',es:'Tienes algunos muy bonitos.'},
+    q12_6:{ar:'ninguno = ولا واحد.',es:'¡Ninguno me queda bien!'},
+    q12_7:{ar:'algún + اسم مذكر مفرد (يُحذف -o).',es:'¿Te pones algún vestido?'},
+    q12_8:{ar:'ningún + اسم مذكر مفرد.',es:'No tengo ningún vestido.'},
+    q12_9:{ar:'nadie = لا أحد (للأشخاص).',es:'Nadie se pone vestido.'},
+    q12_10:{ar:'nada = لا شيء.',es:'No entiendo nada de moda.'},
+    q12_11:{ar:'alguien = شخص ما.',es:'Ve con alguien más moderno.'},
+    q12_12:{ar:'algo = شيء ما.',es:'Tomar algo.'},
+    q15_1:{ar:'ذكرى الزواج.',es:'aniversario de bodas.'},
+    q15_2:{ar:'تذكرة معرض.',es:'entrada para una exposición.'},
+    q15_3:{ar:'قطعة ديكور.',es:'objeto de decoración.'},
+    q15_4:{ar:'منديل حرير.',es:'pañuelo de seda.'},
+    q15_5:{ar:'موقف سيارة.',es:'plaza de garaje.'},
+    q15_6:{ar:'باقة ورد.',es:'ramo de flores.'},
+    q15_7:{ar:'قسيمة سبا.',es:'vale para una sesión de spa.'},
+    q15_8:{ar:'نظارة شمس.',es:'gafas de sol.'},
+    q16_1:{ar:'beso = بوسة، حرف b.',es:'beso (b).'},
+    q16_2:{ar:'ropa = هدوم، حرف p.',es:'ropa (p).'},
+    q16_3:{ar:'bollo = كعكة، حرف b. مختلف عن pollo.',es:'bollo ≠ pollo.'},
+    q16_4:{ar:'capa = عباية، حرف p.',es:'capa (p).'},
+    q16_5:{ar:'veces = مرات، حرف v.',es:'veces (v).'},
+    q16_6:{ar:'pista = ملعب، حرف p.',es:'pista (p).'},
+    q16_7:{ar:'pero = لكن، r مفردة. مختلف عن perro (كلب).',es:'pero ≠ perro.'},
+    q16_8:{ar:'carro = عربية، rr مكررة قوية. مختلف عن caro (غالي).',es:'carro ≠ caro.'}
+};
+
+const TEACHER_GRADED_CONTEXT = {
     q4_1:{questionText:'A los vecinos les podéis comprar una botella de vino.',expectedAnswer:'A los vecinos podéis comprarles una botella de vino.',rule:'إلصاق les بالمصدر.'},
     q4_2:{questionText:'A la profesora le podemos comprar unas flores.',expectedAnswer:'A la profesora podemos comprarle unas flores.',rule:'إلصاق le بالمصدر.'},
     q4_3:{questionText:'A Carmen y a ti os puedo comprar unas entradas.',expectedAnswer:'A vosotros puedo compraros unas entradas para la ópera.',rule:'a Carmen y a ti = a vosotros + os ملصق.'},
@@ -390,7 +450,6 @@ const TEACHER_GRADED = {
     q14_7:{questionText:'Tienda de regalos - حاجتين',expectedAnswer:'un juguete y un bolso',rule:'هدايا.'}
 };
 
-// ==================== النصوص المسجلة ====================
 const TRANSCRIPTIONS = {
     'ex5b': {
         title: 'Transcripción - Ej. 5b (Pistas 10-14)',
@@ -485,241 +544,168 @@ const TRANSCRIPTIONS = {
     }
 };
 
-// ==================== الشرح ====================
-const EXPLANATIONS = {
-    q1_1:{ar:'le = مفعول غير مباشر مفرد.',es:'La secretaria le reserva el vuelo a su jefe.'},
-    q1_2:{ar:'les = مفعول غير مباشر جمع.',es:'Puedes comprarles los zapatos a los niños.'},
-    q1_3:{ar:'nos = لنا.',es:'Luis va a enviarnos el paquete.'},
-    q1_4:{ar:'te = لك.',es:'Te puedo comprar la entrada (a ti).'},
-    q1_5:{ar:'os = لكم.',es:'Os reservo la mesa (a Lara y a ti).'},
-    q2_1:{ar:'a mi madre مفرد → le.',es:'Le he comprado un libro a mi madre.'},
-    q2_2:{ar:'a nuestros padres جمع → les.',es:'Les regalamos un vale.'},
-    q2_3:{ar:'a ti → te.',es:'¿Qué te ha comprado?'},
-    q2_4:{ar:'a mí → me.',es:'Me ha preparado una cena.'},
-    q2_5:{ar:'a mi padre → le.',es:'Le ha comprado una corbata.'},
-    q2_6:{ar:'a todos nosotros → nos.',es:'Nos envía regalos.'},
-    q2_7:{ar:'a vosotros → os.',es:'¿Qué os regalan?'},
-    q2_8:{ar:'a nosotros → nos.',es:'Nos compran ropa.'},
-    q5a_1:{ar:'Lo (مذكر مفرد) = el móvil viejo.',es:'Lo vendo por internet.'},
-    q5a_2:{ar:'Las (مؤنث جمع) = las medicinas.',es:'Las llevo a la farmacia.'},
-    q5a_3:{ar:'Los (مذكر جمع) = los juguetes.',es:'Los cambio en un mercadillo.'},
-    q5a_4:{ar:'La (مؤنث مفرد) = la ropa.',es:'La utilizo para hacer bolsas.'},
-    q5a_5:{ar:'Las (مؤنث جمع) = las botellas.',es:'Las tiro en el contenedor.'},
-    q5b_1n:{ar:'الحوار 4 عن الكمبيوتر.'},
-    q5b_2n:{ar:'الحوار 3 عن الكتب.'},
-    q5b_3n:{ar:'الحوار 2 عن العلب.'},
-    q5b_4n:{ar:'الحوار 1 عن الطرابيزة.'},
-    q6_1:{ar:'las plantas (مؤنث جمع) = las، لنا = nos → nos las.',es:'Nos las han dado los vecinos.'},
-    q6_2:{ar:'los cuadros (مذكر جمع) = los، لكم = os → os los.',es:'¿Quién os los ha regalado?'},
-    q6_3:{ar:'la alfombra (مؤنث مفرد) = la، لي = me → me la.',es:'Me la regaló mi madre.'},
-    q6_4:{ar:'el balcón (مذكر مفرد) = lo، لك = te → te lo.',es:'Te lo enseño.'},
-    q6_5:{ar:'los muebles (مذكر جمع) = los، لنا = nos → nos los.',es:'Nos los compraron.'},
-    q10a_1:{ar:'أفعال -ar → -ando.',es:'alquilar → alquilando.'},
-    q10a_2:{ar:'الجيروندي dando من dar.',es:'dar → dando.'},
-    q10a_3:{ar:'أفعال -ar → -ando.',es:'nadar → nadando.'},
-    q10a_4:{ar:'haciendo من hacer (شاذ).',es:'hacer → haciendo.'},
-    q10a_5:{ar:'viendo من ver.',es:'ver → viendo.'},
-    q10a_6:{ar:'pidiendo من pedir (e→i).',es:'pedir → pidiendo.'},
-    q10a_7:{ar:'ir → yendo (حالة شاذة).',es:'ir → yendo.'},
-    q10b_1:{ar:'leer → leyendo (شاذ). الفاعل مفرد → está.',es:'El papá está leyendo.'},
-    q10b_2:{ar:'jugar → jugando. الفاعل جمع → están.',es:'Los niños están jugando.'},
-    q10b_3:{ar:'estudiar → estudiando. جمع → están.',es:'Emma y Julián están estudiando.'},
-    q10b_4:{ar:'dormir → durmiendo (o→u).',es:'Marianita está durmiendo.'},
-    q10b_5:{ar:'فعل انعكاسي ducharse، شكلين ممكنين.',es:'se está duchando / está duchándose.'},
-    q10b_6:{ar:'فعل انعكاسي levantarse.',es:'se está levantando / está levantándose.'},
-    q12_1:{ar:'ninguno = ولا واحد (مذكر مفرد، نفي).',es:'No me gusta ninguno.'},
-    q12_2:{ar:'alguno = واحد ما (مذكر، تأكيد).',es:'Seguro que alguno te queda bien.'},
-    q12_3:{ar:'ninguna + اسم مؤنث (tienda).',es:'No hay ninguna tienda.'},
-    q12_4:{ar:'alguna = واحدة (ضمير مؤنث).',es:'Hasta encontrar alguna.'},
-    q12_5:{ar:'algunos = بعض (جمع مذكر).',es:'Tienes algunos muy bonitos.'},
-    q12_6:{ar:'ninguno = ولا واحد.',es:'¡Ninguno me queda bien!'},
-    q12_7:{ar:'algún + اسم مذكر مفرد (يُحذف -o).',es:'¿Te pones algún vestido?'},
-    q12_8:{ar:'ningún + اسم مذكر مفرد.',es:'No tengo ningún vestido.'},
-    q12_9:{ar:'nadie = لا أحد (للأشخاص).',es:'Nadie se pone vestido.'},
-    q12_10:{ar:'nada = لا شيء.',es:'No entiendo nada de moda.'},
-    q12_11:{ar:'alguien = شخص ما.',es:'Ve con alguien más moderno.'},
-    q12_12:{ar:'algo = شيء ما.',es:'Tomar algo.'},
-    q15_1:{ar:'ذكرى الزواج.',es:'aniversario de bodas.'},
-    q15_2:{ar:'تذكرة معرض.',es:'entrada para una exposición.'},
-    q15_3:{ar:'قطعة ديكور.',es:'objeto de decoración.'},
-    q15_4:{ar:'منديل حرير.',es:'pañuelo de seda.'},
-    q15_5:{ar:'موقف سيارة.',es:'plaza de garaje.'},
-    q15_6:{ar:'باقة ورد.',es:'ramo de flores.'},
-    q15_7:{ar:'قسيمة سبا.',es:'vale para una sesión de spa.'},
-    q15_8:{ar:'نظارة شمس.',es:'gafas de sol.'},
-    q16_1:{ar:'beso = بوسة، حرف b.',es:'beso (b).'},
-    q16_2:{ar:'ropa = هدوم، حرف p.',es:'ropa (p).'},
-    q16_3:{ar:'bollo = كعكة، حرف b. مختلف عن pollo.',es:'bollo ≠ pollo.'},
-    q16_4:{ar:'capa = عباية، حرف p.',es:'capa (p).'},
-    q16_5:{ar:'veces = مرات، حرف v.',es:'veces (v).'},
-    q16_6:{ar:'pista = ملعب، حرف p.',es:'pista (p).'},
-    q16_7:{ar:'pero = لكن، r مفردة. مختلف عن perro (كلب).',es:'pero ≠ perro.'},
-    q16_8:{ar:'carro = عربية، rr مكررة قوية. مختلف عن caro (غالي).',es:'carro ≠ caro.'}
-};
-
-// ==================== الشرائح ====================
 const SLIDES = [
-    {n:1,title:'¿De quién se trata?',page:12,type:'auto',
+    {n:1,title:'&#191;De qui&#233;n se trata?',page:12,type:'auto',
      arabic:'اربط الضمائر (المكتوبة بالخط العريض) مع الأشخاص المناسبين.',
      spanish:'Relaciona los pronombres en negrita con las personas de la derecha.',
-     options:['a. a Carla y a mí','b. a Lara y a ti','c. a su jefe','d. a ti','e. a los niños'],
+     options:['a. a Carla y a m&#237;','b. a Lara y a ti','c. a su jefe','d. a ti','e. a los ni&#241;os'],
      questions:[
-        {id:'q1_1',text:'1. La secretary <b>le</b> reserva el vuelo.',sel:'abcde'},
-        {id:'q1_2',text:'2. ¿Puedes comprar<b>les</b> tú los zapatos?',sel:'abcde'},
+        {id:'q1_1',text:'1. La secretaria <b>le</b> reserva el vuelo.',sel:'abcde'},
+        {id:'q1_2',text:'2. &#191;Puedes comprar<b>les</b> t&#250; los zapatos?',sel:'abcde'},
         {id:'q1_3',text:'3. Luis va a enviar<b>nos</b> el paquete esta tarde.',sel:'abcde'},
         {id:'q1_4',text:'4. <b>Te</b> puedo comprar la entrada del cine, si quieres.',sel:'abcde'},
-        {id:'q1_5',text:'5. <b>Os</b> reservo la mesa en el restaurante, ¿vale?',sel:'abcde'}
+        {id:'q1_5',text:'5. <b>Os</b> reservo la mesa en el restaurante, &#191;vale?',sel:'abcde'}
      ]},
     {n:2,title:'Regalos para todos',page:12,type:'auto',
      arabic:'أكمل بضمائر المفعول غير المباشر (me, te, le, nos, os, les). لاحظ الكلمات اللي تحتها خط.',
-     spanish:'Completa con los pronombres adecuados. Fíjate en las palabras subrayadas.',
+     spanish:'Completa con los pronombres adecuados. F&#237;jate en las palabras subrayadas.',
      questions:[
         {id:'q2_1',n:1,text:'_____ he comprado un libro de cocina <u>a mi madre</u>.',input:true},
         {id:'q2_2',n:2,text:'En Navidad Susana y yo _____ regalamos <u>a nuestros padres</u> un vale.',input:true},
-        {id:'q2_3',n:3,text:'▸ Y <u>a ti</u>, Lucía, ¿qué _____ ha comprado tu marido?',input:true},
-        {id:'q2_4',n:4,text:'▲ Pues, _____ ha preparado una cena romántica.',input:true},
+        {id:'q2_3',n:3,text:'&#9679; Y <u>a ti</u>, Luc&#237;a, &#191;qu&#233; _____ ha comprado tu marido?',input:true},
+        {id:'q2_4',n:4,text:'&#9650; Pues, _____ ha preparado una cena rom&#225;ntica.',input:true},
         {id:'q2_5',n:5,text:'La abuela _____ ha comprado <u>a mi padre</u> una corbata.',input:true},
-        {id:'q2_6',n:6,text:'Mi tío Eduardo siempre _____ envía <u>a todos nosotros</u> regalos.',input:true},
-        {id:'q2_7',n:7,text:'▸ Y <u>a vosotros</u>, ¿qué _____ regalan vuestros abuelos?',input:true},
-        {id:'q2_8',n:8,text:'▲ Normalmente _____ compran ropa.',input:true}
+        {id:'q2_6',n:6,text:'Mi t&#237;o Eduardo siempre _____ env&#237;a <u>a todos nosotros</u> regalos.',input:true},
+        {id:'q2_7',n:7,text:'&#9679; Y <u>a vosotros</u>, &#191;qu&#233; _____ regalan vuestros abuelos?',input:true},
+        {id:'q2_8',n:8,text:'&#9650; Normalmente _____ compran ropa.',input:true}
      ]},
-    {n:3,title:'¿Quién? ¿Qué? ¿A quién?',page:12,type:'auto',
+    {n:3,title:'&#191;Qui&#233;n? &#191;Qu&#233;? &#191;A qui&#233;n?',page:12,type:'auto',
      arabic:'اقرأ الجمل واملأ: مَن (الفاعل) - ماذا (المفعول المباشر) - لمَن (المفعول غير المباشر).',
      spanish:'Lee las frases y completa la tabla como en el ejemplo.',
-     example:'1. ¿Le has dado la maleta a Víctor? → <em>tú / la maleta / le-a Víctor</em>',
+     example:'1. &#191;Le has dado la maleta a V&#237;ctor? → <em>t&#250; / la maleta / le-a V&#237;ctor</em>',
      triples:[
         {n:2,sentence:'Los abuelos nos regalan dinero para viajar.',ids:['q3_2a','q3_2b','q3_2c']},
-        {n:3,sentence:'¿Tú me has dado tu libro de viajes?',ids:['q3_3a','q3_3b','q3_3c']},
-        {n:4,sentence:'¿Os ha mostrado Sofía las fotos?',ids:['q3_4a','q3_4b','q3_4c']},
+        {n:3,sentence:'&#191;T&#250; me has dado tu libro de viajes?',ids:['q3_3a','q3_3b','q3_3c']},
+        {n:4,sentence:'&#191;Os ha mostrado Sof&#237;a las fotos?',ids:['q3_4a','q3_4b','q3_4c']},
         {n:5,sentence:'Les compro un helado a la salida del colegio.',ids:['q3_5a','q3_5b','q3_5c']},
-        {n:6,sentence:'¡Al fin te regalamos el libro que quieres!',ids:['q3_6a','q3_6b','q3_6c']}
+        {n:6,sentence:'&#161;Al fin te regalamos el libro que quieres!',ids:['q3_6a','q3_6b','q3_6c']}
      ]},
-    {n:4,title:'¿Qué les podemos regalar?',page:12,type:'teacher',
+    {n:4,title:'&#191;Qu&#233; les podemos regalar?',page:12,type:'teacher',
      arabic:'حوّل الجمل كما في المثال. استبدل الضمائر بعبارات (a + شخص).',
      spanish:'Transforma las frases como en el ejemplo.',
-     example:'1. A la abuela y a mí <b>nos</b> puedes comprar unas tazas. → <em>A nosotros puedes comprarnos unas tazas.</em>',
+     example:'1. A la abuela y a m&#237; <b>nos</b> puedes comprar unas tazas. → <em>A nosotros puedes comprarnos unas tazas.</em>',
      teacherNote:true,
      questions:[
-        {id:'q4_1',n:2,text:'A los vecinos <b>les</b> podéis comprar una botella de vino. →',textarea:true},
+        {id:'q4_1',n:2,text:'A los vecinos <b>les</b> pod&#233;is comprar una botella de vino. →',textarea:true},
         {id:'q4_2',n:3,text:'A la profesora <b>le</b> podemos comprar unas flores. →',textarea:true},
-        {id:'q4_3',n:4,text:'A Carmen y a ti <b>os</b> puedo comprar unas entradas para la ópera. →',textarea:true},
-        {id:'q4_4',n:5,text:'A mí <b>me</b> pueden comprar el perfume que tanto me gusta. →',textarea:true}
+        {id:'q4_3',n:4,text:'A Carmen y a ti <b>os</b> puedo comprar unas entradas para la &#243;pera. →',textarea:true},
+        {id:'q4_4',n:5,text:'A m&#237; <b>me</b> pueden comprar el perfume que tanto me gusta. →',textarea:true}
      ]},
     {n:5,title:'Susana y el reciclaje',page:13,type:'auto',custom:'slide5'},
     {n:6,title:'Francisca y su nuevo piso',page:13,type:'auto',
      arabic:'ماريسا تزور صاحبتها فرانسيسكا. أكمل بدمج الضمائر. بعدين اسمع وتأكد.',
-     spanish:'Completa con los pronombres que correspondan. Después escucha y comprueba.',
+     spanish:'Completa con los pronombres que correspondan. Despu&#233;s escucha y comprueba.',
      audios:[15], transcriptKey:'ex6',
      wordBank:['os los','nos las','te lo','nos los','me la'],
      questions:[
-        {id:'q6_1',n:1,text:'¿Y esas plantas?<br>▲ Pues _____ han dado nuestros vecinos.',input:true},
-        {id:'q6_2',n:2,text:'Y estos cuadros, ¿quién _____ ha regalado?',input:true},
-        {id:'q6_3',n:3,text:'¿Dónde has comprado la alfombra?<br>▲ _____ regaló mi madre.',input:true},
-        {id:'q6_4',n:4,text:'¿Y el piso tiene balcón?<br>▲ Ahora mismo _____ enseño.',input:true},
-        {id:'q6_5',n:5,text:'Los muebles del salón.<br>▲ _____ compraron los padres de Carlos.',input:true}
+        {id:'q6_1',n:1,text:'&#191;Y esas plantas?<br>&#9650; Pues _____ han dado nuestros vecinos.',input:true},
+        {id:'q6_2',n:2,text:'Y estos cuadros, &#191;qui&#233;n _____ ha regalado?',input:true},
+        {id:'q6_3',n:3,text:'&#191;D&#243;nde has comprado la alfombra?<br>&#9650; _____ regal&#243; mi madre.',input:true},
+        {id:'q6_4',n:4,text:'&#191;Y el piso tiene balc&#243;n?<br>&#9650; Ahora mismo _____ ense&#241;o.',input:true},
+        {id:'q6_5',n:5,text:'Los muebles del sal&#243;n.<br>&#9650; _____ compraron los padres de Carlos.',input:true}
      ]},
     {n:7,title:'Buscamos el sentido',page:14,type:'teacher',
      arabic:'اجمع العناصر لتكوّن جمل. استخدم: dar, regalar, dejar, enseñar.',
      spanish:'Combina los elementos para formar frases. Usa los verbos del recuadro.',
      hint:'اضغط على زر "📄 صفحة 14" فوق عشان تشوف الرسومات.',
-     wordBank:['dar','regalar','dejar','enseñar'],
-     example:'1. el osito / Raúl / Mariela → <em>Raúl le da el osito a Mariela.</em>',
+     wordBank:['dar','regalar','dejar','ense&#241;ar'],
+     example:'1. el osito / Ra&#250;l / Mariela → <em>Ra&#250;l le da el osito a Mariela.</em>',
      teacherNote:true,
      questions:[
-        {id:'q7_1',n:2,text:'una foto / la mujer / el policía →',textarea:true},
+        {id:'q7_1',n:2,text:'una foto / la mujer / el polic&#237;a →',textarea:true},
         {id:'q7_2',n:3,text:'Magdalena / su bicicleta / Rodrigo →',textarea:true},
         {id:'q7_3',n:4,text:'su nieto / el libro / la abuela →',textarea:true},
         {id:'q7_4',n:5,text:'los alumnos / el profesor / sus cuadernos →',textarea:true}
      ]},
-    {n:8,title:'¡A combinar pronombres!',page:14,type:'teacher',
+    {n:8,title:'&#161;A combinar pronombres!',page:14,type:'teacher',
      arabic:'كوّن جمل في خطوتين كما في المثال. (le/les → se مع lo/la/los/las)',
-     spanish:'Construye frases en dos pasos como en el ejemplo. Los pronombres <strong>le</strong> y <strong>les</strong> se convierten en <strong>se</strong> en combinación con lo, la, los, las.',
+     spanish:'Construye frases en dos pasos como en el ejemplo. Los pronombres <strong>le</strong> y <strong>les</strong> se convierten en <strong>se</strong> en combinaci&#243;n con lo, la, los, las.',
      example:'1. alquilar, ellos / el piso / sus amigos<br>a. <em>Ellos les alquilan el piso a sus amigos.</em><br>b. <em>Ellos se lo alquilan a sus amigos.</em>',
      teacherNote:true,
      questions:[
-        {id:'q8_1',n:2,text:'regalar, tú / las flores / tu novia',textarea:true,placeholder:'a. ...\nb. ...'},
-        {id:'q8_2',n:3,text:'dar, nosotros / los juguetes / tú',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_1',n:2,text:'regalar, t&#250; / las flores / tu novia',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_2',n:3,text:'dar, nosotros / los juguetes / t&#250;',textarea:true,placeholder:'a. ...\nb. ...'},
         {id:'q8_3',n:4,text:'dejar, Laura / la bicicleta / nosotros',textarea:true,placeholder:'a. ...\nb. ...'},
-        {id:'q8_4',n:5,text:'enseñar, Juan y tú / la ciudad / la nueva estudiante',textarea:true,placeholder:'a. ...\nb. ...'},
+        {id:'q8_4',n:5,text:'ense&#241;ar, Juan y t&#250; / la ciudad / la nueva estudiante',textarea:true,placeholder:'a. ...\nb. ...'},
         {id:'q8_5',n:6,text:'vender, yo / el coche / usted',textarea:true,placeholder:'a. ...\nb. ...'}
      ]},
-    {n:9,title:'Combinamos más',page:14,type:'teacher',
+    {n:9,title:'Combinamos m&#225;s',page:14,type:'teacher',
      arabic:'حوّل الجمل. اكتب شكلين: الضمائر قبل الفعل + الضمائر ملصقة بالمصدر.',
      spanish:'Transforma las frases como en el ejemplo.',
-     example:'1. Tú nos vas a regalar unos libros. → <em>Tú nos los vas a regalar. / Tú vas a regalárnoslos.</em>',
+     example:'1. T&#250; nos vas a regalar unos libros. → <em>T&#250; nos los vas a regalar. / T&#250; vas a regal&#225;rnoslos.</em>',
      teacherNote:true,
      questions:[
-        {id:'q9_1',n:2,text:'Ellos os van a enseñar la ciudad. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
-        {id:'q9_2',n:3,text:'Mamá no me puede leer el cuento. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
-        {id:'q9_3',n:4,text:'Yo les puedo mandar un correo electrónico. →',textarea:true,placeholder:'...'},
+        {id:'q9_1',n:2,text:'Ellos os van a ense&#241;ar la ciudad. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
+        {id:'q9_2',n:3,text:'Mam&#225; no me puede leer el cuento. →',textarea:true,placeholder:'Forma 1 / Forma 2'},
+        {id:'q9_3',n:4,text:'Yo les puedo mandar un correo electr&#243;nico. →',textarea:true,placeholder:'...'},
         {id:'q9_4',n:5,text:'Nosotros te podemos dejar nuestro piso. →',textarea:true,placeholder:'...'}
      ]},
     {n:10,title:'Gerundio',page:14,type:'auto',custom:'slide10'},
-    {n:11,title:'¿Qué están haciendo?',page:15,type:'teacher',
+    {n:11,title:'&#191;Qu&#233; est&#225;n haciendo?',page:15,type:'teacher',
      arabic:'شوف الرسومات واكتب إيه اللي بيعملوه الأشخاص. استخدم estar + gerundio.',
-     spanish:'Observa los dibujos y escribe qué están haciendo las personas.',
+     spanish:'Observa los dibujos y escribe qu&#233; est&#225;n haciendo las personas.',
      hint:'اضغط على زر "📄 صفحة 15" فوق عشان تشوف الرسومات.',
      teacherNote:true,
      questions:[
-        {id:'q11_1',n:1,text:'Dibujo 1 (شخصين بيتكلموا)',textarea:true,placeholder:'Están...'},
+        {id:'q11_1',n:1,text:'Dibujo 1 (شخصين بيتكلموا)',textarea:true,placeholder:'Est&#225;n...'},
         {id:'q11_2',n:2,text:'Dibujo 2 (شخص بيقرأ)',textarea:true,placeholder:'...'},
         {id:'q11_3',n:3,text:'Dibujo 3 (ناس في مطعم)',textarea:true,placeholder:'...'},
         {id:'q11_4',n:4,text:'Dibujo 4 (شخص بيدفع في الكاشير)',textarea:true,placeholder:'...'},
-        {id:'q11_5',n:5,text:'Dibujo 5 (شخص قدام المراية)',textarea:true,placeholder:'Está probándose...'},
+        {id:'q11_5',n:5,text:'Dibujo 5 (شخص قدام المراية)',textarea:true,placeholder:'Est&#225; prob&#225;ndose...'},
         {id:'q11_6',n:6,text:'Dibujo 6 (ناس بياخدوا سيلفي)',textarea:true,placeholder:'...'},
         {id:'q11_7',n:7,text:'Dibujo 7 (في الكوافير)',textarea:true,placeholder:'...'},
         {id:'q11_8',n:8,text:'Dibujo 8 (ولد بيلعب تابلت)',textarea:true,placeholder:'...'}
      ]},
     {n:12,title:'Mary y Luzma van de compras',page:15,type:'auto',
      arabic:'أكمل الحوار بالكلمات (nada, ninguno, alguien, algo...).',
-     spanish:'Completa el diálogo con las siguientes palabras.',
-     wordBank:['nada','ninguno (×2)','alguna','ningún','alguno','nadie','algunos','ninguna','algo','algún','alguien'],
+     spanish:'Completa el di&#225;logo con las siguientes palabras.',
+     wordBank:['nada','ninguno (&#215;2)','alguna','ning&#250;n','alguno','nadie','algunos','ninguna','algo','alg&#250;n','alguien'],
      questions:[
-        {id:'q12_1',n:1,text:'▲ Es que no me gusta _____.',input:true},
-        {id:'q12_2',n:2,text:'▸ Seguro que _____ te queda bien.',input:true},
-        {id:'q12_3',n:3,text:'▸ No hay _____ tienda por aquí cerca.',input:true},
-        {id:'q12_4',n:4,text:'▲ Vamos a caminar hasta encontrar _____.',input:true},
-        {id:'q12_5',n:5,text:'▸ Pero tienes _____ muy bonitos en el armario.',input:true},
-        {id:'q12_6',n:6,text:'▲ ¡Pero _____ me queda bien!',input:true},
-        {id:'q12_7',n:7,text:'▸ ¿Y si te pones _____ vestido?',input:true},
-        {id:'q12_8',n:8,text:'▲ ¡No tengo _____ vestido bonito!',input:true},
+        {id:'q12_1',n:1,text:'&#9650; Es que no me gusta _____.',input:true},
+        {id:'q12_2',n:2,text:'&#9679; Seguro que _____ te queda bien.',input:true},
+        {id:'q12_3',n:3,text:'&#9679; No hay _____ tienda por aqu&#237; cerca.',input:true},
+        {id:'q12_4',n:4,text:'&#9650; Vamos a caminar hasta encontrar _____.',input:true},
+        {id:'q12_5',n:5,text:'&#9679; Pero tienes _____ muy bonitos en el armario.',input:true},
+        {id:'q12_6',n:6,text:'&#9650; &#161;Pero _____ me queda bien!',input:true},
+        {id:'q12_7',n:7,text:'&#9679; &#191;Y si te pones _____ vestido?',input:true},
+        {id:'q12_8',n:8,text:'&#9650; &#161;No tengo _____ vestido bonito!',input:true},
         {id:'q12_9',n:9,text:'Y seguro que _____ se pone vestido en la fiesta.',input:true},
-        {id:'q12_10',n:10,text:'▸ Yo no entiendo _____ de moda.',input:true},
-        {id:'q12_11',n:11,text:'▲ ¿Por qué no vas con _____ más moderno?',input:true},
-        {id:'q12_12',n:12,text:'▸ ¿Por qué no nos sentamos a tomar _____?',input:true}
+        {id:'q12_10',n:10,text:'&#9679; Yo no entiendo _____ de moda.',input:true},
+        {id:'q12_11',n:11,text:'&#9650; &#191;Por qu&#233; no vas con _____ m&#225;s moderno?',input:true},
+        {id:'q12_12',n:12,text:'&#9679; &#191;Por qu&#233; no nos sentamos a tomar _____?',input:true}
      ]},
     {n:13,title:'Cinco regalos para cada persona',page:16,type:'whatsapp',custom:'slide13'},
     {n:14,title:'Establecimientos',page:16,type:'teacher',
      arabic:'اكتب حاجتين ممكن تشتريهم من كل محل.',
-     spanish:'¿Qué cosas puedes comprar en estos establecimientos? Escribe dos cosas en cada uno.',
+     spanish:'&#191;Qu&#233; cosas puedes comprar en estos establecimientos? Escribe dos cosas en cada uno.',
      teacherNote:true,
      questions:[
-        {id:'q14_1',label:'🥖 <strong>Panadería:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
-        {id:'q14_2',label:'👞 <strong>Zapatería:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
-        {id:'q14_3',label:'✏️ <strong>Papelería:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_1',label:'🥖 <strong>Panader&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_2',label:'👞 <strong>Zapater&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_3',label:'✏️ <strong>Papeler&#237;a:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
         {id:'q14_4',label:'👗 <strong>Tienda de ropa:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
         {id:'q14_5',label:'⚽ <strong>Tienda de deportes:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
-        {id:'q14_6',label:'💻 <strong>Tienda de productos informáticos:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
+        {id:'q14_6',label:'💻 <strong>Tienda de productos inform&#225;ticos:</strong>',textarea:true,placeholder:'1. ... , 2. ...'},
         {id:'q14_7',label:'🎁 <strong>Tienda de regalos:</strong>',textarea:true,placeholder:'1. ... , 2. ...'}
      ]},
-    {n:15,title:'¿Con qué palabra van?',page:16,type:'auto',
+    {n:15,title:'&#191;Con qu&#233; palabra van?',page:16,type:'auto',
      arabic:'اربط كل كلمة بالعبارة المناسبة.',
      spanish:'Relaciona las siguientes palabras.',
      hint:'اضغط على زر "📄 صفحة 16" فوق عشان تشوف التمرين بالكامل.',
-     options:['a. de garaje','b. de decoración','c. de bodas','d. para una exposición','e. para una sesión de spa','f. de sol','g. de seda','h. de flores'],
+     options:['a. de garaje','b. de decoraci&#243;n','c. de bodas','d. para una exposici&#243;n','e. para una sesi&#243;n de spa','f. de sol','g. de seda','h. de flores'],
      questions:[
         {id:'q15_1',text:'1. el aniversario',sel:'abcdefgh'},
         {id:'q15_2',text:'2. la entrada',sel:'abcdefgh'},
         {id:'q15_3',text:'3. el objeto',sel:'abcdefgh'},
-        {id:'q15_4',text:'4. el pañuelo',sel:'abcdefgh'},
+        {id:'q15_4',text:'4. el pa&#241;uelo',sel:'abcdefgh'},
         {id:'q15_5',text:'5. la plaza',sel:'abcdefgh'},
         {id:'q15_6',text:'6. el ramo',sel:'abcdefgh'},
         {id:'q15_7',text:'7. el vale',sel:'abcdefgh'},
         {id:'q15_8',text:'8. las gafas',sel:'abcdefgh'}
      ]},
-    {n:16,title:'Sonidos del español - ¿Qué letras faltan?',page:17,type:'auto',
+    {n:16,title:'Sonidos del espa&#241;ol - &#191;Qu&#233; letras faltan?',page:17,type:'auto',
      arabic:'اسمع واكتب الحروف الناقصة.',
-     spanish:'¿Qué letras encajan? Escucha y anota las letras correctas.',
+     spanish:'&#191;Qu&#233; letras encajan? Escucha y anota las letras correctas.',
      audios:[17], transcriptKey:'ex16',
      questions:[
         {id:'q16_1',text:'1. ___eso',sel:'bp'},
@@ -733,20 +719,15 @@ const SLIDES = [
      ]}
 ];
 
-// ==================== المتغيرات العامة ====================
 const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
-
-let currentUser = { username: IS_TEACHER_GRADING ? STUDENT_USERNAME : '{{ student.username }}', fullName: IS_TEACHER_GRADING ? STUDENT_USERNAME : '{{ student.username }}' };
+let currentUser = { username:'{{ student.username }}', fullName:'{{ student.username }}' };
 let lockedAnswers = {};
 let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
 let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
-
-const AUTO_GRADED_KEYS = Object.keys(AUTO_GRADED);
-const TEACHER_GRADED_KEYS = Object.keys(TEACHER_GRADED);
-const ALL_QUESTIONS = [...AUTO_GRADED_KEYS, ...TEACHER_GRADED_KEYS];
+const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
+const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
 LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
 
-// ==================== بناء العناصر ====================
 function buildSelect(id, letters) {
     const arr = Array.isArray(letters) ? letters : letters.split('');
     let opts = '<option value="">-- اختر --</option>';
@@ -791,14 +772,14 @@ function buildSlide(s) {
         if (s.wordBank) body += buildWordBank(s.wordBank);
         if (s.options) body += buildOptionsList(s.options);
         if (s.example) body += `<div class="example-solved">✅ ${s.example}</div>`;
-        if (s.teacherNote && !IS_TEACHER_GRADING) body += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
+        if (s.teacherNote) body += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
         if (s.questions) s.questions.forEach(q => body += buildQuestion(q));
         if (s.triples) {
             s.triples.forEach(t => {
                 body += `<div class="question-card"><div class="q-label"><span class="num-bullet">${t.n}</span> ${t.sentence}</div>`;
-                body += `<div class="q-text">¿Quién?</div><input type="text" id="${t.ids[0]}" placeholder="..."><div class="feedback" id="fb${t.ids[0].substring(1)}"></div>`;
-                body += `<div class="q-text" style="margin-top:8px">¿Qué?</div><input type="text" id="${t.ids[1]}" placeholder="..."><div class="feedback" id="fb${t.ids[1].substring(1)}"></div>`;
-                body += `<div class="q-text" style="margin-top:8px">¿A quién?</div><input type="text" id="${t.ids[2]}" placeholder="..."><div class="feedback" id="fb${t.ids[2].substring(1)}"></div>`;
+                body += `<div class="q-text">&#191;Qui&#233;n?</div><input type="text" id="${t.ids[0]}" placeholder="..."><div class="feedback" id="fb${t.ids[0].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;Qu&#233;?</div><input type="text" id="${t.ids[1]}" placeholder="..."><div class="feedback" id="fb${t.ids[1].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;A qui&#233;n?</div><input type="text" id="${t.ids[2]}" placeholder="..."><div class="feedback" id="fb${t.ids[2].substring(1)}"></div>`;
                 body += `</div>`;
             });
         }
@@ -808,16 +789,16 @@ function buildSlide(s) {
 }
 
 function buildSlide5() {
-    let h = `<div class="sub-section-title">5a. Clasifica</div><div class="arabic-box">جار سوزانا بينصحها بإعادة التدوير. صنّف كل جملة مع الشيء المناسب.</div><div class="spanish-box"><div class="es-instruction">¿Qué hace él con las cosas? ¡Clasifícalas!</div>`;
-    h += buildOptionsList(['a. Medicinas','b. Ropa de los niños','c. Móvil viejo','d. Juguetes usados','e. Botellas de vidrio']);
+    let h = `<div class="sub-section-title">5a. Clasifica</div><div class="arabic-box">جار سوزانا بينصحها بإعادة التدوير. صنّف كل جملة مع الشيء المناسب.</div><div class="spanish-box"><div class="es-instruction">&#191;Qu&#233; hace &#233;l con las cosas? &#161;Clasif&#237;calas!</div>`;
+    h += buildOptionsList(['a. Medicinas','b. Ropa de los ni&#241;os','c. M&#243;vil viejo','d. Juguetes usados','e. Botellas de vidrio']);
     [{id:'q5a_1',t:'1. Lo vendo por internet.'},{id:'q5a_2',t:'2. Las llevo a la farmacia.'},{id:'q5a_3',t:'3. Los cambio en un mercadillo.'},{id:'q5a_4',t:'4. La utilizo para hacer bolsas.'},{id:'q5a_5',t:'5. Las tiro en el contenedor.'}].forEach(q => h += `<div class="question-card"><div class="q-text">${q.t}</div>${buildSelect(q.id,'abcde')}</div>`);
     h += `</div><div class="sub-section"><div class="sub-section-title">5b. Escucha y relaciona 🎧</div><div class="arabic-box">اسمع الحوارات واكتب رقم الحوار + اكتب الجملة بالأفعال المناسبة.</div><div class="spanish-box">`;
     [10,11,12,13,14].forEach(p => h += buildAudio(p));
     h += buildTranscriptBtn('ex5b');
     h += buildWordBank(['usar','vender','llevar','reciclar','regalar']);
-    h += `<div class="example-solved">✅ <strong>Diálogo 5: bolsas de plástico</strong> → <em>Las usa de nuevo para comprar en el súper.</em></div>`;
+    h += `<div class="example-solved">✅ <strong>Di&#225;logo 5: bolsas de pl&#225;stico</strong> → <em>Las usa de nuevo para comprar en el s&#250;per.</em></div>`;
     [{n:1,obj:'ordenador',idN:'q5b_1n',idF:'q5b_1f'},{n:2,obj:'libros',idN:'q5b_2n',idF:'q5b_2f'},{n:3,obj:'latas',idN:'q5b_3n',idF:'q5b_3f'},{n:4,obj:'mesa',idN:'q5b_4n',idF:'q5b_4f'}].forEach(q => {
-        h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> Diálogo ___ : ${q.obj}</div><input type="text" id="${q.idN}" placeholder="رقم الحوار" style="margin-bottom:6px"><textarea id="${q.idF}" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb${q.idN.substring(1)}"></div><div class="feedback" id="fb${q.idF.substring(1)}"></div></div>`;
+        h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> Di&#225;logo ___ : ${q.obj}</div><input type="text" id="${q.idN}" placeholder="رقم الحوار" style="margin-bottom:6px"><textarea id="${q.idF}" placeholder="اكتب الجملة..."></textarea><div class="feedback" id="fb${q.idN.substring(1)}"></div><div class="feedback" id="fb${q.idF.substring(1)}"></div></div>`;
     });
     h += `</div></div>`;
     return h;
@@ -827,17 +808,17 @@ function buildSlide10() {
     let h = `<div class="sub-section-title">10a. Completa las formas que faltan</div><div class="arabic-box">أكمل أشكال الجيروندي الناقصة.<br>القاعدة: -ar → -ando | -er/-ir → -iendo</div><div class="spanish-box">`;
     [{n:1,t:'alquilar →',id:'q10a_1'},{n:2,t:'___ → dando',id:'q10a_2',ph:'المصدر...'},{n:3,t:'nadar →',id:'q10a_3'},{n:4,t:'___ → haciendo',id:'q10a_4',ph:'المصدر...'},{n:5,t:'___ → viendo',id:'q10a_5',ph:'المصدر...'},{n:6,t:'___ → pidiendo',id:'q10a_6',ph:'المصدر...'},{n:7,t:'ir →',id:'q10a_7'}].forEach(q => h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> ${q.t}</div>${buildInput(q.id,q.ph)}</div>`);
     h += `</div><div class="sub-section"><div class="sub-section-title">10b. Escucha y escribe estar + gerundio 🎧</div><div class="arabic-box">اسمع الحوارات واكتب جمل بـ estar + gerundio.</div><div class="spanish-box">${buildAudio(16)}${buildTranscriptBtn('ex10b')}${buildWordBank(['jugar','dormir','levantarse','estudiar','leer','ducharse'])}`;
-    [{n:1,t:'El papá...',id:'q10b_1',ph:'está + gerundio'},{n:2,t:'Los niños...',id:'q10b_2',ph:'están + gerundio'},{n:3,t:'Emma y Julián...',id:'q10b_3'},{n:4,t:'Marianita...',id:'q10b_4'},{n:5,t:'Marta...',id:'q10b_5',ph:'se está... / está...se'},{n:6,t:'Alejandro...',id:'q10b_6',ph:'se está... / está...se'}].forEach(q => h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> ${q.t}</div>${buildInput(q.id,q.ph)}</div>`);
+    [{n:1,t:'El pap&#225;...',id:'q10b_1',ph:'est&#225; + gerundio'},{n:2,t:'Los ni&#241;os...',id:'q10b_2',ph:'est&#225;n + gerundio'},{n:3,t:'Emma y Juli&#225;n...',id:'q10b_3'},{n:4,t:'Marianita...',id:'q10b_4'},{n:5,t:'Marta...',id:'q10b_5',ph:'se est&#225;... / est&#225;...se'},{n:6,t:'Alejandro...',id:'q10b_6',ph:'se est&#225;... / est&#225;...se'}].forEach(q => h += `<div class="question-card"><div class="q-label"><span class="num-bullet">${q.n}</span> ${q.t}</div>${buildInput(q.id,q.ph)}</div>`);
     h += `</div></div>`;
     return h;
 }
 
 function buildSlide13() {
-    return `<div class="arabic-box">اختار 5 هدايا لكل شخص من الأشخاص الأربعة، مع السبب.</div><div class="hint-box">اضغط على زر "📄 صفحة 16" فوق عشان تشوف صور الأشخاص ومعلوماتهم.</div><div class="spanish-box"><div class="es-instruction">¿Qué les regalarías a estas personas? Busca cuatro regalos y piensa tú en un quinto.</div><div class="text-paragraph"><strong>1. Jaime</strong> (68 años, deportista)<br><strong>2. Jimena</strong> (35 años, madre de dos niños)<br><strong>3. Raquel</strong> (20 años, estudiante de biología)<br><strong>4. Simón</strong> (7 años, va al colegio)</div></div><div class="whatsapp-note"><span class="wa-icon">📱</span><strong>تمرين مقالي كبير</strong><br>اكتب 5 هدايا لكل شخص مع السبب. مثال:<br><em>A Jaime le regalaría unas zapatillas deportivas porque es deportista.</em><br><br>ابعت الإجابة على <strong>جروب الواتس اب</strong> ليصححها المدرس</div>`;
+    return `<div class="arabic-box">اختار 5 هدايا لكل شخص من الأشخاص الأربعة، مع السبب.</div><div class="hint-box">اضغط على زر "📄 صفحة 16" فوق عشان تشوف صور الأشخاص ومعلوماتهم.</div><div class="spanish-box"><div class="es-instruction">&#191;Qu&#233; les regalar&#237;as a estas personas? Busca cuatro regalos y piensa t&#250; en un quinto.</div><div class="text-paragraph"><strong>1. Jaime</strong> (68 a&#241;os, deportista)<br><strong>2. Jimena</strong> (35 a&#241;os, madre de dos ni&#241;os)<br><strong>3. Raquel</strong> (20 a&#241;os, estudiante de biolog&#237;a)<br><strong>4. Sim&#243;n</strong> (7 a&#241;os, va al colegio)</div></div><div class="whatsapp-note"><span class="wa-icon">📱</span><strong>تمرين مقالي كبير</strong><br>اكتب 5 هدايا لكل شخص مع السبب. مثال:<br><em>A Jaime le regalar&#237;a unas zapatillas deportivas porque es deportista.</em><br><br>ابعت الإجابة على <strong>جروب الواتس اب</strong> ليصححها المدرس</div>`;
 }
 
-// ==================== التهيئة ====================
 function renderSlides() { document.getElementById('slidesContainer').innerHTML = SLIDES.map(buildSlide).join(''); }
+
 function initSlider() {
     const slides = document.querySelectorAll('.slide');
     totalSlides = slides.length;
@@ -900,7 +881,6 @@ document.addEventListener('keydown', e => {
     if (e.key==='ArrowRight') prevSlide();
 });
 
-// ==================== النوافذ المنبثقة ====================
 function showPopup(o) {
     const ov = document.getElementById('popupOverlay');
     document.getElementById('popupBox').className = 'popup-box '+(o.type||'info');
@@ -929,7 +909,6 @@ function closeLightbox(e) {
     document.getElementById('lightbox').classList.remove('show');
 }
 
-// ==================== النصوص المسجلة ====================
 function checkTranscriptStatus(k) {
     const tr = TRANSCRIPTIONS[k]; if (!tr) return;
     const btn = document.getElementById('trBtn_'+k);
@@ -962,7 +941,6 @@ function openTranscript(k) {
 }
 function closeTranscript() { document.getElementById('transcriptModal').classList.remove('show'); }
 
-// ==================== التصحيح ====================
 function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
 function gradeAutoQuestion(qId, value) {
     const m = AUTO_GRADED[qId]; if (!m) return null;
@@ -992,32 +970,72 @@ function preventEditKey(e) {
     }
 }
 
+// دالة لبناء جزء الشرح العربي مع الإسباني (مع span dir=ltr)
+function buildExplanationHTML(exp) {
+    if (!exp) return '';
+    let html = '';
+    if (typeof exp === 'string') {
+        // متوافق مع النسخ القديمة (string)
+        return `💡 <strong>الشرح:</strong><br>${esc(exp).replace(/\n/g,'<br>')}`;
+    }
+    if (exp.ar) html += `💡 <strong>الشرح:</strong> ${esc(exp.ar)}`;
+    if (exp.es) html += `<span class="es-line">📝 ${esc(exp.es)}</span>`;
+    return html;
+}
+
 function displayLockedAnswer(qId, info) {
     const el = document.getElementById(qId); if (!el) return;
     el.value = info.value; lockField(el);
     const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
-    
+    const exp = EXPLANATIONS[qId];
     if (info.status === 'pending') {
         el.classList.add('locked-pending');
         fb.className = 'feedback pending';
-        fb.innerHTML = `<span class="lock-badge pending">⏳ بانتظار</span>`;
-    } else if (info.isCorrect || info.status === 'reviewed' && info.isCorrect) {
-        el.classList.add('locked-correct');
-        fb.className = 'feedback correct';
-        fb.innerHTML = `<span class="lock-badge">✅ صح</span>`;
+        let html = `<div class="fb-spanish"><span class="lock-badge pending">⏳ Pendiente</span><br><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div><div class="fb-arabic"><strong>⏳ بانتظار تصحيح المدرس</strong><br>تم استلام إجابتك.`;
+        if (info.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.expectedAnswer) html += `<span class="es-line">📝 ${esc(info.expectedAnswer)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
     } else if (info.isHalf || info.verdict==='half') {
         el.classList.add('locked-half');
         fb.className = 'feedback half';
-        fb.innerHTML = `<span class="lock-badge half">⚠️ نص</span>`;
+        let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
+        html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
+        if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    } else if (info.isCorrect) {
+        el.classList.add('locked-correct');
+        fb.className = 'feedback correct';
+        let html = `<div class="fb-spanish"><span class="lock-badge">✅ ¡Correcto!</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div>`;
+        if (exp || info.reviewedBy) {
+            html += `<div class="fb-arabic">`;
+            if (exp) html += buildExplanationHTML(exp);
+            if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+            html += `</div>`;
+        }
+        fb.innerHTML = html;
     } else {
         el.classList.add('locked-wrong');
         fb.className = 'feedback wrong';
-        fb.innerHTML = `<span class="lock-badge wrong">❌ خطأ</span>`;
+        const m = AUTO_GRADED[qId];
+        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || '');
+        let html = `<div class="fb-spanish"><span class="lock-badge wrong">❌ Incorrecto</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (cd) html += `<strong>✅ Respuesta correcta:</strong> ${esc(cd)}`;
+        html += `</div><div class="fb-arabic">`;
+        if (exp) html += buildExplanationHTML(exp);
+        else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
     }
 }
 function esc(t) { if (t==null) return ''; const d=document.createElement('div'); d.textContent=String(t); return d.innerHTML; }
 
-// ==================== التقدم ====================
 function updateProgressDisplay() {
     document.getElementById('psCorrect').textContent = Math.floor(totalCorrect);
     document.getElementById('psHalf').textContent = totalHalf;
@@ -1047,21 +1065,60 @@ function showLoading(t,s) {
 }
 function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
-// ==================== إرسال البيانات (بسيط - السؤال والإجابة فقط) ====================
-async function submitAnswers(answersData) {
-    const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(JSON.stringify(answersData));
-    try { 
-        await fetch(url, {mode:'no-cors'});
-        return {success:true}; 
-    } catch(e) { 
-        throw e; 
-    }
+async function sendDataViaGET(data) {
+    const ds = JSON.stringify(data);
+    if (ds.length > 7000) return sendDataViaForm(data);
+    const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(ds);
+    try { await fetch(url, {mode:'no-cors'}); return {success:'unknown'}; } catch(e) { throw e; }
 }
-
+function sendDataViaForm(data) {
+    return new Promise((res,rej) => {
+        const ifn = 'sub_'+Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = ifn; iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const form = document.createElement('form');
+        form.method='POST'; form.action=SCRIPT_URL; form.target=ifn; form.style.display='none';
+        const pi = document.createElement('input');
+        pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
+        const ai = document.createElement('input');
+        ai.type='hidden'; ai.name='action'; ai.value='saveProgress'; form.appendChild(ai);
+        document.body.appendChild(form);
+        let r=false;
+        const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
+        const cu = () => { try{document.body.removeChild(form);}catch(e){} setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}}, 500); };
+        iframe.onload = ()=>{if(!r){r=true;clearTimeout(to);cu();res({success:'unknown'});}};
+        iframe.onerror = ()=>{if(!r){r=true;clearTimeout(to);cu();rej(new Error('Form failed'));}};
+        try{form.submit();}catch(e){r=true;clearTimeout(to);cu();rej(e);}
+    });
+}
+async function sendAndVerify(data) {
+    try { await sendDataViaGET(data); } catch(e) { return {verified:false, error:e.message}; }
+    await new Promise(r => setTimeout(r, 2500));
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(data.username) + '&lessonId=' + encodeURIComponent(data.lessonId) + '&_t=' + Date.now();
+        const r = await fetch(url); const res = await r.json();
+        if (res.status === 'success') {
+            const sA = parseInt(res.totalAnswered) || 0;
+            const sP = parseInt(res.totalPending) || 0;
+            if (sA + sP >= data.totalAnswered + data.totalPending) return {verified:true};
+            return {verified:false, error:'البيانات لم تصل بالكامل'};
+        }
+    } catch(e) { return {verified:false, error:'فشل التحقق'}; }
+    return {verified:false, error:'فشل التحقق'};
+}
+async function fetchWithRetry(url, opts={}, max=3) {
+    let lastErr;
+    for (let i=0; i<max; i++) {
+        try { return await fetch(url, opts); }
+        catch(e) { lastErr=e; if (i<max-1) await new Promise(r=>setTimeout(r,1000*(i+1))); }
+    }
+    throw lastErr;
+}
 async function loadProgress() {
     try {
         const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
-        const r = await fetch(url); const res = await r.json();
+        const r = await fetchWithRetry(url); const res = await r.json();
         if (res.status === 'success') {
             totalCorrect = parseFloat(res.totalCorrect) || 0;
             totalWrong = parseInt(res.totalWrong) || 0;
@@ -1069,16 +1126,19 @@ async function loadProgress() {
             totalPending = parseInt(res.totalPending) || 0;
             totalHalf = parseInt(res.totalHalf) || 0;
             if (res.lockedAnswers && res.lockedAnswers !== '{}') {
-                try { lockedAnswers = JSON.parse(res.lockedAnswers); } catch(e){}
+                try {
+                    lockedAnswers = JSON.parse(res.lockedAnswers);
+                    Object.keys(lockedAnswers).forEach(qId => displayLockedAnswer(qId, lockedAnswers[qId]));
+                } catch(e){}
             }
             updateProgressDisplay();
             updateJumpButtonStatus();
+            checkIfComplete();
             checkAllTranscripts();
         }
     } catch(e) { console.error(e); }
 }
 
-// ==================== تجميع وإرسال إجابات الطالب ====================
 function collectNewAnswers() {
     const na = [];
     ALL_QUESTIONS.forEach(qId => {
@@ -1090,7 +1150,6 @@ function collectNewAnswers() {
     });
     return na;
 }
-
 function prepareSubmit() {
     const na = collectNewAnswers();
     if (na.length === 0) {
@@ -1098,60 +1157,55 @@ function prepareSubmit() {
         return;
     }
     pendingSubmit = na;
+    let ac=0, tc=0;
+    na.forEach(a => { if (AUTO_GRADED[a.id]) ac++; else tc++; });
     showPopup({
         type:'warning', icon:'🤔', title:'تأكيد الإرسال',
-        body:`<p>هل أنت متأكد من إرسال إجاباتك؟</p><div class="popup-detail">📊 <strong>عدد الإجابات:</strong> ${na.length}<br>⚠️ لن تتمكن من تعديل الإجابات بعد الإرسال!</div>`,
+        body:`<p>هل أنت متأكد من إرسال إجاباتك؟</p><div class="popup-detail">📊 <strong>عدد الإجابات:</strong> ${na.length}<br>🤖 تصحيح فوري: <strong>${ac}</strong><br>👨‍🏫 يصححها المدرس: <strong>${tc}</strong><br>⚠️ لن تتمكن من تعديل الإجابات بعد الإرسال!</div>`,
         buttons:[{text:'✅ نعم، أرسل',class:'primary',action:confirmSubmit},{text:'❌ إلغاء',class:'secondary',action:()=>{pendingSubmit=null;closePopup();}}]
     });
 }
-
 async function confirmSubmit() {
     closePopup();
     if (!pendingSubmit) return;
     const na = pendingSubmit; pendingSubmit = null;
-    showLoading('⏳ جاري الإرسال...', na.length+' سؤال');
-
-    const fr = [];
+    showLoading('⏳ جاري التصحيح والإرسال...', na.length+' سؤال');
     let bc=0, bw=0, bp=0;
-    
+    const fr = [];
     na.forEach(ans => {
         if (AUTO_GRADED[ans.id]) {
             const r = gradeAutoQuestion(ans.id, ans.value);
             fr.push({id:ans.id, value:ans.value, status:'reviewed', isCorrect:r.isCorrect});
             if (r.isCorrect) bc++; else bw++;
         } else {
-            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false});
+            const ctx = TEACHER_GRADED_CONTEXT[ans.id] || {};
+            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false, feedback:'بانتظار تصحيح المدرس', questionText:ctx.questionText || ans.id, expectedAnswer:ctx.expectedAnswer || '', rule:ctx.rule || ''});
             bp++;
         }
     });
-
     const tl = JSON.parse(JSON.stringify(lockedAnswers));
     const nao = {};
     fr.forEach(r => {
         const o = {value:r.value, status:r.status, isCorrect:r.isCorrect};
+        if (r.feedback) o.feedback = r.feedback;
+        if (r.status==='pending') { o.questionText=r.questionText; o.expectedAnswer=r.expectedAnswer; o.rule=r.rule; }
         tl[r.id] = o; nao[r.id] = o;
     });
-
     const ntc = totalCorrect + bc;
     const ntw = totalWrong + bw;
     const nta = totalAnswered + (bc + bw);
     const ntp = totalPending + bp;
-
-    // إرسال بسيط: السؤال والإجابة فقط
     const data = {
-        action: 'saveProgress',
-        username: currentUser.username,
-        lessonId: LESSON_CONFIG.lessonId,
-        lessonName: LESSON_CONFIG.lessonName,
-        totalCorrect: ntc,
-        totalWrong: ntw,
-        totalAnswered: nta,
-        totalPending: ntp,
-        newAnswers: JSON.stringify(nao)
+        action:'saveProgress', username:currentUser.username, fullName:currentUser.fullName,
+        lessonId:LESSON_CONFIG.lessonId, lessonName:LESSON_CONFIG.lessonName,
+        totalCorrect:ntc, totalWrong:ntw, totalAnswered:nta, totalPending:ntp, totalQuestions:LESSON_CONFIG.totalQuestions,
+        batchCorrect:bc, batchWrong:bw, batchAnswered:bc+bw, batchPending:bp,
+        details:`${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
+        newAnswers:JSON.stringify(nao)
     };
-
-    try {
-        await submitAnswers(data);
+    const r = await sendAndVerify(data);
+    hideLoading();
+    if (r.verified) {
         lockedAnswers = tl;
         totalCorrect=ntc; totalWrong=ntw; totalAnswered=nta; totalPending=ntp;
         fr.forEach(x => displayLockedAnswer(x.id, x));
@@ -1161,25 +1215,22 @@ async function confirmSubmit() {
         updateProgressDisplay();
         updateJumpButtonStatus();
         checkAllTranscripts();
-        hideLoading();
         showPopup({
             type:'success', icon:'✅', title:'تم الإرسال بنجاح!',
             body:`<div class="popup-detail">✅ صح: <strong style="color:#2ecc71">${bc}</strong><br>❌ خطأ: <strong style="color:#e74c3c">${bw}</strong><br>⏳ بانتظار المدرس: <strong style="color:#9b59b6">${bp}</strong></div>`,
             buttons:[{text:'👍 حسناً',class:'primary',action:()=>{closePopup();checkIfComplete();}}]
         });
-    } catch(e) {
+    } else {
         lastFailedData = data;
         try { safeStorage.setItem('ia_pending_'+LESSON_CONFIG.lessonId, JSON.stringify({data:data, timestamp:Date.now()})); } catch(e){}
         document.getElementById('retryBanner').style.display = 'block';
-        hideLoading();
         showPopup({
             type:'error', icon:'❌', title:'فشل الإرسال',
-            body:`<p>حدث خطأ أثناء الإرسال.</p>`,
+            body:`<p>حدث خطأ أثناء الإرسال.</p><div class="popup-detail">${esc(r.error || 'خطأ غير معروف')}</div>`,
             buttons:[{text:'🔄 إعادة المحاولة',class:'primary',action:()=>{closePopup();retrySubmit();}},{text:'إغلاق',class:'secondary'}]
         });
     }
 }
-
 async function retrySubmit() {
     if (!lastFailedData) {
         try { const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId); if (p) lastFailedData = JSON.parse(p).data; } catch(e){}
@@ -1189,253 +1240,28 @@ async function retrySubmit() {
         }
     }
     showLoading('جاري إعادة المحاولة...');
-    try {
-        await submitAnswers(lastFailedData);
+    const r = await sendAndVerify(lastFailedData);
+    hideLoading();
+    if (r.verified) {
         safeStorage.removeItem('ia_pending_'+LESSON_CONFIG.lessonId);
         lastFailedData = null;
-        hideLoading();
-        showPopup({type:'success',title:'تم بنجاح!',body:'تم حفظ بياناتك.',buttons:[{text:'حسناً',class:'primary'}]});
-    } catch(e) {
-        hideLoading();
-        showPopup({type:'error',title:'فشلت المحاولة',body:'حاول مرة أخرى لاحقاً.',buttons:[{text:'حسناً',class:'primary'}]});
+        showPopup({type:'success',title:'تم بنجاح!',body:'تم حفظ بياناتك. سيتم إعادة تحميل الصفحة.',buttons:[{text:'حسناً',class:'primary',action:()=>location.reload()}]});
+    } else {
+        showPopup({type:'error',title:'فشلت المحاولة',body:esc(r.error || 'حاول مرة أخرى لاحقاً.'),buttons:[{text:'حسناً',class:'primary'}]});
     }
 }
 
-// ==================== وضع المعلم - التصحيح ====================
-function initTeacherGrading() {
-    if (!IS_TEACHER_GRADING) return;
-    
-    document.body.classList.add('teacher-mode');
-    document.getElementById('teacherGradingBar').classList.add('show');
-    document.getElementById('tgStudentName').textContent = STUDENT_USERNAME;
-    
-    // إظهار الأسئلة التي تنتظر التصحيح
-    goToFirstPending();
-}
-
-function goToFirstPending() {
-    for (let i = 0; i < ALL_QUESTIONS.length; i++) {
-        const qId = ALL_QUESTIONS[i];
-        const info = lockedAnswers[qId];
-        if (info && info.status === 'pending') {
-            // البحث عن الشريحة التي تحتوي هذا السؤال
-            const slideIndex = findSlideForQuestion(qId);
-            if (slideIndex >= 0) {
-                goToSlide(slideIndex);
-                return;
-            }
-        }
-    }
-    // إذا لم توجد أسئلة بانتظار، الذهاب لأول سؤال
-    goToSlide(0);
-}
-
-function findSlideForQuestion(qId) {
-    for (let i = 0; i < SLIDES.length; i++) {
-        const s = SLIDES[i];
-        if (s.questions && s.questions.some(q => q.id === qId)) return i;
-        if (s.triples && s.triples.some(t => t.ids.includes(qId))) return i;
-        if (s.custom === 'slide5' && (qId.startsWith('q5a') || qId.startsWith('q5b'))) return i;
-        if (s.custom === 'slide10' && (qId.startsWith('q10a') || qId.startsWith('q10b'))) return i;
-    }
-    return 0;
-}
-
-function teacherSaveAll() {
-    // حفظ كل التصحيحات
-    const graded = [];
-    let saved = 0;
-    
-    ALL_QUESTIONS.forEach(qId => {
-        const info = lockedAnswers[qId];
-        if (info && (info.status === 'reviewed' || info.status === 'pending') && info.teacherGrade) {
-            graded.push({
-                id: qId,
-                value: info.value,
-                status: 'reviewed',
-                isCorrect: info.teacherGrade === 'correct',
-                isHalf: info.teacherGrade === 'half',
-                verdict: info.teacherGrade
-            });
-            saved++;
-        }
-    });
-    
-    if (saved === 0) {
-        showPopup({type:'warning',title:'لا يوجد تصحيح',body:'لم تقم بتصحيح أي سؤال بعد.',buttons:[{text:'حسناً',class:'primary'}]});
-        return;
-    }
-    
-    // إرسال التصحيحات
-    const nao = {};
-    graded.forEach(g => {
-        nao[g.id] = {value:g.value, status:'reviewed', isCorrect:g.isCorrect, isHalf:g.isHalf};
-    });
-    
-    const tc = graded.filter(g => g.isCorrect).length;
-    const th = graded.filter(g => g.isHalf).length;
-    const tw = graded.filter(g => !g.isCorrect && !g.isHalf).length;
-    
-    const data = {
-        action: 'saveTeacherGrading',
-        username: currentUser.username,
-        lessonId: LESSON_CONFIG.lessonId,
-        teacherGrades: JSON.stringify(nao),
-        totalCorrect: tc,
-        totalHalf: th,
-        totalWrong: tw
-    };
-    
-    showLoading('💾 جاري حفظ التصحيحات...', saved+' سؤال');
-    
-    submitAnswers(data).then(() => {
-        hideLoading();
-        showPopup({type:'success',title:'✅ تم الحفظ',body:`تم تصحيح ${saved} سؤال بنجاح!`,buttons:[{text:'حسناً',class:'primary'}]});
-    }).catch(e => {
-        hideLoading();
-        showPopup({type:'error',title:'❌ فشل الحفظ',body:'حدث خطأ أثناء الحفظ.',buttons:[{text:'حسناً',class:'primary'}]});
-    });
-}
-
-function teacherGradeNext() {
-    const currentQId = getCurrentQuestionId();
-    if (!currentQId) return;
-    
-    const info = lockedAnswers[currentQId];
-    if (!info || info.status !== 'pending') {
-        // الانتقال للسؤال التالي
-        const idx = ALL_QUESTIONS.indexOf(currentQId);
-        if (idx < ALL_QUESTIONS.length - 1) {
-            const nextId = ALL_QUESTIONS[idx + 1];
-            goToSlide(findSlideForQuestion(nextId));
-        }
-        return;
-    }
-    
-    // فتح نافذة التصحيح
-    showGradePopup(currentQId, info);
-}
-
-function teacherGradePrev() {
-    const currentQId = getCurrentQuestionId();
-    if (!currentQId) return;
-    
-    const idx = ALL_QUESTIONS.indexOf(currentQId);
-    if (idx > 0) {
-        const prevId = ALL_QUESTIONS[idx - 1];
-        goToSlide(findSlideForQuestion(prevId));
-    }
-}
-
-function teacherSkipToNext() {
-    const currentQId = getCurrentQuestionId();
-    const startIdx = currentQId ? ALL_QUESTIONS.indexOf(currentQId) : -1;
-    
-    for (let i = startIdx + 1; i < ALL_QUESTIONS.length; i++) {
-        const qId = ALL_QUESTIONS[i];
-        const info = lockedAnswers[qId];
-        if (!info || info.status === 'pending') {
-            goToSlide(findSlideForQuestion(qId));
-            return;
-        }
-    }
-    
-    showPopup({type:'info',title:'انتهيت',body:'لا توجد أسئلة بانتظار للتصحيح.',buttons:[{text:'حسناً',class:'primary'}]});
-}
-
-function getCurrentQuestionId() {
-    // البحث عن أول سؤال في الشريحة الحالية له قيمة
-    const currentSlideEl = document.querySelectorAll('.slide')[currentSlide];
-    if (!currentSlideEl) return null;
-    
-    const inputs = currentSlideEl.querySelectorAll('input, select, textarea');
-    for (const inp of inputs) {
-        if (inp.id && inp.id.startsWith('q') && inp.value.trim()) {
-            return inp.id;
-        }
-    }
-    return null;
-}
-
-function showGradePopup(qId, info) {
-    const ctx = TEACHER_GRADED[qId] || {};
-    
-    showPopup({
-        type:'info',
-        icon:'👨‍🏫',
-        title:'تصحيح السؤال',
-        body:`<div class="popup-detail" style="text-align:left;direction:ltr;">
-            <p><strong>السؤال:</strong> ${esc(ctx.questionText || qId)}</p>
-            <p style="margin-top:8px"><strong>إجابة الطالب:</strong> ${esc(info.value || '---')}</p>
-            <p style="margin-top:8px"><strong>الإجابة الصحيحة:</strong> ${esc(ctx.expectedAnswer || '---')}</p>
-            <p style="margin-top:8px"><strong>القاعدة:</strong> ${esc(ctx.rule || '---')}</p>
-        </div>`,
-        buttons:[
-            {text:'✅ صح',class:'primary',action:()=>{applyTeacherGrade(qId, 'correct'); closePopup();}},
-            {text:'⚠️ نص',class:'secondary',action:()=>{applyTeacherGrade(qId, 'half'); closePopup();}},
-            {text:'❌ خطأ',class:'danger',action:()=>{applyTeacherGrade(qId, 'wrong'); closePopup();}}
-        ]
-    });
-}
-
-function applyTeacherGrade(qId, verdict) {
-    const info = lockedAnswers[qId];
-    if (!info) return;
-    
-    const isCorrect = verdict === 'correct';
-    const isHalf = verdict === 'half';
-    
-    lockedAnswers[qId] = {
-        ...info,
-        status: 'reviewed',
-        isCorrect: isCorrect,
-        isHalf: isHalf,
-        verdict: verdict,
-        teacherGrade: verdict
-    };
-    
-    displayLockedAnswer(qId, lockedAnswers[qId]);
-    
-    // تحديث الأرقام
-    totalPending = Math.max(0, totalPending - 1);
-    if (isCorrect) totalCorrect++;
-    else if (isHalf) totalHalf++;
-    else totalWrong++;
-    totalAnswered++;
-    
-    updateProgressDisplay();
-    
-    // الانتقال للسؤال التالي
-    teacherGradeNext();
-}
-
-// ==================== التهيئة النهائية ====================
 window.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
     document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
     document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
-    
     renderSlides();
     initSlider();
     updateProgressDisplay();
     checkAllTranscripts();
-    
-    // وضع المعلم
-    if (IS_TEACHER_GRADING) {
-        initTeacherGrading();
-    }
-    
     showLoading('جاري مزامنة بياناتك...');
     await loadProgress();
     hideLoading();
-    
-    // تحديث إجابات المعلم المحفوظة
-    if (IS_TEACHER_GRADING) {
-        ALL_QUESTIONS.forEach(qId => {
-            if (lockedAnswers[qId]) displayLockedAnswer(qId, lockedAnswers[qId]);
-        });
-    }
-    
     try {
         const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
         if (p) {
