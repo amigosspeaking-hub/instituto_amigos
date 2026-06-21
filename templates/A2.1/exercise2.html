@@ -249,7 +249,7 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 </div>
 
 <div class="user-bar">
-<div class="welcome">👤 أهلاً <span id="userFullName">{{ student.username }}</span></div>
+<div class="welcome">👤 <span id="userFullName">أهلاً {{ student.username }}</span></div>
 <a href="/dashboard" class="logout-btn">🔙 العودة للمنصة</a>
 </div>
 
@@ -287,6 +287,11 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 </div>
 
 <script>
+// =========================================================
+// السطر الذي كان مفقوداً ويتسبب في توقف الصفحة (Crash)
+// =========================================================
+const LESSON_CONFIG = { lessonId:'A2.1_L2', lessonName:'Para ti y para mí', levelDisplay:'A2.1 - Lección 2', totalQuestions:0 };
+
 const scriptUrlMeta = document.querySelector('meta[name="script-url"]');
 const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
 const SCRIPT_URL = (scriptUrlMeta?.content && scriptUrlMeta.content !== '{{ script_url }}' && scriptUrlMeta.content.startsWith('https://')) ? scriptUrlMeta.content : DEFAULT_SCRIPT_URL;
@@ -721,10 +726,284 @@ let currentUser = { username:'{{ student.username }}', fullName:'{{ student.user
 let lockedAnswers = {};
 let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
 let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
+
 const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
 const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
 LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
 
+// ============================================================
+// ⭐ نظام تصحيح المعلم
+// ============================================================
+let isTeacherGradingMode = false;
+let teacherGrades = {};
+let studentUsername = '';
+
+function checkTeacherGradingMode() {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    studentUsername = params.get('student');
+    if (mode === 'grading' && studentUsername) {
+        isTeacherGradingMode = true;
+        document.body.classList.add('teacher-grading-mode');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
+    checkTeacherGradingMode();
+    
+    if (isTeacherGradingMode) {
+        const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
+        const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
+        const tn = document.querySelector('.top-nav'); if(tn) tn.style.display = 'none';
+        const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
+        
+        initTeacherGrading();
+        return; 
+    }
+    
+    if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
+    if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
+    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
+    
+    renderSlides();
+    initSlider();
+    updateProgressDisplay();
+    checkAllTranscripts();
+    
+    showLoading('جاري مزامنة بياناتك...');
+    await loadProgress();
+    hideLoading();
+    
+    try {
+        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        if (p) {
+            lastFailedData = JSON.parse(p).data;
+            document.getElementById('retryBanner').style.display = 'block';
+        }
+    } catch(e){}
+});
+
+async function initTeacherGrading() {
+    const header = document.createElement('div');
+    header.className = 'teacher-grading-banner';
+    header.innerHTML = `
+        <div class="grading-info-bar">
+            <span class="grading-icon">👨‍🏫</span>
+            <span>وضع تصحيح المعلم</span>
+            <span class="divider">|</span>
+            <span>📋 الطالب: <strong>${studentUsername}</strong></span>
+            <span>📚 ${LESSON_CONFIG.lessonName}</span>
+            <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيحات وإرسالها</button>
+        </div>
+    `;
+    document.querySelector('.slider-wrapper').prepend(header);
+    
+    renderSlides();
+    
+    document.querySelectorAll('.slide').forEach(s => {
+        s.style.display = 'block';
+        s.style.opacity = '1';
+        s.classList.add('active');
+    });
+    
+    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
+        btn.style.display = 'none';
+    });
+
+    showLoading('جاري تحميل إجابات الطالب للتصحيح...');
+    
+    try {
+        const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        hideLoading();
+        if (data.status === 'success' && data.student) {
+            applyGradingModeToQuestions(data.student.pendingAnswers || {});
+        } else {
+            showPopup({type:'error', title:'تنبيه', body:'لا توجد أسئلة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
+        }
+    } catch (e) {
+        hideLoading();
+        showPopup({type:'error', title:'خطأ اتصال', body:'فشل جلب البيانات: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
+    }
+    
+    addGradingStyles();
+}
+
+function applyGradingModeToQuestions(pendingAnswers) {
+    const pendingKeys = Object.keys(pendingAnswers);
+    if (pendingKeys.length === 0) {
+        showPopup({type:'info', title:'تم', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
+        return;
+    }
+    
+    pendingKeys.forEach(qId => {
+        const studentAnswer = pendingAnswers[qId];
+        const questionEl = document.getElementById(qId);
+        
+        if (!questionEl) return;
+        
+        teacherGrades[qId] = {
+            value: studentAnswer.value || '',
+            verdict: '',
+            feedback: ''
+        };
+        
+        const correctAnswer = getCorrectAnswer(qId);
+        const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
+        
+        const gradingHTML = `
+            <div class="grading-overlay" id="grading_${qId}">
+                <div class="grading-answer-box student-answer-box">
+                    <div class="answer-label">📝 إجابة الطالب:</div>
+                    <div class="answer-content" dir="auto">${escapeHtml(studentAnswer.value || 'لا توجد إجابة')}</div>
+                </div>
+                ${correctAnswer ? `
+                <div class="grading-answer-box correct-answer-box">
+                    <div class="answer-label">✅ الإجابة النموذجية:</div>
+                    <div class="answer-content" dir="auto">${correctAnswer}</div>
+                </div>` : ''}
+                
+                <div class="grading-controls">
+                    <div class="verdict-buttons">
+                        <span class="verdict-label">🏷️ التقييم:</span>
+                        <button class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صحيح</button>
+                        <button class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">➗ نصف</button>
+                        <button class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>
+                    </div>
+                    <div class="feedback-section">
+                        <label>💬 تعليق / فيدباك (اختياري):</label>
+                        <textarea id="feedback_${qId}" dir="auto" placeholder="اكتب ملاحظاتك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea>
+                    </div>
+                    <div class="verdict-status" id="status_${qId}">
+                        <span class="not-graded">⏳ بانتظار تقييمك</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        questionEl.style.display = 'none'; 
+        qCard.classList.add('pending-grading');
+        qCard.insertAdjacentHTML('beforeend', gradingHTML);
+    });
+}
+
+function getCorrectAnswer(qId) {
+    if (AUTO_GRADED[qId]) {
+        const ag = AUTO_GRADED[qId];
+        if (ag.a && Array.isArray(ag.a)) return ag.a.join(' أو ');
+        if (ag.a) return ag.a;
+    }
+    const qData = TEACHER_GRADED_CONTEXT[qId];
+    if (qData && qData.expectedAnswer) return qData.expectedAnswer;
+    return null;
+}
+
+function selectVerdict(qId, verdict) {
+    teacherGrades[qId].verdict = verdict;
+    const el = document.getElementById('grading_' + qId);
+    if (!el) return;
+    
+    el.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
+    const statusEl = document.getElementById('status_' + qId);
+    
+    if (verdict === 'correct') {
+        el.querySelector('.verdict-btn.correct').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done correct">✅ تم التقييم: صحيح</span>';
+    } else if (verdict === 'half') {
+        el.querySelector('.verdict-btn.half').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done half">➗ تم التقييم: نصف درجة</span>';
+    } else if (verdict === 'wrong') {
+        el.querySelector('.verdict-btn.wrong').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done wrong">❌ تم التقييم: خطأ</span>';
+    }
+}
+
+function updateFeedback(qId, v) { 
+    teacherGrades[qId].feedback = v; 
+}
+
+async function saveAllGrades() {
+    const ungraded = Object.keys(teacherGrades).filter(qId => !teacherGrades[qId].verdict);
+    if (ungraded.length > 0) {
+        if (!confirm(`يوجد ${ungraded.length} سؤال لم تقم بتقييمهم. هل تريد المتابعة وحفظ ما تم تصحيحه فقط؟`)) return;
+    }
+    
+    showLoading('جاري حفظ التصحيحات وإرسالها للطالب...');
+    
+    let tc = 0, th = 0, tw = 0;
+    Object.keys(teacherGrades).forEach(qId => {
+        if (teacherGrades[qId].verdict === 'correct') tc++;
+        else if (teacherGrades[qId].verdict === 'half') th++;
+        else if (teacherGrades[qId].verdict === 'wrong') tw++;
+    });
+
+    const payload = { 
+        action: 'saveTeacherGrading', 
+        username: studentUsername, 
+        lessonId: LESSON_CONFIG.lessonId, 
+        teacherGrades: JSON.stringify(teacherGrades), 
+        totalCorrect: tc, 
+        totalHalf: th, 
+        totalWrong: tw 
+    };
+    
+    try {
+        await sendDataViaForm(payload);
+        hideLoading();
+        showPopup({
+            type:'success', title:'تم بنجاح', body:'تم حفظ التقييم بنجاح!', 
+            buttons:[{text:'إغلاق النافذة', class:'primary', action:() => { window.close(); } }]
+        });
+    } catch (e) { 
+        hideLoading(); 
+        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
+    }
+}
+
+function addGradingStyles() {
+    if(document.getElementById('teacherStyles')) return;
+    const s = document.createElement('style');
+    s.id = 'teacherStyles';
+    s.textContent = `
+        .teacher-grading-mode .slide { opacity: 1 !important; display: block !important; margin-bottom: 20px;}
+        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
+        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
+        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
+        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.1) !important; padding: 15px; border-radius: 12px; }
+        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
+        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
+        .student-answer-box { border-right: 4px solid #f39c12; }
+        .correct-answer-box { border-right: 4px solid #2ecc71; }
+        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
+        .student-answer-box .answer-content { color: #f39c12; font-weight: bold;}
+        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
+        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
+        .verdict-label { color: #ccc; font-weight: bold; }
+        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
+        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
+        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
+        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
+        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
+        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
+        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
+        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
+        .verdict-status { text-align: left; margin-top: 10px; }
+        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
+        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
+        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
+        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
+    `;
+    document.head.appendChild(s);
+}
+
+// ============================================================
+// باقي دوال بناء الصفحة
+// ============================================================
 function buildSelect(id, letters) {
     const arr = Array.isArray(letters) ? letters : letters.split('');
     let opts = '<option value="">-- اختر --</option>';
@@ -737,8 +1016,7 @@ function buildAudio(p) { return `<div class="audio-card"><div class="audio-icon"
 function buildWordBank(w) { return `<div class="word-bank">${w.map(x=>`<span>${x}</span>`).join('')}</div>`; }
 function buildOptionsList(o) { return `<div class="options-list">${o.map(x=>`<span class="opt">${x}</span>`).join('')}</div>`; }
 function buildTranscriptBtn(k) {
-    const tr = TRANSCRIPTIONS[k];
-    if (!tr) return '';
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return '';
     return `<button class="transcript-btn" id="trBtn_${k}" onclick="openTranscript('${k}')" disabled><span class="lock-icon">🔒</span><span>📝 عرض النص (Transcripción)</span><span class="progress-text" id="trProg_${k}">0/${tr.requiredQuestions.length}</span></button>`;
 }
 function buildQuestion(q) {
@@ -825,8 +1103,7 @@ function initSlider() {
     jc.innerHTML = '';
     for (let i=0; i<totalSlides; i++) {
         const btn = document.createElement('button');
-        btn.className = 'jump-btn';
-        btn.textContent = i+1;
+        btn.className = 'jump-btn'; btn.textContent = i+1;
         btn.onclick = () => goToSlide(i); btn.id = 'jumpBtn_'+i;
         jc.appendChild(btn);
     }
@@ -942,8 +1219,7 @@ function closeTranscript() { document.getElementById('transcriptModal').classLis
 
 function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
 function gradeAutoQuestion(qId, value) {
-    const m = AUTO_GRADED[qId];
-    if (!m) return null;
+    const m = AUTO_GRADED[qId]; if (!m) return null;
     const ua = String(value||'').trim(); if (!ua) return null;
     let ok = false;
     if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
@@ -953,8 +1229,7 @@ function gradeAutoQuestion(qId, value) {
 
 function lockField(el) {
     if (!el) return;
-    el.disabled = true;
-    el.readOnly = true; el.setAttribute('data-locked','true');
+    el.disabled = true; el.readOnly = true; el.setAttribute('data-locked','true');
     el.addEventListener('input', preventEdit);
     el.addEventListener('beforeinput', preventEdit);
     el.addEventListener('paste', preventEdit);
@@ -987,7 +1262,6 @@ function displayLockedAnswer(qId, info) {
     el.value = info.value; lockField(el);
     const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
     const exp = EXPLANATIONS[qId];
-    
     if (info.status === 'pending') {
         el.classList.add('locked-pending');
         fb.className = 'feedback pending';
@@ -1037,15 +1311,17 @@ function displayLockedAnswer(qId, info) {
 function esc(t) { if (t==null) return ''; const d=document.createElement('div'); d.textContent=String(t); return d.innerHTML; }
 
 function updateProgressDisplay() {
-    document.getElementById('psCorrect').textContent = Math.floor(totalCorrect);
-    document.getElementById('psHalf').textContent = totalHalf;
-    document.getElementById('psWrong').textContent = totalWrong;
-    document.getElementById('psPending').textContent = totalPending;
-    document.getElementById('psAnswered').textContent = totalAnswered + totalPending;
-    document.getElementById('psTotal').textContent = LESSON_CONFIG.totalQuestions;
-    document.getElementById('psRemaining').textContent = Math.max(0, LESSON_CONFIG.totalQuestions - totalAnswered - totalPending);
-    const pct = LESSON_CONFIG.totalQuestions > 0 ? Math.round(((totalAnswered + totalPending) / LESSON_CONFIG.totalQuestions) * 100) : 0;
-    document.getElementById('psProgressBar').style.width = pct+'%';
+    try {
+        document.getElementById('psCorrect').textContent = Math.floor(totalCorrect);
+        document.getElementById('psHalf').textContent = totalHalf;
+        document.getElementById('psWrong').textContent = totalWrong;
+        document.getElementById('psPending').textContent = totalPending;
+        document.getElementById('psAnswered').textContent = totalAnswered + totalPending;
+        document.getElementById('psTotal').textContent = LESSON_CONFIG.totalQuestions;
+        document.getElementById('psRemaining').textContent = Math.max(0, LESSON_CONFIG.totalQuestions - totalAnswered - totalPending);
+        const pct = LESSON_CONFIG.totalQuestions > 0 ? Math.round(((totalAnswered + totalPending) / LESSON_CONFIG.totalQuestions) * 100) : 0;
+        document.getElementById('psProgressBar').style.width = pct+'%';
+    } catch(e) {}
 }
 function checkIfComplete() {
     if (totalAnswered + totalPending >= LESSON_CONFIG.totalQuestions && totalPending === 0) {
@@ -1082,7 +1358,7 @@ function sendDataViaForm(data) {
         const pi = document.createElement('input');
         pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
         const ai = document.createElement('input');
-        ai.type='hidden'; ai.name='action'; ai.value='saveProgress'; form.appendChild(ai);
+        ai.type='hidden'; ai.name='action'; ai.value=data.action || 'saveProgress'; form.appendChild(ai);
         document.body.appendChild(form);
         let r=false;
         const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
@@ -1133,7 +1409,7 @@ async function loadProgress() {
             }
             updateProgressDisplay();
             updateJumpButtonStatus();
-            if(!isTeacherGradingMode) checkIfComplete();
+            if (!isTeacherGradingMode) checkIfComplete();
             checkAllTranscripts();
         }
     } catch(e) { console.error(e); }
@@ -1249,292 +1525,6 @@ async function retrySubmit() {
     } else {
         showPopup({type:'error',title:'فشلت المحاولة',body:esc(r.error || 'حاول مرة أخرى لاحقاً.'),buttons:[{text:'حسناً',class:'primary'}]});
     }
-}
-
-// ============================================================
-// ⭐ نظام تصحيح المعلم (مُحسن وخالي من الأخطاء)
-// ============================================================
-let isTeacherGradingMode = false;
-let teacherGrades = {};
-let studentUsername = '';
-
-function checkTeacherGradingMode() {
-    const params = new URLSearchParams(window.location.search);
-    const mode = params.get('mode');
-    studentUsername = params.get('student');
-    if (mode === 'grading' && studentUsername) {
-        isTeacherGradingMode = true;
-        document.body.classList.add('teacher-grading-mode');
-    }
-}
-
-window.addEventListener('DOMContentLoaded', async function() {
-    checkTeacherGradingMode();
-    
-    if (isTeacherGradingMode) {
-        // إخفاء عناصر الطالب التي تسبب تعارض
-        const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
-        const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
-        const tn = document.querySelector('.top-nav'); if(tn) tn.style.display = 'none';
-        const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
-        
-        initTeacherGrading();
-        return; 
-    }
-    
-    // =================================================
-    // هذا الكود يعمل للطالب فقط
-    // =================================================
-    if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
-    if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
-    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
-    
-    renderSlides();
-    initSlider();
-    updateProgressDisplay();
-    checkAllTranscripts();
-    
-    showLoading('جاري مزامنة بياناتك...');
-    await loadProgress();
-    hideLoading();
-    
-    try {
-        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
-        if (p) {
-            lastFailedData = JSON.parse(p).data;
-            document.getElementById('retryBanner').style.display = 'block';
-        }
-    } catch(e){}
-});
-
-// =================================================
-// دوال المدرس 
-// =================================================
-async function initTeacherGrading() {
-    // 1. إضافة الهيدر الخاص بالمدرس
-    const header = document.createElement('div');
-    header.className = 'teacher-grading-banner';
-    header.innerHTML = `
-        <div class="grading-info-bar">
-            <span class="grading-icon">👨‍🏫</span>
-            <span>وضع تصحيح المعلم</span>
-            <span class="divider">|</span>
-            <span>📋 الطالب: <strong>${studentUsername}</strong></span>
-            <span>📚 ${LESSON_CONFIG.lessonName}</span>
-            <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيحات وإرسالها</button>
-        </div>
-    `;
-    document.querySelector('.slider-wrapper').prepend(header);
-    
-    // 2. بناء الأسئلة
-    renderSlides();
-    
-    // 3. إظهار جميع الشرائح فوق بعضها (التمرير الطويل بدلاً من السلايدر لراحة المدرس)
-    document.querySelectorAll('.slide').forEach(s => {
-        s.style.display = 'block';
-        s.style.opacity = '1';
-        s.classList.add('active');
-    });
-    
-    // إخفاء أزرار الإرسال الخاصة بالطالب
-    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
-        btn.style.display = 'none';
-    });
-
-    showLoading('جاري تحميل بيانات الطالب للتصحيح...');
-    
-    // 4. جلب بيانات الطالب المحددة
-    try {
-        const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
-        const res = await fetch(url);
-        const data = await res.json();
-        
-        hideLoading();
-        if (data.status === 'success' && data.student) {
-            applyGradingModeToQuestions(data.student.pendingAnswers || {});
-        } else {
-            showPopup({type:'error', title:'تنبيه', body:'لا توجد بيانات لهذا الطالب أو تم تصحيحها مسبقاً.', buttons:[{text:'حسناً', class:'primary'}]});
-        }
-    } catch (e) {
-        hideLoading();
-        showPopup({type:'error', title:'خطأ اتصال', body:'فشل جلب البيانات: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
-    }
-    
-    addGradingStyles();
-}
-
-function applyGradingModeToQuestions(pendingAnswers) {
-    const pendingKeys = Object.keys(pendingAnswers);
-    if (pendingKeys.length === 0) {
-        showPopup({type:'info', title:'تم', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
-        return;
-    }
-    
-    pendingKeys.forEach(qId => {
-        const studentAnswer = pendingAnswers[qId];
-        const questionEl = document.getElementById(qId);
-        
-        if (!questionEl) return;
-        
-        teacherGrades[qId] = {
-            value: studentAnswer.value || '',
-            verdict: '',
-            feedback: ''
-        };
-        
-        const correctAnswer = getCorrectAnswer(qId);
-        
-        // ربط أدوات التصحيح بالكارت الخاص بالسؤال
-        const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
-        
-        const gradingHTML = `
-            <div class="grading-overlay" id="grading_${qId}">
-                <div class="grading-answer-box student-answer-box">
-                    <div class="answer-label">📝 إجابة الطالب:</div>
-                    <div class="answer-content" dir="auto">${escapeHtml(studentAnswer.value || 'لا توجد إجابة')}</div>
-                </div>
-                ${correctAnswer ? `
-                <div class="grading-answer-box correct-answer-box">
-                    <div class="answer-label">✅ الإجابة النموذجية:</div>
-                    <div class="answer-content" dir="auto">${correctAnswer}</div>
-                </div>` : ''}
-                
-                <div class="grading-controls">
-                    <div class="verdict-buttons">
-                        <span class="verdict-label">🏷️ التقييم:</span>
-                        <button class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صحيح</button>
-                        <button class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">➗ نصف</button>
-                        <button class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>
-                    </div>
-                    <div class="feedback-section">
-                        <label>💬 تعليق / فيدباك (اختياري):</label>
-                        <textarea id="feedback_${qId}" dir="auto" placeholder="اكتب ملاحظاتك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea>
-                    </div>
-                    <div class="verdict-status" id="status_${qId}">
-                        <span class="not-graded">⏳ بانتظار تقييمك</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        questionEl.style.display = 'none'; 
-        qCard.classList.add('pending-grading');
-        qCard.insertAdjacentHTML('beforeend', gradingHTML);
-    });
-}
-
-function getCorrectAnswer(qId) {
-    if (AUTO_GRADED[qId]) {
-        const ag = AUTO_GRADED[qId];
-        if (ag.a && Array.isArray(ag.a)) return ag.a.join(' أو ');
-        if (ag.a) return ag.a;
-    }
-    const qData = TEACHER_GRADED_CONTEXT[qId];
-    if (qData && qData.expectedAnswer) return qData.expectedAnswer;
-    return null;
-}
-
-function selectVerdict(qId, verdict) {
-    teacherGrades[qId].verdict = verdict;
-    const el = document.getElementById('grading_' + qId);
-    if (!el) return;
-    
-    el.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
-    const statusEl = document.getElementById('status_' + qId);
-    
-    if (verdict === 'correct') {
-        el.querySelector('.verdict-btn.correct').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done correct">✅ تم التقييم: صحيح</span>';
-    } else if (verdict === 'half') {
-        el.querySelector('.verdict-btn.half').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done half">➗ تم التقييم: نصف درجة</span>';
-    } else if (verdict === 'wrong') {
-        el.querySelector('.verdict-btn.wrong').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done wrong">❌ تم التقييم: خطأ</span>';
-    }
-}
-
-function updateFeedback(qId, v) { 
-    teacherGrades[qId].feedback = v; 
-}
-
-async function saveAllGrades() {
-    const ungraded = Object.keys(teacherGrades).filter(qId => !teacherGrades[qId].verdict);
-    if (ungraded.length > 0) {
-        if (!confirm(`يوجد ${ungraded.length} سؤال لم تقم بتقييمهم. هل تريد المتابعة وحفظ ما تم تصحيحه فقط؟`)) return;
-    }
-    
-    showLoading('جاري حفظ التصحيحات وإرسالها للطالب...');
-    
-    let tc = 0, th = 0, tw = 0;
-    Object.keys(teacherGrades).forEach(qId => {
-        if (teacherGrades[qId].verdict === 'correct') tc++;
-        else if (teacherGrades[qId].verdict === 'half') th++;
-        else if (teacherGrades[qId].verdict === 'wrong') tw++;
-    });
-
-    const payload = { 
-        action: 'saveTeacherGrading', 
-        username: studentUsername, 
-        lessonId: LESSON_CONFIG.lessonId, 
-        teacherGrades: JSON.stringify(teacherGrades), 
-        totalCorrect: tc, 
-        totalHalf: th, 
-        totalWrong: tw 
-    };
-    
-    const url = SCRIPT_URL + '?action=saveTeacherGrading&data=' + encodeURIComponent(JSON.stringify(payload));
-    
-    try {
-        await fetch(url, { mode: 'no-cors' });
-        hideLoading();
-        showPopup({
-            type:'success', title:'تم بنجاح', body:'تم إرسال التقييم للطالب بنجاح!', 
-            buttons:[{text:'حسناً وإغلاق الصفحة', class:'primary', action:() => { window.close(); } }]
-        });
-    } catch (e) { 
-        hideLoading(); 
-        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
-    }
-}
-
-function addGradingStyles() {
-    if(document.getElementById('teacherStyles')) return;
-    const s = document.createElement('style');
-    s.id = 'teacherStyles';
-    s.textContent = `
-        .teacher-grading-mode .slide { opacity: 1 !important; display: block !important; margin-bottom: 20px;}
-        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
-        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
-        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
-        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.1) !important; padding: 15px; border-radius: 12px; }
-        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
-        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
-        .student-answer-box { border-right: 4px solid #f39c12; }
-        .correct-answer-box { border-right: 4px solid #2ecc71; }
-        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
-        .student-answer-box .answer-content { color: #f39c12; font-weight: bold;}
-        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
-        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
-        .verdict-label { color: #ccc; font-weight: bold; }
-        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
-        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
-        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
-        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
-        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
-        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
-        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
-        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
-        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
-        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
-        .verdict-status { text-align: left; margin-top: 10px; }
-        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
-        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
-        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
-        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
-    `;
-    document.head.appendChild(s);
 }
 </script>
 </body>
