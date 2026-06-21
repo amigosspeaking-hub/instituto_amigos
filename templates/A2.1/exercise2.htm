@@ -298,14 +298,19 @@ function checkTeacherGradingMode() {
     const params = new URLSearchParams(window.location.search);
     const mode = params.get('mode');
     studentUsername = params.get('student');
+    console.log('URL Params:', window.location.search);
+    console.log('Mode:', mode, 'Student:', studentUsername);
     if (mode === 'grading' && studentUsername) {
         isTeacherGradingMode = true;
         document.body.classList.add('teacher-grading-mode');
+        console.log('Teacher Grading Mode ACTIVATED!');
     }
 }
 
 async function initTeacherGrading() {
     if (!isTeacherGradingMode) return;
+    
+    console.log('Starting Teacher Grading Mode for:', studentUsername);
     
     // إضافة header وضع التصحيح في أعلى الصفحة
     const header = document.createElement('div');
@@ -322,28 +327,37 @@ async function initTeacherGrading() {
     `;
     document.querySelector('.container').prepend(header);
     
-    // إظهار الصفحة العادية أولاً
+    // إظهار الصفحة العادية (الصور، الصوت، التفريغ) مع إخفاء أزرار الإرسال
     renderSlides();
     initSlider();
-    updateProgressDisplay();
+    
+    // إخفاء الـ submit buttons في وضع التصحيح
+    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
+        btn.style.display = 'none';
+    });
     
     showLoading('جاري تحميل بيانات الطالب...');
+    console.log('Fetching student data...');
     
     // جلب بيانات الطالب
     try {
         const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        console.log('URL:', url);
         const res = await fetch(url);
         const data = await res.json();
+        console.log('Response:', data);
         hideLoading();
         
         if (data.status === 'success' && data.student) {
+            console.log('Student data loaded, pending answers:', data.student.pendingAnswers);
             // تطبيق وضع التصحيح على الأسئلة الـ pending
-            applyGradingModeToQuestions(data.student.pendingAnswers);
+            applyGradingModeToQuestions(data.student.pendingAnswers || {});
         } else {
             showPopup({type:'error', title:'خطأ', body:'لم يتم العثور على بيانات الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
         }
     } catch (e) {
         hideLoading();
+        console.error('Error:', e);
         showPopup({type:'error', title:'خطأ', body:'فشل الاتصال: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
     }
     
@@ -1643,9 +1657,16 @@ async function retrySubmit() {
 }
 
 window.addEventListener('DOMContentLoaded', async function() {
-    // ⭐ فحص وضع التصحيح
+    // ⭐ فحص وضع التصحيح - لازم يكون أول حاجة
     checkTeacherGradingMode();
+    console.log('Grading Mode:', isTeacherGradingMode, 'Student:', studentUsername);
+    
     if (isTeacherGradingMode) {
+        // إخفاء كل عناصر الطالب
+        document.querySelector('.welcome')?.remove();
+        document.querySelector('.top-nav')?.remove();
+        document.querySelector('.progress-section')?.remove();
+        
         initTeacherGrading();
         return; // لا تكمل تحميل وضع الطالب
     }
