@@ -59,7 +59,7 @@ EXERCISES_DATA = {
     "A1.3": [{"title": "تمرين تجريبي", "file": "exercise1.html"}],
     "A2.1": [
         {"title": "تمرين: NUEVA ETAPA", "file": "exercise1.html"},
-        {"title": "تمرين: PARA TI Y PARA MÍ", "file": "exercise2.htm"},
+        {"title": "تمرين: PARA TI Y PARA MÍ", "file": "exercise2.html"},
         {"title": "تمرين: UN AÑO ESPECIAL", "file": "exercise3.html"},
         {"title": "تمرين: CON TUS MANOS", "file": "exercise4.html"}
     ],
