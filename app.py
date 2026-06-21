@@ -59,7 +59,7 @@ EXERCISES_DATA = {
     "A1.3": [{"title": "تمرين تجريبي", "file": "exercise1.html"}],
     "A2.1": [
         {"title": "تمرين: NUEVA ETAPA", "file": "exercise1.html"},
-        {"title": "تمرين: PARA TI Y PARA MÍ", "file": "exercise2.html"},
+        {"title": "تمرين: PARA TI Y PARA MÍ", "file": "exercise2.htm"},
         {"title": "تمرين: UN AÑO ESPECIAL", "file": "exercise3.html"},
         {"title": "تمرين: CON TUS MANOS", "file": "exercise4.html"}
     ],
@@ -980,6 +980,7 @@ TEACHER_DASHBOARD_HTML = """
         const SCRIPT_URL = '{{ script_url }}';
         const CURRENT_LEVEL = '{{ current_level }}';
         const studentsLevelsMap = {{ students_levels_json | safe }};
+        const exercisesList = {{ materials.exercises | tojson | safe if materials else '[]' }};
 
         // بيانات الواجبات المؤقتة
         let allPendingData = [];
@@ -1010,7 +1011,6 @@ TEACHER_DASHBOARD_HTML = """
                 const res = await fetch(SCRIPT_URL + '?action=getPendingReviews&_t=' + Date.now());
                 const data = await res.json();
                 if (data.status === 'success') {
-                    // تصفية الطلبات حسب المستوى
                     allPendingData = (data.students || []).filter(s => {
                         return studentsLevelsMap[s.username] === CURRENT_LEVEL;
                     });
@@ -1054,8 +1054,8 @@ TEACHER_DASHBOARD_HTML = """
             container.innerHTML = html;
         }
 
-        // عرض واجبات طالب معين
-function showStudentLessons(username) {
+        // عرض واجبات طالب معين وفتح الرابط الدقيق بناءً على البيانات
+        function showStudentLessons(username) {
             currentSelectedUsername = username;
             document.getElementById('studentsListView').style.display = 'none';
             document.getElementById('studentLessonsView').style.display = 'block';
@@ -1063,24 +1063,29 @@ function showStudentLessons(username) {
             const container = document.getElementById('studentLessonsContent');
             const studentData = allPendingData.filter(s => s.username === username);
             
-            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color:var(--primary);">${studentData[0].fullName || username}</span></h3>`;
+            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color: var(--primary);">${studentData[0].fullName || username}</span></h3>`;
             html += `<div class="cards-grid">`;
             
             studentData.forEach(s => {
-                let lessonNum = "1";
-                if(s.lessonId.includes('_L')) {
-                    lessonNum = s.lessonId.split('_L')[1];
+                let lessonNum = 1;
+                if(s.lessonId && s.lessonId.includes('_L')) {
+                    lessonNum = parseInt(s.lessonId.split('_L')[1]) || 1;
                 }
                 
-                // تم تعديل الامتداد ليكون .htm عشان يتوافق مع ملفاتك
-                let exerciseLink = `/page/${CURRENT_LEVEL}/exercise${lessonNum}.htm?student=${s.username}&mode=grading`;
+                // البحث في المصفوفة اللي جاية من بايثون للوصول لاسم الملف الأصلي
+                let exerciseFile = `exercise${lessonNum}.html`; 
+                if (exercisesList && exercisesList.length >= lessonNum) {
+                    exerciseFile = exercisesList[lessonNum - 1].file;
+                }
+                
+                const gradeLink = `/page/${CURRENT_LEVEL}/${exerciseFile}?student=${s.username}&mode=grading`;
                 
                 html += `
                 <div class="course-card">
-                    <div class="header" style="background:#fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
+                    <div class="header" style="background: #fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
                     <div class="body">
-                        <span class="badge pending" style="font-size:14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
-                        <a href="${exerciseLink}" target="_blank" class="action-btn" style="margin-top:15px; display:block; text-align:center; text-decoration:none;" onclick="this.style.background='#95a5a6'; this.innerHTML='تم فتح الصفحة ✔️';">
+                        <span class="badge pending" style="font-size: 14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
+                        <a href="${gradeLink}" target="_blank" class="action-btn" style="margin-top: 15px; display: block; text-align: center; text-decoration: none; background: #9b59b6; color: white;" onclick="this.style.background = '#95a5a6'; this.innerHTML = 'تم فتح الصفحة ✔️';">
                             افتح الصفحة وصحح <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
@@ -1089,6 +1094,7 @@ function showStudentLessons(username) {
             html += `</div>`;
             container.innerHTML = html;
         }
+
         // العودة لقائمة الطلبة
         function backToStudentsList() {
             document.getElementById('studentLessonsView').style.display = 'none';
@@ -1249,27 +1255,22 @@ def teacher_dashboard():
 
 @app.route('/page/<level>/<filename>')
 def serve_page(level, filename):
-    """⭐ صفحة التمارين - تدعم وضع الطالب والمعلم مع تمرير SCRIPT_URL"""
     if 'user' not in session:
         return redirect(url_for('login_student'))
     
     role = session.get('role')
     
-    # ⭐ اختيار المستخدم الصحيح - للطالب أو للمعلم
     student_username = request.args.get('student')
     if role == 'teacher' and student_username:
-        # المعلم يشوف واجبات طالب معين - نستخدم بيانات الطالب من الرابط
         target_user = {'username': student_username, 'level': level}
     else:
-        # الطالب يشوف واجباته هو - نتحقق من المستوى
         target_user = session['user']
         if target_user.get('level') != level:
             abort(403)
     
-    # ⭐ تمرير SCRIPT_URL للصفحة عشان JavaScript يقدر يرسل البيانات
     template_context = {
         'student': target_user,
-        'script_url': SCRIPT_URL  # ⭐ مهم جداً - ده اللي بيحل المشكلة!
+        'script_url': SCRIPT_URL  
     }
     
     try:
