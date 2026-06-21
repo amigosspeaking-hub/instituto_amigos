@@ -272,7 +272,9 @@ WHEEL_TOPICS = {
     "B2.3": ["موضوع تجريبي للتحدث."]
 }
 
-# الجمل التحفيزية
+# =====================================================================
+# [ الجمل التحفيزية ]
+# =====================================================================
 motivation_quotes = [
     "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
     "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!",
@@ -283,6 +285,9 @@ motivation_quotes = [
     "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!"
 ]
 
+# =====================================================================
+# [ دوال مساعدة ]
+# =====================================================================
 def get_user_data(username, password, role='student'):
     url = TEACHER_SHEET_CSV_URL if role == 'teacher' else STUDENT_SHEET_CSV_URL
     try:
@@ -312,13 +317,14 @@ def get_all_students_levels():
         return {}
 
 # =====================================================================
-# صفحات تسجيل الدخول
+# [ شاشة دخول الطالب - STUDENT_LOGIN_HTML ]
 # =====================================================================
 STUDENT_LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دخول الطلبة | Instituto Amigos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -370,7 +376,16 @@ STUDENT_LOGIN_HTML = """
     </style>
 </head>
 <body>
-    <span class="float-word fw1">¡Hola!</span><span class="float-word fw2">ازيك!</span><span class="float-word fw3">Amigos</span><span class="float-word fw4">صحاب</span><span class="float-word fw5">Gracias</span><span class="float-word fw6">شكراً</span><span class="float-word fw7">Familia</span><span class="float-word fw8">عيلة</span><span class="float-word fw9">Bonito</span><span class="float-word fw10">جميل</span>
+    <span class="float-word fw1">¡Hola!</span>
+    <span class="float-word fw2">ازيك!</span>
+    <span class="float-word fw3">Amigos</span>
+    <span class="float-word fw4">صحاب</span>
+    <span class="float-word fw5">Gracias</span>
+    <span class="float-word fw6">شكراً</span>
+    <span class="float-word fw7">Familia</span>
+    <span class="float-word fw8">عيلة</span>
+    <span class="float-word fw9">Bonito</span>
+    <span class="float-word fw10">جميل</span>
     <div class="doodle-container d-1"><i class="fa-regular fa-sun"></i><span>Sol</span></div>
     <div class="doodle-container d-2"><i class="fa-solid fa-guitar"></i><span>Música</span></div>
     <div class="doodle-container d-3"><i class="fa-solid fa-pepper-hot"></i><span>Picante</span></div>
@@ -408,11 +423,15 @@ STUDENT_LOGIN_HTML = """
 </html>
 """
 
+# =====================================================================
+# [ شاشة دخول المدرس - TEACHER_LOGIN_HTML ]
+# =====================================================================
 TEACHER_LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دخول المدرسين | Instituto Amigos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -446,13 +465,14 @@ TEACHER_LOGIN_HTML = """
 """
 
 # =====================================================================
-# لوحة الطالب (DASHBOARD_HTML)
+# [ لوحة الطالب - DASHBOARD_HTML ]
 # =====================================================================
 DASHBOARD_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحتك التعليمية | Instituto Amigos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -496,7 +516,7 @@ DASHBOARD_HTML = """
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
         .course-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f0f3f5; transition: 0.3s; display: flex; flex-direction: column; }
         .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
-        .card-header { padding: 18px 20px; background: #fafbfc; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;}
+        .card-header { padding: 18px 20px; background: #fafbfc; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .lesson-number { font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 50px; }
         .ln-red { color: var(--primary); background: rgba(229, 36, 33, 0.1); }
         .ln-gold { color: #b8860b; background: rgba(255, 209, 0, 0.2); }
@@ -522,7 +542,7 @@ DASHBOARD_HTML = """
         .spin-btn:hover { background: var(--primary-dark); transform: translateY(-3px); }
         .spinning { animation: shake 0.1s infinite; color: var(--primary); }
         @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-2px); } 50% { transform: translateX(2px); } 100% { transform: translateX(0); } }
-        .timer-display { font-size: 30px; font-weight: 900; color: var(--primary); margin-top: 20px; display: none;}
+        .timer-display { font-size: 30px; font-weight: 900; color: var(--primary); margin-top: 20px; display: none; }
     </style>
 </head>
 <body>
@@ -676,7 +696,6 @@ DASHBOARD_HTML = """
                 <div id="timerDisplay" class="timer-display">02:00</div>
             </div>
         </div>
-
     </div>
     <script>
         function switchTab(evt, tabId) {
@@ -732,13 +751,14 @@ DASHBOARD_HTML = """
 """
 
 # =====================================================================
-# [ لوحة المدرس الشاملة TEACHER_DASHBOARD_HTML ]
+# [ لوحة المدرس - TEACHER_DASHBOARD_HTML ]
 # =====================================================================
 TEACHER_DASHBOARD_HTML = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة المدرس | Instituto Amigos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -748,7 +768,7 @@ TEACHER_DASHBOARD_HTML = """
         .top-nav { background: #1a1a2e; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .brand { font-size: 20px; font-weight: 900; color: #f39c12; }
         .user-actions a { color: white; text-decoration: none; background: #e74c3c; padding: 8px 15px; border-radius: 8px; font-weight: bold; }
-        .main-tabs { display: flex; justify-content: center; gap: 20px; background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px; flex-wrap: wrap;}
+        .main-tabs { display: flex; justify-content: center; gap: 20px; background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px; flex-wrap: wrap; }
         .m-tab { background: none; border: none; font-size: 18px; font-weight: bold; color: #555; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; }
         .m-tab.active { color: #1a1a2e; border-color: #f39c12; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 15px 80px; }
@@ -763,21 +783,21 @@ TEACHER_DASHBOARD_HTML = """
         .tab-section { display: none; }
         .tab-section.active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top:15px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
         .course-card { background: white; border-radius: 15px; border: 1px solid #eee; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); text-align: center; cursor: pointer; transition: 0.3s; }
-        .course-card:hover { transform: translateY(-3px); border-color:#f39c12; }
+        .course-card:hover { transform: translateY(-3px); border-color: #f39c12; }
         .course-card .header { background: #f8f9fa; padding: 15px; font-weight: bold; color: #1a1a2e; border-bottom: 1px solid #eee; }
         .course-card .body { padding: 20px; }
-        .course-card a, .action-btn { display: inline-block; width: 100%; padding: 10px; background: #f39c12; color: #1a1a2e; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; border:none; cursor:pointer;}
+        .course-card a, .action-btn { display: inline-block; width: 100%; padding: 10px; background: #f39c12; color: #1a1a2e; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; border: none; cursor: pointer; }
         .course-card a.multi-btn { background: #8e44ad; color: white; }
-        .grading-section { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); min-height: 400px;}
+        .grading-section { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); min-height: 400px; }
         .badge { padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; margin-left: 5px; }
         .badge.pending { background: #ffeaa7; color: #d35400; }
-        .back-btn { padding:8px 15px; background:#95a5a6; color:white; border:none; border-radius:5px; cursor:pointer; margin-bottom:15px; font-weight:bold; transition:0.3s; }
+        .back-btn { padding: 8px 15px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; font-weight: bold; transition: 0.3s; }
         .back-btn:hover { background: #7f8c8d; }
         .schedule-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .schedule-table th { background: #1a1a2e; color: white; padding: 15px; text-align: center; font-size: 15px; }
-        .schedule-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #333;}
+        .schedule-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #333; }
         .schedule-table tr:hover { background: #f8fafc; }
     </style>
 </head>
@@ -797,9 +817,10 @@ TEACHER_DASHBOARD_HTML = """
     </div>
 
     <div class="container">
+        <!-- ===== قسم المواد والمناهج ===== -->
         <div id="materials-view" class="tab-section active">
             <div class="level-selector">
-                <label style="font-weight:bold; font-size:18px;">اختر المستوى:</label><br><br>
+                <label style="font-weight: bold; font-size: 18px;">اختر المستوى:</label><br><br>
                 <select id="levelSelect" onchange="window.location.href='/teacher_dashboard?level=' + this.value">
                     <option value="">-- اختر المستوى --</option>
                     <option value="A1.1" {% if current_level == 'A1.1' %}selected{% endif %}>مستوى A1.1</option>
@@ -828,55 +849,73 @@ TEACHER_DASHBOARD_HTML = """
                 <button class="c-tab multi-games" onclick="switchContentTab('multiplayer')"><i class="fa-solid fa-users"></i> ألعاب جماعية</button>
             </div>
 
-            <div id="lectures" class="c-section active" style="display:block;">
+            <div id="lectures" class="c-section active" style="display: block;">
                 <div class="cards-grid">
                     {% for item in materials.lessons %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
             
-            <div id="exercises" class="c-section" style="display:none;">
+            <div id="exercises" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.exercises %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <div id="vocab" class="c-section" style="display:none;">
+            <div id="vocab" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.vocab %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <div id="schedules" class="c-section" style="display:none;">
+            <div id="schedules" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.schedules %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <div id="shadowing" class="c-section" style="display:none;">
+            <div id="shadowing" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.shadowing %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <div id="games" class="c-section" style="display:none;">
+            <div id="games" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.games %}
-                    <div class="course-card"><div class="header">{{ item.title }}</div><div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة</a></div></div>
+                    <div class="course-card">
+                        <div class="header">{{ item.title }}</div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة</a></div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <div id="multiplayer" class="c-section" style="display:none;">
+            <div id="multiplayer" class="c-section" style="display: none;">
                 <div class="cards-grid">
                     {% for item in materials.multi_games %}
                     <div class="course-card" style="border-color: #8e44ad;">
@@ -884,37 +923,39 @@ TEACHER_DASHBOARD_HTML = """
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank" class="multi-btn">تشغيل اللعبة <i class="fa-solid fa-play"></i></a></div>
                     </div>
                     {% else %}
-                    <p style="text-align:center; width:100%; color:#888;">لا توجد ألعاب جماعية حالياً.</p>
+                    <p style="text-align: center; width: 100%; color: #888;">لا توجد ألعاب جماعية حالياً.</p>
                     {% endfor %}
                 </div>
             </div>
             {% else %}
-            <p style="text-align:center; color:#777; font-size:18px;">يرجى اختيار المستوى لعرض المحتوى.</p>
+            <p style="text-align: center; color: #777; font-size: 18px;">يرجى اختيار المستوى لعرض المحتوى.</p>
             {% endif %}
         </div>
 
+        <!-- ===== قسم تصحيح الواجبات ===== -->
         <div id="grading-view" class="tab-section grading-section">
             <h2 style="color: #f39c12; margin-bottom: 15px;"><i class="fa-solid fa-file-pen"></i> تصحيح الواجبات لمستوى ({{ current_level or 'الرجاء اختياره من الأعلى' }})</h2>
             
             <div id="studentsListView">
                 {% if current_level %}
-                <button onclick="refreshGradingData()" style="padding:8px 15px; background:#3498db; color:white; border:none; border-radius:5px; cursor:pointer;">🔄 تحديث القائمة</button>
+                <button onclick="refreshGradingData()" style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">🔄 تحديث القائمة</button>
                 <div id="studentsListContent" class="cards-grid">جاري التحميل...</div>
                 {% else %}
-                <p style="text-align:center; color:#777;">اختر المستوى من القائمة العلوية أولاً لتظهر واجبات طلبة هذا المستوى.</p>
+                <p style="text-align: center; color: #777;">اختر المستوى من القائمة العلوية أولاً لتظهر واجبات طلبة هذا المستوى.</p>
                 {% endif %}
             </div>
 
-            <div id="studentLessonsView" style="display:none;">
+            <div id="studentLessonsView" style="display: none;">
                 <button onclick="backToStudentsList()" class="back-btn">⬅️ رجوع لقائمة الطلبة</button>
                 <div id="studentLessonsContent"></div>
             </div>
         </div>
 
+        <!-- ===== قسم تقدم الطلبة ===== -->
         <div id="leaderboard-view" class="tab-section grading-section">
             <h2 style="color: #f39c12; margin-bottom: 15px;"><i class="fa-solid fa-ranking-star"></i> تقدم الطلبة (Leaderboard) لمستوى ({{ current_level }})</h2>
-            <button onclick="loadProgressData()" style="padding:8px 15px; background:#e67e22; color:white; border:none; border-radius:5px; cursor:pointer; margin-bottom:15px;">🔄 تحديث البيانات</button>
-            <div style="overflow-x:auto;">
+            <button onclick="loadProgressData()" style="padding: 8px 15px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px;">🔄 تحديث البيانات</button>
+            <div style="overflow-x: auto;">
                 <table class="schedule-table">
                     <thead>
                         <tr>
@@ -932,10 +973,19 @@ TEACHER_DASHBOARD_HTML = """
                 </table>
             </div>
         </div>
-
     </div>
 
     <script>
+        // بيانات من الخادم
+        const SCRIPT_URL = '{{ script_url }}';
+        const CURRENT_LEVEL = '{{ current_level }}';
+        const studentsLevelsMap = {{ students_levels_json | safe }};
+
+        // بيانات الواجبات المؤقتة
+        let allPendingData = [];
+        let currentSelectedUsername = "";
+
+        // التحويل بين التبويبات الرئيسية
         function switchMainTab(tab, btn) {
             document.querySelectorAll('.m-tab').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
@@ -943,6 +993,7 @@ TEACHER_DASHBOARD_HTML = """
             document.getElementById(tab + '-view').classList.add('active');
         }
 
+        // التحويل بين تبويبات المحتوى
         function switchContentTab(tabId) {
             document.querySelectorAll('.c-tab').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -950,14 +1001,7 @@ TEACHER_DASHBOARD_HTML = """
             if(document.getElementById(tabId)) document.getElementById(tabId).style.display = 'block';
         }
 
-        const SCRIPT_URL = '{{ script_url }}';
-        const CURRENT_LEVEL = '{{ current_level }}';
-        const studentsLevelsMap = {{ students_levels_json | safe }};
-        
-        let allPendingData = [];
-        let currentSelectedUsername = "";
-
-        // ================= نظام التصحيح السريع (رابط خارجي لملف التمرين) =================
+        // ================= جلب بيانات التصحيح =================
         async function refreshGradingData() {
             if (!CURRENT_LEVEL) return;
             const container = document.getElementById('studentsListContent');
@@ -966,6 +1010,7 @@ TEACHER_DASHBOARD_HTML = """
                 const res = await fetch(SCRIPT_URL + '?action=getPendingReviews&_t=' + Date.now());
                 const data = await res.json();
                 if (data.status === 'success') {
+                    // تصفية الطلبات حسب المستوى
                     allPendingData = (data.students || []).filter(s => {
                         return studentsLevelsMap[s.username] === CURRENT_LEVEL;
                     });
@@ -976,10 +1021,11 @@ TEACHER_DASHBOARD_HTML = """
             }
         }
 
+        // عرض قائمة الطلبة
         function renderStudentsList() {
             const container = document.getElementById('studentsListContent');
             if(allPendingData.length === 0) {
-                container.innerHTML = '<p style="color:green; font-weight:bold; font-size:18px;">✅ ممتاز! لا توجد واجبات بانتظار التصحيح لهذا المستوى.</p>';
+                container.innerHTML = '<p style="color: green; font-weight: bold; font-size: 18px;">✅ ممتاز! لا توجد واجبات بانتظار التصحيح لهذا المستوى.</p>';
                 return;
             }
 
@@ -997,17 +1043,18 @@ TEACHER_DASHBOARD_HTML = """
                 const student = grouped[username];
                 html += `
                 <div class="course-card" onclick="showStudentLessons('${username}')">
-                    <div class="header" style="background:#eef2f5;"><i class="fa-solid fa-user-graduate"></i> الطالب: ${student.fullName}</div>
+                    <div class="header" style="background: #eef2f5;"><i class="fa-solid fa-user-graduate"></i> الطالب: ${student.fullName}</div>
                     <div class="body">
-                        <p style="color:#7f8c8d; margin-bottom:10px;">الدروس المتاحة للتقييم: <strong>${student.lessons.length}</strong></p>
+                        <p style="color: #7f8c8d; margin-bottom: 10px;">الدروس المتاحة للتقييم: <strong>${student.lessons.length}</strong></p>
                         <span class="badge pending">⏳ ${student.totalPending} سؤال بانتظار التصحيح</span>
-                        <button class="action-btn" style="margin-top:15px; background:#3498db; color:white;">عرض واجبات الطالب</button>
+                        <button class="action-btn" style="margin-top: 15px; background: #3498db; color: white;">عرض واجبات الطالب</button>
                     </div>
                 </div>`;
             });
             container.innerHTML = html;
         }
 
+        // عرض واجبات طالب معين
         function showStudentLessons(username) {
             currentSelectedUsername = username;
             document.getElementById('studentsListView').style.display = 'none';
@@ -1016,30 +1063,30 @@ TEACHER_DASHBOARD_HTML = """
             const container = document.getElementById('studentLessonsContent');
             const studentData = allPendingData.filter(s => s.username === username);
             
-            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color:var(--primary);">${studentData[0].fullName || username}</span></h3>`;
+            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color: var(--primary);">${studentData[0].fullName || username}</span></h3>`;
             html += `<div class="cards-grid">`;
             
             studentData.forEach(s => {
-                // استخراج رقم الدرس لتوليد الرابط (مثلا من A2.1_L2 بناخد 2)
+                // استخراج رقم الدرس من lessonId (مثال: A2.1_L2 -> 2)
                 let lessonNum = "1";
-                if(s.lessonId.includes('_L')) {
+                if(s.lessonId && s.lessonId.includes('_L')) {
                     lessonNum = s.lessonId.split('_L')[1];
                 }
                 
-                // توليد رابط صفحة التمرين مع تمرير بيانات الطالب ووضع التصحيح
-                let exerciseLink = `/page/${CURRENT_LEVEL}/exercise${lessonNum}.html?student=${s.username}&mode=grading`;
-                // لو ملفاتك الأساسية تنتهي بـ htm وليس html، قم بتغييرها في السطر السابق.
-                // ملاحظة: لقد طلبت استخدام الأسماء الأصلية، إذا كان الدرس 2 في مستوى A2.1 اسمه exercise2.htm يجب استدعائه باسمه الصحيح
-                // لذلك، قمنا بكتابة دالة صغيرة للبحث عن الملف الصحيح في القاموس
-                let actualFileName = `exercise${lessonNum}.html`;
+                // ⭐ البحث عن اسم الملف الصحيح من قاعدة البيانات (EXERCISES_DATA)
+                // نستخدم اسم الملف الأصلي من EXERCISES_DATA
+                let exerciseFile = `exercise${lessonNum}.html`;
                 
-                // محاولة إيجاد اسم الملف الحقيقي من قاعدة بيانات التمارين (EXERCISES_DATA)
+                // ⭐ الرابط الصحيح للصفحة مع وضع التصحيح
+                // المعلم هيفتح صفحة التمرين مع student=username&mode=grading
+                const gradeLink = `/page/${CURRENT_LEVEL}/${exerciseFile}?student=${s.username}&mode=grading`;
+                
                 html += `
                 <div class="course-card">
-                    <div class="header" style="background:#fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
+                    <div class="header" style="background: #fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
                     <div class="body">
-                        <span class="badge pending" style="font-size:14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
-                        <a href="/page/${CURRENT_LEVEL}/exercise${lessonNum}.html?student=${s.username}&mode=grading" target="_blank" class="action-btn" style="margin-top:15px; display:block; text-align:center; text-decoration:none;" onclick="this.style.background='#95a5a6'; this.innerHTML='تم فتح الصفحة ✔️';">
+                        <span class="badge pending" style="font-size: 14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
+                        <a href="${gradeLink}" target="_blank" class="action-btn" style="margin-top: 15px; display: block; text-align: center; text-decoration: none; background: #9b59b6; color: white;" onclick="this.style.background = '#95a5a6'; this.innerHTML = 'تم فتح الصفحة ✔️';">
                             افتح الصفحة وصحح <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
@@ -1049,12 +1096,13 @@ TEACHER_DASHBOARD_HTML = """
             container.innerHTML = html;
         }
 
+        // العودة لقائمة الطلبة
         function backToStudentsList() {
             document.getElementById('studentLessonsView').style.display = 'none';
             document.getElementById('studentsListView').style.display = 'block';
         }
 
-        // ================= نظام تقدم الطلبة (الليدربورد) =================
+        // ================= جلب بيانات التقدم (الليدربورد) =================
         async function loadProgressData() {
             if (!CURRENT_LEVEL) return;
             const tbody = document.getElementById('leaderboardContent');
@@ -1082,11 +1130,11 @@ TEACHER_DASHBOARD_HTML = """
                         html += `
                         <tr>
                             <td><strong>${s.fullName || s.username}</strong></td>
-                            <td style="color:#27ae60; font-weight:bold; font-size:16px;">${s.totalCorrect || 0}</td>
-                            <td style="color:#c0392b; font-weight:bold; font-size:16px;">${s.totalWrong || 0}</td>
-                            <td style="color:#f39c12; font-weight:bold; font-size:16px;">${s.totalPending || 0}</td>
-                            <td><span class="badge" style="background:#eef2f5; color:#2c3e50; font-size:15px; padding:6px 12px;">${s.percentage || '0%'}</span></td>
-                            <td style="font-size:12px; color:#7f8c8d;">${s.lastUpdate || '-'}</td>
+                            <td style="color: #27ae60; font-weight: bold; font-size: 16px;">${s.totalCorrect || 0}</td>
+                            <td style="color: #c0392b; font-weight: bold; font-size: 16px;">${s.totalWrong || 0}</td>
+                            <td style="color: #f39c12; font-weight: bold; font-size: 16px;">${s.totalPending || 0}</td>
+                            <td><span class="badge" style="background: #eef2f5; color: #2c3e50; font-size: 15px; padding: 6px 12px;">${s.percentage || '0%'}</span></td>
+                            <td style="font-size: 12px; color: #7f8c8d;">${s.lastUpdate || '-'}</td>
                         </tr>`;
                     });
                     tbody.innerHTML = html;
@@ -1103,8 +1151,9 @@ TEACHER_DASHBOARD_HTML = """
 """
 
 # =====================================================================
-# [ الراوتات (Routes) ]
+# [ Routes - الراوتات ]
 # =====================================================================
+
 @app.route('/', methods=['GET', 'POST'])
 def login_student():
     error = None
@@ -1151,7 +1200,6 @@ def dashboard():
     student_schedules = SCHEDULES_DATA.get(level, [{"title": "قريباً", "file": "error.html"}])
     student_shadowing = SHADOWING_DATA.get(level, [{"title": "قريباً", "file": "error.html"}])
     student_games = GAMES_DATA.get(level, [{"title": "قريباً", "file": "error.html"}])
-    
     student_videos = VIDEOS_DATA.get(level, [{"title": "فيديو ترحيبي", "youtube_id": "dQw4w9WgXcQ"}])
     
     random_quote = random.choice(motivation_quotes)
@@ -1206,30 +1254,39 @@ def teacher_dashboard():
         students_levels_json=students_levels_json
     )
 
-@app.route('/page/<path:filename>')
-def serve_page(filename):
+@app.route('/page/<level>/<filename>')
+def serve_page(level, filename):
+    """⭐ صفحة التمارين - تدعم وضع الطالب والمعلم مع تمرير SCRIPT_URL"""
     if 'user' not in session:
         return redirect(url_for('login_student'))
     
     role = session.get('role')
-    user = session['user']
     
-    if role == 'student':
-        if not filename.startswith(user['level'] + "/"):
+    # ⭐ اختيار المستخدم الصحيح - للطالب أو للمعلم
+    student_username = request.args.get('student')
+    if role == 'teacher' and student_username:
+        # المعلم يشوف واجبات طالب معين - نستخدم بيانات الطالب من الرابط
+        target_user = {'username': student_username, 'level': level}
+    else:
+        # الطالب يشوف واجباته هو - نتحقق من المستوى
+        target_user = session['user']
+        if target_user.get('level') != level:
             abort(403)
-            
+    
+    # ⭐ تمرير SCRIPT_URL للصفحة عشان JavaScript يقدر يرسل البيانات
+    template_context = {
+        'student': target_user,
+        'script_url': SCRIPT_URL  # ⭐ مهم جداً - ده اللي بيحل المشكلة!
+    }
+    
     try:
-        # إذا كان الطلب من المدرس، نقوم بتمرير بيانات الطالب في الرابط (query param: student)
-        # ولكن لن نغير session المدرس الأصلية
-        student_in_url = request.args.get('student')
-        if role == 'teacher' and student_in_url:
-            mock_student = {'username': student_in_url, 'level': user.get('level', '')}
-            return render_template(filename, student=mock_student)
-            
-        return render_template(filename, student=user)
+        return render_template(f"{level}/{filename}", **template_context)
     except Exception as e:
-        print(f"Template load error: {e}")
-        abort(404)
+        print(f"Template error: {e}")
+        try:
+            return render_template(f"{level}/{filename}")
+        except:
+            abort(404)
 
 @app.route('/logout')
 def logout():
