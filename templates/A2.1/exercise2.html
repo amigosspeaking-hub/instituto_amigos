@@ -1526,6 +1526,7 @@ async function retrySubmit() {
         showPopup({type:'error',title:'فشلت المحاولة',body:esc(r.error || 'حاول مرة أخرى لاحقاً.'),buttons:[{text:'حسناً',class:'primary'}]});
     }
 }
+function escapeHtml(text) { return esc(text); }
 </script>
 </body>
 </html>
