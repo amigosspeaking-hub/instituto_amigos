@@ -1055,7 +1055,7 @@ TEACHER_DASHBOARD_HTML = """
         }
 
         // عرض واجبات طالب معين
-        function showStudentLessons(username) {
+function showStudentLessons(username) {
             currentSelectedUsername = username;
             document.getElementById('studentsListView').style.display = 'none';
             document.getElementById('studentLessonsView').style.display = 'block';
@@ -1063,30 +1063,24 @@ TEACHER_DASHBOARD_HTML = """
             const container = document.getElementById('studentLessonsContent');
             const studentData = allPendingData.filter(s => s.username === username);
             
-            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color: var(--primary);">${studentData[0].fullName || username}</span></h3>`;
+            let html = `<h3 style="margin-bottom: 20px; color: var(--secondary);">واجبات الطالب: <span style="color:var(--primary);">${studentData[0].fullName || username}</span></h3>`;
             html += `<div class="cards-grid">`;
             
             studentData.forEach(s => {
-                // استخراج رقم الدرس من lessonId (مثال: A2.1_L2 -> 2)
                 let lessonNum = "1";
-                if(s.lessonId && s.lessonId.includes('_L')) {
+                if(s.lessonId.includes('_L')) {
                     lessonNum = s.lessonId.split('_L')[1];
                 }
                 
-                // ⭐ البحث عن اسم الملف الصحيح من قاعدة البيانات (EXERCISES_DATA)
-                // نستخدم اسم الملف الأصلي من EXERCISES_DATA
-                let exerciseFile = `exercise${lessonNum}.html`;
-                
-                // ⭐ الرابط الصحيح للصفحة مع وضع التصحيح
-                // المعلم هيفتح صفحة التمرين مع student=username&mode=grading
-                const gradeLink = `/page/${CURRENT_LEVEL}/${exerciseFile}?student=${s.username}&mode=grading`;
+                // تم تعديل الامتداد ليكون .htm عشان يتوافق مع ملفاتك
+                let exerciseLink = `/page/${CURRENT_LEVEL}/exercise${lessonNum}.htm?student=${s.username}&mode=grading`;
                 
                 html += `
                 <div class="course-card">
-                    <div class="header" style="background: #fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
+                    <div class="header" style="background:#fcf3cf;"><i class="fa-solid fa-book"></i> الدرس: ${s.lessonId}</div>
                     <div class="body">
-                        <span class="badge pending" style="font-size: 14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
-                        <a href="${gradeLink}" target="_blank" class="action-btn" style="margin-top: 15px; display: block; text-align: center; text-decoration: none; background: #9b59b6; color: white;" onclick="this.style.background = '#95a5a6'; this.innerHTML = 'تم فتح الصفحة ✔️';">
+                        <span class="badge pending" style="font-size:14px;">⏳ ${s.pendingCount} إجابات للتصحيح</span>
+                        <a href="${exerciseLink}" target="_blank" class="action-btn" style="margin-top:15px; display:block; text-align:center; text-decoration:none;" onclick="this.style.background='#95a5a6'; this.innerHTML='تم فتح الصفحة ✔️';">
                             افتح الصفحة وصحح <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </a>
                     </div>
@@ -1095,7 +1089,6 @@ TEACHER_DASHBOARD_HTML = """
             html += `</div>`;
             container.innerHTML = html;
         }
-
         // العودة لقائمة الطلبة
         function backToStudentsList() {
             document.getElementById('studentLessonsView').style.display = 'none';
