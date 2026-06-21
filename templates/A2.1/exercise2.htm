@@ -1345,9 +1345,6 @@ window.addEventListener('DOMContentLoaded', async function() {
     } catch(e){}
 });
 
-// =================================================
-// دوال المدرس 
-// =================================================
 async function initTeacherGrading() {
     const header = document.createElement('div');
     header.className = 'teacher-grading-banner';
@@ -1365,6 +1362,7 @@ async function initTeacherGrading() {
     
     renderSlides();
     
+    // إظهار الأسئلة بنفس ترتيب الطالب (1، 2، 3) وتحت بعضها
     document.querySelectorAll('.slide').forEach(s => {
         s.style.display = 'block';
         s.style.opacity = '1';
@@ -1373,6 +1371,17 @@ async function initTeacherGrading() {
     
     document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
         btn.style.display = 'none';
+    });
+
+    // 🔴 حل النقطة الأولى: فتح جميع التفريغات (Transcripts) للمدرس وإخفاء العداد
+    Object.keys(TRANSCRIPTIONS).forEach(k => {
+        const btn = document.getElementById('trBtn_'+k);
+        const prog = document.getElementById('trProg_'+k);
+        if (btn) {
+            btn.disabled = false;
+            btn.querySelector('.lock-icon').textContent = '🔓';
+            if (prog) prog.style.display = 'none';
+        }
     });
 
     showLoading('جاري تحميل إجابات الطالب للتصحيح...');
@@ -1417,16 +1426,20 @@ function applyGradingModeToQuestions(pendingAnswers) {
         
         const correctAnswer = getCorrectAnswer(qId);
         const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
+        qCard.classList.add('pending-grading');
         
+        // 🔴 حل النقطة التانية: نحافظ على شكل الإدخال للطالب، ونعبيه بإجابته ونقفله
+        questionEl.value = studentAnswer.value || '';
+        questionEl.disabled = true;
+        questionEl.style.backgroundColor = 'rgba(243, 156, 18, 0.15)'; 
+        questionEl.style.color = '#f39c12';
+        questionEl.style.fontWeight = 'bold';
+
         const gradingHTML = `
             <div class="grading-overlay" id="grading_${qId}">
-                <div class="grading-answer-box student-answer-box">
-                    <div class="answer-label">📝 إجابة الطالب:</div>
-                    <div class="answer-content" dir="auto">${esc(studentAnswer.value || 'لا توجد إجابة')}</div>
-                </div>
                 ${correctAnswer ? `
                 <div class="grading-answer-box correct-answer-box">
-                    <div class="answer-label">✅ الإجابة النموذجية:</div>
+                    <div class="answer-label">✅ الإجابة النموذجية (لمساعدتك):</div>
                     <div class="answer-content" dir="auto">${esc(correctAnswer)}</div>
                 </div>` : ''}
                 
@@ -1448,9 +1461,13 @@ function applyGradingModeToQuestions(pendingAnswers) {
             </div>
         `;
         
-        questionEl.style.display = 'none'; 
-        qCard.classList.add('pending-grading');
-        qCard.insertAdjacentHTML('beforeend', gradingHTML);
+        // نضع صندوق التصحيح بعد مربع الفيدباك الخاص بالسؤال ليبقى الترتيب سليم
+        const fbBox = document.getElementById('fb' + qId.substring(1));
+        if (fbBox) {
+            fbBox.insertAdjacentHTML('afterend', gradingHTML);
+        } else {
+            questionEl.insertAdjacentHTML('afterend', gradingHTML);
+        }
     });
 }
 
@@ -1489,6 +1506,7 @@ function updateFeedback(qId, v) {
     teacherGrades[qId].feedback = v; 
 }
 
+// 🔴 حل النقطة التالتة: تعديل طريقة الإرسال عشان الشيت يقرأ الداتا
 async function saveAllGrades() {
     const ungraded = Object.keys(teacherGrades).filter(qId => !teacherGrades[qId].verdict);
     if (ungraded.length > 0) {
@@ -1504,25 +1522,30 @@ async function saveAllGrades() {
         else if (teacherGrades[qId].verdict === 'wrong') tw++;
     });
 
-    const payload = { 
-        action: 'saveTeacherGrading', 
-        username: studentUsername, 
-        lessonId: LESSON_CONFIG.lessonId, 
-        teacherGrades: JSON.stringify(teacherGrades), 
-        totalCorrect: tc, 
-        totalHalf: th, 
-        totalWrong: tw 
-    };
-    
-    const url = SCRIPT_URL + '?action=saveTeacherGrading&data=' + encodeURIComponent(JSON.stringify(payload));
+    // استخدام fetch المباشر مع GET ليتوافق مع طريقة استقبال الداتا في جوجل شيت (doGet)
+    const url = SCRIPT_URL + 
+        '?action=saveTeacherGrading' + 
+        '&username=' + encodeURIComponent(studentUsername) + 
+        '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + 
+        '&teacherGrades=' + encodeURIComponent(JSON.stringify(teacherGrades)) + 
+        '&totalCorrect=' + tc + 
+        '&totalHalf=' + th + 
+        '&totalWrong=' + tw;
     
     try {
-        await fetch(url, { mode: 'no-cors' });
+        const res = await fetch(url);
+        const result = await res.json();
+        
         hideLoading();
-        showPopup({
-            type:'success', title:'تم بنجاح', body:'تم إرسال التقييم للطالب بنجاح!', 
-            buttons:[{text:'حسناً وإغلاق الصفحة', class:'primary', action:() => { window.close(); } }]
-        });
+        
+        if (result.status === 'success') {
+            showPopup({
+                type:'success', title:'تم بنجاح', body:'تم حفظ التقييم في الشيت وإرساله للطالب بنجاح!', 
+                buttons:[{text:'إغلاق النافذة', class:'primary', action:() => { window.close(); } }]
+            });
+        } else {
+            throw new Error(result.message || 'خطأ غير معروف في السيرفر');
+        }
     } catch (e) { 
         hideLoading(); 
         showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
@@ -1539,13 +1562,11 @@ function addGradingStyles() {
         .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
         .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
         .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
-        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.1) !important; padding: 15px; border-radius: 12px; }
+        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
         .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
         .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
-        .student-answer-box { border-right: 4px solid #f39c12; }
         .correct-answer-box { border-right: 4px solid #2ecc71; }
         .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
-        .student-answer-box .answer-content { color: #f39c12; font-weight: bold;}
         .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
         .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
         .verdict-label { color: #ccc; font-weight: bold; }
@@ -1566,6 +1587,9 @@ function addGradingStyles() {
         .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
     `;
     document.head.appendChild(s);
+}
+
+function escapeHtml(text) { return esc(text); }
 }
 </script>
 </body>
