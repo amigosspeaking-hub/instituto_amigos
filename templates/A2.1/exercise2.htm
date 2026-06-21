@@ -44,7 +44,7 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#0f0c29,#3
 .top-nav .jump-btn:hover{transform:scale(1.1);background:rgba(52,152,219,.3)}
 .top-nav .jump-btn.active{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;box-shadow:0 3px 10px rgba(52,152,219,.4)}
 .top-nav .jump-btn.completed{background:rgba(39,174,96,.3);color:#2ecc71;border-color:#27ae60}
-.top-nav .jump-btn.has-pending{background:rgba(155,89,182,.3);color:#d5a6f0;border-color:#9b59b6}
+.top-nav .jump-btn.has-pending{background:rgba(155,89,182,.5);color:#f0d6ff;border-color:#9b59b6;box-shadow:0 0 8px rgba(155,89,182,.6)}
 
 .slide{display:none;animation:fadeSlide .3s ease}
 .slide.active{display:block}
@@ -192,6 +192,50 @@ select option{background:#1a2540;color:#ecf0f1}
 .lightbox-title{color:#fff;margin-bottom:12px;font-size:1.1em;font-weight:700}
 
 .retry-banner{background:rgba(243,156,18,.15);border:1px solid #f39c12;padding:10px 14px;border-radius:10px;margin:10px auto;max-width:900px;color:#ffeaa7;text-align:center;display:none;font-size:.9em}
+.spanish-chars-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 8px 12px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    background: linear-gradient(135deg, rgba(30,45,69,0.95), rgba(26,37,64,0.95));
+    backdrop-filter: blur(12px);
+    border-top: 2px solid rgba(52,152,219,0.4);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.spanish-chars-bar .chars-label {
+    color: #f39c12;
+    font-size: 0.8em;
+    font-weight: 700;
+    margin-left: 6px;
+    white-space: nowrap;
+}
+.char-btn {
+    background: rgba(52, 152, 219, 0.2);
+    border: 1px solid rgba(52, 152, 219, 0.4);
+    color: #ecf0f1;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 700;
+    transition: all 0.2s;
+    min-width: 38px;
+    font-family: 'Cairo', sans-serif;
+}
+.char-btn:hover {
+    background: rgba(52, 152, 219, 0.5);
+    transform: scale(1.15);
+}
+/* Padding at bottom so content isn't hidden behind the floating bar */
+body { padding-bottom: 50px; }
 .retry-banner button{background:#f39c12;color:#fff;border:none;padding:5px 12px;border-radius:6px;margin-right:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em}
 
 @media(max-width:768px){
@@ -266,6 +310,20 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 <div class="retry-banner" id="retryBanner">
 ⚠️ يوجد محاولة لم تُرسل بنجاح.
 <button onclick="retrySubmit()">🔄 إعادة الإرسال</button>
+</div>
+
+
+<div class="spanish-chars-bar" id="spanishCharsBar" style="display:none;">
+    <span class="chars-label">🇪🇸 أحرف إسبانية:</span>
+    <button class="char-btn" onclick="insertChar('á')">á</button>
+    <button class="char-btn" onclick="insertChar('é')">é</button>
+    <button class="char-btn" onclick="insertChar('í')">í</button>
+    <button class="char-btn" onclick="insertChar('ó')">ó</button>
+    <button class="char-btn" onclick="insertChar('ú')">ú</button>
+    <button class="char-btn" onclick="insertChar('ü')">ü</button>
+    <button class="char-btn" onclick="insertChar('ñ')">ñ</button>
+    <button class="char-btn" onclick="insertChar('¿')">¿</button>
+    <button class="char-btn" onclick="insertChar('¡')">¡</button>
 </div>
 
 <div class="slider-wrapper">
@@ -716,6 +774,30 @@ const SLIDES = [
         {id:'q16_8',text:'8. ca___o',sel:['r','rr']}
      ]}
 ];
+
+// متغير لتتبع آخر حقل كان المستخدم بيكتب فيه
+let lastFocusedInput = null;
+
+// تتبع الفوكس على كل الحقول
+document.addEventListener('focusin', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+        lastFocusedInput = e.target;
+    }
+});
+
+// دالة إدراج الحروف الإسبانية في آخر حقل كان المستخدم فيه
+function insertChar(ch) {
+    const el = lastFocusedInput;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && !el.disabled && !el.readOnly) {
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        el.value = el.value.substring(0, start) + ch + el.value.substring(end);
+        el.selectionStart = el.selectionEnd = start + 1;
+        el.focus();
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
 
 const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
 
@@ -1284,12 +1366,16 @@ window.addEventListener('DOMContentLoaded', async function() {
     if (isTeacherGradingMode) {
         const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
         const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
-        const tn = document.querySelector('.top-nav'); if(tn) tn.style.display = 'none';
         const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
+        // ✅ Teacher keeps the top-nav slider for navigation + number indicators
         
         initTeacherGrading();
         return; 
     }
+    
+    // ✅ Show spanish characters bar for students
+    const scb = document.getElementById('spanishCharsBar');
+    if(scb) scb.style.display = 'flex';
     
     if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
     if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
@@ -1328,14 +1414,11 @@ async function initTeacherGrading() {
     `;
     document.querySelector('.slider-wrapper').prepend(header);
     
+    // ✅ Show slides normally with slider (same as student)
     renderSlides();
+    initSlider();
     
-    document.querySelectorAll('.slide').forEach(s => {
-        s.style.display = 'block';
-        s.style.opacity = '1';
-        s.classList.add('active');
-    });
-    
+    // Hide submit button in teacher mode
     document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
         btn.style.display = 'none';
     });
@@ -1352,6 +1435,40 @@ async function initTeacherGrading() {
 
     showLoading('جاري تحميل إجابات الطالب للتصحيح...');
     
+    // ✅ First load all submitted answers (correct/wrong/pending)
+    try {
+        const progUrl = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const progRes = await fetch(progUrl);
+        const progData = await progRes.json();
+        if (progData.status === 'success' && progData.lockedAnswers && progData.lockedAnswers !== '{}') {
+            const allLocked = JSON.parse(progData.lockedAnswers);
+            lockedAnswers = allLocked;
+            // Show all submitted answers
+            Object.keys(allLocked).forEach(qId => {
+                const info = allLocked[qId];
+                const el = document.getElementById(qId);
+                if (el && info.value) {
+                    el.value = info.value || '';
+                    el.disabled = true;
+                    if (info.status === 'reviewed') {
+                        if (info.isCorrect) {
+                            el.style.borderColor = '#27ae60'; el.style.backgroundColor = 'rgba(39,174,96,0.12)'; el.style.color = '#2ecc71';
+                        } else if (info.isHalf || info.verdict === 'half') {
+                            el.style.borderColor = '#f1c40f'; el.style.backgroundColor = 'rgba(241,196,15,0.12)'; el.style.color = '#f1c40f';
+                        } else {
+                            el.style.borderColor = '#e74c3c'; el.style.backgroundColor = 'rgba(231,76,60,0.12)'; el.style.color = '#ff7675';
+                        }
+                    } else if (info.status === 'pending') {
+                        el.style.borderColor = '#9b59b6'; el.style.backgroundColor = 'rgba(155,89,182,0.12)'; el.style.color = '#d5a6f0';
+                    }
+                }
+            });
+            // Update jump buttons with locked status
+            updateJumpButtonStatus();
+        }
+    } catch(e) { console.error('Error loading progress:', e); }
+    
+    // ✅ Load pending details for grading
     try {
         const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
         const res = await fetch(url);
@@ -1361,7 +1478,7 @@ async function initTeacherGrading() {
         if (data.status === 'success' && data.student) {
             applyGradingModeToQuestions(data.student.pendingAnswers || {});
         } else {
-            showPopup({type:'error', title:'تنبيه', body:'لا توجد أسئلة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
+            showPopup({type:'info', title:'تنبيه', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
         }
     } catch (e) {
         hideLoading();
@@ -1485,7 +1602,18 @@ async function saveAllGrades() {
         else if (teacherGrades[qId].verdict === 'wrong') tw++;
     });
 
-    const payload = { 
+    // ✅ إرسال التصحيحات عبر GET + POST (dual backup)
+    const getUrl = SCRIPT_URL 
+        + '?action=saveTeacherGrading'
+        + '&username=' + encodeURIComponent(studentUsername)
+        + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId)
+        + '&teacherGrades=' + encodeURIComponent(JSON.stringify(teacherGrades))
+        + '&totalCorrect=' + tc
+        + '&totalHalf=' + th
+        + '&totalWrong=' + tw
+        + '&_t=' + Date.now();
+    
+    const formPayload = { 
         action: 'saveTeacherGrading', 
         username: studentUsername, 
         lessonId: LESSON_CONFIG.lessonId, 
@@ -1496,15 +1624,18 @@ async function saveAllGrades() {
     };
     
     try {
-        await sendDataViaForm(payload);
+        await Promise.all([
+            fetch(getUrl, { mode: 'no-cors' }).catch(function(){}),
+            sendDataViaForm(formPayload)
+        ]);
         hideLoading();
         showPopup({
-            type:'success', title:'تم بنجاح', body:'تم حفظ التقييم في الشيت بنجاح!', 
+            type:'success', title:'تم بنجاح ✅', body:'تم إرسال التقييم للطالب بنجاح!', 
             buttons:[{text:'إغلاق النافذة', class:'primary', action:() => { window.close(); } }]
         });
     } catch (e) { 
         hideLoading(); 
-        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
+        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'إعادة المحاولة', class:'primary', action:function(){ saveAllGrades(); } },{text:'إلغاء', class:'secondary', action:closePopup}]});
     }
 }
 
@@ -1513,7 +1644,9 @@ function addGradingStyles() {
     const s = document.createElement('style');
     s.id = 'teacherStyles';
     s.textContent = `
-        .teacher-grading-mode .slide { opacity: 1 !important; display: block !important; margin-bottom: 20px;}
+        .teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
+        .teacher-grading-mode .slide.active { display: block; }
+        .teacher-grading-mode .slide { display: none; }
         .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
         .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
         .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
@@ -1547,5 +1680,5 @@ function addGradingStyles() {
 
 function escapeHtml(text) { return esc(text); }
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0f4cb78ac52ac32',t:'MTc4MjA2MzU4OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
