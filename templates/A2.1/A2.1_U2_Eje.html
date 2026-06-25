@@ -249,6 +249,38 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 .ex-header{flex-direction:column;align-items:stretch}.ex-title-wrap{justify-content:flex-end;order:1}.ex-actions{justify-content:flex-start;width:100%;order:2}.ex-page-btn{flex:1;text-align:center;justify-content:center;display:flex}
 .popup-actions{flex-direction:column}.popup-btn{width:100%}.bottom-nav{flex-direction:column}.nav-btn{width:100%;justify-content:center}.nav-btn.submit-final{max-width:100%;order:-1}
 }
+
+/* Teacher Grading Styles */
+.teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
+.teacher-grading-mode .slide.active { display: block; }
+.teacher-grading-mode .slide { display: none; }
+.teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+.grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
+.save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
+.save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
+.pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+.grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
+.grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
+.correct-answer-box { border-right: 4px solid #2ecc71; }
+.answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
+.correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
+.verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
+.verdict-label { color: #ccc; font-weight: bold; }
+.verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
+.verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
+.verdict-btn.half { border-color: #f39c12; color: #f39c12; }
+.verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
+.verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
+.verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
+.verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
+.feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
+.feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
+.feedback-section textarea:focus { border-color: #f39c12; outline: none; }
+.verdict-status { text-align: left; margin-top: 10px; }
+.verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
+.verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
+.verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
+.verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
 </style>
 </head>
 <body>
@@ -355,6 +387,34 @@ const PAGE_BASE = 'https://ia903101.us.archive.org/0/items/A2.1-Eje-Pages/Page';
 const AUDIO_BASE = 'https://archive.org/download/A2_Eje/A2_Eje/';
 
 function getPageURL(p) { return PAGE_BASE + p + '.jpg'; }
+
+let isTeacherGradingMode = false;
+let teacherGrades = {};
+let studentUsername = '';
+
+// متغير لتتبع آخر حقل كان المستخدم بيكتب فيه
+let lastFocusedInput = null;
+
+// تتبع الفوكس على كل الحقول
+document.addEventListener('focusin', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+        lastFocusedInput = e.target;
+    }
+});
+
+// دالة إدراج الحروف الإسبانية في آخر حقل كان المستخدم فيه
+function insertChar(ch) {
+    const el = lastFocusedInput;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && !el.disabled && !el.readOnly) {
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        el.value = el.value.substring(0, start) + ch + el.value.substring(end);
+        el.selectionStart = el.selectionEnd = start + 1;
+        el.focus();
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
 
 const AUTO_GRADED = {
     q1_1:{a:['c'],t:'select'}, q1_2:{a:['e'],t:'select'}, q1_3:{a:['a'],t:'select'}, q1_4:{a:['d'],t:'select'}, q1_5:{a:['b'],t:'select'},
@@ -510,93 +570,22 @@ const TRANSCRIPTIONS = {
     'ex5b': {
         title: 'Transcripción - Ej. 5b (Pistas 10-14)',
         requiredQuestions: ['q5b_1n','q5b_1f','q5b_2n','q5b_2f','q5b_3n','q5b_3f','q5b_4n','q5b_4f'],
-        text: `<strong>Diálogo 1:</strong>
-• Mira, vamos a moverla a la otra habitación.
-▲ Susana, no está tan vieja. ¿Qué vas a hacer con ella?
-• La voy a vender por internet. Seguro que alguien la compra, es muy clásica.
-
-<strong>Diálogo 2:</strong>
-▲ ¡Uy, son muchas! No las vas a tirar a la basura, ¿verdad?
-• No, no. Una vez a la semana las llevo al contenedor de metales que está en la calle.
-
-<strong>Diálogo 3:</strong>
-▲ Tienes muchos... y estos sobre fotografía seguro que son muy interesantes.
-• Si quieres, te los regalo. Yo ya no los necesito.
-
-<strong>Diálogo 4:</strong>
-• Ves, no funciona. La verdad es que no sé qué hacer con él.
-▲ Pues lo puedes reciclar en alguno de los puntos de reciclaje de la ciudad.
-• Sí, es verdad. Lo voy a reciclar.
-
-<strong>Diálogo 5:</strong>
-• Mira, te doy estas dos para poner los libros. Aquí hay muchas. Las uso de nuevo para comprar en el súper.
-▲ Susana, eres toda una experta del reciclaje.`
+        text: `<strong>Diálogo 1:</strong>\n• Mira, vamos a moverla a la otra habitación.\n▲ Susana, no está tan vieja. ¿Qué vas a hacer con ella?\n• La voy a vender por internet. Seguro que alguien la compra, es muy clásica.\n\n<strong>Diálogo 2:</strong>\n▲ ¡Uy, son muchas! No las vas a tirar a la basura, ¿verdad?\n• No, no. Una vez a la semana las llevo al contenedor de metales que está en la calle.\n\n<strong>Diálogo 3:</strong>\n▲ Tienes muchos... y estos sobre fotografía seguro que son muy interesantes.\n• Si quieres, te los regalo. Yo ya no los necesito.\n\n<strong>Diálogo 4:</strong>\n• Ves, no funciona. La verdad es que no sé qué hacer con él.\n▲ Pues lo puedes reciclar en alguno de los puntos de reciclaje de la ciudad.\n• Sí, es verdad. Lo voy a reciclar.\n\n<strong>Diálogo 5:</strong>\n• Mira, te doy estas dos para poner los libros. Aquí hay muchas. Las uso de nuevo para comprar en el súper.\n▲ Susana, eres toda una experta del reciclaje.`
     },
     'ex6': {
         title: 'Transcripción - Ej. 6 (Pista 15)',
         requiredQuestions: ['q6_1','q6_2','q6_3','q6_4','q6_5'],
-        text: `<strong>1.</strong>
-• ¡Qué bonito es tu piso! ¡Felicidades! ¿Y esas plantas?
-▲ Pues nos las han dado nuestros vecinos. ¿Te gustan?
-• Sí, son preciosas. ¡Qué simpáticos vuestros vecinos!
-
-<strong>2.</strong>
-• Y estos cuadros, ¿quién os los ha regalado?
-▲ No, no son un regalo. Los ha pintado Carlos.
-
-<strong>3.</strong>
-▲ Mira, este es el dormitorio.
-• ¡Qué luminoso! Oye, ¿dónde has comprado la alfombra?
-▲ Me la regaló mi madre el año pasado, antes de la boda.
-
-<strong>4.</strong>
-• ¿Y el piso tiene balcón?
-▲ Sí, claro. Ahora mismo te lo enseño.
-
-<strong>5.</strong>
-▲ Y los muebles del salón, ¿te gustan?
-• Sí, son muy modernos.
-▲ Nos los compraron los padres de Carlos como regalo de boda.`
+        text: `<strong>1.</strong>\n• ¡Qué bonito es tu piso! ¡Felicidades! ¿Y esas plantas?\n▲ Pues nos las han dado nuestros vecinos. ¿Te gustan?\n• Sí, son preciosas. ¡Qué simpáticos vuestros vecinos!\n\n<strong>2.</strong>\n• Y estos cuadros, ¿quién os los ha regalado?\n▲ No, no son un regalo. Los ha pintado Carlos.\n\n<strong>3.</strong>\n▲ Mira, este es el dormitorio.\n• ¡Qué luminoso! Oye, ¿dónde has comprado la alfombra?\n▲ Me la regaló mi madre el año pasado, antes de la boda.\n\n<strong>4.</strong>\n• ¿Y el piso tiene balcón?\n▲ Sí, claro. Ahora mismo te lo enseño.\n\n<strong>5.</strong>\n▲ Y los muebles del salón, ¿te gustan?\n• Sí, son muy modernos.\n▲ Nos los compraron los padres de Carlos como regalo de boda.`
     },
     'ex10b': {
         title: 'Transcripción - Ej. 10b (Pista 16)',
         requiredQuestions: ['q10b_1','q10b_2','q10b_3','q10b_4','q10b_5','q10b_6'],
-        text: `<strong>1.</strong>
-• Hola mamá. ¿Qué hace papá? ¿Dónde está?
-▲ Pues se ha llevado el periódico y está en el sofá, en el salón.
-
-<strong>2.</strong>
-• ¿Los niños están en el jardín?
-▲ Mmm... Sí, claro, como hace buen tiempo, han salido. ¿No los oyes?
-
-<strong>3.</strong>
-• Ya estoy muy cansado. ¿Nos vamos?
-▲ Sí, yo también estoy cansada. Pero el examen es mañana. Nos quedamos un poco más, ¿de acuerdo?
-
-<strong>4.</strong>
-• ¡Hola! ¿Hay alguien en casa?
-▲ ¡Shhh, Manuel! ¡Habla más bajo, por favor! Marianita está en la cama.
-
-<strong>5.</strong>
-• ¿Dígame?
-▲ ¿Está Marta? Soy Alberto, un compañero de la uni.
-• Pues está en la ducha. Un momento... ¡Marta, te llama un compañero de la universidad!
-
-<strong>6.</strong>
-• Alejandro, ¿ya te has despertado? El desayuno está en la mesa.
-▲ ¡Sí, mamá, ya voy!`
+        text: `<strong>1.</strong>\n• Hola mamá. ¿Qué hace papá? ¿Dónde está?\n▲ Pues se ha llevado el periódico y está en el sofá, en el salón.\n\n<strong>2.</strong>\n• ¿Los niños están en el jardín?\n▲ Mmm... Sí, claro, como hace buen tiempo, han salido. ¿No los oyes?\n\n<strong>3.</strong>\n• Ya estoy muy cansado. ¿Nos vamos?\n▲ Sí, yo también estoy cansada. Pero el examen es mañana. Nos quedamos un poco más, ¿de acuerdo?\n\n<strong>4.</strong>\n• ¡Hola! ¿Hay alguien en casa?\n▲ ¡Shhh, Manuel! ¡Habla más bajo, por favor! Marianita está en la cama.\n\n<strong>5.</strong>\n• ¿Dígame?\n▲ ¿Está Marta? Soy Alberto, un compañero de la uni.\n• Pues está en la ducha. Un momento... ¡Marta, te llama un compañero de la universidad!\n\n<strong>6.</strong>\n• Alejandro, ¿ya te has despertado? El desayuno está en la mesa.\n▲ ¡Sí, mamá, ya voy!`
     },
     'ex16': {
         title: 'Transcripción - Ej. 16 (Pista 17)',
         requiredQuestions: ['q16_1','q16_2','q16_3','q16_4','q16_5','q16_6','q16_7','q16_8'],
-        text: `1. beso
-2. ropa
-3. bollo
-4. capa
-5. veces
-6. pista
-7. pero
-8. carro`
+        text: `1. beso\n2. ropa\n3. bollo\n4. capa\n5. veces\n6. pista\n7. pero\n8. carro`
     }
 };
 
@@ -688,37 +677,10 @@ const SLIDES = [
     {n:16,title:'Sonidos del español - ¿Qué letras faltan?',page:17,type:'auto',arabic:'',spanish:'',custom:'slide16'}
 ];
 
-// متغير لتتبع آخر حقل كان المستخدم بيكتب فيه
-let lastFocusedInput = null;
-
-// تتبع الفوكس على كل الحقول
-document.addEventListener('focusin', function(e) {
-    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
-        lastFocusedInput = e.target;
-    }
-});
-
-// دالة إدراج الحروف الإسبانية في آخر حقل كان المستخدم فيه
-function insertChar(ch) {
-    const el = lastFocusedInput;
-    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && !el.disabled && !el.readOnly) {
-        const start = el.selectionStart;
-        const end = el.selectionEnd;
-        el.value = el.value.substring(0, start) + ch + el.value.substring(end);
-        el.selectionStart = el.selectionEnd = start + 1;
-        el.focus();
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-}
-
 const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
 
 let currentUser = { username:'{{ student.username }}', fullName:'{{ student.username }}' };
-let lockedAnswers = {};
-let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
-let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
-
+let lockedAnswers = {}, totalCorrect = 0, totalWrong = 0, totalAnswered = 0, totalPending = 0, totalHalf = 0, pendingSubmit = null, lastFailedData = null, currentSlide = 0, totalSlides = 0;
 const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
 const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
 LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
@@ -819,7 +781,6 @@ function buildSlide10() {
 function buildSlide13() {
     return `<div class="arabic-box">اختار 5 هدايا لكل شخص من الأشخاص الأربعة، مع السبب.</div><div class="hint-box">اضغط على زر "📄 صفحة 16" فوق عشان تشوف صور الأشخاص ومعلوماتهم.</div><div class="spanish-box"><div class="es-instruction">&#191;Qu&#233; les regalar&#237;as a estas personas? Busca cuatro regalos y piensa t&#250; en un quinto.</div><div class="text-paragraph"><strong>1. Jaime</strong> (68 a&#241;os, deportista)<br><strong>2. Jimena</strong> (35 a&#241;os, madre de dos ni&#241;os)<br><strong>3. Raquel</strong> (20 a&#241;os, estudiante de biolog&#237;a)<br><strong>4. Sim&#243;n</strong> (7 a&#241;os, va al colegio)</div></div><div class="whatsapp-note"><span class="wa-icon">📱</span><strong>تمرين مقالي كبير</strong><br>اكتب 5 هدايا لكل شخص مع السبب. مثال:<br><em>A Jaime le regalar&#237;a unas zapatillas deportivas porque es deportista.</em><br><br>ابعت الإجابة على <strong>جروب الواتس اب</strong> ليصححها المدرس</div>`;
 }
-
 
 function buildSlide1() {
   let h = `<div class="sub-section-title">1. ¿De quién se trata?</div>`;
@@ -1177,25 +1138,55 @@ function buildExplanationHTML(exp) {
 function displayLockedAnswer(qId, info) {
     const el = document.getElementById(qId); if (!el) return;
     el.value = info.value; lockField(el);
-    const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
+    const fb = document.getElementById('fb' + qId.substring(1)); if (!fb) return;
     const exp = EXPLANATIONS[qId];
+    const ctx = TEACHER_GRADED_CONTEXT[qId] || {};
     
+    if (isTeacherGradingMode && info.status === 'pending') {
+        el.classList.add('locked-pending');
+        el.parentElement.classList.add('pending-grading');
+        fb.className = 'feedback pending';
+        fb.style.display = 'block';
+        
+        let html = `<div class="grading-overlay" id="grade_overlay_${qId}">`;
+        html += `<div class="grading-answer-box"><div class="answer-label">📝 إجابة الطالب:</div><div class="answer-content">${esc(info.value)}</div></div>`;
+        if (info.questionText || ctx.questionText) {
+             html += `<div class="grading-answer-box"><div class="answer-label">❓ السؤال:</div><div class="answer-content">${esc(info.questionText || ctx.questionText)}</div></div>`;
+        }
+        if (ctx.expectedAnswer) {
+             html += `<div class="grading-answer-box correct-answer-box"><div class="answer-label">✅ الإجابة النموذجية:</div><div class="answer-content">${esc(ctx.expectedAnswer)}</div></div>`;
+        }
+        if (ctx.rule) {
+             html += `<div class="grading-answer-box"><div class="answer-label">💡 القاعدة:</div><div class="answer-content">${esc(ctx.rule)}</div></div>`;
+        }
+        html += `<div class="verdict-buttons">`;
+        html += `<div class="verdict-label">التقييم:</div>`;
+        html += `<button type="button" class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صح</button>`;
+        html += `<button type="button" class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">⚠️ نص</button>`;
+        html += `<button type="button" class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>`;
+        html += `</div>`;
+        html += `<div class="feedback-section"><label>💬 تعليق للمدرس (اختياري):</label><textarea id="t_feedback_${qId}" placeholder="اكتب تعليقك للطالب هنا..."></textarea></div>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+        return;
+    }
+
     if (info.status === 'pending') {
         el.classList.add('locked-pending');
         fb.className = 'feedback pending';
         let html = `<div class="fb-spanish"><span class="lock-badge pending">⏳ Pendiente</span><br><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div><div class="fb-arabic"><strong>⏳ بانتظار تصحيح المدرس</strong><br>تم استلام إجابتك.`;
-        if (info.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
-        if (info.expectedAnswer) html += `<span class="es-line">📝 ${esc(info.expectedAnswer)}</span>`;
+        if (ctx.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(ctx.rule)}`;
+        if (ctx.expectedAnswer) html += `<span class="es-line">📝 ${esc(ctx.expectedAnswer)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
-    } else if (info.isHalf || info.verdict==='half') {
+    } else if (info.isHalf || info.verdict === 'half') {
         el.classList.add('locked-half');
         fb.className = 'feedback half';
         let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
-        if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
+        if (info.expectedAnswer || ctx.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer || ctx.expectedAnswer)}`;
         html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
         if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
-        if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
+        if (info.rule || ctx.rule) html += `<br>💡 ${esc(info.rule || ctx.rule)}`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
@@ -1214,13 +1205,13 @@ function displayLockedAnswer(qId, info) {
         el.classList.add('locked-wrong');
         fb.className = 'feedback wrong';
         const m = AUTO_GRADED[qId];
-        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || '');
+        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || ctx.expectedAnswer || '');
         let html = `<div class="fb-spanish"><span class="lock-badge wrong">❌ Incorrecto</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
         if (cd) html += `<strong>✅ Respuesta correcta:</strong> ${esc(cd)}`;
         html += `</div><div class="fb-arabic">`;
         if (exp) html += buildExplanationHTML(exp);
-        else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
-        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        else if (info.rule || ctx.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule || ctx.rule)}`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة' && info.feedback !== 'بانتظار تصحيح المدرس') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
@@ -1265,27 +1256,33 @@ async function sendDataViaGET(data) {
     const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(ds);
     try { await fetch(url, {mode:'no-cors'}); return {success:'unknown'}; } catch(e) { throw e; }
 }
+
 function sendDataViaForm(data) {
-    return new Promise((res,rej) => {
-        const ifn = 'sub_'+Date.now();
+    return new Promise((res, rej) => {
+        const ifn = 'sub_' + Date.now();
         const iframe = document.createElement('iframe');
         iframe.name = ifn; iframe.style.display = 'none';
         document.body.appendChild(iframe);
         const form = document.createElement('form');
-        form.method='POST'; form.action=SCRIPT_URL; form.target=ifn; form.style.display='none';
-        const pi = document.createElement('input');
-        pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
-        const ai = document.createElement('input');
-        ai.type='hidden'; ai.name='action'; ai.value=data.action || 'saveProgress'; form.appendChild(ai);
+        form.method = 'POST'; form.action = SCRIPT_URL; form.target = ifn; form.style.display = 'none';
+        
+        for (const key in data) {
+            const pi = document.createElement('input');
+            pi.type = 'hidden'; pi.name = key; 
+            pi.value = typeof data[key] === 'object' ? JSON.stringify(data[key]) : data[key]; 
+            form.appendChild(pi);
+        }
+        
         document.body.appendChild(form);
-        let r=false;
-        const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
-        const cu = () => { try{document.body.removeChild(form);}catch(e){} setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}}, 500); };
-        iframe.onload = ()=>{if(!r){r=true;clearTimeout(to);cu();res({success:'unknown'});}};
-        iframe.onerror = ()=>{if(!r){r=true;clearTimeout(to);cu();rej(new Error('Form failed'));}};
-        try{form.submit();}catch(e){r=true;clearTimeout(to);cu();rej(e);}
+        let r = false;
+        const to = setTimeout(() => { if (!r) { r = true; cu(); res({ success: 'unknown' }); } }, 5000);
+        const cu = () => { try { document.body.removeChild(form); } catch (e) {} setTimeout(() => { try { document.body.removeChild(iframe); } catch (e) {} }, 500); };
+        iframe.onload = () => { if (!r) { r = true; clearTimeout(to); cu(); res({ success: 'unknown' }); } };
+        iframe.onerror = () => { if (!r) { r = true; clearTimeout(to); cu(); rej(new Error('Form failed')); } };
+        try { form.submit(); } catch (e) { r = true; clearTimeout(to); cu(); rej(e); }
     });
 }
+
 async function sendAndVerify(data) {
     try { await sendDataViaGET(data); } catch(e) { return {verified:false, error:e.message}; }
     await new Promise(r => setTimeout(r, 2500));
@@ -1301,6 +1298,7 @@ async function sendAndVerify(data) {
     } catch(e) { return {verified:false, error:'فشل التحقق'}; }
     return {verified:false, error:'فشل التحقق'};
 }
+
 async function fetchWithRetry(url, opts={}, max=3) {
     let lastErr;
     for (let i=0; i<max; i++) {
@@ -1309,6 +1307,7 @@ async function fetchWithRetry(url, opts={}, max=3) {
     }
     throw lastErr;
 }
+
 async function loadProgress() {
     try {
         const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
@@ -1344,6 +1343,7 @@ function collectNewAnswers() {
     });
     return na;
 }
+
 function prepareSubmit() {
     const na = collectNewAnswers();
     if (na.length === 0) {
@@ -1359,6 +1359,7 @@ function prepareSubmit() {
         buttons:[{text:'✅ نعم، أرسل',class:'primary',action:confirmSubmit},{text:'❌ إلغاء',class:'secondary',action:()=>{pendingSubmit=null;closePopup();}}]
     });
 }
+
 async function confirmSubmit() {
     closePopup();
     if (!pendingSubmit) return;
@@ -1366,37 +1367,41 @@ async function confirmSubmit() {
     showLoading('⏳ جاري التصحيح والإرسال...', na.length+' سؤال');
     let bc=0, bw=0, bp=0;
     const fr = [];
+    
     na.forEach(ans => {
         if (AUTO_GRADED[ans.id]) {
             const r = gradeAutoQuestion(ans.id, ans.value);
-            fr.push({id:ans.id, value:ans.value, status:'reviewed', isCorrect:r.isCorrect});
+            fr.push({ id: ans.id, value: ans.value, status: 'reviewed', isCorrect: r.isCorrect });
             if (r.isCorrect) bc++; else bw++;
         } else {
             const ctx = TEACHER_GRADED_CONTEXT[ans.id] || {};
-            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false, feedback:'بانتظار تصحيح المدرس', questionText:ctx.questionText || ans.id, expectedAnswer:ctx.expectedAnswer || '', rule:ctx.rule || ''});
+            fr.push({ id: ans.id, value: ans.value, status: 'pending', isCorrect: false, questionText: ctx.questionText || ans.id });
             bp++;
         }
     });
+    
     const tl = JSON.parse(JSON.stringify(lockedAnswers));
     const nao = {};
     fr.forEach(r => {
-        const o = {value:r.value, status:r.status, isCorrect:r.isCorrect};
-        if (r.feedback) o.feedback = r.feedback;
-        if (r.status==='pending') { o.questionText=r.questionText; o.expectedAnswer=r.expectedAnswer; o.rule=r.rule; }
+        const o = { value: r.value, status: r.status, isCorrect: r.isCorrect };
+        if (r.status === 'pending') { o.questionText = r.questionText; }
         tl[r.id] = o; nao[r.id] = o;
     });
+    
     const ntc = totalCorrect + bc;
     const ntw = totalWrong + bw;
     const nta = totalAnswered + (bc + bw);
     const ntp = totalPending + bp;
+    
     const data = {
-        action:'saveProgress', username:currentUser.username, fullName:currentUser.fullName,
-        lessonId:LESSON_CONFIG.lessonId, lessonName:LESSON_CONFIG.lessonName,
-        totalCorrect:ntc, totalWrong:ntw, totalAnswered:nta, totalPending:ntp, totalQuestions:LESSON_CONFIG.totalQuestions,
-        batchCorrect:bc, batchWrong:bw, batchAnswered:bc+bw, batchPending:bp,
-        details:`${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
-        newAnswers:JSON.stringify(nao)
+        action: 'saveProgress', username: currentUser.username, fullName: currentUser.fullName,
+        lessonId: LESSON_CONFIG.lessonId, lessonName: LESSON_CONFIG.lessonName,
+        totalCorrect: ntc, totalWrong: ntw, totalAnswered: nta, totalPending: ntp, totalQuestions: LESSON_CONFIG.totalQuestions,
+        batchCorrect: bc, batchWrong: bw, batchAnswered: bc + bw, batchPending: bp,
+        details: `${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
+        newAnswers: JSON.stringify(nao)
     };
+    
     const r = await sendAndVerify(data);
     hideLoading();
     if (r.verified) {
@@ -1425,6 +1430,7 @@ async function confirmSubmit() {
         });
     }
 }
+
 async function retrySubmit() {
     if (!lastFailedData) {
         try { const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId); if (p) lastFailedData = JSON.parse(p).data; } catch(e){}
@@ -1445,40 +1451,70 @@ async function retrySubmit() {
     }
 }
 
-// ============================================================
-// ⭐ نظام تصحيح المعلم
-// ============================================================
-let isTeacherGradingMode = false;
-let teacherGrades = {};
-let studentUsername = '';
+function selectVerdict(qId, verdict) {
+    teacherGrades[qId] = teacherGrades[qId] || {};
+    teacherGrades[qId].verdict = verdict;
+    teacherGrades[qId].value = document.getElementById(qId).value;
+    
+    const container = document.getElementById(`grade_overlay_${qId}`);
+    container.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
+    container.querySelector(`.verdict-btn.${verdict}`).classList.add('selected');
+}
 
-function checkTeacherGradingMode() {
-    const params = new URLSearchParams(window.location.search);
-    const mode = params.get('mode');
-    studentUsername = params.get('student');
-    if (mode === 'grading' && studentUsername) {
-        isTeacherGradingMode = true;
-        document.body.classList.add('teacher-grading-mode');
+async function submitTeacherGrades() {
+    Object.keys(teacherGrades).forEach(qId => {
+        const f = document.getElementById(`t_feedback_${qId}`);
+        if (f) teacherGrades[qId].feedback = f.value;
+    });
+    
+    if (Object.keys(teacherGrades).length === 0) {
+        showPopup({ type: 'warning', icon: '⚠️', title: 'تنبيه', body: 'لم تقم بتصحيح أي سؤال.', buttons: [{text: 'حسناً', class: 'primary'}]});
+        return;
+    }
+
+    showLoading('⏳ جاري حفظ التصحيح...');
+    
+    const data = {
+        action: 'saveTeacherGrading',
+        username: currentUser.username,
+        lessonId: LESSON_CONFIG.lessonId,
+        teacherGrades: JSON.stringify(teacherGrades)
+    };
+
+    try {
+        await sendDataViaForm(data);
+        hideLoading();
+        showPopup({ type: 'success', icon: '✅', title: 'تم بنجاح', body: 'تم حفظ التصحيح بنجاح!', buttons: [{ text: 'حسناً', class: 'primary', action: () => location.reload() }]});
+    } catch (e) {
+        hideLoading();
+        showPopup({ type: 'error', icon: '❌', title: 'خطأ', body: 'فشل الاتصال بالسيرفر. حاول مرة أخرى.', buttons: [{text: 'حسناً', class: 'primary'}]});
     }
 }
 
 window.addEventListener('DOMContentLoaded', async function() {
-    checkTeacherGradingMode();
-    
-    if (isTeacherGradingMode) {
-        const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
-        const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
-        const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
-        // ✅ Teacher keeps the top-nav slider for navigation + number indicators
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('mode') === 'grading') {
+        isTeacherGradingMode = true;
+        document.body.classList.add('teacher-grading-mode');
+        currentUser.username = urlParams.get('student') || currentUser.username;
         
-        initTeacherGrading();
-        return; 
+        const tBanner = document.createElement('div');
+        tBanner.className = 'teacher-grading-banner';
+        tBanner.innerHTML = `<div class="grading-info-bar">👨‍🏫 وضع التصحيح | الطالب: <strong>${currentUser.username}</strong> <button class="save-grades-btn-top" onclick="submitTeacherGrades()">💾 حفظ التصحيح</button></div>`;
+        document.body.insertBefore(tBanner, document.body.firstChild);
+        
+        const submitBtn = document.querySelector('.submit-final');
+        if (submitBtn) {
+            submitBtn.textContent = '💾 حفظ التصحيح';
+            submitBtn.onclick = submitTeacherGrades;
+            submitBtn.classList.remove('submit-final');
+            submitBtn.style.background = 'linear-gradient(135deg, #27ae60, #16a085)';
+        }
+    } else {
+        const scb = document.getElementById('spanishCharsBar');
+        if(scb) scb.style.display = 'flex';
     }
-    
-    // ✅ Show spanish characters bar for students
-    const scb = document.getElementById('spanishCharsBar');
-    if(scb) scb.style.display = 'flex';
-    
+
     if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
     if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
     document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
@@ -1500,287 +1536,6 @@ window.addEventListener('DOMContentLoaded', async function() {
         }
     } catch(e){}
 });
-
-async function initTeacherGrading() {
-    const header = document.createElement('div');
-    header.className = 'teacher-grading-banner';
-    header.innerHTML = `
-        <div class="grading-info-bar">
-            <span class="grading-icon">👨‍🏫</span>
-            <span>وضع تصحيح المعلم</span>
-            <span class="divider">|</span>
-            <span>📋 الطالب: <strong>${studentUsername}</strong></span>
-            <span>📚 ${LESSON_CONFIG.lessonName}</span>
-            <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيحات وإرسالها</button>
-        </div>
-    `;
-    document.querySelector('.slider-wrapper').prepend(header);
-    
-    // ✅ Show slides normally with slider (same as student)
-    renderSlides();
-    initSlider();
-    
-    // Hide submit button in teacher mode
-    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
-        btn.style.display = 'none';
-    });
-
-    Object.keys(TRANSCRIPTIONS).forEach(k => {
-        const btn = document.getElementById('trBtn_'+k);
-        const prog = document.getElementById('trProg_'+k);
-        if (btn) {
-            btn.disabled = false;
-            btn.querySelector('.lock-icon').textContent = '🔓';
-            if (prog) prog.style.display = 'none';
-        }
-    });
-
-    showLoading('جاري تحميل إجابات الطالب للتصحيح...');
-    
-    // ✅ First load all submitted answers (correct/wrong/pending)
-    try {
-        const progUrl = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
-        const progRes = await fetch(progUrl);
-        const progData = await progRes.json();
-        if (progData.status === 'success' && progData.lockedAnswers && progData.lockedAnswers !== '{}') {
-            const allLocked = JSON.parse(progData.lockedAnswers);
-            lockedAnswers = allLocked;
-            // Show all submitted answers
-            Object.keys(allLocked).forEach(qId => {
-                const info = allLocked[qId];
-                const el = document.getElementById(qId);
-                if (el && info.value) {
-                    el.value = info.value || '';
-                    el.disabled = true;
-                    if (info.status === 'reviewed') {
-                        if (info.isCorrect) {
-                            el.style.borderColor = '#27ae60'; el.style.backgroundColor = 'rgba(39,174,96,0.12)'; el.style.color = '#2ecc71';
-                        } else if (info.isHalf || info.verdict === 'half') {
-                            el.style.borderColor = '#f1c40f'; el.style.backgroundColor = 'rgba(241,196,15,0.12)'; el.style.color = '#f1c40f';
-                        } else {
-                            el.style.borderColor = '#e74c3c'; el.style.backgroundColor = 'rgba(231,76,60,0.12)'; el.style.color = '#ff7675';
-                        }
-                    } else if (info.status === 'pending') {
-                        el.style.borderColor = '#9b59b6'; el.style.backgroundColor = 'rgba(155,89,182,0.12)'; el.style.color = '#d5a6f0';
-                    }
-                }
-            });
-            // Update jump buttons with locked status
-            updateJumpButtonStatus();
-        }
-    } catch(e) { console.error('Error loading progress:', e); }
-    
-    // ✅ Load pending details for grading
-    try {
-        const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
-        const res = await fetch(url);
-        const data = await res.json();
-        
-        hideLoading();
-        if (data.status === 'success' && data.student) {
-            applyGradingModeToQuestions(data.student.pendingAnswers || {});
-        } else {
-            showPopup({type:'info', title:'تنبيه', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
-        }
-    } catch (e) {
-        hideLoading();
-        showPopup({type:'error', title:'خطأ اتصال', body:'فشل جلب البيانات: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
-    }
-    
-    addGradingStyles();
-}
-
-function applyGradingModeToQuestions(pendingAnswers) {
-    const pendingKeys = Object.keys(pendingAnswers);
-    if (pendingKeys.length === 0) {
-        showPopup({type:'info', title:'تم', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
-        return;
-    }
-    
-    pendingKeys.forEach(qId => {
-        const studentAnswer = pendingAnswers[qId];
-        const questionEl = document.getElementById(qId);
-        
-        if (!questionEl) return;
-        
-        teacherGrades[qId] = {
-            value: studentAnswer.value || '',
-            verdict: '',
-            feedback: ''
-        };
-        
-        const correctAnswer = getCorrectAnswer(qId);
-        const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
-        qCard.classList.add('pending-grading');
-        
-        questionEl.value = studentAnswer.value || '';
-        questionEl.disabled = true;
-        questionEl.style.backgroundColor = 'rgba(243, 156, 18, 0.15)'; 
-        questionEl.style.color = '#f39c12';
-        questionEl.style.fontWeight = 'bold';
-
-        const gradingHTML = `
-            <div class="grading-overlay" id="grading_${qId}">
-                ${correctAnswer ? `
-                <div class="grading-answer-box correct-answer-box">
-                    <div class="answer-label">✅ الإجابة النموذجية (لمساعدتك):</div>
-                    <div class="answer-content" dir="auto">${esc(correctAnswer)}</div>
-                </div>` : ''}
-                
-                <div class="grading-controls">
-                    <div class="verdict-buttons">
-                        <span class="verdict-label">🏷️ التقييم:</span>
-                        <button class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صحيح</button>
-                        <button class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">➗ نصف</button>
-                        <button class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>
-                    </div>
-                    <div class="feedback-section">
-                        <label>💬 تعليق / فيدباك (اختياري):</label>
-                        <textarea id="feedback_${qId}" dir="auto" placeholder="اكتب ملاحظاتك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea>
-                    </div>
-                    <div class="verdict-status" id="status_${qId}">
-                        <span class="not-graded">⏳ بانتظار تقييمك</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        const fbBox = document.getElementById('fb' + qId.substring(1));
-        if (fbBox) {
-            fbBox.insertAdjacentHTML('afterend', gradingHTML);
-        } else {
-            questionEl.insertAdjacentHTML('afterend', gradingHTML);
-        }
-    });
-}
-
-function getCorrectAnswer(qId) {
-    if (AUTO_GRADED[qId]) {
-        const ag = AUTO_GRADED[qId];
-        if (ag.a && Array.isArray(ag.a)) return ag.a.join(' أو ');
-        if (ag.a) return ag.a;
-    }
-    const qData = TEACHER_GRADED_CONTEXT[qId];
-    if (qData && qData.expectedAnswer) return qData.expectedAnswer;
-    return null;
-}
-
-function selectVerdict(qId, verdict) {
-    teacherGrades[qId].verdict = verdict;
-    const el = document.getElementById('grading_' + qId);
-    if (!el) return;
-    
-    el.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
-    const statusEl = document.getElementById('status_' + qId);
-    
-    if (verdict === 'correct') {
-        el.querySelector('.verdict-btn.correct').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done correct">✅ تم التقييم: صحيح</span>';
-    } else if (verdict === 'half') {
-        el.querySelector('.verdict-btn.half').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done half">➗ تم التقييم: نصف درجة</span>';
-    } else if (verdict === 'wrong') {
-        el.querySelector('.verdict-btn.wrong').classList.add('selected');
-        statusEl.innerHTML = '<span class="verdict-done wrong">❌ تم التقييم: خطأ</span>';
-    }
-}
-
-function updateFeedback(qId, v) { 
-    teacherGrades[qId].feedback = v; 
-}
-
-async function saveAllGrades() {
-    const ungraded = Object.keys(teacherGrades).filter(qId => !teacherGrades[qId].verdict);
-    if (ungraded.length > 0) {
-        if (!confirm(`يوجد ${ungraded.length} سؤال لم تقم بتقييمهم. هل تريد المتابعة وحفظ ما تم تصحيحه فقط؟`)) return;
-    }
-    
-    showLoading('جاري حفظ التصحيحات وإرسالها للطالب...');
-    
-    let tc = 0, th = 0, tw = 0;
-    Object.keys(teacherGrades).forEach(qId => {
-        if (teacherGrades[qId].verdict === 'correct') tc++;
-        else if (teacherGrades[qId].verdict === 'half') th++;
-        else if (teacherGrades[qId].verdict === 'wrong') tw++;
-    });
-
-    // ✅ إرسال التصحيحات عبر GET + POST (dual backup)
-    const getUrl = SCRIPT_URL 
-        + '?action=saveTeacherGrading'
-        + '&username=' + encodeURIComponent(studentUsername)
-        + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId)
-        + '&teacherGrades=' + encodeURIComponent(JSON.stringify(teacherGrades))
-        + '&totalCorrect=' + tc
-        + '&totalHalf=' + th
-        + '&totalWrong=' + tw
-        + '&_t=' + Date.now();
-    
-    const formPayload = { 
-        action: 'saveTeacherGrading', 
-        username: studentUsername, 
-        lessonId: LESSON_CONFIG.lessonId, 
-        teacherGrades: JSON.stringify(teacherGrades), 
-        totalCorrect: tc, 
-        totalHalf: th, 
-        totalWrong: tw 
-    };
-    
-    try {
-        await Promise.all([
-            fetch(getUrl, { mode: 'no-cors' }).catch(function(){}),
-            sendDataViaForm(formPayload)
-        ]);
-        hideLoading();
-        showPopup({
-            type:'success', title:'تم بنجاح ✅', body:'تم إرسال التقييم للطالب بنجاح!', 
-            buttons:[{text:'إغلاق النافذة', class:'primary', action:() => { window.close(); } }]
-        });
-    } catch (e) { 
-        hideLoading(); 
-        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'إعادة المحاولة', class:'primary', action:function(){ saveAllGrades(); } },{text:'إلغاء', class:'secondary', action:closePopup}]});
-    }
-}
-
-function addGradingStyles() {
-    if(document.getElementById('teacherStyles')) return;
-    const s = document.createElement('style');
-    s.id = 'teacherStyles';
-    s.textContent = `
-        .teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
-        .teacher-grading-mode .slide.active { display: block; }
-        .teacher-grading-mode .slide { display: none; }
-        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
-        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
-        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
-        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
-        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
-        .correct-answer-box { border-right: 4px solid #2ecc71; }
-        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
-        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
-        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
-        .verdict-label { color: #ccc; font-weight: bold; }
-        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
-        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
-        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
-        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
-        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
-        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
-        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
-        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
-        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
-        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
-        .verdict-status { text-align: left; margin-top: 10px; }
-        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
-        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
-        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
-        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
-    `;
-    document.head.appendChild(s);
-}
-
-function escapeHtml(text) { return esc(text); }
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0f4cb78ac52ac32',t:'MTc4MjA2MzU4OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
