@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="script-url" content="https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec">
+<title>Instituto Amigos - A2.1 U3 - Un año especial</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:#e0e0e0;overflow-x:hidden}
+
+.header{background:linear-gradient(135deg,#e74c3c,#c0392b 50%,#f39c12);padding:16px 20px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'🇪🇸';position:absolute;font-size:90px;opacity:.1;top:-15px;right:20px}
+.header h1{font-size:1.4em;font-weight:900;color:#fff;margin-bottom:3px}
+.header h2{font-size:1em;font-weight:600;color:#ffeaa7}
+.header .lesson-badge{display:inline-block;background:rgba(255,255,255,.25);padding:4px 14px;border-radius:18px;margin-top:5px;font-size:.85em;color:#fff;font-weight:700}
+
+.user-bar{background:rgba(0,0,0,.4);padding:8px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.user-bar .welcome{color:#f39c12;font-weight:700;font-size:.9em}
+.user-bar .logout-btn{background:#c0392b;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600;font-size:.85em;text-decoration:none}
+
+.progress-summary{max-width:1000px;margin:12px auto;padding:12px 18px;background:rgba(30,45,69,.6);backdrop-filter:blur(15px);border-radius:14px;border:1px solid rgba(52,152,219,.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.progress-summary .item{display:flex;flex-direction:column;align-items:center;min-width:55px}
+.progress-summary .item .num{font-size:1.3em;font-weight:900}
+.progress-summary .item .label{font-size:.7em;color:#bdc3c7}
+.progress-summary .item.correct .num{color:#2ecc71}
+.progress-summary .item.half .num{color:#f1c40f}
+.progress-summary .item.wrong .num{color:#e74c3c}
+.progress-summary .item.pending .num{color:#9b59b6}
+.progress-summary .item.remaining .num{color:#f39c12}
+.progress-summary .item.total .num{color:#3498db}
+.progress-summary .progress-bar-mini{flex:1;min-width:120px;height:10px;background:#0f1e33;border-radius:5px;overflow:hidden;margin:0 8px}
+.progress-summary .progress-bar-mini .fill{height:100%;background:linear-gradient(90deg,#2ecc71,#27ae60);transition:width 1s}
+
+.slider-wrapper{max-width:920px;margin:0 auto;padding:15px}
+.top-nav{background:rgba(30,45,69,.7);backdrop-filter:blur(10px);padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.08);margin-bottom:15px}
+.top-nav-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.top-nav .slide-counter{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;padding:7px 16px;border-radius:20px;font-weight:800;font-size:.95em}
+.top-nav .progress-track{flex:1;min-width:150px;height:8px;background:#0f1e33;border-radius:4px;overflow:hidden}
+.top-nav .progress-fill{height:100%;background:linear-gradient(90deg,#e74c3c,#f39c12,#2ecc71);transition:width .5s}
+.top-nav .slide-jump{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.top-nav .jump-btn{background:rgba(52,73,94,.6);color:#bdc3c7;border:1px solid rgba(255,255,255,.1);width:32px;height:32px;border-radius:50%;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.8em;transition:all .2s}
+.top-nav .jump-btn:hover{transform:scale(1.1);background:rgba(52,152,219,.3)}
+.top-nav .jump-btn.active{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;box-shadow:0 3px 10px rgba(52,152,219,.4)}
+.top-nav .jump-btn.completed{background:rgba(39,174,96,.3);color:#2ecc71;border-color:#27ae60}
+.top-nav .jump-btn.has-pending{background:rgba(155,89,182,.5);color:#f0d6ff;border-color:#9b59b6;box-shadow:0 0 8px rgba(155,89,182,.6)}
+
+.slide{display:none;animation:fadeSlide .3s ease}
+.slide.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.exercise{background:linear-gradient(145deg,rgba(30,45,69,.92),rgba(26,37,64,.92));backdrop-filter:blur(20px);border-radius:18px;border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.4);overflow:hidden}
+.ex-header{padding:14px 18px;background:linear-gradient(135deg,rgba(231,76,60,.15),rgba(243,156,18,.1));border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;direction:rtl}
+.ex-header.teacher{background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(142,68,173,.1))}
+.ex-header.whatsapp{background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(18,140,126,.1))}
+.ex-title-wrap{display:flex;align-items:center;gap:10px;flex:1;min-width:0;direction:rtl;order:2;justify-content:flex-end}
+.ex-num{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;min-width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.95em;padding:0 8px;flex-shrink:0;box-shadow:0 4px 12px rgba(231,76,60,.4);order:2}
+.ex-header.teacher .ex-num{background:linear-gradient(135deg,#9b59b6,#8e44ad);box-shadow:0 4px 12px rgba(155,89,182,.4)}
+.ex-header.whatsapp .ex-num{background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.ex-title{font-size:1.05em;font-weight:800;color:#ecf0f1;direction:ltr;text-align:right;order:1;unicode-bidi:embed}
+.ex-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;order:1}
+.ex-type-badge{padding:4px 10px;border-radius:12px;font-size:.7em;font-weight:700;white-space:nowrap}
+.badge-auto{background:rgba(52,152,219,.25);color:#5dade2;border:1px solid #3498db}
+.badge-teacher{background:rgba(155,89,182,.25);color:#d5a6f0;border:1px solid #9b59b6}
+.badge-whatsapp{background:rgba(37,211,102,.25);color:#7eecaf;border:1px solid #25d366}
+.ex-page-btn{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;border:none;padding:7px 14px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em;white-space:nowrap;transition:transform .2s}
+.ex-page-btn:hover{transform:scale(1.05)}
+.ex-body{padding:18px}
+
+.arabic-box{background:rgba(243,156,18,.08);border:1px solid rgba(243,156,18,.3);border-radius:10px;padding:10px 14px;margin-bottom:14px;color:#ffeaa7;font-size:.9em;line-height:1.7;direction:rtl;text-align:right;font-weight:600}
+.arabic-box::before{content:'📌 ';font-size:1em}
+.spanish-box{direction:ltr;text-align:left}
+.spanish-box *{direction:ltr;text-align:left}
+.sub-section{margin-top:22px;padding-top:18px;border-top:2px dashed rgba(52,152,219,.3)}
+.sub-section-title{font-size:1.05em;font-weight:700;color:#3498db;margin-bottom:12px;padding:8px 14px;background:rgba(52,152,219,.1);border-radius:8px;border-left:3px solid #3498db;direction:ltr;text-align:left}
+.es-instruction{color:#d0d8e0;margin-bottom:15px;line-height:1.8;font-size:.95em;background:rgba(52,73,94,.25);padding:12px 16px;border-radius:12px;border-left:4px solid #e74c3c;direction:ltr;text-align:left}
+.es-instruction strong{color:#f39c12}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:14px;background:linear-gradient(135deg,rgba(243,156,18,.08),rgba(230,126,34,.05));border-radius:12px;border:1px dashed rgba(243,156,18,.4);direction:ltr}
+.word-bank span{background:linear-gradient(135deg,#2c3e50,#34495e);color:#ffeaa7;padding:6px 14px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(243,156,18,.5);user-select:none}
+.question-card{background:rgba(15,30,51,.5);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:border-color .3s;direction:ltr;text-align:left}
+.question-card:focus-within{border-color:rgba(52,152,219,.5)}
+.q-label{font-weight:700;color:#ecf0f1;font-size:.95em;margin-bottom:8px;display:flex;align-items:center;gap:6px;direction:ltr;text-align:left;flex-wrap:wrap}
+.q-label .num-bullet{background:rgba(52,152,219,.2);color:#5dade2;min-width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85em;font-weight:800;flex-shrink:0}
+.q-text{color:#bdc3c7;margin-bottom:10px;font-size:.93em;line-height:1.8;direction:ltr;text-align:left}
+.text-paragraph{background:rgba(52,73,94,.3);padding:16px;border-radius:12px;margin-bottom:15px;line-height:2;font-size:.95em;color:#ecf0f1;direction:ltr;text-align:left;border-left:4px solid #f39c12}
+.audio-card{background:linear-gradient(135deg,rgba(155,89,182,.15),rgba(52,152,219,.1));border:1px solid rgba(155,89,182,.3);padding:12px;border-radius:12px;margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;direction:ltr}
+.audio-card .audio-icon{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.audio-card .audio-info{flex:1;min-width:200px}
+.audio-card .audio-label{color:#d5a6f0;font-weight:700;font-size:.85em;margin-bottom:4px;direction:ltr;text-align:left}
+.audio-card audio{width:100%;height:36px;outline:none}
+
+input[type="text"],select,textarea{width:100%;padding:11px 14px;border-radius:10px;border:2px solid rgba(52,73,94,.6);background:rgba(15,30,51,.7);color:#ecf0f1;font-size:1em;font-family:'Cairo',sans-serif;direction:ltr;text-align:left;transition:all .2s}
+input[type="text"]:focus,select:focus,textarea:focus{outline:none;border-color:#3498db;background:rgba(15,30,51,.9);box-shadow:0 0 0 3px rgba(52,152,219,.15)}
+textarea{resize:vertical;min-height:70px}
+input:disabled,select:disabled,textarea:disabled{cursor:not-allowed;opacity:.95;-webkit-user-select:text;user-select:text}
+.locked-correct{border-color:#27ae60!important;background:rgba(39,174,96,.12)!important;color:#2ecc71!important;font-weight:700}
+.locked-half{border-color:#f1c40f!important;background:rgba(241,196,15,.12)!important;color:#f1c40f!important;font-weight:700}
+.locked-wrong{border-color:#e74c3c!important;background:rgba(231,76,60,.12)!important;color:#ff7675!important;font-weight:700}
+.locked-pending{border-color:#9b59b6!important;background:rgba(155,89,182,.12)!important;color:#d5a6f0!important;font-weight:600}
+select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ecf0f1' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 12px) center;padding-right:35px}
+select option{background:#1a2540;color:#ecf0f1}
+
+.feedback{margin-top:10px;padding:0;border-radius:10px;display:none;font-size:.9em;line-height:1.7;overflow:hidden}
+.feedback.correct,.feedback.half,.feedback.wrong,.feedback.pending{display:block}
+.fb-spanish{direction:ltr;text-align:left;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);unicode-bidi:embed}
+.fb-spanish strong{font-weight:800}
+.fb-arabic{direction:rtl;text-align:right;padding:10px 14px;font-size:.9em;background:rgba(0,0,0,.15)}
+.fb-arabic strong{color:#f39c12;font-weight:800}
+.fb-arabic .es{direction:ltr;text-align:left;display:inline-block;unicode-bidi:embed;font-family:'Cairo',sans-serif}
+.fb-arabic .es-line{direction:ltr;text-align:left;display:block;margin:4px 0;padding:4px 8px;background:rgba(52,152,219,.08);border-radius:4px;border-left:2px solid #3498db;unicode-bidi:embed;font-family:'Cairo',sans-serif}
+.feedback.correct{background:rgba(39,174,96,.12);border:1px solid #27ae60;color:#2ecc71}
+.feedback.half{background:rgba(241,196,15,.12);border:1px solid #f1c40f;color:#f1c40f}
+.feedback.wrong{background:rgba(231,76,60,.12);border:1px solid #e74c3c;color:#ff7675}
+.feedback.pending{background:rgba(155,89,182,.12);border:1px solid #9b59b6;color:#d5a6f0}
+.feedback .teacher-comment{background:rgba(0,0,0,.2);padding:8px 10px;border-radius:6px;margin-top:8px;border-right:3px solid #f39c12;direction:rtl;text-align:right}
+.feedback .teacher-comment strong{color:#f39c12}
+.feedback .reviewed-by{display:block;margin-top:6px;font-size:.8em;color:#95a5a6;direction:rtl;text-align:right}
+
+.whatsapp-note{background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(18,140,126,.15));border:2px solid #25d366;border-radius:14px;padding:18px 20px;margin:15px 0;text-align:center;color:#d4ffe4;font-weight:600;line-height:1.8;direction:rtl}
+.whatsapp-note .wa-icon{font-size:2em;display:block;margin-bottom:8px}
+.whatsapp-note strong{color:#25d366}
+.teacher-note{background:linear-gradient(135deg,rgba(155,89,182,.18),rgba(142,68,173,.12));border:1px solid rgba(155,89,182,.5);border-radius:10px;padding:10px 14px;margin:10px 0 14px 0;text-align:center;color:#d5a6f0;font-weight:600;font-size:.9em;direction:rtl}
+.hint-box{background:linear-gradient(135deg,rgba(52,152,219,.15),rgba(41,128,185,.1));border:1px solid #3498db;border-radius:10px;padding:10px 14px;margin-bottom:14px;color:#7ec8e3;font-weight:600;font-size:.88em;direction:rtl;text-align:right}
+.hint-box::before{content:'💡 ';font-size:1.1em}
+.example-solved{background:rgba(39,174,96,.12);border:1px solid rgba(39,174,96,.4);border-radius:10px;padding:10px 14px;color:#2ecc71;font-size:.92em;direction:ltr;text-align:left;margin-bottom:12px}
+.lock-badge{display:inline-block;background:#27ae60;color:#fff;padding:3px 10px;border-radius:12px;font-size:.75em;margin-right:8px;font-weight:700}
+.lock-badge.half{background:#f1c40f;color:#2c3e50}
+.lock-badge.wrong{background:#e74c3c}
+.lock-badge.pending{background:#9b59b6}
+.options-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;direction:ltr}
+.options-list .opt{background:rgba(52,152,219,.12);border:1px solid rgba(52,152,219,.3);padding:5px 12px;border-radius:8px;color:#7ec8e3;font-size:.85em;font-weight:600}
+
+.transcript-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em;margin-bottom:12px;transition:all .3s}
+.transcript-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 14px rgba(22,160,133,.4)}
+.transcript-btn:disabled{background:#555;cursor:not-allowed;opacity:.6}
+.transcript-btn .lock-icon{font-size:1.1em}
+.transcript-btn .progress-text{font-size:.75em;background:rgba(0,0,0,.25);padding:2px 8px;border-radius:10px;margin-right:4px}
+.transcript-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:10003;padding:20px;backdrop-filter:blur(8px)}
+.transcript-modal.show{display:flex}
+.transcript-box{background:linear-gradient(145deg,#1e2d45,#1a2540);border:2px solid #16a085;border-radius:18px;max-width:650px;width:100%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:popIn .3s ease;overflow:hidden}
+.transcript-header{padding:18px 22px;background:linear-gradient(135deg,rgba(22,160,133,.2),transparent);border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.transcript-header h3{color:#1abc9c;font-size:1.1em;font-weight:800;direction:ltr;text-align:left;flex:1}
+.transcript-close{background:#e74c3c;color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:1.1em;cursor:pointer;font-weight:900;flex-shrink:0}
+.transcript-body{padding:20px;overflow-y:auto;flex:1;color:#ecf0f1;line-height:2;font-size:.95em;direction:ltr;text-align:left;white-space:pre-line;font-family:'Cairo',sans-serif}
+.transcript-body strong{color:#1abc9c;font-weight:800;display:inline-block;margin-top:8px}
+
+.bottom-nav{display:flex;gap:8px;margin-top:15px;justify-content:space-between;align-items:center;flex-wrap:wrap;direction:rtl}
+.nav-btn{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;border:none;padding:11px 20px;border-radius:12px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.95em;box-shadow:0 4px 14px rgba(52,152,219,.3);transition:all .3s;display:flex;align-items:center;gap:6px}
+.nav-btn:hover:not(:disabled){transform:translateY(-2px)}
+.nav-btn:disabled{background:#555;cursor:not-allowed;opacity:.5;box-shadow:none}
+.nav-btn.next{background:linear-gradient(135deg,#27ae60,#16a085)}
+.nav-btn.submit-final{background:linear-gradient(135deg,#e74c3c,#c0392b);font-weight:800;flex:1;justify-content:center;max-width:280px}
+
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:10000;padding:20px;backdrop-filter:blur(8px);animation:fadeIn .25s ease}
+.popup-overlay.show{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.popup-box{background:linear-gradient(145deg,#1e2d45,#1a2540);padding:0;border-radius:20px;border:2px solid #f39c12;max-width:480px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:popIn .3s ease;overflow:hidden}
+@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.popup-box.success{border-color:#2ecc71}
+.popup-box.error{border-color:#e74c3c}
+.popup-box.warning{border-color:#f39c12}
+.popup-box.info{border-color:#3498db}
+.popup-header{padding:25px 20px 12px;background:linear-gradient(135deg,rgba(243,156,18,.15),transparent)}
+.popup-box.success .popup-header{background:linear-gradient(135deg,rgba(46,204,113,.15),transparent)}
+.popup-box.error .popup-header{background:linear-gradient(135deg,rgba(231,76,60,.15),transparent)}
+.popup-box.info .popup-header{background:linear-gradient(135deg,rgba(52,152,219,.15),transparent)}
+.popup-icon{font-size:3em;margin-bottom:6px}
+.popup-title{color:#f39c12;font-size:1.3em;font-weight:800}
+.popup-box.success .popup-title{color:#2ecc71}
+.popup-box.error .popup-title{color:#e74c3c}
+.popup-box.info .popup-title{color:#3498db}
+.popup-body{padding:5px 22px 18px;color:#ecf0f1;line-height:1.8;font-size:1em}
+.popup-body .popup-detail{background:rgba(0,0,0,.25);padding:12px;border-radius:10px;margin-top:12px;text-align:right;font-size:.92em;line-height:1.7}
+.popup-actions{padding:0 20px 22px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.popup-btn{padding:11px 22px;border:none;border-radius:10px;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.95em;flex:1;min-width:110px;transition:transform .2s}
+.popup-btn:hover{transform:translateY(-2px)}
+.popup-btn.primary{background:linear-gradient(135deg,#27ae60,#16a085);color:#fff}
+.popup-btn.danger{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}
+.popup-btn.secondary{background:#7f8c8d;color:#fff}
+
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:10001;flex-direction:column;color:#fff;font-size:1.15em;font-weight:700;padding:20px;backdrop-filter:blur(8px)}
+.loading-overlay.show{display:flex}
+.loading-overlay .spinner-big{width:55px;height:55px;border:5px solid rgba(255,255,255,.1);border-top:5px solid #e74c3c;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:15px}
+.loading-overlay .sub-text{font-size:.9em;color:#bdc3c7;margin-top:8px;font-weight:400;max-width:400px;text-align:center}
+
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:10002;padding:20px;flex-direction:column;backdrop-filter:blur(5px)}
+.lightbox.show{display:flex}
+.lightbox img{max-width:100%;max-height:85vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.lightbox-close{position:absolute;top:18px;right:18px;background:#e74c3c;color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:1.3em;cursor:pointer;font-weight:900}
+.lightbox-title{color:#fff;margin-bottom:12px;font-size:1.1em;font-weight:700}
+
+.retry-banner{background:rgba(243,156,18,.15);border:1px solid #f39c12;padding:10px 14px;border-radius:10px;margin:10px auto;max-width:900px;color:#ffeaa7;text-align:center;display:none;font-size:.9em}
+.spanish-chars-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 8px 12px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    background: linear-gradient(135deg, rgba(30,45,69,0.95), rgba(26,37,64,0.95));
+    backdrop-filter: blur(12px);
+    border-top: 2px solid rgba(52,152,219,0.4);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.spanish-chars-bar .chars-label {
+    color: #f39c12;
+    font-size: 0.8em;
+    font-weight: 700;
+    margin-left: 6px;
+    white-space: nowrap;
+}
+.char-btn {
+    background: rgba(52, 152, 219, 0.2);
+    border: 1px solid rgba(52, 152, 219, 0.4);
+    color: #ecf0f1;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 700;
+    transition: all 0.2s;
+    min-width: 38px;
+    font-family: 'Cairo', sans-serif;
+}
+.char-btn:hover {
+    background: rgba(52, 152, 219, 0.5);
+    transform: scale(1.15);
+}
+/* Padding at bottom so content isn't hidden behind the floating bar */
+body { padding-bottom: 50px; }
+.retry-banner button{background:#f39c12;color:#fff;border:none;padding:5px 12px;border-radius:6px;margin-right:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em}
+
+@media(max-width:768px){
+.header h1{font-size:1.2em}.header h2{font-size:.85em}.ex-body{padding:14px}.ex-header{padding:12px 14px}.ex-title{font-size:.95em}.ex-num{min-width:36px;height:36px;font-size:.85em}
+input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px;gap:8px}.progress-summary .item{min-width:45px}.progress-summary .item .num{font-size:1em}.progress-summary .item .label{font-size:.65em}.progress-summary .progress-bar-mini{order:10;width:100%;min-width:100%;margin:5px 0 0 0}
+.slider-wrapper{padding:10px}.top-nav{padding:10px}.top-nav .jump-btn{width:28px;height:28px;font-size:.7em}.nav-btn{padding:10px 14px;font-size:.88em}
+.audio-card{padding:10px;gap:8px}.audio-card .audio-icon{width:32px;height:32px;font-size:1em}.audio-card .audio-info{min-width:100%}
+.question-card{padding:12px}.text-paragraph{padding:12px;font-size:.9em}.word-bank{padding:10px}.word-bank span{padding:5px 10px;font-size:.85em}
+}
+@media(max-width:480px){
+.ex-header{flex-direction:column;align-items:stretch}.ex-title-wrap{justify-content:flex-end;order:1}.ex-actions{justify-content:flex-start;width:100%;order:2}.ex-page-btn{flex:1;text-align:center;justify-content:center;display:flex}
+.popup-actions{flex-direction:column}.popup-btn{width:100%}.bottom-nav{flex-direction:column}.nav-btn{width:100%;justify-content:center}.nav-btn.submit-final{max-width:100%;order:-1}
+}
+
+/* Un año especial – book-accurate */
+.word-bank.letters-bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:18px;position:relative}
+.word-bank.letters-bank span{background:linear-gradient(135deg,#2c3e50,#34495e);color:#ffeaa7;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.08em;border:2px solid rgba(243,156,18,.5)}
+.wb-ex-badge{position:absolute;top:-10px;right:14px;background:#f39c12;color:#1a1a2e;font-weight:900;font-size:.72em;padding:2px 10px;border-radius:10px}
+.exercise-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:720px){.exercise-grid-2{grid-template-columns:1fr}}
+.q-text b{color:#f39c12;font-weight:900}
+.question-card input[type=text]{max-width:260px}
+.slide-col h4{color:#f39c12;margin-bottom:8px;font-size:.95em}
+.question-card .num-bullet{background:linear-gradient(135deg,#f39c12,#e67e22);color:#1a1a2e;min-width:34px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.82em;margin-left:8px;padding:0 8px}
+
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+<div class="spinner-big"></div>
+<div id="loadingText">جاري التحميل...</div>
+<div class="sub-text" id="loadingSubText"></div>
+</div>
+
+<div class="popup-overlay" id="popupOverlay">
+<div class="popup-box" id="popupBox">
+<div class="popup-header">
+<div class="popup-icon" id="popupIcon">⚠️</div>
+<div class="popup-title" id="popupTitle">عنوان</div>
+</div>
+<div class="popup-body" id="popupBody">المحتوى</div>
+<div class="popup-actions" id="popupActions"></div>
+</div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<div class="lightbox-title" id="lightboxTitle"></div>
+<img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="transcript-modal" id="transcriptModal" onclick="if(event.target===this)closeTranscript()">
+<div class="transcript-box">
+<div class="transcript-header">
+<h3 id="trModalTitle">Transcripción</h3>
+<button class="transcript-close" onclick="closeTranscript()">✕</button>
+</div>
+<div class="transcript-body" id="trModalBody"></div>
+</div>
+</div>
+
+<div class="header">
+<h1>📚 Instituto Amigos</h1>
+<h2 id="lessonHeaderName">Un año especial</h2>
+<div class="lesson-badge" id="lessonHeaderBadge">A2.1 - Unidad 3</div>
+</div>
+
+<div class="user-bar">
+<div class="welcome">👤 أهلاً <span id="userFullName">{{ student.username }}</span></div>
+<a href="/dashboard" class="logout-btn">🔙 العودة للمنصة</a>
+</div>
+
+<div class="progress-summary">
+<div class="item correct"><div class="num" id="psCorrect">0</div><div class="label">✅ صح</div></div>
+<div class="item half"><div class="num" id="psHalf">0</div><div class="label">⚠️ نص</div></div>
+<div class="item wrong"><div class="num" id="psWrong">0</div><div class="label">❌ خطأ</div></div>
+<div class="item pending"><div class="num" id="psPending">0</div><div class="label">⏳ انتظار</div></div>
+<div class="item remaining"><div class="num" id="psRemaining">0</div><div class="label">📝 متبقي</div></div>
+<div class="progress-bar-mini"><div class="fill" id="psProgressBar" style="width:0%"></div></div>
+<div class="item total"><div class="num"><span id="psAnswered">0</span>/<span id="psTotal">0</span></div><div class="label">📊 التقدم</div></div>
+</div>
+
+<div class="retry-banner" id="retryBanner">
+⚠️ يوجد محاولة لم تُرسل بنجاح.
+<button onclick="retrySubmit()">🔄 إعادة الإرسال</button>
+</div>
+
+
+<div class="spanish-chars-bar" id="spanishCharsBar" style="display:none;">
+    <span class="chars-label">🇪🇸 أحرف إسبانية:</span>
+    <button class="char-btn" onclick="insertChar('á')">á</button>
+    <button class="char-btn" onclick="insertChar('é')">é</button>
+    <button class="char-btn" onclick="insertChar('í')">í</button>
+    <button class="char-btn" onclick="insertChar('ó')">ó</button>
+    <button class="char-btn" onclick="insertChar('ú')">ú</button>
+    <button class="char-btn" onclick="insertChar('ü')">ü</button>
+    <button class="char-btn" onclick="insertChar('ñ')">ñ</button>
+    <button class="char-btn" onclick="insertChar('¿')">¿</button>
+    <button class="char-btn" onclick="insertChar('¡')">¡</button>
+</div>
+
+<div class="slider-wrapper">
+<div class="top-nav">
+<div class="top-nav-row">
+<div class="slide-counter"><span id="currentSlideNum">1</span> / <span id="totalSlidesNum">16</span></div>
+<div class="progress-track"><div class="progress-fill" id="slideProgressFill" style="width:6%"></div></div>
+</div>
+<div class="slide-jump" id="slideJumpButtons"></div>
+</div>
+
+<div class="slides-container" id="slidesContainer"></div>
+
+<div class="bottom-nav">
+<button class="nav-btn" id="prevBtn" onclick="prevSlide()">▶ السابق</button>
+<button class="nav-btn submit-final" onclick="prepareSubmit()">✅ إرسال الإجابات</button>
+<button class="nav-btn next" id="nextBtn" onclick="nextSlide()">التالي ◀</button>
+</div>
+</div>
+
+<script>
+const LESSON_CONFIG = { lessonId:'A2.1_U3', lessonName:'Un año especial', levelDisplay:'A2.1 - Unidad 3', totalQuestions:0 };
+
+const scriptUrlMeta = document.querySelector('meta[name="script-url"]');
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUtsVd8l0aPnt1V_7CyJniWSjGGbk1djI2Tzk3HrPa8x/exec';
+const SCRIPT_URL = (scriptUrlMeta?.content && scriptUrlMeta.content !== '{{ script_url }}' && scriptUrlMeta.content.startsWith('https://')) ? scriptUrlMeta.content : DEFAULT_SCRIPT_URL;
+
+const AUDIO_BASE = 'https://archive.org/download/A2_Eje/A2_Eje/';
+const PAGE_BASE = 'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page';
+const PAGE_IMAGES = {19:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page19.jpg',20:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page20.jpg',21:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page21.jpg',22:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page22.jpg',23:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page23.jpg',24:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page24.jpg'};
+function getPageURL(p) { return PAGE_IMAGES[p] || (PAGE_BASE + p + '.jpg'); }
+
+const AUTO_GRADED = {
+q7a_1:{a:['I'],t:'select'},q7a_2:{a:['I'],t:'select'},q7a_3:{a:['I'],t:'select'},q7a_4:{a:['I'],t:'select'},q7a_5:{a:['I'],t:'select'},q7a_6:{a:['I'],t:'select'},q7a_7:{a:['I'],t:'select'},q7a_8:{a:['P'],t:'select'},q7a_9:{a:['P'],t:'select'},q7a_10:{a:['P'],t:'select'},q7a_11:{a:['P'],t:'select'},q7a_12:{a:['P'],t:'select'},q7a_13:{a:['P'],t:'select'},q7a_14:{a:['P'],t:'select'},q7a_15:{a:['P'],t:'select'},
+
+q6a_1:{a:['2']},q6a_2:{a:['9']},q6a_3:{a:['3']},q6a_4:{a:['4']},q6a_5:{a:['1']},q6a_6:{a:['6']},q6a_7:{a:['5']},q6a_8:{a:['11']},q6a_9:{a:['12']},q6a_10:{a:['10']},q6a_11:{a:['8']},q6a_12:{a:['7']},
+
+q1_1:{a:['ustedes conocen','conocen']},q1_2:{a:['vosotros dais','dais']},q1_3:{a:['tu decides','decides']},q1_4:{a:['nosotros vamos','vamos']},q1_5:{a:['el sigue','sigue']},q1_6:{a:['tu ganaste','ganaste']},q1_7:{a:['yo viaje','viaje','viajé']},q1_8:{a:['yo empece','empece','empecé']},q1_9:{a:['ellos oyeron','oyeron']},q1_10:{a:['yo vi','vi']},q1_11:{a:['el participo','participo','participó']},q1_12:{a:['nosotros fuimos','fuimos']},q1_13:{a:['ella se traslado','se traslado','se trasladó']},q1_14:{a:['usted durmio','durmio','durmió']},
+q2_1:{a:['busco','buscó']},q2_2:{a:['fue']},q2_3:{a:['gano','ganó']},q2_4:{a:['empezo','empezó']},q2_5:{a:['construyo','construyó']},q2_6:{a:['visitaron']},
+q3_1a:{a:['c']},q3_1b:{a:['z']},q3_2:{a:['y']},q3_3a:{a:['u']},q3_3b:{a:['o']},q3_4a:{a:['qu']},q3_4b:{a:['c']},q3_5a:{a:['í','i']},q3_5b:{a:['y']},q3_5c:{a:['í','i']},q3_6a:{a:['e']},q3_6b:{a:['i']},
+q4_1:{a:['estuvimos']},q4_2:{a:['quise']},q4_3:{a:['vinieron']},q4_4:{a:['pudiste']},q4_5:{a:['hicisteis']},q4_6:{a:['dije']},q4_7:{a:['pusiste']},
+q5_1:{a:['regular'],t:'select'},q5_2:{a:['regular'],t:'select'},q5_3:{a:['regular'],t:'select'},q5_4:{a:['regular'],t:'select'},q5_5:{a:['regular'],t:'select'},q5_6:{a:['regular'],t:'select'},q5_7:{a:['regular'],t:'select'},q5_8:{a:['irregular'],t:'select'},q5_9:{a:['irregular'],t:'select'},q5_10:{a:['irregular'],t:'select'},q5_11:{a:['irregular'],t:'select'},q5_12:{a:['irregular'],t:'select'},q5_13:{a:['irregular'],t:'select'},q5_14:{a:['irregular'],t:'select'},
+q7_1:{a:['b'],t:'select'},q7_2:{a:['a'],t:'select'},q7_3:{a:['b'],t:'select'},q7_4:{a:['a'],t:'select'},q7_5:{a:['b'],t:'select'},q7_6:{a:['a'],t:'select'},q7_7:{a:['a'],t:'select'},q7_8:{a:['b'],t:'select'},
+q8_1:{a:['ir'],t:'select'},q8_2:{a:['ser'],t:'select'},q8_3:{a:['ir'],t:'select'},q8_4:{a:['ir'],t:'select'},q8_5:{a:['ser'],t:'select'},q8_6:{a:['ser'],t:'select'},q8_7:{a:['ser'],t:'select'},q8_8:{a:['ser'],t:'select'},
+q9_1:{a:['tuvimos'],t:'select'},q9_2:{a:['tuvo'],t:'select'},q9_3:{a:['he estado'],t:'select'},q9_4:{a:['pude'],t:'select'},q9_5:{a:['hemos visto'],t:'select'},q9_6:{a:['se caso','se casó'],t:'select'},q9_7:{a:['se fue'],t:'select'},q9_8:{a:['participo','participó'],t:'select'},q9_9:{a:['se marcho','se marchó'],t:'select'},q9_10:{a:['ha expuesto'],t:'select'},q9_11:{a:['ha ganado'],t:'select'},q9_12:{a:['regrese','regresé'],t:'select'},q9_13:{a:['estudie','estudié'],t:'select'},
+q10_1:{a:['fue horrible','horrible']},q10_2:{a:['ha sido muy desagradable','desagradable']},q10_3:{a:['fue fantastico','fue fantástico','fantastico','fantástico']},q10_4:{a:['ha sido muy bonito','bonito']},q10_5:{a:['fue muy divertido','divertido']},
+q12_1:{a:['especial']},q12_2:{a:['de estudios']},q12_3:{a:['deportivo','deportiva','deportivo/a']},q12_4:{a:['del cumpleaños','de cumpleaños']},q12_5:{a:['de oro']},q12_6:{a:['de natacion','de natación']},q12_7:{a:['de una novela']},q12_8:{a:['al aire libre']},q12_9:{a:['popular']},
+q13_1:{a:['el viaje','viaje']},q13_2:{a:['celebrar']},q13_3:{a:['el sueño','sueno','sueño']},q13_4:{a:['volar']},q13_5:{a:['el contrato','contrato']},q13_6:{a:['cambiar']},q13_7:{a:['la manifestacion','la manifestación']},q13_8:{a:['publicar']},
+q15a_1:{a:['maestra']},q15a_2:{a:['linea','línea']},q15a_3:{a:['viaje']},q15a_4:{a:['vuestro']},q15a_5:{a:['rio','río']},q15a_6:{a:['dia','día']},
+q15_1:{a:['fa-mi-lia']},q15_2:{a:['nues-tro']},q15_3:{a:['far-ma-cia']},q15_4:{a:['re-al']},q15_5:{a:['es-tu-dian-tes']},q15_6:{a:['cre-o']},q15_7:{a:['en-vi-o','en-ví-o']},q15_8:{a:['len-gua']},q15_9:{a:['com-pa-ñi-a','com-pa-ñí-a']},q15_10:{a:['real','creo']},q15_11:{a:['familia']},q15_12:{a:['envio','envío','compañia','compañía']}
+};
+
+const EXPLANATIONS = {
+// Ex 1
+q1_1:{ar:'ustedes conocen (تصريف المضارع المستمر للفعل conocer مع ustedes)'},
+q1_2:{ar:'vosotros dais (تصريف المضارع للفعل dar مع vosotros)'},
+q1_3:{ar:'tú decides (تصريف المضارع للفعل decidir مع tú)'},
+q1_4:{ar:'nosotros vamos (تصريف المضارع للفعل ir مع nosotros)'},
+q1_5:{ar:'él sigue (تصريف المضارع للفعل seguir مع él)'},
+q1_6:{ar:'ganaste (تصريف الماضي البسيط للفعل ganar مع tú)'},
+q1_7:{ar:'viajé (تصريف الماضي البسيط للفعل viajar مع yo)'},
+q1_8:{ar:'empecé (تصريف الماضي البسيط للفعل empezar مع yo - لاحظ تحول z إلى c)'},
+q1_9:{ar:'oyeron (تصريف الماضي البسيط للفعل oír مع ellos - لاحظ استخدام y)'},
+q1_10:{ar:'vi (تصريف الماضي البسيط للفعل ver مع yo)'},
+q1_11:{ar:'participó (تصريف الماضي البسيط للفعل participar مع él)'},
+q1_12:{ar:'fuimos (تصريف الماضي البسيط للفعل ir مع nosotros)'},
+q1_13:{ar:'se trasladó (تصريف الماضي البسيط للفعل trasladarse مع ella)'},
+q1_14:{ar:'durmió (تصريف الماضي البسيط للفعل dormir مع usted)'},
+
+// Ex 2
+q2_1:{ar:'buscó (الماضي البسيط للفعل buscar مع ella)'},
+q2_2:{ar:'fue (الماضي البسيط للفعل ser مع ella)'},
+q2_3:{ar:'ganó (الماضي البسيط للفعل ganar مع él)'},
+q2_4:{ar:'empezó (الماضي البسيط للفعل empezar مع ella)'},
+q2_5:{ar:'construyó (الماضي البسيط للفعل construir مع él - يضاف y لتسهيل النطق)'},
+q2_6:{ar:'visitaron (الماضي البسيط للفعل visitar مع ellos)'},
+
+// Ex 3
+q3_1a:{ar:'empecé (في تصريف yo للفعل empezar تتحول الـ z إلى c لتتناسب مع حرف e)'},
+q3_1b:{ar:'empezó (مع él تبقى الـ z كما هي)'},
+q3_2:{ar:'leyeron (للفعل leer مع ellos/ellas نستخدم y بين الحرفين المتحركين)'},
+q3_3a:{ar:'durmió (للفعل dormir مع él/ella/usted تتحول الـ o إلى u)'},
+q3_3b:{ar:'dormí (مع yo لا تتغير الـ o)'},
+q3_4a:{ar:'busqué (في تصريف yo للفعل buscar تتحول الـ c إلى qu)'},
+q3_4b:{ar:'buscamos (مع nosotros تبقى الـ c)'},
+q3_5a:{ar:'oísteis (للفعل oír مع vosotros نضع نبرة tilde على الحرف i)'},
+q3_5b:{ar:'oyeron (للفعل oír مع ellos نستخدم y)'},
+q3_5c:{ar:'leí (للفعل leer مع yo نضع نبرة tilde)'},
+q3_6a:{ar:'conseguí (للفعل conseguir مع yo تبقى الـ e)'},
+q3_6b:{ar:'consiguieron (للفعل conseguir مع ellos تتحول الـ e إلى i)'},
+
+// Ex 4
+q4_1:{ar:'estuvimos (الفعل estar غير منتظم جذره هو estuv)'},
+q4_2:{ar:'quise (الفعل querer غير منتظم جذره هو quis)'},
+q4_3:{ar:'vinieron (الفعل venir غير منتظم جذره هو vin)'},
+q4_4:{ar:'pudiste (الفعل poder غير منتظم جذره هو pud)'},
+q4_5:{ar:'hicisteis (الفعل hacer غير منتظم جذره هو hic)'},
+q4_6:{ar:'dije (الفعل decir غير منتظم جذره هو dij)'},
+q4_7:{ar:'pusiste (الفعل poner غير منتظم جذره هو pus)'},
+
+// Ex 5
+q5_1:{ar:'celebré (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_2:{ar:'conoció (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_3:{ar:'ganó (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_4:{ar:'nació (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_5:{ar:'pedí (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_6:{ar:'decidió (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_7:{ar:'participó (فعل منتظم: النبرة على المقطع الأخير)'},
+q5_8:{ar:'dije (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_9:{ar:'hizo (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_10:{ar:'tuve (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_11:{ar:'estuve (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_12:{ar:'pude (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_13:{ar:'puso (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+q5_14:{ar:'vino (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
+
+// Ex 7a
+q7a_1:{ar:'la semana pasada (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_2:{ar:'el año pasado (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_3:{ar:'en 2014 (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_4:{ar:'el mes pasado (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_5:{ar:'hace mucho (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_6:{ar:'ayer (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_7:{ar:'hace dos años (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
+q7a_8:{ar:'hoy (الماضي التام: حدث مرتبط بالحاضر)'},
+q7a_9:{ar:'ya (الماضي التام: للإشارة عن تجربة أو فعل تم)'},
+q7a_10:{ar:'este año (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
+q7a_11:{ar:'últimamente (الماضي التام: حدث مرتبط بالحاضر)'},
+q7a_12:{ar:'este mes (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
+q7a_13:{ar:'alguna vez (الماضي التام: للسؤال عن تجربة في الحياة)'},
+q7a_14:{ar:'esta semana (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
+q7a_15:{ar:'todavía no (الماضي التام: للإشارة لفعل لم يكتمل بعد)'},
+
+// Ex 7b
+q7_1:{ar:'han estado (الماضي التام يأتي مع este año لأنه يمثل فترة لم تنتهي)'},
+q7_2:{ar:'estuvieron (الماضي البسيط يأتي مع el año pasado لأنه فترة منتهية)'},
+q7_3:{ar:'¿Has subido? (الماضي التام يُستخدم للسؤال عن تجارب الحياة alguna vez)'},
+q7_4:{ar:'¿Subiste? (الماضي البسيط يُستخدم مع فترات منتهية مثل la semana pasada)'},
+q7_5:{ar:'Vimos (الماضي البسيط يُستخدم لتحديد سنة منتهية en 2016)'},
+q7_6:{ar:'Hemos visto (الماضي التام يُستخدم مع este mes)'},
+q7_7:{ar:'cocinaron (الماضي البسيط يُستخدم مع ayer)'},
+q7_8:{ar:'han cocinado (الماضي التام يُستخدم مع hoy)'},
+
+// Ex 8
+q8_1:{ar:'ir (بمعنى ذهب - هل ذهبت إلى الصف؟)'},
+q8_2:{ar:'ser (بمعنى كان - تقييم كيف كانت السنة)'},
+q8_3:{ar:'ir (بمعنى ذهب - متى ذهبت للحفلة؟)'},
+q8_4:{ar:'ir (بمعنى ذهب - ذهبنا مشياً)'},
+q8_5:{ar:'ser (بمعنى كان - كان جداً مشهوراً)'},
+q8_6:{ar:'ser (بمعنى كان - تقييم المحاضرة بأنها شيقة)'},
+q8_7:{ar:'ser (بمعنى كان - من كان الرئيس؟)'},
+q8_8:{ar:'ser (بمعنى كان - تقييم أفضل سنين حياته)'},
+
+// Ex 9
+q9_1:{ar:'tuvimos (لأن la semana pasada فترة منتهية - ماضي بسيط)'},
+q9_2:{ar:'Tuvo (لأننا نكمل سرد القصة في الماضي البسيط)'},
+q9_3:{ar:'he estado (لأنه يذكر تجربة ما زالت مستمرة أو مرتبطة بحاضره Ya)'},
+q9_4:{ar:'pude (يعود لسرد أحداث الاجتماع المنتهي - ماضي بسيط)'},
+q9_5:{ar:'hemos visto (لوجود últimamente وهي تعني "مؤخراً" ما زالت مستمرة - ماضي تام)'},
+q9_6:{ar:'se casó (لوجود el año pasado فترة منتهية - ماضي بسيط)'},
+q9_7:{ar:'se fue (تكملة للحدث في الماضي البسيط)'},
+q9_8:{ar:'participó (لوجود hace un año فترة منتهية - ماضي بسيط)'},
+q9_9:{ar:'se marchó (تكملة للحدث في الماضي البسيط)'},
+q9_10:{ar:'ha expuesto (استخدام Ya للدلالة على إنجاز في الحياة دون تحديد وقت منتهي)'},
+q9_11:{ar:'ha ganado (لوجود este mes فترة لم تنتهي - ماضي تام)'},
+q9_12:{ar:'regresé (لوجود hace dos años فترة منتهية - ماضي بسيط)'},
+q9_13:{ar:'estudié (تكملة لسرد أحداث الماضي البسيط)'},
+
+// Ex 10
+q10_1:{ar:'¡Fue horrible! (شيء سيء لأنهم سُرقوا)'},
+q10_2:{ar:'¡Ha sido muy desagradable! (غير سار بسبب البرد)'},
+q10_3:{ar:'¡Fue fantástico! (رائع لأنهم أحبوا كل شيء)'},
+q10_4:{ar:'¡Ha sido muy bonito! (جميل لأن الوداع كان مؤثراً)'},
+q10_5:{ar:'¡Fue muy divertido! (ممتع لأنهم ضحكوا طوال الوقت)'},
+
+// Ex 12
+q12_1:{ar:'especial (حدث خاص / مميز)'},
+q12_2:{ar:'de estudios (منحة دراسية)'},
+q12_3:{ar:'deportivo/a (بطولة رياضية)'},
+q12_4:{ar:'del cumpleaños (احتفال بعيد الميلاد)'},
+q12_5:{ar:'de oro (ميدالية ذهبية)'},
+q12_6:{ar:'de natación (مهمة سباحة)'},
+q12_7:{ar:'de una novela (نشر رواية)'},
+q12_8:{ar:'al aire libre (حفلة في الهواء الطلق)'},
+q12_9:{ar:'popular (حفلة شعبية)'},
+
+// Ex 13
+q13_1:{ar:'el viaje (الاسم من viajar)'},
+q13_2:{ar:'celebrar (الفعل من la celebración)'},
+q13_3:{ar:'el sueño (الاسم من soñar)'},
+q13_4:{ar:'volar (الفعل من el vuelo)'},
+q13_5:{ar:'el contrato (الاسم من contratar)'},
+q13_6:{ar:'cambiar (الفعل من el cambio)'},
+q13_7:{ar:'la manifestación (الاسم من manifestarse)'},
+q13_8:{ar:'publicar (الفعل من la publicación)'},
+
+// Ex 15
+q15a_1:{ar:'ma-es-tra (فصلنا a و e لأنها حروف قوية متتالية)'},
+q15a_2:{ar:'lí-ne-a (فصلنا e و a لأنها حروف قوية)'},
+q15a_3:{ar:'via-je (الحرف الضعيف i مدمج مع الحرف القوي a)'},
+q15a_4:{ar:'vues-tro (الحرف الضعيف u مدمج مع القوي e)'},
+q15a_5:{ar:'rí-o (الكسرة (Tilde) على i تفصلها عن o)'},
+q15a_6:{ar:'dí-a (الكسرة (Tilde) على i تفصلها عن a)'},
+
+q15_1:{ar:'fa-mi-lia (حرف متحرك قوي وضعيف معاً يشكلان مقطع واحد)'},
+q15_2:{ar:'nues-tro (حرف متحرك ضعيف وقوي معاً يندمجان)'},
+q15_3:{ar:'far-ma-cia (دمج i مع a)'},
+q15_4:{ar:'re-al (حرفان قويان متتاليان e و a يجب فصلهما)'},
+q15_5:{ar:'es-tu-dian-tes (دمج i مع a)'},
+q15_6:{ar:'cre-o (حرفان قويان e و o يجب فصلهما)'},
+q15_7:{ar:'en-ví-o (وضع Tilde على الحرف الضعيف يفصله عن الحرف القوي)'},
+q15_8:{ar:'len-gua (دمج u مع a)'},
+q15_9:{ar:'com-pa-ñí-a (نبرة tilde على الحرف i تفصله)'},
+
+q15_10:{ar:'القاعدة 1 (حرفان قويان): ينطبق على real و creo'},
+q15_11:{ar:'القاعدة 2 (الدمج / diptongo): ينطبق على familia, nuestro, farmacia, estudiantes, lengua'},
+q15_12:{ar:'القاعدة 3 (النبرة التي تكسر الدمج): ينطبق على envío, compañía'}
+};
+
+const TEACHER_GRADED_CONTEXT = {
+q1b_1:{questionText:'Escribe tres frases con verbos de NORMALMENTE y tres con verbos de AYER.',expectedAnswer:'Normalmente tú ganas a las cartas. Ayer tú ganaste un premio…',rule:'Presente vs. Indefinido'},
+q6_1:{questionText:'Amalia en San Sebastián – ordena y escribe.',expectedAnswer:'El fin de semana pasado Amalia estuvo en San Sebastián…',rule:'Indefinido'},
+q11_1:{questionText:'Relaciona columnas y escribe tres frases en indefinido.',expectedAnswer:'Muchos estudiantes participaron en manifestaciones en 1968…',rule:'Verbos de eventos'},
+q14_1:{questionText:'Escribe un nombre para: desierto, cordillera, lago, ruinas, isla, continente.',expectedAnswer:'Desierto de Atacama / Cordillera de los Andes / Lago Titicaca / ruinas mayas / Isla de Pascua / Europa',rule:'Geografía'}
+};
+
+const TRANSCRIPTIONS = {
+'ex5':{title:'Transcripción – Ej. 5b – Pista 18',requiredQuestions:['q5_1','q5_2','q5_3','q5_4','q5_5','q5_6','q5_7','q5_8','q5_9','q5_10','q5_11','q5_12','q5_13','q5_14'],text:`<strong>Verbos regulares – última sílaba acentuada:</strong><br>celebré, conoció, ganó, nació, pedí, decidió, participó<br><br><strong>Verbos irregulares – penúltima sílaba acentuada:</strong><br>dije, hizo, tuve, estuve, pude, puso, vino`},
+'ex6':{title:'Transcripción – Ej. 6a – Pista 19 – Amalia en San Sebastián',requiredQuestions:['q6_1'],text:`<strong>–</strong> Hola, Amalia. ¿Qué tal tu fin de semana? Estuviste en San Sebastián, ¿no?<br><strong>▲</strong> Sí, estuve en San Sebastián, en el País Vasco. ¡Y fue maravilloso! El viernes por la tarde llegué en avión directamente a la ciudad. Me quedé en un hotel en las afueras porque los hoteles del centro de San Sebastián son muy caros. Me acosté temprano y dormí profundamente toda la noche por el cansancio del viaje.<br><br>A la mañana siguiente, el sábado, empecé la visita por la ciudad: recorrí la playa de la Concha, visité la catedral del Buen Pastor y subí al monte Urgull. Al mediodía fui a la parte vieja de la ciudad y tomé unos pinchos. Por la tarde bebí un café en la plaza de la Constitución. Además, conseguí entradas para un concierto por la noche en un bar de moda.`},
+'ex15':{title:'Transcripción – Ej. 15b – Pista 20',requiredQuestions:['q15_1','q15_2','q15_3','q15_4','q15_5','q15_6','q15_7','q15_8','q15_9'],text:`1. guí-a<br>2. fa-mi-lia<br>3. nues-tro<br>4. far-ma-cia<br>5. re-al<br>6. es-tu-dian-tes<br>7. cre-o<br>8. en-ví-o<br>9. len-gua<br>10. com-pa-ñí-a`}
+};
+
+const SLIDES = [
+
+{n:1,exNum:'1',title:'Gimnasia en dos tiempos',page:19,type:'teacher',arabic:'أكمل القوائم واكتب جملاً.',spanish:'',custom:'slide1',teacherNote:true,
+questions:[
+{id:'q1_1'}, {id:'q1_2'}, {id:'q1_3'}, {id:'q1_4'}, {id:'q1_5'},
+{id:'q1_6'}, {id:'q1_7'}, {id:'q1_8'}, {id:'q1_9'}, {id:'q1_10'}, {id:'q1_11'}, {id:'q1_12'}, {id:'q1_13'}, {id:'q1_14'},
+{id:'q1b_1'}
+]},
+{n:2,exNum:'2',title:'El Museo Guggenheim Bilbao',page:19,type:'auto',arabic:'',spanish:'',custom:'slide2'},
+{n:3,exNum:'3',title:'¿Con qué letra?',page:20,type:'auto',arabic:'أكمل الحروف الناقصة – buscar, empezar, conseguir, dormir, leer, oír',spanish:'<b>3. ¿Con qué letra?</b><br>Completa las letras que faltan en las formas de indefinido de los verbos <b>buscar, empezar, conseguir, dormir, leer y oír</b>.',custom:'slide3',wordBank:['i','e','z','u','qu','o','y','í','e'],
+questions:[
+{id:'q3_1a',text:'1. A los siete años empe <input type="text" id="q3_1a" style="width:40px;display:inline" placeholder="..."> é a entrenar para ser futbolista en el club de mi barrio. Un año más tarde, mi hermano empe <input type="text" id="q3_1b" style="width:40px;display:inline"> ó a entrenar también, pero en un club de natación.',input:false},
+{id:'q3_2',text:'2. En la clase de ayer, los estudiantes le <input type="text" id="q3_2" style="width:40px;display:inline" placeholder="..."> eron y comentaron un artículo muy interesante.',input:false},
+{id:'q3_3a',text:'3. En el viaje a México, Ana d <input type="text" id="q3_3a" style="width:40px;display:inline" placeholder="..."> rmió en el avión, pero yo no d <input type="text" id="q3_3b" style="width:40px;display:inline"> rmí nada por el estrés.',input:false},
+{id:'q3_4a',text:'4. En 2015 bus <input type="text" id="q3_4a" style="width:50px;display:inline" placeholder="..."> é un trabajo en Barcelona, un mes después llegaron mi mujer y mi hijo y bus <input type="text" id="q3_4b" style="width:40px;display:inline"> amos una casa juntos.',input:false},
+{id:'q3_5a',text:'5. • ¿O <input type="text" id="q3_5a" style="width:40px;display:inline" placeholder="..."> steis ayer en la radio la noticia sobre Mireia Belmonte?<br>▲ Yo no, pero mis padres sí la o <input type="text" id="q3_5b" style="width:40px;display:inline"> eron y me la contaron.<br>▲ Yo la le <input type="text" id="q3_5c" style="width:40px;display:inline"> en un periódico deportivo.',input:false},
+{id:'q3_6a',text:'6. • Estoy muy triste. No cons <input type="text" id="q3_6a" style="width:40px;display:inline" placeholder="..."> guí entradas para el concierto de mi grupo favorito.<br>▲ ¡Buenas noticias! Jaime y Caro cons <input type="text" id="q3_6b" style="width:40px;display:inline"> guieron varias entradas y una es para ti.',input:false}
+]},
+{n:4,exNum:'4',title:'¿Regular o irregular?',page:20,type:'auto',arabic:'اربط صيغة الحاضر بصيغة الماضي.',spanish:'Une las formas de presente con las formas correspondientes en indefinido. Anota después las dos formas en el infinitivo que corresponda y completa con los pronombres personales adecuados.<br><b>quiero – puedes – estamos – hacéis – pusiste – tiene – vinieron – dije – estuvimos – quise – hicisteis – pudiste – tuvo – digo – vienen – pones</b><br><em>Ejemplo – tener: tiene → tuvo (él/ella/usted)</em>',
+questions:[
+{id:'q4_1',n:'2',text:'estar: estamos → ______ (nosotros/as)',input:true,placeholder:'...'},
+{id:'q4_2',n:'3',text:'querer: quiero → ______ (yo)',input:true},
+{id:'q4_3',n:'4',text:'venir: vienen → ______ (ellos/as, ustedes)',input:true},
+{id:'q4_4',n:'5',text:'poder: puedes → ______ (tú)',input:true},
+{id:'q4_5',n:'6',text:'hacer: hacéis → ______ (vosotros/as)',input:true},
+{id:'q4_6',n:'7',text:'decir: digo → ______ (yo)',input:true},
+{id:'q4_7',n:'8',text:'poner: pones → ______ (tú)',input:true}
+]},
+{n:5,exNum:'5',title:'¿Y cómo suena?',page:20,type:'auto',arabic:'صنف الأفعال حسب النبر – ثم استمع Pista 18',spanish:'<b>a.</b> Coloca estas formas de indefinido en la tabla según su sílaba acentuada.<br><b>dije – celebré – conoció – hizo – ganó – tuve – estuve – nació – pedí – pude – decidió – puso – vino – participó</b><br><b>Verbos regulares – última sílaba acentuada</b><br><b>Verbos irregulares – penúltima sílaba acentuada</b><br><b>b. Escucha y comprueba. 🎧 18</b>',audios:[18],transcriptKey:'ex5',custom:'slide5',
+questions:[
+{id:'q5_1',text:'celebré →',sel:'regular_irregular'},{id:'q5_2',text:'conoció →',sel:'regular_irregular'},{id:'q5_3',text:'ganó →',sel:'regular_irregular'},{id:'q5_4',text:'nació →',sel:'regular_irregular'},{id:'q5_5',text:'pedí →',sel:'regular_irregular'},{id:'q5_6',text:'decidió →',sel:'regular_irregular'},{id:'q5_7',text:'participó →',sel:'regular_irregular'},{id:'q5_8',text:'dije →',sel:'regular_irregular'},{id:'q5_9',text:'hizo →',sel:'regular_irregular'},{id:'q5_10',text:'tuve →',sel:'regular_irregular'},{id:'q5_11',text:'estuve →',sel:'regular_irregular'},{id:'q5_12',text:'pude →',sel:'regular_irregular'},{id:'q5_13',text:'puso →',sel:'regular_irregular'},{id:'q5_14',text:'vino →',sel:'regular_irregular'}
+]},
+{n:6,exNum:'6',title:'Amalia en San Sebastián',page:21,type:'teacher',arabic:'استمع Pista 19 ورتب، ثم اكتب.',spanish:'<b>a.</b> Escucha lo que hizo Amalia el fin de semana pasado y ordena las actividades. 🎧 19<br><b>b.</b> ¿Qué hizo Amalia el fin de semana pasado? Escribe un texto con la información de 6a.<br><em>El fin de semana pasado Amalia estuvo en San Sebastián. Llegó en avión y…</em>',audios:[19],transcriptKey:'ex6',teacherNote:true,
+questions:[
+{id:'q6a_1',n:'',text:'quedarse en un hotel en las afueras',input:true,placeholder:'رقم'},
+{id:'q6a_2',n:'',text:'ir a la parte vieja de la ciudad',input:true,placeholder:'رقم'},
+{id:'q6a_3',n:'',text:'acostarse temprano',input:true,placeholder:'رقم'},
+{id:'q6a_4',n:'',text:'dormir profundamente',input:true,placeholder:'رقم'},
+{id:'q6a_5',n:'',text:'llegar en avión',input:true,placeholder:'رقم'},
+{id:'q6a_6',n:'',text:'recorrer la playa de la Concha',input:true,placeholder:'رقم'},
+{id:'q6a_7',n:'',text:'empezar la visita por la ciudad',input:true,placeholder:'رقم'},
+{id:'q6a_8',n:'',text:'beber un café',input:true,placeholder:'رقم'},
+{id:'q6a_9',n:'',text:'conseguir entradas',input:true,placeholder:'رقم'},
+{id:'q6a_10',n:'',text:'tomar unos pinchos',input:true,placeholder:'رقم'},
+{id:'q6a_11',n:'',text:'subir al monte Urgull',input:true,placeholder:'رقم'},
+{id:'q6a_12',n:'',text:'visitar la catedral del Buen Pastor',input:true,placeholder:'رقم'},
+{id:'q6_1',label:'📝 Tu texto (6b):',textarea:true,placeholder:'...'}
+]},
+{n:7,exNum:'7',title:'¿Cuándo pasó o ha pasado?',page:21,type:'auto',arabic:'صنف كلمات الزمن واربط الجمل.',spanish:'',custom:'slide7',
+questions:[
+{id:'q7a_1'},{id:'q7a_2'},{id:'q7a_3'},{id:'q7a_4'},{id:'q7a_5'},{id:'q7a_6'},{id:'q7a_7'},
+{id:'q7a_8'},{id:'q7a_9'},{id:'q7a_10'},{id:'q7a_11'},{id:'q7a_12'},{id:'q7a_13'},{id:'q7a_14'},{id:'q7a_15'},
+{id:'q7_1'},{id:'q7_2'},{id:'q7_3'},{id:'q7_4'},{id:'q7_5'},{id:'q7_6'},{id:'q7_7'},{id:'q7_8'}
+]},
+{n:8,exNum:'8',title:'¿Ser o ir?',page:22,type:'auto',arabic:'',spanish:'',custom:'slide8'},
+{n:9,exNum:'9',title:'Mis amigos del colegio',page:22,type:'auto',arabic:'',spanish:'',custom:'slide9'},
+{n:10,exNum:'10',title:'¿Experiencias positivas o negativas?',page:22,type:'auto',arabic:'',spanish:'',custom:'slide10'},
+{n:11,exNum:'11',title:'¿Cómo se usa? – Eventos',page:23,type:'teacher',arabic:'',spanish:'',custom:'slide11',teacherNote:true},{n:12,exNum:'12',title:'Eventos – Vocabulario',page:23,type:'auto',arabic:'أكمل التعابير.',spanish:'Completa las expresiones con las siguientes palabras. Hay varias posibilidades.<br><b>deportivo/a – popular – de estudios – del cumpleaños – de natación – de oro – al aire libre – especial – de una novela</b>',wordBank:['especial','de estudios','deportivo/a','del cumpleaños','de oro','de natación','de una novela','al aire libre','popular'],
+questions:[
+{id:'q12_1',n:'1',text:'el acontecimiento ______',input:true,placeholder:'...'},
+{id:'q12_2',n:'2',text:'la beca ______',input:true},
+{id:'q12_3',n:'3',text:'el campeonato ______',input:true},
+{id:'q12_4',n:'4',text:'la celebración ______',input:true},
+{id:'q12_5',n:'5',text:'la medalla ______',input:true},
+{id:'q12_6',n:'6',text:'la misión ______',input:true},
+{id:'q12_7',n:'7',text:'la publicación ______',input:true},
+{id:'q12_8',n:'8',text:'el concierto ______',input:true},
+{id:'q12_9',n:'9',text:'la fiesta ______',input:true}
+]},
+{n:13,exNum:'13',title:'Sustantivos y verbos',page:23,type:'auto',arabic:'اكتب الفعل أو الاسم الناقص.',spanish:'Escribe el verbo o el sustantivo que falta.<br>1. viajar ↔ ______ – 2. la celebración ↔ ______ – 3. soñar ↔ ______ – 4. el vuelo ↔ ______<br>5. ______ ↔ contratar – 6. el cambio ↔ ______ – 7. ______ ↔ manifestarse – 8. la publicación ↔ ______',
+questions:[
+{id:'q13_1',n:'1',text:'viajar ↔ ______',input:true,placeholder:'...'},
+{id:'q13_2',n:'2',text:'la celebración ↔ ______',input:true},
+{id:'q13_3',n:'3',text:'soñar ↔ ______',input:true},
+{id:'q13_4',n:'4',text:'el vuelo ↔ ______',input:true},
+{id:'q13_5',n:'5',text:'______ ↔ contratar',input:true},
+{id:'q13_6',n:'6',text:'el cambio ↔ ______',input:true},
+{id:'q13_7',n:'7',text:'______ ↔ manifestarse',input:true},
+{id:'q13_8',n:'8',text:'la publicación ↔ ______',input:true}
+]},
+{n:14,exNum:'14',title:'Lugares',page:23,type:'teacher',arabic:'اكتب اسمًا لكل مكان.',spanish:'Escribe un nombre para cada uno de estos lugares.<br><em>El desierto de Atacama</em>',teacherNote:true,
+questions:[
+{id:'q14_1',n:'1',text:'Un desierto:',input:true,placeholder:'...'},
+{id:'q14_2',n:'2',text:'Una cordillera:',input:true,placeholder:'...'},
+{id:'q14_3',n:'3',text:'Un lago:',input:true,placeholder:'...'},
+{id:'q14_4',n:'4',text:'Unas ruinas:',input:true,placeholder:'...'},
+{id:'q14_5',n:'5',text:'Una isla:',input:true,placeholder:'...'},
+{id:'q14_6',n:'6',text:'Un continente:',input:true,placeholder:'...'}
+]},
+{n:15,exNum:'15',title:'Sonidos del español',page:24,type:'auto',arabic:'افصل المقاطع وأكمل القواعد. Pista 20',spanish:'',custom:'slide15',audios:[20],transcriptKey:'ex15'},{n:16,exNum:'16',title:'Mi carpeta de textos – Viaje',page:24,type:'whatsapp',arabic:'اكتب نصًا عن رحلة – أرسل واتساب',spanish:'Lee de nuevo el texto sobre el viaje del Che. Escribe después un texto sobre un viaje que has hecho tú. ¿Adónde has viajado? ¿Cuándo fue? ¿Cómo has viajado? ¿Con quién? ¿Cómo fue la experiencia? ¡Pon especial atención a los tiempos verbales!'}
+
+];
+// متغير لتتبع آخر حقل كان المستخدم بيكتب فيه
+let lastFocusedInput = null;
+
+// تتبع الفوكس على كل الحقول
+document.addEventListener('focusin', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+        lastFocusedInput = e.target;
+    }
+});
+
+// دالة إدراج الحروف الإسبانية في آخر حقل كان المستخدم فيه
+function insertChar(ch) {
+    const el = lastFocusedInput;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && !el.disabled && !el.readOnly) {
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        el.value = el.value.substring(0, start) + ch + el.value.substring(end);
+        el.selectionStart = el.selectionEnd = start + 1;
+        el.focus();
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
+
+const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
+
+let currentUser = { username:'demo', fullName:'Demo Student' };
+let lockedAnswers = {};
+let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
+let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
+
+
+const SELECT_OPTIONS = {
+  'regular_irregular': [{v:'regular',t:'Regular'},{v:'irregular',t:'Irregular'}],
+  'ser_ir': [{v:'ser',t:'ser'},{v:'ir',t:'ir'}],
+  'ab': [{v:'a',t:'a'},{v:'b',t:'b'}],
+  'p9_1': [{v:'hemos tenido',t:'hemos tenido'},{v:'tuvimos',t:'tuvimos'}],
+  'p9_2': [{v:'ha tenido',t:'Ha tenido'},{v:'tuvo',t:'Tuvo'}],
+  'p9_3': [{v:'he estado',t:'he estado'},{v:'estuve',t:'estuve'}],
+  'p9_4': [{v:'he podido',t:'he podido'},{v:'pude',t:'pude'}],
+  'p9_5': [{v:'hemos visto',t:'hemos visto'},{v:'vimos',t:'vimos'}],
+  'p9_6': [{v:'se ha casado',t:'se ha casado'},{v:'se casó',t:'se casó'}],
+  'p9_7': [{v:'se ha ido',t:'se ha ido'},{v:'se fue',t:'se fue'}],
+  'p9_8': [{v:'ha participado',t:'ha participado'},{v:'participó',t:'participó'}],
+  'p9_9': [{v:'se ha marchado',t:'se ha marchado'},{v:'se marchó',t:'se marchó'}],
+  'p9_10': [{v:'ha expuesto',t:'ha expuesto'},{v:'expuso',t:'expuso'}],
+  'p9_11': [{v:'ha ganado',t:'ha ganado'},{v:'ganó',t:'ganó'}],
+  'p9_12': [{v:'he regresado',t:'he regresado'},{v:'regresé',t:'regresé'}],
+  'p9_13': [{v:'he estudiado',t:'he estudiado'},{v:'estudié',t:'estudié'}]
+};
+
+const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
+const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
+LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
+
+function buildSelect(id, letters) {
+    let opts = '<option value="">-- اختر --</option>';
+    if (typeof SELECT_OPTIONS !== 'undefined' && SELECT_OPTIONS[letters]) {
+        SELECT_OPTIONS[letters].forEach(o => opts += `<option value="${o.v}">${o.t}</option>`);
+    } else {
+        const arr = Array.isArray(letters) ? letters : letters.split('');
+        arr.forEach(l => opts += `<option value="${l}">${l}</option>`);
+    }
+    return `<select id="${id}">${opts}</select><div class="feedback" id="fb${id.substring(1)}"></div>`;
+}
+function buildInput(id, ph) { return `<input type="text" id="${id}" placeholder="${ph||''}"><div class="feedback" id="fb${id.substring(1)}"></div>`; }
+function buildTextarea(id, ph) { return `<textarea id="${id}" placeholder="${ph||''}"></textarea><div class="feedback" id="fb${id.substring(1)}"></div>`; }
+function buildAudio(p) { return `<div class="audio-card"><div class="audio-icon">🎧</div><div class="audio-info"><div class="audio-label">Pista ${p}</div><audio controls preload="none"><source src="${AUDIO_BASE}${String(p).padStart(2,'0')}%20Pista%20${p}.mp3" type="audio/mpeg"></audio></div></div>`; }
+function buildWordBank(w) { return `<div class="word-bank">${w.map(x=>`<span>${x}</span>`).join('')}</div>`; }
+function buildOptionsList(o) { return `<div class="options-list">${o.map(x=>`<span class="opt">${x}</span>`).join('')}</div>`; }
+function buildTranscriptBtn(k) {
+    const tr = TRANSCRIPTIONS[k];
+    if (!tr) return '';
+    return `<button class="transcript-btn" id="trBtn_${k}" onclick="openTranscript('${k}')" disabled><span class="lock-icon">🔒</span><span>📝 عرض النص (Transcripción)</span><span class="progress-text" id="trProg_${k}">0/${tr.requiredQuestions.length}</span></button>`;
+}
+function buildQuestion(q) {
+    let h = '';
+    if (q.label) h = `<div class="q-label">${q.label}</div>`;
+    else if (q.n !== undefined && q.n !== '') h = `<div class="q-label"><span class="num-bullet">${q.n}</span></div>`;
+    if (q.text) h += `<div class="q-text">${q.text}</div>`;
+    if (q.sel) h += buildSelect(q.id, q.sel);
+    else if (q.input) h += buildInput(q.id, q.placeholder);
+    else if (q.textarea) h += buildTextarea(q.id, q.placeholder);
+    // for questions with inline inputs (Ex3 etc.), feedback divs are already in q.text
+    let fbNeeded = true;
+    if (q.text && q.text.includes('feedback')) fbNeeded = false;
+    if (q.ids) { q.ids.forEach(id => { fbNeeded = false; }); }
+    if (fbNeeded && q.id && !q.sel && !q.input && !q.textarea) {
+        h += `<div class="feedback" id="fb${q.id.substring(1)}"></div>`;
+    }
+    return `<div class="question-card">${h}</div>`;
+}
+
+function buildSlide1() {
+  let h = `<div class="sub-section-title">1a. Completa las listas NORMALMENTE y AYER</div>`;
+  h += `<div class="arabic-box">أكمل قوائم NORMALMENTE و AYER كما في الأمثلة.</div>`;
+  h += `<div class="spanish-box">`;
+  
+  let norm = `
+  <div class="question-card" style="margin-bottom:0; border:none; background:transparent; padding:0;">
+    <div style="line-height:2.2; font-size:0.95em;">
+      1. tú ganas<br>
+      2. ella pide<br>
+      3. ustedes <input type="text" id="q1_1" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_1"></div><br>
+      4. yo viajo<br>
+      5. vosotros <input type="text" id="q1_2" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_2"></div><br>
+      6. yo empiezo<br>
+      7. tú <input type="text" id="q1_3" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_3"></div><br>
+      8. ellos oyen<br>
+      9. yo veo<br>
+      10. él participa<br>
+      11. nosotros <input type="text" id="q1_4" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_4"></div><br>
+      12. nosotros somos<br>
+      13. él <input type="text" id="q1_5" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_5"></div><br>
+      14. ella se traslada<br>
+      15. usted duerme
+    </div>
+  </div>`;
+  
+  let ayer = `
+  <div class="question-card" style="margin-bottom:0; border:none; background:transparent; padding:0;">
+    <div style="line-height:2.2; font-size:0.95em;">
+      1. tú <input type="text" id="q1_6" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_6"></div><br>
+      2. ella pidió<br>
+      3. ustedes conocieron<br>
+      4. yo <input type="text" id="q1_7" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_7"></div><br>
+      5. vosotros disteis<br>
+      6. yo <input type="text" id="q1_8" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_8"></div><br>
+      7. tú decidiste<br>
+      8. ellos <input type="text" id="q1_9" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_9"></div><br>
+      9. yo <input type="text" id="q1_10" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_10"></div><br>
+      10. él <input type="text" id="q1_11" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_11"></div><br>
+      11. nosotros fuimos<br>
+      12. nosotros <input type="text" id="q1_12" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_12"></div><br>
+      13. él siguió<br>
+      14. ella <input type="text" id="q1_13" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_13"></div><br>
+      15. usted <input type="text" id="q1_14" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_14"></div>
+    </div>
+  </div>`;
+  
+  h += `<div class="exercise-grid-2" style="gap:15px;"><div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;"><h4 style="text-align:center;color:#3498db;">NORMALMENTE</h4>${norm}</div><div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;"><h4 style="text-align:center;color:#e74c3c;">AYER</h4>${ayer}</div></div></div>`;
+  
+  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">1b. Escribe tres frases...</div><div class="arabic-box">اكتب ثلاث جمل بأفعال من NORMALMENTE وثلاث من AYER.</div><div class="spanish-box"><div class="es-instruction">Escribe tres frases con verbos de la lista NORMALMENTE y tres con verbos de la lista AYER.<br><em>Normalmente t&#250; ganas a las cartas. Ayer t&#250; ganaste un premio.</em></div><div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
+  h += buildQuestion({id:'q1b_1',label:'📝 Tus frases:',textarea:true,placeholder:'...'});
+  h += `</div></div>`;
+  
+  return h;
+}
+function buildSlide3() {
+  const s = SLIDES.find(x=>String(x.exNum)==='3');
+  let h = '<div class="spanish-box">';
+  if(s.spanish) h += `<div class="es-instruction">${s.spanish}</div>`;
+  if(s.wordBank) h += `<div style="position:relative"><div class="wb-ex-badge">Ej. ${s.exNum}</div><div class="word-bank letters-bank">` + s.wordBank.map(w=>`<span>${w}</span>`).join('') + `</div></div>`;
+  s.questions.forEach(q => h += buildQuestion(q));
+  h += '</div>'; return h;
+}
+
+
+function buildSlide(s) {
+    const hClass = s.type==='teacher'?'teacher':s.type==='whatsapp'?'whatsapp':'';
+    const badge = s.type==='teacher'?'<span class="ex-type-badge badge-teacher">👨‍🏫 يصححه المدرس</span>':s.type==='whatsapp'?'<span class="ex-type-badge badge-whatsapp">📱 واتس اب</span>':'<span class="ex-type-badge badge-auto">🤖 تصحيح تلقائي</span>';
+    let body = '';
+    if (s.arabic) body += `<div class="arabic-box">${s.arabic}</div>`;
+    if (s.hint) body += `<div class="hint-box">${s.hint}</div>`;
+    
+    if (s.custom==='slide1') body += buildSlide1();
+    else if (s.custom==='slide2') body += buildSlide2();
+    else if (s.custom==='slide3') body += buildSlide3();
+    else if (s.custom==='slide5') body += buildSlide5();
+    else if (s.custom==='slide7') body += buildSlide7();
+    else if (s.custom==='slide8') body += buildSlide8();
+    else if (s.custom==='slide9') body += buildSlide9();
+    else if (s.custom==='slide10') body += buildSlide10();
+    else if (s.custom==='slide11') body += buildSlide11();
+    else if (s.custom==='slide13') body += buildSlide13();
+    else if (s.custom==='slide15') body += buildSlide15();
+
+    else {
+        body += `<div class="spanish-box">`;
+        if (s.spanish) body += `<div class="es-instruction">${s.spanish}</div>`;
+        if (s.audios) {
+            s.audios.forEach(p => body += buildAudio(p));
+            if (s.transcriptKey) body += buildTranscriptBtn(s.transcriptKey);
+        }
+        if (s.wordBank && !s.custom) body += buildWordBank(s.wordBank, s.exNum);
+        if (s.options) body += buildOptionsList(s.options);
+        if (s.example) body += `<div class="example-solved">✅ ${s.example}</div>`;
+        if (s.teacherNote) body += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
+        if (s.questions) s.questions.forEach(q => body += buildQuestion(q));
+        if (s.triples) {
+            s.triples.forEach(t => {
+                body += `<div class="question-card"><div class="q-label"><span class="num-bullet">${t.n}</span> ${t.sentence}</div>`;
+                body += `<div class="q-text">&#191;Qui&#233;n?</div><input type="text" id="${t.ids[0]}" placeholder="..."><div class="feedback" id="fb${t.ids[0].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;Qu&#233;?</div><input type="text" id="${t.ids[1]}" placeholder="..."><div class="feedback" id="fb${t.ids[1].substring(1)}"></div>`;
+                body += `<div class="q-text" style="margin-top:8px">&#191;A qui&#233;n?</div><input type="text" id="${t.ids[2]}" placeholder="..."><div class="feedback" id="fb${t.ids[2].substring(1)}"></div>`;
+                body += `</div>`;
+            });
+        }
+        body += `</div>`;
+    }
+    return `<div class="slide" data-slide="${s.n-1}"><div class="exercise"><div class="ex-header ${hClass}"><div class="ex-title-wrap"><div class="ex-num">${s.exNum || s.n}</div><div class="ex-title">${s.title}</div></div><div class="ex-actions">${badge}<button class="ex-page-btn" onclick="openPage(${s.page})">📄 صفحة ${s.page}</button></div></div><div class="ex-body">${body}</div></div></div>`;
+}
+
+
+
+function renderSlides() { 
+    try {
+        document.getElementById('slidesContainer').innerHTML = SLIDES.map(buildSlide).join('');
+    } catch(e) {
+        console.error("Error building slides:", e);
+    }
+}
+
+function initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    document.getElementById('totalSlidesNum').textContent = totalSlides;
+    const jc = document.getElementById('slideJumpButtons');
+    jc.innerHTML = '';
+    for (let i=0; i<totalSlides; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'jump-btn'; btn.textContent = i+1;
+        btn.onclick = () => goToSlide(i); btn.id = 'jumpBtn_'+i;
+        jc.appendChild(btn);
+    }
+    if (slides.length > 0) slides[0].classList.add('active');
+    updateSlider();
+}
+function goToSlide(i) {
+    if (i<0 || i>=totalSlides) return;
+    document.querySelectorAll('audio').forEach(a => { try{a.pause();}catch(e){} });
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.slide')[i].classList.add('active');
+    currentSlide = i;
+    updateSlider();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides-1) goToSlide(currentSlide+1); }
+function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide-1); }
+function updateSlider() {
+    document.getElementById('currentSlideNum').textContent = currentSlide+1;
+    document.getElementById('slideProgressFill').style.width = ((currentSlide+1)/totalSlides*100)+'%';
+    document.getElementById('prevBtn').disabled = currentSlide===0;
+    document.getElementById('nextBtn').disabled = currentSlide===totalSlides-1;
+    for (let i=0; i<totalSlides; i++) {
+        const btn = document.getElementById('jumpBtn_'+i);
+        if (btn) btn.classList.toggle('active', i===currentSlide);
+    }
+    updateJumpButtonStatus();
+}
+function updateJumpButtonStatus() {
+    document.querySelectorAll('.slide').forEach((slide,i) => {
+        const btn = document.getElementById('jumpBtn_'+i);
+        if (!btn) return;
+        const inputs = slide.querySelectorAll('input, select, textarea');
+        let total=0, locked=0, pending=0;
+        inputs.forEach(el => {
+            if (!el.id || !el.id.startsWith('q')) return;
+            total++;
+            if (lockedAnswers[el.id]) {
+                if (lockedAnswers[el.id].status==='pending') pending++;
+                else locked++;
+            }
+        });
+        btn.classList.remove('completed','has-pending');
+        if (pending > 0) btn.classList.add('has-pending');
+        else if (total > 0 && locked >= total) btn.classList.add('completed');
+    });
+}
+document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key==='ArrowLeft') nextSlide();
+    if (e.key==='ArrowRight') prevSlide();
+});
+
+function showPopup(o) {
+    const ov = document.getElementById('popupOverlay');
+    document.getElementById('popupBox').className = 'popup-box '+(o.type||'info');
+    document.getElementById('popupIcon').textContent = o.icon || (o.type==='success'?'✅':o.type==='error'?'❌':o.type==='warning'?'⚠️':'ℹ️');
+    document.getElementById('popupTitle').textContent = o.title || 'تنبيه';
+    document.getElementById('popupBody').innerHTML = o.body || '';
+    const ac = document.getElementById('popupActions');
+    ac.innerHTML = '';
+    (o.buttons || [{text:'حسناً',class:'primary',action:closePopup}]).forEach(b => {
+        const btn = document.createElement('button');
+        btn.className = 'popup-btn '+(b.class||'primary');
+        btn.textContent = b.text;
+        btn.onclick = b.action || closePopup;
+        ac.appendChild(btn);
+    });
+    ov.classList.add('show');
+}
+function closePopup() { document.getElementById('popupOverlay').classList.remove('show'); }
+function openPage(p) {
+    document.getElementById('lightboxTitle').textContent = '📄 صفحة '+p+' من الكتاب';
+    document.getElementById('lightboxImg').src = getPageURL(p);
+    document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(e) {
+    if (e && e.target.tagName==='IMG') return;
+    document.getElementById('lightbox').classList.remove('show');
+}
+
+function checkTranscriptStatus(k) {
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return;
+    const btn = document.getElementById('trBtn_'+k);
+    const prog = document.getElementById('trProg_'+k);
+    if (!btn || !prog) return;
+    let answered = 0;
+    tr.requiredQuestions.forEach(qId => { if (lockedAnswers[qId]) answered++; });
+    prog.textContent = answered + '/' + tr.requiredQuestions.length;
+    if (answered >= tr.requiredQuestions.length) {
+        btn.disabled = false;
+        btn.querySelector('.lock-icon').textContent = '🔓';
+    } else {
+        btn.disabled = true;
+        btn.querySelector('.lock-icon').textContent = '🔒';
+    }
+}
+function checkAllTranscripts() { Object.keys(TRANSCRIPTIONS).forEach(checkTranscriptStatus); }
+function openTranscript(k) {
+    const tr = TRANSCRIPTIONS[k]; if (!tr) return;
+    const btn = document.getElementById('trBtn_'+k);
+    if (btn && btn.disabled) {
+        const answered = parseInt(document.getElementById('trProg_'+k).textContent.split('/')[0]);
+        const remaining = tr.requiredQuestions.length - answered;
+        showPopup({type:'warning',icon:'🔒',title:'النص مقفول',body:`<p>لازم <strong>ترسل إجابات كل أسئلة التمرين</strong> الأول.</p><div class="popup-detail">📤 لسه محتاج ترسل: <strong>${remaining}</strong> إجابة<br>✅ مُرسل: <strong>${answered}</strong> من <strong>${tr.requiredQuestions.length}</strong><br><br>💡 ملحوظة: الكتابة في الخانات مش كفاية، لازم تضغط زر "إرسال الإجابات".</div>`,buttons:[{text:'حسناً',class:'primary'}]});
+        return;
+    }
+    document.getElementById('trModalTitle').textContent = tr.title;
+    document.getElementById('trModalBody').innerHTML = tr.text;
+    document.getElementById('transcriptModal').classList.add('show');
+}
+function closeTranscript() { document.getElementById('transcriptModal').classList.remove('show'); }
+
+function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
+function gradeAutoQuestion(qId, value) {
+    const m = AUTO_GRADED[qId];
+    if (!m) return null;
+    const ua = String(value||'').trim(); if (!ua) return null;
+    let ok = false;
+    if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
+    else ok = m.a.some(x => normalize(x) === normalize(ua));
+    return { isCorrect:ok, correctAnswer: m.d || m.a[0] };
+}
+
+function lockField(el) {
+    if (!el) return;
+    el.disabled = true;
+    el.readOnly = true; el.setAttribute('data-locked','true');
+    el.addEventListener('input', preventEdit);
+    el.addEventListener('beforeinput', preventEdit);
+    el.addEventListener('paste', preventEdit);
+    el.addEventListener('cut', preventEdit);
+    el.addEventListener('keydown', preventEditKey);
+}
+function preventEdit(e) { if (e.target.getAttribute('data-locked')==='true') { e.preventDefault(); return false; } }
+function preventEditKey(e) {
+    if (e.target.getAttribute('data-locked')==='true') {
+        const allowed = ['Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','PageUp','PageDown'];
+        if (allowed.includes(e.key)) return;
+        if (e.ctrlKey && (e.key==='c' || e.key==='a')) return;
+        e.preventDefault(); return false;
+    }
+}
+
+function buildExplanationHTML(exp) {
+    if (!exp) return '';
+    let html = '';
+    if (typeof exp === 'string') {
+        return `💡 <strong>الشرح:</strong><br>${esc(exp).replace(/\n/g,'<br>')}`;
+    }
+    if (exp.ar) html += `💡 <strong>الشرح:</strong> ${esc(exp.ar)}`;
+    if (exp.es) html += `<span class="es-line">📝 ${esc(exp.es)}</span>`;
+    return html;
+}
+
+function displayLockedAnswer(qId, info) {
+    const el = document.getElementById(qId); if (!el) return;
+    el.value = info.value; lockField(el);
+    const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
+    const exp = EXPLANATIONS[qId];
+    
+    if (info.status === 'pending') {
+        el.classList.add('locked-pending');
+        fb.className = 'feedback pending';
+        let html = `<div class="fb-spanish"><span class="lock-badge pending">⏳ Pendiente</span><br><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div><div class="fb-arabic"><strong>⏳ بانتظار تصحيح المدرس</strong><br>تم استلام إجابتك.`;
+        if (info.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.expectedAnswer) html += `<span class="es-line">📝 ${esc(info.expectedAnswer)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    } else if (info.isHalf || info.verdict==='half') {
+        el.classList.add('locked-half');
+        fb.className = 'feedback half';
+        let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
+        html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
+        if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    } else if (info.isCorrect) {
+        el.classList.add('locked-correct');
+        fb.className = 'feedback correct';
+        let html = `<div class="fb-spanish"><span class="lock-badge">✅ ¡Correcto!</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div>`;
+        if (exp || info.reviewedBy) {
+            html += `<div class="fb-arabic">`;
+            if (exp) html += buildExplanationHTML(exp);
+            if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+            html += `</div>`;
+        }
+        fb.innerHTML = html;
+    } else {
+        el.classList.add('locked-wrong');
+        fb.className = 'feedback wrong';
+        const m = AUTO_GRADED[qId];
+        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || '');
+        let html = `<div class="fb-spanish"><span class="lock-badge wrong">❌ Incorrecto</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
+        if (cd) html += `<strong>✅ Respuesta correcta:</strong> ${esc(cd)}`;
+        html += `</div><div class="fb-arabic">`;
+        if (exp) html += buildExplanationHTML(exp);
+        else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
+        html += `</div>`;
+        fb.innerHTML = html;
+    }
+}
+function esc(t) { if (t==null) return ''; const d=document.createElement('div'); d.textContent=String(t); return d.innerHTML; }
+
+function updateProgressDisplay() {
+    try {
+        document.getElementById('psCorrect').textContent = Math.floor(totalCorrect);
+        document.getElementById('psHalf').textContent = totalHalf;
+        document.getElementById('psWrong').textContent = totalWrong;
+        document.getElementById('psPending').textContent = totalPending;
+        document.getElementById('psAnswered').textContent = totalAnswered + totalPending;
+        document.getElementById('psTotal').textContent = LESSON_CONFIG.totalQuestions;
+        document.getElementById('psRemaining').textContent = Math.max(0, LESSON_CONFIG.totalQuestions - totalAnswered - totalPending);
+        const pct = LESSON_CONFIG.totalQuestions > 0 ? Math.round(((totalAnswered + totalPending) / LESSON_CONFIG.totalQuestions) * 100) : 0;
+        document.getElementById('psProgressBar').style.width = pct+'%';
+    } catch(e) {}
+}
+function checkIfComplete() {
+    if (totalAnswered + totalPending >= LESSON_CONFIG.totalQuestions && totalPending === 0) {
+        const es = totalCorrect + (totalHalf * 0.5);
+        const p = Math.round((es / LESSON_CONFIG.totalQuestions) * 100);
+        let i='🌟', t='ممتاز!', c='success';
+        if (p < 50) { i='💪'; t='محتاج تذاكر كويس'; c='error'; }
+        else if (p < 70) { i='📖'; t='راجع الدرس'; c='warning'; }
+        else if (p < 90) { i='👍'; t='جيد جداً!'; c='info'; }
+        showPopup({type:c,icon:i,title:t,body:`<div style="font-size:2.5em;font-weight:900;margin:15px 0">${es} / ${LESSON_CONFIG.totalQuestions}</div><div style="font-size:1.3em;font-weight:700">${p}%</div>`,buttons:[{text:'👍 حسناً',class:'primary'}]});
+    }
+}
+function showLoading(t,s) {
+    document.getElementById('loadingText').textContent = t || 'جاري التحميل...';
+    document.getElementById('loadingSubText').textContent = s || '';
+    document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+
+async function sendDataViaGET(data) {
+    const ds = JSON.stringify(data);
+    if (ds.length > 7000) return sendDataViaForm(data);
+    const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(ds);
+    try { await fetch(url, {mode:'no-cors'}); return {success:'unknown'}; } catch(e) { throw e; }
+}
+function sendDataViaForm(data) {
+    return new Promise((res,rej) => {
+        const ifn = 'sub_'+Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = ifn; iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const form = document.createElement('form');
+        form.method='POST'; form.action=SCRIPT_URL; form.target=ifn; form.style.display='none';
+        const pi = document.createElement('input');
+        pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
+        const ai = document.createElement('input');
+        ai.type='hidden'; ai.name='action'; ai.value=data.action || 'saveProgress'; form.appendChild(ai);
+        document.body.appendChild(form);
+        let r=false;
+        const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
+        const cu = () => { try{document.body.removeChild(form);}catch(e){} setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}}, 500); };
+        iframe.onload = ()=>{if(!r){r=true;clearTimeout(to);cu();res({success:'unknown'});}};
+        iframe.onerror = ()=>{if(!r){r=true;clearTimeout(to);cu();rej(new Error('Form failed'));}};
+        try{form.submit();}catch(e){r=true;clearTimeout(to);cu();rej(e);}
+    });
+}
+async function sendAndVerify(data) {
+    try { await sendDataViaGET(data); } catch(e) { return {verified:false, error:e.message}; }
+    await new Promise(r => setTimeout(r, 2500));
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(data.username) + '&lessonId=' + encodeURIComponent(data.lessonId) + '&_t=' + Date.now();
+        const r = await fetch(url); const res = await r.json();
+        if (res.status === 'success') {
+            const sA = parseInt(res.totalAnswered) || 0;
+            const sP = parseInt(res.totalPending) || 0;
+            if (sA + sP >= data.totalAnswered + data.totalPending) return {verified:true};
+            return {verified:false, error:'البيانات لم تصل بالكامل'};
+        }
+    } catch(e) { return {verified:false, error:'فشل التحقق'}; }
+    return {verified:false, error:'فشل التحقق'};
+}
+async function fetchWithRetry(url, opts={}, max=3) {
+    let lastErr;
+    for (let i=0; i<max; i++) {
+        try { return await fetch(url, opts); }
+        catch(e) { lastErr=e; if (i<max-1) await new Promise(r=>setTimeout(r,1000*(i+1))); }
+    }
+    throw lastErr;
+}
+async function loadProgress() {
+    try {
+        const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const r = await fetchWithRetry(url); const res = await r.json();
+        if (res.status === 'success') {
+            totalCorrect = parseFloat(res.totalCorrect) || 0;
+            totalWrong = parseInt(res.totalWrong) || 0;
+            totalAnswered = parseInt(res.totalAnswered) || 0;
+            totalPending = parseInt(res.totalPending) || 0;
+            totalHalf = parseInt(res.totalHalf) || 0;
+            if (res.lockedAnswers && res.lockedAnswers !== '{}') {
+                try {
+                    lockedAnswers = JSON.parse(res.lockedAnswers);
+                    Object.keys(lockedAnswers).forEach(qId => displayLockedAnswer(qId, lockedAnswers[qId]));
+                } catch(e){}
+            }
+            updateProgressDisplay();
+            updateJumpButtonStatus();
+            if (!isTeacherGradingMode) checkIfComplete();
+            checkAllTranscripts();
+        }
+    } catch(e) { console.error(e); }
+}
+
+function collectNewAnswers() {
+    const na = [];
+    ALL_QUESTIONS.forEach(qId => {
+        if (lockedAnswers[qId]) return;
+        const el = document.getElementById(qId); if (!el) return;
+        const v = el.value;
+        if (!String(v).trim()) return;
+        na.push({id:qId, value:v});
+    });
+    return na;
+}
+function prepareSubmit() {
+    const na = collectNewAnswers();
+    if (na.length === 0) {
+        showPopup({type:'warning',icon:'⚠️',title:'لا توجد إجابات جديدة',body:'لم تحل أي سؤال جديد. الرجاء حل بعض الأسئلة أولاً.',buttons:[{text:'حسناً',class:'primary'}]});
+        return;
+    }
+    pendingSubmit = na;
+    let ac=0, tc=0;
+    na.forEach(a => { if (AUTO_GRADED[a.id]) ac++; else tc++; });
+    showPopup({
+        type:'warning', icon:'🤔', title:'تأكيد الإرسال',
+        body:`<p>هل أنت متأكد من إرسال إجاباتك؟</p><div class="popup-detail">📊 <strong>عدد الإجابات:</strong> ${na.length}<br>🤖 تصحيح فوري: <strong>${ac}</strong><br>👨‍🏫 يصححها المدرس: <strong>${tc}</strong><br>⚠️ لن تتمكن من تعديل الإجابات بعد الإرسال!</div>`,
+        buttons:[{text:'✅ نعم، أرسل',class:'primary',action:confirmSubmit},{text:'❌ إلغاء',class:'secondary',action:()=>{pendingSubmit=null;closePopup();}}]
+    });
+}
+async function confirmSubmit() {
+    closePopup();
+    if (!pendingSubmit) return;
+    const na = pendingSubmit; pendingSubmit = null;
+    showLoading('⏳ جاري التصحيح والإرسال...', na.length+' سؤال');
+    let bc=0, bw=0, bp=0;
+    const fr = [];
+    na.forEach(ans => {
+        if (AUTO_GRADED[ans.id]) {
+            const r = gradeAutoQuestion(ans.id, ans.value);
+            fr.push({id:ans.id, value:ans.value, status:'reviewed', isCorrect:r.isCorrect});
+            if (r.isCorrect) bc++; else bw++;
+        } else {
+            const ctx = TEACHER_GRADED_CONTEXT[ans.id] || {};
+            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false, feedback:'بانتظار تصحيح المدرس', questionText:ctx.questionText || ans.id, expectedAnswer:ctx.expectedAnswer || '', rule:ctx.rule || ''});
+            bp++;
+        }
+    });
+    const tl = JSON.parse(JSON.stringify(lockedAnswers));
+    const nao = {};
+    fr.forEach(r => {
+        const o = {value:r.value, status:r.status, isCorrect:r.isCorrect};
+        if (r.feedback) o.feedback = r.feedback;
+        if (r.status==='pending') { o.questionText=r.questionText; o.expectedAnswer=r.expectedAnswer; o.rule=r.rule; }
+        tl[r.id] = o; nao[r.id] = o;
+    });
+    const ntc = totalCorrect + bc;
+    const ntw = totalWrong + bw;
+    const nta = totalAnswered + (bc + bw);
+    const ntp = totalPending + bp;
+    const data = {
+        action:'saveProgress', username:currentUser.username, fullName:currentUser.fullName,
+        lessonId:LESSON_CONFIG.lessonId, lessonName:LESSON_CONFIG.lessonName,
+        totalCorrect:ntc, totalWrong:ntw, totalAnswered:nta, totalPending:ntp, totalQuestions:LESSON_CONFIG.totalQuestions,
+        batchCorrect:bc, batchWrong:bw, batchAnswered:bc+bw, batchPending:bp,
+        details:`${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
+        newAnswers:JSON.stringify(nao)
+    };
+    const r = await sendAndVerify(data);
+    hideLoading();
+    if (r.verified) {
+        lockedAnswers = tl;
+        totalCorrect=ntc; totalWrong=ntw; totalAnswered=nta; totalPending=ntp;
+        fr.forEach(x => displayLockedAnswer(x.id, x));
+        document.getElementById('retryBanner').style.display = 'none';
+        lastFailedData = null;
+        safeStorage.removeItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        updateProgressDisplay();
+        updateJumpButtonStatus();
+        checkAllTranscripts();
+        showPopup({
+            type:'success', icon:'✅', title:'تم الإرسال بنجاح!',
+            body:`<div class="popup-detail">✅ صح: <strong style="color:#2ecc71">${bc}</strong><br>❌ خطأ: <strong style="color:#e74c3c">${bw}</strong><br>⏳ بانتظار المدرس: <strong style="color:#9b59b6">${bp}</strong></div>`,
+            buttons:[{text:'👍 حسناً',class:'primary',action:()=>{closePopup();checkIfComplete();}}]
+        });
+    } else {
+        lastFailedData = data;
+        try { safeStorage.setItem('ia_pending_'+LESSON_CONFIG.lessonId, JSON.stringify({data:data, timestamp:Date.now()})); } catch(e){}
+        document.getElementById('retryBanner').style.display = 'block';
+        showPopup({
+            type:'error', icon:'❌', title:'فشل الإرسال',
+            body:`<p>حدث خطأ أثناء الإرسال.</p><div class="popup-detail">${esc(r.error || 'خطأ غير معروف')}</div>`,
+            buttons:[{text:'🔄 إعادة المحاولة',class:'primary',action:()=>{closePopup();retrySubmit();}},{text:'إغلاق',class:'secondary'}]
+        });
+    }
+}
+async function retrySubmit() {
+    if (!lastFailedData) {
+        try { const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId); if (p) lastFailedData = JSON.parse(p).data; } catch(e){}
+        if (!lastFailedData) {
+            showPopup({type:'warning',title:'لا توجد بيانات',body:'مفيش بيانات للإعادة.',buttons:[{text:'حسناً',class:'primary'}]});
+            return;
+        }
+    }
+    showLoading('جاري إعادة المحاولة...');
+    const r = await sendAndVerify(lastFailedData);
+    hideLoading();
+    if (r.verified) {
+        safeStorage.removeItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        lastFailedData = null;
+        showPopup({type:'success',title:'تم بنجاح!',body:'تم حفظ بياناتك. سيتم إعادة تحميل الصفحة.',buttons:[{text:'حسناً',class:'primary',action:()=>location.reload()}]});
+    } else {
+        showPopup({type:'error',title:'فشلت المحاولة',body:esc(r.error || 'حاول مرة أخرى لاحقاً.'),buttons:[{text:'حسناً',class:'primary'}]});
+    }
+}
+
+// ============================================================
+// ⭐ نظام تصحيح المعلم
+// ============================================================
+let isTeacherGradingMode = false;
+let teacherGrades = {};
+let studentUsername = '';
+
+function checkTeacherGradingMode() {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    studentUsername = params.get('student');
+    if (mode === 'grading' && studentUsername) {
+        isTeacherGradingMode = true;
+        document.body.classList.add('teacher-grading-mode');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
+    checkTeacherGradingMode();
+    
+    if (isTeacherGradingMode) {
+        const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
+        const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
+        const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
+        // ✅ Teacher keeps the top-nav slider for navigation + number indicators
+        
+        initTeacherGrading();
+        return; 
+    }
+    
+    // ✅ Show spanish characters bar for students
+    const scb = document.getElementById('spanishCharsBar');
+    if(scb) scb.style.display = 'flex';
+    
+    if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
+    if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
+    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
+    
+    renderSlides();
+    initSlider();
+    updateProgressDisplay();
+    checkAllTranscripts();
+    
+    showLoading('جاري مزامنة بياناتك...');
+    await loadProgress();
+    hideLoading();
+    
+    try {
+        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        if (p) {
+            lastFailedData = JSON.parse(p).data;
+            document.getElementById('retryBanner').style.display = 'block';
+        }
+    } catch(e){}
+});
+
+async function initTeacherGrading() {
+    const header = document.createElement('div');
+    header.className = 'teacher-grading-banner';
+    header.innerHTML = `
+        <div class="grading-info-bar">
+            <span class="grading-icon">👨‍🏫</span>
+            <span>وضع تصحيح المعلم</span>
+            <span class="divider">|</span>
+            <span>📋 الطالب: <strong>${studentUsername}</strong></span>
+            <span>📚 ${LESSON_CONFIG.lessonName}</span>
+            <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيحات وإرسالها</button>
+        </div>
+    `;
+    document.querySelector('.slider-wrapper').prepend(header);
+    
+    // ✅ Show slides normally with slider (same as student)
+    renderSlides();
+    initSlider();
+    
+    // Hide submit button in teacher mode
+    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
+        btn.style.display = 'none';
+    });
+
+    Object.keys(TRANSCRIPTIONS).forEach(k => {
+        const btn = document.getElementById('trBtn_'+k);
+        const prog = document.getElementById('trProg_'+k);
+        if (btn) {
+            btn.disabled = false;
+            btn.querySelector('.lock-icon').textContent = '🔓';
+            if (prog) prog.style.display = 'none';
+        }
+    });
+
+    showLoading('جاري تحميل إجابات الطالب للتصحيح...');
+    
+    // ✅ First load all submitted answers (correct/wrong/pending)
+    try {
+        const progUrl = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const progRes = await fetch(progUrl);
+        const progData = await progRes.json();
+        if (progData.status === 'success' && progData.lockedAnswers && progData.lockedAnswers !== '{}') {
+            const allLocked = JSON.parse(progData.lockedAnswers);
+            lockedAnswers = allLocked;
+            // Show all submitted answers
+            Object.keys(allLocked).forEach(qId => {
+                const info = allLocked[qId];
+                const el = document.getElementById(qId);
+                if (el && info.value) {
+                    el.value = info.value || '';
+                    el.disabled = true;
+                    if (info.status === 'reviewed') {
+                        if (info.isCorrect) {
+                            el.style.borderColor = '#27ae60'; el.style.backgroundColor = 'rgba(39,174,96,0.12)'; el.style.color = '#2ecc71';
+                        } else if (info.isHalf || info.verdict === 'half') {
+                            el.style.borderColor = '#f1c40f'; el.style.backgroundColor = 'rgba(241,196,15,0.12)'; el.style.color = '#f1c40f';
+                        } else {
+                            el.style.borderColor = '#e74c3c'; el.style.backgroundColor = 'rgba(231,76,60,0.12)'; el.style.color = '#ff7675';
+                        }
+                    } else if (info.status === 'pending') {
+                        el.style.borderColor = '#9b59b6'; el.style.backgroundColor = 'rgba(155,89,182,0.12)'; el.style.color = '#d5a6f0';
+                    }
+                }
+            });
+            // Update jump buttons with locked status
+            updateJumpButtonStatus();
+        }
+    } catch(e) { console.error('Error loading progress:', e); }
+    
+    // ✅ Load pending details for grading
+    try {
+        const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        hideLoading();
+        if (data.status === 'success' && data.student) {
+            applyGradingModeToQuestions(data.student.pendingAnswers || {});
+        } else {
+            showPopup({type:'info', title:'تنبيه', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
+        }
+    } catch (e) {
+        hideLoading();
+        showPopup({type:'error', title:'خطأ اتصال', body:'فشل جلب البيانات: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
+    }
+    
+    addGradingStyles();
+}
+
+function applyGradingModeToQuestions(pendingAnswers) {
+    const pendingKeys = Object.keys(pendingAnswers);
+    if (pendingKeys.length === 0) {
+        showPopup({type:'info', title:'تم', body:'لا توجد أسئلة جديدة بانتظار التصحيح لهذا الطالب.', buttons:[{text:'حسناً', class:'primary'}]});
+        return;
+    }
+    
+    pendingKeys.forEach(qId => {
+        const studentAnswer = pendingAnswers[qId];
+        const questionEl = document.getElementById(qId);
+        
+        if (!questionEl) return;
+        
+        teacherGrades[qId] = {
+            value: studentAnswer.value || '',
+            verdict: '',
+            feedback: ''
+        };
+        
+        const correctAnswer = getCorrectAnswer(qId);
+        const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
+        qCard.classList.add('pending-grading');
+        
+        questionEl.value = studentAnswer.value || '';
+        questionEl.disabled = true;
+        questionEl.style.backgroundColor = 'rgba(243, 156, 18, 0.15)'; 
+        questionEl.style.color = '#f39c12';
+        questionEl.style.fontWeight = 'bold';
+
+        const gradingHTML = `
+            <div class="grading-overlay" id="grading_${qId}">
+                ${correctAnswer ? `
+                <div class="grading-answer-box correct-answer-box">
+                    <div class="answer-label">✅ الإجابة النموذجية (لمساعدتك):</div>
+                    <div class="answer-content" dir="auto">${esc(correctAnswer)}</div>
+                </div>` : ''}
+                
+                <div class="grading-controls">
+                    <div class="verdict-buttons">
+                        <span class="verdict-label">🏷️ التقييم:</span>
+                        <button class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صحيح</button>
+                        <button class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">➗ نصف</button>
+                        <button class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>
+                    </div>
+                    <div class="feedback-section">
+                        <label>💬 تعليق / فيدباك (اختياري):</label>
+                        <textarea id="feedback_${qId}" dir="auto" placeholder="اكتب ملاحظاتك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea>
+                    </div>
+                    <div class="verdict-status" id="status_${qId}">
+                        <span class="not-graded">⏳ بانتظار تقييمك</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const fbBox = document.getElementById('fb' + qId.substring(1));
+        if (fbBox) {
+            fbBox.insertAdjacentHTML('afterend', gradingHTML);
+        } else {
+            questionEl.insertAdjacentHTML('afterend', gradingHTML);
+        }
+    });
+}
+
+function getCorrectAnswer(qId) {
+    if (AUTO_GRADED[qId]) {
+        const ag = AUTO_GRADED[qId];
+        if (ag.a && Array.isArray(ag.a)) return ag.a.join(' أو ');
+        if (ag.a) return ag.a;
+    }
+    const qData = TEACHER_GRADED_CONTEXT[qId];
+    if (qData && qData.expectedAnswer) return qData.expectedAnswer;
+    return null;
+}
+
+function selectVerdict(qId, verdict) {
+    teacherGrades[qId].verdict = verdict;
+    const el = document.getElementById('grading_' + qId);
+    if (!el) return;
+    
+    el.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
+    const statusEl = document.getElementById('status_' + qId);
+    
+    if (verdict === 'correct') {
+        el.querySelector('.verdict-btn.correct').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done correct">✅ تم التقييم: صحيح</span>';
+    } else if (verdict === 'half') {
+        el.querySelector('.verdict-btn.half').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done half">➗ تم التقييم: نصف درجة</span>';
+    } else if (verdict === 'wrong') {
+        el.querySelector('.verdict-btn.wrong').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done wrong">❌ تم التقييم: خطأ</span>';
+    }
+}
+
+function updateFeedback(qId, v) { 
+    teacherGrades[qId].feedback = v; 
+}
+
+async function saveAllGrades() {
+    const ungraded = Object.keys(teacherGrades).filter(qId => !teacherGrades[qId].verdict);
+    if (ungraded.length > 0) {
+        if (!confirm(`يوجد ${ungraded.length} سؤال لم تقم بتقييمهم. هل تريد المتابعة وحفظ ما تم تصحيحه فقط؟`)) return;
+    }
+    
+    showLoading('جاري حفظ التصحيحات وإرسالها للطالب...');
+    
+    let tc = 0, th = 0, tw = 0;
+    Object.keys(teacherGrades).forEach(qId => {
+        if (teacherGrades[qId].verdict === 'correct') tc++;
+        else if (teacherGrades[qId].verdict === 'half') th++;
+        else if (teacherGrades[qId].verdict === 'wrong') tw++;
+    });
+
+    // ✅ إرسال التصحيحات عبر GET + POST (dual backup)
+    const getUrl = SCRIPT_URL 
+        + '?action=saveTeacherGrading'
+        + '&username=' + encodeURIComponent(studentUsername)
+        + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId)
+        + '&teacherGrades=' + encodeURIComponent(JSON.stringify(teacherGrades))
+        + '&totalCorrect=' + tc
+        + '&totalHalf=' + th
+        + '&totalWrong=' + tw
+        + '&_t=' + Date.now();
+    
+    const formPayload = { 
+        action: 'saveTeacherGrading', 
+        username: studentUsername, 
+        lessonId: LESSON_CONFIG.lessonId, 
+        teacherGrades: JSON.stringify(teacherGrades), 
+        totalCorrect: tc, 
+        totalHalf: th, 
+        totalWrong: tw 
+    };
+    
+    try {
+        await Promise.all([
+            fetch(getUrl, { mode: 'no-cors' }).catch(function(){}),
+            sendDataViaForm(formPayload)
+        ]);
+        hideLoading();
+        showPopup({
+            type:'success', title:'تم بنجاح ✅', body:'تم إرسال التقييم للطالب بنجاح!', 
+            buttons:[{text:'إغلاق النافذة', class:'primary', action:() => { window.close(); } }]
+        });
+    } catch (e) { 
+        hideLoading(); 
+        showPopup({type:'error', title:'خطأ', body:'فشل الحفظ: ' + e.message, buttons:[{text:'إعادة المحاولة', class:'primary', action:function(){ saveAllGrades(); } },{text:'إلغاء', class:'secondary', action:closePopup}]});
+    }
+}
+
+function addGradingStyles() {
+    if(document.getElementById('teacherStyles')) return;
+    const s = document.createElement('style');
+    s.id = 'teacherStyles';
+    s.textContent = `
+        .teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
+        .teacher-grading-mode .slide.active { display: block; }
+        .teacher-grading-mode .slide { display: none; }
+        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
+        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
+        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
+        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
+        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
+        .correct-answer-box { border-right: 4px solid #2ecc71; }
+        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
+        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
+        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
+        .verdict-label { color: #ccc; font-weight: bold; }
+        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
+        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
+        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
+        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
+        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
+        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
+        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
+        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
+        .verdict-status { text-align: left; margin-top: 10px; }
+        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
+        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
+        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
+        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
+    `;
+    document.head.appendChild(s);
+}
+
+function escapeHtml(text) { return esc(text); }
+function buildSlide15() {
+  const s = SLIDES.find(x=>String(x.exNum)==='15');
+  let h = `<div class="sub-section-title">15a. Separación de sílabas</div>`;
+  h += `<div class="arabic-box">أكمل القواعد.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="es-instruction">Separaci&#243;n de s&#237;labas. Observa estas palabras y completa las reglas con ellas.<br><b>ma – es – tra – r&#237; – o – via – je – l&#237; – ne – a – vues – tro – d&#237; – a</b></div>`;
+  h += buildWordBank(['maestra','río','viaje','línea','vuestro','día']);
+  
+  let reglas = `
+  <div class="question-card" style="line-height:2.2; font-size:0.95em;">
+    <div style="margin-bottom:10px;"><strong>MI GRAMÁTICA</strong></div>
+    1. Dos vocales fuertes seguidas se pronuncian en dos sílabas separadas, por ejemplo:<br>
+    <input type="text" id="q15a_1" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_1"></div> , <input type="text" id="q15a_2" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_2"></div><br><br>
+    2. También sucede que dos vocales se pronuncian seguidas y forman una sola sílaba (diptongo). En este caso una de las vocales es una i o una u átona, por ejemplo:<br>
+    <input type="text" id="q15a_3" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_3"></div> , <input type="text" id="q15a_4" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_4"></div><br><br>
+    3. Cuando las vocales débiles i o u van acompañadas de una vocal fuerte y son tónicas se les añade una tilde (acento gráfico) y se separan en dos sílabas, por ejemplo:<br>
+    <input type="text" id="q15a_5" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_5"></div> , <input type="text" id="q15a_6" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_6"></div><br><br>
+    <em>Vocales fuertes A E O – Vocales débiles I U</em>
+  </div>`;
+  h += reglas;
+  h += `</div>`;
+  
+  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">15b y 15c. Separa y Relaciona</div>`;
+  h += `<div class="arabic-box">افصل المقاطع كما في المثال (15b) ثم اربط الكلمات بالقواعد السابقة (15c). بعد ذلك استمع وتحقق.</div>`;
+  h += `<div class="spanish-box">`;
+  if(s.audios){ s.audios.forEach(p => h += buildAudio(p)); if(s.transcriptKey) h += buildTranscriptBtn(s.transcriptKey); }
+  h += `<div class="es-instruction"><b>b.</b> Separa las s&#237;labas como en el ejemplo. Despu&#233;s escucha y comprueba.<br><b>c.</b> Relaciona las palabras anteriores con las reglas de 15a.</div>`;
+  
+  let grid15b = `
+  <div class="exercise-grid-2">
+    <div class="slide-col">
+      <div class="question-card" style="padding:10px;"><em>Ejemplo: 1. guía → guí – a</em></div>
+      <div class="question-card" style="padding:10px;">2. familia → <input type="text" id="q15_1" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_1"></div></div>
+      <div class="question-card" style="padding:10px;">3. nuestro → <input type="text" id="q15_2" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_2"></div></div>
+      <div class="question-card" style="padding:10px;">4. farmacia → <input type="text" id="q15_3" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_3"></div></div>
+      <div class="question-card" style="padding:10px;">5. real → <input type="text" id="q15_4" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_4"></div></div>
+    </div>
+    <div class="slide-col">
+      <div class="question-card" style="padding:10px;">6. estudiantes → <input type="text" id="q15_5" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_5"></div></div>
+      <div class="question-card" style="padding:10px;">7. creo → <input type="text" id="q15_6" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_6"></div></div>
+      <div class="question-card" style="padding:10px;">8. envío → <input type="text" id="q15_7" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_7"></div></div>
+      <div class="question-card" style="padding:10px;">9. lengua → <input type="text" id="q15_8" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_8"></div></div>
+      <div class="question-card" style="padding:10px;">10. compañía → <input type="text" id="q15_9" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_9"></div></div>
+    </div>
+  </div>`;
+  h += grid15b;
+  
+  let grid15c = `
+  <div style="margin-top:15px;">
+    <div class="question-card" style="padding:10px;">Regla 1: <input type="text" id="q15_10" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_10"></div></div>
+    <div class="question-card" style="padding:10px;">Regla 2: <input type="text" id="q15_11" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_11"></div></div>
+    <div class="question-card" style="padding:10px;">Regla 3: guía, <input type="text" id="q15_12" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_12"></div></div>
+  </div>`;
+  h += grid15c;
+  
+  h += `</div></div>`;
+  return h;
+}
+
+
+
+
+
+function buildSlide2() {
+    let h = `<div class="sub-section-title">2. El Museo Guggenheim Bilbao</div>`;
+    h += `<div class="arabic-box">أكمل بالفعل في الماضي البسيط (Indefinido).</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Completa las frases con los verbos en indefinido.</div>`;
+    let q = `
+    <div class="question-card" style="line-height:2.4;">
+      1. Durante años la fundación Guggenheim <input type="text" id="q2_1" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_1"></div> (buscar, ella) un sitio para abrir un museo en Europa.<br>
+      2. Bilbao <input type="text" id="q2_2" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_2"></div> (ser, ella) la ciudad elegida después.<br>
+      3. Frank O. Gehry, arquitecto canadiense, <input type="text" id="q2_3" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_3"></div> (ganar, él) el concurso para construir el museo, entre tres candidatos.<br>
+      4. En 1993 <input type="text" id="q2_4" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_4"></div> (empezar, ella) la construcción del Museo Guggenheim Bilbao.<br>
+      5. El museo se <input type="text" id="q2_5" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_5"></div> (construir, él) con titanio, material que se convirtió en su símbolo.<br>
+      6. En 2015 más de un millón de personas <input type="text" id="q2_6" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_6"></div> (visitar, ellos) este museo.
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide8() {
+    let h = `<div class="sub-section-title">8. ¿Ser o ir?</div>`;
+    h += `<div class="arabic-box">اكتب هل الفعل المستخدم هو ser أم ir.</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Lee las siguientes frases y escribe si se usa el verbo ser o el verbo ir.</div>`;
+    let q = `
+    <div class="question-card" style="line-height:2.4;">
+      1. ¿Fuiste a clase ayer? No te vi. <input type="text" id="q8_1" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_1"></div><br>
+      2. El año 2017 fue un año muy especial para mis padres. <input type="text" id="q8_2" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_2"></div><br>
+      3. ¿Cuándo fuiste a la fiesta? <input type="text" id="q8_3" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_3"></div><br>
+      4. Nosotros fuimos a pie a la estación en cinco minutos. <input type="text" id="q8_4" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_4"></div><br>
+      5. Mi abuelo fue un escultor muy famoso en su país. <input type="text" id="q8_5" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_5"></div><br>
+      6. La conferencia de ayer fue muy interesante. <input type="text" id="q8_6" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_6"></div><br>
+      7. ¿Quién fue el presidente de tu país en los años 80? <input type="text" id="q8_7" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_7"></div><br>
+      8. Esos fueron los mejores años de su vida. <input type="text" id="q8_8" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_8"></div>
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide9() {
+    let h = `<div class="sub-section-title">9. Mis amigos del colegio</div>`;
+    h += `<div class="arabic-box">اختر الزمن الصحيح (Indefinido أو Perfecto). تعبيرات الزمن ستساعدك.</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">¿Perfecto o indefinido? Subraya el tiempo correcto. Las expresiones de tiempo pueden ayudarte.</div>`;
+    let text = `
+    <div class="text-paragraph" style="line-height:2.6; text-align:justify; font-size:1.05em; padding: 20px;">
+      La semana pasada <select id="q9_1" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="hemos tenido">hemos tenido</option><option value="tuvimos">tuvimos</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_1"></div> 
+      la reunión para celebrar los diez años de nuestra graduación de bachillerato. 
+      <select id="q9_2" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="Ha tenido">Ha tenido</option><option value="Tuvo">Tuvo</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_2"></div> 
+      lugar en una finca abandonada que ahora se usa para eventos de este tipo. 
+      Yo ya <select id="q9_3" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he estado">he estado</option><option value="estuve">estuve</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_3"></div> 
+      en tres fiestas allí y me encanta. 
+      Durante la reunión <select id="q9_4" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he podido">he podido</option><option value="pude">pude</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_4"></div> 
+      ver a los compañeros de mi generación. 
+      Últimamente no nos <select id="q9_5" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="hemos visto">hemos visto</option><option value="vimos">vimos</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_5"></div> 
+      con mucha frecuencia. 
+      Marisa <select id="q9_6" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha casado">se ha casado</option><option value="se casó">se casó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_6"></div> 
+      el año pasado y <select id="q9_7" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha ido">se ha ido</option><option value="se fue">se fue</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_7"></div> 
+      a vivir a Canadá. 
+      Hace un año Andrea <select id="q9_8" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha participado">ha participado</option><option value="participó">participó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_8"></div> 
+      en tres proyectos importantes de la NASA y <select id="q9_9" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha marchado">se ha marchado</option><option value="se marchó">se marchó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_9"></div> 
+      a Washington. 
+      Gilberto es el artista del grupo y se dedica a la escultura. Ya 
+      <select id="q9_10" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha expuesto">ha expuesto</option><option value="expuso">expuso</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_10"></div> 
+      sus trabajos en el extranjero y este mes <select id="q9_11" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha ganado">ha ganado</option><option value="ganó">ganó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_11"></div> 
+      un premio muy importante. Bueno, ¿y yo? Pues hace dos años <select id="q9_12" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he regresado">he regresado</option><option value="regresé">regresé</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_12"></div> 
+      de Italia, donde <select id="q9_13" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he estudiado">he estudiado</option><option value="estudié">estudié</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_13"></div> 
+      Arquitectura y ahora tengo mi propia empresa en Madrid.
+    </div>`;
+    h += text + `</div>`;
+    return h;
+}
+
+function buildSlide10() {
+    let h = `<div class="sub-section-title">10. ¿Experiencias positivas o negativas?</div>`;
+    h += `<div class="arabic-box">أكمل الحوارات بالصفات مع تصريف فعل ser في الماضي (Indefinido أو Perfecto). انتبه لعلامات التعجب ¡!</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">¿Cómo valoran estas personas sus vivencias? Completa los diálogos con los adjetivos que aparecen a continuación y con el verbo ser en indefinido o pretérito perfecto.</div>`;
+    h += buildWordBank(['desagradable','bonito','horrible','divertido','fantástico']);
+    let q = `
+    <div class="question-card" style="line-height:2;">
+      1. • ¿Cómo les fue de vacaciones?<br>
+      ▲ En las vacaciones muy bien, pero cuando regresamos la semana pasada, encontramos nuestra casa abierta. Entraron a robar. ¡<input type="text" id="q10_1" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_1"></div>!<br><br>
+      2. • Hoy hace muchísimo frío, ¿y habéis ido a pasear al bosque?<br>
+      ▲ Sí. No ha sido una buena idea. ¡<input type="text" id="q10_2" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_2"></div>!<br><br>
+      3. • De vuestro viaje a Perú el verano pasado, ¿qué fue lo que más os gustó?<br>
+      ▲ A mí me gustó mucho Machu Picchu. A Alfredo, la ciudad de Lima. Pero en realidad nos gustó todo. ¡<input type="text" id="q10_3" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_3"></div>!<br><br>
+      4. • ¿Qué tal esta mañana la despedida de Jorge?<br>
+      ▲ Pues le ha encantado nuestro regalo de despedida y se ha emocionado mucho. ¡<input type="text" id="q10_4" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_4"></div>!<br><br>
+      5. • Ayer por la tarde fuimos al cine a ver una película genial. Nos reímos todo el tiempo, desde el principio hasta el final. ¡<input type="text" id="q10_5" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_5"></div>!
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+function buildSlide5() {
+const s = SLIDES.find(x=>String(x.exNum)==='5');
+let h = `<div class="sub-section-title">5. ¿Y cómo suena?</div>`;
+h += `<div class="arabic-box">صنف الأفعال حسب موضع النبر (Sílaba acentuada) بكتابتها في الجدول ثم استمع (Pista 18).</div>`;
+h += `<div class="spanish-box">`;
+if(s.audios){ s.audios.forEach(p => h += buildAudio(p)); if(s.transcriptKey) h += buildTranscriptBtn(s.transcriptKey); }
+h += `<div class="es-instruction"><b>a.</b> Coloca estas formas de indefinido en la tabla según su sílaba acentuada.<br><b>dije – celebré – conoció – hizo – ganó – tuve – estuve – nació – pedí – pude – decidió – puso – vino – participó</b></div>`;
+let tableHTML = `
+<div class="exercise-grid-2" style="gap:15px; margin-top:15px;">
+<div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;">
+<h4 style="text-align:center;color:#3498db;margin-bottom:5px;">Verbos regulares</h4>
+<div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:15px;">●●● última sílaba acentuada</div>
+<div><input type="text" id="q5_1" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_1"></div></div>
+<div><input type="text" id="q5_2" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_2"></div></div>
+<div><input type="text" id="q5_3" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_3"></div></div>
+<div><input type="text" id="q5_4" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_4"></div></div>
+<div><input type="text" id="q5_5" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_5"></div></div>
+<div><input type="text" id="q5_6" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_6"></div></div>
+<div><input type="text" id="q5_7" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_7"></div></div>
+</div>
+<div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;">
+<h4 style="text-align:center;color:#e74c3c;margin-bottom:5px;">Verbos irregulares</h4>
+<div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:15px;">●●● penúltima sílaba acentuada</div>
+<div><input type="text" id="q5_8" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_8"></div></div>
+<div><input type="text" id="q5_9" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_9"></div></div>
+<div><input type="text" id="q5_10" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_10"></div></div>
+<div><input type="text" id="q5_11" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_11"></div></div>
+<div><input type="text" id="q5_12" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_12"></div></div>
+<div><input type="text" id="q5_13" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_13"></div></div>
+<div><input type="text" id="q5_14" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_14"></div></div>
+</div>
+</div>`;
+h += tableHTML + `</div>`;
+return h;
+}
+function buildSlide7() {
+  let h = `<div class="sub-section-title">7. ¿Cuándo pasó o ha pasado?</div>`;
+  h += `<div class="arabic-box">صنف تعبيرات الزمن واربطها بالجملة المناسبة.</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction"><b>a.</b> Señala si las expresiones de tiempo corresponden al indefinido (I) o al pretérito perfecto (P).</div>`;
+  let options = '<option value=""></option><option value="I">Indefinido</option><option value="P">Pret. Perfecto</option>';
+  const buildSel = id => `<select id="${id}">${options}</select><div class="feedback" style="display:inline-block;margin-left:5px;" id="fb${id.substring(1)}"></div>`;
+  let grid7a = `
+  <div class="exercise-grid-2">
+    <div class="slide-col">
+      <div class="question-card" style="padding:10px;">la semana pasada ${buildSel('q7a_1')}</div>
+      <div class="question-card" style="padding:10px;">ya ${buildSel('q7a_9')}</div>
+      <div class="question-card" style="padding:10px;">el año pasado ${buildSel('q7a_2')}</div>
+      <div class="question-card" style="padding:10px;">este año ${buildSel('q7a_10')}</div>
+      <div class="question-card" style="padding:10px;">en 2014 ${buildSel('q7a_3')}</div>
+      <div class="question-card" style="padding:10px;">últimamente ${buildSel('q7a_11')}</div>
+      <div class="question-card" style="padding:10px;">el mes pasado ${buildSel('q7a_4')}</div>
+      <div class="question-card" style="padding:10px;">este mes ${buildSel('q7a_12')}</div>
+    </div>
+    <div class="slide-col">
+      <div class="question-card" style="padding:10px;">hace mucho ${buildSel('q7a_5')}</div>
+      <div class="question-card" style="padding:10px;">alguna vez ${buildSel('q7a_13')}</div>
+      <div class="question-card" style="padding:10px;">ayer ${buildSel('q7a_6')}</div>
+      <div class="question-card" style="padding:10px;">esta semana ${buildSel('q7a_14')}</div>
+      <div class="question-card" style="padding:10px;">hace dos años ${buildSel('q7a_7')}</div>
+      <div class="question-card" style="padding:10px;">todavía no ${buildSel('q7a_15')}</div>
+      <div class="question-card" style="padding:10px;">hoy ${buildSel('q7a_8')}</div>
+    </div>
+  </div>`;
+  h += grid7a;
+  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">7b. Relaciona las frases</div>`;
+  h += `<div class="es-instruction">Relaciona las frases con la expresión de tiempo adecuada.</div>`;
+  const abOpts = '<option value=""></option><option value="a">a</option><option value="b">b</option>';
+  const buildAB = id => `<select id="${id}">${abOpts}</select><div class="feedback" style="display:inline-block;margin-left:5px;" id="fb${id.substring(1)}"></div>`;
+  let grid7b = `
+  <div class="question-card" style="padding:10px;">1. Mis amigos de España han estado en Salzburgo ${buildAB('q7_1')} / 2. También estuvieron en Salzburgo ${buildAB('q7_2')} <br><b>→ a. el año pasado / b. este año</b></div>
+  <div class="question-card" style="padding:10px;">3. ¿Has subido a esa montaña? ${buildAB('q7_3')} / 4. ¿Subiste a la montaña? ${buildAB('q7_4')} <br><b>→ a. la semana pasada / b. ¿alguna vez?</b></div>
+  <div class="question-card" style="padding:10px;">5. Vimos esa película sobre deportes extremos ${buildAB('q7_5')} / 6. Hemos visto muchas películas ${buildAB('q7_6')} <br><b>→ a. este mes. / b. en 2016.</b></div>
+  <div class="question-card" style="padding:10px;">7. Los chicos cocinaron la paella ${buildAB('q7_7')} / 8. Los chicos han cocinado la paella ${buildAB('q7_8')} <br><b>→ a. ayer. / b. hoy.</b></div>
+  `;
+  h += grid7b + `</div></div>`;
+  return h;
+}
+function buildSlide11() {
+let h = `<div class="sub-section-title">11. ¿Cómo se usa? – Eventos</div>`;
+h += `<div class="arabic-box">اربط الكلمات واكتب ثلاث جمل في الماضي.</div>`;
+h += `<div class="spanish-box"><div class="es-instruction">a. Relaciona las tres columnas. Hay varias posibilidades.</div>`;
+let cols = `
+<div class="exercise-grid-3" style="display:flex; justify-content:space-between; text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:10px; margin-bottom:20px;">
+<div style="text-align:left; line-height:2;">
+1. participar<br>2. ir<br>3. trasladarse<br>4. ver un evento<br>5. salir<br>6. entrar<br>7. pasear
+</div>
+<div style="font-weight:bold; font-size:1.2em; display:flex; flex-direction:column; justify-content:center; gap:20px; color:#f39c12;">
+<div>a</div><div>en</div><div>por</div>
+</div>
+<div style="text-align:left; line-height:2;">
+a. un megaconcierto<br>b. manifestaciones<br>c. televisión<br>d. la guardería<br>e. lugares increíbles<br>f. la calle<br>g. Miami
+</div>
+</div>`;
+h += cols;
+h += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
+h += `<div class="sub-section" style="margin-top:25px;"><div class="es-instruction">b. Escribe frases en indefinido con tres de las combinaciones de 11a.<br><em>Muchos estudiantes participaron en manifestaciones en 1968.</em></div>`;
+h += `<div class="q-label">📝 Tus 3 frases en indefinido:</div>`;
+h += `<textarea id="q11_1" placeholder="1.\n2.\n3."></textarea><div class="feedback" id="fb11_1"></div>`;
+h += `</div></div>`;
+return h;
+}
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0f4cb78ac52ac32',t:'MTc4MjA2MzU4OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
