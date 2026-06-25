@@ -631,7 +631,6 @@ const SELECT_OPTIONS = {
 };
 
 const SLIDES = [
-
 {n:1,exNum:'1',title:'Gimnasia en dos tiempos',page:19,type:'teacher',arabic:'أكمل القوائم واكتب جملاً.',spanish:'',custom:'slide1',teacherNote:true,
 questions:[
 {id:'q1_1'}, {id:'q1_2'}, {id:'q1_3'}, {id:'q1_4'}, {id:'q1_5'},
@@ -719,7 +718,8 @@ questions:[
 {id:'q14_5',n:'5',text:'Una isla:',input:true,placeholder:'...'},
 {id:'q14_6',n:'6',text:'Un continente:',input:true,placeholder:'...'}
 ]},
-{n:15,exNum:'15',title:'Sonidos del español',page:24,type:'auto',arabic:'افصل المقاطع وأكمل القواعد. Pista 20',spanish:'',custom:'slide15',audios:[20],transcriptKey:'ex15'},{n:16,exNum:'16',title:'Mi carpeta de textos – Viaje',page:24,type:'whatsapp',arabic:'اكتب نصًا عن رحلة – أرسل واتساب',spanish:'Lee de nuevo el texto sobre el viaje del Che. Escribe después un texto sobre un viaje que has hecho tú. ¿Adónde has viajado? ¿Cuándo fue? ¿Cómo has viajado? ¿Con quién? ¿Cómo fue la experiencia? ¡Pon especial atención a los tiempos verbales!'}
+{n:15,exNum:'15',title:'Sonidos del español',page:24,type:'auto',arabic:'افصل المقاطع وأكمل القواعد. Pista 20',spanish:'',custom:'slide15',audios:[20],transcriptKey:'ex15'},
+{n:16,exNum:'16',title:'Mi carpeta de textos – Viaje',page:24,type:'whatsapp',arabic:'اكتب نصًا عن رحلة – أرسل واتساب',spanish:'Lee de nuevo el texto sobre el viaje del Che. Escribe después un texto sobre un viaje que has hecho tú. ¿Adónde has viajado? ¿Cuándo fue? ¿Cómo has viajado? ¿Con quién? ¿Cómo fue la experiencia? ¡Pon especial atención a los tiempos verbales!'}
 ];
 
 function buildSelect(id, letters) {
@@ -814,6 +814,7 @@ function buildSlide1() {
   
   return h;
 }
+
 function buildSlide3() {
   const s = SLIDES.find(x=>String(x.exNum)==='3');
   let h = '<div class="spanish-box">';
@@ -829,7 +830,7 @@ function buildSlide(s) {
     let body = '';
     if (s.arabic) body += `<div class="arabic-box">${s.arabic}</div>`;
     if (s.hint) body += `<div class="hint-box">${s.hint}</div>`;
-    
+
     if (s.custom==='slide1') body += buildSlide1();
     else if (s.custom==='slide2') body += buildSlide2();
     else if (s.custom==='slide3') body += buildSlide3();
@@ -1182,12 +1183,6 @@ function updateJumpButtonStatus() {
         else if (total > 0 && locked >= total) btn.classList.add('completed');
     });
 }
-document.addEventListener('keydown', e => {
-    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
-    if (e.key==='ArrowLeft') nextSlide();
-    if (e.key==='ArrowRight') prevSlide();
-});
-
 function showPopup(o) {
     const ov = document.getElementById('popupOverlay');
     document.getElementById('popupBox').className = 'popup-box '+(o.type||'info');
@@ -1224,7 +1219,7 @@ function checkTranscriptStatus(k) {
     let answered = 0;
     tr.requiredQuestions.forEach(qId => { if (lockedAnswers[qId]) answered++; });
     prog.textContent = answered + '/' + tr.requiredQuestions.length;
-    if (answered >= tr.requiredQuestions.length) {
+    if (answered >= tr.requiredQuestions.length && tr.requiredQuestions.length > 0) {
         btn.disabled = false;
         btn.querySelector('.lock-icon').textContent = '🔓';
     } else {
@@ -1249,12 +1244,15 @@ function openTranscript(k) {
 function closeTranscript() { document.getElementById('transcriptModal').classList.remove('show'); }
 
 function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
+function normalizeSyllable(s) { return String(s || '').trim().toLowerCase().replace(/\s+/g, '').replace(/–/g, '-').replace(/—/g, '-').replace(/\s*-\s*/g, '-'); }
+
 function gradeAutoQuestion(qId, value) {
     const m = AUTO_GRADED[qId];
     if (!m) return null;
     const ua = String(value||'').trim(); if (!ua) return null;
     let ok = false;
-    if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
+    if (m.t === 'syllable') ok = m.a.some(x => normalizeSyllable(x) === normalizeSyllable(ua));
+    else if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
     else ok = m.a.some(x => normalize(x) === normalize(ua));
     return { isCorrect:ok, correctAnswer: m.d || m.a[0] };
 }
@@ -1299,7 +1297,7 @@ function displayLockedAnswer(qId, info) {
     
     if (isTeacherGradingMode && info.status === 'pending') {
         el.classList.add('locked-pending');
-        el.parentElement.classList.add('pending-grading');
+        if(el.parentElement) el.parentElement.classList.add('pending-grading');
         fb.className = 'feedback pending';
         fb.style.display = 'block';
         
@@ -1646,17 +1644,24 @@ async function submitTeacherGrades() {
     }
 }
 
+document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key==='ArrowLeft') nextSlide();
+    if (e.key==='ArrowRight') prevSlide();
+});
+
 window.addEventListener('DOMContentLoaded', async function() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('mode') === 'grading') {
         isTeacherGradingMode = true;
         document.body.classList.add('teacher-grading-mode');
         currentUser.username = urlParams.get('student') || currentUser.username;
+        studentUsername = currentUser.username;
         
         const tBanner = document.createElement('div');
         tBanner.className = 'teacher-grading-banner';
-        tBanner.innerHTML = `<div class="grading-info-bar">👨‍🏫 وضع التصحيح | الطالب: <strong>${currentUser.username}</strong> <button class="save-grades-btn-top" onclick="submitTeacherGrades()">💾 حفظ التصحيح</button></div>`;
-        document.body.insertBefore(tBanner, document.body.firstChild);
+        tBanner.innerHTML = `<div class="grading-info-bar">👨‍🏫 وضع التصحيح | الطالب: <strong>${studentUsername}</strong> <button class="save-grades-btn-top" onclick="submitTeacherGrades()">💾 حفظ التصحيح</button></div>`;
+        document.querySelector('.slider-wrapper').prepend(tBanner);
         
         const submitBtn = document.querySelector('.submit-final');
         if (submitBtn) {
@@ -1678,6 +1683,21 @@ window.addEventListener('DOMContentLoaded', async function() {
     initSlider();
     updateProgressDisplay();
     checkAllTranscripts();
+
+    if (isTeacherGradingMode) {
+        document.querySelectorAll('.submit-btn, [onclick*="submit"], .submit-final').forEach(btn => {
+            if (btn.textContent !== '💾 حفظ التصحيح') btn.style.display = 'none';
+        });
+        Object.keys(TRANSCRIPTIONS).forEach(k => {
+            const btn = document.getElementById('trBtn_'+k);
+            const prog = document.getElementById('trProg_'+k);
+            if (btn) {
+                btn.disabled = false;
+                btn.querySelector('.lock-icon').textContent = '🔓';
+                if (prog) prog.style.display = 'none';
+            }
+        });
+    }
     
     showLoading('جاري مزامنة بياناتك...');
     await loadProgress();
