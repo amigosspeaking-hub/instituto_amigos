@@ -253,6 +253,36 @@ input[type="text"],select,textarea{font-size:16px}
 .nav-btn{width:100%;justify-content:center}
 .nav-btn.submit-final{max-width:100%;order:-1}
 }
+        .teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
+        .teacher-grading-mode .slide.active { display: block; }
+        .teacher-grading-mode .slide { display: none; }
+        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
+        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
+        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
+        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
+        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
+        .correct-answer-box { border-right: 4px solid #2ecc71; }
+        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
+        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
+        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
+        .verdict-label { color: #ccc; font-weight: bold; }
+        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
+        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
+        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
+        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
+        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
+        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
+        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
+        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
+        .verdict-status { text-align: left; margin-top: 10px; }
+        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
+        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
+        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
+        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
 </style>
 </head>
 <body>
@@ -343,6 +373,14 @@ const AUDIO_BASE = 'https://archive.org/download/A2_Eje/A2_Eje/';
 function getPageURL(p) { return PAGE_BASE + p + '.jpg'; }
 
 const AUTO_GRADED = {
+
+    q5_1:{a:['desde'],t:'select'}, q5_2:{a:['desde hace'],t:'select'}, q5_3:{a:['desde hace'],t:'select'},
+    q5_4:{a:['desde'],t:'select'}, q5_5:{a:['desde hace'],t:'select'}, q5_6:{a:['desde'],t:'select'},
+    q8_1:{a:['f'],t:'select'}, q8_2:{a:['a'],t:'select'}, q8_3:{a:['c'],t:'select'}, q8_4:{a:['g'],t:'select'},
+    q8_5:{a:['h'],t:'select'}, q8_6:{a:['e'],t:'select'}, q8_7:{a:['d'],t:'select'}, q8_8:{a:['b'],t:'select'},
+    q13_1:{a:['compañero/-a de clase'],t:'select'}, q13_2:{a:['profesor(a)'],t:'select'}, q13_3:{a:['alumno/-a'],t:'select'},
+    q13_4:{a:['amigo/-a'],t:'select'}, q13_5:{a:['colega'],t:'select'}, q13_6:{a:['vecino/-a'],t:'select'},
+
     q1_1:{a:['divertidos'],t:'text'}, q1_2:{a:['aprender'],t:'text'}, q1_3:{a:['bailan'],t:'text'}, 
     q1_4:{a:['escuchan'],t:'text'}, q1_5:{a:['chilenos'],t:'text'}, q1_6:{a:['escriben'],t:'text'}, 
     q1_7:{a:['se acuestan'],t:'text'}, q1_8:{a:['latinos'],t:'text'}, q1_9:{a:['españolas','espanolas'],t:'text'},
@@ -364,7 +402,29 @@ const AUTO_GRADED = {
     q14_8:{a:['es-pa-ñol','es-pa-nol'],t:'syllable'}, q14_9:{a:['tra-du-cir'],t:'syllable'}, q14_10:{a:['li-bro'],t:'syllable'}
 };
 
+
 const EXPLANATIONS = {
+    q5_1:{ar:'desde el otoño (نقطة بداية في الماضي)'},
+    q5_2:{ar:'desde hace unos días (فترة زمنية)'},
+    q5_3:{ar:'desde hace tres años (فترة زمنية)'},
+    q5_4:{ar:'desde diciembre (شهر محدد - نقطة بداية)'},
+    q5_5:{ar:'desde hace solo dos meses (فترة زمنية)'},
+    q5_6:{ar:'desde su primer viaje en 2016 (حدث محدد كنقطة بداية)'},
+    q8_1:{ar:'hacer → hecho', es:'hecho'},
+    q8_2:{ar:'ver → visto', es:'visto'},
+    q8_3:{ar:'escribir → escrito', es:'escrito'},
+    q8_4:{ar:'romper → roto', es:'roto'},
+    q8_5:{ar:'volver → vuelto', es:'vuelto'},
+    q8_6:{ar:'poner → puesto', es:'puesto'},
+    q8_7:{ar:'decir → dicho', es:'dicho'},
+    q8_8:{ar:'abrir → abierto', es:'abierto'},
+    q13_1:{ar:'زميل الفصل يدرس نفس الكورس'},
+    q13_2:{ar:'المُعلم يُدرس في فصوله'},
+    q13_3:{ar:'التلميذ/الطالب هو من يتلقى الدرس'},
+    q13_4:{ar:'الصديق من تمضي معه وقت فراغك'},
+    q13_5:{ar:'الزميل (colega) هو من تعمل معه'},
+    q13_6:{ar:'الجار هو من يعيش بجوارك'}
+,
     q1_1:{ar:'الكلمة قبل الفراغ "son" (يكون) جمع مذكر تابعة لـ "nuestros estudiantes".\nالقاعدة: الصفة تطابق الاسم في النوع والعدد.',es:'estudiantes divertidos.'},
     q1_2:{ar:'بعد "algo que" نستخدم فعل مُصرَّف، لكن هنا السياق يحتاج مصدر "aprender".',es:'encuentran algo que aprender.'},
     q1_3:{ar:'الفاعل ضمير محذوف "ellos" (هم).\nالقاعدة: bailar مع ellos → bailan.',es:'Ellos bailan flamenco.'},
@@ -498,106 +558,17 @@ const TRANSCRIPTIONS = {
 const SLIDES = [
     { n:1, custom:'slide1', page:5, type:'auto', title:'Palabras en contexto' },
     { n:2, custom:'slide2', page:5, type:'auto', title:'El generador de verbos' },
-    { n:3, page:6, type:'teacher', title:'El espa&#241;ol y yo',
-      arabic:'كوّن جمل باستخدام الكلمات التالية. استخدم ضمائر المفعول غير المباشر (me, te, le, nos, os, les).',
-      spanish:'Formula las frases con las siguientes palabras.',
-      wordBank:['te','a m&#237;','a usted','a vosotros','me','a Regina','le','os','a nosotros','nos','a ti'],
-      teacherNote:true,
-      questions:[
-          {id:'q3_1', n:1, text:'usted / aburrir los ejercicios de gram&#225;tica &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q3_2', n:2, text:'yo / encantar estudiar espa&#241;ol &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q3_3', n:3, text:'vosotros / interesar la informaci&#243;n cultural &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q3_4', n:4, text:'Regina / costar la gram&#225;tica &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q3_5', n:5, text:'t&#250; / aburrir leer varias veces el mismo texto &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q3_6', n:6, text:'nosotros / gustar hablar con hispanohablantes &rarr;', textarea:true, placeholder:'Escribe aqu&#237;...'}
-      ]
-    },
+    { n:3, custom:'slide3', page:6, type:'teacher', title:'El español y yo', teacherNote:true},
     { n:4, custom:'slide4', page:6, type:'whatsapp', title:'Gustos y preferencias' },
-    { n:5, page:6, type:'auto', title:'&#161;Cu&#225;nto tiempo!',
-      arabic:'أكمل الجمل باستخدام <b>desde</b> (مع نقطة زمنية محددة) أو <b>desde hace</b> (مع فترة زمنية).',
-      spanish:'El primer d&#237;a de curso los alumnos tienen mucho de qu&#233; hablar. Completa las frases con <strong>desde</strong> o <strong>desde hace</strong>.',
-      questions:[
-          {id:'q5_1', text:'1. La compa&#241;era nueva se llama Marina y es suiza, pero vive en Alemania __________ el oto&#241;o.', sel:['desde','desde hace']},
-          {id:'q5_2', text:'2. Tom tiene un nuevo trabajo __________ unos d&#237;as.', sel:['desde','desde hace']},
-          {id:'q5_3', text:'3. El hijo de Martina, Frederick, aprende espa&#241;ol __________ tres a&#241;os.', sel:['desde','desde hace']},
-          {id:'q5_4', text:'4. Hace mucho que no veo a Silvana. No ha asistido a clase __________ diciembre.', sel:['desde','desde hace']},
-          {id:'q5_5', text:'5. &#191;Jana y John se van a vivir a Madrid? &#161;Pero si aprenden espa&#241;ol __________ solo dos meses!', sel:['desde','desde hace']},
-          {id:'q5_6', text:'6. S&#237;, es que han estudiado espa&#241;ol __________ su primer viaje a Espa&#241;a en 2016.', sel:['desde','desde hace']}
-      ]
-    },
+    { n:5, custom:'slide5', page:6, type:'auto', title:'¡Cuánto tiempo!'},
     { n:6, custom:'slide6', page:7, type:'teacher', title:'Mi portfolio de las lenguas' },
     { n:7, custom:'slide7', page:7, type:'teacher', title:'Consejos pr&#225;cticos' },
-    { n:8, page:8, type:'auto', title:'Participios irregulares',
-      arabic:'اربط كل فعل بالـ participio (التصريف الثالث) الخاص به.',
-      spanish:'Relaciona los siguientes participios irregulares con los verbos en infinitivo.',
-      questions:[
-          {id:'q8_1', n:1, text:'hacer &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_2', n:2, text:'ver &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_3', n:3, text:'escribir &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_4', n:4, text:'romper &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_5', n:5, text:'volver &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_6', n:6, text:'poner &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_7', n:7, text:'decir &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']},
-          {id:'q8_8', n:8, text:'abrir &rarr;', sel:['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']}
-      ]
-    },
-    { n:9, page:8, type:'teacher', title:'&#191;Con pret&#233;rito perfecto?',
-      arabic:'اكتب 5 جمل عن نفسك في زمن <b>pret&#233;rito perfecto</b> باستخدام marcadores من القائمة. انتبه: في 3 marcadores لا تُستخدم مع هذا الزمن.',
-      spanish:'Escribe cinco frases sobre ti en pret&#233;rito perfecto con los siguientes marcadores temporales. Atenci&#243;n, hay tres con los que no se utiliza este tiempo verbal.',
-      wordBank:['esta ma&#241;ana','hoy','ayer','este a&#241;o','&#250;ltimamente','el a&#241;o pasado','esta semana','en 2016'],
-      teacherNote:true,
-      questions:[
-          {id:'q9_1', n:1, text:'Frase 1', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q9_2', n:2, text:'Frase 2', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q9_3', n:3, text:'Frase 3', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q9_4', n:4, text:'Frase 4', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q9_5', n:5, text:'Frase 5', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q9_no', text:'📌 Marcadores NO usados (3):', textarea:true, placeholder:'Escribe aqu&#237;...'}
-      ]
-    },
+    { n:8, custom:'slide8', page:8, type:'auto', title:'Participios irregulares'},
+    { n:9, custom:'slide9', page:8, type:'teacher', title:'¿Con pretérito perfecto?', teacherNote:true},
     { n:10, custom:'slide10', page:8, type:'teacher', title:'&#191;Qu&#233; ha hecho &#250;ltimamente?' },
-    { n:11, page:9, type:'teacher', title:'Para aprender espa&#241;ol',
-      arabic:'أكمل الخريطة المفاهيمية: ما الكلمات التي تتناسب مع كل فعل؟',
-      spanish:'&#161;Refresca tu vocabulario! Completa los mapas conceptuales con las expresiones que correspondan.',
-      wordBank:['en una tertulia','los deberes','palabras nuevas','las audiciones','un idioma','a clase','un intercambio','en clase','canciones','vocabulario','un curso en l&#237;nea'],
-      teacherNote:true,
-      questions:[
-          {id:'q11_1', text:'🎯 APRENDER:', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q11_2', text:'🎯 PARTICIPAR:', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q11_3', text:'🎯 ASISTIR:', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q11_4', text:'🎯 HACER:', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q11_5', text:'🎯 ESCUCHAR:', textarea:true, placeholder:'Escribe aqu&#237;...'}
-      ]
-    },
-    { n:12, page:9, type:'teacher', title:'Actividades de ocio',
-      arabic:'أكمل التعبيرات بالكلمات المناسبة. (في احتمالات متعددة)',
-      spanish:'Completa las expresiones con las siguientes palabras. Hay varias posibilidades.',
-      wordBank:['tarde','en un coro','mensajes','m&#250;sica','un curso de cocina','de vacaciones','con los amigos','la guitarra','pel&#237;culas en versi&#243;n original'],
-      teacherNote:true,
-      questions:[
-          {id:'q12_1', n:1, text:'escribir ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_2', n:2, text:'ver ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_3', n:3, text:'tocar ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_4', n:4, text:'hacer ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_5', n:5, text:'ir ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_6', n:6, text:'escuchar ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_7', n:7, text:'acostarse ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_8', n:8, text:'cantar ___', textarea:true, placeholder:'Escribe aqu&#237;...'},
-          {id:'q12_9', n:9, text:'quedar ___', textarea:true, placeholder:'Escribe aqu&#237;...'}
-      ]
-    },
-    { n:13, page:9, type:'auto', title:'&#191;Qui&#233;n es?',
-      arabic:'اختر النوع المناسب من العلاقات الشخصية لكل تعريف.',
-      spanish:'&#191;A qu&#233; tipo de relaci&#243;n personal corresponden las siguientes definiciones?',
-      questions:[
-          {id:'q13_1', text:'1. Es una persona que hace el mismo curso que t&#250;.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']},
-          {id:'q13_2', text:'2. Es la persona que enseña en sus clases.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']},
-          {id:'q13_3', text:'3. Es la persona que recibe una clase.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']},
-          {id:'q13_4', text:'4. Es una persona con la que tienes una buena relaci&#243;n y con la que haces muchas actividades en tu tiempo libre.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']},
-          {id:'q13_5', text:'5. Es una persona con la que trabajas.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']},
-          {id:'q13_6', text:'6. Es una persona que vive al lado de tu casa.', sel:['compañero/-a de clase','profesor(a)','alumno/-a','amigo/-a','colega','vecino/-a']}
-      ]
-    },
+    { n:11, custom:'slide11', page:9, type:'teacher', title:'Para aprender español', teacherNote:true},
+    { n:12, custom:'slide12', page:9, type:'teacher', title:'Actividades de ocio', teacherNote:true},
+    { n:13, custom:'slide13', page:9, type:'auto', title:'¿Quién es?'},
     { n:14, custom:'slide14', page:10, type:'auto', title:'Separaci&#243;n de s&#237;labas' }
 ];
 
@@ -735,10 +706,17 @@ function buildSlide(s) {
     
     if (s.custom === 'slide1') body += buildSlide1();
     else if (s.custom === 'slide2') body += buildSlide2();
+    else if (s.custom === 'slide3') body += buildSlide3();
     else if (s.custom === 'slide4') body += buildSlide4();
+    else if (s.custom === 'slide5') body += buildSlide5();
     else if (s.custom === 'slide6') body += buildSlide6();
     else if (s.custom === 'slide7') body += buildSlide7();
+    else if (s.custom === 'slide8') body += buildSlide8();
+    else if (s.custom === 'slide9') body += buildSlide9();
     else if (s.custom === 'slide10') body += buildSlide10();
+    else if (s.custom === 'slide11') body += buildSlide11();
+    else if (s.custom === 'slide12') body += buildSlide12();
+    else if (s.custom === 'slide13') body += buildSlide13();
     else if (s.custom === 'slide14') body += buildSlide14();
     else {
         body += `<div class="spanish-box">`;
@@ -755,6 +733,170 @@ function buildSlide(s) {
         body += `</div>`;
     }
     return `<div class="slide" data-slide="${s.n-1}"><div class="exercise"><div class="ex-header ${hClass}"><div class="ex-title-wrap"><div class="ex-num">${s.n}</div><div class="ex-title">${s.title}</div></div><div class="ex-actions">${badge}<button class="ex-page-btn" onclick="openPage(${s.page})">📄 صفحة ${s.page}</button></div></div><div class="ex-body">${body}</div></div></div>`;
+}
+
+
+function buildSlide5() {
+    let h = `<div class="sub-section-title">5. ¡Cuánto tiempo!</div>`;
+    h += `<div class="arabic-box">أكمل الجمل باستخدام <b>desde</b> (مع نقطة زمنية محددة) أو <b>desde hace</b> (مع فترة زمنية).</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">El primer día de curso los alumnos tienen mucho de qué hablar. Completa las frases con <strong>desde</strong> o <strong>desde hace</strong>.</div>`;
+    let opts = '<option value=""></option><option value="desde">desde</option><option value="desde hace">desde hace</option>';
+    const sel = id => `<select id="${id}" style="width:120px;display:inline">${opts}</select><div class="feedback" style="display:inline-block" id="fb${id.substring(1)}"></div>`;
+    
+    let q = `
+    <div class="question-card" style="line-height:2.6;">
+        1. La compañera nueva se llama Marina y es suiza, pero vive en Alemania ${sel('q5_1')} el otoño.<br>
+        2. Tom tiene un nuevo trabajo ${sel('q5_2')} unos días.<br>
+        3. El hijo de Martina, Frederick, aprende español ${sel('q5_3')} tres años.<br>
+        4. Hace mucho que no veo a Silvana. No ha asistido a clase ${sel('q5_4')} diciembre.<br>
+        5. ¿Jana y John se van a vivir a Madrid? ¡Pero si aprenden español ${sel('q5_5')} solo dos meses!<br>
+        6. Sí, es que han estudiado español ${sel('q5_6')} su primer viaje a España en 2016.
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide8() {
+    let h = `<div class="sub-section-title">8. Participios irregulares</div>`;
+    h += `<div class="arabic-box">اربط كل فعل بالـ participio (التصريف الثالث) الخاص به.</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Relaciona los siguientes participios irregulares con los verbos en infinitivo.</div>`;
+    h += buildOptionsList(['a. visto','b. abierto','c. escrito','d. dicho','e. puesto','f. hecho','g. roto','h. vuelto']);
+    
+    let opts = '<option value=""></option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option>';
+    const sel = id => `<select id="${id}" style="width:60px;display:inline">${opts}</select><div class="feedback" style="display:inline-block" id="fb${id.substring(1)}"></div>`;
+    
+    let q = `
+    <div class="exercise-grid-2">
+      <div class="slide-col" style="line-height:2.6; padding:15px; font-size:1.1em;">
+        1. hacer ${sel('q8_1')}<br>
+        2. ver ${sel('q8_2')}<br>
+        3. escribir ${sel('q8_3')}<br>
+        4. romper ${sel('q8_4')}
+      </div>
+      <div class="slide-col" style="line-height:2.6; padding:15px; font-size:1.1em;">
+        5. volver ${sel('q8_5')}<br>
+        6. poner ${sel('q8_6')}<br>
+        7. decir ${sel('q8_7')}<br>
+        8. abrir ${sel('q8_8')}
+      </div>
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide9() {
+    let h = `<div class="sub-section-title">9. ¿Con pretérito perfecto?</div>`;
+    h += `<div class="arabic-box">اكتب 5 جمل عن نفسك في زمن <b>pretérito perfecto</b> باستخدام marcadores من القائمة. انتبه: في 3 marcadores لا تُستخدم مع هذا الزمن.</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Escribe cinco frases sobre ti en pretérito perfecto con los siguientes marcadores temporales. Atención, hay tres con los que no se utiliza este tiempo verbal.</div>`;
+    h += buildWordBank(['esta mañana','hoy','ayer','este año','últimamente','el año pasado','esta semana','en 2016']);
+    
+    let q = `
+    <div class="q-label" style="margin-top:15px;">📝 Tus 5 frases:</div>
+    <textarea id="q9_1" placeholder="Frase 1..."></textarea><div class="feedback" id="fb9_1"></div>
+    <textarea id="q9_2" placeholder="Frase 2..."></textarea><div class="feedback" id="fb9_2"></div>
+    <textarea id="q9_3" placeholder="Frase 3..."></textarea><div class="feedback" id="fb9_3"></div>
+    <textarea id="q9_4" placeholder="Frase 4..."></textarea><div class="feedback" id="fb9_4"></div>
+    <textarea id="q9_5" placeholder="Frase 5..."></textarea><div class="feedback" id="fb9_5"></div>
+    
+    <div class="q-label" style="margin-top:15px; color:#e74c3c;">📌 Escribe aquí los 3 marcadores que NO se utilizan con pretérito perfecto:</div>
+    <textarea id="q9_no" placeholder="Los 3 marcadores son..."></textarea><div class="feedback" id="fb9_no"></div>
+    `;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide11() {
+    let h = `<div class="sub-section-title">11. Para aprender español</div>`;
+    h += `<div class="arabic-box">أكمل الخريطة المفاهيمية: ما الكلمات التي تتناسب مع كل فعل؟ (اكتبها في الخانات)</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">¡Refresca tu vocabulario! Completa los mapas conceptuales con las expresiones que correspondan.</div>`;
+    h += buildWordBank(['en una tertulia','los deberes','palabras nuevas','las audiciones','un idioma','a clase','un intercambio','en clase','canciones','vocabulario','un curso en línea']);
+    
+    let q = `
+    <div class="exercise-grid-2">
+      <div class="slide-col">
+        <div class="q-label">🎯 <strong>APRENDER:</strong></div>
+        <textarea id="q11_1" placeholder="Escribe aquí..."></textarea><div class="feedback" id="fb11_1"></div>
+        <div class="q-label" style="margin-top:15px;">🎯 <strong>PARTICIPAR:</strong></div>
+        <textarea id="q11_2" placeholder="Escribe aquí..."></textarea><div class="feedback" id="fb11_2"></div>
+        <div class="q-label" style="margin-top:15px;">🎯 <strong>ASISTIR:</strong></div>
+        <textarea id="q11_3" placeholder="Escribe aquí..."></textarea><div class="feedback" id="fb11_3"></div>
+      </div>
+      <div class="slide-col">
+        <div class="q-label">🎯 <strong>HACER:</strong></div>
+        <textarea id="q11_4" placeholder="Escribe aquí..."></textarea><div class="feedback" id="fb11_4"></div>
+        <div class="q-label" style="margin-top:15px;">🎯 <strong>ESCUCHAR:</strong></div>
+        <textarea id="q11_5" placeholder="Escribe aquí..."></textarea><div class="feedback" id="fb11_5"></div>
+      </div>
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide12() {
+    let h = `<div class="sub-section-title">12. Actividades de ocio</div>`;
+    h += `<div class="arabic-box">أكمل التعبيرات بالكلمات المناسبة. (ممكن الكلمة تنفع مع أكتر من فعل).</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Completa las expresiones con las siguientes palabras. Hay varias posibilidades.</div>`;
+    h += buildWordBank(['tarde','en un coro','mensajes','música','un curso de cocina','de vacaciones','con los amigos','la guitarra','películas en versión original']);
+    
+    let q = `
+    <div class="exercise-grid-2">
+      <div class="slide-col" style="line-height:2.6; padding:15px; font-size:1.1em;">
+        1. escribir <input type="text" id="q12_1" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_1"></div><br>
+        2. ver <input type="text" id="q12_2" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_2"></div><br>
+        3. tocar <input type="text" id="q12_3" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_3"></div><br>
+        4. hacer <input type="text" id="q12_4" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_4"></div><br>
+        5. ir <input type="text" id="q12_5" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_5"></div>
+      </div>
+      <div class="slide-col" style="line-height:2.6; padding:15px; font-size:1.1em;">
+        6. escuchar <input type="text" id="q12_6" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_6"></div><br>
+        7. acostarse <input type="text" id="q12_7" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_7"></div><br>
+        8. cantar <input type="text" id="q12_8" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_8"></div><br>
+        9. quedar <input type="text" id="q12_9" style="width:140px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb12_9"></div>
+      </div>
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+function buildSlide13() {
+    let h = `<div class="sub-section-title">13. ¿Quién es?</div>`;
+    h += `<div class="arabic-box">اختر النوع المناسب من العلاقات الشخصية لكل تعريف.</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">¿A qué tipo de relación personal corresponden las siguientes definiciones?</div>`;
+    
+    let opts = '<option value=""></option><option value="compañero/-a de clase">compañero/-a de clase</option><option value="profesor(a)">profesor(a)</option><option value="alumno/-a">alumno/-a</option><option value="amigo/-a">amigo/-a</option><option value="colega">colega</option><option value="vecino/-a">vecino/-a</option>';
+    const sel = id => `<select id="${id}" style="width:200px;display:inline">${opts}</select><div class="feedback" style="display:inline-block" id="fb${id.substring(1)}"></div>`;
+    
+    let q = `
+    <div class="question-card" style="line-height:2.6;">
+        1. Es una persona que hace el mismo curso que tú. ${sel('q13_1')}<br>
+        2. Es la persona que enseña en sus clases. ${sel('q13_2')}<br>
+        3. Es la persona que recibe una clase. ${sel('q13_3')}<br>
+        4. Es una persona con la que tienes una buena relación y con la que haces muchas actividades en tu tiempo libre. ${sel('q13_4')}<br>
+        5. Es una persona con la que trabajas. ${sel('q13_5')}<br>
+        6. Es una persona que vive al lado de tu casa. ${sel('q13_6')}
+    </div>`;
+    h += q + `</div>`;
+    return h;
+}
+
+
+function buildSlide3() {
+    let h = `<div class="sub-section-title">3. El español y yo</div>`;
+    h += `<div class="arabic-box">كوّن جمل باستخدام الكلمات التالية. استخدم ضمائر المفعول غير المباشر (me, te, le, nos, os, les).</div>`;
+    h += `<div class="spanish-box"><div class="es-instruction">Formula las frases con las siguientes palabras.</div>`;
+    h += buildWordBank(['te','a mí','a usted','a vosotros','me','a Regina','le','os','a nosotros','nos','a ti']);
+    
+    let q = `
+    <div class="question-card" style="line-height:2.4;">
+      1. usted / aburrir los ejercicios de gramática → <input type="text" id="q3_1" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_1"></div><br><br>
+      2. yo / encantar estudiar español → <input type="text" id="q3_2" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_2"></div><br><br>
+      3. vosotros / interesar la información cultural → <input type="text" id="q3_3" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_3"></div><br><br>
+      4. Regina / costar la gramática → <input type="text" id="q3_4" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_4"></div><br><br>
+      5. tú / aburrir leer varias veces el mismo texto → <input type="text" id="q3_5" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_5"></div><br><br>
+      6. nosotros / gustar hablar con hispanohablantes → <input type="text" id="q3_6" style="width:300px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb3_6"></div>
+    </div>`;
+    h += q + `</div>`;
+    return h;
 }
 
 function renderSlides() { document.getElementById('slidesContainer').innerHTML = SLIDES.map(buildSlide).join(''); }
@@ -1226,5 +1368,5 @@ window.addEventListener('DOMContentLoaded', async function() {
     } catch (e) {}
 });
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a10f2f0e2e4a11c0',t:'MTc4MjM0MDI5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
