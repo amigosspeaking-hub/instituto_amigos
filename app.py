@@ -33,7 +33,7 @@ LESSONS_DATA = {
         {"title": "NUEVA ETAPA", "file": "lesson1.html"},
         {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
         {"title": "UN AÑO ESPECIAL", "file": "lesson3.html"},
-        {"title": "CON TUS MANOS", "file": "lesson4.html"}
+        {"title": "CON TUS MANOS", "file": "A2.1 - Libro - Unidad 4.html"}
     ],
     "A2.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
