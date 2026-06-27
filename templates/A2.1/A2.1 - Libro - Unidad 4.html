@@ -566,7 +566,7 @@ body{font-family:'Poppins','Cairo',sans-serif;background:var(--bg);color:var(--t
 <div class="img-body" id="imgBody"><img id="imgSrc" src="" alt="Page"></div>
 </div>
 <script>
-function togSB(){let s=document.getElementById('sb');if(window.innerWidth<=768){s.classList.toggle('open');s.classList.toggle('collapsed');}else{s.classList.toggle('collapsed');document.getElementById('mainA').classList.toggle('expanded');let m=document.getElementById('mbar');if(m.classList.contains('show'))m.classList.toggle('expanded');}}
+function togSB(){let s=document.getElementById('sb');if(window.innerWidth<=768){if(s.classList.contains('open')){s.classList.remove('open');}else{s.classList.add('open');}s.classList.remove('collapsed');}else{s.classList.toggle('collapsed');document.getElementById('mainA').classList.toggle('expanded');let m=document.getElementById('mbar');if(m.classList.contains('show'))m.classList.toggle('expanded');}}
 let curS=0,totS=11;
 function goS(i){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.sb-it').forEach(s=>s.classList.remove('active'));document.getElementById('scr'+i).classList.add('active');document.querySelectorAll('.sb-it')[i].classList.add('active');curS=i;document.querySelector('.scroll-area').scrollTop=0;if(window.innerWidth<=768){document.getElementById('sb').classList.remove('open');document.getElementById('sb').classList.add('collapsed');}}
 let zl=100;
@@ -624,5 +624,5 @@ makeDrag(document.getElementById('nPop'),document.getElementById('nBar'));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeImg();document.getElementById('timerPop').classList.remove('show');document.getElementById('nPop').classList.remove('show');}if(e.key==='ArrowRight'&&curS<totS-1)goS(curS+1);if(e.key==='ArrowLeft'&&curS>0)goS(curS-1);});
 applyZoom();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a11927597fed0115',t:'MTc4MjQ0NDgzOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
