@@ -1441,18 +1441,20 @@ function displayLockedAnswer(qId, info) {
         let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
         if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
         html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
-        if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment" style="margin-top:8px;padding:8px 12px;background:rgba(243,156,18,0.2);border-radius:8px;border:1px solid #f39c12;color:#ffeaa7;font-weight:700;"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
         if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
-    } else if (info.isCorrect) {
+    } else if (info.isCorrect || info.verdict === 'correct') {
         el.classList.add('locked-correct');
         fb.className = 'feedback correct';
         let html = `<div class="fb-spanish"><span class="lock-badge">✅ ¡Correcto!</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div>`;
-        if (exp || info.reviewedBy) {
+        if (exp || info.feedback || info.reviewedBy || info.rule) {
             html += `<div class="fb-arabic">`;
             if (exp) html += buildExplanationHTML(exp);
+            else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+            if (info.feedback && info.feedback !== '✅ إجابة صحيحة') html += `<div class="teacher-comment" style="margin-top:8px;padding:8px 12px;background:rgba(46,204,113,0.2);border-radius:8px;border:1px solid #2ecc71;color:#2ecc71;font-weight:700;"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
             if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
             html += `</div>`;
         }
@@ -1467,7 +1469,7 @@ function displayLockedAnswer(qId, info) {
         html += `</div><div class="fb-arabic">`;
         if (exp) html += buildExplanationHTML(exp);
         else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
-        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment" style="margin-top:8px;padding:8px 12px;background:rgba(231,76,60,0.2);border-radius:8px;border:1px solid #e74c3c;color:#ff7675;font-weight:700;"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
@@ -1559,7 +1561,7 @@ async function fetchWithRetry(url, opts={}, max=3) {
 async function loadProgress() {
     try {
         const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
-        const r = await fetchWithRetry(url); const res = await r.json();
+        const r = await fetchWithRetry(url); if(!r || !r.json) return; const res = await r.json();
         if (res.status === 'success') {
             totalCorrect = parseFloat(res.totalCorrect) || 0;
             totalWrong = parseInt(res.totalWrong) || 0;
