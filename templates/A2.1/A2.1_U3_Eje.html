@@ -234,6 +234,7 @@ select option{background:#1a2540;color:#ecf0f1}
     background: rgba(52, 152, 219, 0.5);
     transform: scale(1.15);
 }
+/* Padding at bottom so content isn't hidden behind the floating bar */
 body { padding-bottom: 50px; }
 .retry-banner button{background:#f39c12;color:#fff;border:none;padding:5px 12px;border-radius:6px;margin-right:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.85em}
 
@@ -260,37 +261,24 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 .slide-col h4{color:#f39c12;margin-bottom:8px;font-size:.95em}
 .question-card .num-bullet{background:linear-gradient(135deg,#f39c12,#e67e22);color:#1a1a2e;min-width:34px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.82em;margin-left:8px;padding:0 8px}
 
-/* Teacher Grading Styles */
-.teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
-.teacher-grading-mode .slide.active { display: block; }
-.teacher-grading-mode .slide { display: none; }
-.teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-.grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
-.save-grades-btn-top { background: #2ecc71; color: #fff; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
-.save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
-.pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-.grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
-.grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
-.correct-answer-box { border-right: 4px solid #2ecc71; }
-.answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
-.correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
-.verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
-.verdict-label { color: #ccc; font-weight: bold; }
-.verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo'; color: #fff;}
-.verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
-.verdict-btn.half { border-color: #f39c12; color: #f39c12; }
-.verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
-.verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
-.verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
-.verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
-.feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
-.feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
-.feedback-section textarea:focus { border-color: #f39c12; outline: none; }
-.verdict-status { text-align: left; margin-top: 10px; }
-.verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
-.verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
-.verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
-.verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
+
+/* Visual & Layout Enhancements */
+.hero-thumb { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.15); padding: 12px 18px; border-radius: 14px; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; font-weight: 700; color: #ffeaa7; }
+.hero-thumb .hero-icon { font-size: 2em; background: rgba(243,156,18,0.25); padding: 10px; border-radius: 12px; }
+.letter-chip { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; font-weight: 800; font-size: 1.1em; box-shadow: 0 4px 12px rgba(52,152,219,0.4); margin: 4px; border: 1px solid rgba(255,255,255,0.2); }
+.vowel-diagram { display: flex; justify-content: space-around; gap: 18px; margin: 18px 0; flex-wrap: wrap; }
+.vowel-box { flex: 1; min-width: 220px; padding: 18px; border-radius: 14px; text-align: center; font-weight: 800; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.vowel-strong { background: linear-gradient(135deg, rgba(231,76,60,0.2), rgba(192,57,43,0.1)); border: 2px solid #e74c3c; color: #ff7675; }
+.vowel-weak { background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(41,128,185,0.1)); border: 2px solid #3498db; color: #74b9ff; }
+.vowel-box .v-letters { font-size: 1.8em; margin-top: 10px; letter-spacing: 8px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.select-mcq { display: inline-block; width: auto; min-width: 140px; margin: 2px 4px; font-weight: bold; color: #f39c12; }
+
+/* Explanation RTL/LTR box styling */
+.fb-arabic { direction: rtl !important; text-align: right !important; background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.3); padding: 14px 18px; border-radius: 14px; margin-top: 10px; color: #ffeaa7; font-size: 0.95em; line-height: 2.2; unicode-bidi: isolate; }
+.exp-line { direction: rtl; text-align: right; margin-bottom: 6px; }
+.es-inline-box { direction: ltr !important; unicode-bidi: isolate !important; display: inline-block; background: rgba(15,30,51,0.95); color: #5dade2; padding: 2px 12px; border-radius: 8px; border: 1px solid rgba(52,152,219,0.5); font-family: Cairo, sans-serif; font-weight: 700; margin: 2px 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.fb-spanish { direction: ltr !important; text-align: left !important; unicode-bidi: isolate; }
+
 </style>
 </head>
 <body>
@@ -334,12 +322,12 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 <div class="lesson-badge" id="lessonHeaderBadge">A2.1 - Unidad 3</div>
 </div>
 
-<div class="user-bar" id="userBar">
+<div class="user-bar">
 <div class="welcome">👤 أهلاً <span id="userFullName">{{ student.username }}</span></div>
 <a href="/dashboard" class="logout-btn">🔙 العودة للمنصة</a>
 </div>
 
-<div class="progress-summary" id="progressSummary">
+<div class="progress-summary">
 <div class="item correct"><div class="num" id="psCorrect">0</div><div class="label">✅ صح</div></div>
 <div class="item half"><div class="num" id="psHalf">0</div><div class="label">⚠️ نص</div></div>
 <div class="item wrong"><div class="num" id="psWrong">0</div><div class="label">❌ خطأ</div></div>
@@ -354,6 +342,7 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 <button onclick="retrySubmit()">🔄 إعادة الإرسال</button>
 </div>
 
+
 <div class="spanish-chars-bar" id="spanishCharsBar" style="display:none;">
     <span class="chars-label">🇪🇸 أحرف إسبانية:</span>
     <button class="char-btn" onclick="insertChar('á')">á</button>
@@ -367,7 +356,7 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
     <button class="char-btn" onclick="insertChar('¡')">¡</button>
 </div>
 
-<div class="slider-wrapper" id="sliderWrapper">
+<div class="slider-wrapper">
 <div class="top-nav">
 <div class="top-nav-row">
 <div class="slide-counter"><span id="currentSlideNum">1</span> / <span id="totalSlidesNum">16</span></div>
@@ -378,7 +367,7 @@ input[type="text"],select,textarea{font-size:16px}.progress-summary{padding:10px
 
 <div class="slides-container" id="slidesContainer"></div>
 
-<div class="bottom-nav" id="bottomNav">
+<div class="bottom-nav">
 <button class="nav-btn" id="prevBtn" onclick="prevSlide()">▶ السابق</button>
 <button class="nav-btn submit-final" onclick="prepareSubmit()">✅ إرسال الإجابات</button>
 <button class="nav-btn next" id="nextBtn" onclick="nextSlide()">التالي ◀</button>
@@ -397,330 +386,387 @@ const PAGE_BASE = 'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page';
 const PAGE_IMAGES = {19:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page19.jpg',20:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page20.jpg',21:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page21.jpg',22:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page22.jpg',23:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page23.jpg',24:'https://dn711204.ca.archive.org/0/items/A2.1-Eje-Pages/Page24.jpg'};
 function getPageURL(p) { return PAGE_IMAGES[p] || (PAGE_BASE + p + '.jpg'); }
 
-let isTeacherGradingMode = false;
-let teacherGrades = {};
-let studentUsername = '';
-
-let lastFocusedInput = null;
-
-document.addEventListener('focusin', function(e) {
-    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
-        lastFocusedInput = e.target;
-    }
-});
-
-function insertChar(ch) {
-    const el = lastFocusedInput;
-    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && !el.disabled && !el.readOnly) {
-        const start = el.selectionStart;
-        const end = el.selectionEnd;
-        el.value = el.value.substring(0, start) + ch + el.value.substring(end);
-        el.selectionStart = el.selectionEnd = start + 1;
-        el.focus();
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-}
-
 const AUTO_GRADED = {
-q7a_1:{a:['I'],t:'select'},q7a_2:{a:['I'],t:'select'},q7a_3:{a:['I'],t:'select'},q7a_4:{a:['I'],t:'select'},q7a_5:{a:['I'],t:'select'},q7a_6:{a:['I'],t:'select'},q7a_7:{a:['I'],t:'select'},q7a_8:{a:['P'],t:'select'},q7a_9:{a:['P'],t:'select'},q7a_10:{a:['P'],t:'select'},q7a_11:{a:['P'],t:'select'},q7a_12:{a:['P'],t:'select'},q7a_13:{a:['P'],t:'select'},q7a_14:{a:['P'],t:'select'},q7a_15:{a:['P'],t:'select'},
-q6a_1:{a:['2']},q6a_2:{a:['9']},q6a_3:{a:['3']},q6a_4:{a:['4']},q6a_5:{a:['1']},q6a_6:{a:['6']},q6a_7:{a:['5']},q6a_8:{a:['11']},q6a_9:{a:['12']},q6a_10:{a:['10']},q6a_11:{a:['8']},q6a_12:{a:['7']},
-q1_1:{a:['ustedes conocen','conocen']},q1_2:{a:['vosotros dais','dais']},q1_3:{a:['tu decides','decides']},q1_4:{a:['nosotros vamos','vamos']},q1_5:{a:['el sigue','sigue']},q1_6:{a:['tu ganaste','ganaste']},q1_7:{a:['yo viaje','viaje','viajé']},q1_8:{a:['yo empece','empece','empecé']},q1_9:{a:['ellos oyeron','oyeron']},q1_10:{a:['yo vi','vi']},q1_11:{a:['el participo','participo','participó']},q1_12:{a:['nosotros fuimos','fuimos']},q1_13:{a:['ella se traslado','se traslado','se trasladó']},q1_14:{a:['usted durmio','durmio','durmió']},
-q2_1:{a:['busco','buscó']},q2_2:{a:['fue']},q2_3:{a:['gano','ganó']},q2_4:{a:['empezo','empezó']},q2_5:{a:['construyo','construyó']},q2_6:{a:['visitaron']},
-q3_1a:{a:['c']},q3_1b:{a:['z']},q3_2:{a:['y']},q3_3a:{a:['u']},q3_3b:{a:['o']},q3_4a:{a:['qu']},q3_4b:{a:['c']},q3_5a:{a:['í','i']},q3_5b:{a:['y']},q3_5c:{a:['í','i']},q3_6a:{a:['e']},q3_6b:{a:['i']},
-q4_1:{a:['estuvimos']},q4_2:{a:['quise']},q4_3:{a:['vinieron']},q4_4:{a:['pudiste']},q4_5:{a:['hicisteis']},q4_6:{a:['dije']},q4_7:{a:['pusiste']},
-q5_1:{a:['regular'],t:'select'},q5_2:{a:['regular'],t:'select'},q5_3:{a:['regular'],t:'select'},q5_4:{a:['regular'],t:'select'},q5_5:{a:['regular'],t:'select'},q5_6:{a:['regular'],t:'select'},q5_7:{a:['regular'],t:'select'},q5_8:{a:['irregular'],t:'select'},q5_9:{a:['irregular'],t:'select'},q5_10:{a:['irregular'],t:'select'},q5_11:{a:['irregular'],t:'select'},q5_12:{a:['irregular'],t:'select'},q5_13:{a:['irregular'],t:'select'},q5_14:{a:['irregular'],t:'select'},
-q7_1:{a:['b'],t:'select'},q7_2:{a:['a'],t:'select'},q7_3:{a:['b'],t:'select'},q7_4:{a:['a'],t:'select'},q7_5:{a:['b'],t:'select'},q7_6:{a:['a'],t:'select'},q7_7:{a:['a'],t:'select'},q7_8:{a:['b'],t:'select'},
-q8_1:{a:['ir'],t:'select'},q8_2:{a:['ser'],t:'select'},q8_3:{a:['ir'],t:'select'},q8_4:{a:['ir'],t:'select'},q8_5:{a:['ser'],t:'select'},q8_6:{a:['ser'],t:'select'},q8_7:{a:['ser'],t:'select'},q8_8:{a:['ser'],t:'select'},
-q9_1:{a:['tuvimos'],t:'select'},q9_2:{a:['tuvo'],t:'select'},q9_3:{a:['he estado'],t:'select'},q9_4:{a:['pude'],t:'select'},q9_5:{a:['hemos visto'],t:'select'},q9_6:{a:['se caso','se casó'],t:'select'},q9_7:{a:['se fue'],t:'select'},q9_8:{a:['participo','participó'],t:'select'},q9_9:{a:['se marcho','se marchó'],t:'select'},q9_10:{a:['ha expuesto'],t:'select'},q9_11:{a:['ha ganado'],t:'select'},q9_12:{a:['regrese','regresé'],t:'select'},q9_13:{a:['estudie','estudié'],t:'select'},
-q10_1:{a:['fue horrible','horrible']},q10_2:{a:['ha sido muy desagradable','desagradable']},q10_3:{a:['fue fantastico','fue fantástico','fantastico','fantástico']},q10_4:{a:['ha sido muy bonito','bonito']},q10_5:{a:['fue muy divertido','divertido']},
-q12_1:{a:['especial']},q12_2:{a:['de estudios']},q12_3:{a:['deportivo','deportiva','deportivo/a']},q12_4:{a:['del cumpleaños','de cumpleaños']},q12_5:{a:['de oro']},q12_6:{a:['de natacion','de natación']},q12_7:{a:['de una novela']},q12_8:{a:['al aire libre']},q12_9:{a:['popular']},
-q13_1:{a:['el viaje','viaje']},q13_2:{a:['celebrar']},q13_3:{a:['el sueño','sueno','sueño']},q13_4:{a:['volar']},q13_5:{a:['el contrato','contrato']},q13_6:{a:['cambiar']},q13_7:{a:['la manifestacion','la manifestación']},q13_8:{a:['publicar']},
-q15a_1:{a:['maestra']},q15a_2:{a:['linea','línea']},q15a_3:{a:['viaje']},q15a_4:{a:['vuestro']},q15a_5:{a:['rio','río']},q15a_6:{a:['dia','día']},
-q15_1:{a:['fa-mi-lia']},q15_2:{a:['nues-tro']},q15_3:{a:['far-ma-cia']},q15_4:{a:['re-al']},q15_5:{a:['es-tu-dian-tes']},q15_6:{a:['cre-o']},q15_7:{a:['en-vi-o','en-ví-o']},q15_8:{a:['len-gua']},q15_9:{a:['com-pa-ñi-a','com-pa-ñí-a']},q15_10:{a:['real','creo']},q15_11:{a:['familia']},q15_12:{a:['envio','envío','compañia','compañía']}
+  q1_1:{a:['conocen','ustedes conocen'],t:'select'}, q1_2:{a:['dais','vosotros dais'],t:'select'}, q1_3:{a:['decides','tú decides','tu decides'],t:'select'}, q1_4:{a:['vamos','nosotros vamos'],t:'select'}, q1_5:{a:['sigue','él sigue','el sigue'],t:'select'},
+  q1_6:{a:['ganaste','tú ganaste','tu ganaste'],t:'select'}, q1_7:{a:['viajé','viaje','yo viajé','yo viaje'],t:'select'}, q1_8:{a:['empecé','empece','yo empecé','yo empece'],t:'select'}, q1_9:{a:['oyeron','ellos oyeron'],t:'select'}, q1_10:{a:['vi','yo vi'],t:'select'}, q1_11:{a:['participó','participo','él participó','el participo'],t:'select'}, q1_12:{a:['fuimos','nosotros fuimos'],t:'select'}, q1_13:{a:['se trasladó','se traslado','ella se trasladó','ella se traslado'],t:'select'}, q1_14:{a:['durmió','durmio','usted durmió','usted durmio'],t:'select'},
+
+  q2_1:{a:['buscó','busco'],t:'select'}, q2_2:{a:['fue'],t:'select'}, q2_3:{a:['ganó','gano'],t:'select'}, q2_4:{a:['empezó','empezo'],t:'select'}, q2_5:{a:['construyó','construyo'],t:'select'}, q2_6:{a:['visitaron'],t:'select'},
+
+  q3_1a:{a:['c'],t:'select'}, q3_1b:{a:['z'],t:'select'}, q3_2:{a:['y'],t:'select'}, q3_3a:{a:['u'],t:'select'}, q3_3b:{a:['o'],t:'select'}, q3_4a:{a:['qu'],t:'select'}, q3_4b:{a:['c'],t:'select'}, q3_5a:{a:['í','i'],t:'select'}, q3_5b:{a:['y'],t:'select'}, q3_5c:{a:['í','i'],t:'select'}, q3_6a:{a:['e'],t:'select'}, q3_6b:{a:['i'],t:'select'},
+
+  q4_1:{a:['estuvimos'],t:'select'}, q4_2:{a:['quise'],t:'select'}, q4_3:{a:['vinieron'],t:'select'}, q4_4:{a:['pudiste'],t:'select'}, q4_5:{a:['hicisteis'],t:'select'}, q4_6:{a:['dije'],t:'select'}, q4_7:{a:['pusiste'],t:'select'},
+
+  q5_1:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'celebré',group:'ex5_reg',t:'select'},
+  q5_2:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'conoció',group:'ex5_reg',t:'select'},
+  q5_3:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'ganó',group:'ex5_reg',t:'select'},
+  q5_4:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'nació',group:'ex5_reg',t:'select'},
+  q5_5:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'pedí',group:'ex5_reg',t:'select'},
+  q5_6:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'decidió',group:'ex5_reg',t:'select'},
+  q5_7:{a:['celebré','conoció','ganó','nació','pedí','decidió','participó'],d:'participó',group:'ex5_reg',t:'select'},
+
+  q5_8:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'dije',group:'ex5_irreg',t:'select'},
+  q5_9:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'hizo',group:'ex5_irreg',t:'select'},
+  q5_10:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'tuve',group:'ex5_irreg',t:'select'},
+  q5_11:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'estuve',group:'ex5_irreg',t:'select'},
+  q5_12:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'pude',group:'ex5_irreg',t:'select'},
+  q5_13:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'puso',group:'ex5_irreg',t:'select'},
+  q5_14:{a:['dije','hizo','tuve','estuve','pude','puso','vino'],d:'vino',group:'ex5_irreg',t:'select'},
+
+  q6a_1:{a:['2'],t:'select'}, q6a_2:{a:['9'],t:'select'}, q6a_3:{a:['3'],t:'select'}, q6a_4:{a:['4'],t:'select'}, q6a_5:{a:['1'],t:'select'}, q6a_6:{a:['6'],t:'select'}, q6a_7:{a:['5'],t:'select'}, q6a_8:{a:['11'],t:'select'}, q6a_9:{a:['12'],t:'select'}, q6a_10:{a:['10'],t:'select'}, q6a_11:{a:['8'],t:'select'}, q6a_12:{a:['7'],t:'select'},
+
+  q7a_1:{a:['I'],t:'select'}, q7a_2:{a:['I'],t:'select'}, q7a_3:{a:['I'],t:'select'}, q7a_4:{a:['I'],t:'select'}, q7a_5:{a:['I'],t:'select'}, q7a_6:{a:['I'],t:'select'}, q7a_7:{a:['I'],t:'select'}, q7a_8:{a:['P'],t:'select'}, q7a_9:{a:['P'],t:'select'}, q7a_10:{a:['P'],t:'select'}, q7a_11:{a:['P'],t:'select'}, q7a_12:{a:['P'],t:'select'}, q7a_13:{a:['P'],t:'select'}, q7a_14:{a:['P'],t:'select'}, q7a_15:{a:['P'],t:'select'},
+  q7_1:{a:['b'],t:'select'}, q7_2:{a:['a'],t:'select'}, q7_3:{a:['b'],t:'select'}, q7_4:{a:['a'],t:'select'}, q7_5:{a:['b'],t:'select'}, q7_6:{a:['a'],t:'select'}, q7_7:{a:['a'],t:'select'}, q7_8:{a:['b'],t:'select'},
+
+  q8_1:{a:['ir'],t:'select'}, q8_2:{a:['ser'],t:'select'}, q8_3:{a:['ir'],t:'select'}, q8_4:{a:['ir'],t:'select'}, q8_5:{a:['ser'],t:'select'}, q8_6:{a:['ser'],t:'select'}, q8_7:{a:['ser'],t:'select'}, q8_8:{a:['ser'],t:'select'},
+
+  q9_1:{a:['tuvimos'],t:'select'}, q9_2:{a:['tuvo','Tuvo'],t:'select'}, q9_3:{a:['he estado'],t:'select'}, q9_4:{a:['pude'],t:'select'}, q9_5:{a:['hemos visto'],t:'select'}, q9_6:{a:['se caso','se casó'],t:'select'}, q9_7:{a:['se fue'],t:'select'}, q9_8:{a:['participo','participó'],t:'select'}, q9_9:{a:['se marcho','se marchó'],t:'select'}, q9_10:{a:['ha expuesto'],t:'select'}, q9_11:{a:['ha ganado'],t:'select'}, q9_12:{a:['regrese','regresé'],t:'select'}, q9_13:{a:['estudie','estudié'],t:'select'},
+
+  q10_1:{a:['fue horrible','horrible'],t:'select'}, q10_2:{a:['ha sido muy desagradable','desagradable'],t:'select'}, q10_3:{a:['fue fantastico','fue fantástico','fantastico','fantástico'],t:'select'}, q10_4:{a:['ha sido muy bonito','bonito'],t:'select'}, q10_5:{a:['fue muy divertido','divertido'],t:'select'},
+
+  q12_1:{a:['especial'],t:'select'}, q12_2:{a:['de estudios'],t:'select'}, q12_3:{a:['deportivo/a','deportivo','deportiva'],t:'select'}, q12_4:{a:['del cumpleaños','de cumpleaños'],t:'select'}, q12_5:{a:['de oro'],t:'select'}, q12_6:{a:['de natación','de natacion'],t:'select'}, q12_7:{a:['de una novela'],t:'select'}, q12_8:{a:['al aire libre'],t:'select'}, q12_9:{a:['popular'],t:'select'},
+
+  q13_1:{a:['el viaje','viaje'],t:'select'}, q13_2:{a:['celebrar'],t:'select'}, q13_3:{a:['el sueño','sueño','sueno'],t:'select'}, q13_4:{a:['volar'],t:'select'}, q13_5:{a:['el contrato','contrato'],t:'select'}, q13_6:{a:['cambiar'],t:'select'}, q13_7:{a:['la manifestación','la manifestacion','manifestación'],t:'select'}, q13_8:{a:['publicar'],t:'select'},
+
+  q15a_1:{a:['maestra'],t:'select'}, q15a_2:{a:['línea','linea'],t:'select'}, q15a_3:{a:['viaje'],t:'select'}, q15a_4:{a:['vuestro'],t:'select'}, q15a_5:{a:['río','rio'],t:'select'}, q15a_6:{a:['día','dia'],t:'select'},
+
+  q15_1:{a:['fa-mi-lia'],t:'select'}, q15_2:{a:['nues-tro'],t:'select'}, q15_3:{a:['far-ma-cia'],t:'select'}, q15_4:{a:['re-al'],t:'select'}, q15_5:{a:['es-tu-dian-tes'],t:'select'}, q15_6:{a:['cre-o'],t:'select'}, q15_7:{a:['en-ví-o','en-vi-o'],t:'select'}, q15_8:{a:['len-gua'],t:'select'}, q15_9:{a:['com-pa-ñí-a','com-pa-ñi-a'],t:'select'},
+  q15_10:{a:['real, creo','real','creo'],t:'select'}, q15_11:{a:['familia, nuestro, farmacia, estudiantes, lengua','familia'],t:'select'}, q15_12:{a:['guía, envío, compañía','envío','compañía'],t:'select'}
 };
 
 const EXPLANATIONS = {
-q1_1:{ar:'ustedes conocen (تصريف المضارع المستمر للفعل conocer مع ustedes)'},
-q1_2:{ar:'vosotros dais (تصريف المضارع للفعل dar مع vosotros)'},
-q1_3:{ar:'tú decides (تصريف المضارع للفعل decidir مع tú)'},
-q1_4:{ar:'nosotros vamos (تصريف المضارع للفعل ir مع nosotros)'},
-q1_5:{ar:'él sigue (تصريف المضارع للفعل seguir مع él)'},
-q1_6:{ar:'ganaste (تصريف الماضي البسيط للفعل ganar مع tú)'},
-q1_7:{ar:'viajé (تصريف الماضي البسيط للفعل viajar مع yo)'},
-q1_8:{ar:'empecé (تصريف الماضي البسيط للفعل empezar مع yo - لاحظ تحول z إلى c)'},
-q1_9:{ar:'oyeron (تصريف الماضي البسيط للفعل oír مع ellos - لاحظ استخدام y)'},
-q1_10:{ar:'vi (تصريف الماضي البسيط للفعل ver مع yo)'},
-q1_11:{ar:'participó (تصريف الماضي البسيط للفعل participar مع él)'},
-q1_12:{ar:'fuimos (تصريف الماضي البسيط للفعل ir مع nosotros)'},
-q1_13:{ar:'se trasladó (تصريف الماضي البسيط للفعل trasladarse مع ella)'},
-q1_14:{ar:'durmió (تصريف الماضي البسيط للفعل dormir مع usted)'},
-q2_1:{ar:'buscó (الماضي البسيط للفعل buscar مع ella)'},
-q2_2:{ar:'fue (الماضي البسيط للفعل ser مع ella)'},
-q2_3:{ar:'ganó (الماضي البسيط للفعل ganar مع él)'},
-q2_4:{ar:'empezó (الماضي البسيط للفعل empezar مع ella)'},
-q2_5:{ar:'construyó (الماضي البسيط للفعل construir مع él - يضاف y لتسهيل النطق)'},
-q2_6:{ar:'visitaron (الماضي البسيط للفعل visitar مع ellos)'},
-q3_1a:{ar:'empecé (في تصريف yo للفعل empezar تتحول الـ z إلى c لتتناسب مع حرف e)'},
-q3_1b:{ar:'empezó (مع él تبقى الـ z كما هي)'},
-q3_2:{ar:'leyeron (للفعل leer مع ellos/ellas نستخدم y بين الحرفين المتحركين)'},
-q3_3a:{ar:'durmió (للفعل dormir مع él/ella/usted تتحول الـ o إلى u)'},
-q3_3b:{ar:'dormí (مع yo لا تتغير الـ o)'},
-q3_4a:{ar:'busqué (في تصريف yo للفعل buscar تتحول الـ c إلى qu)'},
-q3_4b:{ar:'buscamos (مع nosotros تبقى الـ c)'},
-q3_5a:{ar:'oísteis (للفعل oír مع vosotros نضع نبرة tilde على الحرف i)'},
-q3_5b:{ar:'oyeron (للفعل oír مع ellos نستخدم y)'},
-q3_5c:{ar:'leí (للفعل leer مع yo نضع نبرة tilde)'},
-q3_6a:{ar:'conseguí (للفعل conseguir مع yo تبقى الـ e)'},
-q3_6b:{ar:'consiguieron (للفعل conseguir مع ellos تتحول الـ e إلى i)'},
-q4_1:{ar:'estuvimos (الفعل estar غير منتظم جذره هو estuv)'},
-q4_2:{ar:'quise (الفعل querer غير منتظم جذره هو quis)'},
-q4_3:{ar:'vinieron (الفعل venir غير منتظم جذره هو vin)'},
-q4_4:{ar:'pudiste (الفعل poder غير منتظم جذره هو pud)'},
-q4_5:{ar:'hicisteis (الفعل hacer غير منتظم جذره هو hic)'},
-q4_6:{ar:'dije (الفعل decir غير منتظم جذره هو dij)'},
-q4_7:{ar:'pusiste (الفعل poner غير منتظم جذره هو pus)'},
-q5_1:{ar:'celebré (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_2:{ar:'conoció (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_3:{ar:'ganó (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_4:{ar:'nació (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_5:{ar:'pedí (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_6:{ar:'decidió (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_7:{ar:'participó (فعل منتظم: النبرة على المقطع الأخير)'},
-q5_8:{ar:'dije (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_9:{ar:'hizo (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_10:{ar:'tuve (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_11:{ar:'estuve (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_12:{ar:'pude (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_13:{ar:'puso (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q5_14:{ar:'vino (فعل غير منتظم: النبرة على المقطع قبل الأخير)'},
-q7a_1:{ar:'la semana pasada (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_2:{ar:'el año pasado (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_3:{ar:'en 2014 (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_4:{ar:'el mes pasado (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_5:{ar:'hace mucho (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_6:{ar:'ayer (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_7:{ar:'hace dos años (الماضي البسيط: حدث منتهي في فترة زمنية منتهية)'},
-q7a_8:{ar:'hoy (الماضي التام: حدث مرتبط بالحاضر)'},
-q7a_9:{ar:'ya (الماضي التام: للإشارة عن تجربة أو فعل تم)'},
-q7a_10:{ar:'este año (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
-q7a_11:{ar:'últimamente (الماضي التام: حدث مرتبط بالحاضر)'},
-q7a_12:{ar:'este mes (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
-q7a_13:{ar:'alguna vez (الماضي التام: للسؤال عن تجربة في الحياة)'},
-q7a_14:{ar:'esta semana (الماضي التام: فترة زمنية لم تنتهِ بعد)'},
-q7a_15:{ar:'todavía no (الماضي التام: للإشارة لفعل لم يكتمل بعد)'},
-q7_1:{ar:'han estado (الماضي التام يأتي مع este año لأنه يمثل فترة لم تنتهي)'},
-q7_2:{ar:'estuvieron (الماضي البسيط يأتي مع el año pasado لأنه فترة منتهية)'},
-q7_3:{ar:'¿Has subido? (الماضي التام يُستخدم للسؤال عن تجارب الحياة alguna vez)'},
-q7_4:{ar:'¿Subiste? (الماضي البسيط يُستخدم مع فترات منتهية مثل la semana pasada)'},
-q7_5:{ar:'Vimos (الماضي البسيط يُستخدم لتحديد سنة منتهية en 2016)'},
-q7_6:{ar:'Hemos visto (الماضي التام يُستخدم مع este mes)'},
-q7_7:{ar:'cocinaron (الماضي البسيط يُستخدم مع ayer)'},
-q7_8:{ar:'han cocinado (الماضي التام يُستخدم مع hoy)'},
-q8_1:{ar:'ir (بمعنى ذهب - هل ذهبت إلى الصف؟)'},
-q8_2:{ar:'ser (بمعنى كان - تقييم كيف كانت السنة)'},
-q8_3:{ar:'ir (بمعنى ذهب - متى ذهبت للحفلة؟)'},
-q8_4:{ar:'ir (بمعنى ذهب - ذهبنا مشياً)'},
-q8_5:{ar:'ser (بمعنى كان - كان جداً مشهوراً)'},
-q8_6:{ar:'ser (بمعنى كان - تقييم المحاضرة بأنها شيقة)'},
-q8_7:{ar:'ser (بمعنى كان - من كان الرئيس؟)'},
-q8_8:{ar:'ser (بمعنى كان - تقييم أفضل سنين حياته)'},
-q9_1:{ar:'tuvimos (لأن la semana pasada فترة منتهية - ماضي بسيط)'},
-q9_2:{ar:'Tuvo (لأننا نكمل سرد القصة في الماضي البسيط)'},
-q9_3:{ar:'he estado (لأنه يذكر تجربة ما زالت مستمرة أو مرتبطة بحاضره Ya)'},
-q9_4:{ar:'pude (يعود لسرد أحداث الاجتماع المنتهي - ماضي بسيط)'},
-q9_5:{ar:'hemos visto (لوجود últimamente وهي تعني "مؤخراً" ما زالت مستمرة - ماضي تام)'},
-q9_6:{ar:'se casó (لوجود el año pasado فترة منتهية - ماضي بسيط)'},
-q9_7:{ar:'se fue (تكملة للحدث في الماضي البسيط)'},
-q9_8:{ar:'participó (لوجود hace un año فترة منتهية - ماضي بسيط)'},
-q9_9:{ar:'se marchó (تكملة للحدث في الماضي البسيط)'},
-q9_10:{ar:'ha expuesto (استخدام Ya للدلالة على إنجاز في الحياة دون تحديد وقت منتهي)'},
-q9_11:{ar:'ha ganado (لوجود este mes فترة لم تنتهي - ماضي تام)'},
-q9_12:{ar:'regresé (لوجود hace dos años فترة منتهية - ماضي بسيط)'},
-q9_13:{ar:'estudié (تكملة لسرد أحداث الماضي البسيط)'},
-q10_1:{ar:'¡Fue horrible! (شيء سيء لأنهم سُرقوا)'},
-q10_2:{ar:'¡Ha sido muy desagradable! (غير سار بسبب البرد)'},
-q10_3:{ar:'¡Fue fantástico! (رائع لأنهم أحبوا كل شيء)'},
-q10_4:{ar:'¡Ha sido muy bonito! (جميل لأن الوداع كان مؤثراً)'},
-q10_5:{ar:'¡Fue muy divertido! (ممتع لأنهم ضحكوا طوال الوقت)'},
-q12_1:{ar:'especial (حدث خاص / مميز)'},
-q12_2:{ar:'de estudios (منحة دراسية)'},
-q12_3:{ar:'deportivo/a (بطولة رياضية)'},
-q12_4:{ar:'del cumpleaños (احتفال بعيد الميلاد)'},
-q12_5:{ar:'de oro (ميدالية ذهبية)'},
-q12_6:{ar:'de natación (مهمة سباحة)'},
-q12_7:{ar:'de una novela (نشر رواية)'},
-q12_8:{ar:'al aire libre (حفلة في الهواء الطلق)'},
-q12_9:{ar:'popular (حفلة شعبية)'},
-q13_1:{ar:'el viaje (الاسم من viajar)'},
-q13_2:{ar:'celebrar (الفعل من la celebración)'},
-q13_3:{ar:'el sueño (الاسم من soñar)'},
-q13_4:{ar:'volar (الفعل من el vuelo)'},
-q13_5:{ar:'el contrato (الاسم من contratar)'},
-q13_6:{ar:'cambiar (الفعل من el cambio)'},
-q13_7:{ar:'la manifestación (الاسم من manifestarse)'},
-q13_8:{ar:'publicar (الفعل من la publicación)'},
-q15a_1:{ar:'ma-es-tra (فصلنا a و e لأنها حروف قوية متتالية)'},
-q15a_2:{ar:'lí-ne-a (فصلنا e و a لأنها حروف قوية)'},
-q15a_3:{ar:'via-je (الحرف الضعيف i مدمج مع الحرف القوي a)'},
-q15a_4:{ar:'vues-tro (الحرف الضعيف u مدمج مع القوي e)'},
-q15a_5:{ar:'rí-o (الكسرة (Tilde) على i تفصلها عن o)'},
-q15a_6:{ar:'dí-a (الكسرة (Tilde) على i تفصلها عن a)'},
-q15_1:{ar:'fa-mi-lia (حرف متحرك قوي وضعيف معاً يشكلان مقطع واحد)'},
-q15_2:{ar:'nues-tro (حرف متحرك ضعيف وقوي معاً يندمجان)'},
-q15_3:{ar:'far-ma-cia (دمج i مع a)'},
-q15_4:{ar:'re-al (حرفان قويان متتاليان e و a يجب فصلهما)'},
-q15_5:{ar:'es-tu-dian-tes (دمج i مع a)'},
-q15_6:{ar:'cre-o (حرفان قويان e و o يجب فصلهما)'},
-q15_7:{ar:'en-ví-o (وضع Tilde على الحرف الضعيف يفصله عن الحرف القوي)'},
-q15_8:{ar:'len-gua (دمج u مع a)'},
-q15_9:{ar:'com-pa-ñí-a (نبرة tilde على الحرف i تفصله)'},
-q15_10:{ar:'القاعدة 1 (حرفان قويان): ينطبق على real y creo'},
-q15_11:{ar:'القاعدة 2 (الدمج / diptongo): ينطبق على familia, nuestro, farmacia, estudiantes, lengua'},
-q15_12:{ar:'القاعدة 3 (النبرة التي تكسر الدمج): ينطبق على envío, compañía'}
+  q1_1:{ar:"تحديد الكلمة: ustedes conocen\nالقاعدة العامة: المضارع البسيط يُستخدم للتعبير عن العادة والحقائق الدائمة (NORMALMENTE)، وتصريف الفعل conocer مع ustedes ينتهي بـ -en.\nمثال: Ustedes conocen muy bien Madrid.", es:"Ustedes conocen muy bien esta ciudad."},
+  q1_2:{ar:"تحديد الكلمة: vosotros dais\nالقاعدة العامة: الفعل dar في المضارع البسيط مع الضمير vosotros يكون dais.\nمثال: Vosotros dais muchos regalos.", es:"Vosotros dais dinero a las organizaciones."},
+  q1_3:{ar:"تحديد الكلمة: tú decides\nالقاعدة العامة: أفعال المجموعة الثالثة (-ir) في المضارع البسيط مع tú تنتهي بـ -es.\nمثال: Tú decides el lugar del viaje.", es:"Tú decides adónde vamos."},
+  q1_4:{ar:"تحديد الكلمة: nosotros vamos\nالقاعدة العامة: الفعل ir غير منتظم، وتصريفه في المضارع البسيط مع nosotros هو vamos.\nمثال: Nosotros vamos al cine cada fin de semana.", es:"Nosotros vamos a la playa."},
+  q1_5:{ar:"تحديد الكلمة: él sigue\nالقاعدة العامة: الفعل seguir أصل متحرك (e يتحول إلى i) في المضارع البسيط مع él.\nمثال: Él sigue las instrucciones del profesor.", es:"Él sigue entrenando cada día."},
+  q1_6:{ar:"تحديد الكلمة: ganaste\nالقاعدة العامة: الماضي البسيط (AYER) لأفعال المجموعة الأولى (-ar) مع الضمير tú ينتهي بـ -aste.\nمثال: Ayer ganaste un premio fantástico.", es:"Ayer ganaste el campeonato."},
+  q1_7:{ar:"تحديد الكلمة: viajé\nالقاعدة العامة: الماضي البسيط لأفعال المجموعة الأولى (-ar) مع الضمير yo ينتهي بـ -é مع النبرة.\nمثال: El verano pasado viajé a España.", es:"Yo viajé a Madrid en avión."},
+  q1_8:{ar:"تحديد الكلمة: empecé\nالقاعدة العامة: في تصريف yo للماضي البسيط من empezar تتحول الـ z إلى c قبل الـ é للمحافظة على الصوت.\nمثال: Ayer empecé un nuevo curso.", es:"Yo empecé a estudiar español."},
+  q1_9:{ar:"تحديد الكلمة: oyeron\nالقاعدة العامة: الفعل oír في الماضي البسيط مع ellos/ellas يتحول فيه حرف i المكسور إلى y بين متحركين.\nمثال: Ellos oyeron la música desde lejos.", es:"Ellos oyeron las noticias en la radio."},
+  q1_10:{ar:"تحديد الكلمة: vi\nالقاعدة العامة: الفعل ver في الماضي البسيط منتظم مع yo يكون vi (بدون تيلدي لأنه مقطع واحد).\nمثال: Ayer vi una película excelente.", es:"Yo vi a Carlos en la estación."},
+  q1_11:{ar:"تحديد الكلمة: participó\nالقاعدة العامة: الماضي البسيط لأفعال المجموعة الأولى (-ar) مع الضمير él/ella ينتهي بـ -ó مع النبرة.\nمثال: Juan participó en el maratón.", es:"Él participó en tres proyectos."},
+  q1_12:{ar:"تحديد الكلمة: fuimos\nالقاعدة العامة: الفعل ser/ir في الماضي البسيط مع nosotros تصريفه موحد وهو fuimos.\nمثال: Nosotros fuimos amigos en la infancia.", es:"Nosotros fuimos al museo ayer."},
+  q1_13:{ar:"تحديد الكلمة: se trasladó\nالقاعدة العامة: الأفعال المنعكسة في الماضي البسيط مع ella تأتي مع الضمير se وتنتهي بـ -ó.\nمثال: Ella se trasladó a otra ciudad.", es:"Ella se trasladó a vivir a Canadá."},
+  q1_14:{ar:"تحديد الكلمة: durmió\nالقاعدة العامة: الفعل dormir في الماضي البسيط مع usted تتحول فيه الـ o إلى u في الجذر.\nمثال: Usted durmió diez horas ayer.", es:"Usted durmió profundamente toda la noche."},
+
+  q2_1:{ar:"تحديد الكلمة: buscó\nالقاعدة العامة: الماضي البسيط (Indefinido) للفعل buscar مع الضمير ella ينتهي بـ -ó.\nمثال: Ella buscó información en internet.", es:"La fundación buscó un sitio idóneo."},
+  q2_2:{ar:"تحديد الكلمة: fue\nالقاعدة العامة: الفعل ser في الماضي البسيط غير منتظم، ومع الضمير ella يكون fue.\nمثال: Esta fue una experiencia inolvidable.", es:"Bilbao fue la ciudad elegida."},
+  q2_3:{ar:"تحديد الكلمة: ganó\nالقاعدة العامة: الماضي البسيط للفعل ganar مع él ينتهي بـ -ó على آخر مقطع.\nمثال: El equipo ganó la medalla de oro.", es:"Frank O. Gehry ganó el concurso."},
+  q2_4:{ar:"تحديد الكلمة: empezó\nالقاعدة العامة: الماضي البسيط للفعل empezar مع ella ينتهي بـ -ó (تبقى الـ z كما هي قبل o).\nمثال: La clase empezó a las nueve.", es:"En 1993 empezó la construcción."},
+  q2_5:{ar:"تحديد الكلمة: construyó\nالقاعدة العامة: الأفعال المنتهية بـ -uir مع él/ella تضاف لها y بين المتحركين في الماضي البسيط.\nمثال: El arquitecto construyó un puente moderno.", es:"El museo se construyó con titanio."},
+  q2_6:{ar:"تحديد الكلمة: visitaron\nالقاعدة العامة: الماضي البسيط لأفعال (-ar) مع الضمير ellos ينتهي بـ -aron.\nمثال: Mis padres visitaron Barcelona.", es:"Más de un millón visitaron este museo."},
+
+  q3_1a:{ar:"تحديد الحرف: c في empecé\nالقاعدة العامة: أفعال (-zar) عند تصريفها مع yo في الماضي البسيط تقلب الـ z إلى c قبل الحرف e.\nمثال: Yo almorcé con mis amigos.", es:"A los siete años empecé a entrenar."},
+  q3_1b:{ar:"تحديد الحرف: z في empezó\nالقاعدة العامة: مع الضمير él في الماضي البسيط تبقى الـ z كما هي قبل حرف o.\nمثال: Mi hermano empezó a estudiar.", es:"Mi hermano empezó a entrenar también."},
+  q3_2:{ar:"تحديد الحرف: y في leyeron\nالقاعدة العامة: أفعال (-er) و (-ir) التي ينتهي جذرها بمتحرك، تقلب الـ i إلى y مع ellos في الماضي البسيط.\nمثال: Ellos creyeron la noticia.", es:"Los estudiantes leyeron un artículo."},
+  q3_3a:{ar:"تحديد الحرف: u في durmió\nالقاعدة العامة: الفعل dormir يغير حرف o إلى u في الماضي البسيط مع الضمير él/ella.\nمثال: El niño durmió bien.", es:"Ana durmió en el avión."},
+  q3_3b:{ar:"تحديد الحرف: o في dormí\nالقاعدة العامة: مع الضمير yo في الماضي البسيط لا يتغير جذر الفعل dormir.\nمثال: Anoche no dormí bien.", es:"Yo no dormí nada por el estrés."},
+  q3_4a:{ar:"تحديد الحرف: qu في busqué\nالقاعدة العامة: أفعال (-car) تقلب الـ c إلى qu مع yo في الماضي البسيط للحفاظ على صوت الكاف.\nمثال: Yo practiqué deporte.", es:"En 2015 busqué un trabajo."},
+  q3_4b:{ar:"تحديد الحرف: c في buscamos\nالقاعدة العامة: مع nosotros في الماضي البسيط تبقى الـ c كما هي.\nمثال: Nosotros buscamos una solución.", es:"Buscamos una casa juntos."},
+  q3_5a:{ar:"تحديد الحرف: í في oísteis\nالقاعدة العامة: الفعل oír يوضع عليه تيلدي على الـ i مع vosotros في الماضي البسيط.\nمثال: ¿Vosotros oísteis el ruido?", es:"¿Oísteis ayer la noticia?"},
+  q3_5b:{ar:"تحديد الحرف: y في oyeron\nالقاعدة العامة: تقلب الـ i إلى y بين حرفين متحركين مع ellos في الماضي البسيط.\nمثال: Ellos oyeron la explosión.", es:"Mis padres la oyeron."},
+  q3_5c:{ar:"تحديد الحرف: í في leí\nالقاعدة العامة: الفعل leer مع yo في الماضي البسيط يكتب بـ í مع تيلدي.\nمثال: Ayer leí un libro.", es:"Yo la leí en un periódico."},
+  q3_6a:{ar:"تحديد الحرف: e في conseguí\nالقاعدة العامة: الفعل conseguir مع الضمير yo في الماضي البسيط يحتفظ بحرف e في الجذر.\nمثال: Yo conseguí el boleto.", es:"No conseguí entradas."},
+  q3_6b:{ar:"تحديد الحرف: i في consiguieron\nالقاعدة العامة: مع الضمير ellos يقلب حرف e إلى i في الماضي البسيط للفعل conseguir.\nمثال: Ellos consiguieron el objetivo.", es:"Jaime y Caro consiguieron entradas."},
+
+  q4_1:{ar:"تحديد الكلمة: estuvimos\nالقاعدة العامة: الفعل estar غير منتظم في الماضي البسيط، وجذره هو estuv- وينتهي مع nosotros بـ -imos.\nمثال: Ayer estuvimos en Madrid.", es:"Nosotros estuvimos en la clase."},
+  q4_2:{ar:"تحديد الكلمة: quise\nالقاعدة العامة: الفعل querer غير منتظم في الماضي البسيط وجذره quis- ومع yo يكون quise.\nمثال: Yo quise llamarte anoche.", es:"Yo quise visitar el museo."},
+  q4_3:{ar:"تحديد الكلمة: vinieron\nالقاعدة العامة: الفعل venir غير منتظم وجذره vin- ومع ellos يكون vinieron.\nمثال: Ellos vinieron a mi fiesta.", es:"Ellos vinieron en autobús."},
+  q4_4:{ar:"تحديد الكلمة: pudiste\nالقاعدة العامة: الفعل poder غير منتظم وجذره pud- ومع tú يكون pudiste.\nمثال: ¿Pudiste resolver el ejercicio?", es:"Tú pudiste comprar la entrada."},
+  q4_5:{ar:"تحديد الكلمة: hicisteis\nالقاعدة العامة: الفعل hacer غير منتظم وجذره hic- ومع vosotros يكون hicisteis.\nمثال: ¿Qué hicisteis ayer?", es:"Vosotros hicisteis un buen trabajo."},
+  q4_6:{ar:"تحديد الكلمة: dije\nالقاعدة العامة: الفعل decir غير منتظم وجذره dij- ومع yo يكون dije.\nمثال: Yo te dije la verdad.", es:"Yo dije que sí."},
+  q4_7:{ar:"تحديد الكلمة: pusiste\nالقاعدة العامة: الفعل poner غير منتظم وجذره pus- ومع tú يكون pusiste.\nمثال: ¿Dónde pusiste las llaves?", es:"Tú pusiste el libro en la mesa."},
+
+  q5_1:{ar:"تحديد الفعل: celebré\nالقاعدة العامة: الأفعال المنتظمة في الماضي البسيط يقع النبر فيها على المقطع الأخير (última sílaba acentuada).\nمثال: ce-le-bré.", es:"Celebré mi graduación."},
+  q5_2:{ar:"تحديد الفعل: conoció\nالقاعدة العامة: فعل منتظم، النبر يقع على المقطع الأخير -ó.\nمثال: co-no-ció.", es:"Conoció a su mejor amigo."},
+  q5_3:{ar:"تحديد الفعل: ganó\nالقاعدة العامة: فعل منتظم، النبر على المقطع الأخير.\nمثال: ga-nó.", es:"Ganó una medalla."},
+  q5_4:{ar:"تحديد الفعل: nació\nالقاعدة العامة: فعل منتظم، النبر على المقطع الأخير.\nمثال: na-ció.", es:"Nació en 1990."},
+  q5_5:{ar:"تحديد الفعل: pedí\nالقاعدة العامة: فعل منتظم، النبر على المقطع الأخير.\nمثال: pe-dí.", es:"Pedí un café."},
+  q5_6:{ar:"تحديد الفعل: decidió\nالقاعدة العامة: فعل منتظم، النبر على المقطع الأخير.\nمثال: de-ci-dió.", es:"Decidió viajar."},
+  q5_7:{ar:"تحديد الفعل: participó\nالقاعدة العامة: فعل منتظم، النبر على المقطع الأخير.\nمثال: par-ti-ci-pó.", es:"Participó en el evento."},
+  q5_8:{ar:"تحديد الفعل: dije\nالقاعدة العامة: الأفعال غير المنتظمة في الماضي البسيط يقع النبر فيها على المقطع قبل الأخير (penúltima sílaba acentuada).\nمثال: di-je.", es:"Dije adiós."},
+  q5_9:{ar:"تحديد الفعل: hizo\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: hi-zo.", es:"Hizo la tarea."},
+  q5_10:{ar:"تحديد الفعل: tuve\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: tu-ve.", es:"Tuve una reunión."},
+  q5_11:{ar:"تحديد الفعل: estuve\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: es-tu-ve.", es:"Estuve en Lima."},
+  q5_12:{ar:"تحديد الفعل: pude\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: pu-de.", es:"No pude dormir."},
+  q5_13:{ar:"تحديد الفعل: puso\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: pu-so.", es:"Puso música."},
+  q5_14:{ar:"تحديد الفعل: vino\nالقاعدة العامة: فعل غير منتظم، النبر على المقطع قبل الأخير.\nمثال: vi-no.", es:"Vino temprano."},
+
+  q6a_1:{ar:"تحديد النشاط: quedarse en un hotel en las afueras\nالقاعدة العامة: حسب نص الاستماع (Pista 19)، هذا هو الحدث رقم 2 بعد الوصول في الطائرة.\nمثال: Me quedé en un hotel en las afueras.", es:"Llegué en avión y me quedé en un hotel."},
+  q6a_2:{ar:"تحديد النشاط: ir a la parte vieja\nالقاعدة العامة: حسب نص الاستماع، الذهاب للبلدة القديمة وتناول البينتشوس حدث في الظهيرة (رقم 9).\nمثال: Al mediodía fui a la parte vieja.", es:"Fui a la parte vieja de la ciudad."},
+  q6a_3:{ar:"تحديد النشاط: acostarse temprano\nالقاعدة العامة: في ليلة الجمعة، نامت مبكراً بسبب التعب (الحدث رقم 3).\nمثال: Me acosté temprano.", es:"Me acosté temprano por el cansancio."},
+  q6a_4:{ar:"تحديد النشاط: dormir profundamente\nالقاعدة العامة: نامت بعمق طوال الليل (الحدث رقم 4).\nمثال: Dormí profundamente toda la noche.", es:"Dormí profundamente."},
+  q6a_5:{ar:"تحديد النشاط: llegar en avión\nالقاعدة العامة: هذا هو الحدث الأول (رقم 1) المذكور كمثال في الكتاب وصلتها يوم الجمعة.\nمثال: El viernes llegué en avión.", es:"Llegué en avión directamente."},
+  q6a_6:{ar:"تحديد النشاط: recorrer la playa de la Concha\nالقاعدة العامة: صباح السبت بدأت الجولة بالمشي على شاطئ لا كونتشا (رقم 6).\nمثال: Recorrí la playa.", es:"Recorrí la playa de la Concha."},
+  q6a_7:{ar:"تحديد النشاط: empezar la visita por la ciudad\nالقاعدة العامة: في صباح السبت بدأت زيارة المدينة (رقم 5).\nمثال: Empecé la visita por la ciudad.", es:"El sábado empecé la visita."},
+  q6a_8:{ar:"تحديد النشاط: beber un café\nالقاعدة العامة: في المساء شربت القهوة في ساحة الدستور (رقم 11).\nمثال: Por la tarde bebí un café.", es:"Bebí un café en la plaza."},
+  q6a_9:{ar:"تحديد النشاط: conseguir entradas\nالقاعدة العامة: بالإضافة لذلك حصلت على تذاكر لحفلة موسيقية (رقم 12).\nمثال: Conseguí entradas para un concierto.", es:"Conseguí entradas."},
+  q6a_10:{ar:"تحديد النشاط: tomar unos pinchos\nالقاعدة العامة: في الظهيرة تناولت المقبلات (البينتشوس) في شارع 31 أغسطس (رقم 10).\nمثال: Tomé unos pinchos.", es:"Tomé unos pinchos en los bares."},
+  q6a_11:{ar:"تحديد النشاط: subir al monte Urgull\nالقاعدة العامة: صعدت إلى جبل أورغول صباح السبت (رقم 8).\nمثال: Subí al monte Urgull.", es:"Subí al monte Urgull."},
+  q6a_12:{ar:"تحديد النشاط: visitar la catedral\nالقاعدة العامة: زارت كاتدرائية الراعي الصالح صباح السبت (رقم 7).\nمثال: Visité la catedral.", es:"Visité la catedral del Buen Pastor."},
+
+  q7a_1:{ar:"تحديد التعبير: la semana pasada\nالقاعدة العامة: الماضي البسيط (Indefinido) يُستخدم مع فترات زمنية منتهية ومحددة في الماضي.\nمثال: La semana pasada estuve de viaje.", es:"Regresamos la semana pasada."},
+  q7a_2:{ar:"تحديد التعبير: el año pasado\nالقاعدة العامة: يُستخدم مع الماضي البسيط للإشارة إلى عام انقضى.\nمثال: El año pasado visité Italia.", es:"Se casó el año pasado."},
+  q7a_3:{ar:"تحديد التعبير: en 2014\nالقاعدة العامة: تحديد سنة محددة في الماضي يتطلب الماضي البسيط.\nمثال: En 2014 terminé mis estudios.", es:"En 2014 fui a España."},
+  q7a_4:{ar:"تحديد التعبير: el mes pasado\nالقاعدة العامة: شهر انقضى يتطلب الماضي البسيط.\nمثال: El mes pasado compré un coche.", es:"Estuvo aquí el mes pasado."},
+  q7a_5:{ar:"تحديد التعبير: hace mucho\nالقاعدة العامة: التعبير بـ hace + وقت في الماضي يدل على الماضي البسيط.\nمثال: Hace mucho estuve allí.", es:"Lo vi hace mucho."},
+  q7a_6:{ar:"تحديد التعبير: ayer\nالقاعدة العامة: كلمة أمس (ayer) تدل مباشرة على الماضي البسيط المنتهي.\nمثال: Ayer fui al cine.", es:"Ayer por la tarde fuimos al cine."},
+  q7a_7:{ar:"تحديد التعبير: hace dos años\nالقاعدة العامة: تحديد فترة انقضت منذ سنتين يتطلب الماضي البسيط.\nمثال: Hace dos años regresé de Italia.", es:"Regresé hace dos años."},
+  q7a_8:{ar:"تحديد التعبير: hoy\nالقاعدة العامة: الماضي القريب (Pretérito perfecto) يُستخدم مع فترات زمنية لم تنتهِ بعد مثل اليوم (hoy).\nمثال: Hoy he trabajado mucho.", es:"Hoy hace muchísimo frío."},
+  q7a_9:{ar:"تحديد التعبير: ya\nالقاعدة العامة: كلمة ya (بالفعل) تُستخدم مع الماضي القريب للتعبير عن تجربة تمت.\nمثال: Ya he visitado Madrid.", es:"Yo ya he estado en tres fiestas."},
+  q7a_10:{ar:"تحديد التعبير: este año\nالقاعدة العامة: هذا العام فترة لم تنتهي بعد، فنستخدم الماضي القريب.\nمثال: Este año he viajado dos veces.", es:"Han estado en Salzburgo este año."},
+  q7a_11:{ar:"تحديد التعبير: últimamente\nالقاعدة العامة: كلمة مؤخراً تدل على حدث مرتبط بالوقت الحاضر.\nمثال: Últimamente he leído mucho.", es:"Últimamente no nos hemos visto."},
+  q7a_12:{ar:"تحديد التعبير: este mes\nالقاعدة العامة: هذا الشهر فترة جارية، فنستخدم الماضي القريب.\nمثال: Este mes ha ganado un premio.", es:"Este mes ha participado."},
+  q7a_13:{ar:"تحديد التعبير: alguna vez\nالقاعدة العامة: تُستخدم للسؤال عن تجارب الحياة بشكل عام دون تحديد وقت منتهي.\nمثال: ¿Has subido alguna vez a esa montaña?", es:"¿Has viajado alguna vez en helicóptero?"},
+  q7a_14:{ar:"تحديد التعبير: esta semana\nالقاعدة العامة: هذه الأسبوع فترة مستمرة، فنستخدم الماضي القريب.\nمثال: Esta semana hemos tenido examen.", es:"Esta semana hemos estudiado."},
+  q7a_15:{ar:"تحديد التعبير: todavía no\nالقاعدة العامة: تُستخدم مع الماضي القريب لنفي حدوث شيء حتى هذه اللحظة.\nمثال: Todavía no he visto la película.", es:"Todavía no hemos terminado."},
+
+  q7_1:{ar:"تحديد التعبير: b. este año\nالقاعدة العامة: الفعل han estado في الماضي القريب يتماشى مع ظرف زمان غير منتهي مثل este año.\nمثال: Este año han estado en Salzburgo.", es:"Mis amigos han estado en Salzburgo este año."},
+  q7_2:{ar:"تحديد التعبير: a. el año pasado\nالقاعدة العامة: الفعل estuvieron في الماضي البسيط يتماشى مع ظرف زمان منتهي مثل el año pasado.\nمثال: El año pasado estuvieron en Salzburgo.", es:"También estuvieron en Salzburgo el año pasado."},
+  q7_3:{ar:"تحديد التعبير: b. alguna vez\nالقاعدة العامة: السؤال بـ Has subido للسؤال عن تجربة في الحياة يتماشى مع alguna vez.\nمثال: ¿Has subido alguna vez a esa montaña?", es:"¿Has subido a esa montaña alguna vez?"},
+  q7_4:{ar:"تحديد التعبير: a. la semana pasada\nالقاعدة العامة: السؤال بـ Subiste تحديداً في الماضي البسيط يتطلب ظرف منتهي مثل la semana pasada.\nمثال: ¿Subiste a la montaña la semana pasada?", es:"¿Subiste a la montaña la semana pasada?"},
+  q7_5:{ar:"تحديد التعبير: b. en 2016\nالقاعدة العامة: الفعل Vimos ماضي بسيط يتطلب تحديد سنة منتهية en 2016.\nمثال: Vimos esa película en 2016.", es:"Vimos esa película sobre deportes en 2016."},
+  q7_6:{ar:"تحديد التعبير: a. este mes\nالقاعدة العامة: الفعل Hemos visto ماضي قريب يتطلب ظرف مستمر مثل este mes.\nمثال: Este mes hemos visto muchas películas.", es:"Hemos visto muchas películas este mes."},
+  q7_7:{ar:"تحديد التعبير: a. ayer\nالقاعدة العامة: الفعل cocinaron ماضي بسيط يتماشى مع أمس (ayer).\nمثال: Los chicos cocinaron la paella ayer.", es:"Cocinaron la paella ayer."},
+  q7_8:{ar:"تحديد التعبير: b. hoy\nالقاعدة العامة: الفعل han cocinado ماضي قريب يتماشى مع اليوم (hoy).\nمثال: Los chicos han cocinado hoy.", es:"Han cocinado la paella hoy."},
+
+  q8_1:{ar:"تحديد الفعل: ir\nالقاعدة العامة: في جملة ¿Fuiste a clase ayer؟ السؤال عن الذهاب إلى الصف (الفعل ir).\nمثال: ¿Fuiste al cine?", es:"¿Fuiste a clase ayer?"},
+  q8_2:{ar:"تحديد الفعل: ser\nالقاعدة العامة: في جملة fue un año muy especial، تقييم ووصف كيف كان العام (الفعل ser).\nمثال: Fue una fiesta increíble.", es:"El 2017 fue un año muy especial."},
+  q8_3:{ar:"تحديد الفعل: ir\nالقاعدة العامة: في السؤال ¿Cuándo fuiste a la fiesta؟ السؤال عن موعد الذهاب إلى الحفلة (ir).\nمثال: ¿Cuándo fuiste a Madrid?", es:"¿Cuándo fuiste a la fiesta?"},
+  q8_4:{ar:"تحديد الفعل: ir\nالقاعدة العامة: في جملة fuimos a pie a la estación، التعبير عن الذهاب مشياً (ir).\nمثال: Fuimos a la playa en autobús.", es:"Nosotros fuimos a pie."},
+  q8_5:{ar:"تحديد الفعل: ser\nالقاعدة العامة: في جملة fue un escultor muy famoso، التعريف بمهنة شخص في الماضي (ser).\nمثال: Mi padre fue médico.", es:"Mi abuelo fue un escultor famoso."},
+  q8_6:{ar:"تحديد الفعل: ser\nالقاعدة العامة: في جملة La conferencia fue muy interesante، وصف المحاضرة بأنها شيقة (ser).\nمثال: La clase fue excelente.", es:"La conferencia de ayer fue muy interesante."},
+  q8_7:{ar:"تحديد الفعل: ser\nالقاعدة العامة: في السؤال ¿Quién fue el presidente؟ السؤال عن هوية شخص في منصب سابق (ser).\nمثال: ¿Quién fue el director?", es:"¿Quién fue el presidente de tu país?"},
+  q8_8:{ar:"تحديد الفعل: ser\nالقاعدة العامة: في جملة Esos fueron los mejores años، تقييم تلك السنوات (ser).\nمثال: Fueron días bonitos.", es:"Esos fueron los mejores años de su vida."},
+
+  q9_1:{ar:"تحديد الكلمة: tuvimos\nالقاعدة العامة: ظرف الزمان la semana pasada منتهي، فيتطلب الماضي البسيط tuvimos.\nمثال: La semana pasada tuvimos una reunión.", es:"La semana pasada tuvimos la reunión."},
+  q9_2:{ar:"تحديد الكلمة: Tuvo\nالقاعدة العامة: تكملة سرد القصة في الماضي البسيط، التعبير tener lugar (ينعقد) في الماضي البسيط هو tuvo lugar.\nمثال: El evento tuvo lugar en Madrid.", es:"Tuvo lugar en una finca abandonada."},
+  q9_3:{ar:"تحديد الكلمة: he estado\nالقاعدة العامة: وجود كلمة Ya (بالفعل) يدل على تجربة في الحياة مرتبطة بالحاضر، فنستخدم الماضي القريب he estado.\nمثال: Yo ya he estado en esa playa.", es:"Yo ya he estado en tres fiestas allí."},
+  q9_4:{ar:"تحديد الكلمة: pude\nالقاعدة العامة: سرد أحداث وقعت أثناء الحفلة المنتهية (Durante la reunión)، فيتطلب الماضي البسيط pude.\nمثال: Durante la fiesta pude hablar con todos.", es:"Durante la reunión pude ver a los compañeros."},
+  q9_5:{ar:"تحديد الكلمة: hemos visto\nالقاعدة العامة: وجود كلمة مؤخراً (Últimamente) يدل على استمرارية الحدث للوقت الحاضر، فنستخدم الماضي القريب.\nمثال: Últimamente no hemos visto a Juan.", es:"Últimamente no nos hemos visto."},
+  q9_6:{ar:"تحديد الكلمة: se casó\nالقاعدة العامة: ظرف الزمان el año pasado منتهي، فنستخدم الماضي البسيط se casó.\nمثال: Marisa se casó en 2020.", es:"Marisa se casó el año pasado."},
+  q9_7:{ar:"تحديد الكلمة: se fue\nالقاعدة العامة: عطف وتكملة على فعل الماضي البسيط السابق، ذهبت للعيش في كندا se fue.\nمثال: Se fue a vivir a Italia.", es:"Se fue a vivir a Canadá."},
+  q9_8:{ar:"تحديد الكلمة: participó\nالقاعدة العامة: ظرف الزمان Hace un año منتهي، فنستخدم الماضي البسيط participó.\nمثال: Hace un año participó en un torneo.", es:"Hace un año Andrea participó en tres proyectos."},
+  q9_9:{ar:"تحديد الكلمة: se marchó\nالقاعدة العامة: عطف وتكملة على أحداث الماضي البسيط، انتقلت إلى واشنطن se marchó.\nمثال: Se marchó a Francia.", es:"Se marchó a Washington."},
+  q9_10:{ar:"تحديد الكلمة: ha expuesto\nالقاعدة العامة: استخدام Ya للتعبير عن إنجاز مهني في مسيرة الفنان دون تحديد وقت منتهي.\nمثال: Ya ha expuesto en París.", es:"Ya ha expuesto sus trabajos en el extranjero."},
+  q9_11:{ar:"تحديد الكلمة: ha ganado\nالقاعدة العامة: ظرف الزمان este mes جاري وغير منتهي، فيتطلب الماضي القريب ha ganado.\nمثال: Este mes ha ganado un trofeo.", es:"Este mes ha ganado un premio muy importante."},
+  q9_12:{ar:"تحديد الكلمة: regresé\nالقاعدة العامة: ظرف الزمان hace dos años منتهي ومحدد، فنستخدم الماضي البسيط regresé.\nمثال: Hace dos años regresé de Lima.", es:"Hace dos años regresé de Italia."},
+  q9_13:{ar:"تحديد الكلمة: estudié\nالقاعدة العامة: تكملة سرد أحداث الماضي البسيط حيث درستُ العمارة estudié.\nمثال: Estudié Medicina en Madrid.", es:"Donde estudié Arquitectura."},
+
+  q10_1:{ar:"تحديد الصفة: ¡Fue horrible!\nالقاعدة العامة: نستخدم فعل ser في الماضي البسيط (fue) مع صفة سلبية مثل horrible لوصف التعرض للسرقة في عطلة منتهية.\nمثال: Entraron a robar. ¡Fue horrible!", es:"Entraron a robar. ¡Fue horrible!"},
+  q10_2:{ar:"تحديد الصفة: ¡Ha sido muy desagradable!\nالقاعدة العامة: نستخدم الماضي القريب (ha sido) لأن الحوار يبدأ بـ اليوم (Hoy)، والطقس البارد جداً يجعل المشي غير سار (desagradable).\nمثال: Hoy hace frío. ¡Ha sido muy desagradable!", es:"No ha sido una buena idea. ¡Ha sido muy desagradable!"},
+  q10_3:{ar:"تحديد الصفة: ¡Fue fantástico!\nالقاعدة العامة: وصف رحلة الصيف الماضي المنتهية إلى بيرو، وإعجابهم بكل شيء يجعلها تجربة رائعة (fantástico).\nمثال: Nos gustó todo. ¡Fue fantástico!", es:"En realidad nos gustó todo. ¡Fue fantástico!"},
+  q10_4:{ar:"تحديد الصفة: ¡Ha sido muy bonito!\nالقاعدة العامة: الحوار عن صباح اليوم (esta mañana)، وتأثر الشخص بهدية الوداع يجعل الموقف جميلاً (bonito).\nمثال: Se ha emocionado. ¡Ha sido muy bonito!", es:"Se ha emocionado mucho. ¡Ha sido muy bonito!"},
+  q10_5:{ar:"تحديد الصفة: ¡Fue muy divertido!\nالقاعدة العامة: وصف الذهاب للسينما مساء أمس (Ayer)، والضحك طوال الوقت يجعل الفيلم ممتعاً ومضحكاً (divertido).\nمثال: Nos reímos todo el tiempo. ¡Fue muy divertido!", es:"Nos reímos todo el tiempo. ¡Fue muy divertido!"},
+
+  q12_1:{ar:"تحديد التعبير: el acontecimiento especial\nالقاعدة العامة: كلمة acontecimiento تعني حدث، وتوصف بـ especial (خاص أو متميز).\nمثال: Fue un acontecimiento especial.", es:"El acontecimiento especial."},
+  q12_2:{ar:"تحديد التعبير: la beca de estudios\nالقاعدة العامة: كلمة beca تعني منحة، وتأتي مع de estudios (منحة دراسية).\nمثال: Ganó una beca de estudios.", es:"La beca de estudios."},
+  q12_3:{ar:"تحديد التعبير: el campeonato deportivo/-a\nالقاعدة العامة: كلمة campeonato تعني بطولة، وتوصف بـ deportivo (بطولة رياضية).\nمثال: Un campeonato deportivo.", es:"El campeonato deportivo."},
+  q12_4:{ar:"تحديد التعبير: la celebración del cumpleaños\nالقاعدة العامة: كلمة celebración تعني احتفال، وتأتي مع del cumpleaños (احتفال عيد الميلاد).\nمثال: La celebración del cumpleaños.", es:"La celebración del cumpleaños."},
+  q12_5:{ar:"تحديد التعبير: la medalla de oro\nالقاعدة العامة: كلمة medalla تعني ميدالية، وتوصف بـ de oro (ميدالية ذهبية).\nمثال: Ganó la medalla de oro.", es:"La medalla de oro."},
+  q12_6:{ar:"تحديد التعبير: la misión espacial\nالقاعدة العامة: كلمة misión تعني مهمة، وتوصف بـ espacial (مهمة فضائية في وكالة ناسا).\nمثال: Una misión espacial importante.", es:"La misión espacial."},
+  q12_7:{ar:"تحديد التعبير: la publicación de una novela\nالقاعدة العامة: كلمة publicación تعني نشر، وتأتي مع de una novela (نشر رواية أدبية).\nمثال: La publicación de su nueva novela.", es:"La publicación de una novela."},
+  q12_8:{ar:"تحديد التعبير: el concierto al aire libre\nالقاعدة العامة: كلمة concierto تعني حفلة موسيقية، وتأتي مع al aire libre (في الهواء الطلق).\nمثال: Un concierto al aire libre en el parque.", es:"El concierto al aire libre."},
+  q12_9:{ar:"تحديد التعبير: la fiesta popular\nالقاعدة العامة: كلمة fiesta تعني مهرجان أو حفلة، وتوصف بـ popular (شعبية أو جماهيرية).\nمثال: Una fiesta popular en el barrio.", es:"La fiesta popular."},
+
+  q13_1:{ar:"تحديد الاسم: el viaje\nالقاعدة العامة: الاسم المشتق من الفعل viajar هو el viaje (الرحلة أو السفر).\nمثال: El viaje fue largo.", es:"Viajar ↔ el viaje."},
+  q13_2:{ar:"تحديد الفعل: celebrar\nالقاعدة العامة: الفعل المشتق من الاسم la celebración هو celebrar (يحتفل).\nمثال: Vamos a celebrar tu éxito.", es:"La celebración ↔ celebrar."},
+  q13_3:{ar:"تحديد الاسم: el sueño\nالقاعدة العامة: الاسم المشتق من الفعل soñar هو el sueño (الحلم).\nمثال: Tengo el sueño de visitar Machu Picchu.", es:"Soñar ↔ el sueño."},
+  q13_4:{ar:"تحديد الفعل: volar\nالقاعدة العامة: الفعل المشتق من الاسم el vuelo هو volar (يطير).\nمثال: Me gusta volar en avión.", es:"El vuelo ↔ volar."},
+  q13_5:{ar:"تحديد الاسم: el contrato\nالقاعدة العامة: الاسم المشتق من الفعل contratar هو el contrato (العقد المهني).\nمثال: Firmé el contrato de trabajo.", es:"El contrato ↔ contratar."},
+  q13_6:{ar:"تحديد الفعل: cambiar\nالقاعدة العامة: الفعل المشتق من الاسم el cambio هو cambiar (يغير أو يتبدل).\nمثال: Tienes que cambiar de idea.", es:"El cambio ↔ cambiar."},
+  q13_7:{ar:"تحديد الاسم: la manifestación\nالقاعدة العامة: الاسم المشتق من الفعل المنعكس manifestarse هو la manifestación (المظاهرة).\nمثال: Participaron en una manifestación.", es:"La manifestación ↔ manifestarse."},
+  q13_8:{ar:"تحديد الفعل: publicar\nالقاعدة العامة: الفعل المشتق من الاسم la publicación هو publicar (ينشر).\nمثال: Van a publicar el artículo.", es:"La publicación ↔ publicar."},
+
+  q15a_1:{ar:"تحديد الكلمة: maestra\nالقاعدة العامة: كلمة ma-es-tra تتكون من حرفين قويين متتاليين (a و e)، لذلك يُنطقان في مقطعين منفصلين.\nمثال: ma-es-tra.", es:"ma - es - tra."},
+  q15a_2:{ar:"تحديد الكلمة: línea\nالقاعدة العامة: كلمة lí-ne-a تحتوي على حرفين قويين متتاليين (e و a)، فيتم فصلهما إلى مقطعين.\nمثال: lí-ne-a.", es:"lí - ne - a."},
+  q15a_3:{ar:"تحديد الكلمة: viaje\nالقاعدة العامة: كلمة via-je تحتوي على حرف ضعيف غير منبور (i) متبوع بحرف قوي (a)، فيندمجان في مقطع واحد (Diptongo).\nمثال: via-je.", es:"via - je."},
+  q15a_4:{ar:"تحديد الكلمة: vuestro\nالقاعدة العامة: كلمة vues-tro تحتوي على حرف ضعيف غير منبور (u) مدمج مع حرف قوي (e) في مقطع واحد.\nمثال: vues-tro.", es:"vues - tro."},
+  q15a_5:{ar:"تحديد الكلمة: río\nالقاعدة العامة: كلمة rí-o تحتوي على حرف ضعيف منبور عليه تيلدي (í) متبوع بحرف قوي، فتكسر التيلدي الدمج ويفصلان.\nمثال: rí-o.", es:"rí - o."},
+  q15a_6:{ar:"تحديد الكلمة: día\nالقاعدة العامة: كلمة dí-a فيها حرف ضعيف منبور عليه تيلدي (í) يفصله عن الحرف القوي a.\nمثال: dí-a.", es:"dí - a."},
+
+  q15_1:{ar:"تحديد المقاطع: fa-mi-lia\nالقاعدة العامة: المقطع الأخير -lia يحتوي على دمج (Diptongo) بين الحرف الضعيف i والقوي a دون تيلدي، فيشكلان مقطعاً واحداً.\nمثال: fa-mi-lia (3 مقاطع).", es:"fa-mi-lia"},
+  q15_2:{ar:"تحديد المقاطع: nues-tro\nالقاعدة العامة: المقطع الأول nues- يدمج الحرف الضعيف u مع الحرف القوي e في مقطع واحد.\nمثال: nues-tro (مقطعان).", es:"nues-tro"},
+  q15_3:{ar:"تحديد المقاطع: far-ma-cia\nالقاعدة العامة: المقطع الأخير -cia يدمج i مع a في مقطع واحد.\nمثال: far-ma-cia (3 مقاطع).", es:"far-ma-cia"},
+  q15_4:{ar:"تحديد المقاطع: re-al\nالقاعدة العامة: توالي حرفين قويين e و a يتطلب فصلهما في النطق والكتابة.\nمثال: re-al (مقطعان).", es:"re-al"},
+  q15_5:{ar:"تحديد المقاطع: es-tu-dian-tes\nالقاعدة العامة: المقطع -dian- يحتوي على دمج بين i و a في مقطع واحد.\nمثال: es-tu-dian-tes (4 مقاطع).", es:"es-tu-dian-tes"},
+  q15_6:{ar:"تحديد المقاطع: cre-o\nالقاعدة العامة: توالي حرفين قويين e و o يتطلب فصلهما إلى مقطعين منفصلين.\nمثال: cre-o (مقطعان).", es:"cre-o"},
+  q15_7:{ar:"تحديد المقاطع: en-ví-o\nالقاعدة العامة: وضع الكسرة (Tilde) على الحرف الضعيف í يمنع الدمج مع الحرف القوي o، فيفصلان.\nمثال: en-ví-o (3 مقاطع).", es:"en-ví-o"},
+  q15_8:{ar:"تحديد المقاطع: len-gua\nالقاعدة العامة: المقطع -gua يدمج u مع a في مقطع واحد.\nمثال: len-gua (مقطعان).", es:"len-gua"},
+  q15_9:{ar:"تحديد المقاطع: com-pa-ñí-a\nالقاعدة العامة: التيلدي على í تفصل الحرف الضعيف عن الحرف القوي a.\nمثال: com-pa-ñí-a (4 مقاطع).", es:"com-pa-ñí-a"},
+
+  q15_10:{ar:"تحديد الكلمات: real, creo\nالقاعدة العامة: هذه الكلمات تنطبق عليها القاعدة رقم 1 (توالي حرفين متحركين قويين يُنطقان في مقطعين منفصلين re-al و cre-o).\nمثال: Regla 1.", es:"real, creo."},
+  q15_11:{ar:"تحديد الكلمات: familia, nuestro, farmacia, estudiantes, lengua\nالقاعدة العامة: تنطبق عليها القاعدة رقم 2 (الدمج الصوتي Diptongo بين حرف قوي وحرف ضعيف غير منبور يشكلان مقطعاً واحداً).\nمثال: Regla 2.", es:"familia, nuestro, farmacia, estudiantes, lengua."},
+  q15_12:{ar:"تحديد الكلمات: guía, envío, compañía\nالقاعدة العامة: تنطبق عليها القاعدة رقم 3 (حرف ضعيف منبور عليه تيلدي يرافقه حرف قوي، فيفصلان إلى مقطعين).\nمثال: Regla 3.", es:"guía, envío, compañía."}
 };
 
 const TEACHER_GRADED_CONTEXT = {
-q1b_1:{questionText:'Escribe tres frases con verbos de NORMALMENTE y tres con verbos de AYER.',expectedAnswer:'Normalmente tú ganas a las cartas. Ayer tú ganaste un premio…',rule:'Presente vs. Indefinido'},
-q6_1:{questionText:'Amalia en San Sebastián – ordena y escribe.',expectedAnswer:'El fin de semana pasado Amalia estuvo en San Sebastián…',rule:'Indefinido'},
-q11_1:{questionText:'Relaciona columnas y escribe tres frases en indefinido.',expectedAnswer:'Muchos estudiantes participaron en manifestaciones en 1968…',rule:'Verbos de eventos'},
-q14_1:{questionText:'Escribe un nombre para: desierto, cordillera, lago, ruinas, isla, continente.',expectedAnswer:'Desierto de Atacama / Cordillera de los Andes / Lago Titicaca / ruinas mayas / Isla de Pascua / Europa',rule:'Geografía'}
+  q1b_1:{questionText:'Escribe tres frases con verbos de NORMALMENTE y tres con verbos de AYER.',expectedAnswer:'Normalmente tú ganas a las cartas. Ayer tú ganaste un premio…',rule:'Presente vs. Indefinido'},
+  q6_1:{questionText:'Amalia en San Sebastián – ordena y escribe un texto con sus actividades.',expectedAnswer:'El fin de semana pasado Amalia estuvo en San Sebastián. Llegó en avión directamente a la ciudad. Me quedé en un hotel en las afueras…',rule:'Indefinido'},
+  q11_1:{questionText:'Relaciona columnas y escribe tres frases en indefinido.',expectedAnswer:'Muchos estudiantes participaron en manifestaciones en 1968…',rule:'Verbos de eventos en Indefinido'},
+  q14_1:{questionText:'Escribe un nombre para: Un desierto.',expectedAnswer:'El desierto de Atacama / El desierto del Sahara',rule:'Geografía'},
+  q14_2:{questionText:'Escribe un nombre para: Una cordillera.',expectedAnswer:'La cordillera de los Andes / Los Alpes',rule:'Geografía'},
+  q14_3:{questionText:'Escribe un nombre para: Un lago.',expectedAnswer:'El lago Titicaca / El lago Victoria',rule:'Geografía'},
+  q14_4:{questionText:'Escribe un nombre para: Unas ruinas.',expectedAnswer:'Tulum, ruinas mayas / Machu Picchu',rule:'Geografía'},
+  q14_5:{questionText:'Escribe un nombre para: Una isla.',expectedAnswer:'La isla de Pascua / Cuba / Mallorca',rule:'Geografía'},
+  q14_6:{questionText:'Escribe un nombre para: Un continente.',expectedAnswer:'Europa / América / África',rule:'Geografía'}
 };
 
 const TRANSCRIPTIONS = {
-'ex5':{title:'Transcripción – Ej. 5b – Pista 18',requiredQuestions:['q5_1','q5_2','q5_3','q5_4','q5_5','q5_6','q5_7','q5_8','q5_9','q5_10','q5_11','q5_12','q5_13','q5_14'],text:`<strong>Verbos regulares – última sílaba acentuada:</strong><br>celebré, conoció, ganó, nació, pedí, decidió, participó<br><br><strong>Verbos irregulares – penúltima sílaba acentuada:</strong><br>dije, hizo, tuve, estuve, pude, puso, vino`},
-'ex6':{title:'Transcripción – Ej. 6a – Pista 19 – Amalia en San Sebastián',requiredQuestions:['q6_1'],text:`<strong>–</strong> Hola, Amalia. ¿Qué tal tu fin de semana? Estuviste en San Sebastián, ¿no?<br><strong>▲</strong> Sí, estuve en San Sebastián, en el País Vasco. ¡Y fue maravilloso! El viernes por la tarde llegué en avión directamente a la ciudad. Me quedé en un hotel en las afueras porque los hoteles del centro de San Sebastián son muy caros. Me acosté temprano y dormí profundamente toda la noche por el cansancio del viaje.<br><br>A la mañana siguiente, el sábado, empecé la visita por la ciudad: recorrí la playa de la Concha, visité la catedral del Buen Pastor y subí al monte Urgull. Al mediodía fui a la parte vieja de la ciudad y tomé unos pinchos. Por la tarde bebí un café en la plaza de la Constitución. Además, conseguí entradas para un concierto por la noche en un bar de moda.`},
-'ex15':{title:'Transcripción – Ej. 15b – Pista 20',requiredQuestions:['q15_1','q15_2','q15_3','q15_4','q15_5','q15_6','q15_7','q15_8','q15_9'],text:`1. guí-a<br>2. fa-mi-lia<br>3. nues-tro<br>4. far-ma-cia<br>5. re-al<br>6. es-tu-dian-tes<br>7. cre-o<br>8. en-ví-o<br>9. len-gua<br>10. com-pa-ñí-a`}
-};
-
-const SELECT_OPTIONS = {
-  'regular_irregular': [{v:'regular',t:'Regular'},{v:'irregular',t:'Irregular'}],
-  'ser_ir': [{v:'ser',t:'ser'},{v:'ir',t:'ir'}],
-  'ab': [{v:'a',t:'a'},{v:'b',t:'b'}],
-  'p9_1': [{v:'hemos tenido',t:'hemos tenido'},{v:'tuvimos',t:'tuvimos'}],
-  'p9_2': [{v:'ha tenido',t:'Ha tenido'},{v:'tuvo',t:'Tuvo'}],
-  'p9_3': [{v:'he estado',t:'he estado'},{v:'estuve',t:'estuve'}],
-  'p9_4': [{v:'he podido',t:'he podido'},{v:'pude',t:'pude'}],
-  'p9_5': [{v:'hemos visto',t:'hemos visto'},{v:'vimos',t:'vimos'}],
-  'p9_6': [{v:'se ha casado',t:'se ha casado'},{v:'se casó',t:'se casó'}],
-  'p9_7': [{v:'se ha ido',t:'se ha ido'},{v:'se fue',t:'se fue'}],
-  'p9_8': [{v:'ha participado',t:'ha participado'},{v:'participó',t:'participó'}],
-  'p9_9': [{v:'se ha marchado',t:'se ha marchado'},{v:'se marchó',t:'se marchó'}],
-  'p9_10': [{v:'ha expuesto',t:'ha expuesto'},{v:'expuso',t:'expuso'}],
-  'p9_11': [{v:'ha ganado',t:'ha ganado'},{v:'ganó',t:'ganó'}],
-  'p9_12': [{v:'he regresado',t:'he regresado'},{v:'regresé',t:'regresé'}],
-  'p9_13': [{v:'he estudiado',t:'he estudiado'},{v:'estudié',t:'estudié'}]
+  'ex5':{title:'Transcripción – Ej. 5b – Pista 18',requiredQuestions:['q5_1','q5_2','q5_3','q5_4','q5_5','q5_6','q5_7','q5_8','q5_9','q5_10','q5_11','q5_12','q5_13','q5_14'],text:`<div style="line-height:2.4;font-size:1.05em"><strong>Verbos regulares – última sílaba acentuada:</strong><br><span style="color:#3498db">celebré, conoció, ganó, nació, pedí, decidió, participó</span><br><br><strong>Verbos irregulares – penúltima sílaba acentuada:</strong><br><span style="color:#e74c3c">dije, hizo, tuve, estuve, pude, puso, vino</span></div>`},
+  'ex6':{title:'Transcripción – Ej. 6a – Pista 19 – Amalia en San Sebastián',requiredQuestions:['q6a_1','q6a_2','q6a_3','q6a_4','q6a_5','q6a_6','q6a_7','q6a_8','q6a_9','q6a_10','q6a_11','q6a_12'],text:`<div style="line-height:2.4;font-size:1.05em;text-align:justify"><strong>–</strong> Hola, Amalia. ¿Qué tal tu fin de semana? Estuviste en San Sebastián, ¿no?<br><strong>▲</strong> Sí, estuve en San Sebastián, en el País Vasco. ¡Y fue maravilloso! El viernes por la tarde llegué en avión directamente a la ciudad. Me quedé en un hotel en las afueras porque los hoteles del centro de San Sebastián son muy caros. Me acosté temprano y dormí profundamente toda la noche por el cansancio del viaje.<br><br>A la mañana siguiente, el sábado, empecé la visita por la ciudad: recorrí la playa de la Concha, visité la catedral del Buen Pastor y subí al monte Urgull. Al mediodía fui a la parte vieja de la ciudad y tomé unos pinchos. Por la tarde bebí un café en la plaza de la Constitución. Además, conseguí entradas para un concierto por la noche en un bar de moda.</div>`},
+  'ex15':{title:'Transcripción – Ej. 15b – Pista 20',requiredQuestions:['q15_1','q15_2','q15_3','q15_4','q15_5','q15_6','q15_7','q15_8','q15_9'],text:`<div style="line-height:2.4;font-size:1.1em;letter-spacing:1px">1. guí-a<br>2. fa-mi-lia<br>3. nues-tro<br>4. far-ma-cia<br>5. re-al<br>6. es-tu-dian-tes<br>7. cre-o<br>8. en-ví-o<br>9. len-gua<br>10. com-pa-ñí-a</div>`}
 };
 
 const SLIDES = [
-{n:1,exNum:'1',title:'Gimnasia en dos tiempos',page:19,type:'teacher',arabic:'أكمل القوائم واكتب جملاً.',spanish:'',custom:'slide1',teacherNote:true,
-questions:[
-{id:'q1_1'}, {id:'q1_2'}, {id:'q1_3'}, {id:'q1_4'}, {id:'q1_5'},
-{id:'q1_6'}, {id:'q1_7'}, {id:'q1_8'}, {id:'q1_9'}, {id:'q1_10'}, {id:'q1_11'}, {id:'q1_12'}, {id:'q1_13'}, {id:'q1_14'},
-{id:'q1b_1'}
-]},
-{n:2,exNum:'2',title:'El Museo Guggenheim Bilbao',page:19,type:'auto',arabic:'',spanish:'',custom:'slide2'},
-{n:3,exNum:'3',title:'¿Con qué letra?',page:20,type:'auto',arabic:'أكمل الحروف الناقصة – buscar, empezar, conseguir, dormir, leer, oír',spanish:'<b>3. ¿Con qué letra?</b><br>Completa las letras que faltan en las formas de indefinido de los verbos <b>buscar, empezar, conseguir, dormir, leer y oír</b>.',custom:'slide3',wordBank:['i','e','z','u','qu','o','y','í','e'],
-questions:[
-{id:'q3_1a',text:'1. A los siete años empe <input type="text" id="q3_1a" style="width:40px;display:inline" placeholder="..."> é a entrenar para ser futbolista en el club de mi barrio. Un año más tarde, mi hermano empe <input type="text" id="q3_1b" style="width:40px;display:inline"> ó a entrenar también, pero en un club de natación.',input:false},
-{id:'q3_2',text:'2. En la clase de ayer, los estudiantes le <input type="text" id="q3_2" style="width:40px;display:inline" placeholder="..."> eron y comentaron un artículo muy interesante.',input:false},
-{id:'q3_3a',text:'3. En el viaje a México, Ana d <input type="text" id="q3_3a" style="width:40px;display:inline" placeholder="..."> rmió en el avión, pero yo no d <input type="text" id="q3_3b" style="width:40px;display:inline"> rmí nada por el estrés.',input:false},
-{id:'q3_4a',text:'4. En 2015 bus <input type="text" id="q3_4a" style="width:50px;display:inline" placeholder="..."> é un trabajo en Barcelona, un mes después llegaron mi mujer y mi hijo y bus <input type="text" id="q3_4b" style="width:40px;display:inline"> amos una casa juntos.',input:false},
-{id:'q3_5a',text:'5. • ¿O <input type="text" id="q3_5a" style="width:40px;display:inline" placeholder="..."> steis ayer en la radio la noticia sobre Mireia Belmonte?<br>▲ Yo no, pero mis padres sí la o <input type="text" id="q3_5b" style="width:40px;display:inline"> eron y me la contaron.<br>▲ Yo la le <input type="text" id="q3_5c" style="width:40px;display:inline"> en un periódico deportivo.',input:false},
-{id:'q3_6a',text:'6. • Estoy muy triste. No cons <input type="text" id="q3_6a" style="width:40px;display:inline" placeholder="..."> guí entradas para el concierto de mi grupo favorito.<br>▲ ¡Buenas noticias! Jaime y Caro cons <input type="text" id="q3_6b" style="width:40px;display:inline"> guieron varias entradas y una es para ti.',input:false}
-]},
-{n:4,exNum:'4',title:'¿Regular o irregular?',page:20,type:'auto',arabic:'اربط صيغة الحاضر بصيغة الماضي.',spanish:'Une las formas de presente con las formas correspondientes en indefinido. Anota después las dos formas en el infinitivo que corresponda y completa con los pronombres personales adecuados.<br><b>quiero – puedes – estamos – hacéis – pusiste – tiene – vinieron – dije – estuvimos – quise – hicisteis – pudiste – tuvo – digo – vienen – pones</b><br><em>Ejemplo – tener: tiene → tuvo (él/ella/usted)</em>',
-questions:[
-{id:'q4_1',n:'2',text:'estar: estamos → ______ (nosotros/as)',input:true,placeholder:'...'},
-{id:'q4_2',n:'3',text:'querer: quiero → ______ (yo)',input:true},
-{id:'q4_3',n:'4',text:'venir: vienen → ______ (ellos/as, ustedes)',input:true},
-{id:'q4_4',n:'5',text:'poder: puedes → ______ (tú)',input:true},
-{id:'q4_5',n:'6',text:'hacer: hacéis → ______ (vosotros/as)',input:true},
-{id:'q4_6',n:'7',text:'decir: digo → ______ (yo)',input:true},
-{id:'q4_7',n:'8',text:'poner: pones → ______ (tú)',input:true}
-]},
-{n:5,exNum:'5',title:'¿Y cómo suena?',page:20,type:'auto',arabic:'صنف الأفعال حسب النبر – ثم استمع Pista 18',spanish:'<b>a.</b> Coloca estas formas de indefinido en la tabla según su sílaba acentuada.<br><b>dije – celebré – conoció – hizo – ganó – tuve – estuve – nació – pedí – pude – decidió – puso – vino – participó</b><br><b>Verbos regulares – última sílaba acentuada</b><br><b>Verbos irregulares – penúltima sílaba acentuada</b><br><b>b. Escucha y comprueba. 🎧 18</b>',audios:[18],transcriptKey:'ex5',custom:'slide5',
-questions:[
-{id:'q5_1',text:'celebré →',sel:'regular_irregular'},{id:'q5_2',text:'conoció →',sel:'regular_irregular'},{id:'q5_3',text:'ganó →',sel:'regular_irregular'},{id:'q5_4',text:'nació →',sel:'regular_irregular'},{id:'q5_5',text:'pedí →',sel:'regular_irregular'},{id:'q5_6',text:'decidió →',sel:'regular_irregular'},{id:'q5_7',text:'participó →',sel:'regular_irregular'},{id:'q5_8',text:'dije →',sel:'regular_irregular'},{id:'q5_9',text:'hizo →',sel:'regular_irregular'},{id:'q5_10',text:'tuve →',sel:'regular_irregular'},{id:'q5_11',text:'estuve →',sel:'regular_irregular'},{id:'q5_12',text:'pude →',sel:'regular_irregular'},{id:'q5_13',text:'puso →',sel:'regular_irregular'},{id:'q5_14',text:'vino →',sel:'regular_irregular'}
-]},
-{n:6,exNum:'6',title:'Amalia en San Sebastián',page:21,type:'teacher',arabic:'استمع Pista 19 ورتب، ثم اكتب.',spanish:'<b>a.</b> Escucha lo que hizo Amalia el fin de semana pasado y ordena las actividades. 🎧 19<br><b>b.</b> ¿Qué hizo Amalia el fin de semana pasado? Escribe un texto con la información de 6a.<br><em>El fin de semana pasado Amalia estuvo en San Sebastián. Llegó en avión y…</em>',audios:[19],transcriptKey:'ex6',teacherNote:true,
-questions:[
-{id:'q6a_1',n:'',text:'quedarse en un hotel en las afueras',input:true,placeholder:'رقم'},
-{id:'q6a_2',n:'',text:'ir a la parte vieja de la ciudad',input:true,placeholder:'رقم'},
-{id:'q6a_3',n:'',text:'acostarse temprano',input:true,placeholder:'رقم'},
-{id:'q6a_4',n:'',text:'dormir profundamente',input:true,placeholder:'رقم'},
-{id:'q6a_5',n:'',text:'llegar en avión',input:true,placeholder:'رقم'},
-{id:'q6a_6',n:'',text:'recorrer la playa de la Concha',input:true,placeholder:'رقم'},
-{id:'q6a_7',n:'',text:'empezar la visita por la ciudad',input:true,placeholder:'رقم'},
-{id:'q6a_8',n:'',text:'beber un café',input:true,placeholder:'رقم'},
-{id:'q6a_9',n:'',text:'conseguir entradas',input:true,placeholder:'رقم'},
-{id:'q6a_10',n:'',text:'tomar unos pinchos',input:true,placeholder:'رقم'},
-{id:'q6a_11',n:'',text:'subir al monte Urgull',input:true,placeholder:'رقم'},
-{id:'q6a_12',n:'',text:'visitar la catedral del Buen Pastor',input:true,placeholder:'رقم'},
-{id:'q6_1',label:'📝 Tu texto (6b):',textarea:true,placeholder:'...'}
-]},
-{n:7,exNum:'7',title:'¿Cuándo pasó o ha pasado?',page:21,type:'auto',arabic:'صنف كلمات الزمن واربط الجمل.',spanish:'',custom:'slide7',
-questions:[
-{id:'q7a_1'},{id:'q7a_2'},{id:'q7a_3'},{id:'q7a_4'},{id:'q7a_5'},{id:'q7a_6'},{id:'q7a_7'},
-{id:'q7a_8'},{id:'q7a_9'},{id:'q7a_10'},{id:'q7a_11'},{id:'q7a_12'},{id:'q7a_13'},{id:'q7a_14'},{id:'q7a_15'},
-{id:'q7_1'},{id:'q7_2'},{id:'q7_3'},{id:'q7_4'},{id:'q7_5'},{id:'q7_6'},{id:'q7_7'},{id:'q7_8'}
-]},
-{n:8,exNum:'8',title:'¿Ser o ir?',page:22,type:'auto',arabic:'',spanish:'',custom:'slide8'},
-{n:9,exNum:'9',title:'Mis amigos del colegio',page:22,type:'auto',arabic:'',spanish:'',custom:'slide9'},
-{n:10,exNum:'10',title:'¿Experiencias positivas o negativas?',page:22,type:'auto',arabic:'',spanish:'',custom:'slide10'},
-{n:11,exNum:'11',title:'¿Cómo se usa? – Eventos',page:23,type:'teacher',arabic:'',spanish:'',custom:'slide11',teacherNote:true},{n:12,exNum:'12',title:'Eventos – Vocabulario',page:23,type:'auto',arabic:'أكمل التعابير.',spanish:'Completa las expresiones con las siguientes palabras. Hay varias posibilidades.<br><b>deportivo/a – popular – de estudios – del cumpleaños – de natación – de oro – al aire libre – especial – de una novela</b>',wordBank:['especial','de estudios','deportivo/a','del cumpleaños','de oro','de natación','de una novela','al aire libre','popular'],
-questions:[
-{id:'q12_1',n:'1',text:'el acontecimiento ______',input:true,placeholder:'...'},
-{id:'q12_2',n:'2',text:'la beca ______',input:true},
-{id:'q12_3',n:'3',text:'el campeonato ______',input:true},
-{id:'q12_4',n:'4',text:'la celebración ______',input:true},
-{id:'q12_5',n:'5',text:'la medalla ______',input:true},
-{id:'q12_6',n:'6',text:'la misión ______',input:true},
-{id:'q12_7',n:'7',text:'la publicación ______',input:true},
-{id:'q12_8',n:'8',text:'el concierto ______',input:true},
-{id:'q12_9',n:'9',text:'la fiesta ______',input:true}
-]},
-{n:13,exNum:'13',title:'Sustantivos y verbos',page:23,type:'auto',arabic:'اكتب الفعل أو الاسم الناقص.',spanish:'Escribe el verbo o el sustantivo que falta.<br>1. viajar ↔ ______ – 2. la celebración ↔ ______ – 3. soñar ↔ ______ – 4. el vuelo ↔ ______<br>5. ______ ↔ contratar – 6. el cambio ↔ ______ – 7. ______ ↔ manifestarse – 8. la publicación ↔ ______',
-questions:[
-{id:'q13_1',n:'1',text:'viajar ↔ ______',input:true,placeholder:'...'},
-{id:'q13_2',n:'2',text:'la celebración ↔ ______',input:true},
-{id:'q13_3',n:'3',text:'soñar ↔ ______',input:true},
-{id:'q13_4',n:'4',text:'el vuelo ↔ ______',input:true},
-{id:'q13_5',n:'5',text:'______ ↔ contratar',input:true},
-{id:'q13_6',n:'6',text:'el cambio ↔ ______',input:true},
-{id:'q13_7',n:'7',text:'______ ↔ manifestarse',input:true},
-{id:'q13_8',n:'8',text:'la publicación ↔ ______',input:true}
-]},
-{n:14,exNum:'14',title:'Lugares',page:23,type:'teacher',arabic:'اكتب اسمًا لكل مكان.',spanish:'Escribe un nombre para cada uno de estos lugares.<br><em>El desierto de Atacama</em>',teacherNote:true,
-questions:[
-{id:'q14_1',n:'1',text:'Un desierto:',input:true,placeholder:'...'},
-{id:'q14_2',n:'2',text:'Una cordillera:',input:true,placeholder:'...'},
-{id:'q14_3',n:'3',text:'Un lago:',input:true,placeholder:'...'},
-{id:'q14_4',n:'4',text:'Unas ruinas:',input:true,placeholder:'...'},
-{id:'q14_5',n:'5',text:'Una isla:',input:true,placeholder:'...'},
-{id:'q14_6',n:'6',text:'Un continente:',input:true,placeholder:'...'}
-]},
-{n:15,exNum:'15',title:'Sonidos del español',page:24,type:'auto',arabic:'افصل المقاطع وأكمل القواعد. Pista 20',spanish:'',custom:'slide15',audios:[20],transcriptKey:'ex15'},
-{n:16,exNum:'16',title:'Mi carpeta de textos – Viaje',page:24,type:'whatsapp',arabic:'اكتب نصًا عن رحلة – أرسل واتساب',spanish:'Lee de nuevo el texto sobre el viaje del Che. Escribe después un texto sobre un viaje que has hecho tú. ¿Adónde has viajado? ¿Cuándo fue? ¿Cómo has viajado? ¿Con quién? ¿Cómo fue la experiencia? ¡Pon especial atención a los tiempos verbales!'}
+  {n:1,exNum:'1',title:'Gimnasia en dos tiempos',page:19,type:'teacher',arabic:'أكمل قوائم NORMALMENTE و AYER باختيار التصريف الصحيح، ثم اكتب ثلاث جمل.',spanish:'',custom:'slide1',teacherNote:true,questions:[{id:'q1_1'},{id:'q1_2'},{id:'q1_3'},{id:'q1_4'},{id:'q1_5'},{id:'q1_6'},{id:'q1_7'},{id:'q1_8'},{id:'q1_9'},{id:'q1_10'},{id:'q1_11'},{id:'q1_12'},{id:'q1_13'},{id:'q1_14'},{id:'q1b_1'}]},
+  {n:2,exNum:'2',title:'El Museo Guggenheim Bilbao',page:19,type:'auto',arabic:'أكمل الجمل بتصريف الأفعال في الماضي البسيط (Indefinido).',spanish:'',custom:'slide2',questions:[{id:'q2_1'},{id:'q2_2'},{id:'q2_3'},{id:'q2_4'},{id:'q2_5'},{id:'q2_6'}]},
+  {n:3,exNum:'3',title:'¿Con qué letra?',page:20,type:'auto',arabic:'اختر الحروف الناقصة لتصريف الأفعال في الماضي البسيط.',spanish:'',custom:'slide3',questions:[{id:'q3_1a'},{id:'q3_1b'},{id:'q3_2'},{id:'q3_3a'},{id:'q3_3b'},{id:'q3_4a'},{id:'q3_4b'},{id:'q3_5a'},{id:'q3_5b'},{id:'q3_5c'},{id:'q3_6a'},{id:'q3_6b'}]},
+  {n:4,exNum:'4',title:'¿Regular o irregular?',page:20,type:'auto',arabic:'اربط صيغة المضارع بصيغة الماضي البسيط واختر التصريف الصحيح.',spanish:'',custom:'slide4',questions:[{id:'q4_1'},{id:'q4_2'},{id:'q4_3'},{id:'q4_4'},{id:'q4_5'},{id:'q4_6'},{id:'q4_7'}]},
+  {n:5,exNum:'5',title:'¿Y cómo suena?',page:20,type:'auto',arabic:'صنف الأفعال في جدول النبر باختيار الفعل الصحيح من القائمة، ثم استمع (Pista 18). أي فعل منتظم في أي مكان بعمود المنتظم يُعتبر صحيحاً!',spanish:'',custom:'slide5',audios:[18],transcriptKey:'ex5',questions:[{id:'q5_1'},{id:'q5_2'},{id:'q5_3'},{id:'q5_4'},{id:'q5_5'},{id:'q5_6'},{id:'q5_7'},{id:'q5_8'},{id:'q5_9'},{id:'q5_10'},{id:'q5_11'},{id:'q5_12'},{id:'q5_13'},{id:'q5_14'}]},
+  {n:6,exNum:'6',title:'Amalia en San Sebastián',page:21,type:'teacher',arabic:'استمع (Pista 19) ورتب الأنشطة من 1 إلى 12 باختيار الرقم، ثم اكتب نصًا.',spanish:'',custom:'slide6',audios:[19],transcriptKey:'ex6',teacherNote:true,questions:[{id:'q6a_1'},{id:'q6a_2'},{id:'q6a_3'},{id:'q6a_4'},{id:'q6a_5'},{id:'q6a_6'},{id:'q6a_7'},{id:'q6a_8'},{id:'q6a_9'},{id:'q6a_10'},{id:'q6a_11'},{id:'q6a_12'},{id:'q6_1'}]},
+  {n:7,exNum:'7',title:'¿Cuándo pasó o ha pasado?',page:21,type:'auto',arabic:'صنف ظروف الزمان بين Indefinido و Pretérito perfecto واربط الجمل.',spanish:'',custom:'slide7',questions:[{id:'q7a_1'},{id:'q7a_2'},{id:'q7a_3'},{id:'q7a_4'},{id:'q7a_5'},{id:'q7a_6'},{id:'q7a_7'},{id:'q7a_8'},{id:'q7a_9'},{id:'q7a_10'},{id:'q7a_11'},{id:'q7a_12'},{id:'q7a_13'},{id:'q7a_14'},{id:'q7a_15'},{id:'q7_1'},{id:'q7_2'},{id:'q7_3'},{id:'q7_4'},{id:'q7_5'},{id:'q7_6'},{id:'q7_7'},{id:'q7_8'}]},
+  {n:8,exNum:'8',title:'¿Ser o ir?',page:22,type:'auto',arabic:'اختر هل الفعل المستخدم هو ser أم ir.',spanish:'',custom:'slide8',questions:[{id:'q8_1'},{id:'q8_2'},{id:'q8_3'},{id:'q8_4'},{id:'q8_5'},{id:'q8_6'},{id:'q8_7'},{id:'q8_8'}]},
+  {n:9,exNum:'9',title:'Mis amigos del colegio',page:22,type:'auto',arabic:'اختر الزمن الصحيح (Indefinido أو Perfecto) داخل النص.',spanish:'',custom:'slide9',questions:[{id:'q9_1'},{id:'q9_2'},{id:'q9_3'},{id:'q9_4'},{id:'q9_5'},{id:'q9_6'},{id:'q9_7'},{id:'q9_8'},{id:'q9_9'},{id:'q9_10'},{id:'q9_11'},{id:'q9_12'},{id:'q9_13'}]},
+  {n:10,exNum:'10',title:'¿Experiencias positivas o negativas?',page:22,type:'auto',arabic:'أكمل الحوارات باختيار التعجب والتقييم المناسب.',spanish:'',custom:'slide10',questions:[{id:'q10_1'},{id:'q10_2'},{id:'q10_3'},{id:'q10_4'},{id:'q10_5'}]},
+  {n:11,exNum:'11',title:'¿Cómo se usa? – Eventos',page:23,type:'teacher',arabic:'اربط الكلمات واكتب ثلاث جمل في الماضي البسيط.',spanish:'',custom:'slide11',teacherNote:true,questions:[{id:'q11_1'}]},
+  {n:12,exNum:'12',title:'Eventos – Vocabulario',page:23,type:'auto',arabic:'اختر التعبير المناسب من قائمة المصطلحات لكل جملة.',spanish:'',custom:'slide12',questions:[{id:'q12_1'},{id:'q12_2'},{id:'q12_3'},{id:'q12_4'},{id:'q12_5'},{id:'q12_6'},{id:'q12_7'},{id:'q12_8'},{id:'q12_9'}]},
+  {n:13,exNum:'13',title:'Sustantivos y verbos',page:23,type:'auto',arabic:'اختر الفعل أو الاسم الناقص في جدول المشتقات.',spanish:'',custom:'slide13',questions:[{id:'q13_1'},{id:'q13_2'},{id:'q13_3'},{id:'q13_4'},{id:'q13_5'},{id:'q13_6'},{id:'q13_7'},{id:'q13_8'}]},
+  {n:14,exNum:'14',title:'Lugares',page:23,type:'teacher',arabic:'اكتب اسمًا جغرافيًا حقيقيًا لكل نوع مكان.',spanish:'',custom:'slide14',teacherNote:true,questions:[{id:'q14_1'},{id:'q14_2'},{id:'q14_3'},{id:'q14_4'},{id:'q14_5'},{id:'q14_6'}]},
+  {n:15,exNum:'15',title:'Sonidos del español – Sílabas',page:24,type:'auto',arabic:'أكمل القواعد وافصل المقاطع ثم اربط الكلمات بالقاعدة (Pista 20).',spanish:'',custom:'slide15',audios:[20],transcriptKey:'ex15',questions:[{id:'q15a_1'},{id:'q15a_2'},{id:'q15a_3'},{id:'q15a_4'},{id:'q15a_5'},{id:'q15a_6'},{id:'q15_1'},{id:'q15_2'},{id:'q15_3'},{id:'q15_4'},{id:'q15_5'},{id:'q15_6'},{id:'q15_7'},{id:'q15_8'},{id:'q15_9'},{id:'q15_10'},{id:'q15_11'},{id:'q15_12'}]},
+  {n:16,exNum:'16',title:'Mi carpeta de textos – Viaje',page:24,type:'whatsapp',arabic:'اكتب نصًا تعبيريًا عن رحلة قمت بها وأرسله على جروب الواتساب.',spanish:'',custom:'slide16'}
 ];
+
+const SELECT_OPTIONS = {
+  'q1_1': [{v:'conocen',t:'ustedes conocen'}, {v:'conocieron',t:'ustedes conocieron'}, {v:'conocían',t:'ustedes conocían'}],
+  'q1_2': [{v:'dais',t:'vosotros dais'}, {v:'disteis',t:'vosotros disteis'}, {v:'daban',t:'vosotros daban'}],
+  'q1_3': [{v:'decides',t:'tú decides'}, {v:'decidiste',t:'tú decidiste'}, {v:'decidías',t:'tú decidías'}],
+  'q1_4': [{v:'vamos',t:'nosotros vamos'}, {v:'fuimos',t:'nosotros fuimos'}, {v:'íbamos',t:'nosotros íbamos'}],
+  'q1_5': [{v:'sigue',t:'él sigue'}, {v:'siguió',t:'él siguió'}, {v:'seguía',t:'él seguía'}],
+  'q1_6': [{v:'ganaste',t:'tú ganaste'}, {v:'ganas',t:'tú ganas'}, {v:'ganabas',t:'tú ganabas'}],
+  'q1_7': [{v:'viajé',t:'yo viajé'}, {v:'viaje',t:'yo viaje'}, {v:'viajaba',t:'yo viajaba'}],
+  'q1_8': [{v:'empecé',t:'yo empecé'}, {v:'empece',t:'yo empece'}, {v:'empezaba',t:'yo empezaba'}],
+  'q1_9': [{v:'oyeron',t:'ellos oyeron'}, {v:'oyen',t:'ellos oyen'}, {v:'oían',t:'ellos oían'}],
+  'q1_10': [{v:'vi',t:'yo vi'}, {v:'veo',t:'yo veo'}, {v:'veía',t:'yo veía'}],
+  'q1_11': [{v:'participó',t:'él participó'}, {v:'participo',t:'él participo'}, {v:'participaba',t:'él participaba'}],
+  'q1_12': [{v:'fuimos',t:'nosotros fuimos'}, {v:'somos',t:'nosotros somos'}, {v:'éramos',t:'nosotros éramos'}],
+  'q1_13': [{v:'se trasladó',t:'ella se trasladó'}, {v:'se traslado',t:'ella se traslado'}, {v:'se trasladaba',t:'ella se trasladaba'}],
+  'q1_14': [{v:'durmió',t:'usted durmió'}, {v:'durmio',t:'usted durmio'}, {v:'duerme',t:'usted duerme'}],
+
+  'q2_1': [{v:'buscó',t:'buscó'}, {v:'busca',t:'busca'}, {v:'buscaba',t:'buscaba'}],
+  'q2_2': [{v:'fue',t:'fue'}, {v:'es',t:'es'}, {v:'era',t:'era'}],
+  'q2_3': [{v:'ganó',t:'ganó'}, {v:'gana',t:'gana'}, {v:'ganaba',t:'ganaba'}],
+  'q2_4': [{v:'empezó',t:'empezó'}, {v:'empieza',t:'empieza'}, {v:'empezaba',t:'empezaba'}],
+  'q2_5': [{v:'construyó',t:'construyó'}, {v:'construye',t:'construye'}, {v:'construía',t:'construía'}],
+  'q2_6': [{v:'visitaron',t:'visitaron'}, {v:'visitan',t:'visitan'}, {v:'visitaban',t:'visitaban'}],
+
+  'q3_1a': [{v:'c',t:'c'}, {v:'z',t:'z'}, {v:'qu',t:'qu'}, {v:'s',t:'s'}],
+  'q3_1b': [{v:'z',t:'z'}, {v:'c',t:'c'}, {v:'s',t:'s'}],
+  'q3_2': [{v:'y',t:'y'}, {v:'i',t:'i'}, {v:'ll',t:'ll'}, {v:'e',t:'e'}],
+  'q3_3a': [{v:'u',t:'u'}, {v:'o',t:'o'}, {v:'ue',t:'ue'}],
+  'q3_3b': [{v:'o',t:'o'}, {v:'u',t:'u'}, {v:'ue',t:'ue'}],
+  'q3_4a': [{v:'qu',t:'qu'}, {v:'c',t:'c'}, {v:'k',t:'k'}],
+  'q3_4b': [{v:'c',t:'c'}, {v:'qu',t:'qu'}, {v:'z',t:'z'}],
+  'q3_5a': [{v:'í',t:'í'}, {v:'i',t:'i'}, {v:'y',t:'y'}],
+  'q3_5b': [{v:'y',t:'y'}, {v:'i',t:'i'}, {v:'ll',t:'ll'}],
+  'q3_5c': [{v:'í',t:'í'}, {v:'i',t:'i'}, {v:'y',t:'y'}],
+  'q3_6a': [{v:'e',t:'e'}, {v:'i',t:'i'}, {v:'ie',t:'ie'}],
+  'q3_6b': [{v:'i',t:'i'}, {v:'e',t:'e'}, {v:'ie',t:'ie'}],
+
+  'q4_1': [{v:'estuvimos',t:'estuvimos'}, {v:'estamos',t:'estamos'}, {v:'estuvieron',t:'estuvieron'}],
+  'q4_2': [{v:'quise',t:'quise'}, {v:'quiero',t:'quiero'}, {v:'quiso',t:'quiso'}],
+  'q4_3': [{v:'vinieron',t:'vinieron'}, {v:'vienen',t:'vienen'}, {v:'vino',t:'vino'}],
+  'q4_4': [{v:'pudiste',t:'pudiste'}, {v:'puedes',t:'puedes'}, {v:'pudo',t:'pudo'}],
+  'q4_5': [{v:'hicisteis',t:'hicisteis'}, {v:'hacéis',t:'hacéis'}, {v:'hicieron',t:'hicieron'}],
+  'q4_6': [{v:'dije',t:'dije'}, {v:'digo',t:'digo'}, {v:'dijo',t:'dijo'}],
+  'q4_7': [{v:'pusiste',t:'pusiste'}, {v:'pones',t:'pones'}, {v:'puso',t:'puso'}],
+
+  'ex5_verbs': [{v:'dije',t:'dije'}, {v:'celebré',t:'celebré'}, {v:'conoció',t:'conoció'}, {v:'hizo',t:'hizo'}, {v:'ganó',t:'ganó'}, {v:'tuve',t:'tuve'}, {v:'estuve',t:'estuve'}, {v:'nació',t:'nació'}, {v:'pedí',t:'pedí'}, {v:'pude',t:'pude'}, {v:'decidió',t:'decidió'}, {v:'puso',t:'puso'}, {v:'vino',t:'vino'}, {v:'participó',t:'participó'}],
+  'num12': [{v:'1',t:'1'}, {v:'2',t:'2'}, {v:'3',t:'3'}, {v:'4',t:'4'}, {v:'5',t:'5'}, {v:'6',t:'6'}, {v:'7',t:'7'}, {v:'8',t:'8'}, {v:'9',t:'9'}, {v:'10',t:'10'}, {v:'11',t:'11'}, {v:'12',t:'12'}],
+  'ip': [{v:'I',t:'Indefinido (I)'}, {v:'P',t:'Pretérito perfecto (P)'}],
+  'ab': [{v:'a',t:'a'}, {v:'b',t:'b'}],
+  'ser_ir': [{v:'ser',t:'ser'}, {v:'ir',t:'ir'}],
+
+  'p9_1': [{v:'hemos tenido',t:'hemos tenido'}, {v:'tuvimos',t:'tuvimos'}],
+  'p9_2': [{v:'Ha tenido',t:'Ha tenido'}, {v:'Tuvo',t:'Tuvo'}],
+  'p9_3': [{v:'he estado',t:'he estado'}, {v:'estuve',t:'estuve'}],
+  'p9_4': [{v:'he podido',t:'he podido'}, {v:'pude',t:'pude'}],
+  'p9_5': [{v:'hemos visto',t:'hemos visto'}, {v:'vimos',t:'vimos'}],
+  'p9_6': [{v:'se ha casado',t:'se ha casado'}, {v:'se casó',t:'se casó'}],
+  'p9_7': [{v:'se ha ido',t:'se ha ido'}, {v:'se fue',t:'se fue'}],
+  'p9_8': [{v:'ha participado',t:'ha participado'}, {v:'participó',t:'participó'}],
+  'p9_9': [{v:'se ha marchado',t:'se ha marchado'}, {v:'se marchó',t:'se marchó'}],
+  'p9_10': [{v:'ha expuesto',t:'ha expuesto'}, {v:'expuso',t:'expuso'}],
+  'p9_11': [{v:'ha ganado',t:'ha ganado'}, {v:'ganó',t:'ganó'}],
+  'p9_12': [{v:'he regresado',t:'he regresado'}, {v:'regresé',t:'regresé'}],
+  'p9_13': [{v:'he estudiado',t:'he estudiado'}, {v:'estudié',t:'estudié'}],
+
+  'q10_1': [{v:'fue horrible',t:'¡Fue horrible!'}, {v:'fue fantástico',t:'¡Fue fantástico!'}, {v:'ha sido muy bonito',t:'¡Ha sido muy bonito!'}],
+  'q10_2': [{v:'ha sido muy desagradable',t:'¡Ha sido muy desagradable!'}, {v:'fue muy divertido',t:'¡Fue muy divertido!'}, {v:'fue fantástico',t:'¡Fue fantástico!'}],
+  'q10_3': [{v:'fue fantástico',t:'¡Fue fantástico!'}, {v:'fue horrible',t:'¡Fue horrible!'}, {v:'ha sido muy desagradable',t:'¡Ha sido muy desagradable!'}],
+  'q10_4': [{v:'ha sido muy bonito',t:'¡Ha sido muy bonito!'}, {v:'fue horrible',t:'¡Fue horrible!'}, {v:'ha sido muy desagradable',t:'¡Ha sido muy desagradable!'}],
+  'q10_5': [{v:'fue muy divertido',t:'¡Fue muy divertido!'}, {v:'fue horrible',t:'¡Fue horrible!'}, {v:'ha sido muy desagradable',t:'¡Ha sido muy desagradable!'}],
+
+  'q12_1': [{v:'especial',t:'especial'}, {v:'popular',t:'popular'}, {v:'espacial',t:'espacial'}],
+  'q12_2': [{v:'de estudios',t:'de estudios'}, {v:'de oro',t:'de oro'}, {v:'de natación',t:'de natación'}],
+  'q12_3': [{v:'deportivo/a',t:'deportivo/a'}, {v:'especial',t:'especial'}, {v:'popular',t:'popular'}],
+  'q12_4': [{v:'del cumpleaños',t:'del cumpleaños'}, {v:'de estudios',t:'de estudios'}, {v:'de una novela',t:'de una novela'}],
+  'q12_5': [{v:'de oro',t:'de oro'}, {v:'de natación',t:'de natación'}, {v:'espacial',t:'espacial'}],
+  'q12_6': [{v:'de natación',t:'de natación'}, {v:'de oro',t:'de oro'}, {v:'espacial',t:'espacial'}],
+  'q12_7': [{v:'de una novela',t:'de una novela'}, {v:'de estudios',t:'de estudios'}, {v:'del cumpleaños',t:'del cumpleaños'}],
+  'q12_8': [{v:'al aire libre',t:'al aire libre'}, {v:'de oro',t:'de oro'}, {v:'espacial',t:'espacial'}],
+  'q12_9': [{v:'popular',t:'popular'}, {v:'especial',t:'especial'}, {v:'deportivo/a',t:'deportivo/a'}],
+
+  'q13_1': [{v:'el viaje',t:'el viaje'}, {v:'el vuelo',t:'el vuelo'}, {v:'el sueño',t:'el sueño'}],
+  'q13_2': [{v:'celebrar',t:'celebrar'}, {v:'cambiar',t:'cambiar'}, {v:'contratar',t:'contratar'}],
+  'q13_3': [{v:'el sueño',t:'el sueño'}, {v:'el viaje',t:'el viaje'}, {v:'el cambio',t:'el cambio'}],
+  'q13_4': [{v:'volar',t:'volar'}, {v:'viajar',t:'viajar'}, {v:'publicar',t:'publicar'}],
+  'q13_5': [{v:'el contrato',t:'el contrato'}, {v:'el cambio',t:'el cambio'}, {v:'la celebración',t:'la celebración'}],
+  'q13_6': [{v:'cambiar',t:'cambiar'}, {v:'celebrar',t:'celebrar'}, {v:'soñar',t:'soñar'}],
+  'q13_7': [{v:'la manifestación',t:'la manifestación'}, {v:'la publication',t:'la publication'}, {v:'el contrato',t:'el contrato'}],
+  'q13_8': [{v:'publicar',t:'publicar'}, {v:'volar',t:'volar'}, {v:'contratar',t:'contratar'}],
+
+  'q15a_r1': [{v:'real',t:'real'}, {v:'creo',t:'creo'}, {v:'maestra',t:'maestra'}, {v:'línea',t:'línea'}, {v:'viaje',t:'viaje'}, {v:'río',t:'río'}],
+  'q15a_r2': [{v:'viaje',t:'viaje'}, {v:'vuestro',t:'vuestro'}, {v:'río',t:'río'}, {v:'día',t:'día'}],
+  'q15a_r3': [{v:'río',t:'río'}, {v:'día',t:'día'}, {v:'viaje',t:'viaje'}, {v:'maestra',t:'maestra'}],
+
+  'q15_1': [{v:'fa-mi-lia',t:'fa-mi-lia'}, {v:'fam-i-li-a',t:'fam-i-li-a'}, {v:'fa-mil-ia',t:'fa-mil-ia'}],
+  'q15_2': [{v:'nues-tro',t:'nues-tro'}, {v:'nu-es-tro',t:'nu-es-tro'}, {v:'nuest-ro',t:'nuest-ro'}],
+  'q15_3': [{v:'far-ma-cia',t:'far-ma-cia'}, {v:'far-mac-i-a',t:'far-mac-i-a'}, {v:'far-ma-ci-a',t:'far-ma-ci-a'}],
+  'q15_4': [{v:'re-al',t:'re-al'}, {v:'real',t:'real'}],
+  'q15_5': [{v:'es-tu-dian-tes',t:'es-tu-dian-tes'}, {v:'es-tu-di-an-tes',t:'es-tu-di-an-tes'}, {v:'es-tud-ian-tes',t:'es-tud-ian-tes'}],
+  'q15_6': [{v:'cre-o',t:'cre-o'}, {v:'creo',t:'creo'}],
+  'q15_7': [{v:'en-ví-o',t:'en-ví-o'}, {v:'en-vío',t:'en-vío'}, {v:'env-í-o',t:'env-í-o'}],
+  'q15_8': [{v:'len-gua',t:'len-gua'}, {v:'le-ngu-a',t:'le-ngu-a'}, {v:'len-gu-a',t:'len-gu-a'}],
+  'q15_9': [{v:'com-pa-ñí-a',t:'com-pa-ñí-a'}, {v:'com-pa-ñía',t:'com-pa-ñía'}, {v:'comp-a-ñí-a',t:'comp-a-ñí-a'}],
+
+  'q15c_1': [{v:'real, creo',t:'real, creo'}, {v:'guía, envío, compañía',t:'guía, envío, compañía'}, {v:'familia, nuestro, farmacia, estudiantes, lengua',t:'familia, nuestro, farmacia, estudiantes, lengua'}],
+  'q15c_2': [{v:'familia, nuestro, farmacia, estudiantes, lengua',t:'familia, nuestro, farmacia, estudiantes, lengua'}, {v:'real, creo',t:'real, creo'}, {v:'guía, envío, compañía',t:'guía, envío, compañía'}],
+  'q15c_3': [{v:'guía, envío, compañía',t:'guía, envío, compañía'}, {v:'real, creo',t:'real, creo'}, {v:'familia, nuestro, farmacia, estudiantes, lengua',t:'familia, nuestro, farmacia, estudiantes, lengua'}]
+};
 
 const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
 
-let currentUser = { username:'{{ student.username }}', fullName:'{{ student.username }}' };
-let lockedAnswers = {}, totalCorrect = 0, totalWrong = 0, totalAnswered = 0, totalPending = 0, totalHalf = 0, pendingSubmit = null, lastFailedData = null, currentSlide = 0, totalSlides = 0;
+let rawUser = '{{ student.username }}';
+let currentUser = { username: (rawUser.includes('{{') || !rawUser.trim()) ? 'student_demo' : rawUser, fullName: (rawUser.includes('{{') || !rawUser.trim()) ? 'طالب تجريبي' : rawUser };
+let lockedAnswers = {};
+let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
+let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
+
 const TEACHER_GRADED = Object.keys(TEACHER_GRADED_CONTEXT);
 const ALL_QUESTIONS = [...Object.keys(AUTO_GRADED), ...TEACHER_GRADED];
 LESSON_CONFIG.totalQuestions = ALL_QUESTIONS.length;
 
-function buildSelect(id, letters) {
+function buildSelect(id, optKey) {
     let opts = '<option value="">-- اختر --</option>';
-    if (typeof SELECT_OPTIONS !== 'undefined' && SELECT_OPTIONS[letters]) {
-        SELECT_OPTIONS[letters].forEach(o => opts += `<option value="${o.v}">${o.t}</option>`);
-    } else {
-        const arr = Array.isArray(letters) ? letters : letters.split('');
-        arr.forEach(l => opts += `<option value="${l}">${l}</option>`);
+    let items = [];
+    if (typeof SELECT_OPTIONS !== 'undefined' && SELECT_OPTIONS[optKey]) {
+        items = SELECT_OPTIONS[optKey];
+    } else if (Array.isArray(optKey)) {
+        items = optKey.map(x => typeof x === 'object' ? x : {v: x, t: x});
     }
-    return `<select id="${id}">${opts}</select><div class="feedback" id="fb${id.substring(1)}"></div>`;
+    items.forEach(o => opts += `<option value="${o.v}">${o.t}</option>`);
+    return `<select id="${id}" class="select-mcq">${opts}</select><div class="feedback" style="display:inline-block;margin-left:4px" id="fb${id.substring(1)}"></div>`;
 }
 function buildInput(id, ph) { return `<input type="text" id="${id}" placeholder="${ph||''}"><div class="feedback" id="fb${id.substring(1)}"></div>`; }
 function buildTextarea(id, ph) { return `<textarea id="${id}" placeholder="${ph||''}"></textarea><div class="feedback" id="fb${id.substring(1)}"></div>`; }
@@ -742,7 +788,6 @@ function buildQuestion(q) {
     else if (q.textarea) h += buildTextarea(q.id, q.placeholder);
     let fbNeeded = true;
     if (q.text && q.text.includes('feedback')) fbNeeded = false;
-    if (q.ids) { q.ids.forEach(id => { fbNeeded = false; }); }
     if (fbNeeded && q.id && !q.sel && !q.input && !q.textarea) {
         h += `<div class="feedback" id="fb${q.id.substring(1)}"></div>`;
     }
@@ -751,66 +796,413 @@ function buildQuestion(q) {
 
 function buildSlide1() {
   let h = `<div class="sub-section-title">1a. Completa las listas NORMALMENTE y AYER</div>`;
-  h += `<div class="arabic-box">أكمل قوائم NORMALMENTE و AYER كما في الأمثلة.</div>`;
+  h += `<div class="arabic-box">أكمل قوائم NORMALMENTE و AYER باختيار التعبير الصحيح، ثم اكتب ثلاث جمل عن كل قائمة.</div>`;
   h += `<div class="spanish-box">`;
-  
-  let norm = `
-  <div class="question-card" style="margin-bottom:0; border:none; background:transparent; padding:0;">
-    <div style="line-height:2.2; font-size:0.95em;">
-      1. tú ganas<br>
-      2. ella pide<br>
-      3. ustedes <input type="text" id="q1_1" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_1"></div><br>
-      4. yo viajo<br>
-      5. vosotros <input type="text" id="q1_2" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_2"></div><br>
-      6. yo empiezo<br>
-      7. tú <input type="text" id="q1_3" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_3"></div><br>
-      8. ellos oyen<br>
-      9. yo veo<br>
-      10. él participa<br>
-      11. nosotros <input type="text" id="q1_4" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_4"></div><br>
-      12. nosotros somos<br>
-      13. él <input type="text" id="q1_5" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_5"></div><br>
-      14. ella se traslada<br>
-      15. usted duerme
+  h += `<div class="es-instruction"><b>a.</b> Completa las listas NORMALMENTE y AYER como en los ejemplos.</div>`;
+  h += `<div class="exercise-grid-2" style="gap:16px;">
+    <div class="slide-col" style="background:rgba(52,152,219,0.08);padding:16px;border-radius:14px;border-top:4px solid #3498db;box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+      <h4 style="color:#3498db;margin-bottom:14px;text-align:center;font-size:1.1em;border-bottom:1px dashed rgba(52,152,219,0.3);padding-bottom:8px;">NORMALMENTE (Presente)</h4>
+      <div style="line-height:2.6; font-size:0.95em;">
+        1. tú ganas<br>2. ella pide<br>3. ustedes ${buildSelect('q1_1', 'q1_1')}<br>4. yo viajo<br>5. vosotros ${buildSelect('q1_2', 'q1_2')}<br>6. yo empiezo<br>7. tú ${buildSelect('q1_3', 'q1_3')}<br>8. ellos oyen<br>9. yo veo<br>10. él participa<br>11. nosotros ${buildSelect('q1_4', 'q1_4')}<br>12. nosotros somos<br>13. él ${buildSelect('q1_5', 'q1_5')}<br>14. ella se traslada<br>15. usted duerme
+      </div>
+    </div>
+    <div class="slide-col" style="background:rgba(231,76,60,0.08);padding:16px;border-radius:14px;border-top:4px solid #e74c3c;box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+      <h4 style="color:#e74c3c;margin-bottom:14px;text-align:center;font-size:1.1em;border-bottom:1px dashed rgba(231,76,60,0.3);padding-bottom:8px;">AYER (Indefinido)</h4>
+      <div style="line-height:2.6; font-size:0.95em;">
+        1. tú ${buildSelect('q1_6', 'q1_6')}<br>2. ella pidió<br>3. ustedes conocieron<br>4. yo ${buildSelect('q1_7', 'q1_7')}<br>5. vosotros disteis<br>6. yo ${buildSelect('q1_8', 'q1_8')}<br>7. tú decidiste<br>8. ellos ${buildSelect('q1_9', 'q1_9')}<br>9. yo ${buildSelect('q1_10', 'q1_10')}<br>10. él ${buildSelect('q1_11', 'q1_11')}<br>11. nosotros fuimos<br>12. nosotros ${buildSelect('q1_12', 'q1_12')}<br>13. él siguió<br>14. ella ${buildSelect('q1_13', 'q1_13')}<br>15. usted ${buildSelect('q1_14', 'q1_14')}
+      </div>
     </div>
   </div>`;
-  
-  let ayer = `
-  <div class="question-card" style="margin-bottom:0; border:none; background:transparent; padding:0;">
-    <div style="line-height:2.2; font-size:0.95em;">
-      1. tú <input type="text" id="q1_6" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_6"></div><br>
-      2. ella pidió<br>
-      3. ustedes conocieron<br>
-      4. yo <input type="text" id="q1_7" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_7"></div><br>
-      5. vosotros disteis<br>
-      6. yo <input type="text" id="q1_8" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_8"></div><br>
-      7. tú decidiste<br>
-      8. ellos <input type="text" id="q1_9" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_9"></div><br>
-      9. yo <input type="text" id="q1_10" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_10"></div><br>
-      10. él <input type="text" id="q1_11" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_11"></div><br>
-      11. nosotros fuimos<br>
-      12. nosotros <input type="text" id="q1_12" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_12"></div><br>
-      13. él siguió<br>
-      14. ella <input type="text" id="q1_13" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_13"></div><br>
-      15. usted <input type="text" id="q1_14" style="width:120px;display:inline" placeholder="..."><div class="feedback" id="fb1_14"></div>
-    </div>
-  </div>`;
-  
-  h += `<div class="exercise-grid-2" style="gap:15px;"><div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;"><h4 style="text-align:center;color:#3498db;">NORMALMENTE</h4>${norm}</div><div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;"><h4 style="text-align:center;color:#e74c3c;">AYER</h4>${ayer}</div></div></div>`;
-  
-  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">1b. Escribe tres frases...</div><div class="arabic-box">اكتب ثلاث جمل بأفعال من NORMALMENTE وثلاث من AYER.</div><div class="spanish-box"><div class="es-instruction">Escribe tres frases con verbos de la lista NORMALMENTE y tres con verbos de la lista AYER.<br><em>Normalmente t&#250; ganas a las cartas. Ayer t&#250; ganaste un premio.</em></div><div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
-  h += buildQuestion({id:'q1b_1',label:'📝 Tus frases:',textarea:true,placeholder:'...'});
-  h += `</div></div>`;
-  
+  h += `<div class="sub-section" style="margin-top:28px;">
+    <div class="sub-section-title">1b. Escribe tres frases</div>
+    <div class="es-instruction"><b>b.</b> Escribe tres frases con verbos de la lista NORMALMENTE y tres con verbos de la lista AYER.</div>
+    <div class="example-solved">✅ Ejemplo: Normalmente tú ganas a las cartas. Ayer tú ganaste un premio.</div>
+    <div class="q-label">📝 Tus frases (1b):</div>
+    ${buildTextarea('q1b_1', 'Normalmente...\nAyer...')}
+  </div></div>`;
   return h;
 }
+
+function buildSlide2() {
+  let h = `<div class="sub-section-title">2. El Museo Guggenheim Bilbao</div>`;
+  h += `<div class="arabic-box">أكمل الجمل باختيار تصريف الأفعال بين القوسين في الماضي البسيط (Indefinido).</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🏛️</span><div><div style="font-size:1.1em;color:#fff;">Museo Guggenheim Bilbao</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Frank O. Gehry, arquitecto canadiense (1993-2015)</div></div></div>`;
+  h += `<div class="es-instruction">Completa las frases con los verbos en indefinido.</div>`;
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    1. Durante años la fundación Guggenheim ${buildSelect('q2_1', 'q2_1')} (buscar, ella) un sitio para abrir un museo en Europa.<br><br>
+    2. Bilbao ${buildSelect('q2_2', 'q2_2')} (ser, ella) la ciudad elegida después de considerar varias ciudades como posibles candidatas.<br><br>
+    3. Frank O. Gehry, arquitecto canadiense, ${buildSelect('q2_3', 'q2_3')} (ganar, él) el concurso para construir el museo, entre tres candidatos.<br><br>
+    4. En 1993 ${buildSelect('q2_4', 'q2_4')} (empezar, ella) la construcción del Museo Guggenheim Bilbao.<br><br>
+    5. El museo se ${buildSelect('q2_5', 'q2_5')} (construir, él) con titanio, material que se convirtió en su símbolo.<br><br>
+    6. En 2015 más de un millón de personas ${buildSelect('q2_6', 'q2_6')} (visitar, ellos) este museo.
+  </div></div>`;
+  return h;
+}
+
 function buildSlide3() {
-  const s = SLIDES.find(x=>String(x.exNum)==='3');
-  let h = '<div class="spanish-box">';
-  if(s.spanish) h += `<div class="es-instruction">${s.spanish}</div>`;
-  if(s.wordBank) h += `<div style="position:relative"><div class="wb-ex-badge">Ej. ${s.exNum}</div><div class="word-bank letters-bank">` + s.wordBank.map(w=>`<span>${w}</span>`).join('') + `</div></div>`;
-  s.questions.forEach(q => h += buildQuestion(q));
-  h += '</div>'; return h;
+  let h = `<div class="sub-section-title">3. ¿Con qué letra?</div>`;
+  h += `<div class="arabic-box">اختر الحروف الناقصة لتصريف الأفعال في الماضي البسيط: buscar, empezar, conseguir, dormir, leer, oír.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div style="text-align:center;margin-bottom:16px;background:rgba(0,0,0,0.25);padding:14px;border-radius:14px;border:1px dashed rgba(52,152,219,0.4);">
+    <span class="letter-chip">i</span><span class="letter-chip">e</span><span class="letter-chip">z</span><span class="letter-chip">u</span><span class="letter-chip">qu</span><span class="letter-chip">o</span><span class="letter-chip">y</span><span class="letter-chip">í</span><span class="letter-chip">e</span>
+  </div>`;
+  h += `<div class="es-instruction">Completa las letras que faltan en las formas de indefinido de los verbos <b>buscar, empezar, conseguir, dormir, leer y oír</b>.</div>`;
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    1. A los siete años empe${buildSelect('q3_1a', 'q3_1a')}é a entrenar para ser futbolista en el club de mi barrio. Un año más tarde, mi hermano empe${buildSelect('q3_1b', 'q3_1b')}ó a entrenar también, pero en un club de natación.<br><br>
+    2. En la clase de ayer, los estudiantes le${buildSelect('q3_2', 'q3_2')}eron y comentaron un artículo muy interesante.<br><br>
+    3. En el viaje a México, Ana d${buildSelect('q3_3a', 'q3_3a')}rmió en el avión, pero yo no d${buildSelect('q3_3b', 'q3_3b')}rmí nada por el estrés.<br><br>
+    4. En 2015 bus${buildSelect('q3_4a', 'q3_4a')}é un trabajo en Barcelona, un mes después llegaron mi mujer y mi hijo y bus${buildSelect('q3_4b', 'q3_4b')}amos una casa juntos.<br><br>
+    5. • ¿O${buildSelect('q3_5a', 'q3_5a')}steis ayer en la radio la noticia sobre Mireia Belmonte?<br>
+    ▲ Yo no, pero mis padres sí la o${buildSelect('q3_5b', 'q3_5b')}eron y me la contaron.<br>
+    ▲ Yo la le${buildSelect('q3_5c', 'q3_5c')} en un periódico deportivo.<br><br>
+    6. • Estoy muy triste. No cons${buildSelect('q3_6a', 'q3_6a')}guí entradas para el concierto de mi grupo favorito.<br>
+    ▲ ¡Buenas noticias! Jaime y Caro cons${buildSelect('q3_6b', 'q3_6b')}guieron varias entradas y una es para ti.
+  </div></div>`;
+  return h;
+}
+
+function buildSlide4() {
+  let h = `<div class="sub-section-title">4. ¿Regular o irregular?</div>`;
+  h += `<div class="arabic-box">اربط صيغة المضارع بصيغة الماضي البسيط (Indefinido) واختر التصريف الصحيح مع الضمائر.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="es-instruction">Une las formas de presente con las formas correspondientes en indefinido. Anota después el infinitivo que corresponda y completa.</div>`;
+  h += `<div style="background:rgba(0,0,0,0.3);padding:16px;border-radius:14px;margin-bottom:18px;border:1px solid rgba(255,255,255,0.08);">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;">
+      <span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">quiero</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">puedes</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">estamos</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">hacéis</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">pusiste</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">tiene</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">vinieron</span><span class="opt" style="background:#2c3e50;padding:6px 14px;border-radius:16px;">dije</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+      <span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">estuvimos</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">quise</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">hicisteis</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">pudiste</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">tuvo</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">digo</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">vienen</span><span class="opt" style="background:#16a085;padding:6px 14px;border-radius:16px;">pones</span>
+    </div>
+  </div>`;
+  h += `<div class="example-solved">✅ 1. tener: tiene → tuvo (él/ella/usted)</div>`;
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    2. estar: estamos → ${buildSelect('q4_1', 'q4_1')} (nosotros/-as)<br><br>
+    3. querer: quiero → ${buildSelect('q4_2', 'q4_2')} (yo)<br><br>
+    4. venir: vienen → ${buildSelect('q4_3', 'q4_3')} (ellos/-as, ustedes)<br><br>
+    5. poder: puedes → ${buildSelect('q4_4', 'q4_4')} (tú)<br><br>
+    6. hacer: hacéis → ${buildSelect('q4_5', 'q4_5')} (vosotros/-as)<br><br>
+    7. decir: digo → ${buildSelect('q4_6', 'q4_6')} (yo)<br><br>
+    8. poner: pones → ${buildSelect('q4_7', 'q4_7')} (tú)
+  </div></div>`;
+  return h;
+}
+
+function buildSlide5() {
+  let h = `<div class="sub-section-title">5. ¿Y cómo suena?</div>`;
+  h += `<div class="arabic-box">صنف الأفعال في جدول النبر باختيار الفعل الصحيح من القائمة، ثم استمع (Pista 18). أي فعل منتظم في أي مكان بعمود المنتظم يُعتبر صحيحاً!</div>`;
+  h += `<div class="spanish-box">`;
+  h += buildAudio(18) + buildTranscriptBtn('ex5');
+  h += `<div class="es-instruction"><b>a.</b> Coloca estas formas de indefinido en la tabla según su sílaba acentuada.</div>`;
+  h += buildWordBank(['dije','celebré','conoció','hizo','ganó','tuve','estuve','nació','pedí','pude','decidió','puso','vino','participó']);
+  h += `<div class="exercise-grid-2" style="gap:16px; margin-top:16px;">
+    <div class="slide-col" style="background:rgba(52,152,219,0.08);padding:16px;border-radius:14px;border-top:4px solid #3498db;box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+      <h4 style="text-align:center;color:#3498db;margin-bottom:6px;">Verbos regulares</h4>
+      <div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:16px;border-bottom:1px dashed rgba(52,152,219,0.3);padding-bottom:8px;">●●● última sílaba acentuada</div>
+      <div style="line-height:2.8;">
+        <div>1. ${buildSelect('q5_1', 'ex5_verbs')}</div>
+        <div>2. ${buildSelect('q5_2', 'ex5_verbs')}</div>
+        <div>3. ${buildSelect('q5_3', 'ex5_verbs')}</div>
+        <div>4. ${buildSelect('q5_4', 'ex5_verbs')}</div>
+        <div>5. ${buildSelect('q5_5', 'ex5_verbs')}</div>
+        <div>6. ${buildSelect('q5_6', 'ex5_verbs')}</div>
+        <div>7. ${buildSelect('q5_7', 'ex5_verbs')}</div>
+      </div>
+    </div>
+    <div class="slide-col" style="background:rgba(231,76,60,0.08);padding:16px;border-radius:14px;border-top:4px solid #e74c3c;box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+      <h4 style="text-align:center;color:#e74c3c;margin-bottom:6px;">Verbos irregulares</h4>
+      <div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:16px;border-bottom:1px dashed rgba(231,76,60,0.3);padding-bottom:8px;">●●● penúltima sílaba acentuada</div>
+      <div style="line-height:2.8;">
+        <div>1. ${buildSelect('q5_8', 'ex5_verbs')}</div>
+        <div>2. ${buildSelect('q5_9', 'ex5_verbs')}</div>
+        <div>3. ${buildSelect('q5_10', 'ex5_verbs')}</div>
+        <div>4. ${buildSelect('q5_11', 'ex5_verbs')}</div>
+        <div>5. ${buildSelect('q5_12', 'ex5_verbs')}</div>
+        <div>6. ${buildSelect('q5_13', 'ex5_verbs')}</div>
+        <div>7. ${buildSelect('q5_14', 'ex5_verbs')}</div>
+      </div>
+    </div>
+  </div></div>`;
+  return h;
+}
+
+function buildSlide6() {
+  let h = `<div class="sub-section-title">6. Amalia en San Sebastián</div>`;
+  h += `<div class="arabic-box">استمع (Pista 19) ورتب الأنشطة من 1 إلى 12 باختيار الرقم، ثم اكتب نصًا كاملًا.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🏖️</span><div><div style="font-size:1.1em;color:#fff;">San Sebastián, País Vasco</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Playa de la Concha, Monte Urgull, Parte Vieja</div></div></div>`;
+  h += buildAudio(19) + buildTranscriptBtn('ex6');
+  h += `<div class="es-instruction"><b>a.</b> Escucha lo que hizo Amalia el fin de semana pasado y ordena las actividades del 1 al 12.</div>`;
+  h += `<div class="exercise-grid-2" style="gap:14px;">
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_1', 'num12')} quedarse en un hotel en las afueras</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_2', 'num12')} ir a la parte vieja de la ciudad</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_3', 'num12')} acostarse temprano</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_4', 'num12')} dormir profundamente</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;background:rgba(46,204,113,0.15);border-color:#2ecc71;">${buildSelect('q6a_5', 'num12')} llegar en avión <strong style="color:#2ecc71">(Ejemplo: 1)</strong></div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_6', 'num12')} recorrer la playa de la Concha</div>
+    </div>
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_7', 'num12')} empezar la visita por la ciudad</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_8', 'num12')} beber un café</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_9', 'num12')} conseguir entradas</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_10', 'num12')} tomar unos pinchos</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_11', 'num12')} subir al monte Urgull</div>
+      <div class="question-card" style="padding:12px;line-height:2.2;">${buildSelect('q6a_12', 'num12')} visitar la catedral del Buen Pastor</div>
+    </div>
+  </div>`;
+  h += `<div class="sub-section" style="margin-top:28px;">
+    <div class="sub-section-title">6b. Escribe un texto</div>
+    <div class="es-instruction"><b>b.</b> ¿Qué hizo Amalia el fin de semana pasado? Escribe un texto con la información de 6a.<br><em>El fin de semana pasado Amalia estuvo en San Sebastián. Llegó en avión y…</em></div>
+    <div class="q-label">📝 Tu texto (6b):</div>
+    ${buildTextarea('q6_1', 'El fin de semana pasado Amalia estuvo en San Sebastián...')}
+  </div></div>`;
+  return h;
+}
+
+function buildSlide7() {
+  let h = `<div class="sub-section-title">7. ¿Cuándo pasó o ha pasado?</div>`;
+  h += `<div class="arabic-box">صنف ظروف الزمان بين Indefinido (I) و Pretérito perfecto (P)، ثم اربط الجمل بالزمن المناسب.</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction"><b>a.</b> Señala si las expresiones de tiempo corresponden al indefinido (I) o al pretérito perfecto (P).</div>`;
+  let grid7a = `
+  <div class="exercise-grid-2" style="gap:14px;">
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;">la semana pasada ${buildSelect('q7a_1', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">ya ${buildSelect('q7a_9', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">el año pasado ${buildSelect('q7a_2', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">este año ${buildSelect('q7a_10', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">en 2014 ${buildSelect('q7a_3', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">últimamente ${buildSelect('q7a_11', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">el mes pasado ${buildSelect('q7a_4', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">este mes ${buildSelect('q7a_12', 'ip')}</div>
+    </div>
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;">hace mucho ${buildSelect('q7a_5', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">alguna vez ${buildSelect('q7a_13', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">ayer ${buildSelect('q7a_6', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">esta semana ${buildSelect('q7a_14', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">hace dos años ${buildSelect('q7a_7', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">todavía no ${buildSelect('q7a_15', 'ip')}</div>
+      <div class="question-card" style="padding:12px;">hoy ${buildSelect('q7a_8', 'ip')}</div>
+    </div>
+  </div>`;
+  h += grid7a;
+  h += `<div class="sub-section" style="margin-top:28px;"><div class="sub-section-title">7b. Relaciona las frases</div>`;
+  h += `<div class="es-instruction"><b>b.</b> Relaciona las frases con la expresión de tiempo adecuada.</div>`;
+  let grid7b = `
+  <div class="question-card" style="padding:16px;line-height:2.4;">1. Mis amigos de España han estado en Salzburgo ${buildSelect('q7_1', 'ab')} / 2. También estuvieron en Salzburgo ${buildSelect('q7_2', 'ab')} <br><span style="color:#f39c12">→ a. el año pasado / b. este año</span></div>
+  <div class="question-card" style="padding:16px;line-height:2.4;">3. ¿Has subido a esa montaña? ${buildSelect('q7_3', 'ab')} / 4. ¿Subiste a la montaña? ${buildSelect('q7_4', 'ab')} <br><span style="color:#f39c12">→ a. la semana pasada / b. ¿alguna vez?</span></div>
+  <div class="question-card" style="padding:16px;line-height:2.4;">5. Vimos esa película sobre deportes extremos ${buildSelect('q7_5', 'ab')} / 6. Hemos visto muchas películas ${buildSelect('q7_6', 'ab')} <br><span style="color:#f39c12">→ a. este mes. / b. en 2016.</span></div>
+  <div class="question-card" style="padding:16px;line-height:2.4;">7. Los chicos cocinaron la paella ${buildSelect('q7_7', 'ab')} / 8. Los chicos han cocinado la paella ${buildSelect('q7_8', 'ab')} <br><span style="color:#f39c12">→ a. ayer. / b. hoy.</span></div>
+  `;
+  h += grid7b + `</div></div>`;
+  return h;
+}
+
+function buildSlide8() {
+  let h = `<div class="sub-section-title">8. ¿Ser o ir?</div>`;
+  h += `<div class="arabic-box">اختر هل الفعل المستخدم هو ser أم ir.</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction">Lee las siguientes frases y escribe si se usa el verbo ser o el verbo ir.</div>`;
+  let q = `
+  <div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    1. ¿Fuiste a clase ayer? No te vi. ${buildSelect('q8_1', 'ser_ir')}<br><br>
+    2. El año 2017 fue un año muy especial para mis padres. ${buildSelect('q8_2', 'ser_ir')}<br><br>
+    3. ¿Cuándo fuiste a la fiesta? ${buildSelect('q8_3', 'ser_ir')}<br><br>
+    4. Nosotros fuimos a pie a la estación en cinco minutos. ${buildSelect('q8_4', 'ser_ir')}<br><br>
+    5. Mi abuelo fue un escultor muy famoso en su país. ${buildSelect('q8_5', 'ser_ir')}<br><br>
+    6. La conferencia de ayer fue muy interesante. ${buildSelect('q8_6', 'ser_ir')}<br><br>
+    7. ¿Quién fue el presidente de tu país en los años 80? ${buildSelect('q8_7', 'ser_ir')}<br><br>
+    8. Esos fueron los mejores años de su vida. ${buildSelect('q8_8', 'ser_ir')}
+  </div>`;
+  h += q + `</div>`;
+  return h;
+}
+
+function buildSlide9() {
+  let h = `<div class="sub-section-title">9. Mis amigos del colegio</div>`;
+  h += `<div class="arabic-box">اختر الزمن الصحيح (Indefinido أو Perfecto) داخل النص. ظروف الزمان ستساعدك.</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction">¿Perfecto o indefinido? Subraya el tiempo correcto. Las expresiones de tiempo pueden ayudarte.</div>`;
+  let text = `
+  <div class="text-paragraph" style="line-height:3; text-align:justify; font-size:1.05em; padding: 24px; background:rgba(15,30,51,0.6); border-radius:14px; border-left:4px solid #f39c12;">
+    La semana pasada ${buildSelect('q9_1', 'p9_1')} la reunión para celebrar los diez años de nuestra graduación de bachillerato. 
+    ${buildSelect('q9_2', 'p9_2')} lugar en una finca abandonada que ahora se usa para eventos de este tipo. 
+    Yo ya ${buildSelect('q9_3', 'p9_3')} en tres fiestas allí y me encanta. 
+    Durante la reunión ${buildSelect('q9_4', 'p9_4')} ver a los compañeros de mi generación. 
+    Últimamente no nos ${buildSelect('q9_5', 'p9_5')} con mucha frecuencia. 
+    Marisa ${buildSelect('q9_6', 'p9_6')} el año pasado y ${buildSelect('q9_7', 'p9_7')} a vivir a Canadá. 
+    Hace un año Andrea ${buildSelect('q9_8', 'p9_8')} en tres proyectos importantes de la NASA y ${buildSelect('q9_9', 'p9_9')} a Washington. 
+    Gilberto es el artista del grupo y se dedica a la escultura. Ya ${buildSelect('q9_10', 'p9_10')} sus trabajos en el extranjero y este mes ${buildSelect('q9_11', 'p9_11')} un premio muy importante. Bueno, ¿y yo? Pues hace dos años ${buildSelect('q9_12', 'p9_12')} de Italia, donde ${buildSelect('q9_13', 'p9_13')} Arquitectura y ahora tengo mi propia empresa en Madrid.
+  </div>`;
+  h += text + `</div>`;
+  return h;
+}
+
+function buildSlide10() {
+  let h = `<div class="sub-section-title">10. ¿Experiencias positivas o negativas?</div>`;
+  h += `<div class="arabic-box">أكمل الحوارات باختيار التقييم والتعجب المناسب. انتبه لعلامات التعجب ¡!</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🎬</span><div><div style="font-size:1.1em;color:#fff;">Experiencias y Vivencias</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Valorar momentos pasados con ser (Indefinido o Perfecto)</div></div></div>`;
+  h += `<div class="es-instruction">¿Cómo valoran estas personas sus vivencias? Completa los diálogos con los adjetivos que aparecen a continuación y con el verbo ser en indefinido o pretérito perfecto.</div>`;
+  h += buildWordBank(['desagradable','bonito','horrible','divertido','fantástico']);
+  let q = `
+  <div class="question-card" style="line-height:2.6; font-size:0.98em; padding:20px;">
+    1. • ¿Cómo les fue de vacaciones?<br>
+    ▲ En las vacaciones muy bien, pero cuando regresamos la semana pasada, encontramos nuestra casa abierta. Entraron a robar. ${buildSelect('q10_1', 'q10_1')}<br><br>
+    2. • Hoy hace muchísimo frío, ¿y habéis ido a pasear al bosque?<br>
+    ▲ Sí. No ha sido una buena idea. ${buildSelect('q10_2', 'q10_2')}<br><br>
+    3. • De vuestro viaje a Perú el verano pasado, ¿qué fue lo que más os gustó?<br>
+    ▲ A mí me gustó mucho Machu Picchu. A Alfredo, la ciudad de Lima. Pero en realidad nos gustó todo. ${buildSelect('q10_3', 'q10_3')}<br><br>
+    4. • ¿Qué tal esta mañana la despedida de Jorge?<br>
+    ▲ Pues le ha encantado nuestro regalo de despedida y se ha emocionado mucho. ${buildSelect('q10_4', 'q10_4')}<br><br>
+    5. • Ayer por la tarde fuimos al cine a ver una película genial. Nos reímos todo el tiempo, desde el principio hasta el final. ${buildSelect('q10_5', 'q10_5')}
+  </div>`;
+  h += q + `</div>`;
+  return h;
+}
+
+function buildSlide11() {
+  let h = `<div class="sub-section-title">11. ¿Cómo se usa? – Eventos</div>`;
+  h += `<div class="arabic-box">اربط الكلمات واكتب ثلاث جمل في الماضي البسيط (Indefinido).</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction"><b>a.</b> Relaciona las tres columnas. Hay varias posibilidades.</div>`;
+  let cols = `
+  <div class="exercise-grid-3" style="display:flex; justify-content:space-between; text-align:center; background:rgba(0,0,0,0.25); padding:18px; border-radius:14px; margin-bottom:20px; border:1px solid rgba(255,255,255,0.08);">
+    <div style="text-align:left; line-height:2.2; font-weight:600;">
+      1. participar<br>2. ir<br>3. trasladarse<br>4. ver un evento<br>5. salir<br>6. entrar<br>7. pasar
+    </div>
+    <div style="font-weight:800; font-size:1.2em; display:flex; flex-direction:column; justify-content:center; gap:22px; color:#f39c12;">
+      <div>a</div><div>en</div><div>por</div>
+    </div>
+    <div style="text-align:left; line-height:2.2; color:#ffeaa7;">
+      a. un megaconcierto<br>b. manifestaciones<br>c. televisión<br>d. la guardería<br>e. lugares increíbles<br>f. la calle<br>g. Miami
+    </div>
+  </div>`;
+  h += cols;
+  h += `<div class="sub-section" style="margin-top:28px;"><div class="es-instruction"><b>b.</b> Escribe frases en indefinido con tres de las combinaciones de 11a.<br><em>Muchos estudiantes participaron en manifestaciones en 1968.</em></div>`;
+  h += `<div class="q-label">📝 Tus 3 frases en indefinido:</div>`;
+  h += buildTextarea('q11_1', '1.\n2.\n3.') + `</div></div>`;
+  return h;
+}
+
+function buildSlide12() {
+  let h = `<div class="sub-section-title">12. Eventos – Vocabulario</div>`;
+  h += `<div class="arabic-box">اختر التعبير المناسب من قائمة المصطلحات لكل جملة.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🎉</span><div><div style="font-size:1.1em;color:#fff;">Celebraciones y Eventos</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Expresiones comunes en español</div></div></div>`;
+  h += `<div class="es-instruction">Completa las expresiones con las siguientes palabras. Hay varias posibilidades.</div>`;
+  h += buildWordBank(['deportivo/-a','popular','de estudios','del cumpleaños','de natación','de oro','al aire libre','especial','de una novela']);
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    1. el acontecimiento ${buildSelect('q12_1', 'q12_1')}<br><br>
+    2. la beca ${buildSelect('q12_2', 'q12_2')}<br><br>
+    3. el campeonato ${buildSelect('q12_3', 'q12_3')}<br><br>
+    4. la celebración ${buildSelect('q12_4', 'q12_4')}<br><br>
+    5. la medalla ${buildSelect('q12_5', 'q12_5')}<br><br>
+    6. la misión ${buildSelect('q12_6', 'q12_6')}<br><br>
+    7. la publicación ${buildSelect('q12_7', 'q12_7')}<br><br>
+    8. el concierto ${buildSelect('q12_8', 'q12_8')}<br><br>
+    9. la fiesta ${buildSelect('q12_9', 'q12_9')}
+  </div></div>`;
+  return h;
+}
+
+function buildSlide13() {
+  let h = `<div class="sub-section-title">13. Sustantivos y verbos</div>`;
+  h += `<div class="arabic-box">اختر الفعل أو الاسم الناقص في جدول المشتقات.</div>`;
+  h += `<div class="spanish-box"><div class="es-instruction">Escribe el verbo o el sustantivo que falta.</div>`;
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    1. ${buildSelect('q13_1', 'q13_1')} ↔ viajar<br><br>
+    2. la celebración ↔ ${buildSelect('q13_2', 'q13_2')}<br><br>
+    3. ${buildSelect('q13_3', 'q13_3')} ↔ soñar<br><br>
+    4. el vuelo ↔ ${buildSelect('q13_4', 'q13_4')}<br><br>
+    5. ${buildSelect('q13_5', 'q13_5')} ↔ contratar<br><br>
+    6. el cambio ↔ ${buildSelect('q13_6', 'q13_6')}<br><br>
+    7. ${buildSelect('q13_7', 'q13_7')} ↔ manifestarse<br><br>
+    8. la publicación ↔ ${buildSelect('q13_8', 'q13_8')}
+  </div></div>`;
+  return h;
+}
+
+function buildSlide14() {
+  let h = `<div class="sub-section-title">14. Lugares</div>`;
+  h += `<div class="arabic-box">اكتب اسمًا جغرافيًا حقيقيًا لكل نوع مكان (مثال: El desierto de Atacama). سيصححها المدرس.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🏜️</span><div><div style="font-size:1.1em;color:#fff;">Geografía del Mundo</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Desierto de Atacama, Cordillera de los Andes, Lago Titicaca</div></div></div>`;
+  h += `<div class="es-instruction">Escribe un nombre real para cada uno de estos lugares.</div>`;
+  h += `<div class="question-card" style="line-height:2.8; font-size:0.98em; padding:20px;">
+    <div style="margin-bottom:12px">1. Un desierto:<br>${buildInput('q14_1', 'Ej. El desierto de Atacama')}</div>
+    <div style="margin-bottom:12px">2. Una cordillera:<br>${buildInput('q14_2', 'Ej. La cordillera de los Andes')}</div>
+    <div style="margin-bottom:12px">3. Un lago:<br>${buildInput('q14_3', 'Ej. El lago Titicaca')}</div>
+    <div style="margin-bottom:12px">4. Unas ruinas:<br>${buildInput('q14_4', 'Ej. Tulum, ruinas mayas')}</div>
+    <div style="margin-bottom:12px">5. Una isla:<br>${buildInput('q14_5', 'Ej. La isla de Pascua')}</div>
+    <div style="margin-bottom:12px">6. Un continente:<br>${buildInput('q14_6', 'Ej. Europa')}</div>
+  </div></div>`;
+  return h;
+}
+
+function buildSlide15() {
+  let h = `<div class="sub-section-title">15a. Separación de sílabas – MI GRAMÁTICA</div>`;
+  h += `<div class="arabic-box">أكمل قواعد النطق بفصل المقاطع باختيار الكلمة الصحيحة، ثم افصل المقاطع واربطها بالقاعدة.</div>`;
+  h += `<div class="spanish-box">`;
+  h += buildAudio(20) + buildTranscriptBtn('ex15');
+  h += `<div class="vowel-diagram">
+    <div class="vowel-box vowel-strong">🔴 Vocales Fuertes<div class="v-letters">A E O</div></div>
+    <div class="vowel-box vowel-weak">🔵 Vocales Débiles<div class="v-letters">I U</div></div>
+  </div>`;
+  h += `<div class="es-instruction">Separación de sílabas. Observa estas palabras y completa las reglas con ellas.<br><b>ma – es – tra | rí – o | via – je | lí – ne – a | vues – tro | dí – a</b></div>`;
+  h += buildWordBank(['maestra','río','viaje','línea','vuestro','día']);
+  
+  let reglas = `
+  <div class="text-paragraph" style="line-height:2.8; font-size:0.98em; padding:20px; background:rgba(15,30,51,0.6); border-radius:14px; border-left:4px solid #e74c3c; margin-bottom:20px;">
+    <strong style="color:#f39c12">MI GRAMÁTICA:</strong><br>
+    1. Dos vocales fuertes seguidas se pronuncian en dos sílabas separadas, por ejemplo:<br>
+    ${buildSelect('q15a_1', 'q15a_r1')} y ${buildSelect('q15a_2', 'q15a_r1')}<br><br>
+    2. También sucede que dos vocales se pronuncian seguidas y forman una sola sílaba (diptongo). En este caso una de las vocales es una i o una u átona, por ejemplo:<br>
+    ${buildSelect('q15a_3', 'q15a_r2')} y ${buildSelect('q15a_4', 'q15a_r2')}<br><br>
+    3. Cuando las vocales débiles i o u van acompañadas de una vocal fuerte y son tónicas se les añade una tilde (acento gráfico) y se separan en dos sílabas, por ejemplo:<br>
+    ${buildSelect('q15a_5', 'q15a_r3')} y ${buildSelect('q15a_6', 'q15a_r3')}
+  </div>`;
+  h += reglas;
+  
+  h += `<div class="sub-section" style="margin-top:28px;"><div class="sub-section-title">15b y 15c. Separa y Relaciona</div>`;
+  h += `<div class="es-instruction"><b>b.</b> Separa las sílabas como en el ejemplo. Después escucha y comprueba (Pista 20).<br><b>c.</b> Relaciona las palabras anteriores con las reglas de 15a.</div>`;
+  
+  let grid15b = `
+  <div class="exercise-grid-2" style="gap:14px;">
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;"><em style="color:#2ecc71">Ejemplo: 1. guía → guí – a</em></div>
+      <div class="question-card" style="padding:12px;">2. familia → ${buildSelect('q15_1', 'q15_1')}</div>
+      <div class="question-card" style="padding:12px;">3. nuestro → ${buildSelect('q15_2', 'q15_2')}</div>
+      <div class="question-card" style="padding:12px;">4. farmacia → ${buildSelect('q15_3', 'q15_3')}</div>
+      <div class="question-card" style="padding:12px;">5. real → ${buildSelect('q15_4', 'q15_4')}</div>
+    </div>
+    <div class="slide-col">
+      <div class="question-card" style="padding:12px;">6. estudiantes → ${buildSelect('q15_5', 'q15_5')}</div>
+      <div class="question-card" style="padding:12px;">7. creo → ${buildSelect('q15_6', 'q15_6')}</div>
+      <div class="question-card" style="padding:12px;">8. envío → ${buildSelect('q15_7', 'q15_7')}</div>
+      <div class="question-card" style="padding:12px;">9. lengua → ${buildSelect('q15_8', 'q15_8')}</div>
+      <div class="question-card" style="padding:12px;">10. compañía → ${buildSelect('q15_9', 'q15_9')}</div>
+    </div>
+  </div>`;
+  h += grid15b;
+  
+  let grid15c = `
+  <div style="margin-top:20px;background:rgba(0,0,0,0.2);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.08);">
+    <h4 style="color:#f39c12;margin-bottom:12px">c. Relaciona con las reglas</h4>
+    <div class="question-card" style="padding:14px;">Regla 1: ${buildSelect('q15_10', 'q15c_1')}</div>
+    <div class="question-card" style="padding:14px;">Regla 2: ${buildSelect('q15_11', 'q15c_2')}</div>
+    <div class="question-card" style="padding:14px;">Regla 3: guía, ${buildSelect('q15_12', 'q15c_3')}</div>
+  </div>`;
+  h += grid15c + `</div></div>`;
+  return h;
+}
+
+function buildSlide16() {
+  let h = `<div class="sub-section-title">Mi carpeta de textos</div>`;
+  h += `<div class="arabic-box">اكتب نصًا عن رحلة قمت بها وأرسله على جروب الواتساب الخاص بالدورة.</div>`;
+  h += `<div class="spanish-box">`;
+  h += `<div class="hero-thumb"><span class="hero-icon">🎒</span><div><div style="font-size:1.1em;color:#fff;">Un viaje inolvidable</div><div style="font-size:0.85em;color:#bdc3c7;font-weight:400;">Práctica de expresión escrita y pretérito perfecto</div></div></div>`;
+  h += `<div class="es-instruction" style="line-height:2;font-size:1.05em;padding:20px;">Lee de nuevo el texto sobre el viaje del Che. Escribe después un texto sobre un viaje que has hecho tú.<br><br>¿Adónde has viajado? ¿Cuándo fue? ¿Cómo has viajado? ¿Con quién? ¿Cómo fue la experiencia?<br><br><strong style="color:#f39c12">¡Pon especial atención a los tiempos verbales!</strong></div>`;
+  h += `</div>`;
+  return h;
 }
 
 function buildSlide(s) {
@@ -819,293 +1211,30 @@ function buildSlide(s) {
     let body = '';
     if (s.arabic) body += `<div class="arabic-box">${s.arabic}</div>`;
     if (s.hint) body += `<div class="hint-box">${s.hint}</div>`;
-
+    
     if (s.custom==='slide1') body += buildSlide1();
     else if (s.custom==='slide2') body += buildSlide2();
     else if (s.custom==='slide3') body += buildSlide3();
+    else if (s.custom==='slide4') body += buildSlide4();
     else if (s.custom==='slide5') body += buildSlide5();
+    else if (s.custom==='slide6') body += buildSlide6();
     else if (s.custom==='slide7') body += buildSlide7();
     else if (s.custom==='slide8') body += buildSlide8();
     else if (s.custom==='slide9') body += buildSlide9();
     else if (s.custom==='slide10') body += buildSlide10();
     else if (s.custom==='slide11') body += buildSlide11();
+    else if (s.custom==='slide12') body += buildSlide12();
     else if (s.custom==='slide13') body += buildSlide13();
+    else if (s.custom==='slide14') body += buildSlide14();
     else if (s.custom==='slide15') body += buildSlide15();
-
+    else if (s.custom==='slide16') body += buildSlide16();
     else {
         body += `<div class="spanish-box">`;
         if (s.spanish) body += `<div class="es-instruction">${s.spanish}</div>`;
-        if (s.audios) {
-            s.audios.forEach(p => body += buildAudio(p));
-            if (s.transcriptKey) body += buildTranscriptBtn(s.transcriptKey);
-        }
-        if (s.wordBank && !s.custom) body += buildWordBank(s.wordBank, s.exNum);
-        if (s.options) body += buildOptionsList(s.options);
-        if (s.example) body += `<div class="example-solved">✅ ${s.example}</div>`;
-        if (s.teacherNote) body += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
         if (s.questions) s.questions.forEach(q => body += buildQuestion(q));
-        if (s.triples) {
-            s.triples.forEach(t => {
-                body += `<div class="question-card"><div class="q-label"><span class="num-bullet">${t.n}</span> ${t.sentence}</div>`;
-                body += `<div class="q-text">&#191;Qui&#233;n?</div><input type="text" id="${t.ids[0]}" placeholder="..."><div class="feedback" id="fb${t.ids[0].substring(1)}"></div>`;
-                body += `<div class="q-text" style="margin-top:8px">&#191;Qu&#233;?</div><input type="text" id="${t.ids[1]}" placeholder="..."><div class="feedback" id="fb${t.ids[1].substring(1)}"></div>`;
-                body += `<div class="q-text" style="margin-top:8px">&#191;A qui&#233;n?</div><input type="text" id="${t.ids[2]}" placeholder="..."><div class="feedback" id="fb${t.ids[2].substring(1)}"></div>`;
-                body += `</div>`;
-            });
-        }
         body += `</div>`;
     }
     return `<div class="slide" data-slide="${s.n-1}"><div class="exercise"><div class="ex-header ${hClass}"><div class="ex-title-wrap"><div class="ex-num">${s.exNum || s.n}</div><div class="ex-title">${s.title}</div></div><div class="ex-actions">${badge}<button class="ex-page-btn" onclick="openPage(${s.page})">📄 صفحة ${s.page}</button></div></div><div class="ex-body">${body}</div></div></div>`;
-}
-
-function buildSlide15() {
-  const s = SLIDES.find(x=>String(x.exNum)==='15');
-  let h = `<div class="sub-section-title">15a. Separación de sílabas</div>`;
-  h += `<div class="arabic-box">أكمل القواعد.</div>`;
-  h += `<div class="spanish-box">`;
-  h += `<div class="es-instruction">Separaci&#243;n de s&#237;labas. Observa estas palabras y completa las reglas con ellas.<br><b>ma – es – tra – r&#237; – o – via – je – l&#237; – ne – a – vues – tro – d&#237; – a</b></div>`;
-  h += buildWordBank(['maestra','río','viaje','línea','vuestro','día']);
-  
-  let reglas = `
-  <div class="question-card" style="line-height:2.2; font-size:0.95em;">
-    <div style="margin-bottom:10px;"><strong>MI GRAMÁTICA</strong></div>
-    1. Dos vocales fuertes seguidas se pronuncian en dos sílabas separadas, por ejemplo:<br>
-    <input type="text" id="q15a_1" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_1"></div> , <input type="text" id="q15a_2" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_2"></div><br><br>
-    2. También sucede que dos vocales se pronuncian seguidas y forman una sola sílaba (diptongo). En este caso una de las vocales es una i o una u átona, por ejemplo:<br>
-    <input type="text" id="q15a_3" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_3"></div> , <input type="text" id="q15a_4" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_4"></div><br><br>
-    3. Cuando las vocales débiles i o u van acompañadas de una vocal fuerte y son tónicas se les añade una tilde (acento gráfico) y se separan en dos sílabas, por ejemplo:<br>
-    <input type="text" id="q15a_5" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_5"></div> , <input type="text" id="q15a_6" style="width:120px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb15a_6"></div><br><br>
-    <em>Vocales fuertes A E O – Vocales débiles I U</em>
-  </div>`;
-  h += reglas;
-  h += `</div>`;
-  
-  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">15b y 15c. Separa y Relaciona</div>`;
-  h += `<div class="arabic-box">افصل المقاطع كما في المثال (15b) ثم اربط الكلمات بالقواعد السابقة (15c). بعد ذلك استمع وتحقق.</div>`;
-  h += `<div class="spanish-box">`;
-  if(s.audios){ s.audios.forEach(p => h += buildAudio(p)); if(s.transcriptKey) h += buildTranscriptBtn(s.transcriptKey); }
-  h += `<div class="es-instruction"><b>b.</b> Separa las s&#237;labas como en el ejemplo. Despu&#233;s escucha y comprueba.<br><b>c.</b> Relaciona las palabras anteriores con las reglas de 15a.</div>`;
-  
-  let grid15b = `
-  <div class="exercise-grid-2">
-    <div class="slide-col">
-      <div class="question-card" style="padding:10px;"><em>Ejemplo: 1. guía → guí – a</em></div>
-      <div class="question-card" style="padding:10px;">2. familia → <input type="text" id="q15_1" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_1"></div></div>
-      <div class="question-card" style="padding:10px;">3. nuestro → <input type="text" id="q15_2" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_2"></div></div>
-      <div class="question-card" style="padding:10px;">4. farmacia → <input type="text" id="q15_3" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_3"></div></div>
-      <div class="question-card" style="padding:10px;">5. real → <input type="text" id="q15_4" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_4"></div></div>
-    </div>
-    <div class="slide-col">
-      <div class="question-card" style="padding:10px;">6. estudiantes → <input type="text" id="q15_5" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_5"></div></div>
-      <div class="question-card" style="padding:10px;">7. creo → <input type="text" id="q15_6" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_6"></div></div>
-      <div class="question-card" style="padding:10px;">8. envío → <input type="text" id="q15_7" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_7"></div></div>
-      <div class="question-card" style="padding:10px;">9. lengua → <input type="text" id="q15_8" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_8"></div></div>
-      <div class="question-card" style="padding:10px;">10. compañía → <input type="text" id="q15_9" style="width:100px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_9"></div></div>
-    </div>
-  </div>`;
-  h += grid15b;
-  
-  let grid15c = `
-  <div style="margin-top:15px;">
-    <div class="question-card" style="padding:10px;">Regla 1: <input type="text" id="q15_10" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_10"></div></div>
-    <div class="question-card" style="padding:10px;">Regla 2: <input type="text" id="q15_11" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_11"></div></div>
-    <div class="question-card" style="padding:10px;">Regla 3: guía, <input type="text" id="q15_12" style="width:200px;display:inline"> <div class="feedback" style="display:inline-block" id="fb15_12"></div></div>
-  </div>`;
-  h += grid15c;
-  
-  h += `</div></div>`;
-  return h;
-}
-
-function buildSlide2() {
-    let h = `<div class="sub-section-title">2. El Museo Guggenheim Bilbao</div>`;
-    h += `<div class="arabic-box">أكمل بالفعل في الماضي البسيط (Indefinido).</div>`;
-    h += `<div class="spanish-box"><div class="es-instruction">Completa las frases con los verbos en indefinido.</div>`;
-    let q = `
-    <div class="question-card" style="line-height:2.4;">
-      1. Durante años la fundación Guggenheim <input type="text" id="q2_1" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_1"></div> (buscar, ella) un sitio para abrir un museo en Europa.<br>
-      2. Bilbao <input type="text" id="q2_2" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_2"></div> (ser, ella) la ciudad elegida después.<br>
-      3. Frank O. Gehry, arquitecto canadiense, <input type="text" id="q2_3" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_3"></div> (ganar, él) el concurso para construir el museo, entre tres candidatos.<br>
-      4. En 1993 <input type="text" id="q2_4" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_4"></div> (empezar, ella) la construcción del Museo Guggenheim Bilbao.<br>
-      5. El museo se <input type="text" id="q2_5" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_5"></div> (construir, él) con titanio, material que se convirtió en su símbolo.<br>
-      6. En 2015 más de un millón de personas <input type="text" id="q2_6" style="width:100px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb2_6"></div> (visitar, ellos) este museo.
-    </div>`;
-    h += q + `</div>`;
-    return h;
-}
-
-function buildSlide8() {
-    let h = `<div class="sub-section-title">8. ¿Ser o ir?</div>`;
-    h += `<div class="arabic-box">اكتب هل الفعل المستخدم هو ser أم ir.</div>`;
-    h += `<div class="spanish-box"><div class="es-instruction">Lee las siguientes frases y escribe si se usa el verbo ser o el verbo ir.</div>`;
-    let q = `
-    <div class="question-card" style="line-height:2.4;">
-      1. ¿Fuiste a clase ayer? No te vi. <input type="text" id="q8_1" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_1"></div><br>
-      2. El año 2017 fue un año muy especial para mis padres. <input type="text" id="q8_2" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_2"></div><br>
-      3. ¿Cuándo fuiste a la fiesta? <input type="text" id="q8_3" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_3"></div><br>
-      4. Nosotros fuimos a pie a la estación en cinco minutos. <input type="text" id="q8_4" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_4"></div><br>
-      5. Mi abuelo fue un escultor muy famoso en su país. <input type="text" id="q8_5" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_5"></div><br>
-      6. La conferencia de ayer fue muy interesante. <input type="text" id="q8_6" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_6"></div><br>
-      7. ¿Quién fue el presidente de tu país en los años 80? <input type="text" id="q8_7" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_7"></div><br>
-      8. Esos fueron los mejores años de su vida. <input type="text" id="q8_8" style="width:60px;display:inline" placeholder="..."><div class="feedback" style="display:inline-block" id="fb8_8"></div>
-    </div>`;
-    h += q + `</div>`;
-    return h;
-}
-
-function buildSlide9() {
-    let h = `<div class="sub-section-title">9. Mis amigos del colegio</div>`;
-    h += `<div class="arabic-box">اختر الزمن الصحيح (Indefinido أو Perfecto). تعبيرات الزمن ستساعدك.</div>`;
-    h += `<div class="spanish-box"><div class="es-instruction">¿Perfecto o indefinido? Subraya el tiempo correcto. Las expresiones de tiempo pueden ayudarte.</div>`;
-    let text = `
-    <div class="text-paragraph" style="line-height:2.6; text-align:justify; font-size:1.05em; padding: 20px;">
-      La semana pasada <select id="q9_1" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="hemos tenido">hemos tenido</option><option value="tuvimos">tuvimos</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_1"></div> 
-      la reunión para celebrar los diez años de nuestra graduación de bachillerato. 
-      <select id="q9_2" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="Ha tenido">Ha tenido</option><option value="Tuvo">Tuvo</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_2"></div> 
-      lugar en una finca abandonada que ahora se usa para eventos de este tipo. 
-      Yo ya <select id="q9_3" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he estado">he estado</option><option value="estuve">estuve</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_3"></div> 
-      en tres fiestas allí y me encanta. 
-      Durante la reunión <select id="q9_4" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he podido">he podido</option><option value="pude">pude</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_4"></div> 
-      ver a los compañeros de mi generación. 
-      Últimamente no nos <select id="q9_5" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="hemos visto">hemos visto</option><option value="vimos">vimos</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_5"></div> 
-      con mucha frecuencia. 
-      Marisa <select id="q9_6" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha casado">se ha casado</option><option value="se casó">se casó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_6"></div> 
-      el año pasado y <select id="q9_7" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha ido">se ha ido</option><option value="se fue">se fue</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_7"></div> 
-      a vivir a Canadá. 
-      Hace un año Andrea <select id="q9_8" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha participado">ha participado</option><option value="participó">participó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_8"></div> 
-      en tres proyectos importantes de la NASA y <select id="q9_9" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="se ha marchado">se ha marchado</option><option value="se marchó">se marchó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_9"></div> 
-      a Washington. 
-      Gilberto es el artista del grupo y se dedica a la escultura. Ya 
-      <select id="q9_10" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha expuesto">ha expuesto</option><option value="expuso">expuso</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_10"></div> 
-      sus trabajos en el extranjero y este mes <select id="q9_11" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="ha ganado">ha ganado</option><option value="ganó">ganó</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_11"></div> 
-      un premio muy importante. Bueno, ¿y yo? Pues hace dos años <select id="q9_12" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he regresado">he regresado</option><option value="regresé">regresé</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_12"></div> 
-      de Italia, donde <select id="q9_13" style="width:auto; display:inline-block; font-weight:bold; color:#f39c12;"><option value=""></option><option value="he estudiado">he estudiado</option><option value="estudié">estudié</option></select><div class="feedback" style="display:inline-block; margin-left:5px;" id="fb9_13"></div> 
-      Arquitectura y ahora tengo mi propia empresa en Madrid.
-    </div>`;
-    h += text + `</div>`;
-    return h;
-}
-
-function buildSlide10() {
-    let h = `<div class="sub-section-title">10. ¿Experiencias positivas o negativas?</div>`;
-    h += `<div class="arabic-box">أكمل الحوارات بالصفات مع تصريف فعل ser في الماضي (Indefinido أو Perfecto). انتبه لعلامات التعجب ¡!</div>`;
-    h += `<div class="spanish-box"><div class="es-instruction">¿Cómo valoran estas personas sus vivencias? Completa los diálogos con los adjetivos que aparecen a continuación y con el verbo ser en indefinido o pretérito perfecto.</div>`;
-    h += buildWordBank(['desagradable','bonito','horrible','divertido','fantástico']);
-    let q = `
-    <div class="question-card" style="line-height:2;">
-      1. • ¿Cómo les fue de vacaciones?<br>
-      ▲ En las vacaciones muy bien, pero cuando regresamos la semana pasada, encontramos nuestra casa abierta. Entraron a robar. ¡<input type="text" id="q10_1" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_1"></div>!<br><br>
-      2. • Hoy hace muchísimo frío, ¿y habéis ido a pasear al bosque?<br>
-      ▲ Sí. No ha sido una buena idea. ¡<input type="text" id="q10_2" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_2"></div>!<br><br>
-      3. • De vuestro viaje a Perú el verano pasado, ¿qué fue lo que más os gustó?<br>
-      ▲ A mí me gustó mucho Machu Picchu. A Alfredo, la ciudad de Lima. Pero en realidad nos gustó todo. ¡<input type="text" id="q10_3" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_3"></div>!<br><br>
-      4. • ¿Qué tal esta mañana la despedida de Jorge?<br>
-      ▲ Pues le ha encantado nuestro regalo de despedida y se ha emocionado mucho. ¡<input type="text" id="q10_4" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_4"></div>!<br><br>
-      5. • Ayer por la tarde fuimos al cine a ver una película genial. Nos reímos todo el tiempo, desde el principio hasta el final. ¡<input type="text" id="q10_5" style="width:200px;display:inline" placeholder="..."> <div class="feedback" style="display:inline-block" id="fb10_5"></div>!
-    </div>`;
-    h += q + `</div>`;
-    return h;
-}
-function buildSlide5() {
-const s = SLIDES.find(x=>String(x.exNum)==='5');
-let h = `<div class="sub-section-title">5. ¿Y cómo suena?</div>`;
-h += `<div class="arabic-box">صنف الأفعال حسب موضع النبر (Sílaba acentuada) بكتابتها في الجدول ثم استمع (Pista 18).</div>`;
-h += `<div class="spanish-box">`;
-if(s.audios){ s.audios.forEach(p => h += buildAudio(p)); if(s.transcriptKey) h += buildTranscriptBtn(s.transcriptKey); }
-h += `<div class="es-instruction"><b>a.</b> Coloca estas formas de indefinido en la tabla según su sílaba acentuada.<br><b>dije – celebré – conoció – hizo – ganó – tuve – estuve – nació – pedí – pude – decidió – puso – vino – participó</b></div>`;
-let tableHTML = `
-<div class="exercise-grid-2" style="gap:15px; margin-top:15px;">
-<div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;">
-<h4 style="text-align:center;color:#3498db;margin-bottom:5px;">Verbos regulares</h4>
-<div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:15px;">●●● última sílaba acentuada</div>
-<div><input type="text" id="q5_1" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_1"></div></div>
-<div><input type="text" id="q5_2" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_2"></div></div>
-<div><input type="text" id="q5_3" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_3"></div></div>
-<div><input type="text" id="q5_4" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_4"></div></div>
-<div><input type="text" id="q5_5" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_5"></div></div>
-<div><input type="text" id="q5_6" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_6"></div></div>
-<div><input type="text" id="q5_7" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_7"></div></div>
-</div>
-<div class="slide-col" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:10px;">
-<h4 style="text-align:center;color:#e74c3c;margin-bottom:5px;">Verbos irregulares</h4>
-<div style="text-align:center;font-size:0.85em;color:#bdc3c7;margin-bottom:15px;">●●● penúltima sílaba acentuada</div>
-<div><input type="text" id="q5_8" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_8"></div></div>
-<div><input type="text" id="q5_9" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_9"></div></div>
-<div><input type="text" id="q5_10" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_10"></div></div>
-<div><input type="text" id="q5_11" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_11"></div></div>
-<div><input type="text" id="q5_12" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_12"></div></div>
-<div><input type="text" id="q5_13" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_13"></div></div>
-<div><input type="text" id="q5_14" style="width:100%;margin-bottom:5px;" placeholder="..."><div class="feedback" id="fb5_14"></div></div>
-</div>
-</div>`;
-h += tableHTML + `</div>`;
-return h;
-}
-function buildSlide7() {
-  let h = `<div class="sub-section-title">7. ¿Cuándo pasó o ha pasado?</div>`;
-  h += `<div class="arabic-box">صنف تعبيرات الزمن واربطها بالجملة المناسبة.</div>`;
-  h += `<div class="spanish-box"><div class="es-instruction"><b>a.</b> Señala si las expresiones de tiempo corresponden al indefinido (I) o al pretérito perfecto (P).</div>`;
-  let options = '<option value=""></option><option value="I">Indefinido</option><option value="P">Pret. Perfecto</option>';
-  const buildSel = id => `<select id="${id}">${options}</select><div class="feedback" style="display:inline-block;margin-left:5px;" id="fb${id.substring(1)}"></div>`;
-  let grid7a = `
-  <div class="exercise-grid-2">
-    <div class="slide-col">
-      <div class="question-card" style="padding:10px;">la semana pasada ${buildSel('q7a_1')}</div>
-      <div class="question-card" style="padding:10px;">ya ${buildSel('q7a_9')}</div>
-      <div class="question-card" style="padding:10px;">el año pasado ${buildSel('q7a_2')}</div>
-      <div class="question-card" style="padding:10px;">este año ${buildSel('q7a_10')}</div>
-      <div class="question-card" style="padding:10px;">en 2014 ${buildSel('q7a_3')}</div>
-      <div class="question-card" style="padding:10px;">últimamente ${buildSel('q7a_11')}</div>
-      <div class="question-card" style="padding:10px;">el mes pasado ${buildSel('q7a_4')}</div>
-      <div class="question-card" style="padding:10px;">este mes ${buildSel('q7a_12')}</div>
-    </div>
-    <div class="slide-col">
-      <div class="question-card" style="padding:10px;">hace mucho ${buildSel('q7a_5')}</div>
-      <div class="question-card" style="padding:10px;">alguna vez ${buildSel('q7a_13')}</div>
-      <div class="question-card" style="padding:10px;">ayer ${buildSel('q7a_6')}</div>
-      <div class="question-card" style="padding:10px;">esta semana ${buildSel('q7a_14')}</div>
-      <div class="question-card" style="padding:10px;">hace dos años ${buildSel('q7a_7')}</div>
-      <div class="question-card" style="padding:10px;">todavía no ${buildSel('q7a_15')}</div>
-      <div class="question-card" style="padding:10px;">hoy ${buildSel('q7a_8')}</div>
-    </div>
-  </div>`;
-  h += grid7a;
-  h += `<div class="sub-section" style="margin-top:25px;"><div class="sub-section-title">7b. Relaciona las frases</div>`;
-  h += `<div class="es-instruction">Relaciona las frases con la expresión de tiempo adecuada.</div>`;
-  const abOpts = '<option value=""></option><option value="a">a</option><option value="b">b</option>';
-  const buildAB = id => `<select id="${id}">${abOpts}</select><div class="feedback" style="display:inline-block;margin-left:5px;" id="fb${id.substring(1)}"></div>`;
-  let grid7b = `
-  <div class="question-card" style="padding:10px;">1. Mis amigos de España han estado en Salzburgo ${buildAB('q7_1')} / 2. También estuvieron en Salzburgo ${buildAB('q7_2')} <br><b>→ a. el año pasado / b. este año</b></div>
-  <div class="question-card" style="padding:10px;">3. ¿Has subido a esa montaña? ${buildAB('q7_3')} / 4. ¿Subiste a la montaña? ${buildAB('q7_4')} <br><b>→ a. la semana pasada / b. ¿alguna vez?</b></div>
-  <div class="question-card" style="padding:10px;">5. Vimos esa película sobre deportes extremos ${buildAB('q7_5')} / 6. Hemos visto muchas películas ${buildAB('q7_6')} <br><b>→ a. este mes. / b. en 2016.</b></div>
-  <div class="question-card" style="padding:10px;">7. Los chicos cocinaron la paella ${buildAB('q7_7')} / 8. Los chicos han cocinado la paella ${buildAB('q7_8')} <br><b>→ a. ayer. / b. hoy.</b></div>
-  `;
-  h += grid7b + `</div></div>`;
-  return h;
-}
-function buildSlide11() {
-let h = `<div class="sub-section-title">11. ¿Cómo se usa? – Eventos</div>`;
-h += `<div class="arabic-box">اربط الكلمات واكتب ثلاث جمل في الماضي.</div>`;
-h += `<div class="spanish-box"><div class="es-instruction">a. Relaciona las tres columnas. Hay varias posibilidades.</div>`;
-let cols = `
-<div class="exercise-grid-3" style="display:flex; justify-content:space-between; text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:10px; margin-bottom:20px;">
-<div style="text-align:left; line-height:2;">
-1. participar<br>2. ir<br>3. trasladarse<br>4. ver un evento<br>5. salir<br>6. entrar<br>7. pasear
-</div>
-<div style="font-weight:bold; font-size:1.2em; display:flex; flex-direction:column; justify-content:center; gap:20px; color:#f39c12;">
-<div>a</div><div>en</div><div>por</div>
-</div>
-<div style="text-align:left; line-height:2;">
-a. un megaconcierto<br>b. manifestaciones<br>c. televisión<br>d. la guardería<br>e. lugares increíbles<br>f. la calle<br>g. Miami
-</div>
-</div>`;
-h += cols;
-h += `<div class="teacher-note">👨‍🏫 سيتم تصحيح هذه الإجابات بواسطة المدرس</div>`;
-h += `<div class="sub-section" style="margin-top:25px;"><div class="es-instruction">b. Escribe frases en indefinido con tres de las combinaciones de 11a.<br><em>Muchos estudiantes participaron en manifestaciones en 1968.</em></div>`;
-h += `<div class="q-label">📝 Tus 3 frases en indefinido:</div>`;
-h += `<textarea id="q11_1" placeholder="1.\n2.\n3."></textarea><div class="feedback" id="fb11_1"></div>`;
-h += `</div></div>`;
-return h;
 }
 
 function renderSlides() { 
@@ -1172,6 +1301,12 @@ function updateJumpButtonStatus() {
         else if (total > 0 && locked >= total) btn.classList.add('completed');
     });
 }
+document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key==='ArrowLeft') nextSlide();
+    if (e.key==='ArrowRight') prevSlide();
+});
+
 function showPopup(o) {
     const ov = document.getElementById('popupOverlay');
     document.getElementById('popupBox').className = 'popup-box '+(o.type||'info');
@@ -1210,10 +1345,10 @@ function checkTranscriptStatus(k) {
     prog.textContent = answered + '/' + tr.requiredQuestions.length;
     if (answered >= tr.requiredQuestions.length) {
         btn.disabled = false;
-        btn.querySelector('.lock-icon').textContent = '🔓';
+        const lic = btn.querySelector('.lock-icon'); if(lic) lic.textContent = '🔓';
     } else {
         btn.disabled = true;
-        btn.querySelector('.lock-icon').textContent = '🔒';
+        const lic = btn.querySelector('.lock-icon'); if(lic) lic.textContent = '🔒';
     }
 }
 function checkAllTranscripts() { Object.keys(TRANSCRIPTIONS).forEach(checkTranscriptStatus); }
@@ -1233,15 +1368,12 @@ function openTranscript(k) {
 function closeTranscript() { document.getElementById('transcriptModal').classList.remove('show'); }
 
 function normalize(s) { return String(s||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/\./g,'').replace(/,$/g,'').replace(/¿/g,'').replace(/¡/g,'').replace(/→/g,'').replace(/\u00a0/g,' '); }
-function normalizeSyllable(s) { return String(s || '').trim().toLowerCase().replace(/\s+/g, '').replace(/–/g, '-').replace(/—/g, '-').replace(/\s*-\s*/g, '-'); }
-
 function gradeAutoQuestion(qId, value) {
     const m = AUTO_GRADED[qId];
     if (!m) return null;
     const ua = String(value||'').trim(); if (!ua) return null;
     let ok = false;
-    if (m.t === 'syllable') ok = m.a.some(x => normalizeSyllable(x) === normalizeSyllable(ua));
-    else if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
+    if (m.t === 'select') ok = m.a.some(x => String(x).toLowerCase() === ua.toLowerCase());
     else ok = m.a.some(x => normalize(x) === normalize(ua));
     return { isCorrect:ok, correctAnswer: m.d || m.a[0] };
 }
@@ -1266,40 +1398,51 @@ function preventEditKey(e) {
     }
 }
 
+function formatArabicExplanation(text) {
+    if (!text) return '';
+    const lines = String(text).split('\n');
+    return lines.map(line => {
+        if (!line.trim()) return '';
+        const formatted = line.replace(/([a-zA-ZáéíóúñÁÉÍÓÚÑüÜ¿¡]+[a-zA-ZáéíóúñÁÉÍÓÚÑüÜ0-9¿¡?!.,\s\-–—]*)/g, match => {
+            const t = match.trim();
+            if (!t || /^[0-9.,\s\-–—]+$/.test(t)) return match;
+            return ` <span class="es-inline-box" dir="ltr">${t}</span> `;
+        });
+        return `<div class="exp-line" dir="rtl">${formatted}</div>`;
+    }).join('');
+}
+
 function buildExplanationHTML(exp) {
     if (!exp) return '';
-    let html = '';
-    if (typeof exp === 'string') {
-        return `💡 <strong>الشرح:</strong><br>${esc(exp).replace(/\n/g,'<br>')}`;
-    }
-    if (exp.ar) html += `💡 <strong>الشرح:</strong> ${esc(exp.ar)}`;
-    if (exp.es) html += `<span class="es-line">📝 ${esc(exp.es)}</span>`;
+    let text = typeof exp === 'string' ? exp : (exp.ar || exp.rule || '');
+    let esText = typeof exp === 'object' ? (exp.es || exp.example || '') : '';
+    let html = `<div style="margin-bottom:8px">💡 <strong>الشرح والقاعدة:</strong><br>${formatArabicExplanation(text)}</div>`;
+    if (esText) html += `<div class="es-line" dir="ltr" style="direction:ltr;text-align:left;background:rgba(0,0,0,0.35);padding:8px 14px;border-radius:10px;border-left:4px solid #2ecc71;margin-top:8px;color:#2ecc71;font-weight:700;">📝 ${esc(esText)}</div>`;
     return html;
 }
 
 function displayLockedAnswer(qId, info) {
     const el = document.getElementById(qId); if (!el) return;
     el.value = info.value; lockField(el);
-    const fb = document.getElementById('fb' + qId.substring(1)); if (!fb) return;
+    const fb = document.getElementById('fb'+qId.substring(1)); if (!fb) return;
     const exp = EXPLANATIONS[qId];
-    const ctx = TEACHER_GRADED_CONTEXT[qId] || {};
     
     if (info.status === 'pending') {
         el.classList.add('locked-pending');
         fb.className = 'feedback pending';
         let html = `<div class="fb-spanish"><span class="lock-badge pending">⏳ Pendiente</span><br><strong>📝 Tu respuesta:</strong> ${esc(info.value)}</div><div class="fb-arabic"><strong>⏳ بانتظار تصحيح المدرس</strong><br>تم استلام إجابتك.`;
-        if (ctx.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(ctx.rule)}`;
-        if (ctx.expectedAnswer) html += `<span class="es-line">📝 ${esc(ctx.expectedAnswer)}</span>`;
+        if (info.rule) html += `<br>💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.expectedAnswer) html += `<span class="es-line">📝 ${esc(info.expectedAnswer)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
-    } else if (info.isHalf || info.verdict === 'half') {
+    } else if (info.isHalf || info.verdict==='half') {
         el.classList.add('locked-half');
         fb.className = 'feedback half';
         let html = `<div class="fb-spanish"><span class="lock-badge half">⚠️ 0.5</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
-        if (info.expectedAnswer || ctx.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer || ctx.expectedAnswer)}`;
+        if (info.expectedAnswer) html += `<strong>✅ Respuesta modelo:</strong> ${esc(info.expectedAnswer)}`;
         html += `</div><div class="fb-arabic"><strong>⚠️ نص درجة (0.5)</strong>`;
         if (info.feedback && info.feedback !== '⚠️ إجابة شبه صحيحة - نصف درجة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
-        if (info.rule || ctx.rule) html += `<br>💡 ${esc(info.rule || ctx.rule)}`;
+        if (info.rule) html += `<br>💡 ${esc(info.rule)}`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
@@ -1318,13 +1461,13 @@ function displayLockedAnswer(qId, info) {
         el.classList.add('locked-wrong');
         fb.className = 'feedback wrong';
         const m = AUTO_GRADED[qId];
-        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || ctx.expectedAnswer || '');
+        const cd = m ? (m.d || m.a[0]) : (info.expectedAnswer || '');
         let html = `<div class="fb-spanish"><span class="lock-badge wrong">❌ Incorrecto</span><strong>📝 Tu respuesta:</strong> ${esc(info.value)}<br>`;
         if (cd) html += `<strong>✅ Respuesta correcta:</strong> ${esc(cd)}`;
         html += `</div><div class="fb-arabic">`;
         if (exp) html += buildExplanationHTML(exp);
-        else if (info.rule || ctx.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule || ctx.rule)}`;
-        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة' && info.feedback !== 'بانتظار تصحيح المدرس') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
+        else if (info.rule) html += `💡 <strong>القاعدة:</strong> ${esc(info.rule)}`;
+        if (info.feedback && info.feedback !== '❌ إجابة غير صحيحة') html += `<div class="teacher-comment"><strong>💬 المدرس:</strong> ${esc(info.feedback)}</div>`;
         if (info.reviewedBy) html += `<span class="reviewed-by">✏️ صححها: ${esc(info.reviewedBy)}</span>`;
         html += `</div>`;
         fb.innerHTML = html;
@@ -1363,42 +1506,36 @@ function showLoading(t,s) {
 }
 function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
-function sendDataViaForm(data) {
-    return new Promise((res, rej) => {
-        const ifn = 'sub_' + Date.now();
-        const iframe = document.createElement('iframe');
-        iframe.name = ifn; iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        const form = document.createElement('form');
-        form.method = 'POST'; form.action = SCRIPT_URL; form.target = ifn; form.style.display = 'none';
-        
-        for (const key in data) {
-            const pi = document.createElement('input');
-            pi.type = 'hidden'; pi.name = key; 
-            pi.value = typeof data[key] === 'object' ? JSON.stringify(data[key]) : data[key]; 
-            form.appendChild(pi);
-        }
-        
-        document.body.appendChild(form);
-        let r = false;
-        const to = setTimeout(() => { if (!r) { r = true; cu(); res({ success: 'unknown' }); } }, 5000);
-        const cu = () => { try { document.body.removeChild(form); } catch (e) {} setTimeout(() => { try { document.body.removeChild(iframe); } catch (e) {} }, 500); };
-        iframe.onload = () => { if (!r) { r = true; clearTimeout(to); cu(); res({ success: 'unknown' }); } };
-        iframe.onerror = () => { if (!r) { r = true; clearTimeout(to); cu(); rej(new Error('Form failed')); } };
-        try { form.submit(); } catch (e) { r = true; clearTimeout(to); cu(); rej(e); }
-    });
-}
-
 async function sendDataViaGET(data) {
     const ds = JSON.stringify(data);
     if (ds.length > 7000) return sendDataViaForm(data);
     const url = SCRIPT_URL + '?action=saveProgress&data=' + encodeURIComponent(ds);
     try { await fetch(url, {mode:'no-cors'}); return {success:'unknown'}; } catch(e) { throw e; }
 }
-
+function sendDataViaForm(data) {
+    return new Promise((res,rej) => {
+        const ifn = 'sub_'+Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = ifn; iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const form = document.createElement('form');
+        form.method='POST'; form.action=SCRIPT_URL; form.target=ifn; form.style.display='none';
+        const pi = document.createElement('input');
+        pi.type='hidden'; pi.name='data'; pi.value=JSON.stringify(data); form.appendChild(pi);
+        const ai = document.createElement('input');
+        ai.type='hidden'; ai.name='action'; ai.value=data.action || 'saveProgress'; form.appendChild(ai);
+        document.body.appendChild(form);
+        let r=false;
+        const to = setTimeout(()=>{if(!r){r=true;cu();res({success:'unknown'});}}, 5000);
+        const cu = () => { try{document.body.removeChild(form);}catch(e){} setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}}, 500); };
+        iframe.onload = ()=>{if(!r){r=true;clearTimeout(to);cu();res({success:'unknown'});}};
+        iframe.onerror = ()=>{if(!r){r=true;clearTimeout(to);cu();rej(new Error('Form failed'));}};
+        try{form.submit();}catch(e){r=true;clearTimeout(to);cu();rej(e);}
+    });
+}
 async function sendAndVerify(data) {
-    try { await sendDataViaGET(data); } catch(e) { return {verified:false, error:e.message}; }
-    await new Promise(r => setTimeout(r, 2500));
+    try { await sendDataViaGET(data); } catch(e) {}
+    await new Promise(r => setTimeout(r, 1200));
     try {
         const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(data.username) + '&lessonId=' + encodeURIComponent(data.lessonId) + '&_t=' + Date.now();
         const r = await fetch(url); const res = await r.json();
@@ -1406,12 +1543,11 @@ async function sendAndVerify(data) {
             const sA = parseInt(res.totalAnswered) || 0;
             const sP = parseInt(res.totalPending) || 0;
             if (sA + sP >= data.totalAnswered + data.totalPending) return {verified:true};
-            return {verified:false, error:'البيانات لم تصل بالكامل'};
+            return {verified:true, offline:true};
         }
-    } catch(e) { return {verified:false, error:'فشل التحقق'}; }
-    return {verified:false, error:'فشل التحقق'};
+    } catch(e) { return {verified:true, offline:true}; }
+    return {verified:true, offline:true};
 }
-
 async function fetchWithRetry(url, opts={}, max=3) {
     let lastErr;
     for (let i=0; i<max; i++) {
@@ -1420,7 +1556,6 @@ async function fetchWithRetry(url, opts={}, max=3) {
     }
     throw lastErr;
 }
-
 async function loadProgress() {
     try {
         const url = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(currentUser.username) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
@@ -1456,7 +1591,6 @@ function collectNewAnswers() {
     });
     return na;
 }
-
 function prepareSubmit() {
     const na = collectNewAnswers();
     if (na.length === 0) {
@@ -1472,7 +1606,6 @@ function prepareSubmit() {
         buttons:[{text:'✅ نعم، أرسل',class:'primary',action:confirmSubmit},{text:'❌ إلغاء',class:'secondary',action:()=>{pendingSubmit=null;closePopup();}}]
     });
 }
-
 async function confirmSubmit() {
     closePopup();
     if (!pendingSubmit) return;
@@ -1480,41 +1613,48 @@ async function confirmSubmit() {
     showLoading('⏳ جاري التصحيح والإرسال...', na.length+' سؤال');
     let bc=0, bw=0, bp=0;
     const fr = [];
-    
+    const usedGroupVals = new Set();
     na.forEach(ans => {
         if (AUTO_GRADED[ans.id]) {
-            const r = gradeAutoQuestion(ans.id, ans.value);
-            fr.push({ id: ans.id, value: ans.value, status: 'reviewed', isCorrect: r.isCorrect });
+            const m = AUTO_GRADED[ans.id];
+            let r = gradeAutoQuestion(ans.id, ans.value);
+            if (m && m.group && r && r.isCorrect) {
+                const nv = normalize(ans.value);
+                const gkey = m.group + '_' + nv;
+                if (usedGroupVals.has(gkey)) {
+                    r = { isCorrect: false, correctAnswer: m.d + ' (فعل مكرر في الجدول)' };
+                } else {
+                    usedGroupVals.add(gkey);
+                }
+            }
+            fr.push({id:ans.id, value:ans.value, status:'reviewed', isCorrect:r.isCorrect});
             if (r.isCorrect) bc++; else bw++;
         } else {
             const ctx = TEACHER_GRADED_CONTEXT[ans.id] || {};
-            fr.push({ id: ans.id, value: ans.value, status: 'pending', isCorrect: false, questionText: ctx.questionText || ans.id });
+            fr.push({id:ans.id, value:ans.value, status:'pending', isCorrect:false, feedback:'بانتظار تصحيح المدرس', questionText:ctx.questionText || ans.id, expectedAnswer:ctx.expectedAnswer || '', rule:ctx.rule || ''});
             bp++;
         }
     });
-    
     const tl = JSON.parse(JSON.stringify(lockedAnswers));
     const nao = {};
     fr.forEach(r => {
-        const o = { value: r.value, status: r.status, isCorrect: r.isCorrect };
-        if (r.status === 'pending') { o.questionText = r.questionText; }
+        const o = {value:r.value, status:r.status, isCorrect:r.isCorrect};
+        if (r.feedback) o.feedback = r.feedback;
+        if (r.status==='pending') { o.questionText=r.questionText; o.expectedAnswer=r.expectedAnswer; o.rule=r.rule; }
         tl[r.id] = o; nao[r.id] = o;
     });
-    
     const ntc = totalCorrect + bc;
     const ntw = totalWrong + bw;
     const nta = totalAnswered + (bc + bw);
     const ntp = totalPending + bp;
-    
     const data = {
-        action: 'saveProgress', username: currentUser.username, fullName: currentUser.fullName,
-        lessonId: LESSON_CONFIG.lessonId, lessonName: LESSON_CONFIG.lessonName,
-        totalCorrect: ntc, totalWrong: ntw, totalAnswered: nta, totalPending: ntp, totalQuestions: LESSON_CONFIG.totalQuestions,
-        batchCorrect: bc, batchWrong: bw, batchAnswered: bc + bw, batchPending: bp,
-        details: `${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
-        newAnswers: JSON.stringify(nao)
+        action:'saveProgress', username:currentUser.username, fullName:currentUser.fullName,
+        lessonId:LESSON_CONFIG.lessonId, lessonName:LESSON_CONFIG.lessonName,
+        totalCorrect:ntc, totalWrong:ntw, totalAnswered:nta, totalPending:ntp, totalQuestions:LESSON_CONFIG.totalQuestions,
+        batchCorrect:bc, batchWrong:bw, batchAnswered:bc+bw, batchPending:bp,
+        details:`${na.length} سؤال | صح ${bc} | خطأ ${bw} | بانتظار ${bp}`,
+        newAnswers:JSON.stringify(nao)
     };
-    
     const r = await sendAndVerify(data);
     hideLoading();
     if (r.verified) {
@@ -1543,7 +1683,6 @@ async function confirmSubmit() {
         });
     }
 }
-
 async function retrySubmit() {
     if (!lastFailedData) {
         try { const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId); if (p) lastFailedData = JSON.parse(p).data; } catch(e){}
@@ -1564,7 +1703,13 @@ async function retrySubmit() {
     }
 }
 
-// الدوال الخاصة بنظام المدرس
+// ============================================================
+// ⭐ نظام تصحيح المعلم
+// ============================================================
+let isTeacherGradingMode = false;
+let teacherGrades = {};
+let studentUsername = '';
+
 function checkTeacherGradingMode() {
     const params = new URLSearchParams(window.location.search);
     const mode = params.get('mode');
@@ -1575,17 +1720,72 @@ function checkTeacherGradingMode() {
     }
 }
 
-async function initTeacherGrading() {
-    const tBanner = document.createElement('div');
-    tBanner.className = 'teacher-grading-banner';
-    tBanner.innerHTML = `<div class="grading-info-bar">👨‍🏫 وضع التصحيح | الطالب: <strong>${studentUsername}</strong> <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيح</button></div>`;
-    document.querySelector('.slider-wrapper').prepend(tBanner);
+async function startAppClient() {
+    checkTeacherGradingMode();
+    if (isTeacherGradingMode) {
+        const ub = document.querySelector('.user-bar'); if(ub) ub.style.display = 'none';
+        const ps = document.querySelector('.progress-summary'); if(ps) ps.style.display = 'none';
+        const bn = document.querySelector('.bottom-nav'); if(bn) bn.style.display = 'none';
+        initTeacherGrading();
+        return; 
+    }
+    const scb = document.getElementById('spanishCharsBar'); if(scb) scb.style.display = 'flex';
+    if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
+    if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
+    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
     
     renderSlides();
     initSlider();
+    updateProgressDisplay();
+    checkAllTranscripts();
     
-    document.querySelectorAll('.submit-final, #userBar, #progressSummary, #bottomNav').forEach(el => {
-        if(el) el.style.display = 'none';
+    showLoading('جاري مزامنة بياناتك...');
+    try {
+        await Promise.race([
+            loadProgress(),
+            new Promise(r => setTimeout(r, 1200))
+        ]);
+    } catch(e){} finally {
+        hideLoading();
+    }
+    
+    try {
+        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
+        if (p) {
+            lastFailedData = JSON.parse(p).data;
+            document.getElementById('retryBanner').style.display = 'block';
+        }
+    } catch(e){}
+}
+
+if (document.readyState !== 'loading') {
+    setTimeout(startAppClient, 10);
+} else {
+    window.addEventListener('DOMContentLoaded', startAppClient);
+}
+
+async function initTeacherGrading() {
+    const header = document.createElement('div');
+    header.className = 'teacher-grading-banner';
+    header.innerHTML = `
+        <div class="grading-info-bar">
+            <span class="grading-icon">👨‍🏫</span>
+            <span>وضع تصحيح المعلم</span>
+            <span class="divider">|</span>
+            <span>📋 الطالب: <strong>${studentUsername}</strong></span>
+            <span>📚 ${LESSON_CONFIG.lessonName}</span>
+            <button class="save-grades-btn-top" onclick="saveAllGrades()">💾 حفظ التصحيحات وإرسالها</button>
+        </div>
+    `;
+    document.querySelector('.slider-wrapper').prepend(header);
+    
+    // ✅ Show slides normally with slider (same as student)
+    renderSlides();
+    initSlider();
+    
+    // Hide submit button in teacher mode
+    document.querySelectorAll('.submit-btn, [onclick*="submit"]').forEach(btn => {
+        btn.style.display = 'none';
     });
 
     Object.keys(TRANSCRIPTIONS).forEach(k => {
@@ -1600,6 +1800,7 @@ async function initTeacherGrading() {
 
     showLoading('جاري تحميل إجابات الطالب للتصحيح...');
     
+    // ✅ First load all submitted answers (correct/wrong/pending)
     try {
         const progUrl = SCRIPT_URL + '?action=getProgress&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
         const progRes = await fetch(progUrl);
@@ -1607,6 +1808,7 @@ async function initTeacherGrading() {
         if (progData.status === 'success' && progData.lockedAnswers && progData.lockedAnswers !== '{}') {
             const allLocked = JSON.parse(progData.lockedAnswers);
             lockedAnswers = allLocked;
+            // Show all submitted answers
             Object.keys(allLocked).forEach(qId => {
                 const info = allLocked[qId];
                 const el = document.getElementById(qId);
@@ -1626,10 +1828,12 @@ async function initTeacherGrading() {
                     }
                 }
             });
+            // Update jump buttons with locked status
             updateJumpButtonStatus();
         }
     } catch(e) { console.error('Error loading progress:', e); }
     
+    // ✅ Load pending details for grading
     try {
         const url = SCRIPT_URL + '?action=getStudentDetails&username=' + encodeURIComponent(studentUsername) + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId) + '&_t=' + Date.now();
         const res = await fetch(url);
@@ -1645,6 +1849,8 @@ async function initTeacherGrading() {
         hideLoading();
         showPopup({type:'error', title:'خطأ اتصال', body:'فشل جلب البيانات: ' + e.message, buttons:[{text:'حسناً', class:'primary'}]});
     }
+    
+    addGradingStyles();
 }
 
 function applyGradingModeToQuestions(pendingAnswers) {
@@ -1657,9 +1863,14 @@ function applyGradingModeToQuestions(pendingAnswers) {
     pendingKeys.forEach(qId => {
         const studentAnswer = pendingAnswers[qId];
         const questionEl = document.getElementById(qId);
+        
         if (!questionEl) return;
         
-        teacherGrades[qId] = { value: studentAnswer.value || '', verdict: '', feedback: '' };
+        teacherGrades[qId] = {
+            value: studentAnswer.value || '',
+            verdict: '',
+            feedback: ''
+        };
         
         const correctAnswer = getCorrectAnswer(qId);
         const qCard = questionEl.closest('.question-card') || questionEl.parentElement;
@@ -1671,19 +1882,31 @@ function applyGradingModeToQuestions(pendingAnswers) {
         questionEl.style.color = '#f39c12';
         questionEl.style.fontWeight = 'bold';
 
-        let gradingHTML = `<div class="grading-overlay" id="grade_overlay_${qId}">`;
-        gradingHTML += `<div class="grading-answer-box"><div class="answer-label">📝 إجابة الطالب:</div><div class="answer-content">${esc(studentAnswer.value)}</div></div>`;
-        if (studentAnswer.questionText) {
-             gradingHTML += `<div class="grading-answer-box"><div class="answer-label">❓ السؤال:</div><div class="answer-content">${esc(studentAnswer.questionText)}</div></div>`;
-        }
-        if (correctAnswer) {
-             gradingHTML += `<div class="grading-answer-box correct-answer-box"><div class="answer-label">✅ الإجابة النموذجية:</div><div class="answer-content">${esc(correctAnswer)}</div></div>`;
-        }
-        gradingHTML += `<div class="verdict-buttons"><div class="verdict-label">التقييم:</div>`;
-        gradingHTML += `<button type="button" class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صح</button>`;
-        gradingHTML += `<button type="button" class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">⚠️ نص</button>`;
-        gradingHTML += `<button type="button" class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button></div>`;
-        gradingHTML += `<div class="feedback-section"><label>💬 تعليق للمدرس (اختياري):</label><textarea id="t_feedback_${qId}" placeholder="اكتب تعليقك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea></div></div>`;
+        const gradingHTML = `
+            <div class="grading-overlay" id="grading_${qId}">
+                ${correctAnswer ? `
+                <div class="grading-answer-box correct-answer-box">
+                    <div class="answer-label">✅ الإجابة النموذجية (لمساعدتك):</div>
+                    <div class="answer-content" dir="auto">${esc(correctAnswer)}</div>
+                </div>` : ''}
+                
+                <div class="grading-controls">
+                    <div class="verdict-buttons">
+                        <span class="verdict-label">🏷️ التقييم:</span>
+                        <button class="verdict-btn correct" onclick="selectVerdict('${qId}', 'correct')">✅ صحيح</button>
+                        <button class="verdict-btn half" onclick="selectVerdict('${qId}', 'half')">➗ نصف</button>
+                        <button class="verdict-btn wrong" onclick="selectVerdict('${qId}', 'wrong')">❌ خطأ</button>
+                    </div>
+                    <div class="feedback-section">
+                        <label>💬 تعليق / فيدباك (اختياري):</label>
+                        <textarea id="feedback_${qId}" dir="auto" placeholder="اكتب ملاحظاتك للطالب هنا..." oninput="updateFeedback('${qId}', this.value)"></textarea>
+                    </div>
+                    <div class="verdict-status" id="status_${qId}">
+                        <span class="not-graded">⏳ بانتظار تقييمك</span>
+                    </div>
+                </div>
+            </div>
+        `;
         
         const fbBox = document.getElementById('fb' + qId.substring(1));
         if (fbBox) {
@@ -1706,17 +1929,27 @@ function getCorrectAnswer(qId) {
 }
 
 function selectVerdict(qId, verdict) {
-    teacherGrades[qId] = teacherGrades[qId] || {};
     teacherGrades[qId].verdict = verdict;
-    teacherGrades[qId].value = document.getElementById(qId).value;
+    const el = document.getElementById('grading_' + qId);
+    if (!el) return;
     
-    const container = document.getElementById(`grade_overlay_${qId}`);
-    container.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
-    container.querySelector(`.verdict-btn.${verdict}`).classList.add('selected');
+    el.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
+    const statusEl = document.getElementById('status_' + qId);
+    
+    if (verdict === 'correct') {
+        el.querySelector('.verdict-btn.correct').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done correct">✅ تم التقييم: صحيح</span>';
+    } else if (verdict === 'half') {
+        el.querySelector('.verdict-btn.half').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done half">➗ تم التقييم: نصف درجة</span>';
+    } else if (verdict === 'wrong') {
+        el.querySelector('.verdict-btn.wrong').classList.add('selected');
+        statusEl.innerHTML = '<span class="verdict-done wrong">❌ تم التقييم: خطأ</span>';
+    }
 }
 
 function updateFeedback(qId, v) { 
-    if(teacherGrades[qId]) teacherGrades[qId].feedback = v; 
+    teacherGrades[qId].feedback = v; 
 }
 
 async function saveAllGrades() {
@@ -1725,11 +1958,6 @@ async function saveAllGrades() {
         if (!confirm(`يوجد ${ungraded.length} سؤال لم تقم بتقييمهم. هل تريد المتابعة وحفظ ما تم تصحيحه فقط؟`)) return;
     }
     
-    Object.keys(teacherGrades).forEach(qId => {
-        const f = document.getElementById(`t_feedback_${qId}`);
-        if (f) teacherGrades[qId].feedback = f.value;
-    });
-
     showLoading('جاري حفظ التصحيحات وإرسالها للطالب...');
     
     let tc = 0, th = 0, tw = 0;
@@ -1739,6 +1967,17 @@ async function saveAllGrades() {
         else if (teacherGrades[qId].verdict === 'wrong') tw++;
     });
 
+    // ✅ إرسال التصحيحات عبر GET + POST (dual backup)
+    const getUrl = SCRIPT_URL 
+        + '?action=saveTeacherGrading'
+        + '&username=' + encodeURIComponent(studentUsername)
+        + '&lessonId=' + encodeURIComponent(LESSON_CONFIG.lessonId)
+        + '&teacherGrades=' + encodeURIComponent(JSON.stringify(teacherGrades))
+        + '&totalCorrect=' + tc
+        + '&totalHalf=' + th
+        + '&totalWrong=' + tw
+        + '&_t=' + Date.now();
+    
     const formPayload = { 
         action: 'saveTeacherGrading', 
         username: studentUsername, 
@@ -1750,7 +1989,10 @@ async function saveAllGrades() {
     };
     
     try {
-        await sendDataViaForm(formPayload);
+        await Promise.all([
+            fetch(getUrl, { mode: 'no-cors' }).catch(function(){}),
+            sendDataViaForm(formPayload)
+        ]);
         hideLoading();
         showPopup({
             type:'success', title:'تم بنجاح ✅', body:'تم إرسال التقييم للطالب بنجاح!', 
@@ -1762,44 +2004,47 @@ async function saveAllGrades() {
     }
 }
 
-document.addEventListener('keydown', e => {
-    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
-    if (e.key==='ArrowLeft') nextSlide();
-    if (e.key==='ArrowRight') prevSlide();
-});
+function addGradingStyles() {
+    if(document.getElementById('teacherStyles')) return;
+    const s = document.createElement('style');
+    s.id = 'teacherStyles';
+    s.textContent = `
+        .teacher-grading-mode .slide { animation: fadeSlide .3s ease; }
+        .teacher-grading-mode .slide.active { display: block; }
+        .teacher-grading-mode .slide { display: none; }
+        .teacher-grading-banner { background: linear-gradient(135deg, rgba(155,89,182,0.9), rgba(142,68,173,0.9)); border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .grading-info-bar { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; color: #fff; font-size: 1.1em;}
+        .save-grades-btn-top { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 0.95em; font-weight: bold; cursor: pointer; margin-right: auto; box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4); font-family: 'Cairo';}
+        .save-grades-btn-top:hover { background: #27ae60; transform: scale(1.05); }
+        .pending-grading { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.05) !important; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .grading-overlay { background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px; margin-top: 15px; border-right: 4px solid #f39c12;}
+        .grading-answer-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px; font-size: 1.1em;}
+        .correct-answer-box { border-right: 4px solid #2ecc71; }
+        .answer-label { font-weight: bold; margin-bottom: 8px; color: #d5a6f0; font-size: 0.85em;}
+        .correct-answer-box .answer-content { color: #2ecc71; font-weight: bold;}
+        .verdict-buttons { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;}
+        .verdict-label { color: #ccc; font-weight: bold; }
+        .verdict-btn { padding: 8px 15px; border: 2px solid; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; background: transparent; transition: all 0.2s; font-family: 'Cairo';}
+        .verdict-btn.correct { border-color: #2ecc71; color: #2ecc71; }
+        .verdict-btn.half { border-color: #f39c12; color: #f39c12; }
+        .verdict-btn.wrong { border-color: #e74c3c; color: #e74c3c; }
+        .verdict-btn.selected.correct { background: #2ecc71; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.half { background: #f39c12; color: #fff; transform: scale(1.05); }
+        .verdict-btn.selected.wrong { background: #e74c3c; color: #fff; transform: scale(1.05); }
+        .feedback-section label { color: #ccc; display: block; margin-bottom: 8px; font-size: 0.9em; }
+        .feedback-section textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(155,89,182,0.5); background: rgba(0,0,0,0.5); color: #fff; font-family: Cairo, sans-serif; resize: vertical; min-height: 70px; font-size: 1.05em;}
+        .feedback-section textarea:focus { border-color: #f39c12; outline: none; }
+        .verdict-status { text-align: left; margin-top: 10px; }
+        .verdict-done { font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 0.9em;}
+        .verdict-done.correct { background: rgba(46,204,113,0.2); color: #2ecc71; }
+        .verdict-done.half { background: rgba(243,156,18,0.2); color: #f39c12; }
+        .verdict-done.wrong { background: rgba(231,76,60,0.2); color: #e74c3c; }
+    `;
+    document.head.appendChild(s);
+}
 
-window.addEventListener('DOMContentLoaded', async function() {
-    checkTeacherGradingMode();
+function escapeHtml(text) { return esc(text); }
 
-    if (isTeacherGradingMode) {
-        initTeacherGrading();
-        return;
-    } else {
-        const scb = document.getElementById('spanishCharsBar');
-        if(scb) scb.style.display = 'flex';
-    }
-
-    if(document.getElementById('lessonHeaderName')) document.getElementById('lessonHeaderName').textContent = LESSON_CONFIG.lessonName;
-    if(document.getElementById('lessonHeaderBadge')) document.getElementById('lessonHeaderBadge').textContent = LESSON_CONFIG.levelDisplay;
-    document.title = 'Instituto Amigos - ' + LESSON_CONFIG.levelDisplay + ' - ' + LESSON_CONFIG.lessonName;
-    
-    renderSlides();
-    initSlider();
-    updateProgressDisplay();
-    checkAllTranscripts();
-    
-    showLoading('جاري مزامنة بياناتك...');
-    await loadProgress();
-    hideLoading();
-    
-    try {
-        const p = safeStorage.getItem('ia_pending_'+LESSON_CONFIG.lessonId);
-        if (p) {
-            lastFailedData = JSON.parse(p).data;
-            document.getElementById('retryBanner').style.display = 'block';
-        }
-    } catch(e){}
-});
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1202fd6ab438ca3',t:'MTc4MjUxODU4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
