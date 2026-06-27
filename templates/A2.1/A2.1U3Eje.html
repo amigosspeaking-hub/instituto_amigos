@@ -748,7 +748,7 @@ const SELECT_OPTIONS = {
 const safeStorage = {_d:{},setItem(k,v){try{if(typeof localStorage!=='undefined'){localStorage.setItem(k,v);return;}}catch(e){}this._d[k]=v;},getItem(k){try{if(typeof localStorage!=='undefined')return localStorage.getItem(k);}catch(e){}return this._d[k]||null;},removeItem(k){try{if(typeof localStorage!=='undefined'){localStorage.removeItem(k);return;}}catch(e){}delete this._d[k];}};
 
 let rawUser = '{{ student.username }}';
-let currentUser = { username: (rawUser.includes('{{') || !rawUser.trim()) ? 'student_demo' : rawUser, fullName: (rawUser.includes('{{') || !rawUser.trim()) ? 'طالب تجريبي' : rawUser };
+let currentUser = { username: (rawUser.indexOf('{' + '{') !== -1 || !rawUser.trim()) ? 'student_demo' : rawUser, fullName: (rawUser.indexOf('{' + '{') !== -1 || !rawUser.trim()) ? 'طالب تجريبي' : rawUser };
 let lockedAnswers = {};
 let totalCorrect=0, totalWrong=0, totalAnswered=0, totalPending=0, totalHalf=0;
 let pendingSubmit=null, lastFailedData=null, currentSlide=0, totalSlides=16;
@@ -2046,5 +2046,5 @@ function addGradingStyles() {
 function escapeHtml(text) { return esc(text); }
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1202fd6ab438ca3',t:'MTc4MjUxODU4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
