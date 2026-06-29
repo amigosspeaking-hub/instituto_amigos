@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shadowing – Unidad 3 Un año especial | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100vh;}
+body{font-family:'Open Sans',sans-serif;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 50%,#a5d6a7 100%);color:#333;padding:0;position:relative;}
+body::before{content:"Instituto Amigos";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,10vw,10rem);font-weight:900;color:rgba(27,94,32,0.06);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+.header{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:clamp(20px,4vw,40px) clamp(15px,4vw,40px);text-align:center;border-bottom:5px solid #ffd60a;position:relative;z-index:2;overflow:hidden;}
+.header::after{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:clamp(3rem,6vw,5rem);font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px;}
+.header .unit-badge{display:inline-block;background:#ffd60a;color:#1b5e20;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,28px);width:clamp(50px,8vw,70px);height:clamp(50px,8vw,70px);line-height:clamp(50px,8vw,70px);border-radius:50%;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative;z-index:1;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);letter-spacing:2px;margin-bottom:5px;text-shadow:2px 2px 6px rgba(0,0,0,0.3);position:relative;z-index:1;}
+.header .subtitle{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.5vw,15px);opacity:0.95;direction:rtl;font-weight:500;position:relative;z-index:1;}
+.header .subtitle .es-name{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;}
+.header .brand{margin-top:8px;font-size:11px;letter-spacing:3px;opacity:0.85;text-transform:uppercase;position:relative;z-index:1;font-weight:700;}
+
+.container{max-width:1200px;margin:0 auto;padding:clamp(15px,3vw,30px) clamp(12px,2vw,25px);position:relative;z-index:2;}
+
+.info-banner{background:linear-gradient(90deg,#f1f8e9,#dcedc8);border:2px dashed #2e7d32;border-radius:14px;padding:14px 18px;margin-bottom:16px;font-family:'Cairo',sans-serif;direction:rtl;font-size:clamp(13px,1.4vw,15px);color:#1b5e20;font-weight:600;line-height:1.85;}
+.info-banner strong{color:#1b5e20;}
+.info-banner .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:8px;}
+.info-banner .step{background:#fff;border-radius:8px;padding:8px 12px;border:1px solid #a5d6a7;font-size:13px;}
+.info-banner .step strong{color:#2e7d32;display:block;margin-bottom:3px;font-size:14px;}
+
+.slide-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;background:rgba(255,255,255,0.7);padding:10px;border-radius:14px;border:2px solid #2e7d32;}
+.tab-btn{background:#fff;color:#1b5e20;border:2px solid #2e7d32;padding:10px 22px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+.tab-btn:hover{background:#c8e6c9;transform:translateY(-2px);}
+.tab-btn.active{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;box-shadow:0 4px 12px rgba(46,125,50,0.3);}
+.tab-btn .tab-num{background:#ffd60a;color:#1b5e20;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+.tab-btn.active .tab-num{background:#fff;}
+
+.slide{display:none;animation:fadeIn 0.4s ease;}
+.slide.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.slide-head{background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid #2e7d32;border-radius:12px;padding:12px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.slide-head h2{font-family:'Playfair Display',serif;color:#1b5e20;font-size:clamp(16px,2vw,20px);}
+.slide-head .range{background:#2e7d32;color:#fff;padding:5px 14px;border-radius:14px;font-weight:700;font-size:13px;font-family:'Open Sans',sans-serif;}
+
+.play-all-row{display:flex;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.play-all-btn{background:linear-gradient(135deg,#00897b,#00695c);color:#fff;border:none;padding:11px 24px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;box-shadow:0 3px 10px rgba(0,137,123,0.3);}
+.play-all-btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,137,123,0.4);}
+.play-all-btn.playing{background:linear-gradient(135deg,#c62828,#b71c1c);animation:pulseBtn 1s ease-in-out infinite;}
+@keyframes pulseBtn{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+.stop-btn{background:linear-gradient(135deg,#757575,#424242);color:#fff;border:none;padding:11px 24px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;}
+.stop-btn:hover{background:linear-gradient(135deg,#616161,#212121);}
+.speed-control{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #2e7d32;border-radius:20px;padding:5px 14px;font-family:'Cairo',sans-serif;font-size:13px;color:#1b5e20;font-weight:700;}
+.speed-control select{background:transparent;border:none;outline:none;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;color:#1b5e20;cursor:pointer;font-size:13px;}
+
+.sentences-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+.sentence-card{background:#fff;border:2px solid #2e7d32;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.25s;box-shadow:0 2px 6px rgba(46,125,50,0.1);}
+.sentence-card:hover{background:#e8f5e9;transform:translateX(-3px);box-shadow:0 5px 14px rgba(46,125,50,0.2);}
+.sentence-card.speaking{background:linear-gradient(135deg,#fff59d,#ffeb3b);border-color:#1b5e20;animation:pulseCard 0.7s ease-in-out infinite;}
+@keyframes pulseCard{0%,100%{transform:scale(1);}50%{transform:scale(1.015);}}
+
+.sentence-num{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Playfair Display',serif;font-size:14px;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,0.15);}
+.sentence-card.speaking .sentence-num{background:linear-gradient(135deg,#c62828,#8e0000);}
+
+.play-btn{background:#2e7d32;color:#fff;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;}
+.play-btn:hover{background:#1b5e20;transform:scale(1.1);}
+.sentence-card.speaking .play-btn{background:#c62828;}
+
+.sentence-text-wrap{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0;}
+.sentence-text{font-family:'Open Sans',sans-serif;font-weight:700;color:#1b5e20;font-size:clamp(14px,1.5vw,15.5px);direction:ltr;line-height:1.5;unicode-bidi:isolate;}
+.sentence-ar{font-family:'Cairo',sans-serif;color:#1a3a1a;font-size:clamp(13px,1.4vw,14px);direction:rtl;text-align:right;font-weight:600;line-height:1.55;}
+
+.tips-box{background:linear-gradient(135deg,#f1f8e9,#dcedc8);border:2px solid #66bb6a;border-radius:14px;padding:14px 18px;margin-top:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:14px;color:#1a3a1a;font-weight:600;line-height:1.95;}
+.tips-box h3{color:#2e7d32;font-family:'Playfair Display',serif;margin-bottom:8px;font-size:17px;text-decoration:underline;}
+
+.footer{text-align:center;padding:30px 20px;color:#1b5e20;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:3px;font-size:13px;text-transform:uppercase;opacity:0.85;position:relative;z-index:2;}
+.footer .heart{color:#c62828;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="unit-badge">3</div>
+  <h1>📅 SHADOWING – UN AÑO ESPECIAL</h1>
+  <p class="subtitle">30 جملة من قلب الوحدة <span class="es-name">— Unidad 3 —</span> للتمرين على النطق والماضي</p>
+  <div class="brand">★ Instituto Amigos ★</div>
+</div>
+
+<div class="container">
+
+  <div class="info-banner">
+    📢 <strong>إيه هو الـ Shadowing؟</strong> ده تمرين بيساعدك تتكلم إسباني بطلاقة وبنطق صحيح. الفكرة بسيطة: اسمع الجملة، وبعدها كررها بنفس النطق والإيقاع تماماً (زي ظلك).
+    <div class="steps">
+      <div class="step"><strong>1️⃣ اضغط على الجملة</strong>هتسمع نطقها بصوت إسباني طبيعي</div>
+      <div class="step"><strong>2️⃣ كررها بصوت عالي</strong>قلد النطق والإيقاع بالظبط</div>
+      <div class="step"><strong>3️⃣ كرر التمرين 3 مرات</strong>على كل جملة عشان تثبت في عقلك</div>
+      <div class="step"><strong>4️⃣ استخدم زر "تشغيل الكل"</strong>عشان تسمع كل الشريحة ورا بعض</div>
+    </div>
+  </div>
+
+  <div class="slide-tabs">
+    <button class="tab-btn active" onclick="showSlide(1)"><span class="tab-num">1</span>الجمل 1 — 10</button>
+    <button class="tab-btn" onclick="showSlide(2)"><span class="tab-num">2</span>الجمل 11 — 20</button>
+    <button class="tab-btn" onclick="showSlide(3)"><span class="tab-num">3</span>الجمل 21 — 30</button>
+  </div>
+
+  <!-- SLIDE 1: أحداث الماضي — الشهادات الشخصية -->
+  <div class="slide active" id="slide1">
+    <div class="slide-head">
+      <h2>🌍 المجموعة الأولى — أحداث الماضي (Pretérito indefinido)</h2>
+      <span class="range">10 / 1 — 10</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(1, this)">▶️ تشغيل الكل (1 — 10)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+      <div class="speed-control">⚡ السرعة:
+        <select id="speedSelect" onchange="changeSpeed()">
+          <option value="0.7">بطيء</option>
+          <option value="0.85" selected>عادي</option>
+          <option value="1">سريع</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sentences-grid">
+      <div class="sentence-card" data-speak="Un año especial para mí fue el dos mil diez.">
+        <div class="sentence-num">1</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Un año especial para mí fue el 2010.</div>
+          <div class="sentence-ar">سنة مميزة بالنسبالي كانت 2010.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Ese año se celebró el Mundial de Fútbol en Sudáfrica.">
+        <div class="sentence-num">2</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Ese año se celebró el Mundial de Fútbol en Sudáfrica.</div>
+          <div class="sentence-ar">في السنة دي اتقام كأس العالم في جنوب أفريقيا.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Mi mujer y yo viajamos a África por primera vez.">
+        <div class="sentence-num">3</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Mi mujer y yo viajamos a África por primera vez.</div>
+          <div class="sentence-ar">أنا وزوجتي سافرنا لأفريقيا لأول مرة.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¡Y la selección ganó la copa!">
+        <div class="sentence-num">4</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¡Y la selección ganó la copa!</div>
+          <div class="sentence-ar">والمنتخب فاز بالكأس!</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En dos mil once participé con unos amigos en el movimiento del quince de mayo.">
+        <div class="sentence-num">5</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En 2011 participé con unos amigos en el movimiento del 15 de mayo.</div>
+          <div class="sentence-ar">في 2011 شاركت مع ناس أصحابي في حركة 15 مايو.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Después fuimos juntos a otros encuentros en muchas ciudades.">
+        <div class="sentence-num">6</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Después fuimos juntos a otros encuentros en muchas ciudades.</div>
+          <div class="sentence-ar">بعدين رحنا مع بعض لتجمعات تانية في مدن كتير.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Fue un año muy importante en España.">
+        <div class="sentence-num">7</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Fue un año muy importante en España.</div>
+          <div class="sentence-ar">كانت سنة مهمة جداً في إسبانيا.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="El seis de mayo de dos mil quince Enrique Iglesias dio un megaconcierto en Veracruz.">
+        <div class="sentence-num">8</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">El 6 de mayo de 2015 Enrique Iglesias dio un megaconcierto en Veracruz.</div>
+          <div class="sentence-ar">في 6 مايو 2015 انريكي إيغلياس قدّم حفلة ضخمة في فيراكروث.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Yo estuve allí. ¡Fue fantástico!">
+        <div class="sentence-num">9</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Yo estuve allí. ¡Fue fantástico!</div>
+          <div class="sentence-ar">أنا كنت هناك. كان رائع!</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En el concierto conocí a Toni, mi marido, ¡y ese mismo año nos casamos!">
+        <div class="sentence-num">10</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En el concierto conocí a Toni, mi marido, ¡y ese mismo año nos casamos!</div>
+          <div class="sentence-ar">في الحفلة اتعرفت على توني، جوزي، ونفس السنة اتجوزنا!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: شخصيات مشهورة + الماضي الشاذ -->
+  <div class="slide" id="slide2">
+    <div class="slide-head">
+      <h2>⭐ المجموعة الثانية — شخصيات مشهورة وأحداث (Verbos irregulares)</h2>
+      <span class="range">20 / 11 — 20</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(2, this)">▶️ تشغيل الكل (11 — 20)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+    </div>
+
+    <div class="sentences-grid">
+      <div class="sentence-card" data-speak="Mireia Belmonte, la mejor nadadora española de todos los tiempos, nació en mil novecientos noventa.">
+        <div class="sentence-num">11</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Mireia Belmonte, la mejor nadadora española de todos los tiempos, nació en 1990.</div>
+          <div class="sentence-ar">ميريا بيلمونتي، أحسن سبّاحة إسبانية على الإطلاق، اتولدت سنة 1990.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Empecé a nadar muy joven.">
+        <div class="sentence-num">12</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Empecé a nadar muy joven.</div>
+          <div class="sentence-ar">بدأت أسبح وأنا صغير/ة جداً.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Sus padres pidieron información en un club de su ciudad natal, Badalona.">
+        <div class="sentence-num">13</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Sus padres pidieron información en un club de su ciudad natal, Badalona.</div>
+          <div class="sentence-ar">أهلها طلبوا معلومات في نادي في مدينتها الأصلية، بدالونا.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En dos mil ocho participó por primera vez en unas olimpiadas.">
+        <div class="sentence-num">14</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En 2008 participó por primera vez en unas olimpiadas.</div>
+          <div class="sentence-ar">في 2008 شاركت لأول مرة في الأولمبياد.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En dos mil catorce ganó dos medallas de oro en el Campeonato europeo.">
+        <div class="sentence-num">15</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En 2014 ganó dos medallas de oro en el Campeonato europeo.</div>
+          <div class="sentence-ar">في 2014 فازت بميداليتين ذهبيتين في البطولة الأوروبية.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="La realidad superó mis sueños cuando llegué al espacio.">
+        <div class="sentence-num">16</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">La realidad superó mis sueños cuando llegué al espacio.</div>
+          <div class="sentence-ar">الواقع فاق أحلامي لما وصلت للفضاء.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="El vuelo de Yuri Gagarin al espacio en mil novecientos sesenta y uno marcó su vida.">
+        <div class="sentence-num">17</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">El vuelo de Yuri Gagarin al espacio en 1961 marcó su vida.</div>
+          <div class="sentence-ar">رحلة يوري غاغارين للفضاء في 1961 غيّرت حياته.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="El pequeño Franklin quedó impresionado por ese acontecimiento.">
+        <div class="sentence-num">18</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">El pequeño Franklin quedó impresionado por ese acontecimiento.</div>
+          <div class="sentence-ar">الصغير فرانكلين انبهر بالحدث ده.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En mil novecientos ochenta consiguió su primer contrato con la NASA.">
+        <div class="sentence-num">19</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En 1980 consiguió su primer contrato con la NASA.</div>
+          <div class="sentence-ar">في 1980 حصل على أول عقد له مع ناسا.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Así decidió su profesión de mayor: ser astronauta.">
+        <div class="sentence-num">20</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Así decidió su profesión de mayor: ser astronauta.</div>
+          <div class="sentence-ar">وبكده قرر مهنته لما يكبر: يبقى رائد فضاء.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: الماضي المركب + تقييم التجارب -->
+  <div class="slide" id="slide3">
+    <div class="slide-head">
+      <h2>✅ المجموعة الثالثة — الماضي المركب وتقييم التجارب (Pretérito perfecto)</h2>
+      <span class="range">30 / 21 — 30</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(3, this)">▶️ تشغيل الكل (21 — 30)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+    </div>
+
+    <div class="sentences-grid">
+      <div class="sentence-card" data-speak="Ayer llegué a las islas Galápagos. ¡Por fin aquí, rodeada de naturaleza y de tortugas!">
+        <div class="sentence-num">21</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Ayer llegué a las islas Galápagos. ¡Por fin aquí, rodeada de naturaleza y de tortugas!</div>
+          <div class="sentence-ar">إمبارح وصلت جزر غالاباغوس. أخيراً هنا، محاطة بالطبيعة والسلاحف!</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Hoy he visitado algunas islas con ellos y hemos ido juntos al centro de investigación.">
+        <div class="sentence-num">22</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Hoy he visitado algunas islas con ellos y hemos ido juntos al centro de investigación.</div>
+          <div class="sentence-ar">النهارده زرت معاهم بعض الجزر ورحنا مع بعض لمركز الأبحاث.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Esta mañana ha sido mi primer día en la guardería.">
+        <div class="sentence-num">23</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Esta mañana ha sido mi primer día en la guardería.</div>
+          <div class="sentence-ar">الصبح ده كان أول يوم ليا في الحضانة.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Ha sido muy bonito conocer a los niños y a mis nuevos compañeros de trabajo.">
+        <div class="sentence-num">24</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Ha sido muy bonito conocer a los niños y a mis nuevos compañeros de trabajo.</div>
+          <div class="sentence-ar">كان حلو جداً إني اتعرفت على الأطفال وزملائي الجدد في الشغل.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Los más pequeños han empezado esta semana y necesitan más dedicación.">
+        <div class="sentence-num">25</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Los más pequeños han empezado esta semana y necesitan más dedicación.</div>
+          <div class="sentence-ar">الأصغر منهم بدأوا الأسبوع ده ومحتاجين اهتمام أكتر.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="El sábado pasado fue mi cumpleaños. Cumplí sesenta años y preparé una comida en casa.">
+        <div class="sentence-num">26</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">El sábado pasado fue mi cumpleaños. Cumplí 60 años y preparé una comida en casa.</div>
+          <div class="sentence-ar">السبت اللي فات كان عيد ميلادي. كملت 60 سنة وحضّرت أكل في البيت.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¡Lo pasamos fenomenal!">
+        <div class="sentence-num">27</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¡Lo pasamos fenomenal!</div>
+          <div class="sentence-ar">قضينا وقتاً رهيب / فنوموناًل!</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Pero este fin de semana he vuelto a la normalidad. He hecho gimnasia y he ido al cine.">
+        <div class="sentence-num">28</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Pero este fin de semana he vuelto a la normalidad. He hecho gimnasia y he ido al cine.</div>
+          <div class="sentence-ar">بس الويك إند ده رجعت للروتين. عملت جيم ورحت السينما.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¿Qué tal hoy? ¡Ha sido muy divertido! El concierto me ha encantado.">
+        <div class="sentence-num">29</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¿Qué tal hoy? ¡Ha sido muy divertido! El concierto me ha encantado.</div>
+          <div class="sentence-ar">إيه أخبار النهارده؟ كان ممتعاً جداً! الحفلة أعجبتني كثيراً.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¿Qué tal el sábado pasado? Fue horrible. La fiesta no me gustó nada.">
+        <div class="sentence-num">30</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¿Qué tal el sábado pasado? Fue horrible. La fiesta no me gustó nada.</div>
+          <div class="sentence-ar">إيه أخبار السبت اللي فات؟ كان مريع. الحفلة ما عجبتنيش خالص.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tips-box">
+    <h3>💡 نصائح ذهبية للـ Shadowing</h3>
+    ▸ <strong>اسمع أولاً بدون كلام</strong> — ركز على إيقاع الجملة وموسيقاها.<br>
+    ▸ <strong>كرر بصوت عالي وبثقة</strong> — متخافش من الأخطاء، الأخطاء جزء من التعلم.<br>
+    ▸ <strong>قلد كل حاجة</strong> — النبرة، السرعة، اللي بيوقف فيها المتحدث، حتى الانفعالات.<br>
+    ▸ <strong>سجل صوتك</strong> واسمع نفسك، قارن بين نطقك والأصلي.<br>
+    ▸ <strong>اشتغل على 5 جمل في اليوم</strong> بدل ما تحاول تخلص كل حاجة مرة واحدة.<br>
+    ▸ <strong>استخدم زر "تشغيل الكل"</strong> لما تبقى مرتاح، خليه شغال في الباك جراوند وأنت بتعمل حاجات تانية.<br>
+    ▸ <strong>ركز على النطق الصعب:</strong> حروف <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">ñ, j, r, rr, ll, c+e/i, z</span> — دي مفاتيح النطق الصح.<br>
+    ▸ <strong>في الوحدة دي ركز على:</strong> نطق نهايات الماضي — <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">-é, -ó, -imos, -aron, -ieron</span> — وفرق النبرة بين <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">estuVE / esTUvo</span>.
+  </div>
+
+</div>
+
+<div class="footer">
+  ⭐ Instituto Amigos <span class="heart">❤️</span> Shadowing Unidad 3 ⭐
+</div>
+
+<script>
+let spanishVoices = [];
+let currentSpeakingEl = null;
+let isPlayingQueue = false;
+let currentSpeed = 0.85;
+let currentPlayAllBtn = null;
+
+function loadSpanishVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const allVoices = window.speechSynthesis.getVoices();
+  spanishVoices = [
+    ...allVoices.filter(v => v.lang === 'es-ES'),
+    ...allVoices.filter(v => v.lang === 'es-MX'),
+    ...allVoices.filter(v => v.lang === 'es-US'),
+    ...allVoices.filter(v => v.lang === 'es-AR'),
+    ...allVoices.filter(v => v.lang === 'es-CO'),
+    ...allVoices.filter(v => v.lang.startsWith('es-')),
+    ...allVoices.filter(v => v.lang.startsWith('es'))
+  ];
+  spanishVoices = [...new Set(spanishVoices)];
+}
+if ('speechSynthesis' in window) {
+  loadSpanishVoices();
+  window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+  setTimeout(loadSpanishVoices, 100);
+  setTimeout(loadSpanishVoices, 500);
+  setTimeout(loadSpanishVoices, 1500);
+}
+
+function speakES(el, text, onEndCallback) {
+  if (!('speechSynthesis' in window)) return;
+  if (spanishVoices.length === 0) loadSpanishVoices();
+  const cleanText = text.replace(/[¿¡]/g,'').trim();
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = 'es-ES';
+  if (spanishVoices.length > 0) {
+    u.voice = spanishVoices[0];
+    u.lang = spanishVoices[0].lang;
+  }
+  u.rate = currentSpeed;
+  u.pitch = 1;
+  u.volume = 1;
+  if (el) {
+    el.classList.add('speaking');
+    currentSpeakingEl = el;
+  }
+  u.onend = () => {
+    if (el) el.classList.remove('speaking');
+    currentSpeakingEl = null;
+    if (onEndCallback) onEndCallback();
+  };
+  u.onerror = () => {
+    if (el) el.classList.remove('speaking');
+    currentSpeakingEl = null;
+    if (onEndCallback) onEndCallback();
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function showSlide(num) {
+  stopAll();
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('slide' + num).classList.add('active');
+  document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function playAll(slideNum, btn) {
+  stopAll();
+  isPlayingQueue = true;
+  currentPlayAllBtn = btn;
+  btn.classList.add('playing');
+  btn.innerHTML = '⏸️ بيشتغل...';
+
+  const cards = document.querySelectorAll('#slide' + slideNum + ' .sentence-card');
+  let index = 0;
+
+  function playNext() {
+    if (!isPlayingQueue || index >= cards.length) {
+      if (currentPlayAllBtn) {
+        currentPlayAllBtn.classList.remove('playing');
+        const ranges = {1:'1 — 10', 2:'11 — 20', 3:'21 — 30'};
+        const activeTab = Array.from(document.querySelectorAll('.tab-btn')).findIndex(b => b.classList.contains('active')) + 1;
+        currentPlayAllBtn.innerHTML = '▶️ تشغيل الكل (' + ranges[activeTab] + ')';
+      }
+      isPlayingQueue = false;
+      return;
+    }
+    const card = cards[index];
+    const text = card.dataset.speak;
+    card.scrollIntoView({behavior: 'smooth', block: 'center'});
+    speakES(card, text, () => {
+      index++;
+      setTimeout(playNext, 600);
+    });
+  }
+  playNext();
+}
+
+function stopAll() {
+  isPlayingQueue = false;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (currentSpeakingEl) {
+    currentSpeakingEl.classList.remove('speaking');
+    currentSpeakingEl = null;
+  }
+  const ranges = ['1 — 10','11 — 20','21 — 30'];
+  document.querySelectorAll('.play-all-btn').forEach((b, i) => {
+    b.classList.remove('playing');
+    b.innerHTML = '▶️ تشغيل الكل (' + ranges[i] + ')';
+  });
+}
+
+function changeSpeed() {
+  currentSpeed = parseFloat(document.getElementById('speedSelect').value);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.sentence-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlayingQueue) stopAll();
+      window.speechSynthesis.cancel();
+      if (currentSpeakingEl) {
+        currentSpeakingEl.classList.remove('speaking');
+        currentSpeakingEl = null;
+      }
+      const text = card.dataset.speak;
+      speakES(card, text);
+    });
+  });
+});
+</script>
+</body>
+</html>

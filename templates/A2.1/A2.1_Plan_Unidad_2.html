@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Plan de estudio – Unidad 2 Para ti y para mí | Instituto Amigos</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100vh;}
+body{font-family:'Cairo','Tajawal',sans-serif;background:linear-gradient(135deg,#E6FFFB 0%,#CCFBF1 50%,#99F6E4 100%);color:#333;padding:0;position:relative;direction:rtl;}
+body::before{content:"Instituto Amigos";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,10vw,10rem);font-weight:900;color:rgba(14,124,115,0.06);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+.header{background:linear-gradient(135deg,#1B9AAA,#0E7C73);color:#fff;padding:clamp(20px,4vw,40px) clamp(15px,4vw,40px);text-align:center;border-bottom:5px solid #F1C40F;position:relative;z-index:2;overflow:hidden;}
+.header::after{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:clamp(3rem,6vw,5rem);font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px;}
+.header .unit-badge{display:inline-block;background:#F1C40F;color:#0E7C73;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,28px);width:clamp(50px,8vw,70px);height:clamp(50px,8vw,70px);line-height:clamp(50px,8vw,70px);border-radius:50%;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative;z-index:1;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);letter-spacing:2px;margin-bottom:5px;text-shadow:2px 2px 6px rgba(0,0,0,0.3);position:relative;z-index:1;}
+.header h1 .es-title{display:inline-block;direction:ltr;unicode-bidi:isolate;}
+.header .subtitle{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.5vw,15px);opacity:0.95;direction:rtl;font-weight:500;position:relative;z-index:1;}
+.header .subtitle .es-name{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;}
+.header .brand{margin-top:8px;font-size:11px;letter-spacing:3px;opacity:0.85;text-transform:uppercase;font-family:'Playfair Display',serif;position:relative;z-index:1;font-weight:700;}
+
+.container{max-width:1300px;margin:0 auto;padding:clamp(15px,3vw,30px) clamp(12px,2vw,25px);position:relative;z-index:2;}
+
+.info-banner{background:linear-gradient(90deg,#fff8e1,#CCFBF1);border:2px dashed #1B9AAA;border-radius:14px;padding:14px 18px;margin-bottom:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:clamp(13px,1.4vw,15px);color:#0E7C73;font-weight:600;line-height:1.85;text-align:center;}
+.info-banner strong{color:#0E7C73;}
+
+.section-title{font-family:'Playfair Display',serif;color:#0E7C73;font-size:clamp(18px,2.2vw,22px);text-align:center;margin:25px 0 14px;letter-spacing:2px;text-transform:uppercase;}
+.section-title::before,.section-title::after{content:"★";color:#F1C40F;margin:0 12px;}
+
+.es{display:inline-block;direction:ltr;unicode-bidi:isolate;}
+
+.global-progress{background:#fff;border:3px solid #1B9AAA;border-radius:16px;padding:14px 20px;margin-bottom:18px;box-shadow:0 4px 14px rgba(27,154,170,0.15);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.global-progress h3{font-family:'Playfair Display',serif;color:#0E7C73;font-size:clamp(15px,1.8vw,18px);flex-shrink:0;}
+.progress-bar-wrap{flex:1;display:flex;align-items:center;gap:10px;min-width:200px;}
+.progress-text{font-family:'Cairo',sans-serif;font-weight:800;color:#0E7C73;font-size:14px;min-width:42px;text-align:center;}
+.progress-bar{flex:1;height:16px;background:#E6FFFB;border-radius:10px;overflow:hidden;border:1px solid #99F6E4;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2e7d32,#66bb6a);transition:width 0.5s;width:0%;border-radius:10px;}
+.reset-btn{background:linear-gradient(135deg,#757575,#424242);color:#fff;border:none;padding:8px 16px;border-radius:14px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:12px;transition:all 0.3s;flex-shrink:0;}
+.reset-btn:hover{transform:translateY(-2px);box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+
+.days-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:14px;}
+
+.day-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(27,154,170,0.12);transition:all 0.3s;display:flex;flex-direction:column;border:2px solid transparent;position:relative;}
+.day-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(27,154,170,0.2);}
+.day-card.completed{border-color:#2e7d32;}
+.completed-badge{display:none;}
+.day-card.completed .completed-badge{display:inline-block;position:absolute;background:#2e7d32;color:#fff;padding:4px 14px;border-radius:0 0 10px 10px;font-size:11px;font-weight:700;z-index:5;top:0;left:50%;transform:translateX(-50%);font-family:'Cairo',sans-serif;}
+
+.day-card .day-header{padding:14px 18px;color:#fff;text-align:center;position:relative;border-bottom:4px solid #F1C40F;}
+.day-1 .day-header{background:linear-gradient(135deg,#c62828,#8e0000);}
+.day-2 .day-header{background:linear-gradient(135deg,#ef6c00,#0E7C73);}
+.day-3 .day-header{background:linear-gradient(135deg,#00897b,#00695c);}
+.day-4 .day-header{background:linear-gradient(135deg,#1976d2,#0d47a1);}
+.day-5 .day-header{background:linear-gradient(135deg,#7b1fa2,#4a148c);}
+.day-6 .day-header{background:linear-gradient(135deg,#5d4037,#3e2723);}
+.day-7 .day-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);}
+
+.day-num{display:inline-block;background:#F1C40F;color:#333;font-family:'Playfair Display',serif;font-weight:900;font-size:18px;width:36px;height:36px;line-height:36px;border-radius:50%;margin-bottom:6px;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.day-name-en{font-family:'Playfair Display',serif;font-size:14px;letter-spacing:2px;opacity:0.9;text-transform:uppercase;direction:ltr;}
+.day-name-ar{font-family:'Cairo',sans-serif;font-size:clamp(18px,2.2vw,22px);font-weight:800;margin:4px 0;}
+.day-duration{display:inline-block;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:14px;font-size:12px;font-weight:700;backdrop-filter:blur(4px);}
+
+.day-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;}
+
+.task-section{background:#fafafa;border-radius:10px;padding:10px 12px;border-right:4px solid #1B9AAA;transition:all 0.2s;}
+.task-section:hover{background:#E6FFFB;}
+.task-icon-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.task-icon{font-size:18px;}
+.task-label{font-family:'Cairo',sans-serif;font-weight:800;color:#0E7C73;font-size:13px;flex:1;}
+.task-label .es{font-family:'Open Sans',sans-serif;}
+.task-content{font-family:'Cairo',sans-serif;font-size:12.5px;color:#444;line-height:1.55;font-weight:600;}
+.task-tip{display:block;color:#1565c0;font-size:11.5px;font-style:italic;background:#e3f2fd;padding:4px 8px;border-radius:5px;border-right:3px solid #1976d2;margin-top:5px;font-weight:600;}
+
+.day-checklist{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:2px dashed #1B9AAA;border-radius:10px;padding:10px 12px;margin-top:auto;}
+.day-checklist-title{font-family:'Cairo',sans-serif;font-weight:800;color:#0E7C73;font-size:13px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.day-progress-mini{background:#fff;padding:2px 8px;border-radius:10px;font-size:11px;color:#0E7C73;border:1px solid #1B9AAA;}
+.check-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px dashed #CCFBF1;cursor:pointer;transition:all 0.2s;}
+.check-item:last-child{border-bottom:none;}
+.check-item:hover{background:rgba(255,255,255,0.5);border-radius:6px;padding-right:6px;}
+.check-item input[type="checkbox"]{width:18px;height:18px;cursor:pointer;accent-color:#2e7d32;flex-shrink:0;margin-top:1px;}
+.check-item label{flex:1;font-family:'Cairo',sans-serif;font-weight:600;color:#5a4100;font-size:12.5px;cursor:pointer;line-height:1.55;}
+.check-item.done label{text-decoration:line-through;color:#999;}
+.check-item.done input[type="checkbox"]{accent-color:#2e7d32;}
+
+.goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0 20px;}
+.goal-card{background:#fff;border:2px solid #1B9AAA;border-radius:14px;padding:14px;text-align:center;box-shadow:0 3px 10px rgba(27,154,170,0.12);transition:all 0.3s;}
+.goal-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(27,154,170,0.25);}
+.goal-icon{font-size:36px;margin-bottom:8px;}
+.goal-title{font-family:'Playfair Display',serif;font-weight:800;color:#0E7C73;font-size:15px;margin-bottom:5px;}
+.goal-desc{font-family:'Cairo',sans-serif;color:#555;font-size:12.5px;line-height:1.6;font-weight:600;}
+.goal-card.vocab{border-color:#ef6c00;}
+.goal-card.vocab .goal-title{color:#0E7C73;}
+.goal-card.grammar{border-color:#7b1fa2;}
+.goal-card.grammar .goal-title{color:#4a148c;}
+.goal-card.speak{border-color:#2e7d32;}
+.goal-card.speak .goal-title{color:#1b5e20;}
+.goal-card.write{border-color:#1976d2;}
+.goal-card.write .goal-title{color:#0d47a1;}
+
+.tips-box{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:2px solid #f5a623;border-radius:14px;padding:16px 20px;margin-top:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:14px;color:#5a4100;font-weight:600;line-height:2;}
+.tips-box h3{color:#bf6a00;font-family:'Playfair Display',serif;margin-bottom:8px;font-size:17px;text-decoration:underline;}
+
+.footer{text-align:center;padding:30px 20px;color:#0E7C73;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:3px;font-size:13px;text-transform:uppercase;opacity:0.85;position:relative;z-index:2;direction:ltr;}
+.footer .heart{color:#c62828;}
+
+.achievement{display:none;position:fixed;top:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:14px 24px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,0.3);z-index:200;animation:slideDown 0.5s;font-size:14px;}
+.achievement.show{display:block;}
+@keyframes slideDown{from{transform:translate(-50%,-100px);opacity:0;}to{transform:translate(-50%,0);opacity:1;}}
+
+@media(max-width:600px){
+.days-grid{grid-template-columns:1fr;}
+.global-progress{flex-direction:column;align-items:stretch;}
+.progress-bar-wrap{justify-content:space-between;}
+}
+
+/* Unidad 2 palette */
+.header{background:linear-gradient(135deg,#1B9AAA,#0E7C73)!important;border-bottom-color:#F1C40F!important}.header .unit-badge{background:#F1C40F!important;color:#0E7C73!important}.info-banner{background:linear-gradient(90deg,#F0FDFA,#E6FFFB)!important;border-color:#1B9AAA!important;color:#0E7C73!important}.global-progress{border-color:#1B9AAA!important}.task-section{border-right-color:#1B9AAA!important}.task-section:hover{background:#F0FDFA!important}.day-checklist{background:linear-gradient(135deg,#F0FDFA,#E6FFFB)!important;border-color:#1B9AAA!important}.section-title,.global-progress h3,.task-label,.day-checklist-title,.day-progress-mini,.footer{color:#0E7C73!important}.goal-card{border-color:#1B9AAA!important}.goal-title{color:#0E7C73!important}.tips-box{background:linear-gradient(135deg,#FFFBEB,#FEF3C7)!important;border-color:#F1C40F!important}.progress-fill{background:linear-gradient(90deg,#1B9AAA,#35C7BE)!important}
+</style></head>
+<body>
+<div class="header">
+  <div class="unit-badge">2</div>
+  <h1>PLAN DE ESTUDIO · <span class="es-title">PARA TI Y PARA MÍ</span></h1>
+  <div class="subtitle">خطة مذاكرة 7 أيام لـ <span class="es-name">Unidad 2</span> — الهدايا، الضمائر، التسوق، و <span class="es-name">estar + gerundio</span></div>
+  <div class="brand">INSTITUTO AMIGOS</div>
+</div>
+
+<div class="container">
+  <div class="info-banner">
+    <strong>هدف الخطة:</strong> في 7 أيام تكون فاهم محتوى الوحدة 2 بالكامل: تختار هدايا، تتكلم عن أشياء لم تعد تحتاجها، تشتري في محل، وتستخدم <span class="es">le/les, lo/la/los/las, se lo</span> و <span class="es">estar + gerundio</span> بثقة.
+  </div>
+
+  <div class="global-progress">
+    <h3>📊 التقدم العام</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div><span class="progress-text" id="globalText">0%</span></div>
+    <button class="reset-btn" onclick="resetAll()">إعادة ضبط</button>
+  </div>
+
+  <div class="section-title">خطة الأسبوع</div>
+  <div class="days-grid"><div class="day-card day-1"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">1</div><div class="day-name-en">Sábado</div><div class="day-name-ar">السبت</div><span class="day-duration">⏱️ 55 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎁</span><span class="task-label">مدخل الوحدة <span class="es">¿Qué les compro?</span></span></div><div class="task-content">راجع صفحة 16: صور Raúl / Silvia / Cecilia وقائمة الهدايا: <span class="es">un perfume, una tableta, un vale...</span></div><span class="task-tip">💡 اربط كل هدية بالشخص: Raúl = tableta، Silvia = spa، Cecilia = pulsómetro.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎧</span><span class="task-label">استماع <span class="es">Pista 4</span></span></div><div class="task-content">اسمع الحوار مرتين: مرة للفكرة العامة ومرة للإجابات التفصيلية.</div><span class="task-tip">💡 اكتب 3 جمل: <span class="es">Puede leer...</span> / <span class="es">Puede relajarse...</span> / <span class="es">Puede controlarse...</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🗣️</span><span class="task-label">تعبير شفهي قصير</span></div><div class="task-content">جاوب بصوت عالي: <span class="es">¿Qué regalos compras tú normalmente?</span></div><span class="task-tip">💡 استخدم: <span class="es">Le compro...</span> و <span class="es">porque le gusta...</span>.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="1">0/5</span></div><div class="check-item"><input type="checkbox" id="d1c1"><label for="d1c1">فتحت صفحة 16 وفهمت الهدايا</label></div><div class="check-item"><input type="checkbox" id="d1c2"><label for="d1c2">سمعت Pista 4 مرتين</label></div><div class="check-item"><input type="checkbox" id="d1c3"><label for="d1c3">كتبت إجابات 1b</label></div><div class="check-item"><input type="checkbox" id="d1c4"><label for="d1c4">قلت 4 جمل عن هدايا بجيبها</label></div><div class="check-item"><input type="checkbox" id="d1c5"><label for="d1c5">راجعت 15 كلمة من Vocabulario</label></div></div></div></div><div class="day-card day-2"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">2</div><div class="day-name-en">Domingo</div><div class="day-name-ar">الأحد</div><span class="day-duration">⏱️ 60 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">قراءة <span class="es">Milregalos de Lorena</span></span></div><div class="task-content">اقرأ صفحة 17 وحدد أفكار الهدايا: للثقافة، للوالدين الرومانسيين، للشباب.</div><span class="task-tip">💡 ظلّل الجمل اللي فيها <span class="es">le regalo / les reservo / comprarles</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">📌</span><span class="task-label">ضمائر المفعول غير المباشر</span></div><div class="task-content">ادرس: <span class="es">me, te, le, nos, os, les</span>.</div><span class="task-tip">💡 <span class="es">A mi amigo Julián le compro...</span> = الضمير <span class="es">le</span> راجع على Julián.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">✍️</span><span class="task-label">تطبيق كتابي</span></div><div class="task-content">اكتب 6 أفكار هدايا: 2 لمحبي الثقافة، 2 للوالدين، 2 للشباب.</div><span class="task-tip">💡 ابدأ بـ <span class="es">Le podemos regalar...</span>.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="2">0/5</span></div><div class="check-item"><input type="checkbox" id="d2c1"><label for="d2c1">قرأت نص Milregalos كامل</label></div><div class="check-item"><input type="checkbox" id="d2c2"><label for="d2c2">فهمت استخدام le/les</label></div><div class="check-item"><input type="checkbox" id="d2c3"><label for="d2c3">كتبت 6 أفكار هدايا</label></div><div class="check-item"><input type="checkbox" id="d2c4"><label for="d2c4">راجعت تصنيف Regalos في ملف المفردات</label></div><div class="check-item"><input type="checkbox" id="d2c5"><label for="d2c5">نطقت 8 جمل من النص</label></div></div></div></div><div class="day-card day-3"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">3</div><div class="day-name-en">Lunes</div><div class="day-name-ar">الاثنين</div><span class="day-duration">⏱️ 65 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">♻️</span><span class="task-label">قسم <span class="es">¡Regalar hace feliz!</span></span></div><div class="task-content">راجع 3a: <span class="es">ropa usada, muebles viejos, electrodomésticos...</span> مع الأفعال <span class="es">vender, regalar, tirar</span>.</div><span class="task-tip">💡 كوّن جمل: <span class="es">La ropa usada la regalo</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎧</span><span class="task-label">استماع <span class="es">Pista 5</span> عن <span class="es">gratiferias</span></span></div><div class="task-content">اسمع التقرير واختار التعريف الصحيح للـ gratiferia.</div><span class="task-tip">💡 التعريف المهم: سوق بدون فلوس؛ لو عجبك شيء بتاخده مجانًا.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🔁</span><span class="task-label">ضميرين مع بعض</span></div><div class="task-content">تدرّب على: <span class="es">te lo vendo</span>, <span class="es">nos las regalas</span>, <span class="es">os los damos</span>.</div><span class="task-tip">💡 الترتيب: غير مباشر ثم مباشر.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="3">0/5</span></div><div class="check-item"><input type="checkbox" id="d3c1"><label for="d3c1">راجعت كلمات الأشياء القديمة</label></div><div class="check-item"><input type="checkbox" id="d3c2"><label for="d3c2">سمعت Pista 5 مرتين</label></div><div class="check-item"><input type="checkbox" id="d3c3"><label for="d3c3">فهمت معنى gratiferia</label></div><div class="check-item"><input type="checkbox" id="d3c4"><label for="d3c4">حلّيت 3b و3c</label></div><div class="check-item"><input type="checkbox" id="d3c5"><label for="d3c5">قلت 5 جمل بضمير مباشر</label></div></div></div></div><div class="day-card day-4"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">4</div><div class="day-name-en">Martes</div><div class="day-name-ar">الثلاثاء</div><span class="day-duration">⏱️ 70 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">🚚</span><span class="task-label">قسم <span class="es">No todo son regalos...</span></span></div><div class="task-content">راجع صفحة 18: Sara مسافرة لندن وبتتصرف في حاجاتها.</div><span class="task-tip">💡 احفظ الأزواج: piso→amigos، bicicleta→compañera، plantas→vecina، coche→Miguel.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎧</span><span class="task-label">استماع <span class="es">Pista 6</span></span></div><div class="task-content">اسمع الحوار واملأ جدول 4a و4b.</div><span class="task-tip">💡 كرر الجمل: <span class="es">se lo alquila</span>, <span class="es">se la vende</span>, <span class="es">se las da</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">📐</span><span class="task-label">قاعدة <span class="es">le/les → se</span></span></div><div class="task-content">ادرس القاعدة: لما <span class="es">le/les</span> يجوا قبل <span class="es">lo/la/los/las</span> يتحولوا إلى <span class="es">se</span>.</div><span class="task-tip">💡 ممنوع: <span class="es">le lo doy</span>؛ الصح: <span class="es">se lo doy</span>.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="4">0/5</span></div><div class="check-item"><input type="checkbox" id="d4c1"><label for="d4c1">سمعت Pista 6</label></div><div class="check-item"><input type="checkbox" id="d4c2"><label for="d4c2">حفظت 4 علاقات في الجدول</label></div><div class="check-item"><input type="checkbox" id="d4c3"><label for="d4c3">فهمت le/les → se</label></div><div class="check-item"><input type="checkbox" id="d4c4"><label for="d4c4">كتبت 8 جمل se lo/se la/se los/se las</label></div><div class="check-item"><input type="checkbox" id="d4c5"><label for="d4c5">عملت تدريب 4c شفهيًا</label></div></div></div></div><div class="day-card day-5"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">5</div><div class="day-name-en">Miércoles</div><div class="day-name-ar">الأربعاء</div><span class="day-duration">⏱️ 60 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">🏬</span><span class="task-label">قسم <span class="es">¡Estamos comprando!</span></span></div><div class="task-content">راجع صفحة 19 وأسماء المحلات: peluquería, papelería, tienda de deportes, regalos y complementos.</div><span class="task-tip">💡 اربط كل محل بالصورة والحركة اللي بتحصل فيه.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🕒</span><span class="task-label">قاعدة <span class="es">estar + gerundio</span></span></div><div class="task-content">ادرس: <span class="es">estoy/estás/está/estamos/estáis/están + hablando/comiendo/escribiendo</span>.</div><span class="task-tip">💡 شواذ مهمة: <span class="es">leer→leyendo</span>, <span class="es">dormir→durmiendo</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎭</span><span class="task-label">ممارسة ميميك</span></div><div class="task-content">مثّل فعل من المول وخلي زميلك يخمن: <span class="es">¿Estás pagando?</span>.</div><span class="task-tip">💡 جاوب: <span class="es">Sí</span> أو <span class="es">No, estoy...</span>.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="5">0/5</span></div><div class="check-item"><input type="checkbox" id="d5c1"><label for="d5c1">حفظت أسماء 4 محلات</label></div><div class="check-item"><input type="checkbox" id="d5c2"><label for="d5c2">فهمت estar + gerundio</label></div><div class="check-item"><input type="checkbox" id="d5c3"><label for="d5c3">كتبت 10 أفعال في gerundio</label></div><div class="check-item"><input type="checkbox" id="d5c4"><label for="d5c4">حلّيت 5a و5b</label></div><div class="check-item"><input type="checkbox" id="d5c5"><label for="d5c5">عملت 5 جمل عن ناس في المول</label></div></div></div></div><div class="day-card day-6"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">6</div><div class="day-name-en">Jueves</div><div class="day-name-ar">الخميس</div><span class="day-duration">⏱️ 75 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">🧢</span><span class="task-label">قسم <span class="es">¿Me quedan bien?</span></span></div><div class="task-content">راجع صفحة 20: sombrero, gafas de sol, collar, camiseta, gorra, anillo, pañuelo.</div><span class="task-tip">💡 ركز على جمل المقاس والشراء: <span class="es">Me queda...</span>, <span class="es">Me lo llevo</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎧</span><span class="task-label">استماع <span class="es">Pista 7</span></span></div><div class="task-content">اسمع حوار Juan في محل الهدايا وحدد ماذا يشتري.</div><span class="task-tip">💡 الإجابة: <span class="es">unas gafas de sol</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🛒</span><span class="task-label">Role play في محل</span></div><div class="task-content">حضّر حوار بائع/عميل من 8 جمل على الأقل.</div><span class="task-tip">💡 لازم تستخدم: <span class="es">¿Me lo puedo probar?</span> و <span class="es">¿Paga en efectivo o con tarjeta?</span>.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="6">0/5</span></div><div class="check-item"><input type="checkbox" id="d6c1"><label for="d6c1">سمعت Pista 7 مرتين</label></div><div class="check-item"><input type="checkbox" id="d6c2"><label for="d6c2">فهمت الفرق بين queda/quedan</label></div><div class="check-item"><input type="checkbox" id="d6c3"><label for="d6c3">كتبت حوار شراء</label></div><div class="check-item"><input type="checkbox" id="d6c4"><label for="d6c4">حفظت 12 كلمة ملابس وإكسسوارات</label></div><div class="check-item"><input type="checkbox" id="d6c5"><label for="d6c5">تدربت على الدورين: بائع وعميل</label></div></div></div></div><div class="day-card day-7"><span class="completed-badge">✓ مكتمل</span><div class="day-header"><div class="day-num">7</div><div class="day-name-en">Viernes</div><div class="day-name-ar">الجمعة</div><span class="day-duration">⏱️ 80 دقيقة</span></div><div class="day-body"><div class="task-section"><div class="task-icon-row"><span class="task-icon">🚫</span><span class="task-label">قسم <span class="es">En la tienda de regalos y complementos</span></span></div><div class="task-content">راجع صفحة 21: <span class="es">algún, alguna, algunos, algunas, ningún, ninguna, nada, nadie</span>.</div><span class="task-tip">💡 قبل اسم مذكر مفرد: <span class="es">alguno→algún</span> و <span class="es">ninguno→ningún</span>.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">Ejercicios صفحة 121</span></div><div class="task-content">حل تمارين الضمائر، gerundio، indefinidos، والأسئلة المناسبة للحوار.</div><span class="task-tip">💡 اشتغل بدون كشف الإجابات ثم راجع من الملف الرئيسي.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🏆</span><span class="task-label">Consolidamos</span></div><div class="task-content">اعمل كتالوج هدايا + حوار شراء في المركز التجاري.</div><span class="task-tip">💡 استخدم أكبر قدر من مفردات الوحدة وقواعدها.</span></div><div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing نهائي</span></div><div class="task-content">شغّل جمل الشادوينج الخاصة بالوحدة وكررها بصوت عالي.</div><span class="task-tip">💡 كرر كل جملة 3 مرات: فهم → تقليد → بدون قراءة.</span></div><div class="day-checklist"><div class="day-checklist-title"><span>✅ مهام اليوم</span><span class="day-progress-mini" data-day-progress="7">0/6</span></div><div class="check-item"><input type="checkbox" id="d7c1"><label for="d7c1">فهمت algún/ningún/nada/nadie</label></div><div class="check-item"><input type="checkbox" id="d7c2"><label for="d7c2">حلّيت تمارين صفحة 121</label></div><div class="check-item"><input type="checkbox" id="d7c3"><label for="d7c3">عملت كتالوج هدايا صغير</label></div><div class="check-item"><input type="checkbox" id="d7c4"><label for="d7c4">عملت حوار شراء كامل</label></div><div class="check-item"><input type="checkbox" id="d7c5"><label for="d7c5">راجعت ملف المفردات كامل</label></div><div class="check-item"><input type="checkbox" id="d7c6"><label for="d7c6">أنهيت Shadowing للجمل المهمة</label></div></div></div></div></div>
+
+  <div class="section-title">أهداف الوحدة الثانية</div>
+  <div class="goals-grid">
+    <div class="goal-card vocab"><div class="goal-icon">🎁</div><div class="goal-title">150+ كلمة وتعبير</div><div class="goal-desc">مفردات الهدايا، المحلات، الملابس، الأشياء القديمة، وأفعال البيع والشراء.</div></div>
+    <div class="goal-card grammar"><div class="goal-icon">📐</div><div class="goal-title">4 قواعد رئيسية</div><div class="goal-desc"><span class="es">complemento indirecto</span> + جمع ضميرين + <span class="es">estar + gerundio</span> + <span class="es">indefinidos</span>.</div></div>
+    <div class="goal-card speak"><div class="goal-icon">🗣️</div><div class="goal-title">حوارات شراء كاملة</div><div class="goal-desc">تقدر تسأل عن المقاس والسعر والدفع وتقول <span class="es">Me lo llevo</span>.</div></div>
+    <div class="goal-card write"><div class="goal-icon">✍️</div><div class="goal-title">تمارين وتطبيقات</div><div class="goal-desc">حل تمارين صفحة 121 + مشروع كتالوج الهدايا وحوار المركز التجاري.</div></div>
+  </div>
+
+  <div class="tips-box">
+    <h3>💡 نصائح للنجاح في الخطة</h3>
+    ▸ <strong>اشتغل بالترتيب:</strong> كل يوم مبني على اللي قبله، خصوصًا الضمائر.<br>
+    ▸ <strong>اتكلم بصوت عالي:</strong> جمل المحل لازم تتقال مش بس تتقري.<br>
+    ▸ <strong>اربط الضمير بالمعنى:</strong> <span class="es">le</span> = له/لها، <span class="es">lo/la</span> = الشيء نفسه.<br>
+    ▸ <strong>اكتب أمثلة شخصية:</strong> اكتب هدايا حقيقية لأصحابك وعيلتك.<br>
+    ▸ <strong>راجع يوميًا:</strong> 10 دقائق مفردات + 10 دقائق Shadowing كل يوم.<br>
+    ▸ <strong>لو فاتك يوم:</strong> كمل من اليوم اللي وقفت عنده، ومتبدأش من الأول.
+  </div>
+</div>
+
+<div class="footer">⭐ Instituto Amigos <span class="heart">❤️</span> Plan de estudio Unidad 2 ⭐</div>
+<div class="achievement" id="achievement">🎉 برافو! خلصت كل المهام!</div>
+<script>
+const STORAGE_KEY = 'unidad2_v1_checklist';
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    state[cb.id] = cb.checked;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+      if (state[cb.id]) {
+        cb.checked = true;
+        cb.closest('.check-item').classList.add('done');
+      }
+    });
+  } catch(e) {}
+}
+
+function updateProgress() {
+  const allCheckboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+  const total = allCheckboxes.length;
+  const checked = document.querySelectorAll('.check-item input[type="checkbox"]:checked').length;
+  const percent = total ? Math.round((checked / total) * 100) : 0;
+  document.getElementById('globalFill').style.width = percent + '%';
+  document.getElementById('globalText').textContent = percent + '%';
+  if (percent === 100) showAchievement();
+
+  document.querySelectorAll('.day-card').forEach(card => {
+    const dayCheckboxes = card.querySelectorAll('.check-item input[type="checkbox"]');
+    const dayTotal = dayCheckboxes.length;
+    const dayChecked = card.querySelectorAll('.check-item input[type="checkbox"]:checked').length;
+    const miniLabel = card.querySelector('[data-day-progress]');
+    if (miniLabel) miniLabel.textContent = dayChecked + '/' + dayTotal;
+    card.classList.toggle('completed', dayChecked === dayTotal && dayTotal > 0);
+  });
+}
+
+function showAchievement() {
+  const el = document.getElementById('achievement');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+function resetAll() {
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.check-item').classList.remove('done');
+  });
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('completed'));
+  saveState();
+  updateProgress();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  updateProgress();
+
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.check-item').classList.toggle('done', cb.checked);
+      saveState();
+      updateProgress();
+    });
+  });
+
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') return;
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      cb.dispatchEvent(new Event('change'));
+    });
+  });
+});
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a12b7c94d83018c4',t:'MTc4MjYzNzA3NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

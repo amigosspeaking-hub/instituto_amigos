@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shadowing – Unidad 1 Nueva etapa | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100vh;}
+body{font-family:'Open Sans',sans-serif;background:linear-gradient(135deg,#e3f0ff 0%,#c8e0ff 50%,#a8ccff 100%);color:#333;padding:0;position:relative;}
+body::before{content:"Instituto Amigos";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,10vw,10rem);font-weight:900;color:rgba(13,71,161,0.06);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+.header{background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;padding:clamp(20px,4vw,40px) clamp(15px,4vw,40px);text-align:center;border-bottom:5px solid #ffd60a;position:relative;z-index:2;overflow:hidden;}
+.header::after{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:clamp(3rem,6vw,5rem);font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px;}
+.header .unit-badge{display:inline-block;background:#ffd60a;color:#0d47a1;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,28px);width:clamp(50px,8vw,70px);height:clamp(50px,8vw,70px);line-height:clamp(50px,8vw,70px);border-radius:50%;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative;z-index:1;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);letter-spacing:2px;margin-bottom:5px;text-shadow:2px 2px 6px rgba(0,0,0,0.3);position:relative;z-index:1;}
+.header .subtitle{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.5vw,15px);opacity:0.95;direction:rtl;font-weight:500;position:relative;z-index:1;}
+.header .subtitle .es-name{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;}
+.header .brand{margin-top:8px;font-size:11px;letter-spacing:3px;opacity:0.85;text-transform:uppercase;position:relative;z-index:1;font-weight:700;}
+
+.container{max-width:1200px;margin:0 auto;padding:clamp(15px,3vw,30px) clamp(12px,2vw,25px);position:relative;z-index:2;}
+
+.info-banner{background:linear-gradient(90deg,#e8f0fe,#d0e4ff);border:2px dashed #1565c0;border-radius:14px;padding:14px 18px;margin-bottom:16px;font-family:'Cairo',sans-serif;direction:rtl;font-size:clamp(13px,1.4vw,15px);color:#0d47a1;font-weight:600;line-height:1.85;}
+.info-banner strong{color:#0d47a1;}
+.info-banner .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:8px;}
+.info-banner .step{background:#fff;border-radius:8px;padding:8px 12px;border:1px solid #90caf9;font-size:13px;}
+.info-banner .step strong{color:#1565c0;display:block;margin-bottom:3px;font-size:14px;}
+
+.slide-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;background:rgba(255,255,255,0.7);padding:10px;border-radius:14px;border:2px solid #1565c0;}
+.tab-btn{background:#fff;color:#0d47a1;border:2px solid #1565c0;padding:10px 22px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+.tab-btn:hover{background:#d0e4ff;transform:translateY(-2px);}
+.tab-btn.active{background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;box-shadow:0 4px 12px rgba(21,101,192,0.3);}
+.tab-btn .tab-num{background:#ffd60a;color:#0d47a1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+.tab-btn.active .tab-num{background:#fff;color:#0d47a1;}
+
+.slide{display:none;animation:fadeIn 0.4s ease;}
+.slide.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.slide-head{background:linear-gradient(135deg,#fff,#e3f0ff);border:2px solid #1565c0;border-radius:12px;padding:12px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.slide-head h2{font-family:'Playfair Display',serif;color:#0d47a1;font-size:clamp(16px,2vw,20px);}
+.slide-head .range{background:#1565c0;color:#fff;padding:5px 14px;border-radius:14px;font-weight:700;font-size:13px;font-family:'Open Sans',sans-serif;}
+
+.play-all-row{display:flex;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.play-all-btn{background:linear-gradient(135deg,#00838f,#006064);color:#fff;border:none;padding:11px 24px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;box-shadow:0 3px 10px rgba(0,131,143,0.3);}
+.play-all-btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,131,143,0.4);}
+.play-all-btn.playing{background:linear-gradient(135deg,#c62828,#b71c1c);animation:pulseBtn 1s ease-in-out infinite;}
+@keyframes pulseBtn{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+.stop-btn{background:linear-gradient(135deg,#757575,#424242);color:#fff;border:none;padding:11px 24px;border-radius:24px;cursor:pointer;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;}
+.stop-btn:hover{background:linear-gradient(135deg,#616161,#212121);}
+.speed-control{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #1565c0;border-radius:20px;padding:5px 14px;font-family:'Cairo',sans-serif;font-size:13px;color:#0d47a1;font-weight:700;}
+.speed-control select{background:transparent;border:none;outline:none;font-family:'Cairo','Open Sans',sans-serif;font-weight:700;color:#0d47a1;cursor:pointer;font-size:13px;}
+
+.sentences-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+.sentence-card{background:#fff;border:2px solid #1565c0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.25s;box-shadow:0 2px 6px rgba(21,101,192,0.1);}
+.sentence-card:hover{background:#e3f0ff;transform:translateX(-3px);box-shadow:0 5px 14px rgba(21,101,192,0.2);}
+.sentence-card.speaking{background:linear-gradient(135deg,#fff59d,#ffeb3b);border-color:#f57f17;animation:pulseCard 0.7s ease-in-out infinite;}
+@keyframes pulseCard{0%,100%{transform:scale(1);}50%{transform:scale(1.015);}}
+
+.sentence-num{background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Playfair Display',serif;font-size:14px;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,0.15);}
+.sentence-card.speaking .sentence-num{background:linear-gradient(135deg,#c62828,#8e0000);}
+
+.play-btn{background:#1565c0;color:#fff;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;}
+.play-btn:hover{background:#0d47a1;transform:scale(1.1);}
+.sentence-card.speaking .play-btn{background:#c62828;}
+
+.sentence-text-wrap{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0;}
+.sentence-text{font-family:'Open Sans',sans-serif;font-weight:700;color:#0d47a1;font-size:clamp(14px,1.5vw,15.5px);direction:ltr;line-height:1.5;unicode-bidi:isolate;}
+.sentence-ar{font-family:'Cairo',sans-serif;color:#1a237e;font-size:clamp(13px,1.4vw,14px);direction:rtl;text-align:right;font-weight:600;line-height:1.55;}
+
+.tips-box{background:linear-gradient(135deg,#e8eaf6,#e3f2fd);border:2px solid #5c6bc0;border-radius:14px;padding:14px 18px;margin-top:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:14px;color:#1a237e;font-weight:600;line-height:1.95;}
+.tips-box h3{color:#0d47a1;font-family:'Playfair Display',serif;margin-bottom:8px;font-size:17px;text-decoration:underline;}
+
+.footer{text-align:center;padding:30px 20px;color:#0d47a1;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:3px;font-size:13px;text-transform:uppercase;opacity:0.85;position:relative;z-index:2;}
+.footer .heart{color:#c62828;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="unit-badge">1</div>
+  <h1>🗣️ SHADOWING – NUEVA ETAPA</h1>
+  <p class="subtitle">30 جملة من قلب الوحدة <span class="es-name">— Unidad 1 —</span> للتمرين على النطق والطلاقة</p>
+  <div class="brand">★ Instituto Amigos ★</div>
+</div>
+
+<div class="container">
+
+  <div class="info-banner">
+    📢 <strong>إيه هو الـ Shadowing؟</strong> ده تمرين بيساعدك تتكلم إسباني بطلاقة وبنطق صحيح. الفكرة بسيطة: اسمع الجملة، وبعدها كررها بنفس النطق والإيقاع تماماً (زي ظلك).
+    <div class="steps">
+      <div class="step"><strong>1️⃣ اضغط على الجملة</strong>هتسمع نطقها بصوت إسباني طبيعي</div>
+      <div class="step"><strong>2️⃣ كررها بصوت عالي</strong>قلد النطق والإيقاع بالظبط</div>
+      <div class="step"><strong>3️⃣ كرر التمرين 3 مرات</strong>على كل جملة عشان تثبت في عقلك</div>
+      <div class="step"><strong>4️⃣ استخدم زر "تشغيل الكل"</strong>عشان تسمع كل الشريحة ورا بعض</div>
+    </div>
+  </div>
+
+  <div class="slide-tabs">
+    <button class="tab-btn active" onclick="showSlide(1)"><span class="tab-num">1</span>الجمل 1 — 10</button>
+    <button class="tab-btn" onclick="showSlide(2)"><span class="tab-num">2</span>الجمل 11 — 20</button>
+    <button class="tab-btn" onclick="showSlide(3)"><span class="tab-num">3</span>الجمل 21 — 30</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 1: الأذواق والصعوبات (1–10)          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide active" id="slide1">
+    <div class="slide-head">
+      <h2>❤️ المجموعة الأولى — الأذواق والصعوبات (Me gusta / Me cuesta)</h2>
+      <span class="range">10 / 1 — 10</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(1, this)">▶️ تشغيل الكل (1 — 10)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+      <div class="speed-control">⚡ السرعة:
+        <select id="speedSelect" onchange="changeSpeed()">
+          <option value="0.7">بطيء</option>
+          <option value="0.85" selected>عادي</option>
+          <option value="1">سريع</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sentences-grid">
+
+      <div class="sentence-card" data-speak="El español me encanta. Las clases también.">
+        <div class="sentence-num">1</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">El español me encanta. Las clases también.</div>
+          <div class="sentence-ar">الإسباني بعشقه. والحصص كمان.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Me cuesta un poco entender las audiciones en clase.">
+        <div class="sentence-num">2</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Me cuesta un poco entender las audiciones en clase.</div>
+          <div class="sentence-ar">بيصعب عليّ شوية إني أفهم تمارين الاستماع في الفصل.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Algunos deberes me aburren un poco.">
+        <div class="sentence-num">3</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Algunos deberes me aburren un poco.</div>
+          <div class="sentence-ar">بعض الواجبات بتملّني شوية.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Me encanta la melodía de la lengua española.">
+        <div class="sentence-num">4</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Me encanta la melodía de la lengua española.</div>
+          <div class="sentence-ar">بعشق موسيقى اللغة الإسبانية.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Me interesa la cultura de los países hispanohablantes.">
+        <div class="sentence-num">5</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Me interesa la cultura de los países hispanohablantes.</div>
+          <div class="sentence-ar">ثقافة البلاد الناطقة بالإسباني بتهمني.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En clase me gusta trabajar en grupos y escuchar los diálogos.">
+        <div class="sentence-num">6</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En clase me gusta trabajar en grupos y escuchar los diálogos.</div>
+          <div class="sentence-ar">في الفصل بحب أشتغل في مجموعات وأسمع الحوارات.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Me cuesta mucho aprender palabras nuevas.">
+        <div class="sentence-num">7</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Me cuesta mucho aprender palabras nuevas.</div>
+          <div class="sentence-ar">بيصعب عليّ جداً إني أتعلم كلمات جديدة.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="A mí me gustan los ejercicios de gramática y jugar en clase.">
+        <div class="sentence-num">8</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">A mí me gustan los ejercicios de gramática y jugar en clase.</div>
+          <div class="sentence-ar">أنا بحب تمارين القواعد واللعب في الفصل.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Pues a mí me cuesta hacer los deberes, pero me gusta mucho escribir.">
+        <div class="sentence-num">9</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Pues a mí me cuesta hacer los deberes, pero me gusta mucho escribir.</div>
+          <div class="sentence-ar">طب أنا بيصعب عليّ أعمل الواجبات، بس بحب الكتابة أوي.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="A mí me cuesta pronunciar la erre, pero me encanta escuchar las audiciones.">
+        <div class="sentence-num">10</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">A mí me cuesta pronunciar la "r", pero me encanta escuchar las audiciones.</div>
+          <div class="sentence-ar">بيصعب عليّ أنطق الـ"r"، بس بعشق أسمع تمارين الاستماع.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 2: Desde / desde hace + idiomas (11–20)  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide" id="slide2">
+    <div class="slide-head">
+      <h2>⏰ المجموعة الثانية — تحديد الزمن واللغات (Desde / idiomas)</h2>
+      <span class="range">20 / 11 — 20</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(2, this)">▶️ تشغيل الكل (11 — 20)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+    </div>
+
+    <div class="sentences-grid">
+
+      <div class="sentence-card" data-speak="Estudio español desde hace dos años.">
+        <div class="sentence-num">11</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Estudio español desde hace dos años.</div>
+          <div class="sentence-ar">بأدرس الإسباني منذ سنتين. (مدة زمنية)</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Hago un intercambio desde hace unas semanas.">
+        <div class="sentence-num">12</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Hago un intercambio desde hace unas semanas.</div>
+          <div class="sentence-ar">بأعمل تبادل لغوي منذ بضعة أسابيع.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Estudio español desde el año pasado.">
+        <div class="sentence-num">13</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Estudio español desde el año pasado.</div>
+          <div class="sentence-ar">بأدرس الإسباني من العام الماضي. (وقت محدد)</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Tenemos una nueva profesora desde la semana pasada.">
+        <div class="sentence-num">14</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Tenemos una nueva profesora desde la semana pasada.</div>
+          <div class="sentence-ar">عندنا مدرسة جديدة من الأسبوع اللي فات.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¿Desde cuándo vives en esta ciudad?">
+        <div class="sentence-num">15</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¿Desde cuándo vives en esta ciudad?</div>
+          <div class="sentence-ar">من إمتى بتعيش في المدينة دي؟</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Vivo aquí desde hace tres años. ¿Y tú?">
+        <div class="sentence-num">16</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Vivo aquí desde hace tres años. ¿Y tú?</div>
+          <div class="sentence-ar">بأعيش هنا منذ 3 سنين. وانت؟</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Soy bilingüe porque tengo dos lenguas maternas: catalán y español.">
+        <div class="sentence-num">17</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Soy bilingüe porque tengo dos lenguas maternas: catalán y español.</div>
+          <div class="sentence-ar">أنا ثنائي اللغة لأن عندي لغتان أصليتان: الكتالونية والإسبانية.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="En el trabajo hablo alemán con los colegas e inglés con los clientes.">
+        <div class="sentence-num">18</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">En el trabajo hablo alemán con los colegas e inglés con los clientes.</div>
+          <div class="sentence-ar">في الشغل بتكلم ألماني مع الزملاء وإنجليزي مع العملاء.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Con mis hijos hablo catalán para que puedan hablar con sus abuelos.">
+        <div class="sentence-num">19</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Con mis hijos hablo catalán para que puedan hablar con sus abuelos.</div>
+          <div class="sentence-ar">مع أولادي بتكلم كتالوني عشان يقدروا يتكلموا مع أجدادهم.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Pienso que hoy en día es muy importante saber idiomas.">
+        <div class="sentence-num">20</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Pienso que hoy en día es muy importante saber idiomas.</div>
+          <div class="sentence-ar">أعتقد إن في وقتنا الحالي معرفة اللغات مهمة جداً.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- SLIDE 3: Pretérito perfecto + consejos (21–30)   -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="slide" id="slide3">
+    <div class="slide-head">
+      <h2>⏳ المجموعة الثالثة — الماضي القريب والنصائح (Pretérito perfecto / Consejos)</h2>
+      <span class="range">30 / 21 — 30</span>
+    </div>
+
+    <div class="play-all-row">
+      <button class="play-all-btn" onclick="playAll(3, this)">▶️ تشغيل الكل (21 — 30)</button>
+      <button class="stop-btn" onclick="stopAll()">⏹️ إيقاف</button>
+    </div>
+
+    <div class="sentences-grid">
+
+      <div class="sentence-card" data-speak="Estas vacaciones he hecho un viaje maravilloso a Cuba.">
+        <div class="sentence-num">21</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Estas vacaciones he hecho un viaje maravilloso a Cuba.</div>
+          <div class="sentence-ar">الإجازة دي عملت رحلة رائعة لكوبا.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="He hecho todos los ejercicios del libro. Algunos, los menos aburridos.">
+        <div class="sentence-num">22</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">He hecho todos los ejercicios del libro. Bueno, algunos, los menos aburridos.</div>
+          <div class="sentence-ar">عملت كل تمارين الكتاب. أوكي، بعضها، الأقل مللاً.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="He hablado con mis amigos por Skype solo en español.">
+        <div class="sentence-num">23</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">He hablado con mis amigos por Skype solo en español.</div>
+          <div class="sentence-ar">اتكلمت مع أصحابي على سكايب بالإسباني بس.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="He comprado un audiolibro en español y lo he escuchado.">
+        <div class="sentence-num">24</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">He comprado un audiolibro en español y lo he escuchado.</div>
+          <div class="sentence-ar">اشتريت كتاب صوتي بالإسباني وسمعته.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="He leído una revista para principiantes en la tableta.">
+        <div class="sentence-num">25</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">He leído una revista para principiantes en la tableta.</div>
+          <div class="sentence-ar">قرأت مجلة للمبتدئين على التابلت.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="He escrito mensajes a mi amiga española.">
+        <div class="sentence-num">26</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">He escrito mensajes a mi amiga española.</div>
+          <div class="sentence-ar">كتبت رسائل لصاحبتي الإسبانية.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Si quieres aprender más vocabulario, tienes que trabajar con tarjetas.">
+        <div class="sentence-num">27</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Si quieres aprender más vocabulario, tienes que trabajar con tarjetas.</div>
+          <div class="sentence-ar">لو عايز تتعلم مفردات أكتر، لازم تشتغل بالكروت.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Para hablar más y perder el miedo, lo mejor es hacer un intercambio.">
+        <div class="sentence-num">28</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Para hablar más y perder el miedo, lo mejor es hacer un intercambio.</div>
+          <div class="sentence-ar">عشان تتكلم أكتر وتخسر الخوف، الأحسن تعمل تبادل لغوي.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="¿Te sientes inseguro con la pronunciación? Pues puedes escuchar canciones en español.">
+        <div class="sentence-num">29</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">¿Te sientes inseguro con la pronunciación? Pues puedes escuchar canciones en español.</div>
+          <div class="sentence-ar">مش واثق من نطقك؟ تقدر تسمع أغاني بالإسباني.</div>
+        </div>
+      </div>
+
+      <div class="sentence-card" data-speak="Para entender mejor a los hispanohablantes, es muy útil ver la televisión en español.">
+        <div class="sentence-num">30</div>
+        <button class="play-btn">▶</button>
+        <div class="sentence-text-wrap">
+          <div class="sentence-text">Para entender mejor a los hispanohablantes, es muy útil ver la televisión en español.</div>
+          <div class="sentence-ar">عشان تفهم الناطقين بالإسباني أحسن، مفيد جداً تتفرج على التليفزيون بالإسباني.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="tips-box">
+    <h3>💡 نصائح ذهبية للـ Shadowing</h3>
+    ▸ <strong>اسمع أولاً بدون كلام</strong> — ركز على إيقاع الجملة وموسيقاها.<br>
+    ▸ <strong>كرر بصوت عالي وبثقة</strong> — متخافش من الأخطاء، الأخطاء جزء من التعلم.<br>
+    ▸ <strong>قلد كل حاجة</strong> — النبرة، السرعة، اللي بيوقف فيها المتحدث، حتى الانفعالات.<br>
+    ▸ <strong>سجل صوتك</strong> واسمع نفسك، قارن بين نطقك والأصلي.<br>
+    ▸ <strong>اشتغل على 5 جمل في اليوم</strong> بدل ما تحاول تخلص كل حاجة مرة واحدة.<br>
+    ▸ <strong>الشريحة 1:</strong> ركز على تمييز <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">me gusta / me gustan / me cuesta / me cuestan</span> — لاحظ متى بيتغير الفعل.<br>
+    ▸ <strong>الشريحة 2:</strong> ركز على الفرق بين <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">desde</span> (وقت محدد) و <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">desde hace</span> (مدة).<br>
+    ▸ <strong>الشريحة 3:</strong> ركز على الشواذ: <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">hecho, escrito, leído</span> — احفظ شكلها وطريقة نطقها.
+  </div>
+
+</div>
+
+<div class="footer">
+  ⭐ Instituto Amigos <span class="heart">❤️</span> Shadowing Unidad 1 ⭐
+</div>
+
+<script>
+let spanishVoices = [];
+let currentSpeakingEl = null;
+let isPlayingQueue = false;
+let currentSpeed = 0.85;
+let currentPlayAllBtn = null;
+
+function loadSpanishVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const allVoices = window.speechSynthesis.getVoices();
+  spanishVoices = [
+    ...allVoices.filter(v => v.lang === 'es-ES'),
+    ...allVoices.filter(v => v.lang === 'es-MX'),
+    ...allVoices.filter(v => v.lang === 'es-US'),
+    ...allVoices.filter(v => v.lang === 'es-AR'),
+    ...allVoices.filter(v => v.lang === 'es-CO'),
+    ...allVoices.filter(v => v.lang.startsWith('es-')),
+    ...allVoices.filter(v => v.lang.startsWith('es'))
+  ];
+  spanishVoices = [...new Set(spanishVoices)];
+}
+if ('speechSynthesis' in window) {
+  loadSpanishVoices();
+  window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+  setTimeout(loadSpanishVoices, 100);
+  setTimeout(loadSpanishVoices, 500);
+  setTimeout(loadSpanishVoices, 1500);
+}
+
+function speakES(el, text, onEndCallback) {
+  if (!('speechSynthesis' in window)) return;
+  if (spanishVoices.length === 0) loadSpanishVoices();
+  const cleanText = text.replace(/[¿¡""]/g,'').trim();
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = 'es-ES';
+  if (spanishVoices.length > 0) {
+    u.voice = spanishVoices[0];
+    u.lang = spanishVoices[0].lang;
+  }
+  u.rate = currentSpeed;
+  u.pitch = 1;
+  u.volume = 1;
+  if (el) { el.classList.add('speaking'); currentSpeakingEl = el; }
+  u.onend = () => {
+    if (el) el.classList.remove('speaking');
+    currentSpeakingEl = null;
+    if (onEndCallback) onEndCallback();
+  };
+  u.onerror = () => {
+    if (el) el.classList.remove('speaking');
+    currentSpeakingEl = null;
+    if (onEndCallback) onEndCallback();
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function showSlide(num) {
+  stopAll();
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('slide' + num).classList.add('active');
+  document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function playAll(slideNum, btn) {
+  stopAll();
+  isPlayingQueue = true;
+  currentPlayAllBtn = btn;
+  btn.classList.add('playing');
+  btn.innerHTML = '⏸️ بيشتغل...';
+  const cards = document.querySelectorAll('#slide' + slideNum + ' .sentence-card');
+  let index = 0;
+  function playNext() {
+    if (!isPlayingQueue || index >= cards.length) {
+      if (currentPlayAllBtn) {
+        currentPlayAllBtn.classList.remove('playing');
+        const ranges = {1:'1 — 10', 2:'11 — 20', 3:'21 — 30'};
+        const activeTab = document.querySelector('.tab-btn.active');
+        const tabIdx = activeTab ? Array.from(document.querySelectorAll('.tab-btn')).indexOf(activeTab) + 1 : slideNum;
+        currentPlayAllBtn.innerHTML = '▶️ تشغيل الكل (' + (ranges[tabIdx] || ranges[slideNum]) + ')';
+      }
+      isPlayingQueue = false;
+      return;
+    }
+    const card = cards[index];
+    const text = card.dataset.speak;
+    card.scrollIntoView({behavior: 'smooth', block: 'center'});
+    speakES(card, text, () => { index++; setTimeout(playNext, 700); });
+  }
+  playNext();
+}
+
+function stopAll() {
+  isPlayingQueue = false;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (currentSpeakingEl) { currentSpeakingEl.classList.remove('speaking'); currentSpeakingEl = null; }
+  document.querySelectorAll('.play-all-btn').forEach(b => { b.classList.remove('playing'); });
+  const ranges = ['1 — 10','11 — 20','21 — 30'];
+  document.querySelectorAll('.play-all-btn').forEach((b, i) => {
+    b.innerHTML = '▶️ تشغيل الكل (' + ranges[i] + ')';
+  });
+}
+
+function changeSpeed() {
+  currentSpeed = parseFloat(document.getElementById('speedSelect').value);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.sentence-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlayingQueue) stopAll();
+      const text = card.dataset.speak;
+      speakES(card, text);
+    });
+  });
+});
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a12b8611bbabd4b8',t:'MTc4MjYzNzQ2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

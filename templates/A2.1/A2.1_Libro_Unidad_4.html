@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 4 - Con tus manos | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+:root{--pri:#E8651A;--pri-l:#FF8C42;--pri-d:#C4520F;--acc:#1B9AAA;--acc2:#6C5CE7;--grn:#00B894;--red:#E74C3C;--yel:#F1C40F;--dk:#1E293B;--dkr:#0F172A;--bg:#F1F5F9;--txt:#334155;--txtl:#64748B;--brd:#E2E8F0;--sbw:260px;--tbh:46px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins','Cairo',sans-serif;background:var(--bg);color:var(--txt);overflow:hidden;height:100vh;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.toolbar{position:fixed;top:0;left:0;right:0;height:var(--tbh);background:var(--dkr);display:flex;align-items:center;padding:0 8px;gap:4px;z-index:200}
+.tb-b{background:rgba(255,255,255,.1);border:none;color:#fff;width:34px;height:34px;border-radius:7px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.tb-b:hover{background:var(--pri)}
+.tb-sep{width:1px;height:24px;background:rgba(255,255,255,.12);margin:0 2px}
+.tb-title{flex:1;text-align:center;color:#fff;font-weight:700;font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tb-logo{color:var(--yel);font-weight:800;font-size:12px;white-space:nowrap;margin-left:8px}
+.zoom-disp{color:var(--yel);font-size:11px;font-weight:700;min-width:38px;text-align:center}
+.timer-pop{display:none;position:fixed;top:50px;left:50%;transform:translateX(-50%);background:var(--dkr);border:1px solid var(--pri);border-radius:12px;padding:14px 22px;z-index:300;color:#fff;text-align:center}
+.timer-pop.show{display:block}
+.timer-num{font-size:34px;font-weight:700;color:var(--pri)}
+.timer-btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.timer-b{background:var(--pri);border:none;color:#fff;padding:5px 14px;border-radius:7px;cursor:pointer;font-family:'Cairo';font-size:12px}
+.notes-pop{display:none;position:fixed;top:60px;right:30px;width:280px;background:#FFFDE7;border:2px solid var(--yel);border-radius:12px;z-index:400;box-shadow:0 8px 25px rgba(0,0,0,.2);overflow:hidden;resize:both;min-width:220px;min-height:180px}
+.notes-pop.show{display:block}
+.notes-bar{background:var(--yel);padding:7px 10px;cursor:move;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px;font-family:'Cairo'}
+.notes-bar .nc{background:none;border:none;font-size:16px;cursor:pointer}
+.notes-body{padding:10px;height:calc(100% - 36px)}
+.notes-body textarea{width:100%;height:100%;background:rgba(255,255,255,.6);border:1px solid #ddd;border-radius:7px;padding:8px;font-family:'Cairo';font-size:12px;resize:none}
+.sidebar{position:fixed;top:var(--tbh);left:0;width:var(--sbw);height:calc(100vh - var(--tbh));background:#fff;border-right:1px solid var(--brd);overflow-y:auto;z-index:100;transition:transform .3s;box-shadow:2px 0 8px rgba(0,0,0,.04)}
+.sidebar.collapsed{transform:translateX(calc(var(--sbw)*-1))}
+.sb-hd{padding:14px;background:linear-gradient(135deg,var(--pri),var(--pri-d));color:#fff;text-align:center}
+.sb-hd h2{font-size:18px;font-weight:800}
+.sb-hd p{font-size:11px;opacity:.9}
+.sb-lb{padding:6px 12px;background:#f8fafc;font-size:9px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--brd);border-top:1px solid var(--brd)}
+.sb-it{padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--brd);transition:.2s;font-size:11px}
+.sb-it:hover{background:#fff7ed}
+.sb-it.active{background:#fff7ed;border-left:3px solid var(--pri);font-weight:700}
+.sb-m{font-weight:600}
+.main{position:fixed;top:var(--tbh);left:var(--sbw);right:0;bottom:0;transition:left .3s;overflow:hidden}
+.main.expanded{left:0}
+.scroll-area{height:100%;overflow:auto}
+#zoomW{padding:22px 30px;transform-origin:top left;width:100%;min-height:100%;max-width:1180px;margin:0 auto}
+.screen{display:none;animation:fi .4s}
+.screen.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.nav-btns{display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:2px solid var(--brd)}
+.nav-b{background:var(--pri);color:#fff;border:none;padding:8px 22px;border-radius:10px;cursor:pointer;font-size:20px;transition:.2s}
+.nav-b:hover{transform:scale(1.1)}
+.nav-b:disabled{opacity:.3;cursor:default;transform:none}
+.u-hero{background:linear-gradient(135deg,var(--pri),var(--pri-l));border-radius:14px;padding:24px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
+.u-hero::after{content:'4';position:absolute;top:-15px;right:15px;font-size:100px;font-weight:900;opacity:.1}
+.u-hero h1{font-size:32px;font-weight:800;text-align:center;position:relative;letter-spacing:.5px}
+.u-hero .obj{font-size:12.5px;background:rgba(255,255,255,.15);padding:12px 16px;border-radius:11px;margin-top:14px;line-height:1.95;text-align:center}
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:3px solid var(--pri)}
+.sec-n{background:var(--pri);color:#fff;min-width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.sec-t{font-size:22px;font-weight:800;color:var(--pri);letter-spacing:.2px}
+.card{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px;border:1px solid var(--brd);box-shadow:0 2px 10px rgba(15,23,42,.04)}
+.c-lb{display:inline-block;background:var(--pri);color:#fff;padding:4px 14px;border-radius:16px;font-size:12px;font-weight:800;letter-spacing:.3px;box-shadow:0 2px 6px rgba(232,101,26,.25)}
+.c-ins{background:#FFFBEB;border-left:4px solid var(--yel);padding:11px 14px;border-radius:0 9px 9px 0;font-size:13px;color:#92400E;line-height:1.75;margin:10px 0 16px}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}
+.exp-btn{background:linear-gradient(135deg,var(--acc2),#8B5CF6);color:#fff;border:none;padding:5px 12px;border-radius:7px;cursor:pointer;font-family:'Cairo';font-size:11px;font-weight:600;margin:3px;transition:.2s}
+.exp-btn:hover{transform:translateY(-2px)}
+.exp-box{display:none;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1px solid #DDD6FE;border-right:4px solid var(--acc2);padding:12px 14px;border-radius:9px;margin-top:8px;font-family:'Cairo';direction:rtl;text-align:right}
+.exp-box.show{display:block;animation:fi .3s}
+.ar-l{font-size:12.5px;line-height:2.1;color:#3B1F8B;margin-bottom:6px}
+.es-i{display:inline-block;direction:ltr;unicode-bidi:isolate;background:rgba(232,101,26,.1);padding:1px 6px;border-radius:4px;color:var(--pri);font-family:'Poppins';font-weight:600;margin:0 2px}
+.es-b{background:#EFF6FF;border:1px solid #BFDBFE;padding:13px 15px;border-radius:11px;margin:9px 0;color:#1E3A8A;font-size:13.5px;line-height:1.95}
+.es-b strong{color:var(--pri)}
+.dlg{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:11px;padding:12px 15px;margin:9px 0}
+.dlg p{margin:5px 0;font-size:13.5px;color:#166534;line-height:1.7}
+.spk{color:var(--pri);font-weight:800;margin-right:5px}
+.hnt{background:#FFFDE7;border:1px solid #FBC02D;border-left:4px solid #F9A825;border-radius:11px;padding:12px 15px;margin:11px 0}
+.hnt-t{color:#E65100;font-weight:800;font-size:12.5px;margin-bottom:6px;letter-spacing:.2px}
+.hnt-c{font-size:12.5px;color:#4E342E;line-height:2}
+.qa{background:#FAFBFC;border:1px solid var(--brd);border-radius:10px;padding:11px 13px;margin:8px 0;display:flex;align-items:center;gap:9px;flex-wrap:wrap;transition:.2s}
+.qa:hover{border-color:#CBD5E1;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.qa p{flex:1;min-width:160px;font-size:13.5px;line-height:1.95}
+.as{display:inline-block;min-width:62px;text-align:center;border-bottom:2px dashed var(--pri);padding:2px 8px;margin:0 3px;vertical-align:bottom;border-radius:4px 4px 0 0}
+.as-p{color:var(--txtl)}
+.as-v{display:none;color:var(--pri);font-weight:700}
+.as.rev .as-p{display:none}
+.as.rev .as-v{display:inline}
+.as.rev{background:#FFF7ED;border-bottom:2px solid var(--pri);border-radius:3px}
+.rb{background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff;border:none;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:12px;display:inline-flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.rb:hover{transform:scale(1.1)}
+.mcq{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:9px 13px;margin:7px 0;display:flex;align-items:center;gap:10px;transition:.3s;font-size:13.5px}
+.ol{background:#F3F4F6;color:#6B7280;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;flex-shrink:0}
+.ot{flex:1}
+.or{background:#3B82F6;color:#fff;border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mcq.ok{background:#ECFDF5;border-color:var(--grn)}.mcq.ok .ol{background:var(--grn);color:#fff}
+.mcq.no{background:#FEF2F2;border-color:var(--red);text-decoration:line-through}.mcq.no .ol{background:var(--red);color:#fff}
+.etb{width:100%;border-collapse:collapse;margin:9px 0;background:#fff;border-radius:9px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.etb th{background:var(--pri);color:#fff;padding:10px 12px;font-size:12px;font-weight:700;text-align:left}
+.etb td{padding:10px 12px;border-bottom:1px solid #F1F5F9;font-size:12.5px;text-align:left;vertical-align:middle;line-height:1.6}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.pfc{background:#fff;border:1px solid var(--brd);border-radius:9px;padding:9px;text-align:center;transition:.2s}
+.pfc:hover{border-color:var(--pri);transform:translateY(-2px)}
+.pfn{color:var(--pri);font-weight:700;font-size:12px}
+.pfj{color:var(--txtl);font-size:10px;margin-top:2px}
+.bzc{background:linear-gradient(135deg,#F9FAFB,#E5E7EB);border-radius:11px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.bzl{display:inline-block;background:var(--dk);color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-bottom:4px}
+.bzc h4{color:var(--acc);font-size:13px;font-weight:800}
+.bzc .bn{font-weight:700;margin-top:3px;font-size:11px}
+.bzc .bj{color:var(--txtl);font-style:italic;font-size:10px}
+.bzc .bd{margin-top:4px;font-size:9px;color:#555;line-height:1.7}
+.auc{background:var(--dkr);border-radius:10px;padding:9px 11px;margin:7px 0;color:#fff}
+.aut{color:var(--yel);font-weight:700;font-size:10px;margin-bottom:5px}
+.aur{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.aub{background:var(--pri);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center}
+.ausk{flex:1;min-width:70px;height:4px;-webkit-appearance:none;appearance:none;border-radius:2px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
+.ausk::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--yel);cursor:pointer}
+.autm{color:#94A3B8;font-size:9px;min-width:55px;text-align:center}
+.ausr{display:flex;gap:3px;margin-top:4px;align-items:center;flex-wrap:wrap}
+.ausp{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#CBD5E1;padding:1px 6px;border-radius:4px;cursor:pointer;font-size:9px}
+.ausp:hover,.ausp.act{background:var(--yel);color:var(--dk);border-color:var(--yel)}
+.aubk{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#CBD5E1;padding:1px 6px;border-radius:4px;cursor:pointer;font-size:9px;font-family:'Cairo'}
+.autb{background:rgba(0,184,148,.2);border:1px solid var(--grn);color:var(--grn);padding:2px 8px;border-radius:5px;cursor:pointer;font-family:'Cairo';font-size:9px;margin-top:4px}
+.autr{display:none;background:rgba(0,0,0,.3);border-radius:7px;padding:7px;margin-top:4px;color:#E2E8F0;font-size:11px;line-height:1.8}
+.autr.show{display:block}
+.pgb{background:linear-gradient(135deg,var(--grn),#00A884);color:#fff;border:none;padding:5px 11px;border-radius:7px;cursor:pointer;font-family:'Cairo';font-size:10px;font-weight:600;margin:2px;display:inline-flex;align-items:center;gap:3px}
+.mbar{position:fixed;bottom:0;left:var(--sbw);right:0;height:60px;background:var(--dkr);display:none;align-items:center;padding:0 12px;gap:8px;z-index:100;transition:left .3s;border-top:1px solid rgba(255,255,255,.1)}
+.mbar.show{display:flex}
+.mbar.expanded{left:0}
+.mbi{color:var(--yel);font-size:9px;font-weight:700;min-width:60px;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mbb{background:var(--pri);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+.mbsk{flex:1;height:3px;-webkit-appearance:none;appearance:none;border-radius:2px;background:rgba(255,255,255,.12);cursor:pointer}
+.mbsk::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--yel);cursor:pointer}
+.mbtm{color:#94A3B8;font-size:9px;min-width:55px;text-align:center}
+.mbsp{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#CBD5E1;padding:1px 5px;border-radius:4px;cursor:pointer;font-size:8px}
+.mbsp:hover,.mbsp.act{background:var(--yel);color:var(--dk);border-color:var(--yel)}
+.mbcl{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:1px 6px;border-radius:4px;cursor:pointer;font-size:11px}
+.img-pop{position:fixed;width:88vw;height:86vh;background:var(--dk);border-radius:12px;z-index:500;display:none;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.5);resize:both;min-width:320px;min-height:260px;max-width:98vw;max-height:96vh}
+.img-pop.show{display:flex;flex-direction:column}
+.img-bar{background:var(--dkr);padding:6px 10px;cursor:move;display:flex;justify-content:space-between;align-items:center;gap:6px;flex-shrink:0}
+.img-bar span{color:#fff;font-size:11px;font-weight:600}
+.img-bar .img-hint{color:#94A3B8;font-size:9.5px;font-weight:500}
+.img-bar button{background:rgba(255,255,255,.1);border:none;color:#fff;width:26px;height:26px;border-radius:5px;cursor:pointer;font-size:12px}
+.img-bar button:hover{background:var(--yel);color:var(--dk)}
+.img-body{flex:1;overflow:auto;background:#111;position:relative}
+.img-body img{display:block;transform-origin:0 0;transition:transform .12s ease-out}
+.writing-area{width:100%;min-height:80px;background:#fff;border:2px dashed var(--pri);border-radius:9px;padding:9px;font-family:'Poppins';font-size:12px;resize:vertical}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#F1F5F9}
+::-webkit-scrollbar-thumb{background:var(--pri);border-radius:4px}
+@media(max-width:768px){:root{--sbw:0px}.sidebar{width:250px;transform:translateX(-250px)}.sidebar.open{transform:translateX(0)}.main{left:0}.mbar{left:0}.g2,.g3,.split{grid-template-columns:1fr}#zoomW{padding:12px}.u-hero h1{font-size:22px}.sec-t{font-size:16px}.img-pop{width:92%;height:70vh}.tb-logo{display:none}}
+
+.pg-tag{display:inline-flex;align-items:center;gap:4px;background:#FFF7ED;border:1px solid #FED7AA;color:var(--pri);font-weight:700;font-size:10.5px;padding:3px 9px;border-radius:20px;margin-left:8px;cursor:pointer;vertical-align:middle;transition:.2s;white-space:nowrap}
+.pg-tag:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
+.q-head{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+/* WORD BANK — صندوق اختيارات بارز ومنفصل تحت السؤال */
+.wbank{background:linear-gradient(180deg,#FFF8EC,#FFF1D9);border:2.5px dashed var(--pri);border-radius:14px;padding:15px 17px 17px;margin:16px 0 20px;box-shadow:0 4px 14px rgba(232,101,26,.12);position:relative}
+.wbank::before{content:'OPCIONES';position:absolute;top:-10px;left:16px;background:var(--pri);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 12px;border-radius:8px;box-shadow:0 2px 5px rgba(232,101,26,.3)}
+.wbank-t{display:flex;align-items:center;gap:6px;width:100%;font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:.7px;margin:4px 0 11px;padding-bottom:8px;border-bottom:1.5px dashed #FCD9A6}
+.wbank-t::before{content:'🗂️';font-size:13px}
+.wbank-row{display:flex;flex-wrap:wrap;gap:9px}
+.chip{display:inline-block;background:#fff;border:1.5px solid #E2E8F0;border-radius:9px;padding:7px 14px;font-size:13px;color:var(--dk);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:.15s;cursor:default}
+.chip:hover{border-color:var(--pri);color:var(--pri);transform:translateY(-2px);box-shadow:0 4px 10px rgba(232,101,26,.12)}
+.chip.cat{background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF}
+.chip.fn{background:#F0FDF4;border-color:#BBF7D0;color:#166534}
+.subtitle-es{font-size:11.5px;color:var(--txtl);font-style:italic;margin:-2px 0 8px}
+/* ROBOT BOX (3c) — شكل زي الكتاب */
+.rbox{background:#fff;border:1.5px solid var(--brd);border-radius:12px;padding:12px 14px;margin:9px 0;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.rbox-t{display:inline-block;background:var(--dk);color:#fff;font-weight:800;font-size:12px;padding:4px 14px;border-radius:8px;margin-bottom:10px}
+.rrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:7px 0}
+.opt{display:flex;align-items:center;gap:8px;background:#FAFBFC;border:1.5px solid #E5E7EB;border-radius:9px;padding:8px 11px;font-size:12.5px;transition:.25s;cursor:default}
+.opt .ob{width:18px;height:18px;border:2px solid #CBD5E1;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent}
+.opt .otx{flex:1;line-height:1.45}
+.opt .oeye{background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff;border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:11px;flex-shrink:0}
+.opt .oeye:hover{transform:scale(1.1)}
+.opt.ok{background:#ECFDF5;border-color:var(--grn)}.opt.ok .ob{border-color:var(--grn);background:var(--grn);color:#fff}
+.opt.no{background:#FEF2F2;border-color:var(--red);text-decoration:line-through;opacity:.8}.opt.no .ob{border-color:var(--red);background:var(--red);color:#fff}
+@media(max-width:600px){.rrow{grid-template-columns:1fr}}
+/* TWO-COLUMN GAME BOXES (3d) — أخضر/برتقالي زي الكتاب */
+.gamebox{border-radius:13px;padding:13px 15px;margin:8px 0}
+.gamebox-t{font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.gamebox.green{background:#ECFDF5;border:2px solid #A7F3D0}
+.gamebox.green .gamebox-t{color:#047857}
+.gamebox.orange{background:#FFF7ED;border:2px solid #FED7AA}
+.gamebox.orange .gamebox-t{color:#C2410C}
+.gamebox .wbank-row{gap:9px}
+/* HINT — ألوان وبولد للأجزاء */
+.hnt-c b,.hnt-c strong{color:#B45309;font-weight:800}
+.hnt-c .es-tag{display:inline-block;background:#fff;border:1px solid #FBC02D;color:#9A6700;font-weight:700;padding:1px 7px;border-radius:6px;margin:2px;font-family:'Poppins'}
+.hnt-c .lbl{display:inline-block;background:#F9A825;color:#fff;font-weight:800;font-size:11px;padding:1px 8px;border-radius:6px;margin-right:4px}
+</style>
+</head>
+<body>
+<div class="toolbar">
+<button class="tb-b" onclick="togSB()">☰</button>
+<div class="tb-sep"></div>
+<button class="tb-b" onclick="zIn()">🔍+</button>
+<span class="zoom-disp" id="zDisp">100%</span>
+<button class="tb-b" onclick="zOut()">🔍−</button>
+<button class="tb-b" onclick="zReset()">↺</button>
+<div class="tb-sep"></div>
+<button class="tb-b" onclick="togNotes()">📝</button>
+<button class="tb-b" onclick="togTimer()">⏱️</button>
+<div class="tb-sep"></div>
+<button class="tb-b" id="allB" onclick="togAll()">👁️</button>
+<div class="tb-title">Unidad 4 — Con tus manos</div>
+<span class="tb-logo">Instituto Amigos</span>
+<button class="tb-b" onclick="goFS()">🖥️</button>
+</div>
+<div class="timer-pop" id="timerPop"><div class="timer-num" id="tD">00:00</div><div class="timer-btns"><button class="timer-b" id="tB" onclick="tTog()">▶️</button><button class="timer-b" onclick="tR()">↺</button></div></div>
+<div class="notes-pop" id="nPop"><div class="notes-bar" id="nBar"><span>📝 ملاحظات</span><button class="nc" onclick="togNotes()">✕</button></div><div class="notes-body"><textarea placeholder="اكتب ملاحظاتك..."></textarea></div></div>
+<aside class="sidebar" id="sb">
+<div class="sb-hd"><h2>Unidad 4</h2><p>Con tus manos</p></div>
+<div class="sb-lb">INICIO</div>
+<div class="sb-it active" onclick="goS(0)"><div class="sb-m">Portada</div></div>
+<div class="sb-lb">ACTIVIDADES</div>
+<div class="sb-it" onclick="goS(1)"><div class="sb-m">1. ¡Soy un manitas!</div></div>
+<div class="sb-it" onclick="goS(2)"><div class="sb-m">2. Un nuevo portal en internet</div></div>
+<div class="sb-it" onclick="goS(3)"><div class="sb-m">3. Aparatos prácticos</div></div>
+<div class="sb-it" onclick="goS(4)"><div class="sb-m">4. Casas con estilo</div></div>
+<div class="sb-it" onclick="goS(5)"><div class="sb-m">5. Cosas especiales</div></div>
+<div class="sb-lb">REFERENCIA</div>
+<div class="sb-it" onclick="goS(6)"><div class="sb-m">📐 Gramática</div></div>
+<div class="sb-it" onclick="goS(7)"><div class="sb-m">💬 Comunicación</div></div>
+<div class="sb-lb">EJERCICIOS</div>
+<div class="sb-it" onclick="goS(8)"><div class="sb-m">📝 Ejercicios 1–6</div></div>
+<div class="sb-lb">CONSOLIDAMOS</div>
+<div class="sb-it" onclick="goS(9)"><div class="sb-m">Un portal de objetos originales</div></div>
+<div class="sb-it" onclick="goS(10)"><div class="sb-m">Redecoramos nuestra clase</div></div>
+</aside>
+<div class="main" id="mainA"><div class="scroll-area"><div id="zoomW">
+
+<div class="screen active" id="scr0">
+<div class="u-hero"><h1>CON TUS MANOS</h1><div class="obj">Describir objetos (material, forma, valoración) • Indicar la utilidad de un objeto • Expresar el resultado de una acción</div></div>
+<div class="split">
+<div class="card" style="text-align:center"><p style="font-size:18px;font-weight:800;color:var(--acc);margin-bottom:8px">UNIDAD 4</p><p style="font-size:13.5px;line-height:1.8">Pau, Selma, Jaime, Alejandra y Ángel son unos <strong>manitas</strong>. Hacen tartas, montan muebles, cuelgan lámparas, pintan paredes y hacen punto.</p><p style="color:var(--pri);font-weight:800;margin-top:10px;font-size:15px">¡SOY UN MANITAS!</p><div style="margin-top:14px"><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page32.png',event)">📖 Página 32</span></div></div>
+<div class="card"><button class="exp-btn" onclick="togExp('eP')">💡 شرح بالعربي — هنتعلم إيه في الوحدة؟</button><div class="exp-box" id="eP"><div class="ar-l">📌 <strong>محاور الوحدة 4:</strong></div><div class="ar-l">📝 نوصف الأشياء: الخامة <span class="es-i">material</span>، الشكل <span class="es-i">forma</span>، والتقييم <span class="es-i">valoración</span></div><div class="ar-l">📝 نقول فايدة الشيء واستخدامه <span class="es-i">¿Para qué sirve?</span></div><div class="ar-l">📝 نعبر عن نتيجة فعل بـ <span class="es-i">estar + participio</span></div><div class="ar-l">📝 التصريفات الشاذة للـ <span class="es-i">participio</span> (roto, hecho, abierto...)</div><div class="ar-l">📝 ظروف المكان <span class="es-i">dentro, fuera, en un rincón...</span></div></div></div>
+</div>
+<div class="nav-btns"><button class="nav-b" disabled>⬅️</button><button class="nav-b" onclick="goS(1)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr1">
+<div class="sec-h"><div class="sec-n">1</div><div class="sec-t">¡Soy un manitas!</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">1a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page32.png',event)">📖 Página 32</span></div><div class="c-ins">En parejas. ¿Qué están haciendo las personas de las fotos?</div>
+<div class="wbank"><span class="wbank-t">Acciones (banco de palabras)</span><div class="wbank-row"><span class="chip ">cambiar las ruedas del coche</span><span class="chip ">montar muebles</span><span class="chip ">cortarle el pelo a alguien</span><span class="chip ">hacer tartas</span><span class="chip ">cultivar verduras en casa</span><span class="chip ">colgar lámparas</span><span class="chip ">arreglar electrodomésticos</span><span class="chip ">pintar paredes</span><span class="chip ">hacer manualidades</span><span class="chip ">hacer punto</span></div></div>
+<div class="split"><div>
+<p class="subtitle-es">● Selma está haciendo punto.</p>
+<div class="qa"><p>Selma está <span class="as" id="a1"><span class="as-p">_____</span><span class="as-v">haciendo punto</span></span></p><button class="rb" onclick="togA('a1')">👁️</button></div>
+<div class="qa"><p>Jaime está <span class="as" id="a2"><span class="as-p">_____</span><span class="as-v">colgando una lámpara</span></span></p><button class="rb" onclick="togA('a2')">👁️</button></div>
+<div class="qa"><p>Alejandra está <span class="as" id="a3"><span class="as-p">_____</span><span class="as-v">pintando una pared</span></span></p><button class="rb" onclick="togA('a3')">👁️</button></div>
+<div class="qa"><p>Ángel está <span class="as" id="a4"><span class="as-p">_____</span><span class="as-v">haciendo una tarta</span></span></p><button class="rb" onclick="togA('a4')">👁️</button></div>
+<div class="qa"><p>Pau está <span class="as" id="a5"><span class="as-p">_____</span><span class="as-v">montando muebles</span></span></p><button class="rb" onclick="togA('a5')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e1a')">💡 شرح بالعربي</button><div class="exp-box" id="e1a"><div class="ar-l">📌 وصف اللي بيحصل دلوقتي بـ <span class="es-i">estar + gerundio</span></div><div class="ar-l">📝 <span class="es-i">hacer punto</span> = يشتغل تريكو / كروشيه</div><div class="ar-l">📝 <span class="es-i">colgar lámparas</span> = يعلّق لمبات</div><div class="ar-l">📝 <span class="es-i">montar muebles</span> = يركّب أثاث</div><div class="ar-l">📝 <span class="es-i">arreglar electrodomésticos</span> = يصلّح أجهزة كهربائية</div><div class="ar-l">📝 <span class="es-i">hacer manualidades</span> = يعمل أشغال يدوية</div></div>
+<button class="exp-btn" onclick="togExp('g1a')">📐 قاعدة: estar + gerundio</button><div class="exp-box" id="g1a"><div class="ar-l">📌 <strong>estar + gerundio</strong> للتعبير عن فعل بيحصل دلوقتي</div><div class="ar-l">📝 صرّف <span class="es-i">estar</span> + الفعل بصيغة <span class="es-i">-ando / -iendo</span></div><div class="ar-l">💡 <span class="es-i">hacer → haciendo</span> | <span class="es-i">pintar → pintando</span> | <span class="es-i">colgar → colgando</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">1b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page32.png',event)">📖 Página 32</span></div><div class="c-ins">En parejas. Y tú, ¿qué cosas de 1a sabes hacer? ¿Con qué frecuencia las haces? ¿Qué no haces nunca?</div>
+<div class="split"><div class="dlg"><p><span class="spk">●</span> Yo sé arreglar electrodomésticos...</p><p><span class="spk">▲</span> Pues yo nunca hago punto, pero sé hacer tartas muy bien.</p></div><div><button class="exp-btn" onclick="togExp('e1b')">💡 شرح بالعربي</button><div class="exp-box" id="e1b"><div class="ar-l">📝 قول إيه اللي بتعرف تعمله، بأي تكرار، وإيه اللي مبتعملوش أبداً <span class="es-i">nunca</span></div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(0)">⬅️</button><button class="nav-b" onclick="goS(2)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr2">
+<div class="sec-h"><div class="sec-n">2</div><div class="sec-t">Un nuevo portal en internet</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">2a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page33.png',event)">📖 Página 33</span></div><div class="c-ins">En el nuevo portal LOHAGOYO, varias personas describen los objetos que ellas mismas han hecho. Lee los textos y elige el título adecuado para cada uno.</div>
+<div class="wbank"><span class="wbank-t">Títulos (elige uno para cada texto)</span><div class="wbank-row"><span class="chip ">Rosas sin agua</span><span class="chip ">Para un buen café</span><span class="chip ">Creatividad luminosa</span><span class="chip ">Recuerdos enmarcados</span></div></div>
+<div class="split"><div>
+<div class="es-b"><strong>Texto 1 — Alma, 2 de junio 11:00:</strong> Esta lámpara ovalada tan original se hace con cucharas de plástico y una botella de agua también de plástico. Las lámparas pueden tener formas diferentes según el tipo de botella utilizada como base: redonda, ovalada... ¡Son preciosas!</div>
+<div class="qa"><p>Título 1: <span class="as" id="a6"><span class="as-p">_____</span><span class="as-v">Creatividad luminosa</span></span></p><button class="rb" onclick="togA('a6')">👁️</button></div>
+<div class="es-b"><strong>Texto 2 — Toni, 4 de septiembre 09:01:</strong> Hacer tazas de cerámica no es difícil. Se hacen con barro, agua y un poco de paciencia. ¡El resultado es fantástico! Cada taza es un objeto único e irrepetible. Mis favoritas son las redondas. Además son muy prácticas y personales.</div>
+<div class="qa"><p>Título 2: <span class="as" id="a7"><span class="as-p">_____</span><span class="as-v">Para un buen café</span></span></p><button class="rb" onclick="togA('a7')">👁️</button></div>
+<div class="es-b"><strong>Texto 3 — Feli, 10 de abril 14:12:</strong> Una idea sencilla, pero de gran efecto para las fotos de la familia, de los amigos o de los viajes es este marco de fotos de madera a partir de un marco antiguo. Este es cuadrado, pero los marcos también pueden ser rectangulares, redondos... Son muy decorativos.</div>
+<div class="qa"><p>Título 3: <span class="as" id="a8"><span class="as-p">_____</span><span class="as-v">Recuerdos enmarcados</span></span></p><button class="rb" onclick="togA('a8')">👁️</button></div>
+<div class="es-b"><strong>Texto 4 — Rosario, 1 de marzo 23:02:</strong> ¿Un ramo de flores que se conserva sin agua? Yo los hago de papel de colores o de revistas recicladas. Los hago sobre todo de rosas, rosas muy alargadas y de muchos colores. Tijeras, pegamento, papel... ¡y manos a la obra! ¡Son muy bonitos!</div>
+<div class="qa"><p>Título 4: <span class="as" id="a9"><span class="as-p">_____</span><span class="as-v">Rosas sin agua</span></span></p><button class="rb" onclick="togA('a9')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e2a')">💡 شرح بالعربي</button><div class="exp-box" id="e2a"><div class="ar-l">📌 اقرأ كل نص واختار العنوان المناسب:</div><div class="ar-l">📝 <strong>نص 1:</strong> لمبة من ملاعق وقزازة بلاستيك → <span class="es-i">Creatividad luminosa</span></div><div class="ar-l">📝 <strong>نص 2:</strong> فناجين سيراميك للقهوة → <span class="es-i">Para un buen café</span></div><div class="ar-l">📝 <strong>نص 3:</strong> برواز صور من الخشب → <span class="es-i">Recuerdos enmarcados</span></div><div class="ar-l">📝 <strong>نص 4:</strong> ورد ورق من غير ميّة → <span class="es-i">Rosas sin agua</span></div></div>
+<div class="hnt"><div class="hnt-t">Describir objetos</div><div class="hnt-c"><span class="lbl">Material</span> <b>¿De qué es?</b> → Es de... <span class="es-tag">madera</span><span class="es-tag">papel</span><span class="es-tag">cristal</span><span class="es-tag">plástico</span><span class="es-tag">tela</span><span class="es-tag">cartón</span><span class="es-tag">cerámica</span><span class="es-tag">barro</span><span class="es-tag">cuero</span><span class="es-tag">metal</span><br><span class="lbl">Forma</span> <b>¿Qué forma tiene?</b> → Es... <span class="es-tag">cuadrado</span><span class="es-tag">redondo</span><span class="es-tag">alargado</span><span class="es-tag">rectangular</span><span class="es-tag">ovalado</span><br><span class="lbl">Valoración</span> <b>¿Cómo es?</b> → Es... <span class="es-tag">original</span><span class="es-tag">práctico</span><span class="es-tag">personal</span><span class="es-tag">útil</span><span class="es-tag">bonito</span><span class="es-tag">precioso</span><span class="es-tag">único</span><span class="es-tag">decorativo</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">2b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page33.png',event)">📖 Página 33</span></div><div class="c-ins">Completa las fichas sobre los objetos con la información de los textos de 2a.</div>
+<div class="split"><div>
+<table class="etb"><thead><tr><th>Ficha</th><th>Objeto</th><th>Material</th><th>Forma</th><th>¿Cómo es?</th></tr></thead><tbody>
+<tr><td>1</td><td><div class="qa"><p><span class="as" id="b1"><span class="as-p">_____</span><span class="as-v">lámpara</span></span></p><button class="rb" onclick="togA('b1')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b2"><span class="as-p">_____</span><span class="as-v">plástico</span></span></p><button class="rb" onclick="togA('b2')">👁️</button></div></td><td>ovalada</td><td><div class="qa"><p><span class="as" id="b3"><span class="as-p">_____</span><span class="as-v">preciosa / original</span></span></p><button class="rb" onclick="togA('b3')">👁️</button></div></td></tr>
+<tr><td>2</td><td><div class="qa"><p><span class="as" id="b4"><span class="as-p">_____</span><span class="as-v">taza</span></span></p><button class="rb" onclick="togA('b4')">👁️</button></div></td><td>cerámica</td><td><div class="qa"><p><span class="as" id="b5"><span class="as-p">_____</span><span class="as-v">redonda</span></span></p><button class="rb" onclick="togA('b5')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b6"><span class="as-p">_____</span><span class="as-v">única, práctica y personal</span></span></p><button class="rb" onclick="togA('b6')">👁️</button></div></td></tr>
+<tr><td>3</td><td>marco</td><td><div class="qa"><p><span class="as" id="b7"><span class="as-p">_____</span><span class="as-v">madera</span></span></p><button class="rb" onclick="togA('b7')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b8"><span class="as-p">_____</span><span class="as-v">cuadrado</span></span></p><button class="rb" onclick="togA('b8')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b9"><span class="as-p">_____</span><span class="as-v">decorativo</span></span></p><button class="rb" onclick="togA('b9')">👁️</button></div></td></tr>
+<tr><td>4</td><td><div class="qa"><p><span class="as" id="b10"><span class="as-p">_____</span><span class="as-v">ramo de flores</span></span></p><button class="rb" onclick="togA('b10')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b11"><span class="as-p">_____</span><span class="as-v">papel</span></span></p><button class="rb" onclick="togA('b11')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="b12"><span class="as-p">_____</span><span class="as-v">alargada</span></span></p><button class="rb" onclick="togA('b12')">👁️</button></div></td><td>muy bonito</td></tr>
+</tbody></table>
+</div><div>
+<button class="exp-btn" onclick="togExp('e2b')">💡 شرح بالعربي</button><div class="exp-box" id="e2b"><div class="ar-l">📌 املأ الكروت من النصوص: الشيء، الخامة، الشكل، التقييم</div><div class="ar-l">📝 <span class="es-i">ovalada</span> = بيضاوي / <span class="es-i">redonda</span> = دائري</div><div class="ar-l">📝 <span class="es-i">cuadrado</span> = مربّع / <span class="es-i">alargada</span> = طويل ممدود</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">2c</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page34.png',event)">📖 Página 34</span></div><div class="c-ins">En movimiento. Pregunta a tus compañeros si tienen objetos con estas características en casa o en el trabajo.</div>
+<div class="split"><div class="dlg"><p><span class="spk">●</span> ¿Tienes un marco de madera ovalado?</p><p><span class="spk">▲</span> No, pero tengo uno cuadrado de cerámica. ¡Es muy original!</p></div><div><button class="exp-btn" onclick="togExp('e2c')">💡 شرح بالعربي</button><div class="exp-box" id="e2c"><div class="ar-l">📝 اسأل زمايلك عن أشياء عندهم في البيت أو الشغل بنفس المواصفات</div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(1)">⬅️</button><button class="nav-b" onclick="goS(3)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr3">
+<div class="sec-h"><div class="sec-n">3</div><div class="sec-t">Aparatos prácticos</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">3a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page34.png',event)">📖 Página 34</span></div><div class="c-ins">Mira los siguientes aparatos: ¿para qué sirven? Relaciona. ¿Tienes tú algún tipo de robot en casa?</div>
+<div class="wbank"><span class="wbank-t">Aparatos</span><div class="wbank-row"><span class="chip ">robot familiar</span><span class="chip ">robot de cocina</span><span class="chip ">robot-aspiradora</span><span class="chip ">robot-jardinero</span></div></div>
+<div class="split"><div>
+<div class="qa"><p>1. Sirve para limpiar el suelo: <span class="as" id="a10"><span class="as-p">_____</span><span class="as-v">robot-aspiradora</span></span></p><button class="rb" onclick="togA('a10')">👁️</button></div>
+<div class="qa"><p>2. Sirve para entretener y educar a los niños: <span class="as" id="a11"><span class="as-p">_____</span><span class="as-v">robot familiar</span></span></p><button class="rb" onclick="togA('a11')">👁️</button></div>
+<div class="qa"><p>3. Se usa para cortar el césped: <span class="as" id="a12"><span class="as-p">_____</span><span class="as-v">robot-jardinero</span></span></p><button class="rb" onclick="togA('a12')">👁️</button></div>
+<div class="qa"><p>4. Sirve para cocinar (cortar, batir, hacer masas de pizza...): <span class="as" id="a13"><span class="as-p">_____</span><span class="as-v">robot de cocina</span></span></p><button class="rb" onclick="togA('a13')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e3a')">💡 شرح بالعربي</button><div class="exp-box" id="e3a"><div class="ar-l">📌 وصّل كل روبوت بفايدته:</div><div class="ar-l">📝 <span class="es-i">robot-aspiradora</span> = روبوت مكنسة (ينضّف الأرض)</div><div class="ar-l">📝 <span class="es-i">robot familiar</span> = روبوت عائلي (يسلّي ويعلّم الأطفال)</div><div class="ar-l">📝 <span class="es-i">robot-jardinero</span> = روبوت بستاني (يقص النجيلة)</div><div class="ar-l">📝 <span class="es-i">robot de cocina</span> = روبوت مطبخ (يطبخ)</div></div>
+<div class="hnt"><div class="hnt-t">Indicar la utilidad de un objeto</div><div class="hnt-c"><span class="lbl">Utilidad</span> <b>Sirve para</b> cortar el césped.<br><span class="lbl">Plural</span> <b>Sirven para</b> entretener a los niños.<br><span class="lbl">Impersonal</span> <b>Se usa para</b> cocinar.<br><span class="lbl">Funcionamiento</span> <b>Funciona</b> a pilas / con electricidad.<br><span class="lbl">Personal</span> Yo lo <b>uso para</b> limpiar.</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">3b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page34.png',event)">📖 Página 34</span></div><div class="c-ins">Icíar explica a una amiga para qué sirven y cómo funcionan sus dos robots. ¿Qué robots de 3a tiene? Escucha. 🔊 11</div>
+<div class="split"><div>
+<div class="qa"><p>Icíar tiene <span class="as" id="a14"><span class="as-p">_____</span><span class="as-v">un robot-aspiradora y un robot de cocina</span></span></p><button class="rb" onclick="togA('a14')">👁️</button></div>
+<div class="auc"><div class="aut">🎧 Pista 11</div><div class="aur"><button class="aub" id="pb-a11x" onclick="togAu('a11x')">▶</button><input type="range" class="ausk" id="sk-a11x" value="0" min="0" max="100" oninput="skAu('a11x',this.value)"><span class="autm" id="tm-a11x">0:00/0:00</span></div><div class="ausr"><button class="aubk" onclick="bk5('a11x')">⏪-5s</button><button class="ausp" onclick="spd('a11x',.5)">0.5x</button><button class="ausp" onclick="spd('a11x',.75)">0.75x</button><button class="ausp act" onclick="spd('a11x',1)">1x</button></div><audio id="a11x" src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/11%20Pista%2011.mp3" preload="metadata"></audio><button class="autb" onclick="togTr('tr-a11x')">📄 Transcripción</button><div class="autr" id="tr-a11x">● Icíar, ¿qué es esta cosa redonda que tienes aquí? ▲ ¿No sabes qué es? Es muy práctico. Mira, lo puedes activar así. ● ¿Pero qué hace? ¿Está buscando algo? ▲ No, mujer, ¿no lo ves? ¡Está limpiando el suelo! ● ¡Anda...! ¿Y cómo funciona? ▲ Con una batería, que se puede recargar. ● ¿Y cómo sabe el aparato qué habitaciones tiene que limpiar? ▲ Pues porque lo puedes programar. ● ¡Ah...! Tú programas qué habitaciones tiene que limpiar. ▲ Sí, así es. Y si se rompe..., tiene una garantía de dos años. ● Y esto de aquí, ¿qué es? ¿Un aparato para hacer zumos? ▲ No..., sirve para preparar todo tipo de platos. ● ¡Ah, sí...! ¿Y cómo funciona? ▲ Pues pones los ingredientes, lo programas y cocina el plato. ● ¡Oh, qué práctico! ▲ Y mira, puedes conectarlo a internet y encontrar recetas específicas para este robot. Así no necesitas libros de cocina. ● Sí, está muy bien. Es muy práctico, pero estos aparatos cuando ya no funcionan, son un problema, ¿no? ¿Qué haces con ellos? ▲ Bueno, lo puedo llevar a la tienda y ellos mismos lo reciclan. ¡Y sin pagar nada...!</div></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e3b')">💡 شرح بالعربي</button><div class="exp-box" id="e3b"><div class="ar-l">📝 اسمع وحدد إيكيار عندها أنهي روبوتين من اللي في 3a</div><div class="ar-l">💡 عندها <span class="es-i">robot-aspiradora</span> (مكنسة) و <span class="es-i">robot de cocina</span> (مطبخ)</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">3c</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page34.png',event)">📖 Página 34</span></div><div class="c-ins">Escucha otra vez. ¿Qué características tienen los robots? Anota la opción correcta.</div>
+<div class="split"><div>
+<div class="rbox"><span class="rbox-t">Robot 1</span>
+<div class="rrow"><div class="opt" id="m1"><span class="ob"></span><span class="otx"><b>a.</b> Funciona a pilas.</span><button class="oeye" onclick="rvO('m1',0)">👁️</button></div><div class="opt" id="m2"><span class="ob"></span><span class="otx"><b>b.</b> Funciona con batería recargable.</span><button class="oeye" onclick="rvO('m2',1)">👁️</button></div></div>
+<div class="rrow"><div class="opt" id="m3"><span class="ob"></span><span class="otx"><b>a.</b> La garantía es de dos años.</span><button class="oeye" onclick="rvO('m3',1)">👁️</button></div><div class="opt" id="m4"><span class="ob"></span><span class="otx"><b>b.</b> La garantía es de tres años.</span><button class="oeye" onclick="rvO('m4',0)">👁️</button></div></div>
+</div>
+<div class="rbox"><span class="rbox-t">Robot 2</span>
+<div class="rrow"><div class="opt" id="m5"><span class="ob"></span><span class="otx"><b>a.</b> Se conecta a internet.</span><button class="oeye" onclick="rvO('m5',1)">👁️</button></div><div class="opt" id="m6"><span class="ob"></span><span class="otx"><b>b.</b> Tiene un CD con recetas.</span><button class="oeye" onclick="rvO('m6',0)">👁️</button></div></div>
+<div class="rrow"><div class="opt" id="m7"><span class="ob"></span><span class="otx"><b>a.</b> Se puede reciclar.</span><button class="oeye" onclick="rvO('m7',1)">👁️</button></div><div class="opt" id="m8"><span class="ob"></span><span class="otx"><b>b.</b> No se puede reciclar.</span><button class="oeye" onclick="rvO('m8',0)">👁️</button></div></div>
+</div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e3c')">💡 شرح بالعربي</button><div class="exp-box" id="e3c"><div class="ar-l">📌 اسمع تاني وحدد خصائص كل روبوت:</div><div class="ar-l">📝 <strong>Robot 1 (مكنسة):</strong> يشتغل بـ <span class="es-i">batería recargable</span> بطارية بتتشحن، الضمان سنتين</div><div class="ar-l">📝 <strong>Robot 2 (مطبخ):</strong> يتوصل بالإنترنت، ويتعمله إعادة تدوير</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">3d</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page34.png',event)">📖 Página 34</span></div><div class="c-ins">En grupos. Elige uno de los siguientes objetos y describe para qué sirve y cómo funciona. Tus compañeros adivinan qué objeto es. ¿Quién es el más rápido?</div>
+<div class="gamebox green"><span class="gamebox-t">🔌 Objetos</span><div class="wbank-row"><span class="chip cat">barómetro</span><span class="chip cat">lámpara</span><span class="chip cat">impresora</span><span class="chip cat">batidora</span><span class="chip cat">tostadora</span><span class="chip cat">reloj</span><span class="chip cat">secador de pelo</span><span class="chip cat">lavadora</span></div></div>
+<div class="gamebox orange"><span class="gamebox-t">⚙️ Funciones</span><div class="wbank-row"><span class="chip fn">secar</span><span class="chip fn">tostar</span><span class="chip fn">batir</span><span class="chip fn">lavar</span><span class="chip fn">dar luz</span><span class="chip fn">imprimir</span><span class="chip fn">saber la hora</span><span class="chip fn">saber el tiempo atmosférico</span></div></div>
+<div class="split"><div>
+<div class="dlg"><p><span class="spk">●</span> Es un objeto que sirve para... y que funciona...</p></div>
+<div class="qa"><p>barómetro → <span class="as" id="a15"><span class="as-p">_____</span><span class="as-v">saber el tiempo atmosférico</span></span></p><button class="rb" onclick="togA('a15')">👁️</button></div>
+<div class="qa"><p>lámpara → <span class="as" id="a16"><span class="as-p">_____</span><span class="as-v">dar luz</span></span></p><button class="rb" onclick="togA('a16')">👁️</button></div>
+<div class="qa"><p>impresora → <span class="as" id="a17"><span class="as-p">_____</span><span class="as-v">imprimir</span></span></p><button class="rb" onclick="togA('a17')">👁️</button></div>
+<div class="qa"><p>batidora → <span class="as" id="a18"><span class="as-p">_____</span><span class="as-v">batir</span></span></p><button class="rb" onclick="togA('a18')">👁️</button></div>
+<div class="qa"><p>tostadora → <span class="as" id="a19"><span class="as-p">_____</span><span class="as-v">tostar</span></span></p><button class="rb" onclick="togA('a19')">👁️</button></div>
+<div class="qa"><p>reloj → <span class="as" id="a20"><span class="as-p">_____</span><span class="as-v">saber la hora</span></span></p><button class="rb" onclick="togA('a20')">👁️</button></div>
+<div class="qa"><p>secador de pelo → <span class="as" id="a21"><span class="as-p">_____</span><span class="as-v">secar</span></span></p><button class="rb" onclick="togA('a21')">👁️</button></div>
+<div class="qa"><p>lavadora → <span class="as" id="a22"><span class="as-p">_____</span><span class="as-v">lavar</span></span></p><button class="rb" onclick="togA('a22')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e3d')">💡 شرح بالعربي</button><div class="exp-box" id="e3d"><div class="ar-l">📌 وصّل كل جهاز بفايدته، وزميلك يخمّن الجهاز</div><div class="ar-l">📝 <span class="es-i">batidora → batir</span> خلاط يخفق / <span class="es-i">tostadora → tostar</span> توستر يحمّص</div><div class="ar-l">📝 <span class="es-i">secador de pelo → secar</span> سشوار ينشّف</div></div>
+<div class="hnt"><div class="hnt-t">¿Te acuerdas? (que / donde)</div><div class="hnt-c">Es un objeto <b>que</b> sirve para saber el tiempo atmosférico.<br>Es la tienda <b>donde</b> compré mi aspiradora.</div></div>
+</div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(2)">⬅️</button><button class="nav-b" onclick="goS(4)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr4">
+<div class="sec-h"><div class="sec-n">4</div><div class="sec-t">Casas con estilo</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">4a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page35.png',event)">📖 Página 35</span></div><div class="c-ins">En grupos. Mirad las fotos que acompañan al reportaje "Casas con estilo" de una revista de decoración. ¿Qué estilo de decoración representan? Ahora fíjate en un objeto de cada foto y cierra el libro. ¿Qué objeto has elegido? ¿Por qué? Descríbelo para que tus compañeros lo adivinen.</div>
+<div class="wbank"><span class="wbank-t">Estilos de decoración</span><div class="wbank-row"><span class="chip ">minimalista</span><span class="chip ">rústico</span><span class="chip ">retro</span><span class="chip ">étnico</span><span class="chip ">clásico</span><span class="chip ">moderno</span></div></div>
+<div class="split"><div>
+<div class="qa"><p>Foto 1: <span class="as" id="c1"><span class="as-p">_____</span><span class="as-v">rústico</span></span></p><button class="rb" onclick="togA('c1')">👁️</button></div>
+<div class="qa"><p>Foto 2: <span class="as" id="c2"><span class="as-p">_____</span><span class="as-v">minimalista o moderno</span></span></p><button class="rb" onclick="togA('c2')">👁️</button></div>
+<div class="qa"><p>Foto 3: <span class="as" id="c3"><span class="as-p">_____</span><span class="as-v">étnico</span></span></p><button class="rb" onclick="togA('c3')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e4a')">💡 شرح بالعربي</button><div class="exp-box" id="e4a"><div class="ar-l">📌 شوف صور المنازل وحدد ستايل كل واحدة:</div><div class="ar-l">📝 <span class="es-i">rústico</span> = ريفي / <span class="es-i">minimalista</span> = بسيط / <span class="es-i">moderno</span> = عصري</div><div class="ar-l">📝 <span class="es-i">étnico</span> = إثني / <span class="es-i">retro</span> = قديم الطراز / <span class="es-i">clásico</span> = كلاسيكي</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">4b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page36.png',event)">📖 Página 36</span></div><div class="c-ins">Lee ahora el reportaje. ¿Qué foto de 4a corresponde a la casa de estas personas? ¿Qué es característico de cada estilo? Marca en los textos las palabras y expresiones que lo describen. Después compara con tu compañero.</div>
+<div class="split"><div>
+<div class="es-b"><strong>Martina Cervera (Retiro, Buenos Aires):</strong> Muebles de diseño. Líneas claras y puras. Las paredes están pintadas de blanco y no tienen adornos. Jefa de departamento de una multinacional. Se define como una persona sencilla y purista. «Me gustan los espacios abiertos y amplios. No me gustan los colores, solo me gusta el blanco. Tampoco me gusta colgar cuadros o fotos en la pared. No me siento bien con muchos muebles.»</div>
+<div class="es-b"><strong>Rafael Rodríguez (Miraflores, Lima):</strong> Profesor de geografía limeño. Persona romántica y nostálgica. «En mi casa estoy rodeado de recuerdos de mis viajes. Forman parte de mi vida y no puedo deshacerme de ninguno.» Las paredes, que están decoradas con máscaras y objetos de los cinco continentes, dan a las habitaciones un ambiente multicultural acogedor y lleno de vida.</div>
+<div class="es-b"><strong>Celso Santillana (Sarria, Lugo):</strong> Informático de 40 años. Vive con su mujer y sus tres hijos en una casa antigua. «Encontramos la casa hace cinco años, hemos arreglado la electricidad, el agua y la calefacción y hemos pintado las paredes. Después de mucho trabajo, ahora la casa está completamente reformada y todo funciona.» Las habitaciones están amuebladas con mesas que están hechas de madera antigua y con sillas y armarios restaurados por el mismo Celso.</div>
+<div class="qa"><p>Martina → estilo <span class="as" id="c4"><span class="as-p">_____</span><span class="as-v">minimalista (foto 2)</span></span></p><button class="rb" onclick="togA('c4')">👁️</button></div>
+<div class="qa"><p>Rafael → estilo <span class="as" id="c5"><span class="as-p">_____</span><span class="as-v">étnico (foto 3)</span></span></p><button class="rb" onclick="togA('c5')">👁️</button></div>
+<div class="qa"><p>Celso → estilo <span class="as" id="c6"><span class="as-p">_____</span><span class="as-v">rústico (foto 1)</span></span></p><button class="rb" onclick="togA('c6')">👁️</button></div>
+<div class="dlg"><p><span class="spk">●</span> Martina prefiere un estilo de decoración... porque le gusta el color...</p></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e4b')">💡 شرح بالعربي</button><div class="exp-box" id="e4b"><div class="ar-l">📌 اقرأ الريبورتاج وحدد ستايل كل شخص:</div><div class="ar-l">📝 <strong>Martina:</strong> أثاث تصميم وخطوط نقية وحيطان بيضا من غير زينة → <span class="es-i">minimalista</span></div><div class="ar-l">📝 <strong>Rafael:</strong> محاط بذكريات سفره وأقنعة من كل القارات → <span class="es-i">étnico</span></div><div class="ar-l">📝 <strong>Celso:</strong> بيت قديم مجدّد بمناجد خشب قديم → <span class="es-i">rústico</span></div></div>
+<div class="hnt"><div class="hnt-t">Estar + participio</div><div class="hnt-c"><b>Estar + participio</b> expresa el <b>resultado</b> de una acción. El participio <b>concuerda en género y número</b> con la palabra a la que se refiere.<br><span class="es-tag">El piso está amueblado.</span> <span class="es-tag">La casa está reformada.</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">4c</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page36.png',event)">📖 Página 36</span></div><div class="c-ins">Lee otra vez el reportaje y completa las frases con ayuda de los textos.</div>
+<div class="split"><div>
+<div class="qa"><p>1. Martina: Las paredes están <span class="as" id="c7"><span class="as-p">_____</span><span class="as-v">pintadas</span></span> de blanco.</p><button class="rb" onclick="togA('c7')">👁️</button></div>
+<div class="qa"><p>2. Rafael: Estoy <span class="as" id="c8"><span class="as-p">_____</span><span class="as-v">rodeado</span></span> de recuerdos de mis viajes.</p><button class="rb" onclick="togA('c8')">👁️</button></div>
+<div class="qa"><p>3. Rafael: Las paredes están <span class="as" id="c9"><span class="as-p">_____</span><span class="as-v">decoradas</span></span> con máscaras.</p><button class="rb" onclick="togA('c9')">👁️</button></div>
+<div class="qa"><p>4. Celso: La casa está completamente <span class="as" id="c10"><span class="as-p">_____</span><span class="as-v">reformada</span></span>.</p><button class="rb" onclick="togA('c10')">👁️</button></div>
+<div class="qa"><p>5. Celso: Las habitaciones están <span class="as" id="c11"><span class="as-p">_____</span><span class="as-v">amuebladas</span></span> con mesas que están <span class="as" id="c12"><span class="as-p">_____</span><span class="as-v">hechas</span></span> de madera antigua.</p><button class="rb" onclick="togA('c11')">👁️</button><button class="rb" onclick="togA('c12')">👁️</button></div>
+<div class="qa"><p>6. Celso: Las sillas y los armarios están <span class="as" id="c13"><span class="as-p">_____</span><span class="as-v">restaurados</span></span> por él mismo.</p><button class="rb" onclick="togA('c13')">👁️</button></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('g4c')">📐 قاعدة: estar + participio</button><div class="exp-box" id="g4c"><div class="ar-l">📌 <strong>estar + participio</strong> بيعبّر عن نتيجة فعل، والـ participio بيتعامل زي صفة</div><div class="ar-l">📝 بيتوافق في النوع والعدد مع الكلمة اللي بيوصفها</div><div class="ar-l">💡 <span class="es-i">Las paredes están pintadas</span> (مؤنث جمع) / <span class="es-i">El piso está amueblado</span> (مذكر مفرد)</div></div>
+<button class="exp-btn" onclick="togExp('e4c')">💡 شرح بالعربي</button><div class="exp-box" id="e4c"><div class="ar-l">📝 <span class="es-i">pintadas</span> = متدهونة / <span class="es-i">rodeado</span> = محاط / <span class="es-i">decoradas</span> = مزيّنة</div><div class="ar-l">📝 <span class="es-i">reformada</span> = مجدّدة / <span class="es-i">amuebladas</span> = متأثثة / <span class="es-i">hechas</span> = معمولة / <span class="es-i">restaurados</span> = مرمّمة</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">4d</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">En parejas. ¿Qué estilo de decoración tiene tu casa? Haz las siguientes preguntas a tu compañero y toma nota.</div>
+<div class="split"><div>
+<div class="es-b">1. ¿De qué color están pintadas las habitaciones?<br>2. ¿Cómo están decoradas las paredes?<br>3. ¿Está reformada?<br>4. ¿Cómo está amueblado el salón?<br>5. ¿Tienes objetos o muebles restaurados?<br>6. ¿De qué está hecho tu objeto o mueble favorito?</div>
+</div><div><button class="exp-btn" onclick="togExp('e4d')">💡 شرح بالعربي</button><div class="exp-box" id="e4d"><div class="ar-l">📝 اسأل زميلك الأسئلة دي عن بيته وسجّل إجاباته</div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(3)">⬅️</button><button class="nav-b" onclick="goS(5)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr5">
+<div class="sec-h"><div class="sec-n">5</div><div class="sec-t">Cosas especiales</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">5a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">En la entrevista para la revista de decoración, Martina, Rafael y Celso también han hablado sobre objetos o muebles especiales para ellos. Escucha la entrevista y responde a las preguntas: ¿De qué objeto o mueble hablan? ¿Dónde está? 🔊 12–14</div>
+<div class="split"><div>
+<table class="etb"><thead><tr><th></th><th>¿De qué objeto o mueble hablan?</th><th>¿Dónde está?</th></tr></thead><tbody>
+<tr><td><strong>Martina</strong></td><td><div class="qa"><p><span class="as" id="d1"><span class="as-p">_____</span><span class="as-v">un sillón blanco de cuero</span></span></p><button class="rb" onclick="togA('d1')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="d2"><span class="as-p">_____</span><span class="as-v">en un rincón del salón</span></span></p><button class="rb" onclick="togA('d2')">👁️</button></div></td></tr>
+<tr><td><strong>Rafael</strong></td><td><div class="qa"><p><span class="as" id="d3"><span class="as-p">_____</span><span class="as-v">una figura de madera (un elefante)</span></span></p><button class="rb" onclick="togA('d3')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="d4"><span class="as-p">_____</span><span class="as-v">fuera de la casa, en el jardín</span></span></p><button class="rb" onclick="togA('d4')">👁️</button></div></td></tr>
+<tr><td><strong>Celso</strong></td><td><div class="qa"><p><span class="as" id="d5"><span class="as-p">_____</span><span class="as-v">una mesa antigua de su escuela</span></span></p><button class="rb" onclick="togA('d5')">👁️</button></div></td><td><div class="qa"><p><span class="as" id="d6"><span class="as-p">_____</span><span class="as-v">en el piso de arriba</span></span></p><button class="rb" onclick="togA('d6')">👁️</button></div></td></tr>
+</tbody></table>
+<div class="auc"><div class="aut">🎧 Pista 12 — Martina</div><div class="aur"><button class="aub" id="pb-a12x" onclick="togAu('a12x')">▶</button><input type="range" class="ausk" id="sk-a12x" value="0" min="0" max="100" oninput="skAu('a12x',this.value)"><span class="autm" id="tm-a12x">0:00/0:00</span></div><div class="ausr"><button class="aubk" onclick="bk5('a12x')">⏪-5s</button><button class="ausp" onclick="spd('a12x',.5)">0.5x</button><button class="ausp" onclick="spd('a12x',.75)">0.75x</button><button class="ausp act" onclick="spd('a12x',1)">1x</button></div><audio id="a12x" src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/12%20Pista%2012.mp3" preload="metadata"></audio><button class="autb" onclick="togTr('tr-a12x')">📄 Transcripción</button><div class="autr" id="tr-a12x">● Martina, tu casa está decorada de forma purista y con pocos muebles, pero seguro que tienes un mueble o un objeto especial para ti. ▲ Bueno, como ya sabes, no me siento bien con muchas cosas y muchos muebles, y en las paredes prácticamente no tengo adornos. Pero, eso sí, lo que sí necesito es mi sillón blanco de cuero. Después de un día de trabajo, estoy cansada y lo que busco es tranquilidad, la tranquilidad en un rincón del salón, en mi sillón, claro.</div></div>
+<div class="auc"><div class="aut">🎧 Pista 13 — Rafael</div><div class="aur"><button class="aub" id="pb-a13x" onclick="togAu('a13x')">▶</button><input type="range" class="ausk" id="sk-a13x" value="0" min="0" max="100" oninput="skAu('a13x',this.value)"><span class="autm" id="tm-a13x">0:00/0:00</span></div><div class="ausr"><button class="aubk" onclick="bk5('a13x')">⏪-5s</button><button class="ausp" onclick="spd('a13x',.5)">0.5x</button><button class="ausp" onclick="spd('a13x',.75)">0.75x</button><button class="ausp act" onclick="spd('a13x',1)">1x</button></div><audio id="a13x" src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/13%20Pista%2013.mp3" preload="metadata"></audio><button class="autb" onclick="togTr('tr-a13x')">📄 Transcripción</button><div class="autr" id="tr-a13x">● Bueno, Rafael, ¡cuántas cosas de tus viajes! ■ Sí, soy un nostálgico. Me gusta estar rodeado de objetos que he comprado en mis viajes por todo el mundo. Como ves, están colgados en las paredes, por toda la casa. Pero justo mi objeto favorito no está dentro, sino que está fuera de la casa. Es una figura de madera bastante grande que tengo en el jardín. Es un elefante que compré en la India. ¡Fue muy difícil traerlo hasta el Perú, pero me encanta el color que tiene!</div></div>
+<div class="auc"><div class="aut">🎧 Pista 14 — Celso</div><div class="aur"><button class="aub" id="pb-a14x" onclick="togAu('a14x')">▶</button><input type="range" class="ausk" id="sk-a14x" value="0" min="0" max="100" oninput="skAu('a14x',this.value)"><span class="autm" id="tm-a14x">0:00/0:00</span></div><div class="ausr"><button class="aubk" onclick="bk5('a14x')">⏪-5s</button><button class="ausp" onclick="spd('a14x',.5)">0.5x</button><button class="ausp" onclick="spd('a14x',.75)">0.75x</button><button class="ausp act" onclick="spd('a14x',1)">1x</button></div><audio id="a14x" src="https://archive.org/download/A2_Aud/A2%20AUDIO%20MP3/14%20Pista%2014.mp3" preload="metadata"></audio><button class="autb" onclick="togTr('tr-a14x')">📄 Transcripción</button><div class="autr" id="tr-a14x">● Celso, tú mismo has reformado tu casa y has restaurado los muebles. ◆ Mira, y todavía estoy arreglando cosas que están rotas o restaurando muebles. ● Dime, ¿y hay alguno especial para ti? ◆ Pues, sí, en el piso de arriba tengo uno muy especial para mí: una mesa antigua de mi escuela. Está completamente renovada y la uso para poner libros antiguos. ¡Es un recuerdo de mi escuela!</div></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('e5a')">💡 شرح بالعربي</button><div class="exp-box" id="e5a"><div class="ar-l">📌 اسمع المقابلة وحدد الشيء المميز ومكانه لكل شخص:</div><div class="ar-l">📝 <strong>Martina:</strong> فوتيه أبيض من الجلد <span class="es-i">sillón blanco de cuero</span> في ركن الصالة</div><div class="ar-l">📝 <strong>Rafael:</strong> تمثال فيل خشب <span class="es-i">un elefante</span> برّه في الجنينة</div><div class="ar-l">📝 <strong>Celso:</strong> ترابيزة قديمة من مدرسته في الدور اللي فوق</div></div>
+<div class="hnt"><div class="hnt-t">Expresiones de lugar</div><div class="hnt-c">dentro (de) · fuera (de) · en un rincón (de) · en la pared · en el piso de arriba/abajo</div></div>
+<div class="hnt"><div class="hnt-t">¿Te acuerdas? Complementos de lugar</div><div class="hnt-c">La alfombra está al lado de la cama.<br>La lámpara está encima de la mesa.</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">5b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">Escucha otra vez. ¿Por qué son tan especiales esas cosas para ellos?</div>
+<div class="split"><div>
+<div class="qa"><p>1. Para Martina es especial porque <span class="as" id="d7"><span class="as-p">_____</span><span class="as-v">después de un día de trabajo está cansada y busca tranquilidad en su sillón</span></span></p><button class="rb" onclick="togA('d7')">👁️</button></div>
+<div class="qa"><p>2. Para Rafael es especial porque <span class="as" id="d8"><span class="as-p">_____</span><span class="as-v">le encanta el color que tiene y lo compró en la India</span></span></p><button class="rb" onclick="togA('d8')">👁️</button></div>
+<div class="qa"><p>3. Para Celso es especial porque <span class="as" id="d9"><span class="as-p">_____</span><span class="as-v">es un recuerdo de su escuela</span></span></p><button class="rb" onclick="togA('d9')">👁️</button></div>
+</div><div><button class="exp-btn" onclick="togExp('e5b')">💡 شرح بالعربي</button><div class="exp-box" id="e5b"><div class="ar-l">📝 اسمع تاني وحدد سبب أهمية كل شيء:</div><div class="ar-l">📝 مارتينا: بتدوّر على الهدوء بعد يوم الشغل</div><div class="ar-l">📝 رافاييل: بيحب لون الفيل وجابه من الهند</div><div class="ar-l">📝 سيلسو: ذكرى من مدرسته</div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">5c</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">En parejas. ¿Qué objetos o muebles de tu casa son especiales para ti? ¿Por qué? ¿Dónde están?</div>
+<div class="split"><div class="dlg"><p><span class="spk">●</span> Tengo un cuadro muy bonito en el salón. Lo pintó mi padre.</p><p><span class="spk">▲</span> Pues yo...</p></div><div><button class="exp-btn" onclick="togExp('e5c')">💡 شرح بالعربي</button><div class="exp-box" id="e5c"><div class="ar-l">📝 اتكلم عن الأشياء المميزة عندك في البيت وفين موجودة وليه مهمة</div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(4)">⬅️</button><button class="nav-b" onclick="goS(6)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr6">
+<div class="sec-h"><div class="sec-n">📐</div><div class="sec-t">Gramática</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Estar + participio</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<div class="es-b">El piso <strong>está</strong> amueblad<strong>o</strong> con muebles antiguos.<br>La casa <strong>está</strong> rodead<strong>a</strong> de árboles.<br>Los cuadros <strong>están</strong> restaurad<strong>os</strong>.<br>Las paredes <strong>están</strong> pintad<strong>as</strong> de blanco.</div>
+<div class="hnt"><div class="hnt-t">Regla</div><div class="hnt-c"><b>Estar + participio</b> expresa el <b>resultado</b> de una acción. El participio se utiliza como un <b>adjetivo</b> y <b>concuerda en género y número</b> con la palabra a la que se refiere.</div></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('g6a')">📐 قاعدة: estar + participio</button><div class="exp-box" id="g6a"><div class="ar-l">📌 <strong>estar + participio</strong> = نتيجة فعل</div><div class="ar-l">📝 الـ participio بيشتغل زي صفة وبيتوافق نوع وعدد مع الكلمة</div><div class="ar-l">💡 <span class="es-i">amueblado</span> (مذكر) / <span class="es-i">rodeada</span> (مؤنث) / <span class="es-i">restaurados</span> (جمع مذكر) / <span class="es-i">pintadas</span> (جمع مؤنث)</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Participios irregulares</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<table class="etb"><thead><tr><th>Infinitivo</th><th>Participio</th></tr></thead><tbody>
+<tr><td>romper</td><td>roto</td></tr><tr><td>hacer</td><td>hecho</td></tr><tr><td>abrir</td><td>abierto</td></tr>
+<tr><td>ver</td><td>visto</td></tr><tr><td>poner</td><td>puesto</td></tr><tr><td>escribir</td><td>escrito</td></tr>
+</tbody></table>
+</div><div>
+<button class="exp-btn" onclick="togExp('g6b')">📐 قاعدة: Participios irregulares</button><div class="exp-box" id="g6b"><div class="ar-l">📌 <strong>اسم المفعول الشاذ</strong> لازم تحفظه:</div><div class="ar-l">📝 <span class="es-i">romper → roto</span> (يكسر → مكسور)</div><div class="ar-l">📝 <span class="es-i">hacer → hecho</span> / <span class="es-i">abrir → abierto</span> / <span class="es-i">ver → visto</span></div><div class="ar-l">📝 <span class="es-i">poner → puesto</span> / <span class="es-i">escribir → escrito</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Complementos de lugar</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<div class="es-b">dentro (de)<br>fuera (de)<br>en un rincón (de)<br>en la pared<br>en la habitación de arriba<br>en el piso de abajo</div>
+</div><div>
+<button class="exp-btn" onclick="togExp('g6c')">💡 شرح بالعربي — ظروف المكان</button><div class="exp-box" id="g6c"><div class="ar-l">📝 <span class="es-i">dentro (de)</span> = جوّه / <span class="es-i">fuera (de)</span> = برّه</div><div class="ar-l">📝 <span class="es-i">en un rincón (de)</span> = في ركن / <span class="es-i">en la pared</span> = على الحيطة</div><div class="ar-l">📝 <span class="es-i">en la habitación de arriba</span> = في الأوضة اللي فوق / <span class="es-i">en el piso de abajo</span> = في الدور اللي تحت</div></div>
+</div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(5)">⬅️</button><button class="nav-b" onclick="goS(7)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr7">
+<div class="sec-h"><div class="sec-n">💬</div><div class="sec-t">Comunicación</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Describir objetos</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<div class="dlg"><p><span class="spk">●</span> ¿De qué es el marco?</p><p><span class="spk">▲</span> Es de madera.</p></div>
+<div class="dlg"><p><span class="spk">●</span> ¿Cómo es la lámpara?</p><p><span class="spk">▲</span> Es bonita y muy decorativa.</p></div>
+<div class="dlg"><p><span class="spk">●</span> ¿Qué forma tiene el espejo?</p><p><span class="spk">▲</span> Es redondo.</p></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('c7a')">💡 شرح بالعربي — وصف الأشياء</button><div class="exp-box" id="c7a"><div class="ar-l">📝 <span class="es-i">¿De qué es?</span> = من إيه؟ (الخامة) → <span class="es-i">Es de madera</span></div><div class="ar-l">📝 <span class="es-i">¿Cómo es?</span> = عامل إزاي؟ (التقييم) → <span class="es-i">bonita, decorativa</span></div><div class="ar-l">📝 <span class="es-i">¿Qué forma tiene?</span> = شكله إيه؟ → <span class="es-i">redondo, cuadrado...</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Indicar la utilidad de un objeto</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<div class="dlg"><p><span class="spk">●</span> ¿Para qué sirve esto?</p><p><span class="spk">▲</span> Para hacer tartas. Es un robot de cocina.</p></div>
+<div class="dlg"><p><span class="spk">●</span> ¿Qué es esto?</p><p><span class="spk">▲</span> Es un robot familiar. Sirve para entretener y educar a los niños.</p><p><span class="spk">■</span> ¿Y cómo funciona?</p><p><span class="spk">▲</span> Funciona a pilas.</p></div>
+</div><div>
+<button class="exp-btn" onclick="togExp('c7b')">💡 شرح بالعربي — فايدة الشيء</button><div class="exp-box" id="c7b"><div class="ar-l">📝 <span class="es-i">¿Para qué sirve?</span> = بيستخدم في إيه؟ → <span class="es-i">Sirve para...</span></div><div class="ar-l">📝 <span class="es-i">¿Cómo funciona?</span> = بيشتغل إزاي؟ → <span class="es-i">Funciona a pilas / con electricidad</span></div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Expresar el resultado de una acción</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page124.png',event)">📖 Página 124</span></div>
+<div class="split"><div>
+<div class="es-b">El apartamento está amueblado.<br>La casa está reformada.<br>Los muebles están restaurados.<br>Las ventanas están rotas.</div>
+</div><div>
+<button class="exp-btn" onclick="togExp('c7c')">💡 شرح بالعربي — نتيجة الفعل</button><div class="exp-box" id="c7c"><div class="ar-l">📝 <span class="es-i">estar + participio</span> للتعبير عن نتيجة الفعل</div><div class="ar-l">💡 <span class="es-i">está amueblado</span> = متأثث / <span class="es-i">está reformada</span> = مجدّدة / <span class="es-i">están rotas</span> = مكسورة</div></div>
+</div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(6)">⬅️</button><button class="nav-b" onclick="goS(8)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr8">
+<div class="sec-h"><div class="sec-n">📝</div><div class="sec-t">Ejercicios 1–6</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 1</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">Escribe los participios de los siguientes verbos.</div>
+<div class="split"><div>
+<div class="qa"><p>1. hacer → <span class="as" id="e1"><span class="as-p">_____</span><span class="as-v">hecho</span></span></p><button class="rb" onclick="togA('e1')">👁️</button></div><div class="qa"><p>2. restaurar → <span class="as" id="e2"><span class="as-p">_____</span><span class="as-v">restaurado</span></span></p><button class="rb" onclick="togA('e2')">👁️</button></div><div class="qa"><p>3. abrir → <span class="as" id="e3"><span class="as-p">_____</span><span class="as-v">abierto</span></span></p><button class="rb" onclick="togA('e3')">👁️</button></div>
+<div class="qa"><p>4. cubrir → <span class="as" id="e4"><span class="as-p">_____</span><span class="as-v">cubierto</span></span></p><button class="rb" onclick="togA('e4')">👁️</button></div><div class="qa"><p>5. pintar → <span class="as" id="e5"><span class="as-p">_____</span><span class="as-v">pintado</span></span></p><button class="rb" onclick="togA('e5')">👁️</button></div><div class="qa"><p>6. amueblar → <span class="as" id="e6"><span class="as-p">_____</span><span class="as-v">amueblado</span></span></p><button class="rb" onclick="togA('e6')">👁️</button></div>
+</div><div>
+<div class="qa"><p>7. reformar → <span class="as" id="e7"><span class="as-p">_____</span><span class="as-v">reformado</span></span></p><button class="rb" onclick="togA('e7')">👁️</button></div><div class="qa"><p>8. romper → <span class="as" id="e8"><span class="as-p">_____</span><span class="as-v">roto</span></span></p><button class="rb" onclick="togA('e8')">👁️</button></div><div class="qa"><p>9. decorar → <span class="as" id="e9"><span class="as-p">_____</span><span class="as-v">decorado</span></span></p><button class="rb" onclick="togA('e9')">👁️</button></div>
+<div class="qa"><p>10. fabricar → <span class="as" id="e10"><span class="as-p">_____</span><span class="as-v">fabricado</span></span></p><button class="rb" onclick="togA('e10')">👁️</button></div><div class="qa"><p>11. colgar → <span class="as" id="e11"><span class="as-p">_____</span><span class="as-v">colgado</span></span></p><button class="rb" onclick="togA('e11')">👁️</button></div><div class="qa"><p>12. cerrar → <span class="as" id="e12"><span class="as-p">_____</span><span class="as-v">cerrado</span></span></p><button class="rb" onclick="togA('e12')">👁️</button></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 2</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">Observa el dibujo y corrige las frases incorrectas.</div>
+<div class="split"><div>
+<div class="qa"><p>1. La pareja está bailando tango dentro del hotel. → <span class="as" id="e13"><span class="as-p">_____</span><span class="as-v">La pareja está bailando tango fuera del hotel.</span></span></p><button class="rb" onclick="togA('e13')">👁️</button></div>
+<div class="qa"><p>2. En el rincón de la sala hay una planta. → <span class="as" id="e14"><span class="as-p">_____</span><span class="as-v">Correcta.</span></span></p><button class="rb" onclick="togA('e14')">👁️</button></div>
+<div class="qa"><p>3. La lámpara está al lado de la mesa. → <span class="as" id="e15"><span class="as-p">_____</span><span class="as-v">La lámpara está encima de la mesa.</span></span></p><button class="rb" onclick="togA('e15')">👁️</button></div>
+<div class="qa"><p>4. Vivo en el piso de arriba. → <span class="as" id="e16"><span class="as-p">_____</span><span class="as-v">Vivo en el piso de abajo.</span></span></p><button class="rb" onclick="togA('e16')">👁️</button></div>
+<div class="qa"><p>5. El cuadro está en la pared. → <span class="as" id="e17"><span class="as-p">_____</span><span class="as-v">Correcta.</span></span></p><button class="rb" onclick="togA('e17')">👁️</button></div>
+</div><div><button class="exp-btn" onclick="togExp('ee2')">💡 شرح بالعربي</button><div class="exp-box" id="ee2"><div class="ar-l">📝 صحّح الجمل الغلط حسب الرسمة باستخدام ظروف المكان</div><div class="ar-l">💡 <span class="es-i">dentro ↔ fuera</span> / <span class="es-i">al lado de ↔ encima de</span> / <span class="es-i">arriba ↔ abajo</span></div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 3</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">¿Qué hay en tu clase? Completa las frases. (Solución abierta)</div>
+<div class="split"><div>
+<div class="es-b">1. Dentro de la clase hay _______.<br>2. Fuera de la clase hay _______.<br>3. En un rincón de la clase hay _______.<br>4. En la pared de la clase hay _______.</div>
+</div><div><button class="exp-btn" onclick="togExp('ee3')">💡 شرح بالعربي</button><div class="exp-box" id="ee3"><div class="ar-l">📝 اكتب إيه اللي موجود في الفصل بتاعك بظروف المكان (حل مفتوح)</div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 4</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">Relaciona las palabras de las dos columnas para formar preguntas.</div>
+<div class="wbank"><span class="wbank-t">Columna B</span><div class="wbank-row"><span class="chip ">a. el jarrón?</span><span class="chip ">b. sirve este robot?</span><span class="chip ">c. es esto?</span><span class="chip ">d. tiene la mesa?</span><span class="chip ">e. este aparato?</span><span class="chip ">f. los muebles de la cocina?</span></div></div>
+<div class="split"><div>
+<div class="qa"><p>1. ¿Para qué → <span class="as" id="e18"><span class="as-p">_____</span><span class="as-v">b. sirve este robot?</span></span></p><button class="rb" onclick="togA('e18')">👁️</button></div>
+<div class="qa"><p>2. ¿Qué forma → <span class="as" id="e19"><span class="as-p">_____</span><span class="as-v">d. tiene la mesa?</span></span></p><button class="rb" onclick="togA('e19')">👁️</button></div>
+<div class="qa"><p>3. ¿Cómo son → <span class="as" id="e20"><span class="as-p">_____</span><span class="as-v">f. los muebles de la cocina?</span></span></p><button class="rb" onclick="togA('e20')">👁️</button></div>
+<div class="qa"><p>4. ¿De qué es → <span class="as" id="e21"><span class="as-p">_____</span><span class="as-v">a. el jarrón?</span></span></p><button class="rb" onclick="togA('e21')">👁️</button></div>
+<div class="qa"><p>5. ¿Qué → <span class="as" id="e22"><span class="as-p">_____</span><span class="as-v">c. es esto?</span></span></p><button class="rb" onclick="togA('e22')">👁️</button></div>
+<div class="qa"><p>6. ¿Cómo funciona → <span class="as" id="e23"><span class="as-p">_____</span><span class="as-v">e. este aparato?</span></span></p><button class="rb" onclick="togA('e23')">👁️</button></div>
+</div><div><button class="exp-btn" onclick="togExp('ee4')">💡 شرح بالعربي</button><div class="exp-box" id="ee4"><div class="ar-l">📝 وصّل بداية السؤال بنهايته لتكوين سؤال صحيح</div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 5</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">Lee las respuestas y completa con las preguntas anteriores (del ejercicio 4).</div>
+<div class="split"><div>
+<div class="qa"><p>1. <span class="as" id="e24"><span class="as-p">_____</span><span class="as-v">¿De qué es el jarrón?</span></span> &nbsp;▲ Es de cristal.</p><button class="rb" onclick="togA('e24')">👁️</button></div>
+<div class="qa"><p>2. <span class="as" id="e25"><span class="as-p">_____</span><span class="as-v">¿Para qué sirve este robot?</span></span> &nbsp;▲ Sirve para limpiar la casa.</p><button class="rb" onclick="togA('e25')">👁️</button></div>
+<div class="qa"><p>3. <span class="as" id="e26"><span class="as-p">_____</span><span class="as-v">¿Cómo funciona este aparato?</span></span> &nbsp;▲ Funciona con energía solar.</p><button class="rb" onclick="togA('e26')">👁️</button></div>
+</div><div>
+<div class="qa"><p>4. <span class="as" id="e27"><span class="as-p">_____</span><span class="as-v">¿Qué forma tiene la mesa?</span></span> &nbsp;▲ Es cuadrada.</p><button class="rb" onclick="togA('e27')">👁️</button></div>
+<div class="qa"><p>5. <span class="as" id="e28"><span class="as-p">_____</span><span class="as-v">¿Qué es esto?</span></span> &nbsp;▲ Es un aparato que sirve para hacer zumos.</p><button class="rb" onclick="togA('e28')">👁️</button></div>
+<div class="qa"><p>6. <span class="as" id="e29"><span class="as-p">_____</span><span class="as-v">¿Cómo son los muebles de la cocina?</span></span> &nbsp;▲ ¡Son preciosos!</p><button class="rb" onclick="togA('e29')">👁️</button></div>
+<button class="exp-btn" onclick="togExp('ee5')">💡 شرح بالعربي</button><div class="exp-box" id="ee5"><div class="ar-l">📝 اقرأ كل إجابة واختار السؤال المناسب ليها من تمرين 4</div></div>
+</div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">Ejercicio 6</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page125.png',event)">📖 Página 125</span></div><div class="c-ins">Completa las siguientes frases con uno de los siguientes participios.</div>
+<div class="wbank"><span class="wbank-t">Participios</span><div class="wbank-row"><span class="chip ">rodeado/-a</span><span class="chip ">pintado/-a</span><span class="chip ">reformado/-a</span><span class="chip ">restaurado/-a</span><span class="chip ">roto/-a</span><span class="chip ">amueblado/-a</span><span class="chip ">hecho/-a</span><span class="chip ">decorado/-a</span></div></div>
+<div class="split"><div>
+<div class="qa"><p>1. He comprado una casa muy barata, pero no está <span class="as" id="e30"><span class="as-p">_____</span><span class="as-v">reformada</span></span>. Vamos a tener mucho trabajo y muchos gastos.</p><button class="rb" onclick="togA('e30')">👁️</button></div>
+<div class="qa"><p>2. Vivo en un barrio que está <span class="as" id="e31"><span class="as-p">_____</span><span class="as-v">rodeado</span></span> de parques y bosques. ¡Es una maravilla!</p><button class="rb" onclick="togA('e31')">👁️</button></div>
+<div class="qa"><p>3. La pared de la cocina está <span class="as" id="e32"><span class="as-p">_____</span><span class="as-v">pintada</span></span> de color blanco.</p><button class="rb" onclick="togA('e32')">👁️</button></div>
+<div class="qa"><p>4. Este mueble de la sala está <span class="as" id="e33"><span class="as-p">_____</span><span class="as-v">hecho</span></span> de hierro y madera. Es muy original.</p><button class="rb" onclick="togA('e33')">👁️</button></div>
+</div><div>
+<div class="qa"><p>5. La habitación del hotel está <span class="as" id="e34"><span class="as-p">_____</span><span class="as-v">decorada</span></span> con objetos y muebles de los años 60.</p><button class="rb" onclick="togA('e34')">👁️</button></div>
+<div class="qa"><p>6. Tengo que buscar un apartamento en el centro... El apartamento tiene que estar <span class="as" id="e35"><span class="as-p">_____</span><span class="as-v">amueblado</span></span> porque solo lo necesito para tres meses.</p><button class="rb" onclick="togA('e35')">👁️</button></div>
+<div class="qa"><p>7. Hace frío y no puedo cerrar la ventana porque está <span class="as" id="e36"><span class="as-p">_____</span><span class="as-v">rota</span></span>.</p><button class="rb" onclick="togA('e36')">👁️</button></div>
+<div class="qa"><p>8. Este edificio del siglo XVII está precioso desde que está <span class="as" id="e37"><span class="as-p">_____</span><span class="as-v">restaurado</span></span>.</p><button class="rb" onclick="togA('e37')">👁️</button></div>
+<button class="exp-btn" onclick="togExp('ee6')">💡 شرح بالعربي</button><div class="exp-box" id="ee6"><div class="ar-l">📝 اكمل بـ participio مناسب مع التوافق في النوع والعدد</div><div class="ar-l">💡 <span class="es-i">pintada</span> (مؤنث) / <span class="es-i">rota</span> (مؤنث) / <span class="es-i">hecho, amueblado</span> (مذكر)</div></div>
+</div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(7)">⬅️</button><button class="nav-b" onclick="goS(9)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr9">
+<div class="sec-h"><div class="sec-n">★</div><div class="sec-t">Un portal de objetos originales</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page35.png',event)">📖 Página 35</span></div><div class="c-ins">En grupos. Pensad en dos objetos originales que podéis vender en una página web. ¿Cómo son? ¿Para qué sirven? Completad la ficha.</div>
+<div class="split"><div>
+<div class="es-b"><strong>UN/-A ______ ORIGINAL</strong><br>FORMA: ______<br>MATERIAL: ______<br>FUNCIÓN: Sirve para ______<br>¿CÓMO ES?: ______<br>PRECIO: ______</div>
+<textarea class="writing-area" placeholder="Escribe aquí la ficha de vuestro objeto original..."></textarea>
+</div><div><button class="exp-btn" onclick="togExp('cs9a')">💡 شرح بالعربي</button><div class="exp-box" id="cs9a"><div class="ar-l">📌 في مجموعات: فكّروا في شيئين مبتكرين تقدروا تبيعوهم على الإنترنت</div><div class="ar-l">📝 املأ البطاقة: الشكل، الخامة، الوظيفة، التقييم، السعر</div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page35.png',event)">📖 Página 35</span></div><div class="c-ins">Presentad vuestros objetos a la clase.</div>
+<div class="split"><div class="dlg"><p><span class="spk">●</span> Vendemos un plato de cerámica que sirve para decorar y para...</p></div><div><button class="exp-btn" onclick="togExp('cs9b')">💡 شرح بالعربي</button><div class="exp-box" id="cs9b"><div class="ar-l">📝 قدّموا منتجاتكم للفصل ووصفوها بالتفصيل</div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(8)">⬅️</button><button class="nav-b" onclick="goS(10)">➡️</button></div>
+</div>
+
+<div class="screen" id="scr10">
+<div class="sec-h"><div class="sec-n">★</div><div class="sec-t">Redecoramos nuestra clase</div></div>
+<div class="card"><div class="q-head"><span class="c-lb">a</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">En grupos. Nuestra clase ideal. Cada grupo elige un estilo de decoración y hace una lista de los muebles, objetos de decoración y aparatos que necesita. Describidlos con detalle (para qué sirven, la forma, el material...). ¿Dónde queréis colocar las cosas?</div>
+<div class="split"><div>
+<div class="es-b"><em>Para decorar nuestra clase en un estilo moderno, necesitamos... 12 sillas cómodas y funcionales...</em></div>
+<textarea class="writing-area" placeholder="Estilo elegido:&#10;Muebles:&#10;Objetos de decoración:&#10;Aparatos:&#10;¿Dónde colocamos las cosas?"></textarea>
+</div><div><button class="exp-btn" onclick="togExp('cs10a')">💡 شرح بالعربي</button><div class="exp-box" id="cs10a"><div class="ar-l">📌 فصلنا المثالي: كل مجموعة تختار ستايل ديكور</div><div class="ar-l">📝 اعملوا ليستة بالأثاث والأجهزة والديكور المطلوب ووصفوها (الفايدة، الشكل، الخامة)</div><div class="ar-l">📝 حددوا فين هتحطوا كل حاجة باستخدام ظروف المكان <span class="es-i">dentro, en un rincón, en la pared...</span></div><div class="ar-l">💡 الحل مفتوح <span class="es-i">(Solución abierta)</span></div></div></div></div></div>
+<div class="card"><div class="q-head"><span class="c-lb">b</span><span class="pg-tag" onclick="openImg('https://ia601403.us.archive.org/16/items/a2libropages/Page37.png',event)">📖 Página 37</span></div><div class="c-ins">Presentad la propuesta de decoración a la clase.</div>
+<div class="split"><div class="dlg"><p><span class="spk">●</span> Para decorar nuestra clase en un estilo moderno, necesitamos...</p></div><div><button class="exp-btn" onclick="togExp('cs10b')">💡 شرح بالعربي</button><div class="exp-box" id="cs10b"><div class="ar-l">📝 قدّموا اقتراح الديكور بتاعكم للفصل</div></div></div></div></div>
+<div class="nav-btns"><button class="nav-b" onclick="goS(9)">⬅️</button><button class="nav-b" disabled>➡️</button></div>
+</div>
+
+</div></div></div>
+<div class="mbar" id="mbar">
+<span class="mbi" id="mbI">🎵</span>
+<button class="mbb" id="mbP" onclick="mbTog()">▶</button>
+<input type="range" class="mbsk" id="mbSk" value="0" min="0" max="100" oninput="mbSkTo(this.value)">
+<span class="mbtm" id="mbTm">0:00/0:00</span>
+<button class="aubk" onclick="mbBk()" style="font-size:8px">⏪-5s</button>
+<button class="mbsp" onclick="mbSpd(.5)">0.5x</button>
+<button class="mbsp" onclick="mbSpd(.75)">0.75x</button>
+<button class="mbsp act" onclick="mbSpd(1)">1x</button>
+<button class="mbcl" onclick="closeMB()">✕</button>
+</div>
+<div class="img-pop" id="imgPop">
+<div class="img-bar" id="imgBar"><span>📖 Página <span class="img-hint">— اسحب من الشريط للتحريك · اسحب من الركن تحت لتغيير الحجم (الصورة تتظبط تلقائي)</span></span><div style="display:flex;gap:3px"><button onclick="imgZO()" title="تصغير (Ctrl −)">🔍−</button><button onclick="imgZI()" title="تكبير (Ctrl +)">🔍+</button><button onclick="imgZR()" title="إعادة / ملء">↺</button><button onclick="imgFull()" title="ملء الشاشة">⛶</button><button onclick="closeImg()" title="إغلاق">✕</button></div></div>
+<div class="img-body" id="imgBody"><img id="imgSrc" src="" alt="Page"></div>
+</div>
+<script>
+function togSB(){let s=document.getElementById('sb');if(window.innerWidth<=768){if(s.classList.contains('open')){s.classList.remove('open');}else{s.classList.add('open');}s.classList.remove('collapsed');}else{s.classList.toggle('collapsed');document.getElementById('mainA').classList.toggle('expanded');let m=document.getElementById('mbar');if(m.classList.contains('show'))m.classList.toggle('expanded');}}
+let curS=0,totS=11;
+function goS(i){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.sb-it').forEach(s=>s.classList.remove('active'));document.getElementById('scr'+i).classList.add('active');document.querySelectorAll('.sb-it')[i].classList.add('active');curS=i;document.querySelector('.scroll-area').scrollTop=0;if(window.innerWidth<=768){document.getElementById('sb').classList.remove('open');document.getElementById('sb').classList.add('collapsed');}}
+let zl=100;
+function applyZoom(){let zw=document.getElementById('zoomW');zw.style.transform='scale('+(zl/100)+')';zw.style.width=(10000/zl)+'%';document.getElementById('zDisp').textContent=zl+'%';}
+function zIn(){zl=Math.min(zl+10,200);applyZoom();}
+function zOut(){zl=Math.max(zl-10,50);applyZoom();}
+function zReset(){zl=100;applyZoom();}
+function goFS(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+let tO=false,tS=0,tI=null;
+function togTimer(){document.getElementById('timerPop').classList.toggle('show');}
+function tTog(){if(tO){clearInterval(tI);tO=false;document.getElementById('tB').textContent='▶️';}else{tO=true;document.getElementById('tB').textContent='⏸️';tI=setInterval(()=>{tS++;let m=Math.floor(tS/60),s=tS%60;document.getElementById('tD').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;},1000);}}
+function tR(){clearInterval(tI);tO=false;tS=0;document.getElementById('tD').textContent='00:00';document.getElementById('tB').textContent='▶️';}
+function togNotes(){document.getElementById('nPop').classList.toggle('show');}
+function togExp(id){document.getElementById(id).classList.toggle('show');}
+function togA(id){document.getElementById(id).classList.toggle('rev');}
+let allS=false;
+function togAll(){allS=!allS;document.getElementById('allB').textContent=allS?'🙈':'👁️';document.querySelectorAll('.as').forEach(s=>{if(allS)s.classList.add('rev');else s.classList.remove('rev');});document.querySelectorAll('.mcq').forEach(m=>{let btn=m.querySelector('.or');if(!btn)return;let oc=btn.getAttribute('onclick');let mt=oc.match(/rvM\('([^']+)',(\d)\)/);if(mt){let c=mt[2]==='1';m.classList.remove('ok','no');let l=m.querySelector('.ol');if(!l.getAttribute('data-o'))l.setAttribute('data-o',l.textContent);if(allS){if(c){m.classList.add('ok');l.textContent='✓';}else{m.classList.add('no');l.textContent='✗';}}else{l.textContent=l.getAttribute('data-o');}}});}
+function rvM(id,c){let el=document.getElementById(id);let l=el.querySelector('.ol');if(!l.getAttribute('data-o'))l.setAttribute('data-o',l.textContent);if(el.classList.contains('ok')||el.classList.contains('no')){el.classList.remove('ok','no');l.textContent=l.getAttribute('data-o');return;}if(c){el.classList.add('ok');l.textContent='✓';}else{el.classList.add('no');l.textContent='✗';}}
+function rvO(id,c){let el=document.getElementById(id);let b=el.querySelector('.ob');if(el.classList.contains('ok')||el.classList.contains('no')){el.classList.remove('ok','no');b.textContent='';return;}if(c){el.classList.add('ok');b.textContent='✓';}else{el.classList.add('no');b.textContent='✗';}}
+let cAu=null;
+function ft(s){if(isNaN(s))return'0:00';let m=Math.floor(s/60),sc=Math.floor(s%60);return m+':'+(sc<10?'0':'')+sc;}
+function togAu(id){let a=document.getElementById(id),b=document.getElementById('pb-'+id);document.querySelectorAll('audio').forEach(x=>{if(x.id!==id){x.pause();let bb=document.getElementById('pb-'+x.id);if(bb)bb.textContent='▶';}});if(a.paused){a.play();b.textContent='⏸';cAu=a;let c=a.closest('.auc');if(c){let t=c.querySelector('.aut');document.getElementById('mbI').textContent=t?t.textContent:'🎵';}document.getElementById('mbP').textContent='⏸';let mb=document.getElementById('mbar');mb.classList.add('show');if(!document.getElementById('sb').classList.contains('collapsed'))mb.classList.remove('expanded');else mb.classList.add('expanded');}else{a.pause();b.textContent='▶';document.getElementById('mbP').textContent='▶';}}
+function skAu(id,v){let a=document.getElementById(id);if(a.duration)a.currentTime=(v/100)*a.duration;}
+function spd(id,s){let a=document.getElementById(id);a.playbackRate=s;let c=a.closest('.auc');if(c)c.querySelectorAll('.ausp').forEach(b=>{b.classList.remove('act');if(parseFloat(b.textContent)===s)b.classList.add('act');});}
+function bk5(id){let a=document.getElementById(id);a.currentTime=Math.max(0,a.currentTime-5);}
+function togTr(id){document.getElementById(id).classList.toggle('show');}
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('audio').forEach(a=>{a.addEventListener('timeupdate',()=>{let sk=document.getElementById('sk-'+a.id),tm=document.getElementById('tm-'+a.id);if(sk&&a.duration)sk.value=(a.currentTime/a.duration)*100;if(tm)tm.textContent=ft(a.currentTime)+'/'+ft(a.duration);if(cAu===a){let ms=document.getElementById('mbSk'),mt=document.getElementById('mbTm');if(ms&&a.duration)ms.value=(a.currentTime/a.duration)*100;if(mt)mt.textContent=ft(a.currentTime)+'/'+ft(a.duration);}});a.addEventListener('ended',()=>{let b=document.getElementById('pb-'+a.id);if(b)b.textContent='▶';document.getElementById('mbP').textContent='▶';});});});
+function mbTog(){if(!cAu)return;if(cAu.paused){cAu.play();document.getElementById('mbP').textContent='⏸';let b=document.getElementById('pb-'+cAu.id);if(b)b.textContent='⏸';}else{cAu.pause();document.getElementById('mbP').textContent='▶';let b=document.getElementById('pb-'+cAu.id);if(b)b.textContent='▶';}}
+function mbSkTo(v){if(!cAu||!cAu.duration)return;cAu.currentTime=(v/100)*cAu.duration;}
+function mbBk(){if(!cAu)return;cAu.currentTime=Math.max(0,cAu.currentTime-5);}
+function mbSpd(s){if(!cAu)return;cAu.playbackRate=s;document.querySelectorAll('.mbar .mbsp').forEach(b=>{b.classList.remove('act');if(parseFloat(b.textContent)===s)b.classList.add('act');});}
+function closeMB(){if(cAu){cAu.pause();let b=document.getElementById('pb-'+cAu.id);if(b)b.textContent='▶';}document.getElementById('mbar').classList.remove('show');document.getElementById('mbP').textContent='▶';}
+/* imgZ = عامل زوم يدوي إضافي فوق مقاس "screen-to-fit" التلقائي */
+let imgZ=1,imgFitScale=1;
+/* يحسب المقاس اللي يخلي الصورة تملأ عرض إطار العرض بالكامل (بدون فراغ أسود على الجوانب) — والطول يتـscroll لو زاد */
+function imgComputeFit(){let im=document.getElementById('imgSrc'),b=document.getElementById('imgBody');if(!im.naturalWidth||!im.naturalHeight)return 1;return b.clientWidth/im.naturalWidth;}
+/* يطبّق: المقاس النهائي = مقاس الـ fit التلقائي × زوم المستخدم اليدوي. الزوم دايمًا من المركز (زي Ctrl +/-) */
+function imgApply(){let im=document.getElementById('imgSrc');let s=imgFitScale*imgZ;im.style.width=im.naturalWidth+'px';im.style.height=im.naturalHeight+'px';im.style.transform='scale('+s+')';}
+/* يعيد حساب الـ fit (يتنده عند الفتح وعند تغيير حجم النافذة) */
+function imgRefit(){imgFitScale=imgComputeFit();imgApply();}
+function openImg(url,ev){imgZ=1;let im=document.getElementById('imgSrc');let p=document.getElementById('imgPop');p.classList.add('show');let w=Math.round(window.innerWidth*0.88),h=Math.round(window.innerHeight*0.86);p.style.width=w+'px';p.style.height=h+'px';p.style.top=((window.innerHeight-h)/2)+'px';p.style.left=((window.innerWidth-w)/2)+'px';im.onload=function(){imgRefit();};im.src=url;if(im.complete&&im.naturalWidth)imgRefit();}
+function closeImg(){document.getElementById('imgPop').classList.remove('show');}
+/* الزوم اليدوي زي Ctrl + / Ctrl - : من المركز وبدون انزلاق */
+function imgZI(){imgZ=Math.min(imgZ+.2,5);imgApply();}
+function imgZO(){imgZ=Math.max(imgZ-.2,.4);imgApply();}
+function imgZR(){imgZ=1;imgRefit();}
+function imgFull(){let p=document.getElementById('imgPop');p.style.width='98vw';p.style.height='96vh';p.style.top='2vh';p.style.left='1vw';setTimeout(imgRefit,160);}
+/* مراقبة تغيير حجم النافذة → إعادة "screen to fit" تلقائي */
+if(window.ResizeObserver){new ResizeObserver(function(){let p=document.getElementById('imgPop');if(p.classList.contains('show')){imgZ=1;imgRefit();}}).observe(document.getElementById('imgPop'));}
+window.addEventListener('resize',function(){let p=document.getElementById('imgPop');if(p.classList.contains('show'))imgRefit();});
+function makeDrag(el,handle){let ox=0,oy=0,mx=0,my=0;handle.onmousedown=function(e){if(e.target.tagName==='BUTTON')return;e.preventDefault();mx=e.clientX;my=e.clientY;document.onmousemove=function(e){ox=mx-e.clientX;oy=my-e.clientY;mx=e.clientX;my=e.clientY;el.style.top=Math.max(0,Math.min(window.innerHeight-50,el.offsetTop-oy))+'px';el.style.left=Math.max(0,Math.min(window.innerWidth-50,el.offsetLeft-ox))+'px';};document.onmouseup=function(){document.onmousemove=null;document.onmouseup=null;};};handle.ontouchstart=function(e){if(e.target.tagName==='BUTTON')return;let t=e.touches[0];mx=t.clientX;my=t.clientY;document.ontouchmove=function(e){let t=e.touches[0];ox=mx-t.clientX;oy=my-t.clientY;mx=t.clientX;my=t.clientY;el.style.top=Math.max(0,el.offsetTop-oy)+'px';el.style.left=Math.max(0,el.offsetLeft-ox)+'px';};document.ontouchend=function(){document.ontouchmove=null;document.ontouchend=null;};};}
+
+makeDrag(document.getElementById('imgPop'),document.getElementById('imgBar'));
+makeDrag(document.getElementById('nPop'),document.getElementById('nBar'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeImg();document.getElementById('timerPop').classList.remove('show');document.getElementById('nPop').classList.remove('show');}if(e.key==='ArrowRight'&&curS<totS-1)goS(curS+1);if(e.key==='ArrowLeft'&&curS>0)goS(curS-1);});
+applyZoom();
+</script>
+</body>
+</html>

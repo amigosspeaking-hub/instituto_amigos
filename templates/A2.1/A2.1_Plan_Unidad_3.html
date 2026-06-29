@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan de estudio – Unidad 3 Un año especial | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100vh;}
+body{font-family:'Cairo','Tajawal',sans-serif;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 50%,#a5d6a7 100%);color:#333;padding:0;position:relative;direction:rtl;}
+body::before{content:"Instituto Amigos";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,10vw,10rem);font-weight:900;color:rgba(27,94,32,0.06);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+.header{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:clamp(20px,4vw,40px) clamp(15px,4vw,40px);text-align:center;border-bottom:5px solid #ffd60a;position:relative;z-index:2;overflow:hidden;}
+.header::after{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:clamp(3rem,6vw,5rem);font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px;}
+.header .unit-badge{display:inline-block;background:#ffd60a;color:#1b5e20;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,28px);width:clamp(50px,8vw,70px);height:clamp(50px,8vw,70px);line-height:clamp(50px,8vw,70px);border-radius:50%;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative;z-index:1;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);letter-spacing:2px;margin-bottom:5px;text-shadow:2px 2px 6px rgba(0,0,0,0.3);position:relative;z-index:1;}
+.header h1 .es-title{display:inline-block;direction:ltr;unicode-bidi:isolate;}
+.header .subtitle{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.5vw,15px);opacity:0.95;direction:rtl;font-weight:500;position:relative;z-index:1;}
+.header .subtitle .es-name{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;}
+.header .brand{margin-top:8px;font-size:11px;letter-spacing:3px;opacity:0.85;text-transform:uppercase;font-family:'Playfair Display',serif;position:relative;z-index:1;font-weight:700;}
+
+.container{max-width:1300px;margin:0 auto;padding:clamp(15px,3vw,30px) clamp(12px,2vw,25px);position:relative;z-index:2;}
+
+.info-banner{background:linear-gradient(90deg,#f1f8e9,#dcedc8);border:2px dashed #2e7d32;border-radius:14px;padding:14px 18px;margin-bottom:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:clamp(13px,1.4vw,15px);color:#1b5e20;font-weight:600;line-height:1.85;text-align:center;}
+.info-banner strong{color:#1b5e20;}
+
+.section-title{font-family:'Playfair Display',serif;color:#1b5e20;font-size:clamp(18px,2.2vw,22px);text-align:center;margin:25px 0 14px;letter-spacing:2px;text-transform:uppercase;}
+.section-title::before,.section-title::after{content:"★";color:#ffd60a;margin:0 12px;}
+
+.es{display:inline-block;direction:ltr;unicode-bidi:isolate;}
+
+.global-progress{background:#fff;border:3px solid #2e7d32;border-radius:16px;padding:14px 20px;margin-bottom:18px;box-shadow:0 4px 14px rgba(46,125,50,0.15);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.global-progress h3{font-family:'Playfair Display',serif;color:#1b5e20;font-size:clamp(15px,1.8vw,18px);flex-shrink:0;}
+.progress-bar-wrap{flex:1;display:flex;align-items:center;gap:10px;min-width:200px;}
+.progress-text{font-family:'Cairo',sans-serif;font-weight:800;color:#1b5e20;font-size:14px;min-width:42px;text-align:center;}
+.progress-bar{flex:1;height:16px;background:#e8f5e9;border-radius:10px;overflow:hidden;border:1px solid #a5d6a7;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2e7d32,#66bb6a);transition:width 0.5s;width:0%;border-radius:10px;}
+.reset-btn{background:linear-gradient(135deg,#757575,#424242);color:#fff;border:none;padding:8px 16px;border-radius:14px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:12px;transition:all 0.3s;flex-shrink:0;}
+.reset-btn:hover{transform:translateY(-2px);box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+
+.days-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:14px;}
+
+.day-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(46,125,50,0.12);transition:all 0.3s;display:flex;flex-direction:column;border:2px solid transparent;position:relative;}
+.day-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(46,125,50,0.2);}
+.day-card.completed{border-color:#2e7d32;}
+.completed-badge{display:none;}
+.day-card.completed .completed-badge{display:inline-block;position:absolute;background:#2e7d32;color:#fff;padding:4px 14px;border-radius:0 0 10px 10px;font-size:11px;font-weight:700;z-index:5;top:0;left:50%;transform:translateX(-50%);font-family:'Cairo',sans-serif;}
+
+.day-card .day-header{padding:14px 18px;color:#fff;text-align:center;position:relative;border-bottom:4px solid #ffd60a;}
+.day-1 .day-header{background:linear-gradient(135deg,#c62828,#8e0000);}
+.day-2 .day-header{background:linear-gradient(135deg,#1565c0,#0d47a1);}
+.day-3 .day-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);}
+.day-4 .day-header{background:linear-gradient(135deg,#6a1b9a,#4a148c);}
+.day-5 .day-header{background:linear-gradient(135deg,#ef6c00,#bf360c);}
+.day-6 .day-header{background:linear-gradient(135deg,#00695c,#004d40);}
+.day-7 .day-header{background:linear-gradient(135deg,#37474f,#263238);}
+
+.day-num{display:inline-block;background:#ffd60a;color:#333;font-family:'Playfair Display',serif;font-weight:900;font-size:18px;width:36px;height:36px;line-height:36px;border-radius:50%;margin-bottom:6px;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.day-name-en{font-family:'Playfair Display',serif;font-size:14px;letter-spacing:2px;opacity:0.9;text-transform:uppercase;direction:ltr;}
+.day-name-ar{font-family:'Cairo',sans-serif;font-size:clamp(18px,2.2vw,22px);font-weight:800;margin:4px 0;}
+.day-duration{display:inline-block;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:14px;font-size:12px;font-weight:700;backdrop-filter:blur(4px);}
+
+.day-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;}
+
+.task-section{background:#fafafa;border-radius:10px;padding:10px 12px;border-right:4px solid #2e7d32;transition:all 0.2s;}
+.task-section:hover{background:#e8f5e9;}
+.task-icon-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.task-icon{font-size:18px;}
+.task-label{font-family:'Cairo',sans-serif;font-weight:800;color:#1b5e20;font-size:13px;flex:1;}
+.task-label .es{font-family:'Open Sans',sans-serif;}
+.task-content{font-family:'Cairo',sans-serif;font-size:12.5px;color:#444;line-height:1.55;font-weight:600;}
+.task-tip{display:block;color:#1565c0;font-size:11.5px;font-style:italic;background:#e3f2fd;padding:4px 8px;border-radius:5px;border-right:3px solid #1976d2;margin-top:5px;font-weight:600;}
+
+.day-checklist{background:linear-gradient(135deg,#f1f8e9,#dcedc8);border:2px dashed #66bb6a;border-radius:10px;padding:10px 12px;margin-top:auto;}
+.day-checklist-title{font-family:'Cairo',sans-serif;font-weight:800;color:#1b5e20;font-size:13px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.day-progress-mini{background:#fff;padding:2px 8px;border-radius:10px;font-size:11px;color:#1b5e20;border:1px solid #66bb6a;}
+.check-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px dashed #c8e6c9;cursor:pointer;transition:all 0.2s;}
+.check-item:last-child{border-bottom:none;}
+.check-item:hover{background:rgba(255,255,255,0.5);border-radius:6px;padding-right:6px;}
+.check-item input[type="checkbox"]{width:18px;height:18px;cursor:pointer;accent-color:#2e7d32;flex-shrink:0;margin-top:1px;}
+.check-item label{flex:1;font-family:'Cairo',sans-serif;font-weight:600;color:#1a3a1a;font-size:12.5px;cursor:pointer;line-height:1.55;}
+.check-item.done label{text-decoration:line-through;color:#999;}
+.check-item.done input[type="checkbox"]{accent-color:#2e7d32;}
+
+.goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0 20px;}
+.goal-card{background:#fff;border:2px solid #2e7d32;border-radius:14px;padding:14px;text-align:center;box-shadow:0 3px 10px rgba(46,125,50,0.12);transition:all 0.3s;}
+.goal-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(46,125,50,0.25);}
+.goal-icon{font-size:36px;margin-bottom:8px;}
+.goal-title{font-family:'Playfair Display',serif;font-weight:800;color:#1b5e20;font-size:15px;margin-bottom:5px;}
+.goal-desc{font-family:'Cairo',sans-serif;color:#555;font-size:12.5px;line-height:1.6;font-weight:600;}
+.goal-card.vocab{border-color:#ef6c00;}
+.goal-card.vocab .goal-title{color:#bf360c;}
+.goal-card.grammar{border-color:#6a1b9a;}
+.goal-card.grammar .goal-title{color:#4a148c;}
+.goal-card.speak{border-color:#2e7d32;}
+.goal-card.speak .goal-title{color:#1b5e20;}
+.goal-card.write{border-color:#1565c0;}
+.goal-card.write .goal-title{color:#0d47a1;}
+
+.tips-box{background:linear-gradient(135deg,#f1f8e9,#dcedc8);border:2px solid #66bb6a;border-radius:14px;padding:16px 20px;margin-top:18px;font-family:'Cairo',sans-serif;direction:rtl;font-size:14px;color:#1a3a1a;font-weight:600;line-height:2;}
+.tips-box h3{color:#2e7d32;font-family:'Playfair Display',serif;margin-bottom:8px;font-size:17px;text-decoration:underline;}
+
+.footer{text-align:center;padding:30px 20px;color:#1b5e20;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:3px;font-size:13px;text-transform:uppercase;opacity:0.85;position:relative;z-index:2;direction:ltr;}
+.footer .heart{color:#c62828;}
+
+.achievement{display:none;position:fixed;top:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2e7d32,#1b5e20);color:#fff;padding:14px 24px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,0.3);z-index:200;animation:slideDown 0.5s;font-size:14px;}
+.achievement.show{display:block;}
+@keyframes slideDown{from{transform:translate(-50%,-100px);opacity:0;}to{transform:translate(-50%,0);opacity:1;}}
+
+@media(max-width:600px){
+.days-grid{grid-template-columns:1fr;}
+.global-progress{flex-direction:column;align-items:stretch;}
+.progress-bar-wrap{justify-content:space-between;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="unit-badge">3</div>
+  <h1>📅 Plan de estudio — <span class="es-title">UN AÑO ESPECIAL</span></h1>
+  <p class="subtitle">خطة مذاكرة شاملة لمدة أسبوع لإتقان <span class="es-name">Unidad 3</span> بالكامل</p>
+  <div class="brand">★ Instituto Amigos ★</div>
+</div>
+
+<div class="container">
+
+  <div class="info-banner">
+    🎯 <strong>الخطة محددة بـ 7 أيام</strong> — كل يوم في كارت لوحده فيه كل المهام والـ Checklist بتاعته. شطّب اللي خلصته يتسجل تلقائياً!
+  </div>
+
+  <div class="global-progress">
+    <h3>📊 إجمالي تقدمك</h3>
+    <div class="progress-bar-wrap">
+      <span class="progress-text" id="globalText">0%</span>
+      <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 إعادة تعيين الكل</button>
+  </div>
+
+  <div class="section-title">جدول المذاكرة اليومي</div>
+
+  <div class="days-grid">
+
+    <!-- DAY 1: SÁBADO -->
+    <div class="day-card day-1" data-day="1">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">1</div>
+        <div class="day-name-en">Sábado</div>
+        <div class="day-name-ar">السبت</div>
+        <span class="day-duration">⏱️ 55 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🌍</span><span class="task-label">أحداث الماضي — النشاط 1</span></div>
+          <div class="task-content">اقرأ شهادات <span class="es">Juanfran, Almudena, Marina</span> + اربطها بالصور الثلاثة (ص 24)</div>
+          <span class="task-tip">💡 ركز على: <span class="es">fue el 2010 / participé / estuve allí / nos casamos</span> — كلها ماضي بسيط</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">المفردات — الأفعال المنتظمة</span></div>
+          <div class="task-content">احفظ تصريف <span class="es">viajar</span> و <span class="es">nacer</span> في الماضي البسيط (6 أشخاص) من ملف Vocab</div>
+          <span class="task-tip">💡 نهايات <span class="es">-AR</span>: <span class="es">-é / -aste / -ó / -amos / -asteis / -aron</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing</span></div>
+          <div class="task-content">جمل 1 — 5 (شهادات شخصية عن سنوات مميزة)</div>
+          <span class="task-tip">💡 كرر كل جملة 3 مرات بصوت عالي — ركز على نطق نهاية <span class="es">-é</span> و <span class="es">-ó</span></span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="1">0/4</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d1c1"><label for="d1c1">قرأت شهادات الثلاثة وربطتها بالصور</label></div>
+          <div class="check-item"><input type="checkbox" id="d1c2"><label for="d1c2">حفظت تصريف <span class="es">viajar</span> و <span class="es">nacer</span> كامل</label></div>
+          <div class="check-item"><input type="checkbox" id="d1c3"><label for="d1c3">عملت <span class="es">Shadowing</span> للجمل 1 — 5</label></div>
+          <div class="check-item"><input type="checkbox" id="d1c4"><label for="d1c4">حليت النشاط 1b (إيه السنة المميزة ليك؟)</label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 2: DOMINGO -->
+    <div class="day-card day-2" data-day="2">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">2</div>
+        <div class="day-name-en">Domingo</div>
+        <div class="day-name-ar">الأحد</div>
+        <span class="day-duration">⏱️ 65 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">⭐</span><span class="task-label">النشاط 2 — شخصيات مشهورة</span></div>
+          <div class="task-content">اقرأ نصوص <span class="es">Mireia Belmonte</span> و <span class="es">Franklin Chang Díaz</span> (ص 25) + استخرج الأفعال في الماضي البسيط</div>
+          <span class="task-tip">💡 كلمات مهمة: <span class="es">nació / empecé / aconsejaron / pidieron / empezó / participó / ganó / consiguió / decidió / marcó</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🔄</span><span class="task-label">منتظم vs شاذ — النشاط 2b</span></div>
+          <div class="task-content">صنّف الأفعال: منتظمة (<span class="es">Formas regulares</span>) وشاذة (<span class="es">Formas irregulares</span>) + أضف المصدر</div>
+          <span class="task-tip">💡 مثال: <span class="es">nació — nacer</span> (منتظم) / <span class="es">pidieron — pedir</span> (شاذ بتغيير حرف)</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing</span></div>
+          <div class="task-content">جمل 11 — 15 (عن <span class="es">Mireia Belmonte</span> وبداياتها)</div>
+          <span class="task-tip">💡 ركز على نطق <span class="es">campeona, olimpiadas, medalla</span></span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="2">0/5</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d2c1"><label for="d2c1">قرأت نصي <span class="es">Mireia</span> و <span class="es">Franklin</span></label></div>
+          <div class="check-item"><input type="checkbox" id="d2c2"><label for="d2c2">استخرجت كل الأفعال في الماضي البسيط</label></div>
+          <div class="check-item"><input type="checkbox" id="d2c3"><label for="d2c3">صنّفت الأفعال (منتظم / شاذ) في 2b</label></div>
+          <div class="check-item"><input type="checkbox" id="d2c4"><label for="d2c4">عملت <span class="es">Shadowing</span> للجمل 11 — 15</label></div>
+          <div class="check-item"><input type="checkbox" id="d2c5"><label for="d2c5">حليت النشاط 2c (<span class="es">Celia Cruz / García Márquez</span>)</label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 3: LUNES -->
+    <div class="day-card day-3" data-day="3">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">3</div>
+        <div class="day-name-en">Lunes</div>
+        <div class="day-name-ar">الإثنين</div>
+        <span class="day-duration">⏱️ 65 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">⚡</span><span class="task-label">الأفعال الشاذة — <span class="es">estar, poder, tener, hacer, venir</span></span></div>
+          <div class="task-content">احفظ التصريف الكامل من Vocab (الفئة 2): كلهم ليهم نفس النهايات <span class="es">-e / -iste / -o / -imos / -isteis / -ieron</span></div>
+          <span class="task-tip">💡 مهم جداً: النبرة بتقع على الجذر في <span class="es">yo</span> و <span class="es">él</span>: <span class="es">EStuve / esTUvo</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">تمرين 3 — جداول الأفعال الشاذة (ص 123)</span></div>
+          <div class="task-content">أكمل جداول: <span class="es">estar / tener / poder</span> ثم <span class="es">poner / decir / hacer</span> ثم <span class="es">venir / querer / saber</span></div>
+          <span class="task-tip">💡 استخدم ملف <span class="es">Vocab</span> كمرجع — لا تحفظ بدون فهم</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing</span></div>
+          <div class="task-content">جمل 16 — 20 (<span class="es">Franklin Chang Díaz</span> والفضاء)</div>
+          <span class="task-tip">💡 ركز على <span class="es">superó / marcó / quedó impresionado / decidió / consiguió</span></span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="3">0/5</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d3c1"><label for="d3c1">حفظت <span class="es">estar / poder / tener</span> كامل</label></div>
+          <div class="check-item"><input type="checkbox" id="d3c2"><label for="d3c2">حفظت <span class="es">hacer / venir / querer / decir / saber</span></label></div>
+          <div class="check-item"><input type="checkbox" id="d3c3"><label for="d3c3">أكملت جداول التمرين 3 (ص 123)</label></div>
+          <div class="check-item"><input type="checkbox" id="d3c4"><label for="d3c4">عملت <span class="es">Shadowing</span> للجمل 16 — 20</label></div>
+          <div class="check-item"><input type="checkbox" id="d3c5"><label for="d3c5">قدرت أقول تصريف <span class="es">estuve/estuvo</span> من غير ما أبص</label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 4: MARTES -->
+    <div class="day-card day-4" data-day="4">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">4</div>
+        <div class="day-name-en">Martes</div>
+        <div class="day-name-ar">الثلاثاء</div>
+        <span class="day-duration">⏱️ 60 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🔄</span><span class="task-label">أفعال بتغيير الحرف (e→i / o→u) — النشاط 3</span></div>
+          <div class="task-content">ادرس <span class="es">pedir</span> و <span class="es">dormir</span> + باقي أفعال الفئة 3 من Vocab: <span class="es">elegir, sentir, morir, oír, leer, construir</span></div>
+          <span class="task-tip">💡 التغيير بيحصل بس في <span class="es">él/ella</span> و <span class="es">ellos</span>: <span class="es">pidió / pidieron</span> — مش في <span class="es">yo, tú, nosotros</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🔊</span><span class="task-label">النشاط 3 — <span class="es">¡Yo estuve allí!</span></span></div>
+          <div class="task-content">استمع للحوار (ص 26) + حدد نوع الحدث من الخيارات الأربعة + صحح الجمل الـ 6</div>
+          <span class="task-tip">💡 الإجابة: <span class="es">una manifestación</span> — حركة 15 مايو في مدريد</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">تمرين 1 + 2 (ص 123)</span></div>
+          <div class="task-content">أكمل جدول <span class="es">elegir / sentir / dormir</span> + اكتب الأفعال في الماضي البسيط (8 جمل)</div>
+          <span class="task-tip">💡 تمرين 2: <span class="es">ellos oyen → oyeron / ella construye → construyó</span></span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="4">0/5</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d4c1"><label for="d4c1">فهمت تغيير <span class="es">e→i</span> و <span class="es">o→u</span> في الماضي</label></div>
+          <div class="check-item"><input type="checkbox" id="d4c2"><label for="d4c2">سمعت الحوار وعرفت نوع الحدث</label></div>
+          <div class="check-item"><input type="checkbox" id="d4c3"><label for="d4c3">صححت الجمل الـ 6 في النشاط 3b</label></div>
+          <div class="check-item"><input type="checkbox" id="d4c4"><label for="d4c4">أكملت جدول التمرين 1 (ص 123)</label></div>
+          <div class="check-item"><input type="checkbox" id="d4c5"><label for="d4c5">حليت التمرين 2 — الـ 8 أفعال</label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 5: MIÉRCOLES -->
+    <div class="day-card day-5" data-day="5">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">5</div>
+        <div class="day-name-en">Miércoles</div>
+        <div class="day-name-ar">الأربعاء</div>
+        <span class="day-duration">⏱️ 65 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">✅</span><span class="task-label">الماضي المركب — <span class="es">Pretérito perfecto</span></span></div>
+          <div class="task-content">ادرس التكوين: <span class="es">haber (presente) + participio</span> من Vocab الفئة 4: <span class="es">he/has/ha/hemos/habéis/han + visitado / ido / hecho / sido</span></div>
+          <span class="task-tip">💡 الـ <span class="es">participio</span> ما بيتغيرش أبداً — بيبقى زي ما هو مهما كان الفاعل</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">⏱️</span><span class="task-label">ظروف الزمن — <span class="es">Perfecto vs Indefinido</span></span></div>
+          <div class="task-content">احفظ الجدول من Vocab الفئة 5: <span class="es">hoy/esta semana/este mes</span> مع الكامل — <span class="es">ayer/la semana pasada/en 2010</span> مع البسيط</div>
+          <span class="task-tip">💡 السر: الوقت لسه جاري؟ → كامل. الوقت انتهى؟ → بسيط</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">النشاط 5 — يوميات نادية وفيليبي وإيزابيل</span></div>
+          <div class="task-content">اقرأ الديaries الثلاث (ص 27) + حل جدول 5a (من يعيش لوحده؟ من هو معلم أطفال؟...)</div>
+          <span class="task-tip">💡 نادية في الجالاباغوس — فيليبي في فالنسيا — إيزابيل في غرناطة</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing</span></div>
+          <div class="task-content">جمل 21 — 25 (يوميات نادية وفيليبي بالماضي المركب)</div>
+          <span class="task-tip">💡 ركز على <span class="es">he visitado / hemos ido / ha sido / han empezado</span></span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="5">0/6</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d5c1"><label for="d5c1">فهمت تكوين <span class="es">pretérito perfecto</span></label></div>
+          <div class="check-item"><input type="checkbox" id="d5c2"><label for="d5c2">حفظت ظروف الزمن — كامل وبسيط</label></div>
+          <div class="check-item"><input type="checkbox" id="d5c3"><label for="d5c3">قرأت اليوميات الثلاثة وحليت جدول 5a</label></div>
+          <div class="check-item"><input type="checkbox" id="d5c4"><label for="d5c4">أكملت جدول 5b (من؟ ماذا حدث؟ متى؟)</label></div>
+          <div class="check-item"><input type="checkbox" id="d5c5"><label for="d5c5">عملت <span class="es">Shadowing</span> للجمل 21 — 25</label></div>
+          <div class="check-item"><input type="checkbox" id="d5c6"><label for="d5c6">فهمت الرسم البياني 5c (كامل / بسيط)</label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 6: JUEVES -->
+    <div class="day-card day-6" data-day="6">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">6</div>
+        <div class="day-name-en">Jueves</div>
+        <div class="day-name-ar">الخميس</div>
+        <span class="day-duration">⏱️ 65 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">💬</span><span class="task-label">تقييم التجارب — النشاط 6</span></div>
+          <div class="task-content">احفظ عبارات التقييم من Vocab الفئة 9: <span class="es">¡Fue fantástico! / ¡Fue horrible! / ¡Ha sido muy divertido! / El concierto me ha encantado</span></div>
+          <span class="task-tip">💡 <span class="es">¿Qué tal hoy?</span> → كامل — <span class="es">¿Qué tal ayer?</span> → بسيط</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🔊</span><span class="task-label">النشاط 6a — <span class="es">¿Cómo fue?</span></span></div>
+          <div class="task-content">استمع لحوارَي <span class="es">Jordi</span> و <span class="es">Lucía</span> (ص 29) + حدد: إيجابية أم سلبية؟ + أكمل الجدول (إيه؟ امتى؟ كيف كانت؟)</div>
+          <span class="task-tip">💡 <span class="es">Jordi</span> كانت تجربته سلبية (مشاكل مع <span class="es">Maribel</span>) — <span class="es">Lucía</span> إيجابية</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">تمرين 6 — اختر الصح (ص 123)</span></div>
+          <div class="task-content">8 جمل تختار فيها بين <span class="es">pretérito perfecto</span> و <span class="es">indefinido</span> بناءً على ظرف الزمن</div>
+          <span class="task-tip">💡 <span class="es">esta semana → he estudiado / hace tres días → llegaron</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing</span></div>
+          <div class="task-content">جمل 26 — 30 (يومية إيزابيل وعبارات التقييم)</div>
+          <span class="task-tip">💡 ركز على الفرق في النبرة بين جمل الكامل والبسيط</span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="6">0/5</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d6c1"><label for="d6c1">حفظت عبارات تقييم التجارب</label></div>
+          <div class="check-item"><input type="checkbox" id="d6c2"><label for="d6c2">سمعت حوارَي <span class="es">Jordi</span> و <span class="es">Lucía</span> وأكملت الجدول</label></div>
+          <div class="check-item"><input type="checkbox" id="d6c3"><label for="d6c3">حليت التمرين 6 — الـ 8 جمل (ص 123)</label></div>
+          <div class="check-item"><input type="checkbox" id="d6c4"><label for="d6c4">عملت <span class="es">Shadowing</span> للجمل 26 — 30</label></div>
+          <div class="check-item"><input type="checkbox" id="d6c5"><label for="d6c5">قدرت أسأل وأجيب: <span class="es">¿Qué tal hoy? / ¿Qué tal ayer?</span></label></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DAY 7: VIERNES -->
+    <div class="day-card day-7" data-day="7">
+      <span class="completed-badge">✓ مكتمل</span>
+      <div class="day-header">
+        <div class="day-num">7</div>
+        <div class="day-name-en">Viernes</div>
+        <div class="day-name-ar">الجمعة</div>
+        <span class="day-duration">⏱️ 75 دقيقة</span>
+      </div>
+      <div class="day-body">
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">التمرين 4 — <span class="es">ser / ir / dar</span> (ص 123)</span></div>
+          <div class="task-content">أكمل الـ 9 جمل باستخدام الماضي البسيط لـ <span class="es">ser / ir / dar</span> — خليك حذر لأن <span class="es">ser</span> و <span class="es">ir</span> ليهم نفس التصريف</div>
+          <span class="task-tip">💡 <span class="es">fui al cine</span> = رحت السينما / <span class="es">fue un día especial</span> = كان يوم مميز</span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">📔</span><span class="task-label">التمرين 7 — يومية ساندرا الكاملة (ص 123)</span></div>
+          <div class="task-content">أكمل اليومية بـ <span class="es">pretérito perfecto</span> أو <span class="es">indefinido</span> حسب السياق — ركز على <span class="es">ayer</span> و <span class="es">hoy</span></div>
+          <span class="task-tip">💡 <span class="es">ayer (ser) fue / trabajó / fue / salió / pasó / hizo / llegó / preparó / habló / vio / se acostó</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🏆</span><span class="task-label"><span class="es">¡Consolidamos!</span> — نشاط المجموعة</span></div>
+          <div class="task-content">اختر سنة مميزة + اكتب تقرير قصير عنها بالإسباني بالماضي البسيط (حدث رياضي + اجتماعي + شخصية مشهورة)</div>
+          <span class="task-tip">💡 استخدم النموذج: <span class="es">Un año especial para mí fue el... En ese año... También...</span></span>
+        </div>
+
+        <div class="task-section">
+          <div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">Shadowing نهائي</span></div>
+          <div class="task-content">اعمل "تشغيل الكل" للـ 30 جملة في الـ 3 شرائح ورا بعض بسرعة عادية</div>
+          <span class="task-tip">💡 حاول تنطق كل جملة من غير سماع الأصل — قيس تقدمك!</span>
+        </div>
+
+        <div class="day-checklist">
+          <div class="day-checklist-title">
+            <span>✅ مهام اليوم</span>
+            <span class="day-progress-mini" data-day-progress="7">0/6</span>
+          </div>
+          <div class="check-item"><input type="checkbox" id="d7c1"><label for="d7c1">حليت التمرين 4 (<span class="es">ser/ir/dar</span>) — 9 جمل</label></div>
+          <div class="check-item"><input type="checkbox" id="d7c2"><label for="d7c2">أكملت يومية ساندرا في التمرين 7</label></div>
+          <div class="check-item"><input type="checkbox" id="d7c3"><label for="d7c3">كتبت تقرير عن سنة مميزة بالإسباني</label></div>
+          <div class="check-item"><input type="checkbox" id="d7c4"><label for="d7c4">عملت "تشغيل الكل" للـ 30 جملة <span class="es">Shadowing</span></label></div>
+          <div class="check-item"><input type="checkbox" id="d7c5"><label for="d7c5">راجعت كل كلمات الـ Vocab (الفئات العشر)</label></div>
+          <div class="check-item"><input type="checkbox" id="d7c6"><label for="d7c6">قدرت تفرق بين الكامل والبسيط من غير تردد</label></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">أهداف الوحدة الثالثة</div>
+
+  <div class="goals-grid">
+    <div class="goal-card vocab">
+      <div class="goal-icon">📅</div>
+      <div class="goal-title">158+ كلمة</div>
+      <div class="goal-desc">احفظ مفردات الوحدة في 10 تصنيفات (أفعال منتظمة، شاذة، تغيير حرف، ظروف زمن، أحداث...)</div>
+    </div>
+    <div class="goal-card grammar">
+      <div class="goal-icon">⚡</div>
+      <div class="goal-title">قاعدتان أساسيتان</div>
+      <div class="goal-desc">إتقان <span class="es">Pretérito indefinido</span> (منتظم + شاذ) + <span class="es">Pretérito perfecto</span> وظروف الزمن الخاصة بكل منهما</div>
+    </div>
+    <div class="goal-card speak">
+      <div class="goal-icon">🗣️</div>
+      <div class="goal-title">30 جملة بنطق صح</div>
+      <div class="goal-desc">إتقان جميع جمل الـ <span class="es">Shadowing</span> مع التركيز على نبرة الماضي الصحيحة</div>
+    </div>
+    <div class="goal-card write">
+      <div class="goal-icon">✍️</div>
+      <div class="goal-title">7 تمارين كتابية</div>
+      <div class="goal-desc">حل جميع تمارين <span class="es">Ejercicios</span> صفحة 123 + كتابة تقرير عن سنة مميزة</div>
+    </div>
+  </div>
+
+  <div class="tips-box">
+    <h3>💡 نصائح للنجاح في خطة الوحدة الثالثة</h3>
+    ▸ <strong>الانتظام أهم من الكمية:</strong> 45 دقيقة كل يوم أحسن من 5 ساعات في يوم واحد.<br>
+    ▸ <strong>الماضي البسيط أولاً:</strong> ركز عليه الأيام 1–4 قبل ما تبدأ الكامل في اليوم 5.<br>
+    ▸ <strong>خليك حذر من النبرة:</strong> <span class="es">viajÉ / viajÓ</span> — الضغط على النهاية مهم جداً.<br>
+    ▸ <strong>الجذر الشاذ مهم:</strong> <span class="es">estuv- / tuv- / pud- / hic- / vin-</span> — احفظ الجذر ثم ألحق النهايات.<br>
+    ▸ <strong>فرق الكامل والبسيط:</strong> سأل نفسك "الوقت ده لسه جاري؟" — آيوه → كامل / لأ → بسيط.<br>
+    ▸ <strong>اتكلم عن نفسك:</strong> احكي عن سنة مميزة في حياتك بالإسباني كل يوم.<br>
+    ▸ <strong>كرر مع الـ Shadowing:</strong> اسمع الجملة، كررها، وتخيل إنك انت اللي عايشها.<br>
+    ▸ <strong>لو فاتك يوم:</strong> كمل من اليوم اللي وقفت عنده، متبدأش من الأول.
+  </div>
+
+</div>
+
+<div class="footer">
+  ⭐ Instituto Amigos <span class="heart">❤️</span> Plan de estudio Unidad 3 ⭐
+</div>
+
+<div class="achievement" id="achievement">🎉 برافو! خلصت كل مهام الوحدة الثالثة!</div>
+
+<script>
+const STORAGE_KEY = 'unidad3_v1_checklist';
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    state[cb.id] = cb.checked;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+      if (state[cb.id]) {
+        cb.checked = true;
+        cb.closest('.check-item').classList.add('done');
+      }
+    });
+  } catch(e) {}
+}
+
+function updateProgress() {
+  const allCheckboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+  const total = allCheckboxes.length;
+  const checked = document.querySelectorAll('.check-item input[type="checkbox"]:checked').length;
+  const percent = total ? Math.round((checked / total) * 100) : 0;
+  document.getElementById('globalFill').style.width = percent + '%';
+  document.getElementById('globalText').textContent = percent + '%';
+  if (percent === 100) showAchievement();
+
+  document.querySelectorAll('.day-card').forEach(card => {
+    const dayCheckboxes = card.querySelectorAll('.check-item input[type="checkbox"]');
+    const dayTotal = dayCheckboxes.length;
+    const dayChecked = card.querySelectorAll('.check-item input[type="checkbox"]:checked').length;
+    const miniLabel = card.querySelector('[data-day-progress]');
+    if (miniLabel) miniLabel.textContent = dayChecked + '/' + dayTotal;
+    card.classList.toggle('completed', dayChecked === dayTotal && dayTotal > 0);
+  });
+}
+
+function showAchievement() {
+  const el = document.getElementById('achievement');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+function resetAll() {
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.check-item').classList.remove('done');
+  });
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('completed'));
+  saveState();
+  updateProgress();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  updateProgress();
+
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.check-item').classList.toggle('done', cb.checked);
+      saveState();
+      updateProgress();
+    });
+  });
+
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') return;
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      cb.dispatchEvent(new Event('change'));
+    });
+  });
+});
+</script>
+</body>
+</html>

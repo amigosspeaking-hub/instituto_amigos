@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unidad 1 – Vocabulario | Nueva etapa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Open Sans',sans-serif;background:linear-gradient(135deg,#e3f0ff 0%,#c8e0ff 100%);min-height:100vh;padding:15px;color:#333;}
+.container{max-width:1400px;margin:0 auto;}
+
+.header{background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;border-radius:18px;padding:25px 30px;text-align:center;margin-bottom:20px;box-shadow:0 8px 25px rgba(13,71,161,0.3);position:relative;overflow:hidden;}
+.header::before{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-25deg);font-size:clamp(3rem,6vw,6rem);font-weight:900;color:rgba(255,255,255,0.05);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px;}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);letter-spacing:3px;margin-bottom:6px;position:relative;z-index:1;}
+.header .sub{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.6vw,16px);opacity:0.95;direction:rtl;position:relative;z-index:1;font-weight:500;}
+.header .badge{display:inline-block;background:#ffd54f;color:#0d47a1;padding:5px 16px;border-radius:20px;font-weight:900;font-size:12px;margin-top:8px;letter-spacing:2px;font-family:'Playfair Display',serif;}
+
+.controls{background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,0.08);display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.search-wrap{flex:1;min-width:230px;display:flex;align-items:center;gap:10px;background:#e8f0fe;border:2px solid #1565c0;border-radius:10px;padding:8px 14px;}
+.search-wrap .icon{font-size:18px;color:#0d47a1;}
+.search-input{flex:1;border:none;outline:none;font-size:14px;font-family:'Open Sans',sans-serif;background:transparent;}
+.search-input::placeholder{color:#999;font-style:italic;font-size:13px;}
+.stats{font-family:'Cairo',sans-serif;font-size:12.5px;color:#0d47a1;font-weight:700;background:#e3f0ff;padding:7px 14px;border-radius:14px;white-space:nowrap;border:1.5px solid #1565c0;}
+.action-btns{display:flex;gap:8px;}
+.action-btn{background:#1565c0;color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:12px;transition:all 0.2s;display:inline-flex;align-items:center;gap:5px;}
+.action-btn:hover{background:#0d47a1;transform:translateY(-1px);}
+.action-btn.collapse{background:#37474f;}
+.action-btn.collapse:hover{background:#263238;}
+
+.instructions{background:linear-gradient(90deg,#e8f0fe,#d0e4ff);border:2px dashed #1565c0;border-radius:12px;padding:10px 18px;margin-bottom:18px;text-align:center;direction:rtl;font-family:'Cairo',sans-serif;font-size:14px;color:#0d47a1;font-weight:700;}
+
+.legend{background:#fff;border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.legend-title{font-family:'Cairo',sans-serif;font-weight:700;color:#333;font-size:13px;direction:rtl;}
+.legend-item{display:inline-flex;align-items:center;gap:5px;font-family:'Cairo',sans-serif;font-size:12px;direction:rtl;color:#444;}
+
+.cat{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:box-shadow 0.3s;}
+.cat:hover{box-shadow:0 6px 22px rgba(0,0,0,0.12);}
+.cat-header{padding:14px 22px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#fff;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;letter-spacing:1px;transition:filter 0.3s;user-select:none;}
+.cat-header:hover{filter:brightness(1.08);}
+.cat-header .left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.cat-header .icon-cat{font-size:24px;}
+.cat-header .ar-label{font-family:'Cairo',sans-serif;font-size:13.5px;font-weight:600;opacity:0.95;direction:rtl;}
+.cat-header .right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.count{background:rgba(255,255,255,0.25);padding:3px 12px;border-radius:14px;font-size:12px;font-family:'Cairo',sans-serif;font-weight:700;}
+.toggle-arrow{font-size:14px;transition:transform 0.3s;display:inline-block;}
+.cat.open .toggle-arrow{transform:rotate(180deg);}
+
+/* Category colors — blues/teals palette for Unidad 1 */
+.cat-1 .cat-header{background:linear-gradient(135deg,#1565c0,#0d47a1);}
+.cat-2 .cat-header{background:linear-gradient(135deg,#00838f,#006064);}
+.cat-3 .cat-header{background:linear-gradient(135deg,#283593,#1a237e);}
+.cat-4 .cat-header{background:linear-gradient(135deg,#6a1b9a,#4a148c);}
+.cat-5 .cat-header{background:linear-gradient(135deg,#0277bd,#01579b);}
+.cat-6 .cat-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);}
+.cat-7 .cat-header{background:linear-gradient(135deg,#ad1457,#880e4f);}
+.cat-8 .cat-header{background:linear-gradient(135deg,#37474f,#263238);}
+.cat-9 .cat-header{background:linear-gradient(135deg,#4527a0,#311b92);}
+
+.cat-body{display:none;padding:14px 18px 18px;}
+.cat.open .cat-body{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
+
+.vocab-card{
+  background:linear-gradient(135deg,#fafafa,#f5f5f5);
+  border:2px solid #e0e0e0;
+  border-radius:12px;
+  padding:12px 14px;
+  cursor:pointer;
+  transition:all 0.25s;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  min-height:80px;
+}
+.vocab-card:hover{
+  background:linear-gradient(135deg,#e3f0ff,#c8e0ff);
+  border-color:#1565c0;
+  transform:translateY(-3px);
+  box-shadow:0 6px 16px rgba(21,101,192,0.2);
+}
+.vocab-card:active{transform:translateY(-1px);}
+.vocab-card.speaking{
+  background:linear-gradient(135deg,#fff176,#ffd54f) !important;
+  border-color:#f57f17 !important;
+  animation:pulse 0.7s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+
+.vocab-card .top-row{display:flex;align-items:center;gap:8px;pointer-events:none;flex-wrap:wrap;}
+
+.play-mini{
+  flex-shrink:0;width:24px;height:24px;background:#1565c0;color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:10px;opacity:0.85;
+  transition:all 0.2s;pointer-events:none;
+}
+.vocab-card:hover .play-mini{opacity:1;background:#0d47a1;transform:scale(1.12);}
+.vocab-card.speaking .play-mini{background:#f57f17 !important;opacity:1 !important;animation:pulse 0.5s ease infinite;}
+
+.es-word{
+  font-family:'Open Sans',sans-serif;font-weight:700;color:#0d47a1;font-size:14.5px;
+  direction:ltr;flex:1;line-height:1.35;pointer-events:none;word-break:break-word;
+  unicode-bidi:isolate;
+}
+.vocab-card.speaking .es-word{color:#5d4037;}
+
+.type-badge{
+  font-size:10.5px;padding:3px 9px;border-radius:10px;color:#fff;font-weight:700;
+  white-space:nowrap;font-family:'Cairo','Tajawal',sans-serif;pointer-events:none;
+  flex-shrink:0;direction:rtl;
+}
+.type-verb{background:#1565c0;}
+.type-adj{background:#2e7d32;}
+.type-noun-m{background:#0277bd;}
+.type-noun-f{background:#ad1457;}
+.type-expr{background:#6a1b9a;}
+.type-adv{background:#00838f;}
+.type-gram{background:#37474f;}
+.type-idiom{background:#4527a0;}
+.type-refl{background:#c62828;}
+
+.ar-meaning{
+  font-family:'Cairo',sans-serif;font-size:13.5px;color:#1a237e;direction:rtl;
+  text-align:right;font-weight:600;line-height:1.5;background:#e8f0fe;padding:5px 9px;
+  border-radius:6px;border-right:3px solid #1565c0;pointer-events:none;
+}
+
+.no-results{text-align:center;padding:50px 30px;color:#999;font-family:'Cairo',sans-serif;font-size:16px;direction:rtl;display:none;background:#fff;border-radius:14px;margin-top:14px;font-weight:600;}
+.no-results.show{display:block;}
+
+.footer{text-align:center;margin-top:25px;padding:18px;color:#0d47a1;font-family:'Playfair Display',serif;font-size:13px;letter-spacing:3px;opacity:0.7;}
+
+@media(max-width:600px){
+.vocab-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));}
+.cat-header{padding:11px 15px;font-size:15px;}
+.cat-header .ar-label{display:none;}
+.controls{flex-direction:column;align-items:stretch;}
+.action-btns{justify-content:center;}
+.es-word{font-size:13.5px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📚 VOCABULARIO</h1>
+  <p class="sub">الكلمات الأساسية لـ Unidad 1 – Nueva etapa</p>
+  <span class="badge">INSTITUTO AMIGOS</span>
+</div>
+
+<div class="instructions">🗣️ اضغط على أي كارت كلمة لسماع نطقها الصحيح بصوت إسباني أصلي</div>
+
+<div class="legend">
+  <span class="legend-title">🏷️ تصنيف الكلمات:</span>
+  <span class="legend-item"><span class="type-badge type-verb">فعل</span></span>
+  <span class="legend-item"><span class="type-badge type-adj">صفة</span></span>
+  <span class="legend-item"><span class="type-badge type-noun-m">مذكر</span></span>
+  <span class="legend-item"><span class="type-badge type-noun-f">مؤنث</span></span>
+  <span class="legend-item"><span class="type-badge type-expr">عبارة</span></span>
+  <span class="legend-item"><span class="type-badge type-adv">ظرف</span></span>
+  <span class="legend-item"><span class="type-badge type-gram">قاعدة</span></span>
+  <span class="legend-item"><span class="type-badge type-refl">انعكاسي</span></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن كلمة بالإسباني أو العربي..." autocomplete="off">
+  </div>
+  <span class="stats" id="stats">0 / 0</span>
+  <div class="action-btns">
+    <button class="action-btn" id="expandAll" type="button">📂 فتح الكل</button>
+    <button class="action-btn collapse" id="collapseAll" type="button">📁 إغلاق الكل</button>
+  </div>
+</div>
+
+<div class="no-results" id="noResults">😔 لا توجد نتائج مطابقة لبحثك</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CAT 1: GUSTOS, DIFICULTADES Y PREFERENCIAS   -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="cat cat-1 open">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">❤️</span><span>Gustos, dificultades y preferencias</span><span class="ar-label">الأذواق والصعوبات والتفضيلات</span></div>
+    <div class="right"><span class="count">18</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="gustar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">gustar</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يعجبه / يحبّ</div></div>
+      <div class="vocab-card" data-speak="encantar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">encantar</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يحب جداً / يعشق</div></div>
+      <div class="vocab-card" data-speak="interesar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">interesar</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يهتم بـ / يستهويه</div></div>
+      <div class="vocab-card" data-speak="costar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">costar (o→ue)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يصعب عليه / يكلّفه جهد</div></div>
+      <div class="vocab-card" data-speak="aburrir"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">aburrir</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يُملّ / يُضجر</div></div>
+      <div class="vocab-card" data-speak="me gusta"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me gusta</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يعجبني / بحبّه (مفرد/مصدر)</div></div>
+      <div class="vocab-card" data-speak="me gustan"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me gustan</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يعجبوني / بحبّهم (جمع)</div></div>
+      <div class="vocab-card" data-speak="me encanta"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me encanta</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بعشقه جداً (مفرد)</div></div>
+      <div class="vocab-card" data-speak="me cuesta"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me cuesta</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بيصعب عليّ (مفرد/مصدر)</div></div>
+      <div class="vocab-card" data-speak="me cuestan"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me cuestan</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بيصعبوا عليّ (جمع)</div></div>
+      <div class="vocab-card" data-speak="me aburre"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me aburre</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بيملّني (مفرد)</div></div>
+      <div class="vocab-card" data-speak="me aburren"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">me aburren</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بيملّوني (جمع)</div></div>
+      <div class="vocab-card" data-speak="a mí me gusta"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">a mí me gusta</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">أنا بحبّه (للتأكيد)</div></div>
+      <div class="vocab-card" data-speak="a ti te cuesta"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">a ti te cuesta</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">بيصعب عليك أنت</div></div>
+      <div class="vocab-card" data-speak="las audiciones"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">las audiciones</div><span class="type-badge type-noun-f">مؤنث</span></div><div class="ar-meaning">تمارين الاستماع</div></div>
+      <div class="vocab-card" data-speak="los ejercicios de gramática"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">los ejercicios de gramática</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">تمارين القواعد</div></div>
+      <div class="vocab-card" data-speak="la pronunciación"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">la pronunciación</div><span class="type-badge type-noun-f">مؤنث</span></div><div class="ar-meaning">النطق</div></div>
+      <div class="vocab-card" data-speak="el vocabulario"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el vocabulario</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">المفردات</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CAT 2: APRENDER IDIOMAS — أنشطة التعلم  -->
+<!-- ══════════════════════════════════════════ -->
+<div class="cat cat-2">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">🎓</span><span>Aprender idiomas</span><span class="ar-label">أنشطة وطرق تعلم اللغات</span></div>
+    <div class="right"><span class="count">16</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="hacer un intercambio"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hacer un intercambio</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تعمل تبادل لغوي</div></div>
+      <div class="vocab-card" data-speak="escuchar canciones en español"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">escuchar canciones en español</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تسمع أغاني بالإسباني</div></div>
+      <div class="vocab-card" data-speak="escribir a amigos hispanohablantes"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">escribir a amigos hispanohablantes</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تكتب لأصدقاء ناطقين بالإسباني</div></div>
+      <div class="vocab-card" data-speak="ir a un país de lengua española"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ir a un país de lengua española</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تروح لبلد إسباني اللغة</div></div>
+      <div class="vocab-card" data-speak="leer libros de lectura graduada"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">leer libros de lectura graduada</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تقرأ كتب مستوى مدرّج</div></div>
+      <div class="vocab-card" data-speak="traducir frases o textos"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">traducir frases o textos</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تترجم جمل أو نصوص</div></div>
+      <div class="vocab-card" data-speak="ver películas en versión original"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ver películas en versión original</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تتفرج على أفلام بالنسخة الأصلية</div></div>
+      <div class="vocab-card" data-speak="ver la televisión en español"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ver la televisión en español</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تتفرج على التليفزيون بالإسباني</div></div>
+      <div class="vocab-card" data-speak="participar en una tertulia"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">participar en una tertulia</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تشترك في نقاش / حلقة كلام</div></div>
+      <div class="vocab-card" data-speak="escuchar la radio en español"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">escuchar la radio en español</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تسمع الراديو بالإسباني</div></div>
+      <div class="vocab-card" data-speak="trabajar el vocabulario con tarjetas"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">trabajar el vocabulario con tarjetas</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تذاكر المفردات بكروت (flashcards)</div></div>
+      <div class="vocab-card" data-speak="hacer un curso en línea"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hacer un curso en línea</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تعمل كورس أونلاين</div></div>
+      <div class="vocab-card" data-speak="repasar el vocabulario"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">repasar el vocabulario</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تراجع المفردات</div></div>
+      <div class="vocab-card" data-speak="perder el miedo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">perder el miedo</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تخسر الخوف / تتجرأ</div></div>
+      <div class="vocab-card" data-speak="practicar español fuera de clase"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">practicar español fuera de clase</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">تتدرب على الإسباني خارج الفصل</div></div>
+      <div class="vocab-card" data-speak="los deberes"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">los deberes</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الواجبات المنزلية</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CAT 3: DAR CONSEJOS — هياكل النصائح      -->
+<!-- ══════════════════════════════════════════ -->
+<div class="cat cat-3">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">💡</span><span>Dar consejos</span><span class="ar-label">هياكل إعطاء النصائح</span></div>
+    <div class="right"><span class="count">6</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="tienes que estudiar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">tienes que + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لازم تـ... / عليك أن... (+ مصدر)</div></div>
+      <div class="vocab-card" data-speak="lo mejor es practicar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">lo mejor es + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">الأحسن إنك... / الأفضل هو... (+ مصدر)</div></div>
+      <div class="vocab-card" data-speak="es muy útil escuchar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">es (muy) útil + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">من المفيد جداً أن تـ... (+ مصدر)</div></div>
+      <div class="vocab-card" data-speak="hay que repasar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hay que + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">يجب / لازم (عام — بدون ضمير) (+ مصدر)</div></div>
+      <div class="vocab-card" data-speak="puedes leer"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">puedes + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">تقدر تـ... / ممكن تـ... (+ مصدر)</div></div>
+      <div class="vocab-card" data-speak="debes practicar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">debes + infinitivo</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">يجب عليك أن تـ... (+ مصدر)</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CAT 4: DESDE / DESDE HACE                  -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="cat cat-4">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">⏰</span><span>Desde y desde hace</span><span class="ar-label">تحديد الوقت والمدة</span></div>
+    <div class="right"><span class="count">12</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="desde"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">منذ / من (وقت محدد: سنة، يوم، شهر)</div></div>
+      <div class="vocab-card" data-speak="desde hace"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde hace</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">منذ (مدة زمنية: سنتين، شهر، 3 أيام)</div></div>
+      <div class="vocab-card" data-speak="desde hace dos años"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde hace dos años</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ سنتين</div></div>
+      <div class="vocab-card" data-speak="desde hace unas semanas"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde hace unas semanas</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ بضعة أسابيع</div></div>
+      <div class="vocab-card" data-speak="desde hace un mes"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde hace un mes</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ شهر</div></div>
+      <div class="vocab-card" data-speak="desde el año pasado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde el año pasado</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ العام الماضي</div></div>
+      <div class="vocab-card" data-speak="desde la semana pasada"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde la semana pasada</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ الأسبوع الماضي</div></div>
+      <div class="vocab-card" data-speak="desde febrero"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde febrero</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ فبراير (شهر محدد)</div></div>
+      <div class="vocab-card" data-speak="desde ayer"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">desde ayer</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">منذ أمس (وقت محدد)</div></div>
+      <div class="vocab-card" data-speak="desde cuándo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">¿Desde cuándo...?</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">من إمتى؟ / منذ متى؟</div></div>
+      <div class="vocab-card" data-speak="el periodo de tiempo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el periodo de tiempo</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الفترة الزمنية / المدة</div></div>
+      <div class="vocab-card" data-speak="el momento concreto"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el momento concreto</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">اللحظة / الوقت المحدد</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CAT 5: PRETÉRITO PERFECTO — الماضي القريب     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="cat cat-5">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">⏳</span><span>Pretérito perfecto</span><span class="ar-label">الماضي القريب — التركيب والشواذ</span></div>
+    <div class="right"><span class="count">16</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="he trabajado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">he trabajado</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد عملت / اشتغلت (yo)</div></div>
+      <div class="vocab-card" data-speak="has comido"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">has comido</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد أكلت (tú)</div></div>
+      <div class="vocab-card" data-speak="ha vivido"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ha vivido</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد عاش/عاشت (él/ella)</div></div>
+      <div class="vocab-card" data-speak="hemos viajado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hemos viajado</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد سافرنا (nosotros)</div></div>
+      <div class="vocab-card" data-speak="habéis aprendido"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">habéis aprendido</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد تعلمتم (vosotros)</div></div>
+      <div class="vocab-card" data-speak="han hablado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">han hablado</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">لقد تكلموا (ellos)</div></div>
+      <div class="vocab-card" data-speak="hecho"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hacer → hecho</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: عمل / صنع</div></div>
+      <div class="vocab-card" data-speak="dicho"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">decir → dicho</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: قال</div></div>
+      <div class="vocab-card" data-speak="puesto"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">poner → puesto</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: وضع / حط</div></div>
+      <div class="vocab-card" data-speak="visto"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ver → visto</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: رأى / شاف</div></div>
+      <div class="vocab-card" data-speak="escrito"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">escribir → escrito</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: كتب</div></div>
+      <div class="vocab-card" data-speak="vuelto"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">volver → vuelto</div><span class="type-badge type-gram">قاعدة</span></div><div class="ar-meaning">شاذ: رجع / عاد</div></div>
+      <div class="vocab-card" data-speak="este año"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">este año</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">هذا العام (يُستخدم مع pretérito perfecto)</div></div>
+      <div class="vocab-card" data-speak="hoy"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hoy</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">اليوم (يُستخدم مع pretérito perfecto)</div></div>
+      <div class="vocab-card" data-speak="estas vacaciones"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">estas vacaciones</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">هذه الإجازة (يُستخدم مع pretérito perfecto)</div></div>
+      <div class="vocab-card" data-speak="últimamente"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">últimamente</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">مؤخراً / في الفترة الأخيرة</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CAT 6: VERBOS IRREGULARES EN YO           -->
+<!-- ══════════════════════════════════════════ -->
+<div class="cat cat-6">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">⚡</span><span>Verbos irregulares en yo</span><span class="ar-label">الأفعال الشاذة في ضمير yo</span></div>
+    <div class="right"><span class="count">14</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="salgo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">salir → salgo</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أخرج / أغادر (yo شاذ بـ -g-)</div></div>
+      <div class="vocab-card" data-speak="hago"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hacer → hago</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أعمل / أصنع (yo شاذ بـ -g-)</div></div>
+      <div class="vocab-card" data-speak="pongo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">poner → pongo</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أضع / أحط (yo شاذ بـ -g-)</div></div>
+      <div class="vocab-card" data-speak="reconozco"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">reconocer → reconozco</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أعترف / أتعرف على (yo شاذ بـ -zc-)</div></div>
+      <div class="vocab-card" data-speak="conozco"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">conocer → conozco</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أعرف / أعرّف (yo شاذ بـ -zc-)</div></div>
+      <div class="vocab-card" data-speak="traduzco"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">traducir → traduzco</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أترجم (yo شاذ بـ -zc-)</div></div>
+      <div class="vocab-card" data-speak="conduzco"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">conducir → conduzco</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أقود (yo شاذ بـ -zc-)</div></div>
+      <div class="vocab-card" data-speak="sé"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">saber → sé</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أعلم / أعرف (yo شاذ تماماً)</div></div>
+      <div class="vocab-card" data-speak="estoy"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">estar → estoy</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أكون / أنا (yo شاذ تماماً)</div></div>
+      <div class="vocab-card" data-speak="doy"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">dar → doy</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أعطي (yo شاذ تماماً)</div></div>
+      <div class="vocab-card" data-speak="veo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">ver → veo</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أرى / أشوف (yo شاذ تماماً)</div></div>
+      <div class="vocab-card" data-speak="me río"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">reírse → me río (e→i)</div><span class="type-badge type-refl">انعكاسي</span></div><div class="ar-meaning">أضحك (تغيير صوتي e→i)</div></div>
+      <div class="vocab-card" data-speak="entiendo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">entender → entiendo (e→ie)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أفهم (تغيير صوتي e→ie)</div></div>
+      <div class="vocab-card" data-speak="sueño"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">soñar → sueño (o→ue)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">أحلم (تغيير صوتي o→ue)</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CAT 7: LOS IDIOMAS Y LAS LENGUAS              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="cat cat-7">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">🌍</span><span>Los idiomas y las lenguas</span><span class="ar-label">اللغات ومواقف استخدامها</span></div>
+    <div class="right"><span class="count">18</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="la lengua materna"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">la lengua materna</div><span class="type-badge type-noun-f">مؤنث</span></div><div class="ar-meaning">اللغة الأم</div></div>
+      <div class="vocab-card" data-speak="bilingüe"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">bilingüe</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">ثنائي اللغة</div></div>
+      <div class="vocab-card" data-speak="el castellano"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el castellano</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">القشتالية (الإسبانية الرسمية)</div></div>
+      <div class="vocab-card" data-speak="el catalán"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el catalán</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الكتالونية (لغة رسمية في إسبانيا)</div></div>
+      <div class="vocab-card" data-speak="el gallego"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el gallego</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الجاليجية (لغة رسمية في إسبانيا)</div></div>
+      <div class="vocab-card" data-speak="el vasco"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el vasco / el euskera</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الباسكية / الأوسكارا (لغة رسمية في إسبانيا)</div></div>
+      <div class="vocab-card" data-speak="el alemán"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el alemán</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الألمانية</div></div>
+      <div class="vocab-card" data-speak="el italiano"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el italiano</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الإيطالية</div></div>
+      <div class="vocab-card" data-speak="el francés"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el francés</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الفرنسية</div></div>
+      <div class="vocab-card" data-speak="el inglés"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el inglés</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الإنجليزية</div></div>
+      <div class="vocab-card" data-speak="hablar con fluidez"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hablar con fluidez</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يتكلم بطلاقة</div></div>
+      <div class="vocab-card" data-speak="los hispanohablantes"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">los hispanohablantes</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الناطقون بالإسبانية</div></div>
+      <div class="vocab-card" data-speak="en el extranjero"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">en el extranjero</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">في الخارج / بالخارج</div></div>
+      <div class="vocab-card" data-speak="los colegas"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">los colegas</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">الزملاء</div></div>
+      <div class="vocab-card" data-speak="los clientes"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">los clientes</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">العملاء / الزبائن</div></div>
+      <div class="vocab-card" data-speak="aprender idiomas"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">aprender idiomas</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يتعلم لغات</div></div>
+      <div class="vocab-card" data-speak="saber idiomas"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">saber idiomas</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يعرف لغات / يتقن لغات</div></div>
+      <div class="vocab-card" data-speak="el intercambio lingüístico"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el intercambio lingüístico</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">التبادل اللغوي</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CAT 8: ADJETIVOS DE CARÁCTER             -->
+<!-- ══════════════════════════════════════════ -->
+<div class="cat cat-8">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">😊</span><span>Adjetivos de carácter y descripción</span><span class="ar-label">صفات الشخصية والوصف</span></div>
+    <div class="right"><span class="count">16</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="dinámico"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">dinámico / dinámica</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">ديناميكي / نشيط</div></div>
+      <div class="vocab-card" data-speak="alegre"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">alegre</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مبهوج / بشوش</div></div>
+      <div class="vocab-card" data-speak="simpático"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">simpático / simpática</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">لطيف / محبوب</div></div>
+      <div class="vocab-card" data-speak="activo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">activo / activa</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">نشيط / فعّال</div></div>
+      <div class="vocab-card" data-speak="inteligente"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">inteligente</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">ذكي</div></div>
+      <div class="vocab-card" data-speak="divertido"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">divertido / divertida</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مرح / ممتع</div></div>
+      <div class="vocab-card" data-speak="trabajador"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">trabajador / trabajadora</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مجتهد / مشتغل</div></div>
+      <div class="vocab-card" data-speak="relajado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">relajado / relajada</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مسترخي / هادي</div></div>
+      <div class="vocab-card" data-speak="joven"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">joven</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">شاب / صغير السن</div></div>
+      <div class="vocab-card" data-speak="aburrido"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">aburrido / aburrida</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">ممل / مُضجر</div></div>
+      <div class="vocab-card" data-speak="encantado"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">encantado / encantada</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مسرور / مبسوط جداً</div></div>
+      <div class="vocab-card" data-speak="maravilloso"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">maravilloso / maravillosa</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">رائع / مذهل</div></div>
+      <div class="vocab-card" data-speak="fantástico"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">fantástico / fantástica</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">رائع / ممتاز</div></div>
+      <div class="vocab-card" data-speak="inseguro"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">inseguro / insegura</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">غير واثق من نفسه / متردد</div></div>
+      <div class="vocab-card" data-speak="necesario"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">necesario / necesaria</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">ضروري / لازم</div></div>
+      <div class="vocab-card" data-speak="útil"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">útil</div><span class="type-badge type-adj">صفة</span></div><div class="ar-meaning">مفيد / نافع</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CAT 9: VERBOS Y EXPRESIONES GENERALES    -->
+<!-- ══════════════════════════════════════════ -->
+<div class="cat cat-9">
+  <div class="cat-header">
+    <div class="left"><span class="icon-cat">🔤</span><span>Verbos y expresiones generales</span><span class="ar-label">أفعال وتعبيرات عامة من الوحدة</span></div>
+    <div class="right"><span class="count">20</span><span class="toggle-arrow">▼</span></div>
+  </div>
+  <div class="cat-body">
+    <div class="vocab-grid">
+      <div class="vocab-card" data-speak="identificarse"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">identificarse</div><span class="type-badge type-refl">انعكاسي</span></div><div class="ar-meaning">يتعرف على نفسه / يتماهى مع</div></div>
+      <div class="vocab-card" data-speak="sentirse bien"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">sentirse bien (e→ie)</div><span class="type-badge type-refl">انعكاسي</span></div><div class="ar-meaning">يشعر بالارتياح</div></div>
+      <div class="vocab-card" data-speak="encontrar algo que aprender"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">encontrar algo (o→ue)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يجد شيئاً ما</div></div>
+      <div class="vocab-card" data-speak="pedir"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">pedir (e→i)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يطلب / يسأل عن</div></div>
+      <div class="vocab-card" data-speak="perder"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">perder (e→ie)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يخسر / يضيع</div></div>
+      <div class="vocab-card" data-speak="pensar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">pensar (e→ie)</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يفكر / يعتقد</div></div>
+      <div class="vocab-card" data-speak="creo que"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">creo que...</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">أعتقد أن... / أظن إن...</div></div>
+      <div class="vocab-card" data-speak="quedar con amigos"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">quedar con amigos</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">يتقابل مع أصدقاء / يتواعد</div></div>
+      <div class="vocab-card" data-speak="en compañía de otros"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">en compañía de otros</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">في صحبة الآخرين / مع غيره</div></div>
+      <div class="vocab-card" data-speak="hoy en día"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">hoy en día</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">في وقتنا الحالي / في يومنا هذا</div></div>
+      <div class="vocab-card" data-speak="con frecuencia"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">con frecuencia</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">بشكل متكرر / كثيراً</div></div>
+      <div class="vocab-card" data-speak="a menudo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">a menudo</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">كثيراً / في الغالب</div></div>
+      <div class="vocab-card" data-speak="en definitiva"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">en definitiva</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">باختصار / وخلاصة القول</div></div>
+      <div class="vocab-card" data-speak="además"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">además</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">علاوة على ذلك / بالإضافة لكده</div></div>
+      <div class="vocab-card" data-speak="sin embargo"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">sin embargo</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">ولكن / بيد أن / رغم ذلك</div></div>
+      <div class="vocab-card" data-speak="por eso"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">por eso</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">لهذا السبب / علشان كده</div></div>
+      <div class="vocab-card" data-speak="así también"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">así también</div><span class="type-badge type-adv">ظرف</span></div><div class="ar-meaning">وكذلك / وبهذه الطريقة أيضاً</div></div>
+      <div class="vocab-card" data-speak="felicitar"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">felicitar</div><span class="type-badge type-verb">فعل</span></div><div class="ar-meaning">يهنئ / يبارك</div></div>
+      <div class="vocab-card" data-speak="te felicito"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">te felicito</div><span class="type-badge type-expr">عبارة</span></div><div class="ar-meaning">هنيئاً لك / مبروك عليك</div></div>
+      <div class="vocab-card" data-speak="principiante"><div class="top-row"><div class="play-mini">▶</div><div class="es-word">el/la principiante</div><span class="type-badge type-noun-m">مذكر</span></div><div class="ar-meaning">المبتدئ / الأول في تعلم شيء</div></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">★ INSTITUTO AMIGOS ★ Unidad 1 ★ Nueva etapa ★</div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+  let spanishVoices = [];
+  let currentSpeakingEl = null;
+
+  function loadSpanishVoices(){
+    if(!('speechSynthesis' in window)) return;
+    const all = window.speechSynthesis.getVoices();
+    spanishVoices = [
+      ...all.filter(v => v.lang === 'es-ES'),
+      ...all.filter(v => v.lang === 'es-MX'),
+      ...all.filter(v => v.lang === 'es-US'),
+      ...all.filter(v => v.lang.startsWith('es-')),
+      ...all.filter(v => v.lang.startsWith('es'))
+    ];
+    spanishVoices = [...new Set(spanishVoices)];
+  }
+
+  if('speechSynthesis' in window){
+    loadSpanishVoices();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = loadSpanishVoices;
+    }
+    setTimeout(loadSpanishVoices, 100);
+    setTimeout(loadSpanishVoices, 500);
+    setTimeout(loadSpanishVoices, 1500);
+  }
+
+  function speakES(el, text){
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    if(currentSpeakingEl) currentSpeakingEl.classList.remove('speaking');
+    if(spanishVoices.length === 0) loadSpanishVoices();
+    const cleanText = text.replace(/[¿¡→()]/g,'').replace(/\(.*?\)/g,'').trim();
+    const utt = new SpeechSynthesisUtterance(cleanText);
+    utt.lang = 'es-ES';
+    if(spanishVoices.length > 0){
+      utt.voice = spanishVoices[0];
+      utt.lang = spanishVoices[0].lang;
+    }
+    utt.rate = 0.88;
+    utt.pitch = 1;
+    utt.volume = 1;
+    if(el){ el.classList.add('speaking'); currentSpeakingEl = el; }
+    utt.onend = function(){ if(el) el.classList.remove('speaking'); if(currentSpeakingEl===el) currentSpeakingEl=null; };
+    utt.onerror = function(){ if(el) el.classList.remove('speaking'); if(currentSpeakingEl===el) currentSpeakingEl=null; };
+    window.speechSynthesis.speak(utt);
+  }
+
+  function bindCategoryToggles(){
+    document.querySelectorAll('.cat-header').forEach(function(header){
+      header.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        header.parentElement.classList.toggle('open');
+      });
+    });
+  }
+
+  function bindCardClicks(){
+    document.querySelectorAll('.vocab-card').forEach(function(card){
+      card.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        const text = card.getAttribute('data-speak');
+        if(text) speakES(card, text);
+      });
+    });
+  }
+
+  function filterCards(){
+    const input = document.getElementById('searchInput');
+    if(!input) return;
+    const q = input.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.vocab-card');
+    const cats = document.querySelectorAll('.cat');
+    let visibleTotal = 0;
+    cards.forEach(function(card){
+      const esEl = card.querySelector('.es-word');
+      const arEl = card.querySelector('.ar-meaning');
+      const es = esEl ? esEl.textContent.toLowerCase() : '';
+      const ar = arEl ? arEl.textContent.toLowerCase() : '';
+      const match = !q || es.includes(q) || ar.includes(q);
+      card.style.display = match ? '' : 'none';
+      if(match) visibleTotal++;
+    });
+    cats.forEach(function(cat){
+      const visibleInCat = cat.querySelectorAll('.vocab-card:not([style*="display: none"])').length;
+      if(visibleInCat === 0){ cat.style.display = 'none'; }
+      else { cat.style.display = ''; if(q) cat.classList.add('open'); }
+    });
+    const totalCards = cards.length;
+    const statsEl = document.getElementById('stats');
+    if(statsEl) statsEl.textContent = visibleTotal + ' / ' + totalCards;
+    const noRes = document.getElementById('noResults');
+    if(noRes){ if(visibleTotal===0 && q) noRes.classList.add('show'); else noRes.classList.remove('show'); }
+  }
+
+  function bindActionButtons(){
+    const expandBtn = document.getElementById('expandAll');
+    const collapseBtn = document.getElementById('collapseAll');
+    if(expandBtn){ expandBtn.addEventListener('click', function(e){ e.preventDefault(); document.querySelectorAll('.cat').forEach(function(cat){ cat.classList.add('open'); }); }); }
+    if(collapseBtn){ collapseBtn.addEventListener('click', function(e){ e.preventDefault(); document.querySelectorAll('.cat').forEach(function(cat){ cat.classList.remove('open'); }); }); }
+  }
+
+  function bindSearch(){
+    const input = document.getElementById('searchInput');
+    if(input) input.addEventListener('input', filterCards);
+  }
+
+  function initStats(){
+    const total = document.querySelectorAll('.vocab-card').length;
+    const statsEl = document.getElementById('stats');
+    if(statsEl) statsEl.textContent = total + ' / ' + total;
+  }
+
+  function init(){
+    bindCategoryToggles();
+    bindCardClicks();
+    bindActionButtons();
+    bindSearch();
+    initStats();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a12b7c513aab18c4',t:'MTc4MjYzNzA2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
