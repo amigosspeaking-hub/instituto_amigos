@@ -114,7 +114,7 @@ SCHEDULES_DATA = {
     "A1.2": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
     "A1.3": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
     "A2.1": [
-        {"title": "جدول مذاكرة الدرس الأول", "file": "    A2.1_Plan_Unidad_1.html"},
+        {"title": "جدول مذاكرة الدرس الأول", "file": "A2.1_Plan_Unidad_1.html"},
         {"title": "جدول مذاكرة الدرس الثاني", "file": "A2.1_Plan_Unidad_2.html"},
         {"title": "جدول مذاكرة الدرس الثالث", "file": "A2.1_Plan_Unidad_3.html"},
         {"title": "جدول مذاكرة الدرس الرابع", "file": "gadwal4.html"}
