@@ -30,10 +30,10 @@ LESSONS_DATA = {
     "A1.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A1.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.1": [
-        {"title": "NUEVA ETAPA", "file": "lesson1.html"},
+        {"title": "NUEVA ETAPA", "file": "A2.1_Libro_Unidad_1.html"},
         {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
-        {"title": "UN AÑO ESPECIAL", "file": "lesson3.html"},
-        {"title": "CON TUS MANOS", "file": "A2.1 - Libro - Unidad 4.html"}
+        {"title": "UN AÑO ESPECIAL", "file": "A2.1_Libro_Unidad_3.html"},
+        {"title": "CON TUS MANOS", "file": "A2.1_Libro_Unidad_4.html"}
     ],
     "A2.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
@@ -86,9 +86,9 @@ VOCAB_DATA = {
     "A1.2": [{"title": "كلمات تجريبية", "file": "vocab1.html"}],
     "A1.3": [{"title": "كلمات تجريبية", "file": "vocab1.html"}],
     "A2.1": [
-        {"title": "كلمات: NUEVA ETAPA", "file": "vocab1.html"},
-        {"title": "كلمات: PARA TI Y PARA MÍ", "file": "Unidad 02 - Palabras.htm"},
-        {"title": "كلمات: UN AÑO ESPECIAL", "file": "vocab3.html"},
+        {"title": "كلمات: NUEVA ETAPA", "file": "A2.1_Vocab_Unidad_1.html"},
+        {"title": "كلمات: PARA TI Y PARA MÍ", "file": "A2.1_Vocab_Unidad_2.html"},
+        {"title": "كلمات: UN AÑO ESPECIAL", "file": "A2.1_Vocab_Unidad_3.html"},
         {"title": "كلمات: CON TUS MANOS", "file": "vocab4.html"}
     ],
     "A2.2": [{"title": "كلمات تجريبية", "file": "vocab1.html"}],
@@ -114,9 +114,9 @@ SCHEDULES_DATA = {
     "A1.2": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
     "A1.3": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
     "A2.1": [
-        {"title": "جدول مذاكرة الدرس الأول", "file": "gadwal1.html"},
-        {"title": "جدول مذاكرة الدرس الثاني", "file": "Unidad 02 - Study_Plan.htm"},
-        {"title": "جدول مذاكرة الدرس الثالث", "file": "gadwal3.html"},
+        {"title": "جدول مذاكرة الدرس الأول", "file": "    A2.1_Plan_Unidad_1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "A2.1_Plan_Unidad_2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "A2.1_Plan_Unidad_3.html"},
         {"title": "جدول مذاكرة الدرس الرابع", "file": "gadwal4.html"}
     ],
     "A2.2": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
@@ -170,9 +170,9 @@ SHADOWING_DATA = {
     "A1.2": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A1.3": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A2.1": [
-        {"title": "شادوينج: NUEVA ETAPA", "file": "shadowing1.html"},
-        {"title": "شادوينج: PARA TI Y PARA MÍ", "file": "Unidad 02 - Shadowing.htm"},
-        {"title": "شادوينج: UN AÑO ESPECIAL", "file": "shadowing3.html"},
+        {"title": "شادوينج: NUEVA ETAPA", "file": "A2.1_Shadowing_Unidad_1.html"},
+        {"title": "شادوينج: PARA TI Y PARA MÍ", "file": "A2.1_Shadowing_Unidad_2.html"},
+        {"title": "شادوينج: UN AÑO ESPECIAL", "file": "A2.1_Shadowing_Unidad_3.html"},
         {"title": "شادوينج: CON TUS MANOS", "file": "shadowing4.html"}
     ],
     "A2.2": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
@@ -220,7 +220,7 @@ MULTIPLAYER_GAMES_DATA = {
     "A1.2": [{"title": "لعبة جماعية تجريبية", "file": "multi1.html"}],
     "A1.3": [{"title": "لعبة جماعية تجريبية", "file": "multi1.html"}],
     "A2.1": [
-        {"title": "مسابقة كلمات جماعية", "file": "multi_a2.html"}
+        {"title": "Unidad 2", "file": "Unidad 02 - Juego _Grupo.htm"}
     ],
     "A2.2": [{"title": "لعبة جماعية تجريبية", "file": "multi1.html"}],
     "A2.3": [{"title": "لعبة جماعية تجريبية", "file": "multi1.html"}],
