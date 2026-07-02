@@ -495,36 +495,36 @@ WHEEL_TOPICS = {
 # [ الجمل التحفيزية ]
 # =====================================================================
 motivation_quotes = [
-    "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة! | ¡La constancia es la clave del éxito!",
-    "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش! | ¡Sigue adelante, vas muy bien!",
-    "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك! | ¡Esfuérzate hoy para triunfar mañana!",
-    "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك! | ¡Con esfuerzo todo es possible!",
-    "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس. | ¡Paso a paso llegarás muy lejos!",
-    "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك. | ¡Tu esfuerzo de hoy es el éxito de mañana!",
-    "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر! | ¡Un viaje de mil millas comienza con un paso!",
-    "اللغة مش بس كلمات، اللغة ثقافة وحياة جديدة بتفتحلك أبواب العالم. | ¡Un nuevo idioma es una nueva vida!",
-    "غلطاتك في النطق والتحدث هي أكبر معلم ليك، اتكلم وماتخفش! | ¡El error es el mejor maestro, habla sin miedo!",
-    "فخورين بمجهودك اليومي في المنصة، كمل وهتشوف النتيجة بنفسك. | ¡Estamos muy orgullosos de tu dedicación!",
-    "كل ربع ساعة بتذاكرها بتعمل فرق كبير في مستواك على المدى البعيد. | ¡Cada minuto de práctica cuenta!",
-    "سر إتقان الإسبانية هو الممارسة اليومية والاستماع المستمر. | ¡Practica y escucha todos los días!",
-    "أنت أقوى من أي صعوبة، واللغة الإسبانية هتكون أسهل مع كل تمرين. | ¡Eres capaz de lograr todo lo que te propongas!",
-    "استمتع برحلة التعلم، كل كلمة جديدة بتتعلمها هي انتصار ليك. | ¡Disfruta el camino del aprendizaje!",
-    "جهدك اليوم يفتح لك أبواب الفرص والمنح والوظائف غداً. | ¡El conocimiento te abrirá todas las puertas!",
-    "مستواك بيتحسن كل يوم حتى لو مش حاسس، الاستمرار هو المفتاح! | ¡Mejoras cada día, sigue adelante!",
-    "لا تقارن نفسك بحد، قارن مستواك النهاردة بمستواك الشهر اللي فات. | ¡Compárate solo con tu versión de ayer!",
-    "الحماس بيخليك تبدأ، لكن الالتزام والروتين هم اللي بيوصلوك للنجاح. | ¡La disciplina supera a la motivación!",
-    "لما تتعب افتكر أنت بدأت ليه، الإسبانية هتغير مستقبلك للأفضل! | ¡Recuerda siempre por qué empezaste!",
-    "ابتسم وأنت بتذاكر، أنت بتبني نسخة أفضل وأذكى من نفسك! | ¡Sonríe, estás construyendo un futuro brillante!",
-    "التدريب اليومي بيصنع المعجزات، استمر على نفس الجدول. | ¡La práctica diaria hace al maestro!",
-    "كل سؤال بتجاوبه صح هو خطوة جديدة نحو الطلاقة التامة. | ¡Cada respuesta correcta te acerca a la fluidez!",
-    "النجاح هو مجموع مجهودات صغيرة بتتكرر كل يوم بانتظام. | ¡El éxito es la suma de pequeños esfuerzos!",
-    "أنت في المكان الصح، ومعاك أفضل المناهج والتمارين.. انطلق! | ¡Estás en el lugar correcto para aprender!",
-    "ما تخافش من المحادثة، الإسباني لغة جميلة وسهلة لما تمارسها بحب. | ¡Hablar español es fácil y divertido!",
-    "تذكر دائماً: من يزرع الاجتهاد يحصد التفوق والتميز. | ¡Quien siembra esfuerzo, cosecha éxito!",
-    "أصعب جزء هو البداية، وأنت بالفعل بدأت وقطعت شوط رائع! | ¡Lo más difícil es empezar, y ya estás aquí!",
-    "اللغة الإسبانية بيتحدث بها أكثر من 500 مليون شخص، وأنت بقيت واحد منهم! | ¡Ya eres parte del mundo hispanohablante!",
-    "استمع جيداً، ردد بصوت عالٍ، واكتب بيدك.. هكذا تتقن اللغات! | ¡Escucha, repite y escribe para dominar el idioma!",
-    "نحن معك في كل خطوة، فخورين بك وبإصرارك على التميز! | ¡Estamos contigo en cada paso del camino!"
+    {"ar": "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة!", "es": "¡La constancia es la clave del éxito!"},
+    {"ar": "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!", "es": "¡Sigue adelante, vas muy bien!"},
+    {"ar": "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك!", "es": "¡Esfuérzate hoy para triunfar mañana!"},
+    {"ar": "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك!", "es": "¡Con esfuerzo todo es posible!"},
+    {"ar": "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس.", "es": "¡Paso a paso llegarás muy lejos!"},
+    {"ar": "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك.", "es": "¡Tu esfuerzo de hoy es el éxito de mañana!"},
+    {"ar": "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!", "es": "¡Un viaje de mil millas comienza con un paso!"},
+    {"ar": "اللغة مش بس كلمات، اللغة ثقافة وحياة جديدة بتفتحلك أبواب العالم.", "es": "¡Un nuevo idioma es una nueva vida!"},
+    {"ar": "غلطاتك في النطق والتحدث هي أكبر معلم ليك، اتكلم وماتخفش!", "es": "¡El error es el mejor maestro, habla sin miedo!"},
+    {"ar": "فخورين بمجهودك اليومي في المنصة، كمل وهتشوف النتيجة بنفسك.", "es": "¡Estamos muy orgullosos de tu dedicación!"},
+    {"ar": "كل ربع ساعة بتذاكرها بتعمل فرق كبير في مستواك على المدى البعيد.", "es": "¡Cada minuto de práctica cuenta!"},
+    {"ar": "سر إتقان الإسبانية هو الممارسة اليومية والاستماع المستمر.", "es": "¡Practica y escucha todos los días!"},
+    {"ar": "أنت أقوى من أي صعوبة، واللغة الإسبانية هتكون أسهل مع كل تمرين.", "es": "¡Eres capaz de lograr todo lo que te propongas!"},
+    {"ar": "استمتع برحلة التعلم، كل كلمة جديدة بتتعلمها هي انتصار ليك.", "es": "¡Disfruta el camino del aprendizaje!"},
+    {"ar": "جهدك اليوم يفتح لك أبواب الفرص والمنح والوظائف غداً.", "es": "¡El conocimiento te abrirá todas las puertas!"},
+    {"ar": "مستواك بيتحسن كل يوم حتى لو مش حاسس، الاستمرار هو المفتاح!", "es": "¡Mejoras cada día, sigue adelante!"},
+    {"ar": "لا تقارن نفسك بحد، قارن مستواك النهاردة بمستواك الشهر اللي فات.", "es": "¡Compárate solo con tu versión de ayer!"},
+    {"ar": "الحماس بيخليك تبدأ، لكن الالتزام والروتين هم اللي بيوصلوك للنجاح.", "es": "¡La disciplina supera a la motivación!"},
+    {"ar": "لما تتعب افتكر أنت بدأت ليه، الإسبانية هتغير مستقبلك للأفضل!", "es": "¡Recuerda siempre por qué empezaste!"},
+    {"ar": "ابتسم وأنت بتذاكر، أنت بتبني نسخة أفضل وأذكى من نفسك!", "es": "¡Sonríe, estás construyendo un futuro brillante!"},
+    {"ar": "التدريب اليومي بيصنع المعجزات، استمر على نفس الجدول.", "es": "¡La práctica diaria hace al maestro!"},
+    {"ar": "كل سؤال بتجاوبه صح هو خطوة جديدة نحو الطلاقة التامة.", "es": "¡Cada respuesta correcta te acerca a la fluidez!"},
+    {"ar": "النجاح هو مجموع مجهودات صغيرة بتتكرر كل يوم بانتظام.", "es": "¡El éxito es la suma de pequeños esfuerzos!"},
+    {"ar": "أنت في المكان الصح، ومعاك أفضل المناهج والتمارين.. انطلق!", "es": "¡Estás en el lugar correcto para aprender!"},
+    {"ar": "ما تخافش من المحادثة، الإسباني لغة جميلة وسهلة لما تمارسها بحب.", "es": "¡Hablar español es fácil y divertido!"},
+    {"ar": "تذكر دائماً: من يزرع الاجتهاد يحصد التفوق والتميز.", "es": "¡Quien siembra esfuerzo, cosecha éxito!"},
+    {"ar": "أصعب جزء هو البداية، وأنت بالفعل بدأت وقطعت شوط رائع!", "es": "¡Lo más difícil es empezar, y ya estás aquí!"},
+    {"ar": "اللغة الإسبانية بيتحدث بها أكثر من 500 مليون شخص، وأنت بقيت واحد منهم!", "es": "¡Ya eres parte del mundo hispanohablante!"},
+    {"ar": "استمع جيداً، ردد بصوت عالٍ، واكتب بيدك.. هكذا تتقن اللغات!", "es": "¡Escucha, repite y escribe para dominar el idioma!"},
+    {"ar": "نحن معك في كل خطوة، فخورين بك وبإصرارك على التميز!", "es": "¡Estamos contigo en cada paso del camino!"}
 ]
 
 # =====================================================================
@@ -752,6 +752,14 @@ DASHBOARD_HTML = """
         .user-welcome-info h2 .es-greet { font-family: 'Reenie Beanie', cursive; color: var(--accent); font-size: 38px; }
         .user-welcome-info p { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 500px; }
         .motivation-box { background: rgba(255, 209, 0, 0.15); border: 1px solid var(--accent); color: var(--accent); padding: 20px; border-radius: 16px; text-align: center; width: 300px; backdrop-filter: blur(5px); z-index: 1; }
+        .motivation-boxes-wrap { display: flex; flex-direction: column; gap: 10px; width: 360px; max-width: 100%; z-index: 1; }
+        .m-box { padding: 12px 16px; border-radius: 14px; backdrop-filter: blur(8px); display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 13.5px; line-height: 1.5; transition: 0.3s; }
+        .m-box:hover { transform: translateY(-2px); }
+        .m-ar { background: rgba(255, 255, 255, 0.95); color: var(--secondary); border-right: 4px solid var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .m-es { background: rgba(229, 36, 33, 0.92); color: white; border-left: 4px solid var(--accent); box-shadow: 0 4px 15px rgba(229,36,33,0.25); text-align: left; }
+        .m-icon { font-size: 18px; flex-shrink: 0; }
+        .m-ar .m-icon { color: var(--primary); }
+        .m-es .m-icon { color: var(--accent); }
         .tabs-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 12px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
         .tab-trigger { background: none; border: 2px solid transparent; font-size: 13px; font-weight: 700; color: var(--text-muted); padding: 10px 16px; cursor: pointer; transition: 0.3s; border-radius: 12px; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
         .tab-trigger:hover { background: #f0f3f5; border-color: #e2e8f0; }
@@ -804,6 +812,20 @@ DASHBOARD_HTML = """
         .timer-display { font-size: 18px; font-weight: 800; color: var(--primary); background: white; padding: 10px 20px; border-radius: 12px; display: inline-block; border: 1px solid #fee2e2; }
         .timer-display span { font-size: 24px; font-weight: 900; }
         
+        .topic-recorder-animated { animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .timer-display-box { background: #fff1f2; border: 2px solid #fecdd3; padding: 10px 24px; border-radius: 50px; display: inline-flex; align-items: center; gap: 12px; margin-top: 10px; }
+        .timer-label { font-size: 15px; font-weight: 800; color: #991b1b; }
+        .timer-digits { font-size: 26px; font-weight: 900; font-family: monospace; color: #e52421; }
+        .timer-digits.running { animation: pulseTimer 1s infinite; }
+        @keyframes pulseTimer { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .success-banner { background: #d1fae5; color: #065f46; font-weight: 800; padding: 12px 18px; border-radius: 12px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14.5px; border: 1px solid #6ee7b7; }
+        .after-record-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+        .btn-spin-again { background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); color: white; box-shadow: 0 6px 16px rgba(142,68,173,0.3); }
+        .btn-spin-again:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(142,68,173,0.4); }
         .pro-recorder-card { background: #1e293b; color: white; border-radius: 24px; padding: 30px; margin: 30px auto 10px; max-width: 750px; box-shadow: 0 15px 35px rgba(15,23,42,0.4); text-align: right; border: 1px solid #334155; }
         .recorder-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #334155; padding-bottom: 18px; margin-bottom: 22px; }
         .rec-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(229,36,33,0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
@@ -831,7 +853,7 @@ DASHBOARD_HTML = """
         .pro-download-btn:hover { background: #059669; transform: translateY(-2px); }
         @media (max-width: 768px) {
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
-            .motivation-box { width: 100%; max-width: 320px; margin: 0 auto; }
+            .motivation-boxes-wrap { width: 100%; max-width: 400px; margin: 0 auto; }
             .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
             .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
             .tab-trigger { flex-shrink: 0; }
@@ -857,24 +879,30 @@ DASHBOARD_HTML = """
     <div class="main-content">
         <header class="welcome-section">
             <div class="user-welcome-info">
-                <h2><span class="es-greet">¡!</span> أهلاً بيك يا {{ student.username }}! 👋</h2>
+                <h2>أهلاً بيك يا {{ student.username }}! 👋</h2>
                 <p>جاهز لدرس النهاردة؟ كمل في طريقك وإحنا في ضهرك دايماً!</p>
             </div>
-            <div class="motivation-box">
-                <i class="fa-solid fa-lightbulb" style="font-size: 22px; margin-bottom: 8px;"></i>
-                <p style="font-size: 15px;">{{ quote }}</p>
+            <div class="motivation-boxes-wrap">
+                <div class="m-box m-ar">
+                    <i class="fa-solid fa-quote-right m-icon"></i>
+                    <span>{{ quote.ar if quote is mapping else quote }}</span>
+                </div>
+                <div class="m-box m-es" dir="ltr">
+                    <i class="fa-solid fa-quote-left m-icon"></i>
+                    <span>{{ quote.es if quote is mapping else "" }}</span>
+                </div>
             </div>
         </header>
 
         <nav class="tabs-nav">
-            <button class="tab-trigger active" onclick="switchTab(event, 'lectures-tab')"><i class="fa-solid fa-video"></i> الدروس</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'exercises-tab')"><i class="fa-solid fa-pen-ruler"></i> التمارين</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'vocab-tab')"><i class="fa-solid fa-spell-check"></i> الكلمات</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')"><i class="fa-solid fa-calendar-days"></i> الجداول</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'shadowing-tab')"><i class="fa-solid fa-headphones"></i> الشادوينج</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'games-tab')"><i class="fa-solid fa-gamepad"></i> الألعاب</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'videos-tab')"><i class="fa-brands fa-youtube"></i> فيديوهات</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> العجلة</button>
+            <button class="tab-trigger active" onclick="switchTab(event, 'lectures-tab')"><i class="fa-solid fa-video"></i> الدروس | Lecciones</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'exercises-tab')"><i class="fa-solid fa-pen-ruler"></i> التمارين | Ejercicios</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'vocab-tab')"><i class="fa-solid fa-spell-check"></i> الكلمات | Vocabulario</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'schedule-tab')"><i class="fa-solid fa-calendar-days"></i> الجداول | Planes</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'shadowing-tab')"><i class="fa-solid fa-headphones"></i> الشادوينج | Shadowing</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'games-tab')"><i class="fa-solid fa-gamepad"></i> الألعاب | Juegos</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'videos-tab')"><i class="fa-brands fa-youtube"></i> فيديوهات | Videos</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> العجلة | Rueda</button>
         </nav>
 
         <div id="lectures-tab" class="tab-content active">
@@ -901,7 +929,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank">ابدأ التمرين</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -916,7 +944,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank">افتح الكلمات</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -931,7 +959,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank">افتح الجدول</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -946,7 +974,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank">ابدأ الشادوينج</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -961,7 +989,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank">ادخل العب</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -988,61 +1016,71 @@ DASHBOARD_HTML = """
             <div class="wheel-container-wrapper">
                 <div class="wheel-header">
                     <h3><i class="fa-solid fa-dharmachakra" style="color: var(--primary);"></i> عجلة التحدث التفاعلية | Rueda de Conversación</h3>
-                    <p>اضغط على زر الدوران لاختيار موضوع عشوائي للتحدث، ثم سجل إجابتك بصوتك!</p>
+                    <p id="wheelSubtitle">اضغط على زر الدوران لاختيار موضوع عشوائي للتحدث، ثم سجل إجابتك بصوتك!</p>
                 </div>
                 
-                <div class="wheel-canvas-area" style="position: relative; margin: 25px auto; width: 380px; max-width: 100%;">
-                    <div class="wheel-pointer"><i class="fa-solid fa-caret-down"></i></div>
-                    <canvas id="wheelCanvas" width="380" height="380" style="max-width: 100%; height: auto; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 6px solid #2c3e50; background: white;"></canvas>
+                <!-- 1. العجلة الدوارة -->
+                <div id="wheelSpinSection">
+                    <div class="wheel-canvas-area" style="position: relative; margin: 25px auto; width: 380px; max-width: 100%;">
+                        <div class="wheel-pointer"><i class="fa-solid fa-caret-down"></i></div>
+                        <canvas id="wheelCanvas" width="380" height="380" style="max-width: 100%; height: auto; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 6px solid #2c3e50; background: white;"></canvas>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <button id="spinBtn" class="spin-btn" onclick="startWheelSpin()"><i class="fa-solid fa-rotate-right"></i> لف العجلة | ¡Girar Rueda!</button>
+                    </div>
                 </div>
 
-                <div style="text-align: center; margin-bottom: 25px;">
-                    <button id="spinBtn" class="spin-btn" onclick="startWheelSpin()"><i class="fa-solid fa-rotate-right"></i> لف العجلة | ¡Girar Rueda!</button>
-                </div>
-
-                <!-- شاشة عرض الموضوع المختار بوضوح تام -->
-                <div id="winnerTopicCard" class="winner-topic-card" style="display: none;">
-                    <div class="winner-badge">🎯 الموضوع المختار لك | Tema Seleccionado</div>
-                    <div id="winnerTopicText" class="winner-text"></div>
-                    <div id="timerDisplay" class="timer-display">⏱️ الوقت المتبقي للتحدث: <span>02:00</span></div>
-                </div>
-
-                <!-- كونسول التسجيل الصوتي الاحترافي -->
-                <div id="professionalRecorder" class="pro-recorder-card">
-                    <div class="recorder-header">
-                        <div class="rec-icon"><i class="fa-solid fa-studio-vinari"></i></div>
-                        <div class="rec-title">
-                            <h4>استوديو التسجيل الصوتي | Estudio de Grabación</h4>
-                            <span>سجل إجابتك بوضوح، استمع لنطقك، وشارك الملف مع معلمك</span>
+                <!-- 2. كارت الموضوع واستوديو التسجيل (يظهر مكان العجلة بانيميشن بعد توقفها) -->
+                <div id="topicAndRecorderSection" class="topic-recorder-animated" style="display: none;">
+                    <div class="winner-topic-card">
+                        <div class="winner-badge">🎯 الموضوع المختار لتحدي التحدث | Tema Seleccionado</div>
+                        <div id="winnerTopicText" class="winner-text"></div>
+                        <div class="timer-display-box">
+                            <span class="timer-label">⏱️ الوقت المقترح للتحدث:</span>
+                            <span id="speakingTimerEl" class="timer-digits">02:00</span>
                         </div>
                     </div>
 
-                    <div class="recorder-visualizer" id="recVisualizer">
-                        <div class="status-indicator">
-                            <span class="status-dot" id="statusDot"></span>
-                            <span id="recStatusText">جاهز للتسجيل | Listo para grabar</span>
+                    <div class="pro-recorder-card">
+                        <div class="recorder-header">
+                            <div class="rec-icon"><i class="fa-solid fa-studio-vinari"></i></div>
+                            <div class="rec-title">
+                                <h4>استوديو التسجيل الصوتي | Estudio de Grabación</h4>
+                                <span>اضغط على (ابدأ التسجيل) ليبدأ عداد الوقت وميكروفون التسجيل</span>
+                            </div>
                         </div>
-                        <div class="rec-timer" id="recTimerText">00:00</div>
-                    </div>
 
-                    <div class="recorder-actions">
-                        <button id="startRecordBtn" onclick="startRecording()" class="pro-btn btn-record">
-                            <i class="fa-solid fa-microphone"></i> <span>ابدأ التسجيل | Grabar</span>
-                        </button>
-                        <button id="stopRecordBtn" onclick="stopRecording()" class="pro-btn btn-stop" disabled>
-                            <i class="fa-solid fa-square"></i> <span>إيقاف وحفظ | Detener</span>
-                        </button>
-                        <button id="resetRecordBtn" onclick="resetRecording()" class="pro-btn btn-reset" style="display: none;">
-                            <i class="fa-solid fa-rotate-left"></i> <span>تسجيل جديد | Regrabar</span>
-                        </button>
-                    </div>
+                        <div class="recorder-visualizer">
+                            <div class="status-indicator">
+                                <span class="status-dot" id="statusDot"></span>
+                                <span id="recStatusText">جاهز للتسجيل، اضغط الزر أدناه | Listo para grabar</span>
+                            </div>
+                            <div class="rec-timer" id="recTimerText">00:00</div>
+                        </div>
 
-                    <div id="playbackArea" class="playback-area" style="display: none;">
-                        <audio id="audioPlayback" controls class="custom-audio-player"></audio>
-                        <div class="download-strip">
-                            <a id="downloadRecordBtn" href="#" download="mi_respuesta_espanol.webm" class="pro-download-btn">
-                                <i class="fa-solid fa-cloud-arrow-down"></i> تحميل المقطع الصوتي (MP3/WebM) | Descargar
-                            </a>
+                        <div class="recorder-actions">
+                            <button id="startRecordBtn" onclick="startRecording()" class="pro-btn btn-record">
+                                <i class="fa-solid fa-microphone"></i> <span>ابدأ التسجيل | Grabar</span>
+                            </button>
+                            <button id="stopRecordBtn" onclick="stopRecording()" class="pro-btn btn-stop" disabled>
+                                <i class="fa-solid fa-square"></i> <span>إيقاف وحفظ | Detener</span>
+                            </button>
+                        </div>
+
+                        <div id="playbackArea" class="playback-area" style="display: none;">
+                            <div class="success-banner">
+                                <i class="fa-solid fa-circle-check"></i> تم حفظ التسجيل وإيقاف العداد! يمكنك الاستماع أو التحميل أو لف العجلة مرة أخرى.
+                            </div>
+                            <audio id="audioPlayback" controls class="custom-audio-player"></audio>
+                            <div class="after-record-buttons">
+                                <a id="downloadRecordBtn" href="#" download="mi_respuesta_espanol.webm" class="pro-download-btn">
+                                    <i class="fa-solid fa-cloud-arrow-down"></i> تحميل المقطع الصوتي | Descargar Audio
+                                </a>
+                                <button onclick="resetToSpinAgain()" class="pro-btn btn-spin-again">
+                                    <i class="fa-solid fa-rotate-right"></i> لف العجلة لموضوع جديد | ¡Girar de Nuevo!
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1144,6 +1182,9 @@ DASHBOARD_HTML = """
             requestAnimationFrame(animateSpin);
         }
 
+        let speakingTimerInterval = null;
+        let remainingSeconds = 120;
+
         function determineWinner() {
             const numSlices = levelTopics.length;
             const sliceAngle = (2 * Math.PI) / numSlices;
@@ -1157,25 +1198,33 @@ DASHBOARD_HTML = """
             let winningIndex = Math.floor(pointerAngle / sliceAngle) % numSlices;
             let winningTopic = levelTopics[winningIndex];
 
+            // 1. إخفاء العجلة وزر الدوران
+            document.getElementById("wheelSpinSection").style.display = "none";
+            document.getElementById("wheelSubtitle").style.display = "none";
+
+            // 2. إظهار الموضوع المختار واستوديو التسجيل مكان العجلة بانيميشن
             document.getElementById("winnerTopicText").innerText = winningTopic;
-            document.getElementById("winnerTopicCard").style.display = "block";
-            startSpeakingTimer(120);
+            document.getElementById("topicAndRecorderSection").style.display = "block";
+
+            // تجهيز العدادات (لا يبدأ التايمر إلا عند الضغط على ابدأ التسجيل)
+            remainingSeconds = 120;
+            updateSpeakingTimerDisplay(120);
+            document.getElementById("speakingTimerEl").classList.remove("running");
+            clearInterval(speakingTimerInterval);
+            document.getElementById("playbackArea").style.display = "none";
+            document.getElementById("startRecordBtn").disabled = false;
+            document.getElementById("startRecordBtn").style.display = "inline-flex";
+            document.getElementById("stopRecordBtn").disabled = true;
+            document.getElementById("stopRecordBtn").style.display = "inline-flex";
+            document.getElementById("recStatusText").innerText = "جاهز للتسجيل، اضغط الزر أدناه لبدء التايمر | Listo para grabar";
+            document.getElementById("recTimerText").innerText = "00:00";
+            document.getElementById("statusDot").classList.remove("active-rec");
         }
 
-        let speakingTimerInterval;
-        function startSpeakingTimer(duration) {
-            clearInterval(speakingTimerInterval);
-            let timer = duration;
-            const timerEl = document.querySelector("#timerDisplay span");
-            speakingTimerInterval = setInterval(() => {
-                let m = parseInt(timer / 60, 10);
-                let s = parseInt(timer % 60, 10);
-                timerEl.textContent = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                if (--timer < 0) {
-                    clearInterval(speakingTimerInterval);
-                    timerEl.textContent = "انتهى الوقت!";
-                }
-            }, 1000);
+        function updateSpeakingTimerDisplay(sec) {
+            let m = Math.floor(sec / 60);
+            let s = sec % 60;
+            document.getElementById("speakingTimerEl").textContent = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }
 
         window.addEventListener("DOMContentLoaded", () => { drawWheel(); });
@@ -1198,7 +1247,11 @@ DASHBOARD_HTML = """
                 };
 
                 mediaRecorder.onstop = () => {
+                    // إيقاف التايمر والعداد فوراً عند الضغط على إيقاف
                     clearInterval(recInterval);
+                    clearInterval(speakingTimerInterval);
+                    document.getElementById("speakingTimerEl").classList.remove("running");
+
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     const audioPlayback = document.getElementById("audioPlayback");
@@ -1206,12 +1259,16 @@ DASHBOARD_HTML = """
                     audioPlayback.src = audioUrl;
                     document.getElementById("playbackArea").style.display = "block";
                     downloadBtn.href = audioUrl;
-                    document.getElementById("recStatusText").innerText = "تم حفظ الإجابة بنجاح | Grabación guardada";
+                    document.getElementById("recStatusText").innerText = "تم حفظ الإجابة وإيقاف العداد | Grabación completada";
                     document.getElementById("statusDot").classList.remove("active-rec");
-                    document.getElementById("resetRecordBtn").style.display = "inline-flex";
+                    
+                    document.getElementById("startRecordBtn").style.display = "none";
+                    document.getElementById("stopRecordBtn").style.display = "none";
                 };
 
                 mediaRecorder.start();
+                
+                // بدء عداد التسجيل وتايمر التحدث الآن معاً!
                 recSeconds = 0;
                 document.getElementById("recTimerText").innerText = "00:00";
                 clearInterval(recInterval);
@@ -1222,11 +1279,23 @@ DASHBOARD_HTML = """
                     document.getElementById("recTimerText").innerText = (rm < 10 ? "0" + rm : rm) + ":" + (rs < 10 ? "0" + rs : rs);
                 }, 1000);
 
+                clearInterval(speakingTimerInterval);
+                document.getElementById("speakingTimerEl").classList.add("running");
+                speakingTimerInterval = setInterval(() => {
+                    if (remainingSeconds > 0) {
+                        remainingSeconds--;
+                        updateSpeakingTimerDisplay(remainingSeconds);
+                    } else {
+                        clearInterval(speakingTimerInterval);
+                        document.getElementById("speakingTimerEl").textContent = "انتهى الوقت!";
+                        stopRecording();
+                    }
+                }, 1000);
+
                 document.getElementById("startRecordBtn").disabled = true;
                 document.getElementById("stopRecordBtn").disabled = false;
-                document.getElementById("resetRecordBtn").style.display = "none";
                 document.getElementById("playbackArea").style.display = "none";
-                document.getElementById("recStatusText").innerText = "جاري التسجيل الصوتي الآن... | Grabando en curso...";
+                document.getElementById("recStatusText").innerText = "جاري التسجيل والعد التنازلي الآن... | Grabando en curso...";
                 document.getElementById("statusDot").classList.add("active-rec");
             } catch (err) {
                 alert("يرجى السماح للمتصفح بالوصول للميكروفون لبدء التسجيل الصوتي.");
@@ -1243,12 +1312,18 @@ DASHBOARD_HTML = """
             }
         }
 
-        function resetRecording() {
-            document.getElementById("playbackArea").style.display = "none";
-            document.getElementById("resetRecordBtn").style.display = "none";
-            document.getElementById("recStatusText").innerText = "جاهز للتسجيل | Listo para grabar";
-            document.getElementById("recTimerText").innerText = "00:00";
-            startRecording();
+        function resetToSpinAgain() {
+            if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+            clearInterval(recInterval);
+            clearInterval(speakingTimerInterval);
+
+            document.getElementById("topicAndRecorderSection").style.display = "none";
+            document.getElementById("wheelSpinSection").style.display = "block";
+            document.getElementById("wheelSubtitle").style.display = "block";
+            setTimeout(drawWheel, 20);
         }
     </script>
 </body>
@@ -1321,9 +1396,9 @@ TEACHER_DASHBOARD_HTML = """
     </nav>
 
     <div class="main-tabs">
-        <button class="m-tab active" onclick="switchMainTab('materials', this)"><i class="fa-solid fa-book"></i> المناهج والمواد</button>
-        <button class="m-tab" onclick="switchMainTab('grading', this); refreshGradingData();"><i class="fa-solid fa-check-double"></i> تصحيح الواجبات</button>
-        <button class="m-tab" onclick="switchMainTab('leaderboard', this); loadProgressData();"><i class="fa-solid fa-ranking-star"></i> تقدم الطلبة</button>
+        <button class="m-tab active" onclick="switchMainTab('materials', this)"><i class="fa-solid fa-book"></i> المناهج والمواد | Materiales</button>
+        <button class="m-tab" onclick="switchMainTab('grading', this); refreshGradingData();"><i class="fa-solid fa-check-double"></i> تصحيح الواجبات | Tareas</button>
+        <button class="m-tab" onclick="switchMainTab('leaderboard', this); loadProgressData();"><i class="fa-solid fa-ranking-star"></i> تقدم الطلبة | Progreso</button>
     </div>
 
     <div class="container">
@@ -1351,13 +1426,13 @@ TEACHER_DASHBOARD_HTML = """
 
             {% if current_level %}
             <div class="content-tabs">
-                <button class="c-tab active" onclick="switchContentTab('lectures')">الدروس</button>
-                <button class="c-tab" onclick="switchContentTab('exercises')">التمارين</button>
-                <button class="c-tab" onclick="switchContentTab('vocab')">الكلمات</button>
-                <button class="c-tab" onclick="switchContentTab('schedules')">الجداول</button>
-                <button class="c-tab" onclick="switchContentTab('shadowing')">الشادوينج</button>
-                <button class="c-tab" onclick="switchContentTab('games')">الألعاب الفردية</button>
-                <button class="c-tab multi-games" onclick="switchContentTab('multiplayer')"><i class="fa-solid fa-users"></i> ألعاب جماعية</button>
+                <button class="c-tab active" onclick="switchContentTab('lectures')">الدروس | Lecciones</button>
+                <button class="c-tab" onclick="switchContentTab('exercises')">التمارين | Ejercicios</button>
+                <button class="c-tab" onclick="switchContentTab('vocab')">الكلمات | Vocabulario</button>
+                <button class="c-tab" onclick="switchContentTab('schedules')">الجداول | Planes</button>
+                <button class="c-tab" onclick="switchContentTab('shadowing')">الشادوينج | Shadowing</button>
+                <button class="c-tab" onclick="switchContentTab('games')">الألعاب الفردية | Juegos</button>
+                <button class="c-tab multi-games" onclick="switchContentTab('multiplayer')"><i class="fa-solid fa-users"></i> ألعاب جماعية | Multijugador</button>
             </div>
 
             <div id="lectures" class="c-section active" style="display: block;">
@@ -1376,7 +1451,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.exercises %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين | Abrir Ejercicio</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1387,7 +1462,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.vocab %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات | Abrir Vocabulario</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1398,7 +1473,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.schedules %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول | Abrir Plan</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1409,7 +1484,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.shadowing %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج | Abrir Shadowing</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1420,7 +1495,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.games %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة | Abrir Juego</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1431,7 +1506,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.multi_games %}
                     <div class="course-card" style="border-color: #8e44ad;">
                         <div class="header" style="background: #f4ecf7; color: #8e44ad;">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank" class="multi-btn">تشغيل اللعبة <i class="fa-solid fa-play"></i></a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank" class="multi-btn">تشغيل اللعبة <i class="fa-solid fa-play"></i> | Iniciar</a></div>
                     </div>
                     {% else %}
                     <p style="text-align: center; width: 100%; color: #888;">لا توجد ألعاب جماعية حالياً.</p>
