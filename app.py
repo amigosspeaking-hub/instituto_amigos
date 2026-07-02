@@ -495,36 +495,36 @@ WHEEL_TOPICS = {
 # [ الجمل التحفيزية ]
 # =====================================================================
 motivation_quotes = [
-    {"ar": "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة!", "es": "¡La constancia es la clave del éxito!"},
-    {"ar": "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!", "es": "¡Sigue adelante, vas muy bien!"},
-    {"ar": "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك!", "es": "¡Esfuérzate hoy para triunfar mañana!"},
-    {"ar": "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك!", "es": "¡Con esfuerzo todo es posible!"},
-    {"ar": "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس.", "es": "¡Paso a paso llegarás muy lejos!"},
-    {"ar": "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك.", "es": "¡Tu esfuerzo de hoy es el éxito de mañana!"},
-    {"ar": "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!", "es": "¡Un viaje de mil millas comienza con un paso!"},
-    {"ar": "اللغة مش بس كلمات، اللغة ثقافة وحياة جديدة بتفتحلك أبواب العالم.", "es": "¡Un nuevo idioma es una nueva vida!"},
-    {"ar": "غلطاتك في النطق والتحدث هي أكبر معلم ليك، اتكلم وماتخفش!", "es": "¡El error es el mejor maestro, habla sin miedo!"},
-    {"ar": "فخورين بمجهودك اليومي في المنصة، كمل وهتشوف النتيجة بنفسك.", "es": "¡Estamos muy orgullosos de tu dedicación!"},
-    {"ar": "كل ربع ساعة بتذاكرها بتعمل فرق كبير في مستواك على المدى البعيد.", "es": "¡Cada minuto de práctica cuenta!"},
-    {"ar": "سر إتقان الإسبانية هو الممارسة اليومية والاستماع المستمر.", "es": "¡Practica y escucha todos los días!"},
-    {"ar": "أنت أقوى من أي صعوبة، واللغة الإسبانية هتكون أسهل مع كل تمرين.", "es": "¡Eres capaz de lograr todo lo que te propongas!"},
-    {"ar": "استمتع برحلة التعلم، كل كلمة جديدة بتتعلمها هي انتصار ليك.", "es": "¡Disfruta el camino del aprendizaje!"},
-    {"ar": "جهدك اليوم يفتح لك أبواب الفرص والمنح والوظائف غداً.", "es": "¡El conocimiento te abrirá todas las puertas!"},
-    {"ar": "مستواك بيتحسن كل يوم حتى لو مش حاسس، الاستمرار هو المفتاح!", "es": "¡Mejoras cada día, sigue adelante!"},
-    {"ar": "لا تقارن نفسك بحد، قارن مستواك النهاردة بمستواك الشهر اللي فات.", "es": "¡Compárate solo con tu versión de ayer!"},
-    {"ar": "الحماس بيخليك تبدأ، لكن الالتزام والروتين هم اللي بيوصلوك للنجاح.", "es": "¡La disciplina supera a la motivación!"},
-    {"ar": "لما تتعب افتكر أنت بدأت ليه، الإسبانية هتغير مستقبلك للأفضل!", "es": "¡Recuerda siempre por qué empezaste!"},
-    {"ar": "ابتسم وأنت بتذاكر، أنت بتبني نسخة أفضل وأذكى من نفسك!", "es": "¡Sonríe, estás construyendo un futuro brillante!"},
-    {"ar": "التدريب اليومي بيصنع المعجزات، استمر على نفس الجدول.", "es": "¡La práctica diaria hace al maestro!"},
-    {"ar": "كل سؤال بتجاوبه صح هو خطوة جديدة نحو الطلاقة التامة.", "es": "¡Cada respuesta correcta te acerca a la fluidez!"},
-    {"ar": "النجاح هو مجموع مجهودات صغيرة بتتكرر كل يوم بانتظام.", "es": "¡El éxito es la suma de pequeños esfuerzos!"},
-    {"ar": "أنت في المكان الصح، ومعاك أفضل المناهج والتمارين.. انطلق!", "es": "¡Estás en el lugar correcto para aprender!"},
-    {"ar": "ما تخافش من المحادثة، الإسباني لغة جميلة وسهلة لما تمارسها بحب.", "es": "¡Hablar español es fácil y divertido!"},
-    {"ar": "تذكر دائماً: من يزرع الاجتهاد يحصد التفوق والتميز.", "es": "¡Quien siembra esfuerzo, cosecha éxito!"},
-    {"ar": "أصعب جزء هو البداية، وأنت بالفعل بدأت وقطعت شوط رائع!", "es": "¡Lo más difícil es empezar, y ya estás aquí!"},
-    {"ar": "اللغة الإسبانية بيتحدث بها أكثر من 500 مليون شخص، وأنت بقيت واحد منهم!", "es": "¡Ya eres parte del mundo hispanohablante!"},
-    {"ar": "استمع جيداً، ردد بصوت عالٍ، واكتب بيدك.. هكذا تتقن اللغات!", "es": "¡Escucha, repite y escribe para dominar el idioma!"},
-    {"ar": "نحن معك في كل خطوة، فخورين بك وبإصرارك على التميز!", "es": "¡Estamos contigo en cada paso del camino!"}
+    {"ar": "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة!", "es": "¡Bravo campeón, la constancia es la clave del éxito en cualquier idioma!"},
+    {"ar": "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!", "es": "¡Cada lección completada te acerca un paso más a tu sueño, sigue adelante y no te detengas!"},
+    {"ar": "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك!", "es": "¡El estudio de hoy es tu fluidez de mañana, esfuérzate!"},
+    {"ar": "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك!", "es": "¡No hay nada difícil para quien lo intenta cada día, confiamos en ti!"},
+    {"ar": "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس.", "es": "¡Paso a paso llegarás, lo importante es continuar con el mismo entusiasmo!"},
+    {"ar": "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك.", "es": "¡Tu esfuerzo de hoy será tu descanso de mañana, concéntrate en tu lección y haz lo mejor!"},
+    {"ar": "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!", "es": "¡El viaje de mil millas comienza con un paso, y tú ya avanzaste mucho, continúa!"},
+    {"ar": "اللغة مش بس كلمات، اللغة ثقافة وحياة جديدة بتفتحلك أبواب العالم.", "es": "¡El idioma no son solo palabras, es una cultura y vida nueva que te abre las puertas del mundo!"},
+    {"ar": "غلطاتك في النطق والتحدث هي أكبر معلم ليك، اتكلم وماتخفش!", "es": "¡Tus errores de pronunciación y habla son tu mejor maestro, habla sin miedo!"},
+    {"ar": "فخورين بمجهودك اليومي في المنصة، كمل وهتشوف النتيجة بنفسك.", "es": "¡Estamos orgullosos de tu esfuerzo diario en la plataforma, sigue y verás los resultados!"},
+    {"ar": "كل ربع ساعة بتذاكرها بتعمل فرق كبير في مستواك على المدى البعيد.", "es": "¡Cada quince minutos de estudio marcan una gran diferencia en tu nivel a largo plazo!"},
+    {"ar": "سر إتقان الإسبانية هو الممارسة اليومية والاستماع المستمر.", "es": "¡El secreto para dominar el español es la práctica diaria y la escucha constante!"},
+    {"ar": "أنت أقوى من أي صعوبة، واللغة الإسبانية هتكون أسهل مع كل تمرين.", "es": "¡Eres más fuerte que cualquier dificultad, y el español será más fácil con cada ejercicio!"},
+    {"ar": "استمتع برحلة التعلم، كل كلمة جديدة بتتعلمها هي انتصار ليك.", "es": "¡Disfruta el viaje de aprendizaje, cada palabra nueva que aprendes es una victoria para ti!"},
+    {"ar": "جهدك اليوم يفتح لك أبواب الفرص والمنح والوظائف غداً.", "es": "¡Tu esfuerzo hoy te abre las puertas de becas y oportunidades laborales mañana!"},
+    {"ar": "مستواك بيتحسن كل يوم حتى لو مش حاسس، الاستمرار هو المفتاح!", "es": "¡Tu nivel mejora cada día aunque no lo sientas, la constancia es la clave!"},
+    {"ar": "لا تقارن نفسك بحد، قارن مستواك النهاردة بمستواك الشهر اللي فات.", "es": "¡No te compares con nadie, compara tu nivel de hoy con el del mes pasado!"},
+    {"ar": "الحماس بيخليك تبدأ، لكن الالتزام والروتين هم اللي بيوصلوك للنجاح.", "es": "¡El entusiasmo te hace empezar, pero el compromiso y la rutina te llevan al éxito!"},
+    {"ar": "لما تتعب افتكر أنت بدأت ليه، الإسبانية هتغير مستقبلك للأفضل!", "es": "¡Cuando te canses recuerda por qué empezaste, el español cambiará tu futuro para mejor!"},
+    {"ar": "ابتسم وأنت بتذاكر، أنت بتبني نسخة أفضل وأذكى من نفسك!", "es": "¡Sonríe mientras estudias, estás construyendo una versión mejor y más inteligente de ti mismo!"},
+    {"ar": "التدريب اليومي بيصنع المعجزات، استمر على نفس الجدول.", "es": "¡La práctica diaria hace milagros, continúa con el mismo plan!"},
+    {"ar": "كل سؤال بتجاوبه صح هو خطوة جديدة نحو الطلاقة التامة.", "es": "¡Cada pregunta que respondes correctamente es un nuevo paso hacia la fluidez total!"},
+    {"ar": "النجاح هو مجموع مجهودات صغيرة بتتكرر كل يوم بانتظام.", "es": "¡El éxito es la suma de pequeños esfuerzos repetidos día tras día!"},
+    {"ar": "أنت في المكان الصح، ومعاك أفضل المناهج والتمارين.. انطلق!", "es": "¡Estás en el lugar correcto, con los mejores materiales y ejercicios, adelante!"},
+    {"ar": "ما تخافش من المحادثة، الإسباني لغة جميلة وسهلة لما تمارسها بحب.", "es": "¡No temas a la conversación, el español es un idioma hermoso y fácil cuando lo practicas con amor!"},
+    {"ar": "تذكر دائماً: من يزرع الاجتهاد يحصد التفوق والتميز.", "es": "¡Recuerda siempre: quien siembra esfuerzo cosecha excelencia y distinción!"},
+    {"ar": "أصعب جزء هو البداية، وأنت بالفعل بدأت وقطعت شوط رائع!", "es": "¡La parte más difícil es empezar, y tú ya empezaste y lograste un maravilloso avance!"},
+    {"ar": "اللغة الإسبانية بيتحدث بها أكثر من 500 مليون شخص، وأنت بقيت واحد منهم!", "es": "¡El español es hablado por más de 500 millones de personas, y tú ya eres uno de ellos!"},
+    {"ar": "استمع جيداً، ردد بصوت عالٍ، واكتب بيدك.. هكذا تتقن اللغات!", "es": "¡Escucha bien, repite en voz alta y escribe a mano, así se dominan los idiomas!"},
+    {"ar": "نحن معك في كل خطوة، فخورين بك وبإصرارك على التميز!", "es": "¡Estamos contigo en cada paso, orgullosos de ti y de tu determinación por sobresalir!"}
 ]
 
 # =====================================================================
@@ -1154,7 +1154,7 @@ DASHBOARD_HTML = """
             isSpinningWheel = true;
             const btn = document.getElementById("spinBtn");
             btn.disabled = true;
-            document.getElementById("winnerTopicCard").style.display = "none";
+            const topicSec = document.getElementById("topicAndRecorderSection"); if(topicSec) topicSec.style.display = "none";
 
             let duration = 4000;
             let startTime = null;
