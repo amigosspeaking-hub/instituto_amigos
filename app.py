@@ -495,13 +495,36 @@ WHEEL_TOPICS = {
 # [ الجمل التحفيزية ]
 # =====================================================================
 motivation_quotes = [
-    "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة.",
-    "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش!",
-    "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك!",
-    "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك!",
-    "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس.",
-    "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك.",
-    "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر!"
+    "عاش يا بطل، الاستمرارية هي سر النجاح في أي لغة! | ¡La constancia es la clave del éxito!",
+    "كل درس بتخلصه بيقربك خطوة لحلمك، كمل وماتوقفش! | ¡Sigue adelante, vas muy bien!",
+    "المذاكرة النهاردة هي طلاقتك بكرة، شد حيلك! | ¡Esfuérzate hoy para triunfar mañana!",
+    "مافيش حاجة صعبة على واحد بيحاول كل يوم، إحنا واثقين فيك! | ¡Con esfuerzo todo es possible!",
+    "خطوة بخطوة هتوصل، المهم تفضل مكمل على نفس الحماس. | ¡Paso a paso llegarás muy lejos!",
+    "تعبك النهاردة هترتاح بيه بكرة، ركز في درسك واعمل اللي عليك. | ¡Tu esfuerzo de hoy es el éxito de mañana!",
+    "رحلة الألف ميل بتبدأ بخطوة، وأنت قطعت شوط كبير.. استمر! | ¡Un viaje de mil millas comienza con un paso!",
+    "اللغة مش بس كلمات، اللغة ثقافة وحياة جديدة بتفتحلك أبواب العالم. | ¡Un nuevo idioma es una nueva vida!",
+    "غلطاتك في النطق والتحدث هي أكبر معلم ليك، اتكلم وماتخفش! | ¡El error es el mejor maestro, habla sin miedo!",
+    "فخورين بمجهودك اليومي في المنصة، كمل وهتشوف النتيجة بنفسك. | ¡Estamos muy orgullosos de tu dedicación!",
+    "كل ربع ساعة بتذاكرها بتعمل فرق كبير في مستواك على المدى البعيد. | ¡Cada minuto de práctica cuenta!",
+    "سر إتقان الإسبانية هو الممارسة اليومية والاستماع المستمر. | ¡Practica y escucha todos los días!",
+    "أنت أقوى من أي صعوبة، واللغة الإسبانية هتكون أسهل مع كل تمرين. | ¡Eres capaz de lograr todo lo que te propongas!",
+    "استمتع برحلة التعلم، كل كلمة جديدة بتتعلمها هي انتصار ليك. | ¡Disfruta el camino del aprendizaje!",
+    "جهدك اليوم يفتح لك أبواب الفرص والمنح والوظائف غداً. | ¡El conocimiento te abrirá todas las puertas!",
+    "مستواك بيتحسن كل يوم حتى لو مش حاسس، الاستمرار هو المفتاح! | ¡Mejoras cada día, sigue adelante!",
+    "لا تقارن نفسك بحد، قارن مستواك النهاردة بمستواك الشهر اللي فات. | ¡Compárate solo con tu versión de ayer!",
+    "الحماس بيخليك تبدأ، لكن الالتزام والروتين هم اللي بيوصلوك للنجاح. | ¡La disciplina supera a la motivación!",
+    "لما تتعب افتكر أنت بدأت ليه، الإسبانية هتغير مستقبلك للأفضل! | ¡Recuerda siempre por qué empezaste!",
+    "ابتسم وأنت بتذاكر، أنت بتبني نسخة أفضل وأذكى من نفسك! | ¡Sonríe, estás construyendo un futuro brillante!",
+    "التدريب اليومي بيصنع المعجزات، استمر على نفس الجدول. | ¡La práctica diaria hace al maestro!",
+    "كل سؤال بتجاوبه صح هو خطوة جديدة نحو الطلاقة التامة. | ¡Cada respuesta correcta te acerca a la fluidez!",
+    "النجاح هو مجموع مجهودات صغيرة بتتكرر كل يوم بانتظام. | ¡El éxito es la suma de pequeños esfuerzos!",
+    "أنت في المكان الصح، ومعاك أفضل المناهج والتمارين.. انطلق! | ¡Estás en el lugar correcto para aprender!",
+    "ما تخافش من المحادثة، الإسباني لغة جميلة وسهلة لما تمارسها بحب. | ¡Hablar español es fácil y divertido!",
+    "تذكر دائماً: من يزرع الاجتهاد يحصد التفوق والتميز. | ¡Quien siembra esfuerzo, cosecha éxito!",
+    "أصعب جزء هو البداية، وأنت بالفعل بدأت وقطعت شوط رائع! | ¡Lo más difícil es empezar, y ya estás aquí!",
+    "اللغة الإسبانية بيتحدث بها أكثر من 500 مليون شخص، وأنت بقيت واحد منهم! | ¡Ya eres parte del mundo hispanohablante!",
+    "استمع جيداً، ردد بصوت عالٍ، واكتب بيدك.. هكذا تتقن اللغات! | ¡Escucha, repite y escribe para dominar el idioma!",
+    "نحن معك في كل خطوة، فخورين بك وبإصرارك على التميز! | ¡Estamos contigo en cada paso del camino!"
 ]
 
 # =====================================================================
@@ -583,7 +606,8 @@ STUDENT_LOGIN_HTML = """
         .input-group { position: relative; margin: 15px 0; }
         .input-group i.field-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; }
         input { width: 100%; padding: 12px 40px 12px 12px; border: 2px solid #333; border-radius: 8px; text-align: center; box-sizing: border-box; font-size: 15px; font-family: 'Cairo', sans-serif; transition: all 0.2s; }
-        input[type="password"] { direction: ltr; text-align: left; font-family: sans-serif; padding: 12px 40px 12px 12px; }
+        input[type="password"] { direction: ltr; text-align: center; font-family: 'Cairo', sans-serif; padding: 12px 40px 12px 12px; }
+        input::placeholder { text-align: center; font-family: 'Cairo', sans-serif; }
         input:focus { border-color: var(--primary-red); outline: none; box-shadow: 3px 3px 0px rgba(229, 36, 33, 0.2); }
         button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; transition: all 0.2s; margin-top: 10px; box-shadow: 3px 3px 0px #333; }
         button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #333; }
@@ -624,19 +648,19 @@ STUDENT_LOGIN_HTML = """
         <form method="POST">
             <div class="input-group">
                 <i class="fa-solid fa-user field-icon"></i>
-                <input type="text" name="username" placeholder="اسم المستخدم بتاعك" required>
+                <input type="text" name="username" placeholder="اسم المستخدم بتاعك | Usuario" required>
             </div>
             <div class="input-group">
                 <i class="fa-solid fa-lock field-icon"></i>
-                <input type="password" name="password" placeholder="كلمة المرور" required>
+                <input type="password" name="password" placeholder="كلمة المرور | Contraseña" required>
             </div>
-            <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> ادخل للمنصة</button>
+            <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> ادخل للمنصة | Entrar</button>
         </form>
-        <a href="/teacher_login" class="teacher-link"><i class="fa-solid fa-chalkboard-user"></i> الدخول كمدرس</a>
+        <a href="/teacher_login" class="teacher-link"><i class="fa-solid fa-chalkboard-user"></i> الدخول كمدرس | Acceso Profesores</a>
         <div class="lang-strip">
-            <div class="lang-item"><span class="es">Aprende!</span><br><span class="ar">اتعلم!</span></div>
-            <div class="lang-item"><span class="es">Habla!</span><br><span class="ar">اتكلم!</span></div>
-            <div class="lang-item"><span class="es">Practica!</span><br><span class="ar">اتمرن!</span></div>
+            <div class="lang-item"><span class="es" dir="ltr" style="display:inline-block;">¡Aprende!</span><br><span class="ar">اتعلم!</span></div>
+            <div class="lang-item"><span class="es" dir="ltr" style="display:inline-block;">¡Habla!</span><br><span class="ar">اتكلم!</span></div>
+            <div class="lang-item"><span class="es" dir="ltr" style="display:inline-block;">¡Practica!</span><br><span class="ar">اتمرن!</span></div>
         </div>
         <div class="social-links">
             <a href="https://www.facebook.com/institutoamigos1" target="_blank" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
@@ -667,8 +691,9 @@ TEACHER_LOGIN_HTML = """
         .card { background: #16213e; padding: 32px 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid #0f3460; text-align: center; width: 100%; max-width: 365px; margin: 15px auto; }
         h1 { color: #f39c12; font-size: 24px; font-weight: 900; margin-bottom: 5px; }
         .input-group { margin: 15px 0; }
-        input { width: 100%; padding: 12px; border: 2px solid #0f3460; background: #1a1a2e; color: white; border-radius: 8px; text-align: center; font-family: 'Cairo'; }
-        input[type="password"] { direction: ltr; text-align: left; font-family: sans-serif; }
+        input { width: 100%; padding: 12px; border: 2px solid #0f3460; background: #1a1a2e; color: white; border-radius: 8px; text-align: center; font-family: 'Cairo', sans-serif; }
+        input[type="password"] { direction: ltr; text-align: center; font-family: 'Cairo', sans-serif; }
+        input::placeholder { text-align: center; font-family: 'Cairo', sans-serif; }
         button { width: 100%; padding: 12px; background: #e67e22; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         .student-link { display: inline-block; margin-top: 20px; color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .student-link:hover { color: #fff; }
@@ -683,11 +708,11 @@ TEACHER_LOGIN_HTML = """
         <p style="color: #aaa; margin-bottom: 25px;">أدخل بياناتك للوصول للوحة التحكم</p>
         {% if error %} <div class="error">{{ error }}</div> {% endif %}
         <form method="POST">
-            <div class="input-group"><input type="text" name="username" placeholder="اسم المستخدم" required></div>
-            <div class="input-group"><input type="password" name="password" placeholder="كلمة المرور" required></div>
-            <button type="submit">تسجيل الدخول</button>
+            <div class="input-group"><input type="text" name="username" placeholder="اسم المستخدم | Usuario" required></div>
+            <div class="input-group"><input type="password" name="password" placeholder="كلمة المرور | Contraseña" required></div>
+            <button type="submit">تسجيل الدخول | Entrar</button>
         </form>
-        <a href="/" class="student-link"><i class="fa-solid fa-arrow-right"></i> رجوع لصفحة الطلبة</a>
+        <a href="/" class="student-link"><i class="fa-solid fa-arrow-right"></i> رجوع لصفحة الطلبة | Volver</a>
     </div>
 </body>
 </html>
@@ -765,23 +790,45 @@ DASHBOARD_HTML = """
         .btn-shadow { background: var(--shadow-color); color: white; }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .wheel-box { text-align: center; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .wheel-display { font-size: 22px; font-weight: 800; color: var(--secondary); padding: 40px 20px; margin: 20px auto; max-width: 700px; min-height: 150px; display: flex; align-items: center; justify-content: center; border: 3px dashed var(--accent); border-radius: 20px; background: #fffdf5; transition: all 0.2s ease; }
-        .spin-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; font-size: 20px; font-weight: 900; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-        .spin-btn:hover { background: var(--primary-dark); transform: translateY(-3px); }
-        .spinning { animation: shake 0.1s infinite; color: var(--primary); }
-        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-2px); } 50% { transform: translateX(2px); } 100% { transform: translateX(0); } }
-        .timer-display { font-size: 30px; font-weight: 900; color: var(--primary); margin-top: 20px; display: none; }
-        .recorder-box { margin-top: 35px; padding-top: 25px; border-top: 2px dashed #eee; text-align: center; }
-        .record-btn { padding: 12px 24px; font-size: 15px; font-weight: 800; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-start { background: #e52421; color: white; box-shadow: 0 4px 12px rgba(229,36,33,0.3); }
-        .btn-start:hover:not(:disabled) { background: #c31e1b; transform: translateY(-2px); }
-        .btn-start:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
-        .btn-stop { background: #2c3e50; color: white; box-shadow: 0 4px 12px rgba(44,62,80,0.3); }
-        .btn-stop:hover:not(:disabled) { background: #1a252f; transform: translateY(-2px); }
-        .btn-stop:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
-        .download-audio-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: #2ecc71; color: white; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 12px rgba(46,204,113,0.3); }
-        .download-audio-btn:hover { background: #27ae60; transform: translateY(-2px); }
+        .wheel-container-wrapper { background: white; padding: 35px 25px; border-radius: 24px; box-shadow: 0 12px 35px rgba(0,0,0,0.06); text-align: center; position: relative; }
+        .wheel-header h3 { font-size: 24px; font-weight: 900; color: var(--secondary); margin-bottom: 8px; }
+        .wheel-header p { font-size: 14px; color: var(--text-muted); }
+        .wheel-pointer { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 42px; color: #e52421; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .spin-btn { background: linear-gradient(135deg, var(--primary) 0%, #c31e1b 100%); color: white; border: none; padding: 16px 45px; font-size: 20px; font-weight: 900; border-radius: 50px; cursor: pointer; transition: 0.3s; box-shadow: 0 8px 20px rgba(229,36,33,0.3); display: inline-flex; align-items: center; gap: 10px; }
+        .spin-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(229,36,33,0.4); }
+        .spin-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
+        .winner-topic-card { background: linear-gradient(135deg, #fffcf0 0%, #fff9db 100%); border: 3px solid var(--accent); border-radius: 20px; padding: 25px; margin: 25px auto; max-width: 750px; box-shadow: 0 8px 25px rgba(255,209,0,0.2); animation: fadeInScale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .winner-badge { display: inline-block; background: var(--secondary); color: var(--accent); font-weight: 800; font-size: 13px; padding: 6px 16px; border-radius: 50px; margin-bottom: 12px; }
+        .winner-text { font-size: 22px; font-weight: 900; color: #1e293b; line-height: 1.6; margin: 10px 0 15px; }
+        .timer-display { font-size: 18px; font-weight: 800; color: var(--primary); background: white; padding: 10px 20px; border-radius: 12px; display: inline-block; border: 1px solid #fee2e2; }
+        .timer-display span { font-size: 24px; font-weight: 900; }
+        
+        .pro-recorder-card { background: #1e293b; color: white; border-radius: 24px; padding: 30px; margin: 30px auto 10px; max-width: 750px; box-shadow: 0 15px 35px rgba(15,23,42,0.4); text-align: right; border: 1px solid #334155; }
+        .recorder-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #334155; padding-bottom: 18px; margin-bottom: 22px; }
+        .rec-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(229,36,33,0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .rec-title h4 { font-size: 18px; font-weight: 900; color: white; margin: 0 0 4px; }
+        .rec-title span { font-size: 13px; color: #94a3b8; }
+        .recorder-visualizer { background: #0f172a; border-radius: 16px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #1e293b; margin-bottom: 22px; }
+        .status-indicator { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; background: #64748b; display: inline-block; transition: 0.3s; }
+        .status-dot.active-rec { background: #ef4444; box-shadow: 0 0 12px #ef4444; animation: pulseRec 1s infinite; }
+        @keyframes pulseRec { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
+        .rec-timer { font-family: monospace; font-size: 26px; font-weight: 900; color: #38bdf8; }
+        .recorder-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px; }
+        .pro-btn { padding: 14px 28px; border-radius: 14px; font-size: 15px; font-weight: 800; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-record { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; box-shadow: 0 6px 16px rgba(239,68,68,0.3); }
+        .btn-record:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(239,68,68,0.4); }
+        .btn-record:disabled { background: #475569; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
+        .btn-stop { background: #334155; color: white; border: 1px solid #475569; }
+        .btn-stop:hover:not(:disabled) { background: #475569; transform: translateY(-2px); }
+        .btn-stop:disabled { background: #1e293b; color: #475569; border-color: #334155; cursor: not-allowed; }
+        .btn-reset { background: #d97706; color: white; }
+        .btn-reset:hover { background: #b45309; transform: translateY(-2px); }
+        .playback-area { background: #0f172a; padding: 20px; border-radius: 16px; margin-top: 20px; border: 1px dashed #334155; text-align: center; }
+        .custom-audio-player { width: 100%; height: 45px; margin-bottom: 15px; }
+        .pro-download-btn { display: inline-flex; align-items: center; gap: 10px; background: #10b981; color: white; text-decoration: none; padding: 12px 26px; border-radius: 12px; font-weight: 800; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 14px rgba(16,185,129,0.3); }
+        .pro-download-btn:hover { background: #059669; transform: translateY(-2px); }
         @media (max-width: 768px) {
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
             .motivation-box { width: 100%; max-width: 320px; margin: 0 auto; }
@@ -789,7 +836,8 @@ DASHBOARD_HTML = """
             .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
             .tab-trigger { flex-shrink: 0; }
             .cards-grid { grid-template-columns: 1fr; gap: 15px; }
-            .wheel-box { padding: 20px 15px; }
+            .wheel-container-wrapper { padding: 20px 15px; }
+            .pro-recorder-card { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -937,22 +985,66 @@ DASHBOARD_HTML = """
         </div>
 
         <div id="wheel-tab" class="tab-content">
-            <div class="wheel-box">
-                <h3 style="color: var(--secondary); margin-bottom: 10px;">عجلة التحدث</h3>
-                <div id="topicDisplay" class="wheel-display">اضغط على "لف العجلة" لبدء التحدي! 🎯</div>
-                <button id="spinBtn" class="spin-btn" onclick="spinWheel()">لف العجلة</button>
-                <div id="timerDisplay" class="timer-display">02:00</div>
-                <div id="recorderBox" class="recorder-box">
-                    <h4 style="color: var(--secondary); margin-bottom: 12px; font-size: 18px;"><i class="fa-solid fa-microphone-lines" style="color: var(--primary);"></i> سجل إجابتك وتحدث بالإسبانية | ¡Graba tu respuesta!</h4>
-                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">بعد ظهور الموضوع، اضغط على زر التسجيل وابدأ في التحدث، ثم استمع لصوتك أو حمله لمراجعته.</p>
-                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
-                        <button id="startRecordBtn" onclick="startRecording()" class="record-btn btn-start"><i class="fa-solid fa-record-vinyl"></i> ابدأ التسجيل | Grabar</button>
-                        <button id="stopRecordBtn" onclick="stopRecording()" class="record-btn btn-stop" disabled><i class="fa-solid fa-stop"></i> إيقاف التسجيل | Detener</button>
+            <div class="wheel-container-wrapper">
+                <div class="wheel-header">
+                    <h3><i class="fa-solid fa-dharmachakra" style="color: var(--primary);"></i> عجلة التحدث التفاعلية | Rueda de Conversación</h3>
+                    <p>اضغط على زر الدوران لاختيار موضوع عشوائي للتحدث، ثم سجل إجابتك بصوتك!</p>
+                </div>
+                
+                <div class="wheel-canvas-area" style="position: relative; margin: 25px auto; width: 380px; max-width: 100%;">
+                    <div class="wheel-pointer"><i class="fa-solid fa-caret-down"></i></div>
+                    <canvas id="wheelCanvas" width="380" height="380" style="max-width: 100%; height: auto; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 6px solid #2c3e50; background: white;"></canvas>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <button id="spinBtn" class="spin-btn" onclick="startWheelSpin()"><i class="fa-solid fa-rotate-right"></i> لف العجلة | ¡Girar Rueda!</button>
+                </div>
+
+                <!-- شاشة عرض الموضوع المختار بوضوح تام -->
+                <div id="winnerTopicCard" class="winner-topic-card" style="display: none;">
+                    <div class="winner-badge">🎯 الموضوع المختار لك | Tema Seleccionado</div>
+                    <div id="winnerTopicText" class="winner-text"></div>
+                    <div id="timerDisplay" class="timer-display">⏱️ الوقت المتبقي للتحدث: <span>02:00</span></div>
+                </div>
+
+                <!-- كونسول التسجيل الصوتي الاحترافي -->
+                <div id="professionalRecorder" class="pro-recorder-card">
+                    <div class="recorder-header">
+                        <div class="rec-icon"><i class="fa-solid fa-studio-vinari"></i></div>
+                        <div class="rec-title">
+                            <h4>استوديو التسجيل الصوتي | Estudio de Grabación</h4>
+                            <span>سجل إجابتك بوضوح، استمع لنطقك، وشارك الملف مع معلمك</span>
+                        </div>
                     </div>
-                    <div id="recordStatus" style="font-size: 14px; font-weight: bold; color: var(--secondary); min-height: 20px; margin-bottom: 10px;">جاهز للتسجيل...</div>
-                    <audio id="audioPlayback" controls style="width: 100%; max-width: 500px; margin: 10px auto; display: none; border-radius: 30px;"></audio>
-                    <br>
-                    <a id="downloadRecordBtn" href="#" download="mi_respuesta_espanol.webm" class="download-audio-btn" style="display: none; margin-top: 10px;"><i class="fa-solid fa-download"></i> تحميل التسجيل الصوتي | Descargar Audio</a>
+
+                    <div class="recorder-visualizer" id="recVisualizer">
+                        <div class="status-indicator">
+                            <span class="status-dot" id="statusDot"></span>
+                            <span id="recStatusText">جاهز للتسجيل | Listo para grabar</span>
+                        </div>
+                        <div class="rec-timer" id="recTimerText">00:00</div>
+                    </div>
+
+                    <div class="recorder-actions">
+                        <button id="startRecordBtn" onclick="startRecording()" class="pro-btn btn-record">
+                            <i class="fa-solid fa-microphone"></i> <span>ابدأ التسجيل | Grabar</span>
+                        </button>
+                        <button id="stopRecordBtn" onclick="stopRecording()" class="pro-btn btn-stop" disabled>
+                            <i class="fa-solid fa-square"></i> <span>إيقاف وحفظ | Detener</span>
+                        </button>
+                        <button id="resetRecordBtn" onclick="resetRecording()" class="pro-btn btn-reset" style="display: none;">
+                            <i class="fa-solid fa-rotate-left"></i> <span>تسجيل جديد | Regrabar</span>
+                        </button>
+                    </div>
+
+                    <div id="playbackArea" class="playback-area" style="display: none;">
+                        <audio id="audioPlayback" controls class="custom-audio-player"></audio>
+                        <div class="download-strip">
+                            <a id="downloadRecordBtn" href="#" download="mi_respuesta_espanol.webm" class="pro-download-btn">
+                                <i class="fa-solid fa-cloud-arrow-down"></i> تحميل المقطع الصوتي (MP3/WebM) | Descargar
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -963,51 +1055,135 @@ DASHBOARD_HTML = """
             document.querySelectorAll(".tab-trigger").forEach(el => el.classList.remove("active"));
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
+            if(tabId === 'wheel-tab') {
+                setTimeout(drawWheel, 50);
+            }
         }
         const levelTopics = {{ topics_json | safe }};
-        function spinWheel() {
-            const btn = document.getElementById("spinBtn");
-            const display = document.getElementById("topicDisplay");
-            const timerDisplay = document.getElementById("timerDisplay");
-            btn.disabled = true;
-            timerDisplay.style.display = "none";
-            display.classList.add("spinning");
-            let counter = 0;
-            let spinInterval = setInterval(() => {
-                const randomTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
-                display.innerText = randomTopic;
-                counter++;
-                if(counter > 20) {
-                    clearInterval(spinInterval);
-                    display.classList.remove("spinning");
-                    const finalTopic = levelTopics[Math.floor(Math.random() * levelTopics.length)];
-                    display.innerHTML = '<span style="color: var(--primary); font-size: 26px;">🎯 ' + finalTopic + '</span>';
-                    btn.innerHTML = 'جرب موضوع تاني';
-                    btn.disabled = false;
-                    startTimer(120, timerDisplay);
-                }
-            }, 100);
+        const colorsPalette = ["#e52421", "#f39c12", "#2ecc71", "#2980b9", "#8e44ad", "#16a085", "#d35400", "#27ae60", "#c0392b", "#2c3e50"];
+        let wheelAngle = 0;
+        let isSpinningWheel = false;
+
+        function drawWheel() {
+            const canvas = document.getElementById("wheelCanvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = centerX - 10;
+            const numSlices = levelTopics.length;
+            const sliceAngle = (2 * Math.PI) / numSlices;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numSlices; i++) {
+                const startAngle = wheelAngle + i * sliceAngle;
+                const endAngle = startAngle + sliceAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colorsPalette[i % colorsPalette.length];
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#ffffff";
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + sliceAngle / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 15px Cairo, sans-serif";
+                
+                let textLabel = "موضوع " + (i + 1);
+                ctx.fillText(textLabel, radius - 20, 5);
+                ctx.restore();
+            }
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 28, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "#2c3e50";
+            ctx.stroke();
         }
-        let timerInterval;
-        function startTimer(duration, display) {
-            clearInterval(timerInterval);
-            display.style.display = "block";
-            let timer = duration, minutes, seconds;
-            timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = minutes + ":" + seconds;
+
+        function startWheelSpin() {
+            if (isSpinningWheel) return;
+            isSpinningWheel = true;
+            const btn = document.getElementById("spinBtn");
+            btn.disabled = true;
+            document.getElementById("winnerTopicCard").style.display = "none";
+
+            let duration = 4000;
+            let startTime = null;
+            let initialAngle = wheelAngle;
+            let totalSpin = (Math.PI * 2) * (5 + Math.random() * 5);
+
+            function animateSpin(timestamp) {
+                if (!startTime) startTime = timestamp;
+                let elapsed = timestamp - startTime;
+                let progress = Math.min(elapsed / duration, 1);
+                
+                let easeOut = 1 - Math.pow(1 - progress, 3);
+                wheelAngle = initialAngle + totalSpin * easeOut;
+                drawWheel();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    isSpinningWheel = false;
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> لفة جديدة | ¡Girar de nuevo!';
+                    determineWinner();
+                }
+            }
+            requestAnimationFrame(animateSpin);
+        }
+
+        function determineWinner() {
+            const numSlices = levelTopics.length;
+            const sliceAngle = (2 * Math.PI) / numSlices;
+            
+            let normalizedAngle = wheelAngle % (2 * Math.PI);
+            if (normalizedAngle < 0) normalizedAngle += 2 * Math.PI;
+            
+            let pointerAngle = (3 * Math.PI / 2 - normalizedAngle) % (2 * Math.PI);
+            if (pointerAngle < 0) pointerAngle += 2 * Math.PI;
+
+            let winningIndex = Math.floor(pointerAngle / sliceAngle) % numSlices;
+            let winningTopic = levelTopics[winningIndex];
+
+            document.getElementById("winnerTopicText").innerText = winningTopic;
+            document.getElementById("winnerTopicCard").style.display = "block";
+            startSpeakingTimer(120);
+        }
+
+        let speakingTimerInterval;
+        function startSpeakingTimer(duration) {
+            clearInterval(speakingTimerInterval);
+            let timer = duration;
+            const timerEl = document.querySelector("#timerDisplay span");
+            speakingTimerInterval = setInterval(() => {
+                let m = parseInt(timer / 60, 10);
+                let s = parseInt(timer % 60, 10);
+                timerEl.textContent = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
                 if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    display.textContent = "انتهى الوقت! أحسنت 👏";
+                    clearInterval(speakingTimerInterval);
+                    timerEl.textContent = "انتهى الوقت!";
                 }
             }, 1000);
         }
 
+        window.addEventListener("DOMContentLoaded", () => { drawWheel(); });
+
         let mediaRecorder;
         let audioChunks = [];
+        let recInterval;
+        let recSeconds = 0;
 
         async function startRecording() {
             try {
@@ -1022,24 +1198,39 @@ DASHBOARD_HTML = """
                 };
 
                 mediaRecorder.onstop = () => {
+                    clearInterval(recInterval);
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                     const audioUrl = URL.createObjectURL(audioBlob);
                     const audioPlayback = document.getElementById("audioPlayback");
                     const downloadBtn = document.getElementById("downloadRecordBtn");
                     audioPlayback.src = audioUrl;
-                    audioPlayback.style.display = "block";
+                    document.getElementById("playbackArea").style.display = "block";
                     downloadBtn.href = audioUrl;
-                    downloadBtn.style.display = "inline-flex";
-                    document.getElementById("recordStatus").innerHTML = '<span style="color: #2ecc71;">✅ تم حفظ التسجيل بنجاح! يمكنك الاستماع أو التحميل الآن.</span>';
+                    document.getElementById("recStatusText").innerText = "تم حفظ الإجابة بنجاح | Grabación guardada";
+                    document.getElementById("statusDot").classList.remove("active-rec");
+                    document.getElementById("resetRecordBtn").style.display = "inline-flex";
                 };
 
                 mediaRecorder.start();
+                recSeconds = 0;
+                document.getElementById("recTimerText").innerText = "00:00";
+                clearInterval(recInterval);
+                recInterval = setInterval(() => {
+                    recSeconds++;
+                    let rm = Math.floor(recSeconds / 60);
+                    let rs = recSeconds % 60;
+                    document.getElementById("recTimerText").innerText = (rm < 10 ? "0" + rm : rm) + ":" + (rs < 10 ? "0" + rs : rs);
+                }, 1000);
+
                 document.getElementById("startRecordBtn").disabled = true;
                 document.getElementById("stopRecordBtn").disabled = false;
-                document.getElementById("recordStatus").innerHTML = '<span style="color: #e52421; animation: shake 0.5s infinite;">🔴 جاري التسجيل الآن... تحدث بوضوح!</span>';
+                document.getElementById("resetRecordBtn").style.display = "none";
+                document.getElementById("playbackArea").style.display = "none";
+                document.getElementById("recStatusText").innerText = "جاري التسجيل الصوتي الآن... | Grabando en curso...";
+                document.getElementById("statusDot").classList.add("active-rec");
             } catch (err) {
-                alert("لم نتمكن من الوصول للميكروفون. يرجى السماح بالوصول للميكروفون من إعدادات المتصفح.");
-                console.error("Error accessing microphone:", err);
+                alert("يرجى السماح للمتصفح بالوصول للميكروفون لبدء التسجيل الصوتي.");
+                console.error("Mic error:", err);
             }
         }
 
@@ -1049,8 +1240,15 @@ DASHBOARD_HTML = """
                 mediaRecorder.stream.getTracks().forEach(track => track.stop());
                 document.getElementById("startRecordBtn").disabled = false;
                 document.getElementById("stopRecordBtn").disabled = true;
-                document.getElementById("recordStatus").innerHTML = 'جاري معالجة الصوت...';
             }
+        }
+
+        function resetRecording() {
+            document.getElementById("playbackArea").style.display = "none";
+            document.getElementById("resetRecordBtn").style.display = "none";
+            document.getElementById("recStatusText").innerText = "جاهز للتسجيل | Listo para grabar";
+            document.getElementById("recTimerText").innerText = "00:00";
+            startRecording();
         }
     </script>
 </body>
@@ -1622,5 +1820,6 @@ def logout():
 @app.route('/healthz')
 def health_check():
     return "OK", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
