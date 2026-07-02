@@ -21,6 +21,10 @@ SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUt
 # [ 1. المحاضرات - LESSONS_DATA ]
 # =====================================================================
 LESSONS_DATA = {
+    "demo": [
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"}
+    ],
     "A1.1": [
         {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
         {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"},
@@ -49,6 +53,10 @@ LESSONS_DATA = {
 # [ 2. التمارين - EXERCISES_DATA ]
 # =====================================================================
 EXERCISES_DATA = {
+    "demo": [
+        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
+        {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"}
+    ],
     "A1.1": [
         {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
         {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"},
@@ -77,6 +85,10 @@ EXERCISES_DATA = {
 # [ 3. الكلمات - VOCAB_DATA ]
 # =====================================================================
 VOCAB_DATA = {
+    "demo": [
+        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
+        {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"}
+    ],
     "A1.1": [
         {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
         {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"},
@@ -105,6 +117,10 @@ VOCAB_DATA = {
 # [ 4. جداول المذاكرة - SCHEDULES_DATA ]
 # =====================================================================
 SCHEDULES_DATA = {
+    "demo": [
+        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"}
+    ],
     "A1.1": [
         {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
         {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
@@ -133,6 +149,10 @@ SCHEDULES_DATA = {
 # [ 5. الألعاب الفردية - GAMES_DATA ]
 # =====================================================================
 GAMES_DATA = {
+    "demo": [
+        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
+        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"}
+    ],
     "A1.1": [
         {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
         {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
@@ -161,6 +181,10 @@ GAMES_DATA = {
 # [ 6. الشادوينج - SHADOWING_DATA ]
 # =====================================================================
 SHADOWING_DATA = {
+    "demo": [
+        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
+        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"}
+    ],
     "A1.1": [
         {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
         {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"},
@@ -189,6 +213,10 @@ SHADOWING_DATA = {
 # [ 7. الفيديوهات - VIDEOS_DATA ]
 # =====================================================================
 VIDEOS_DATA = {
+    "demo": [
+        {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
+        {"title": "أدوات التعريف والتنكير في الإسبانية", "youtube_id": "dQw4w9WgXcQ"}
+    ],
     "A1.1": [
         {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
         {"title": "أدوات التعريف والتنكير في الإسبانية", "youtube_id": "dQw4w9WgXcQ"}
@@ -213,6 +241,10 @@ VIDEOS_DATA = {
 # [ 8. الألعاب الجماعية - MULTIPLAYER_GAMES_DATA ]
 # =====================================================================
 MULTIPLAYER_GAMES_DATA = {
+    "demo": [
+        {"title": "لعبة كاهوت جماعية 1", "file": "multi1.html"},
+        {"title": "لعبة تفاعلية للفصل", "file": "multi2.html"}
+    ],
     "A1.1": [
         {"title": "لعبة كاهوت جماعية 1", "file": "multi1.html"},
         {"title": "لعبة تفاعلية للفصل", "file": "multi2.html"}
@@ -236,40 +268,227 @@ MULTIPLAYER_GAMES_DATA = {
 # [ 9. عجلة التحدث - WHEEL_TOPICS ]
 # =====================================================================
 WHEEL_TOPICS = {
+    "demo": [
+        "قدم نفسك بالكامل: اسمك وسنك وبلدك وظيفتك.",
+        "تحدث عن الألوان المفضلة لديك ولماذا تحبها.",
+        "اذكر 5 أشياء تستخدمها كل يوم في غرفتك أو حقيبتك.",
+        "اوصف الطقس اليوم بالإسبانية (حار، بارد، مشمس).",
+        "قول أيام الأسبوع وقول ماذا تفعل في كل يوم.",
+        "اتكلم عن أكلتك المفضلة ومشروبك المفضل.",
+        "عرّف صاحبك المقرب: اسمه وشكله وأين يعيش.",
+        "قول الأرقام من 1 لـ 20 وبعدين العد العكسي من 20 إلى 1.",
+        "اوصف أوضتك في البيت: ماذا يوجد فيها من أثاث؟",
+        "سلم على شخص جديد وعرّفه بنفسك وبأسرتك.",
+        "تحدث عن أفراد عائلتك (الأب، الأم، الإخوة والأخوات).",
+        "اذكر أوقات اليوم ووجباتك الثلاثة (الإفطار، الغداء، العشاء).",
+        "تحدث عن حيوانك المفضل ولماذا تحبه.",
+        "اذكر 5 دول تتحدث الإسبانية وجنسيات أهلها.",
+        "تحدث عن روتينك الصباحي البسيط: متى تستيقظ وماذا تفعل أولاً."
+    ],
     "A1.1": [
-        "قدم نفسك بالكامل: اسمك وسنك وبلدك.",
-        "تحدث عن الألوان المفضلة لديك ولماذا.",
-        "اذكر 5 أشياء تستخدمها كل يوم.",
-        "اوصف الطقس النهاردة بالإسباني.",
-        "قول أيام الأسبوع وقول بتعمل إيه كل يوم.",
-        "اتكلم عن أكلتك المفضلة.",
-        "عرّف صاحبك المقرب: اسمه وشكله.",
-        "قول الأرقام من 1 لـ 20 وبعدين العد العكسي.",
-        "اوصف أوضتك: فيها إيه؟",
-        "سلم على حد جديد وعرّفه بنفسك."
+        "قدم نفسك بالكامل: اسمك وسنك وبلدك وظيفتك.",
+        "تحدث عن الألوان المفضلة لديك ولماذا تحبها.",
+        "اذكر 5 أشياء تستخدمها كل يوم في غرفتك أو حقيبتك.",
+        "اوصف الطقس اليوم بالإسبانية (حار، بارد، مشمس).",
+        "قول أيام الأسبوع وقول ماذا تفعل في كل يوم.",
+        "اتكلم عن أكلتك المفضلة ومشروبك المفضل.",
+        "عرّف صاحبك المقرب: اسمه وشكله وأين يعيش.",
+        "قول الأرقام من 1 لـ 20 وبعدين العد العكسي من 20 إلى 1.",
+        "اوصف أوضتك في البيت: ماذا يوجد فيها من أثاث؟",
+        "سلم على شخص جديد وعرّفه بنفسك وبأسرتك.",
+        "تحدث عن أفراد عائلتك (الأب، الأم، الإخوة والأخوات).",
+        "اذكر أوقات اليوم ووجباتك الثلاثة (الإفطار، الغداء، العشاء).",
+        "تحدث عن حيوانك المفضل ولماذا تحبه.",
+        "اذكر 5 دول تتحدث الإسبانية وجنسيات أهلها.",
+        "تحدث عن روتينك الصباحي البسيط: متى تستيقظ وماذا تفعل أولاً."
     ],
-    "A1.2": ["موضوع تجريبي للتحدث."],
-    "A1.3": ["موضوع تجريبي للتحدث."],
+    "A1.2": [
+        "تحدث عن روتينك اليومي بالتفصيل من الصباح حتى المساء.",
+        "اوصف بيتك أو شقتك بالتفصيل (عدد الغرف والأثاث الموجود).",
+        "ماذا تفعل عادة في وقت فراغك وعطلة نهاية الأسبوع؟",
+        "تحدث عن مدينتك أو حيك وماذا يوجد به من أماكن وخدمات.",
+        "كيف تقضي يوم العطلة مع عائلتك أو أصدقائك؟",
+        "تحدث عن رياضتك المفضلة وكم مرة تمارسها في الأسبوع.",
+        "اذكر كيف تذهب إلى العمل أو الجامعة وما هي وسائل المواصلات.",
+        "تخيل أنك في مطعم إسباني: اطلب وجبتك المفضلة وتحدث مع النادل.",
+        "تحدث عن فصلك المفضل من فصول السنة الأربعة ولماذا.",
+        "اوصف ملابس ارتديتها اليوم أو تحب ارتدائها في المناسبات.",
+        "تحدث عن مهنة تحبها وماذا يفعل أصحاب هذه المهنة يومياً.",
+        "اسأل زميلك 5 أسئلة للتعرف على هواياته واهتماماته.",
+        "تحدث عن سوق أو متجر تحب التسوق فيه وماذا تشتري منه.",
+        "اوصف حفلة عيد ميلاد حضرتها وكيف كان الاحتفال.",
+        "تحدث عن اللغات التي تتحدثها ولماذا قررت تعلم اللغة الإسبانية."
+    ],
+    "A1.3": [
+        "تحدث عن رحلة قمت بها في الماضي القريب وماذا أعجبك فيها.",
+        "قارن بين مدينتك الحالية ومدينتك المفضلة للسفر والعطلات.",
+        "ما هي خططك لعطلة نهاية الأسبوع القادمة؟",
+        "تحدث عن وجبة قمت بطهيها أو تحب أن تتعلم طهيها.",
+        "اوصف صديقاً لم تره منذ فترة طويلة وتذكر ذكرياتكم معاً.",
+        "تحدث عن مكان سياحي شهير في مصر أو إسبانيا وتنصح بزيارته.",
+        "كيف تحتفل مع أسرتك بالأعياد والمناسبات الرسمية؟",
+        "تحدث عن برنامج تلفزيوني أو مسلسل تتابعه بانتظام.",
+        "اوصف حديقة أو مكان طبيعي تحب قضاء الوقت فيه للاسترخاء.",
+        "ما هي العادات الصحية التي تحرص على القيام بها يومياً؟",
+        "تحدث عن هدية مميزة تلقيتها أو قدمتها لشخص عزيز.",
+        "اوصف كيف كانت طفولتك وألعابتك المفضلة عندما كنت صغيراً.",
+        "تحدث عن يوم استثنائي أو موقف طريف حدث لك مؤخراً.",
+        "اذكر 3 نصائح لشخص يبدأ تعلم اللغة الإسبانية حديثاً.",
+        "تحدث عن مشروع صغير أو فكرة تحب تنفيذها في المستقبل."
+    ],
     "A2.1": [
-        "تحدث عن هواية جديدة بدأتها مؤخراً.",
-        "صف أعز أصدقائك: شخصيته وهواياته.",
-        "تحدث عما فعلته في عطلة الأسبوع الماضي.",
-        "اوصف تجربة تعلمك الإسبانية.",
-        "اتكلم عن أحلامك وأهدافك.",
-        "لو سافرت لإسبانيا هتعمل إيه؟",
-        "اوصف عيد ميلادك الأخير.",
-        "اتكلم عن فيلم أو مسلسل شفته مؤخراً.",
-        "صف شخص بتحبه وبتقدره.",
-        "قارن بين حياتك دلوقتي وقبل 5 سنين."
+        "تحدث عن هواية جديدة بدأت ممارستها مؤخراً ولماذا اخترتها.",
+        "صف أعز أصدقائك: شخصيته، طباعه، واهتماماته المشتركة معك.",
+        "تحدث بالتفصيل عما فعلته في عطلة الأسبوع الماضي.",
+        "اوصف تجربتك في تعلم اللغة الإسبانية والتحديات التي تجاوزتها.",
+        "اتكلم عن أحلامك وأهدافك المهنية والشخصية للسنوات القادمة.",
+        "لو سافرت إلى إسبانيا غداً، ما هي أول 3 مدن ستزورها ولماذا؟",
+        "اوصف احتفالك بعيد ميلادك الأخير ومن كان معك.",
+        "اتكلم عن فيلم أو مسلسل شاهدته مؤخراً ولخص قصته ورأيك فيه.",
+        "صف شخصية تاريخية أو عامة تحبها وتقدر إنجازاتها.",
+        "قارن بين حياتك وطريقة تفكيرك الآن وقبل 5 سنوات.",
+        "تحدث عن أهم كتاب قرأته أو قصة أثرت في تفكيرك.",
+        "اوصف موقفاً واجهت فيه مشكلة وكيف استطعت حلها بحكمة.",
+        "ما رأيك في استخدام وسائل التواصل الاجتماعي وأثرها على حياتنا؟",
+        "تحدث عن ثقافة أو عادات دولة إسبانية أو أمريكية لاتينية تثير فضولك.",
+        "صف يوماً مثالياً بالنسبة لك من البداية حتى النهاية."
     ],
-    "A2.2": ["موضوع تجريبي للتحدث."],
-    "A2.3": ["موضوع تجريبي للتحدث."],
-    "B1.1": ["موضوع تجريبي للتحدث."],
-    "B1.2": ["موضوع تجريبي للتحدث."],
-    "B1.3": ["موضوع تجريبي للتحدث."],
-    "B2.1": ["موضوع تجريبي للتحدث."],
-    "B2.2": ["موضوع تجريبي للتحدث."],
-    "B2.3": ["موضوع تجريبي للتحدث."]
+    "A2.2": [
+        "تحدث عن تجربة سفر غيرت نظرتك للحياة أو عرفتك على ثقافة جديدة.",
+        "ما هي الصفات التي تجعل الشخص مديراً أو قائداً ناجحاً في رأيك؟",
+        "تحدث عن أهم اختراع تكنولوجي في حياتك ولا تستغني عنه أبداً.",
+        "لو كان بإمكانك العيش في أي حقبة زمنية، أي فترة ستختار ولماذا؟",
+        "تحدث عن أهمية الحفاظ على البيئة وماذا يمكننا فعله يومياً.",
+        "اوصف مناسبة تقليدية أو عرس حضرتها وكيف كانت الطقوس والعادات.",
+        "ما هي النصيحة الذهبية التي قدمها لك أحد والديك أو أساتذتك وتعمل بها؟",
+        "تحدث عن الفرق بين الحياة في الريف الهادئ والحياة في المدن المزدحمة.",
+        "كيف تتعامل مع التوتر وضغوط العمل أو المذاكرة؟",
+        "صف وجبة طعام غريبة أو جديدة جربتها لأول مرة وكيف كان انطباعك.",
+        "تحدث عن دور الفنون والموسيقى في التعبير عن ثقافة الشعوب.",
+        "ما هي المهارة التي تتمنى إتقانها خلال الستة أشهر القادمة؟",
+        "تحدث عن تجربة تطوعية أو مساعدة قدمتها لشخص أو للمجتمع.",
+        "اوصف كيف تطورت أساليب التعليم والتعلم عبر الإنترنت في السنوات الأخيرة.",
+        "تحدث عن طموحك الشخصي وكيف تقيس النجاح في حياتك."
+    ],
+    "A2.3": [
+        "ناقش إيجابيات وسلبيات العمل عن بُعد (Remote Work) مقارنة بالعمل المكتبي.",
+        "تحدث عن قضية اجتماعية تشغلك وكيف يمكن للمجتمع التعامل معها.",
+        "كيف تؤثر ممارسة الرياضة بانتظام على الصحة النفسية والجسدية؟",
+        "تحدث عن شخص يعتبر قدوة وملهم لك في مجال تخصصك أو عملك.",
+        "ما هو رأيك في القراءة الإلكترونية مقابل الكتب الورقية التقليدية؟",
+        "اوصف رحلة استكشافية تتمنى القيام بها في الطبيعة أو الجبال.",
+        "تحدث عن كيفية تنظيم وقتك والتوازن بين العمل والحياة الشخصية.",
+        "ما هي أهمية تعلم لغات متعددة في عالمنا العالمي المتصل اليوم؟",
+        "ناقش تأثير الإعلانات التجارية على عادات التسوق لدى المستهلكين.",
+        "تحدث عن أهمية الصداقة الحقيقية وكيف نحافظ عليها على مر السنين.",
+        "لو كنت تمتلك ميزانية لإنشاء مشروع خدمي في مدينتك، ماذا سيكون؟",
+        "اوصف تجربة ثقافية أو فنية (مسرحية، معرض، حفلة) أثارت إعجابك.",
+        "كيف يمكن للشباب الاستعداد لوظائف المستقبل في ظل التطور التكنولوجي؟",
+        "تحدث عن أهم درس تعلمته من خطأ أو فشل مررت به في الماضي.",
+        "شاركنا وجهة نظرك عن أهمية السفر والتعرف على شعوب العالم."
+    ],
+    "B1.1": [
+        "ناقش دور التكنولوجيا والذكاء الاصطناعي في تغيير سوق العمل المستقبلي.",
+        "تحدث عن تجربة تحدي صعب مررت به وكيف طورت من مهاراتك الشخصية.",
+        "ما هي المقومات الأساسية لبناء مجتمع صحي ومستدام في رأيك؟",
+        "قارن بين العادات الغذائية الحديثة والتقليدية وتأثيرها على الصحة العامة.",
+        "تحدث عن أثر السينما والمسرح في تشكيل الوعي العام وثقافة الشباب.",
+        "كيف يمكن للتعليم المستمر (Lifelong Learning) أن يساعد في التطور المهني؟",
+        "ناقش ظاهرة العولمة وتأثيرها على الهوية الثقافية للمجتمعات المحلية.",
+        "تحدث عن كتاب أو مقال علمي قرأته وأحدث تغييراً في تفكيرك.",
+        "ما هي العوامل التي تجعل مدينة ما مكاناً مثالياً للعيش والاستقرار؟",
+        "كيف يمكننا تشجيع السياحة البيئية والحفاظ على المعالم الطبيعية؟",
+        "تحدث عن دور الشباب في العمل التطوعي ومبادرات خدمة المجتمع.",
+        "ناقش العلاقة بين المال والسعادة وهل يحقق المال الرضا النفسي الكامل؟",
+        "كيف تؤثر وسائل الإعلام الحديثة في صياغة الرأي العام؟",
+        "تحدث عن أهمية المرونة وتقبل التغيير في مواجهة أزمات الحياة.",
+        "صف مشروعاً ريادياً تتمنى إطلاقه لحل مشكلة يومية في مجتمعك."
+    ],
+    "B1.2": [
+        "ناقش التحديات البيئية العالمية مثل التغير المناخي وكيفية الحد منها.",
+        "تحدث عن أهمية التنوع الثقافي في بيئة العمل الدولية.",
+        "كيف يؤثر الإجهاد الرقمي (Digital Fatigue) على إنتاجية الأفراد وعلاقاتهم؟",
+        "قارن بين وسائل النقل المستدامة والتقليدية وأثرها على تخطيط المدن.",
+        "تحدث عن قيمة العمل الجماعي وكيفية إدارة الخلافات داخل الفريق.",
+        "ما رأيك في تطور الصحافة الإلكترونية وتراجع الصحف المطبوعة؟",
+        "تحدث عن استراتيجيات إدارة المالية الشخصية والادخار للشباب.",
+        "كيف يمكن للأدب والفنون أن تكون جسراً للسلام والتفاهم بين الشعوب؟",
+        "ناقش تأثير العمل الأكاديمي والبحث العلمي في تقدم الأمم.",
+        "تحدث عن أهمية الصحة العقلية والدعم النفسي في بيئات العمل الحديثة.",
+        "ما هو دور الطاقات المتجددة في تأمين مستقبل الأرض للأجيال القادمة؟",
+        "اوصف كيفية بناء علامة تجارية شخصية (Personal Branding) ناجحة.",
+        "ناقش العوامل المؤثرة في اتخاذ القرارات المصيرية في الحياة.",
+        "تحدث عن تطور التجارة الإلكترونية وتغيير سلوك المستهلك.",
+        "شاركنا برأيك في كيفية تنمية مهارات التفكير النقدي لدى الطلاب."
+    ],
+    "B1.3": [
+        "ناقش الأبعاد الأخلاقية لاستخدام التكنولوجيا الحيوية والذكاء الاصطناعي.",
+        "تحدث عن استراتيجيات التفاوض الفعال وحل النزاعات في الحياة اليومية.",
+        "كيف يساهم الحفاظ على التراث التاريخي في تعزيز الانتماء الوطني؟",
+        "قارن بين أساليب القيادة الكلاسيكية والقيادة الملهمة في الشركات الحديثة.",
+        "تحدث عن أثر الاقتصاد التشاركي (Sharing Economy) على الخدمات التقليدية.",
+        "ما هي التحديات التي تواجه المبدعين والفنانين في العصر الرقمي؟",
+        "ناقش أهمية التوازن بين النمو الاقتصادي وحماية الموارد الطبيعية.",
+        "تحدث عن دور الرياضة العالمية في تعزيز التقارب الدبلوماسي والثقافي.",
+        "كيف يمكن للمؤسسات التعليمية دمج المهارات الناعمة في المناهج الدراسية؟",
+        "ناقش دور المرأة القيادي وأثره في تنمية المجتمع والاقتصاد.",
+        "تحدث عن تطور مفهوم الرفاهية والنجاح في المجتمعات المعاصرة.",
+        "كيف يؤثر التصميم المعماري للمدن على نفسية السكان وتفاعلهم؟",
+        "ناقش أهمية القراءة التحليلية في مواجهة الأخبار المضللة (Fake News).",
+        "تحدث عن أهمية الابتكار وريادة الأعمال في خلق فرص عمل جديدة.",
+        "شاركنا رؤيتك لمستقبل العلاقات الإنسانية في ظل التطور الافتراضي."
+    ],
+    "B2.1": [
+        "حلل أثر التحول الرقمي الشامل على استدامة الأعمال والشركات الكبرى.",
+        "ناقش مسؤولية الأفراد والمؤسسات تجاه تحقيق أهداف التنمية المستدامة.",
+        "تحدث عن تأثير التغيرات الديموغرافية والشيخوخة على أنظمة الرعاية الصحية.",
+        "كيف يمكن للمجتمعات تحقيق التوازن بين الابتكار التقني وحماية الخصوصية؟",
+        "ناقش أهمية التبادل الثقافي الدولي في الحد من النزاعات العالمية.",
+        "تحدث عن استراتيجيات بناء المرونة المؤسسية وإدارة المخاطر.",
+        "حلل تطور المفاهيم الحديثة للمواطنة العالمية في القرن الحادي والعشرين.",
+        "ناقش دور الملكية الفكرية في حماية الإبداع وتشجيع الابتكار.",
+        "تحدث عن العلاقة المعقدة بين حرية التعبير والمسؤولية الاجتماعية.",
+        "كيف يؤثر التضخم والأزمات الاقتصادية على النمط الاستهلاكي للطبقة الوسطى؟",
+        "حلل دور الفلسفة والفنون في معالجة القضايا الوجودية للإنسان المعاصر.",
+        "ناقش مستقبل المدن الذكية وكيفية دمج الذكاء الاصطناعي في المرافق العامة.",
+        "تحدث عن أهمية الأمن السيبراني في حماية البنية التحتية للدول.",
+        "حلل أثر التغير السريع في أنماط العمل على العقود والتشريعات العمالية.",
+        "شاركنا تحليلك لكيفية إعادة تشكيل الهوية الوطنية في ظل الرقمنة."
+    ],
+    "B2.2": [
+        "ناقش التطور التاريخي والمستقبلي للاتفاقيات الدولية للمناخ وحماية البيئة.",
+        "حلل التداعيات الاجتماعية والنفسية للاعتماد المتزايد على الروبوتات الخدمية.",
+        "تحدث عن دور الدبلوماسية الثقافية والقوة الناعمة في العلاقات الدولية.",
+        "كيف يمكن للنظم المالية الحديثة والعملات الرقمية إعادة تشكيل الاقتصاد العالمي؟",
+        "ناقش الأبعاد الأخلاقية والقانونية لتحرير الجينات والتعديل الوراثي.",
+        "تحدث عن أهمية الحفاظ على اللغات المهددة بالانقراض كجزء من التراث الإنساني.",
+        "حلل تأثير الاقتصاد الدائري (Circular Economy) على تقليل النفايات والاستدامة.",
+        "ناقش دور مؤسسات المجتمع المدني في مراقبة الأداء الحكومي وتعزيز الشفافية.",
+        "تحدث عن التحديات التي تواجه سلاسل الإمداد العالمية في أوقات الأزمات.",
+        "كيف يمكن للتعليم العالي مواءمة مخرجاته مع سرعة التغير التقني المعاصر؟",
+        "حلل تأثير الثقافة الاستهلاكية السريعة (Fast Consumerism) على القيم الاجتماعية.",
+        "ناقش العلاقة بين التخطيط العمراني المستدام والحد من الفوارق الطبقية.",
+        "تحدث عن أهمية أخلاقيات الذكاء الاصطناعي في منع التحيز والخوارزميات المضللة.",
+        "حلل دور وسائل الإعلام المستقلة في تعزيز الديمقراطية وحقوق الإنسان.",
+        "شاركنا رؤيتك لتحديات التكامل الاقتصادي بين الدول النامية ومستقبلها."
+    ],
+    "B2.3": [
+        "حلل الأثر الفلسفي والاجتماعي للتقنيات العصبية وتداخلها مع العقل البشري.",
+        "ناقش مستقبل الحوكمة العالمية في مواجهة الأزمات العابرة للحدود.",
+        "تحدث عن الأبعاد التنافسية للأمن الغذائي والمائي في ظل التغيرات الجيوسياسية.",
+        "كيف يمكن للتكنولوجيا أن تسهم في القضاء على الفقر وتعزيز العدالة الاجتماعية؟",
+        "ناقش التحديات الأخلاقية لتقنيات الواقع الافتراضي والميتافيرس على الهوية.",
+        "تحدث عن دور الطاقة النووية والهيدروجين الأخضر كخيارات لإنقاذ المناخ العالمي.",
+        "حلل أثر السياسات النقدية للبنوك المركزية على الاستقرار المالي الدولي.",
+        "ناقش دور الإبداع والابتكار المفتوح في تطوير صناعات الأدوية والرعاية الصحية.",
+        "تحدث عن التوازن الحرج بين الأمن القومي وحريات الأفراد المدنية في العصر الرقمي.",
+        "حلل ظاهرة الهجرة العالمية وأثرها الاقتصادي والثقافي على الدول المستضيفة.",
+        "ناقش مستقبل قطاع الفضاء واستغلال الموارد خارج كوكب الأرض.",
+        "تحدث عن أهمية الحفاظ على التنوع البيولوجي في حماية التوازن البيئي للأرض.",
+        "حلل كيف تؤثر الخوارزميات التنبؤية على حرية الإرادة واختيارات البشر.",
+        "ناقش استراتيجيات تحقيق التحول العادل نحو الاقتصاد الأخضر دون إضرار بالعمالة.",
+        "شاركنا تحليلك الفلسفي لمفهوم التقدم الإنساني وهل يقاس بالتكنولوجيا أم بالأخلاق."
+    ]
 }
 
 # =====================================================================
@@ -298,11 +517,16 @@ def get_user_data(username, password, role='student'):
         df['password'] = df['password'].str.strip()
         user_row = df[(df['username'] == str(username).strip()) & (df['password'] == str(password).strip())]
         if not user_row.empty:
-            return user_row.iloc[0].to_dict()
-        return None
+            user_dict = user_row.iloc[0].to_dict()
+            if str(user_dict.get('level', '')).strip().lower() == 'demo':
+                user_dict['level'] = 'demo'
+            return user_dict
     except Exception as e:
         print(f"Error checking Google Sheet ({role}): {e}")
-        return None
+    
+    if role == 'student' and str(username).strip().lower() == 'demo' and str(password).strip() in ['demo', 'demo123', '123456']:
+        return {'username': str(username).strip(), 'level': 'demo'}
+    return None
 
 def get_all_students_levels():
     try:
@@ -330,7 +554,8 @@ STUDENT_LOGIN_HTML = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --primary-red: #e52421; --primary-gold: #ffd100; }
-        body { background: #fcfbf7; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; overflow: hidden; position: relative; }
+        * { box-sizing: border-box; }
+        body { background: #fcfbf7; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; overflow-x: hidden; position: relative; padding: 15px; }
         .float-word { position: absolute; font-family: 'Reenie Beanie', cursive; font-size: 26px; color: rgba(0,0,0,0.06); font-weight: bold; pointer-events: none; z-index: 0; }
         .fw1 { top: 5%; left: 10%; transform: rotate(-12deg); font-size: 40px; color: rgba(229,36,33,0.08); }
         .fw2 { top: 8%; right: 12%; transform: rotate(8deg); font-size: 35px; }
@@ -350,14 +575,15 @@ STUDENT_LOGIN_HTML = """
         .d-3 { bottom: 15%; left: 15%; animation: float 7s ease-in-out infinite; transform: rotate(-8deg); }
         .d-4 { top: 15%; right: 15%; animation: float 8s ease-in-out infinite; transform: rotate(12deg); }
         @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
-        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 5px 5px 0px rgba(0,0,0,0.05); border: 3px solid #333; text-align: center; width: 400px; position: relative; z-index: 1; }
-        .logo-img { width: 110px; height: auto; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--primary-gold); }
-        h1 { color: #333; margin-bottom: 5px; font-size: 24px; font-weight: 900; }
-        h1 .es-word { color: var(--primary-red); font-family: 'Reenie Beanie', cursive; font-size: 30px; }
-        p.subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
+        .card { background: white; padding: 32px 25px; border-radius: 15px; box-shadow: 5px 5px 0px rgba(0,0,0,0.05); border: 3px solid #333; text-align: center; width: 100%; max-width: 365px; margin: 15px auto; position: relative; z-index: 1; }
+        .logo-img { width: 100px; height: auto; margin-bottom: 8px; border-radius: 50%; border: 3px solid var(--primary-gold); }
+        h1 { color: #333; margin-bottom: 5px; font-size: 22px; font-weight: 900; }
+        h1 .es-word { color: var(--primary-red); font-family: 'Reenie Beanie', cursive; font-size: 28px; }
+        p.subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
         .input-group { position: relative; margin: 15px 0; }
         .input-group i.field-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; }
         input { width: 100%; padding: 12px 40px 12px 12px; border: 2px solid #333; border-radius: 8px; text-align: center; box-sizing: border-box; font-size: 15px; font-family: 'Cairo', sans-serif; transition: all 0.2s; }
+        input[type="password"] { direction: ltr; text-align: left; font-family: sans-serif; padding: 12px 40px 12px 12px; }
         input:focus { border-color: var(--primary-red); outline: none; box-shadow: 3px 3px 0px rgba(229, 36, 33, 0.2); }
         button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: 2px solid #333; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; transition: all 0.2s; margin-top: 10px; box-shadow: 3px 3px 0px #333; }
         button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #333; }
@@ -372,7 +598,7 @@ STUDENT_LOGIN_HTML = """
         .fb { background: #1877F2; } .ig { background: #E4405F; } .tt { background: #000000; } .wa { background: #25D366; }
         .teacher-link { display: inline-block; margin-top: 20px; color: #555; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 2px dashed #ccc; padding-bottom: 2px; transition: 0.3s; }
         .teacher-link:hover { color: #e52421; border-color: #e52421; }
-        @media (max-width: 500px) { .card { width: 92%; padding: 25px; } .doodle-container { display: none; } }
+        @media (max-width: 500px) { .card { width: calc(100% - 24px); max-width: 340px; padding: 24px 16px; } .doodle-container { display: none; } }
     </style>
 </head>
 <body>
@@ -436,15 +662,18 @@ TEACHER_LOGIN_HTML = """
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #1a1a2e; color: white; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; }
-        .card { background: #16213e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid #0f3460; text-align: center; width: 400px; }
-        h1 { color: #f39c12; font-size: 26px; font-weight: 900; margin-bottom: 5px; }
+        * { box-sizing: border-box; }
+        body { background: #1a1a2e; color: white; font-family: 'Cairo', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin:0; padding: 15px; }
+        .card { background: #16213e; padding: 32px 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid #0f3460; text-align: center; width: 100%; max-width: 365px; margin: 15px auto; }
+        h1 { color: #f39c12; font-size: 24px; font-weight: 900; margin-bottom: 5px; }
         .input-group { margin: 15px 0; }
         input { width: 100%; padding: 12px; border: 2px solid #0f3460; background: #1a1a2e; color: white; border-radius: 8px; text-align: center; font-family: 'Cairo'; }
+        input[type="password"] { direction: ltr; text-align: left; font-family: sans-serif; }
         button { width: 100%; padding: 12px; background: #e67e22; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         .student-link { display: inline-block; margin-top: 20px; color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .student-link:hover { color: #fff; }
         .error { color: #fff; margin-bottom: 15px; font-weight: bold; background: #e74c3c; padding: 8px; border-radius: 5px; }
+        @media (max-width: 500px) { .card { width: calc(100% - 24px); max-width: 340px; padding: 24px 16px; } }
     </style>
 </head>
 <body>
@@ -513,7 +742,7 @@ DASHBOARD_HTML = """
         .section-header .sec-icon { font-size: 28px; }
         .section-header .sec-title { font-size: 20px; font-weight: 800; color: var(--secondary); }
         .section-header .sec-subtitle { font-size: 13px; color: var(--text-muted); }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
         .course-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f0f3f5; transition: 0.3s; display: flex; flex-direction: column; }
         .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
         .card-header { padding: 18px 20px; background: #fafbfc; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -543,6 +772,25 @@ DASHBOARD_HTML = """
         .spinning { animation: shake 0.1s infinite; color: var(--primary); }
         @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-2px); } 50% { transform: translateX(2px); } 100% { transform: translateX(0); } }
         .timer-display { font-size: 30px; font-weight: 900; color: var(--primary); margin-top: 20px; display: none; }
+        .recorder-box { margin-top: 35px; padding-top: 25px; border-top: 2px dashed #eee; text-align: center; }
+        .record-btn { padding: 12px 24px; font-size: 15px; font-weight: 800; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-start { background: #e52421; color: white; box-shadow: 0 4px 12px rgba(229,36,33,0.3); }
+        .btn-start:hover:not(:disabled) { background: #c31e1b; transform: translateY(-2px); }
+        .btn-start:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
+        .btn-stop { background: #2c3e50; color: white; box-shadow: 0 4px 12px rgba(44,62,80,0.3); }
+        .btn-stop:hover:not(:disabled) { background: #1a252f; transform: translateY(-2px); }
+        .btn-stop:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
+        .download-audio-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: #2ecc71; color: white; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 12px rgba(46,204,113,0.3); }
+        .download-audio-btn:hover { background: #27ae60; transform: translateY(-2px); }
+        @media (max-width: 768px) {
+            .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
+            .motivation-box { width: 100%; max-width: 320px; margin: 0 auto; }
+            .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
+            .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
+            .tab-trigger { flex-shrink: 0; }
+            .cards-grid { grid-template-columns: 1fr; gap: 15px; }
+            .wheel-box { padding: 20px 15px; }
+        }
     </style>
 </head>
 <body>
@@ -590,7 +838,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank">ابدأ الشرح</a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -694,6 +942,18 @@ DASHBOARD_HTML = """
                 <div id="topicDisplay" class="wheel-display">اضغط على "لف العجلة" لبدء التحدي! 🎯</div>
                 <button id="spinBtn" class="spin-btn" onclick="spinWheel()">لف العجلة</button>
                 <div id="timerDisplay" class="timer-display">02:00</div>
+                <div id="recorderBox" class="recorder-box">
+                    <h4 style="color: var(--secondary); margin-bottom: 12px; font-size: 18px;"><i class="fa-solid fa-microphone-lines" style="color: var(--primary);"></i> سجل إجابتك وتحدث بالإسبانية | ¡Graba tu respuesta!</h4>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">بعد ظهور الموضوع، اضغط على زر التسجيل وابدأ في التحدث، ثم استمع لصوتك أو حمله لمراجعته.</p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button id="startRecordBtn" onclick="startRecording()" class="record-btn btn-start"><i class="fa-solid fa-record-vinyl"></i> ابدأ التسجيل | Grabar</button>
+                        <button id="stopRecordBtn" onclick="stopRecording()" class="record-btn btn-stop" disabled><i class="fa-solid fa-stop"></i> إيقاف التسجيل | Detener</button>
+                    </div>
+                    <div id="recordStatus" style="font-size: 14px; font-weight: bold; color: var(--secondary); min-height: 20px; margin-bottom: 10px;">جاهز للتسجيل...</div>
+                    <audio id="audioPlayback" controls style="width: 100%; max-width: 500px; margin: 10px auto; display: none; border-radius: 30px;"></audio>
+                    <br>
+                    <a id="downloadRecordBtn" href="#" download="mi_respuesta_espanol.webm" class="download-audio-btn" style="display: none; margin-top: 10px;"><i class="fa-solid fa-download"></i> تحميل التسجيل الصوتي | Descargar Audio</a>
+                </div>
             </div>
         </div>
     </div>
@@ -745,6 +1005,53 @@ DASHBOARD_HTML = """
                 }
             }, 1000);
         }
+
+        let mediaRecorder;
+        let audioChunks = [];
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    const audioPlayback = document.getElementById("audioPlayback");
+                    const downloadBtn = document.getElementById("downloadRecordBtn");
+                    audioPlayback.src = audioUrl;
+                    audioPlayback.style.display = "block";
+                    downloadBtn.href = audioUrl;
+                    downloadBtn.style.display = "inline-flex";
+                    document.getElementById("recordStatus").innerHTML = '<span style="color: #2ecc71;">✅ تم حفظ التسجيل بنجاح! يمكنك الاستماع أو التحميل الآن.</span>';
+                };
+
+                mediaRecorder.start();
+                document.getElementById("startRecordBtn").disabled = true;
+                document.getElementById("stopRecordBtn").disabled = false;
+                document.getElementById("recordStatus").innerHTML = '<span style="color: #e52421; animation: shake 0.5s infinite;">🔴 جاري التسجيل الآن... تحدث بوضوح!</span>';
+            } catch (err) {
+                alert("لم نتمكن من الوصول للميكروفون. يرجى السماح بالوصول للميكروفون من إعدادات المتصفح.");
+                console.error("Error accessing microphone:", err);
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                document.getElementById("startRecordBtn").disabled = false;
+                document.getElementById("stopRecordBtn").disabled = true;
+                document.getElementById("recordStatus").innerHTML = 'جاري معالجة الصوت...';
+            }
+        }
     </script>
 </body>
 </html>
@@ -783,7 +1090,7 @@ TEACHER_DASHBOARD_HTML = """
         .tab-section { display: none; }
         .tab-section.active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; margin-top: 15px; }
         .course-card { background: white; border-radius: 15px; border: 1px solid #eee; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); text-align: center; cursor: pointer; transition: 0.3s; }
         .course-card:hover { transform: translateY(-3px); border-color: #f39c12; }
         .course-card .header { background: #f8f9fa; padding: 15px; font-weight: bold; color: #1a1a2e; border-bottom: 1px solid #eee; }
@@ -799,6 +1106,11 @@ TEACHER_DASHBOARD_HTML = """
         .schedule-table th { background: #1a1a2e; color: white; padding: 15px; text-align: center; font-size: 15px; }
         .schedule-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #333; }
         .schedule-table tr:hover { background: #f8fafc; }
+        @media (max-width: 768px) {
+            .top-nav { flex-direction: column; gap: 15px; text-align: center; }
+            .main-tabs { flex-direction: column; gap: 10px; }
+            .m-tab { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -823,6 +1135,7 @@ TEACHER_DASHBOARD_HTML = """
                 <label style="font-weight: bold; font-size: 18px;">اختر المستوى:</label><br><br>
                 <select id="levelSelect" onchange="window.location.href='/teacher_dashboard?level=' + this.value">
                     <option value="">-- اختر المستوى --</option>
+                    <option value="demo" {% if current_level == 'demo' %}selected{% endif %}>مستوى تجريبي (Demo)</option>
                     <option value="A1.1" {% if current_level == 'A1.1' %}selected{% endif %}>مستوى A1.1</option>
                     <option value="A1.2" {% if current_level == 'A1.2' %}selected{% endif %}>مستوى A1.2</option>
                     <option value="A1.3" {% if current_level == 'A1.3' %}selected{% endif %}>مستوى A1.3</option>
@@ -854,7 +1167,7 @@ TEACHER_DASHBOARD_HTML = """
                     {% for item in materials.lessons %}
                     <div class="course-card">
                         <div class="header">{{ item.title }}</div>
-                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس</a></div>
+                        <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس | Abrir Lección</a></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -1191,7 +1504,9 @@ def dashboard():
         return redirect(url_for('login_student'))
     
     student = session['user']
-    level = student['level']
+    raw_level = str(student.get('level', '')).strip()
+    level = 'demo' if raw_level.lower() == 'demo' else raw_level
+    student['level'] = level
     
     student_lessons = LESSONS_DATA.get(level, [{"title": "قريباً", "file": "error.html"}])
     student_exercises = EXERCISES_DATA.get(level, [{"title": "قريباً", "file": "error.html"}])
@@ -1259,13 +1574,28 @@ def serve_page(level, filename):
         return redirect(url_for('login_student'))
     
     role = session.get('role')
-    
     student_username = request.args.get('student')
-    if role == 'teacher' and student_username:
-        target_user = {'username': student_username, 'level': level}
+    
+    if role == 'teacher':
+        target_user = {'username': student_username or session['user'].get('username', 'المدرس'), 'level': level}
     else:
         target_user = session['user']
-        if target_user.get('level') != level:
+        user_level = str(target_user.get('level', '')).strip()
+        req_level = str(level).strip()
+        
+        if user_level.lower() == 'demo':
+            allowed_demo_files = [
+                'lesson1.html', 'lesson2.html',
+                'exercise1.html', 'exercise2.html',
+                'vocab1.html', 'vocab2.html',
+                'schedule1.html', 'schedule2.html',
+                'game1.html', 'game2.html',
+                'shadowing1.html', 'shadowing2.html',
+                'multi1.html', 'multi2.html'
+            ]
+            if req_level.lower() not in ['demo', 'a1.1'] or filename not in allowed_demo_files:
+                abort(403)
+        elif user_level != req_level:
             abort(403)
     
     template_context = {
@@ -1273,12 +1603,14 @@ def serve_page(level, filename):
         'script_url': SCRIPT_URL  
     }
     
+    actual_folder = "A1.1" if str(level).strip().lower() == "demo" else level
+    
     try:
-        return render_template(f"{level}/{filename}", **template_context)
+        return render_template(f"{actual_folder}/{filename}", **template_context)
     except Exception as e:
         print(f"Template error: {e}")
         try:
-            return render_template(f"{level}/{filename}")
+            return render_template(f"{actual_folder}/{filename}")
         except:
             abort(404)
 
@@ -1290,6 +1622,5 @@ def logout():
 @app.route('/healthz')
 def health_check():
     return "OK", 200
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
