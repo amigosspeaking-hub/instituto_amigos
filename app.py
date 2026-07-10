@@ -1,5 +1,8 @@
 import os
-import pandas as pd
+import time
+import csv
+import requests as http_requests
+from io import StringIO
 import random
 import json
 from datetime import timedelta
@@ -530,20 +533,49 @@ motivation_quotes = [
 # =====================================================================
 # [ دوال مساعدة ]
 # =====================================================================
+# =====================================================================
+# [ Cache خفيف للشيت - يحمي الميموري ويوفر طلبات ]
+# =====================================================================
+_sheet_cache = {}
+CACHE_TTL = 120
+
+def _fetch_csv_text(url):
+    now = time.time()
+    cached = _sheet_cache.get(url)
+    if cached and (now - cached["ts"]) < CACHE_TTL:
+        return cached["data"]
+    resp = http_requests.get(url, timeout=10)
+    resp.raise_for_status()
+    text = resp.text
+    _sheet_cache[url] = {"data": text, "ts": now}
+    return text
+
+def _csv_text_to_rows(url):
+    text = _fetch_csv_text(url)
+    reader = csv.DictReader(StringIO(text))
+    rows = []
+    for row in reader:
+        clean = {}
+        for k, v in row.items():
+            key = k.strip() if k else k
+            val = (v.strip() if v else '') if isinstance(v, str) else (str(v) if v else '')
+            clean[key] = val
+        rows.append(clean)
+    return rows
+
+# =====================================================================
+# [ دوال مساعدة ]
+# =====================================================================
 def get_user_data(username, password, role='student'):
     url = TEACHER_SHEET_CSV_URL if role == 'teacher' else STUDENT_SHEET_CSV_URL
     try:
-        df = pd.read_csv(url, dtype=str)
-        df.fillna('', inplace=True)
-        df.columns = df.columns.str.strip()
-        df['username'] = df['username'].str.strip()
-        df['password'] = df['password'].str.strip()
-        user_row = df[(df['username'] == str(username).strip()) & (df['password'] == str(password).strip())]
-        if not user_row.empty:
-            user_dict = user_row.iloc[0].to_dict()
-            if str(user_dict.get('level', '')).strip().lower() == 'demo':
-                user_dict['level'] = 'demo'
-            return user_dict
+        rows = _csv_text_to_rows(url)
+        for row in rows:
+            if row.get('username', '').strip() == str(username).strip() and row.get('password', '').strip() == str(password).strip():
+                user_dict = dict(row)
+                if str(user_dict.get('level', '')).strip().lower() == 'demo':
+                    user_dict['level'] = 'demo'
+                return user_dict
     except Exception as e:
         print(f"Error checking Google Sheet ({role}): {e}")
     
@@ -553,12 +585,14 @@ def get_user_data(username, password, role='student'):
 
 def get_all_students_levels():
     try:
-        df = pd.read_csv(STUDENT_SHEET_CSV_URL, dtype=str)
-        df.fillna('', inplace=True)
-        df.columns = df.columns.str.strip()
-        df['username'] = df['username'].str.strip()
-        df['level'] = df['level'].str.strip()
-        return dict(zip(df['username'], df['level']))
+        rows = _csv_text_to_rows(STUDENT_SHEET_CSV_URL)
+        result = {}
+        for row in rows:
+            u = row.get('username', '').strip()
+            l = row.get('level', '').strip()
+            if u:
+                result[u] = l
+        return result
     except Exception as e:
         print("Error fetching students levels:", e)
         return {}
@@ -1859,11 +1893,15 @@ def serve_page(level, filename):
         if user_level.lower() == 'demo':
             allowed_demo_files = [
                 'lesson1.html', 'lesson2.html',
+                'A1_L_U_1.html', 'A1_L_U_2.html',
                 'exercise1.html', 'exercise2.html',
                 'vocab1.html', 'vocab2.html',
+                'A1_V_U_1.html', 'A1_V_U_2.html',
                 'schedule1.html', 'schedule2.html',
+                'A1_P_U_1.html', 'A1_P_U_2.html',
                 'game1.html', 'game2.html',
                 'shadowing1.html', 'shadowing2.html',
+                'A1_S_U_1.html', 'A1_S_U_2.html',
                 'multi1.html', 'multi2.html'
             ]
             if req_level.lower() not in ['demo', 'a1.1'] or filename not in allowed_demo_files:
