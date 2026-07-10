@@ -22,14 +22,14 @@ SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUt
 # =====================================================================
 LESSONS_DATA = {
     "demo": [
-        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"}
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"}
     ],
     "A1.1": [
-        {"title": "HOLA, ¿QUÉ TAL?", "file": "lesson1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "lesson2.html"},
-        {"title": "TRABAJO AQUÍ", "file": "lesson3.html"},
-        {"title": "¡ME GUSTAN LAS TAPAS!", "file": "lesson4.html"}
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"},
+        {"title": "TRABAJO AQUÍ", "file": "A1_L_U_3.html"},
+        {"title": "¡ME GUSTAN LAS TAPAS!", "file": "A1_L_U_4.html"}
     ],
     "A1.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A1.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
@@ -86,14 +86,14 @@ EXERCISES_DATA = {
 # =====================================================================
 VOCAB_DATA = {
     "demo": [
-        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
-        {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"}
+        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "A1_V_U_1.html"},
+        {"title": "كلمات: EL ESPAÑOL Y YO", "file": "A1_V_U_2.html"}
     ],
     "A1.1": [
-        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "vocab1.html"},
-        {"title": "كلمات: EL ESPAÑOL Y YO", "file": "vocab2.html"},
-        {"title": "كلمات: TRABAJO AQUÍ", "file": "vocab3.html"},
-        {"title": "كلمات: ¡ME GUSTAN LAS TAPAS!", "file": "vocab4.html"}
+        {"title": "كلمات: HOLA, ¿QUÉ TAL?", "file": "A1_V_U_1.html"},
+        {"title": "كلمات: EL ESPAÑOL Y YO", "file": "A1_V_U_2.html"},
+        {"title": "كلمات: TRABAJO AQUÍ", "file": "A1_V_U_3.html"},
+        {"title": "كلمات: ¡ME GUSTAN LAS TAPAS!", "file": "A1_V_U_4.html"}
     ],
     "A1.2": [{"title": "كلمات تجريبية", "file": "vocab1.html"}],
     "A1.3": [{"title": "كلمات تجريبية", "file": "vocab1.html"}],
@@ -118,14 +118,14 @@ VOCAB_DATA = {
 # =====================================================================
 SCHEDULES_DATA = {
     "demo": [
-        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"}
+        {"title": "جدول مذاكرة الدرس الأول", "file": "A1_P_U_1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "A1_P_U_2.html"}
     ],
     "A1.1": [
-        {"title": "جدول مذاكرة الدرس الأول", "file": "schedule1.html"},
-        {"title": "جدول مذاكرة الدرس الثاني", "file": "schedule2.html"},
-        {"title": "جدول مذاكرة الدرس الثالث", "file": "schedule3.html"},
-        {"title": "جدول مذاكرة الدرس الرابع", "file": "schedule4.html"}
+        {"title": "جدول مذاكرة الدرس الأول", "file": "A1_P_U_1.html"},
+        {"title": "جدول مذاكرة الدرس الثاني", "file": "A1_P_U_2.html"},
+        {"title": "جدول مذاكرة الدرس الثالث", "file": "A1_P_U_3.html"},
+        {"title": "جدول مذاكرة الدرس الرابع", "file": "A1_P_U_4.html"}
     ],
     "A1.2": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
     "A1.3": [{"title": "جدول تجريبي", "file": "schedule1.html"}],
@@ -182,14 +182,14 @@ GAMES_DATA = {
 # =====================================================================
 SHADOWING_DATA = {
     "demo": [
-        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
-        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"}
+        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "A1_S_U_1.html"},
+        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "A1_S_U_2.html"}
     ],
     "A1.1": [
-        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "shadowing1.html"},
-        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "shadowing2.html"},
-        {"title": "شادوينج: TRABAJO AQUÍ", "file": "shadowing3.html"},
-        {"title": "شادوينج: ¡ME GUSTAN LAS TAPAS!", "file": "shadowing4.html"}
+        {"title": "شادوينج: HOLA, ¿QUÉ TAL?", "file": "A1_S_U_1.html"},
+        {"title": "شادوينج: EL ESPAÑOL Y YO", "file": "A1_S_U_2.html"},
+        {"title": "شادوينج: TRABAJO AQUÍ", "file": "A1_S_U_3.html"},
+        {"title": "شادوينج: ¡ME GUSTAN LAS TAPAS!", "file": "A1_S_U_4.html"}
     ],
     "A1.2": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A1.3": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
@@ -214,12 +214,12 @@ SHADOWING_DATA = {
 # =====================================================================
 VIDEOS_DATA = {
     "demo": [
-        {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
-        {"title": "أدوات التعريف والتنكير في الإسبانية", "youtube_id": "dQw4w9WgXcQ"}
+        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.1": [
-        {"title": "مراجعة قواعد النطق الأساسية والأبجدية", "youtube_id": "dQw4w9WgXcQ"},
-        {"title": "أدوات التعريف والتنكير في الإسبانية", "youtube_id": "dQw4w9WgXcQ"}
+        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.2": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A1.3": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
