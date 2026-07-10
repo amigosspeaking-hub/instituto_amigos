@@ -217,10 +217,10 @@ SHADOWING_DATA = {
     "A1.2": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A1.3": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A2.1": [
-        {"title": "شادوينج: NUEVA ETAPA", "file": "A2.1_Shadowing_Unidad_1.html"},
-        {"title": "شادوينج: PARA TI Y PARA MÍ", "file": "A2.1_Shadowing_Unidad_2.html"},
-        {"title": "شادوينج: UN AÑO ESPECIAL", "file": "A2.1_Shadowing_Unidad_3.html"},
-        {"title": "شادوينج: CON TUS MANOS", "file": "shadowing4.html"}
+        {"title": "شادوينج: NUEVA ETAPA", "file": "A2_S_U_1.html"},
+        {"title": "شادوينج: PARA TI Y PARA MÍ", "file": "A2_S_U_2.html"},
+        {"title": "شادوينج: UN AÑO ESPECIAL", "file": "A2_S_U_3.html"},
+        {"title": "شادوينج: CON TUS MANOS", "file": "A2_S_U_4.html"}
     ],
     "A2.2": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
     "A2.3": [{"title": "شادوينج تجريبي", "file": "shadowing1.html"}],
