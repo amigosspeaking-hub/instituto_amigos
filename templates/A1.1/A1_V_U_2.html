@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>Instituto Amigos · A1 Unidad 2 · Tarjetas</title>
+<style>
+
+700;800;900&family=Cairo:wght@600;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}:root{--g:#0D9488;--gd:#0F766E;--yg:#99F6E4;--bg:#F0FDFA;--ink:#134E4A;--muted:#475569;--card:#fff;--gold:#F7C948;--red:#E94B4B;--blue:#1976D2;--shadow:0 16px 38px rgba(45,91,10,.14)}html{scroll-behavior:smooth}body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;min-height:100vh;background:radial-gradient(circle at 10% 0%,#fff 0,#f0fdfa 30%,#ccfbf1 66%,#99f6e4 100%);color:var(--ink);padding:18px;overflow-x:hidden}button,input{font:inherit}button{touch-action:manipulation}.app{max-width:1180px;margin:0 auto}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#0F766E 0%,#0D9488 72%);border-radius:30px;padding:24px 20px;color:white;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:16px}.hero:after{content:'IA';position:absolute;right:-18px;bottom:-48px;font-size:150px;font-weight:900;color:rgba(255,255,255,.10);line-height:1}.brand{position:relative;z-index:1}.brand h1{font-size:clamp(24px,3.2vw,38px);font-weight:900;letter-spacing:.3px}.brand p{font-size:clamp(15px,1.7vw,20px);font-weight:900;margin-top:5px;direction:ltr;unicode-bidi:plaintext}.unit-badge{position:relative;z-index:1;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);border-radius:22px;padding:12px 16px;text-align:center;backdrop-filter:blur(10px);font-weight:900}.unit-badge b{display:block;font-size:30px;color:#fff}.unit-badge span{font-family:Tahoma,Arial,sans-serif;font-size:12px;color:#f0fdfa}.top-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.stat{background:rgba(255,255,255,.92);border:1px solid rgba(120,182,30,.28);border-radius:22px;padding:14px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.06)}.stat b{display:block;font-size:26px;color:var(--gd);font-weight:900}.stat span{font-family:Tahoma,Arial,sans-serif;font-size:12px;color:var(--muted);font-weight:900}.toolbar{background:rgba(255,255,255,.92);border:1px solid rgba(120,182,30,.26);border-radius:24px;padding:12px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,0,0,.06);position:sticky;top:8px;z-index:20;backdrop-filter:blur(12px)}.toolbar.search-only{position:relative;top:auto;display:block}.toolbar.search-only .search{width:100%}.search{width:100%;border:2px solid #fecaca;border-radius:18px;padding:13px 16px;outline:none;font-family:Tahoma,Arial,sans-serif,Nunito;font-weight:900;background:#f0fdfa;color:var(--ink)}.search:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(120,182,30,.14)}.btn{border:0;border-radius:18px;padding:13px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--g),var(--gd));color:white;box-shadow:0 8px 18px rgba(77,138,16,.2);transition:transform .18s,filter .18s,box-shadow .18s;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:0 12px 24px rgba(77,138,16,.25)}.btn:active{transform:translateY(0) scale(.98)}.btn.gold{background:linear-gradient(135deg,#FFD95A,#F4A51C);color:#26320e}.btn.dark{background:linear-gradient(135deg,#991b1b,#7f1d1d)}.btn.red{background:linear-gradient(135deg,#ff6b6b,#d93030)}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.tab{border:0;background:white;color:var(--gd);border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.06);border:2px solid transparent}.tab.active{background:linear-gradient(135deg,var(--gd),var(--g));color:white;border-color:#ffd166}.panel{display:none}.panel.active{display:block}.study-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}.study-card-area{min-width:0}.card-wrap{perspective:1300px;min-height:410px}.flashcard{height:410px;border-radius:34px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.8,.2,1);cursor:pointer}.flashcard.flipped{transform:rotateY(180deg)}.side{position:absolute;inset:0;backface-visibility:hidden;border-radius:34px;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 22px 55px rgba(0,0,0,.16);border:5px solid rgba(255,255,255,.92);overflow:hidden}.side:before{content:'';position:absolute;inset:-30%;background:radial-gradient(circle,#fff7 0,#fff0 55%);pointer-events:none}.front{background:linear-gradient(160deg,#ffffff 0%,#f0fdfa 48%,#99f6e4 100%)}.back{background:linear-gradient(160deg,#fff8d4 0%,#ffffff 45%,#ccfbf1 100%);transform:rotateY(180deg)}.emoji{font-size:78px;margin-bottom:12px;position:relative;z-index:1}.word{font-size:clamp(28px,4vw,42px);font-weight:900;color:var(--gd);direction:ltr;unicode-bidi:plaintext;line-height:1.22;position:relative;z-index:1;overflow-wrap:anywhere}.meaning{font-family:Tahoma,Arial,sans-serif;font-size:clamp(24px,3.2vw,34px);font-weight:900;direction:rtl;line-height:1.55;color:#334616;position:relative;z-index:1}.tag{margin-top:16px;background:linear-gradient(135deg,var(--gd),var(--g));color:white;border-radius:999px;padding:8px 15px;font-family:Tahoma,Arial,sans-serif;font-weight:900;position:relative;z-index:1}.hint{margin-top:16px;color:#69833b;font-family:Tahoma,Arial,sans-serif;font-weight:900;direction:rtl;position:relative;z-index:1}.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.sidebox{background:rgba(255,255,255,.94);border:1px solid rgba(120,182,30,.25);border-radius:28px;padding:16px;box-shadow:0 10px 28px rgba(0,0,0,.07);position:sticky;top:92px}.progress-title{font-family:Tahoma,Arial,sans-serif;font-weight:900;direction:rtl;margin:0 0 10px;color:var(--gd)}.bar{height:14px;background:#fff1ed;border-radius:999px;overflow:hidden;margin:8px 0 16px}.fill{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));width:0%;transition:.4s}.deck-list{display:flex;flex-wrap:wrap;gap:8px;max-height:240px;overflow:auto;padding-left:2px}.pill{border:0;border-radius:999px;padding:8px 11px;background:#f0fdfa;font-size:12px;font-weight:900;color:var(--gd);cursor:pointer;border:1px solid #99f6e4}.pill.active{background:linear-gradient(135deg,var(--gd),var(--g));color:white}.quiz-card{background:rgba(255,255,255,.95);border-radius:30px;padding:24px;box-shadow:var(--shadow);border:1px solid rgba(120,182,30,.28);max-width:880px;margin:0 auto}.q-word{font-size:clamp(28px,4vw,38px);font-weight:900;color:var(--gd);text-align:center;margin:16px 0;direction:ltr;unicode-bidi:plaintext}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.opt{background:#f0fdfa;border:2px solid #99f6e4;border-radius:20px;padding:16px;font-family:Tahoma,Arial,sans-serif;font-weight:900;direction:rtl;cursor:pointer;transition:.18s;text-align:center;color:#3A1612}.opt:hover:not(:disabled){border-color:var(--g);transform:translateY(-2px)}.opt.correct{background:#dcf8ce;border-color:#059669;color:#047857}.opt.wrong{background:#ffdada;border-color:#d93030;color:#8e0000}.feedback{min-height:42px;text-align:center;font-family:Tahoma,Arial,sans-serif;font-weight:900;margin-top:12px;direction:rtl;color:#3d4f20}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}.mini{background:rgba(255,255,255,.95);border:1px solid rgba(120,182,30,.25);border-radius:20px;padding:15px;cursor:pointer;box-shadow:0 7px 18px rgba(0,0,0,.06);transition:.18s}.mini:hover{transform:translateY(-3px);border-color:var(--g)}.mini .mword{font-weight:900;color:var(--gd);direction:ltr;unicode-bidi:plaintext;line-height:1.35}.mini .mar{font-family:Tahoma,Arial,sans-serif;font-weight:800;direction:rtl;color:#5a4100;margin-top:6px;line-height:1.55}.level{height:8px;background:#f0fdfa;border-radius:99px;overflow:hidden;margin-top:10px}.level i{display:block;height:100%;background:linear-gradient(90deg,var(--g),var(--gold));width:0%}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#3A1612;color:white;border-radius:18px;padding:12px 18px;font-family:Tahoma,Arial,sans-serif;font-weight:900;opacity:0;pointer-events:none;transition:.3s;z-index:99;box-shadow:0 10px 30px #0004}.toast.show{opacity:1;bottom:28px}@media(max-width:920px){body{padding:10px}.hero{border-radius:24px;align-items:flex-start}.toolbar{position:relative;top:auto}.search{width:100%}.study-layout{grid-template-columns:1fr}.sidebox{position:relative;top:auto}.top-stats{grid-template-columns:repeat(2,1fr)}.card-wrap{min-height:360px}.flashcard{height:360px}.options{grid-template-columns:1fr}}@media(max-width:560px){body{padding:8px}.hero{padding:18px 14px;border-radius:22px;display:block;text-align:center}.unit-badge{display:inline-block;margin-top:12px}.toolbar{gap:8px;border-radius:20px}.btn{width:100%;padding:12px}.nav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.tab{padding:10px 8px;font-size:13px}.top-stats{gap:8px}.stat{padding:10px;border-radius:18px}.stat b{font-size:22px}.card-wrap{min-height:320px}.flashcard{height:320px}.side{padding:20px;border-radius:26px}.emoji{font-size:58px}.word{font-size:25px}.meaning{font-size:22px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.controls .btn:first-child{grid-column:1/-1}.grid{grid-template-columns:1fr}}
+
+/* Clean app-like responsive layout */
+html,body{height:100%;}
+body{padding:10px;background:linear-gradient(135deg,#f0fdfa 0%,#99f6e4 55%,#fb923c 100%);} 
+.app{max-width:1180px;min-height:calc(100svh - 20px);display:flex;flex-direction:column;}
+.hero{border-radius:22px;padding:14px 18px;box-shadow:0 10px 26px rgba(45,91,10,.16);}
+.hero:after{font-size:92px;right:-8px;bottom:-30px;}
+.brand h1{font-size:clamp(20px,2.5vw,30px)}.brand p{font-size:clamp(13px,1.35vw,17px)}
+.unit-badge{border-radius:16px;padding:8px 12px}.unit-badge b{font-size:24px}.unit-badge span{font-size:10px}
+.top-stats{grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.stat{border-radius:16px;padding:8px 10px}.stat b{font-size:20px}.stat span{font-size:11px}
+.toolbar{position:relative;top:auto;border-radius:18px;padding:9px;gap:8px;margin-bottom:8px;box-shadow:0 6px 16px rgba(0,0,0,.05)}
+.btn{border-radius:14px;padding:10px 13px;font-size:13px;box-shadow:0 6px 14px rgba(77,138,16,.16)}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.tab{border-radius:14px;padding:9px 10px;font-size:13px;text-align:center}
+.study-layout{grid-template-columns:minmax(0,1fr) 280px;gap:12px;flex:1;min-height:0}.card-wrap{min-height:330px}.flashcard{height:330px;border-radius:26px}.side{border-radius:26px;padding:22px;border-width:3px;box-shadow:0 14px 34px rgba(0,0,0,.13)}
+.emoji{font-size:48px;margin-bottom:8px}.word{font-size:clamp(24px,3vw,34px)}.meaning{font-size:clamp(21px,2.6vw,29px)}.tag{padding:6px 12px;font-size:13px;margin-top:10px}.hint{font-size:13px;margin-top:10px}.controls{margin-top:10px;gap:8px}.sidebox{border-radius:20px;padding:12px;top:10px}.progress-title{font-size:13px;margin-bottom:7px}.bar{height:10px;margin-bottom:10px}.deck-list{max-height:190px}.pill{font-size:11px;padding:6px 9px}
+.quiz-card{border-radius:22px;padding:18px}.q-word{font-size:clamp(24px,3.2vw,34px);margin:10px 0}.opt{border-radius:15px;padding:13px}.grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}.mini{border-radius:16px;padding:12px}
+@media(max-width:920px){
+  body{padding:7px;overflow:hidden}.app{height:calc(100svh - 14px);min-height:0;overflow:hidden}.hero{padding:10px 12px;border-radius:18px;flex-shrink:0}.hero:after{font-size:68px;right:-5px;bottom:-22px}.brand h1{font-size:19px}.brand p{font-size:12.5px}.unit-badge{padding:6px 10px;border-radius:14px}.unit-badge b{font-size:20px}.unit-badge span{display:none}
+  .top-stats{grid-template-columns:repeat(4,1fr);gap:5px;margin:6px 0;flex-shrink:0}.stat{padding:5px 3px;border-radius:12px}.stat b{font-size:15px}.stat span{font-size:9px;line-height:1.1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .toolbar{display:grid;grid-template-columns:repeat(3,1fr);padding:6px;gap:5px;margin-bottom:5px;flex-shrink:0}.btn{padding:8px 5px;font-size:11.5px;border-radius:12px;white-space:normal;line-height:1.15}.toolbar.search-only{display:block;padding:7px;margin-bottom:8px}.search{padding:10px 12px;border-radius:13px;font-size:13px}
+  .nav{grid-template-columns:repeat(3,1fr);gap:5px;margin:5px 0;flex-shrink:0}.tab{padding:8px 4px;font-size:11.5px;border-radius:12px;white-space:nowrap}
+  .panel.active{min-height:0;flex:1;overflow:hidden}.study-layout{display:flex;flex-direction:column;gap:6px;height:100%;min-height:0}.study-card-area{display:flex;flex-direction:column;min-height:0;flex:1}.card-wrap{min-height:0;flex:1}.flashcard{height:100%;min-height:220px;border-radius:20px}.side{border-radius:20px;padding:12px;border-width:2px}.emoji{font-size:34px;margin-bottom:5px}.word{font-size:clamp(20px,6vw,26px);line-height:1.18}.meaning{font-size:clamp(18px,5.5vw,24px);line-height:1.35}.tag{font-size:11px;padding:5px 10px;margin-top:7px}.hint{font-size:11px;margin-top:7px}.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:6px;flex-shrink:0}.controls .btn:first-child{grid-column:auto}.controls .btn{width:100%;font-size:10.5px;padding:8px 3px;min-height:38px}
+  .sidebox{position:relative;top:auto;order:3;padding:6px;border-radius:14px;max-height:58px;overflow:hidden;flex-shrink:0}.sidebox .progress-title:first-child,.sidebox .bar{display:none}.sidebox .progress-title{font-size:11px;margin:0 0 4px;text-align:center}.deck-list{display:flex;flex-wrap:nowrap;gap:5px;max-height:none;overflow-x:auto;overflow-y:hidden;padding-bottom:2px}.pill{flex:0 0 auto;font-size:10px;padding:5px 8px;border-radius:999px}
+  #quiz.panel.active,#all.panel.active{overflow:auto;padding-bottom:6px}.quiz-card{padding:12px;border-radius:18px}.q-word{font-size:23px;margin:8px 0}.options{gap:7px}.opt{padding:10px;border-radius:13px;font-size:13px}.feedback{font-size:13px;min-height:28px}.grid{grid-template-columns:1fr;gap:8px}.mini{padding:10px;border-radius:14px}.toast{font-size:13px;max-width:92vw;text-align:center}
+}
+@media(min-width:921px){.panel.active{flex:1}.study-card-area{max-width:760px}.toolbar .btn{min-width:150px}.controls .btn{min-width:135px}}
+@media(max-width:380px){.brand h1{font-size:17px}.brand p{font-size:11px}.unit-badge{display:none}.stat span{font-size:8px}.btn,.tab{font-size:10.5px}.emoji{font-size:30px}.word{font-size:20px}.meaning{font-size:18px}.controls .btn{font-size:9.5px}}
+
+/* Final mobile fit polish */
+@media(max-width:920px){
+  .app{max-width:100%;}
+  .top-stats{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .stat{min-width:0}.stat span{font-size:8.5px}.stat b{font-size:14px}
+  .toolbar{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .toolbar .btn{min-width:0;}
+  .study-layout{max-height:calc(100svh - 185px);}
+  .flashcard{min-height:190px;}
+  .sidebox{max-height:50px;}
+}
+@media(max-width:560px){
+  .hero{min-height:58px}.top-stats{margin:4px 0}.stat{padding:4px 2px}.toolbar{margin-bottom:4px}.nav{margin:4px 0}
+  .study-layout{max-height:calc(100svh - 168px);}
+  .flashcard{min-height:185px;}
+  .controls{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .controls .btn{min-width:0;white-space:normal;word-break:keep-all;}
+  .deck-list::-webkit-scrollbar{height:0}.deck-list{scrollbar-width:none;}
+}
+@media(max-width:360px){
+  .top-stats{display:none}.study-layout{max-height:calc(100svh - 128px)}.flashcard{min-height:180px}.emoji{font-size:26px}.hint{display:none}.tag{font-size:10px;padding:4px 8px}
+}
+
+/* Category popup + centered mobile card */
+.study-layout{display:flex!important;justify-content:center!important;align-items:center!important;width:100%;}
+.study-card-area{width:min(720px,100%)!important;margin:0 auto!important;display:flex;flex-direction:column;align-items:center;}
+.card-wrap{width:100%;max-width:720px;margin:0 auto;}
+.flashcard{width:100%;margin:0 auto;}
+.mini-progress{width:min(420px,90%);height:10px;background:#fff1ed;border-radius:999px;overflow:hidden;margin:10px auto 0;box-shadow:inset 0 1px 2px #0001}.mini-progress .fill{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));width:0%;transition:.4s}
+.cat-open{background:#fff!important;color:var(--gd)!important;border-color:#ffd166!important}.cat-open.active-cat{background:linear-gradient(135deg,#FFD95A,#F4A51C)!important;color:#26320e!important}
+.cat-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:16px}.cat-modal.show{display:flex}.cat-backdrop{position:absolute;inset:0;background:rgba(20,40,10,.45);backdrop-filter:blur(5px)}.cat-sheet{position:relative;background:#fff;border:2px solid #99f6e4;border-radius:26px;padding:16px;width:min(560px,94vw);max-height:min(75vh,560px);box-shadow:0 24px 70px rgba(0,0,0,.25);direction:rtl}.cat-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-family:Tahoma,Arial,sans-serif;font-weight:900;color:var(--gd);font-size:18px}.cat-close{border:0;background:#f1f8dc;color:var(--gd);width:36px;height:36px;border-radius:50%;font-weight:900;cursor:pointer}.modal-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-height:calc(75vh - 90px);overflow:auto}.modal-list .pill{font-size:13px;padding:11px 12px;text-align:center;border-radius:14px}
+@media(max-width:920px){.nav{grid-template-columns:repeat(4,1fr)!important}.study-layout{height:auto!important;max-height:none!important;align-items:center!important}.study-card-area{margin-left:auto!important;margin-right:auto!important;align-items:center!important}.card-wrap{width:100%!important;max-width:94vw!important;min-height:0!important}.flashcard{width:100%!important}.sidebox{display:none!important}.cat-sheet{width:94vw;border-radius:22px}.modal-list{grid-template-columns:1fr 1fr}.cat-open{font-size:11.5px!important}}
+@media(max-width:560px){.nav{grid-template-columns:repeat(4,minmax(0,1fr))!important}.tab{font-size:10.5px!important;padding:8px 2px!important}.study-card-area{width:100%!important;max-width:96vw!important}.card-wrap{max-width:96vw!important}.flashcard{margin-left:auto!important;margin-right:auto!important}.modal-list{grid-template-columns:1fr}.cat-modal{padding:10px}.cat-sheet{max-height:82vh}.modal-list{max-height:calc(82vh - 90px)}.mini-progress{height:8px;margin-top:7px}}
+
+</style></head>
+<body><div class="app">
+<section class="hero"><div class="brand"><h1>Instituto Amigos</h1><p>A1 · Unidad 2 — El español y yo</p></div><div class="unit-badge"><b>2</b><span>Unidad</span></div></section>
+<div class="top-stats"><div class="stat"><b id="stTotal">0</b><span>كل الكروت</span></div><div class="stat"><b id="stMastered">0</b><span>محفوظ</span></div><div class="stat"><b id="stDue">0</b><span>مراجعة اليوم</span></div><div class="stat"><b id="stStreak">0</b><span>أيام متتالية</span></div></div>
+<div class="toolbar"><button class="btn gold" id="dueBtn">⚡ مراجعة اليوم</button><button class="btn" id="shuffleBtn">🔀 عشوائي</button><button class="btn red" id="resetBtn">🗑️ تصفير</button></div>
+<div class="nav"><button class="tab active" data-panel="study">📇 تعلم</button><button class="tab" data-panel="quiz">🎯 اختبار</button><button class="tab" data-panel="all">📚 الكلمات</button><button class="tab cat-open" id="catsOpen" type="button">🏷️ الفئات</button></div>
+<section id="study" class="panel active"><div class="study-layout"><div class="study-card-area"><div class="card-wrap"><div class="flashcard" id="card"><div class="side front"><div class="emoji" id="emoji">🇪🇸</div><div class="word" id="word">...</div><div class="tag" id="tag">...</div><div class="hint">اضغط على الكارت علشان تشوف المعنى</div></div><div class="side back"><div class="meaning" id="meaning">...</div><div class="word" id="backWord">...</div><div class="hint">اختار مستواك في الكلمة</div></div></div></div><div class="controls"><button class="btn dark" id="speakBtn">🔊 نطق</button><button class="btn red" id="badBtn">لسه مش حافظ</button><button class="btn gold" id="hardBtn">صعبة</button><button class="btn" id="goodBtn">حافظها</button></div><div class="mini-progress"><div class="fill" id="cardLevel"></div></div></div></div></section>
+<section id="quiz" class="panel"><div class="quiz-card"><div class="progress-title" style="text-align:center">اختار المعنى الصحيح</div><div class="q-word" id="qWord">...</div><div class="options" id="qOptions"></div><div class="feedback" id="qFeedback"></div><div class="controls"><button class="btn dark" id="speakQuizBtn">🔊 نطق</button><button class="btn" id="nextQuizBtn">Siguiente ▶</button></div></div></section>
+<section id="all" class="panel"><div class="toolbar search-only"><input class="search" id="search" placeholder="ابحث بالإسباني أو العربي..."></div><div class="grid" id="allGrid"></div></section>
+<div class="cat-modal" id="catModal" aria-hidden="true"><div class="cat-backdrop" id="catBackdrop"></div><div class="cat-sheet"><div class="cat-head"><b>الفئات</b><button class="cat-close" id="catClose" type="button">✕</button></div><div class="deck-list modal-list" id="cats"></div></div></div><div class="toast" id="toast"></div></div>
+<script>
+const CARDS = [
+  // Nacionalidades
+  {es:"alemán / alemana", speak:"alemán", ar:"ألماني / ألمانية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇩🇪"},
+  {es:"argentino / argentina", speak:"argentino", ar:"أرجنتيني / أرجنتينية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇦R"},
+  {es:"austriaco / austriaca", speak:"austriaco", ar:"نمساوي / نمساوية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇦AE"},
+  {es:"belga", speak:"belga", ar:"بلجيكي / بلجيكية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇧E"},
+  {es:"canadiense", speak:"canadiense", ar:"كندي / كندية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇨A"},
+  {es:"colombiano / colombiana", speak:"colombiano", ar:"كولومبي / كولومبية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇨O"},
+  {es:"español / española", speak:"español", ar:"إسباني / إسبانية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇪🇸"},
+  {es:"francés / francesa", speak:"francés", ar:"فرنسي / فرنسية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇫🇷"},
+  {es:"griego / griega", speak:"griego", ar:"يوناني / يونانية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇬🇷"},
+  {es:"holandés / holandesa", speak:"holandés", ar:"هولندي / هولندية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇳L"},
+  {es:"inglés / inglesa", speak:"inglés", ar:"إنجليزي / إنجليزية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇬🇧"},
+  {es:"italiano / italiana", speak:"italiano", ar:"إيطالي / إيطالية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇮AE"},
+  {es:"marroquí", speak:"marroquí", ar:"مغربي / مغربية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇲A"},
+  {es:"mexicano / mexicana", speak:"mexicano", ar:"مكسيكي / مكسيكية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇲X"},
+  {es:"portugués / portuguesa", speak:"portugués", ar:"برتغالي / برتغالية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇵AE"},
+  {es:"ruso / rusa", speak:"ruso", ar:"روسي / روسية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇷🇺"},
+  {es:"suizo / suiza", speak:"suizo", ar:"سويسري / سويسرية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇨H"},
+  {es:"turco / turca", speak:"turco", ar:"تركي / تركية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇹🇷"},
+  {es:"brasileño / brasileña", speak:"brasileño", ar:"برازيلي / برازيلية", tag:"جنسية", cat:"Nacionalidades", emoji:"🇧R"},
+
+  // Aficiones
+  {es:"bailar salsa / zumba", speak:"bailar salsa", ar:"رقص السالسا / الزومبا", tag:"هواية", cat:"Aficiones", emoji:"💃"},
+  {es:"bailar tango", speak:"bailar tango", ar:"رقص التانغو", tag:"هواية", cat:"Aficiones", emoji:"🕺"},
+  {es:"cantar en un coro", speak:"cantar en un coro", ar:"الغناء في فريق كورال", tag:"هواية", cat:"Aficiones", emoji:"🎤"},
+  {es:"cantar en un grupo", speak:"cantar en un grupo", ar:"الغناء في فرقة موسيقية", tag:"هواية", cat:"Aficiones", emoji:"🎶"},
+  {es:"cocinar", speak:"cocinar", ar:"الطبخ / يطبخ", tag:"هواية / فعل", cat:"Aficiones", emoji:"🍳"},
+  {es:"escuchar música", speak:"escuchar música", ar:"الاستماع للموسيقى", tag:"هواية", cat:"Aficiones", emoji:"🎧"},
+  {es:"estudiar español", speak:"estudiar español", ar:"دراسة الإسبانية", tag:"هواية / نشاط", cat:"Aficiones", emoji:"📚"},
+  {es:"hablar idiomas", speak:"hablar idiomas", ar:"التحدث باللغات", tag:"هواية / نشاط", cat:"Aficiones", emoji:"🗣️"},
+  {es:"leer libros", speak:"leer libros", ar:"قراءة الكتب", tag:"هواية", cat:"Aficiones", emoji:"📖"},
+  {es:"pintar", speak:"pintar", ar:"الرسم / يرسم", tag:"هواية / فعل", cat:"Aficiones", emoji:"🎨"},
+  {es:"practicar deportes", speak:"practicar deportes", ar:"ممارسة الرياضة", tag:"هواية", cat:"Aficiones", emoji:"⚽"},
+  {es:"trabajar", speak:"trabajar", ar:"العمل / يعمل", tag:"فعل", cat:"Aficiones", emoji:"💼"},
+  {es:"tocar la guitarra", speak:"tocar la guitarra", ar:"العزف على الغيتار", tag:"هواية", cat:"Aficiones", emoji:"🎸"},
+  {es:"tocar un instrumento", speak:"tocar un instrumento", ar:"العزف على آلة موسيقية", tag:"هواية", cat:"Aficiones", emoji:"🎺"},
+  {es:"tocar el piano", speak:"tocar el piano", ar:"العزف على البيانو", tag:"هواية", cat:"Aficiones", emoji:"🎹"},
+  {es:"tomar fotografías", speak:"tomar fotografías", ar:"التقاط الصور / التصوير", tag:"هواية", cat:"Aficiones", emoji:"📷"},
+  {es:"viajar", speak:"viajar", ar:"السفر / يسافر", tag:"هواية / فعل", cat:"Aficiones", emoji:"✈️"},
+  {es:"tener una vida activa", speak:"tener una vida activa", ar:"امتلاك حياة نشطة", tag:"تعبير", cat:"Aficiones", emoji:"🏃"},
+
+  // Características
+  {es:"alegre", speak:"alegre", ar:"مبتهج / بشوش / مرح", tag:"صفة", cat:"Características", emoji:"😊"},
+  {es:"amable", speak:"amable", ar:"لطيف / ودود", tag:"صفة", cat:"Características", emoji:"🤝"},
+  {es:"artístico / artística", speak:"artístico", ar:"فني / ذو حس فني", tag:"صفة", cat:"Características", emoji:"🎭"},
+  {es:"bonito / bonita", speak:"bonito", ar:"جميل / جميلة", tag:"صفة", cat:"Características", emoji:"🌸"},
+  {es:"cosmopolita", speak:"cosmopolita", ar:"عالمي / كوزموبوليتاني", tag:"صفة", cat:"Características", emoji:"🌍"},
+  {es:"excelente", speak:"excelente", ar:"ممتاز / رائع", tag:"صفة", cat:"Características", emoji:"⭐"},
+  {es:"famoso / famosa", speak:"famoso", ar:"مشهور / مشهورة", tag:"صفة", cat:"Características", emoji:"🌟"},
+  {es:"importante", speak:"importante", ar:"مهم / هام", tag:"صفة", cat:"Características", emoji:"❗"},
+  {es:"numeroso / numerosa", speak:"numeroso", ar:"عديد / وفير / متكرر", tag:"صفة", cat:"Características", emoji:"🔢"},
+
+  // Objetos de la clase
+  {es:"el bolígrafo", speak:"el bolígrafo", ar:"القلم الجاف", tag:"مذكر", cat:"Objetos", emoji:"🖊️"},
+  {es:"el cuaderno", speak:"el cuaderno", ar:"الدفتر / الكشكول", tag:"مذكر", cat:"Objetos", emoji:"📓"},
+  {es:"el diccionario", speak:"el diccionario", ar:"القاموس / المعجم", tag:"مذكر", cat:"Objetos", emoji:"📕"},
+  {es:"la goma", speak:"la goma", ar:"الممحاة / الأستيكة", tag:"مؤنث", cat:"Objetos", emoji:"🧽"},
+  {es:"la hoja", speak:"la hoja", ar:"الورقة", tag:"مؤنث", cat:"Objetos", emoji:"📄"},
+  {es:"el lápiz", speak:"el lápiz", ar:"القلم الرصاص", tag:"مذكر", cat:"Objetos", emoji:"✏️"},
+  {es:"el libro", speak:"el libro", ar:"الكتاب", tag:"مذكر", cat:"Objetos", emoji:"📙"},
+  {es:"el sacapuntas", speak:"el sacapuntas", ar:"بُرّاية الأقلام", tag:"مذكر", cat:"Objetos", emoji:"✏️"},
+
+  // Idiomas
+  {es:"el español", speak:"el español", ar:"اللغة الإسبانية", tag:"لغة", cat:"Idiomas", emoji:"🇪🇸"},
+  {es:"el alemán", speak:"el alemán", ar:"اللغة الألمانية", tag:"لغة", cat:"Idiomas", emoji:"🇩🇪"},
+  {es:"el italiano", speak:"el italiano", ar:"اللغة الإيطالية", tag:"لغة", cat:"Idiomas", emoji:"🇮AE"},
+  {es:"el inglés", speak:"el inglés", ar:"اللغة الإنجليزية", tag:"لغة", cat:"Idiomas", emoji:"🇬🇧"},
+  {es:"el griego", speak:"el griego", ar:"اللغة اليونانية", tag:"لغة", cat:"Idiomas", emoji:"🇬🇷"},
+  {es:"el francés", speak:"el francés", ar:"اللغة الفرنسية", tag:"لغة", cat:"Idiomas", emoji:"🇫🇷"},
+  {es:"el ruso", speak:"el ruso", ar:"اللغة الروسية", tag:"لغة", cat:"Idiomas", emoji:"🇷🇺"},
+  {es:"hablar un idioma", speak:"hablar un idioma", ar:"التحدث بلغة", tag:"فعل", cat:"Idiomas", emoji:"🗣️"},
+
+  // Razones y Motivos
+  {es:"¿Por qué estudias español?", speak:"¿Por qué estudias español?", ar:"لماذا تدرس الإسبانية؟", tag:"سؤال", cat:"Razones", emoji:"❓"},
+  {es:"Para viajar a España", speak:"para viajar a España", ar:"من أجل السفر إلى إسبانيا", tag:"دافع", cat:"Razones", emoji:"✈️"},
+  {es:"Para leer libros en español", speak:"para leer libros en español", ar:"لقراءة الكتب بالإسبانية", tag:"دافع", cat:"Razones", emoji:"📖"},
+  {es:"Porque es una lengua bonita", speak:"porque es una lengua bonita", ar:"لأنها لغة جميلة", tag:"سبب", cat:"Razones", emoji:"❤️"},
+  {es:"Porque es una lengua importante", speak:"porque es una lengua importante", ar:"لأنها لغة مهمة", tag:"سبب", cat:"Razones", emoji:"🌟"},
+  {es:"Porque tengo una pareja colombiana", speak:"porque tengo una pareja colombiana", ar:"لأن لدي شريك كولومبي", tag:"سبب", cat:"Razones", emoji:"👫"},
+  {es:"una lengua materna", speak:"una lengua materna", ar:"لغة أم", tag:"تعبير", cat:"Razones", emoji:"💬"}
+];
+
+const KEY='IA_A1_U2_vocab_progress_v4';
+let progress={}, deck=[], idx=0, flipped=false, currentCat='all', quiz=null;
+const $=id=>document.getElementById(id);
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function load(){try{progress=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){progress={}}; if(!progress.meta)progress.meta={streak:0,last:''}; CARDS.forEach((c,i)=>{if(!progress[i])progress[i]={level:0,due:0,seen:0,ok:0,bad:0}}); updateStreak();}
+function save(){localStorage.setItem(KEY,JSON.stringify(progress)); stats(); renderAll(); renderCats();}
+function updateStreak(){const t=todayKey(); if(progress.meta.last!==t){let y=new Date(); y.setDate(y.getDate()-1); const yy=y.toISOString().slice(0,10); progress.meta.streak=(progress.meta.last===yy)?(progress.meta.streak||0)+1:1; progress.meta.last=t; localStorage.setItem(KEY,JSON.stringify(progress));}}
+function due(i){return (progress[i]?.due||0)<=Date.now()}
+function showPanel(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active')); $(id).classList.add('active'); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); if(btn)btn.classList.add('active'); if(id==='quiz')nextQuiz(); if(id==='all')renderAll(); window.scrollTo({top:0,behavior:'smooth'})}
+function stats(){let mastered=0,dueN=0; CARDS.forEach((c,i)=>{if((progress[i].level||0)>=5)mastered++; if(due(i))dueN++;}); $('stTotal').textContent=CARDS.length; $('stMastered').textContent=mastered; $('stDue').textContent=dueN; $('stStreak').textContent=progress.meta.streak||0;}
+function renderCats(){const cs=['all',...new Set(CARDS.map(c=>c.cat))]; $('cats').innerHTML=cs.map(c=>`<button class="pill ${c===currentCat?'active':''}" data-cat="${c}">${c==='all'?'الكل':c}</button>`).join(''); document.querySelectorAll('.pill').forEach(b=>b.addEventListener('click',()=>setCat(b.dataset.cat))); if($('catsOpen')) $('catsOpen').textContent='🏷️ '+(currentCat==='all'?'الفئات':currentCat);}
+function baseDeck(){return CARDS.map((x,i)=>({...x,i})).filter(x=>currentCat==='all'||x.cat===currentCat)}
+function setCat(c){currentCat=c; deck=baseDeck(); idx=0; renderCats(); renderCard(); closeCats();}
+function shuffleDeck(arr){return [...arr].sort(()=>Math.random()-.5)}
+function resetSession(){deck=shuffleDeck(baseDeck()); idx=0; renderCard();}
+function startDue(){deck=shuffleDeck(CARDS.map((x,i)=>({...x,i})).filter(x=>due(x.i)&&(currentCat==='all'||x.cat===currentCat))); if(!deck.length)deck=shuffleDeck(baseDeck()); idx=0; renderCard(); toast('بدأت مراجعة اليوم')}
+function currentCard(){if(!deck.length)deck=shuffleDeck(baseDeck()); return deck[((idx%deck.length)+deck.length)%deck.length]}
+function renderCard(){const c=currentCard(), p=progress[c.i]; flipped=false; $('card').classList.remove('flipped'); $('emoji').textContent=c.emoji||'⭐'; $('word').textContent=c.es; $('backWord').textContent=c.es; $('meaning').textContent=c.ar; $('tag').textContent=c.tag||c.cat; $('cardLevel').style.width=((p.level||0)/5*100)+'%';}
+function flipCard(){flipped=!flipped; $('card').classList.toggle('flipped',flipped)}
+function speak(text){if(!('speechSynthesis'in window))return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/[¿¡]/g,'')); u.lang='es-ES'; u.rate=.86; speechSynthesis.speak(u)}
+function speakCurrent(){speak(currentCard().speak)}
+function rateCard(r){const c=currentCard(), p=progress[c.i]; p.seen++; if(r===2){p.ok++;p.level=Math.min(5,(p.level||0)+1)} else if(r===1){p.bad++;p.level=Math.max(1,p.level||1)} else {p.bad++;p.level=0} const days=[0,0.02,1,2,4,7][p.level]||10; p.due=Date.now()+days*86400000; save(); idx++; renderCard();}
+function nextQuiz(){const pool=shuffleDeck(CARDS.map((c,i)=>({...c,i}))); quiz=pool[0]; $('qWord').textContent=quiz.es; const opts=shuffleDeck([quiz,...pool.filter(x=>x.i!==quiz.i).slice(0,3)]); $('qOptions').innerHTML=opts.map(o=>`<button class="opt" data-id="${o.i}">${o.ar}</button>`).join(''); $('qFeedback').textContent=''; document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>answerQuiz(Number(b.dataset.id),b)));}
+function answerQuiz(id,btn){document.querySelectorAll('.opt').forEach(o=>o.disabled=true); const ok=id===quiz.i; btn.classList.add(ok?'correct':'wrong'); if(!ok){[...document.querySelectorAll('.opt')].find(o=>Number(o.dataset.id)===quiz.i)?.classList.add('correct')} $('qFeedback').textContent=ok?'¡Correcto! ممتاز 👏':'خطأ. الإجابة الصحيحة: '+quiz.ar; const p=progress[quiz.i]; if(ok){p.ok++;p.level=Math.min(5,(p.level||0)+1)}else{p.bad++;p.level=Math.max(0,(p.level||0)-1)} p.seen++; p.due=Date.now()+([0,0.02,1,2,4,7][p.level]||10)*86400000; save();}
+function speakQuiz(){if(quiz)speak(quiz.speak)}
+function renderAll(){const q=($('search').value||'').toLowerCase().trim(); $('allGrid').innerHTML=CARDS.map((c,i)=>({...c,i})).filter(c=>!q||c.es.toLowerCase().includes(q)||c.ar.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q)).map(c=>`<div class="mini" data-id="${c.i}"><div class="mword">${c.emoji} ${c.es}</div><div class="mar">${c.ar}</div><div class="level"><i style="width:${(progress[c.i].level||0)/5*100}%"></i></div></div>`).join(''); document.querySelectorAll('.mini').forEach(m=>m.addEventListener('click',()=>{const id=Number(m.dataset.id); currentCat='all'; deck=[{...CARDS[id],i:id}]; idx=0; showPanel('study',document.querySelector('.tab[data-panel="study"]')); renderCard();}));}
+function toast(t){const el=$('toast'); el.textContent=t; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),1500)}
+function openCats(){$('catModal').classList.add('show'); $('catModal').setAttribute('aria-hidden','false')}
+function closeCats(){$('catModal').classList.remove('show'); $('catModal').setAttribute('aria-hidden','true')}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  load(); stats(); deck=shuffleDeck(baseDeck()); renderCard(); renderCats();
+  document.querySelectorAll('.tab[data-panel]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.panel,b)));
+  $('card').addEventListener('click',flipCard);
+  $('speakBtn').addEventListener('click',e=>{e.stopPropagation(); speakCurrent()});
+  $('badBtn').addEventListener('click',e=>{e.stopPropagation(); rateCard(0)});
+  $('hardBtn').addEventListener('click',e=>{e.stopPropagation(); rateCard(1)});
+  $('goodBtn').addEventListener('click',e=>{e.stopPropagation(); rateCard(2)});
+  $('dueBtn').addEventListener('click',startDue);
+  $('shuffleBtn').addEventListener('click',resetSession);
+  $('resetBtn').addEventListener('click',()=>{if(confirm('هل تريد تصفير تقدمك في هذه الوحدة؟')){localStorage.removeItem(KEY); progress={}; load(); stats(); renderCard(); toast('تم تصفير التقدم')}});
+  $('search').addEventListener('input',renderAll);
+  $('speakQuizBtn').addEventListener('click',speakQuiz);
+  $('nextQuizBtn').addEventListener('click',nextQuiz);
+  $('catsOpen').addEventListener('click',openCats);
+  $('catClose').addEventListener('click',closeCats);
+  $('catBackdrop').addEventListener('click',closeCats);
+});
+
+</script></body></html>

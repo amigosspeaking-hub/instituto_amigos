@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>خطة الدراسة الأسبوعية – المستوى A1 الوحدة الثانية | Instituto Amigos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&family=Cairo:wght@500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100vh}
+body{font-family:'Cairo','Tajawal',sans-serif;background:linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 50%,#99f6e4 100%);color:#333;padding:0;position:relative;direction:rtl}
+body::before{content:"Instituto Amigos";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:clamp(4rem,10vw,10rem);font-weight:900;color:rgba(13,148,136,0.06);pointer-events:none;z-index:0;white-space:nowrap;letter-spacing:5px;font-family:'Playfair Display',serif}
+
+.header{background:linear-gradient(135deg,#0F766E,#0D9488);color:#fff;padding:clamp(20px,4vw,40px) clamp(15px,4vw,40px);text-align:center;border-bottom:5px solid #FACC15;position:relative;z-index:2;overflow:hidden}
+.header::after{content:"Instituto Amigos";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:clamp(3rem,6vw,5rem);font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;pointer-events:none;white-space:nowrap;letter-spacing:5px}
+.header .unit-badge{display:inline-block;background:#FACC15;color:#0F766E;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,28px);width:clamp(50px,8vw,70px);height:clamp(50px,8vw,70px);line-height:clamp(50px,8vw,70px);border-radius:50%;margin-bottom:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative;z-index:1}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);letter-spacing:2px;margin-bottom:5px;text-shadow:2px 2px 6px rgba(0,0,0,0.3);position:relative;z-index:1}
+.header h1 .es-title{display:inline-block;direction:ltr;unicode-bidi:isolate}
+.header .subtitle{font-family:'Cairo',sans-serif;font-size:clamp(13px,1.5vw,15px);opacity:0.95;direction:rtl;font-weight:500;position:relative;z-index:1}
+.header .subtitle .es-name{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700}
+.header .brand{margin-top:8px;font-size:11px;letter-spacing:3px;opacity:0.85;text-transform:uppercase;font-family:'Playfair Display',serif;position:relative;z-index:1;font-weight:700}
+
+.container{max-width:1300px;margin:0 auto;padding:clamp(15px,3vw,30px) clamp(12px,2vw,25px);position:relative;z-index:2}
+
+.info-banner{background:linear-gradient(90deg,#fff,#f0fdfa);border:2px dashed #0D9488;border-radius:18px;padding:18px 22px;margin-bottom:22px;font-family:'Cairo',sans-serif;direction:rtl;font-size:clamp(13.5px,1.45vw,15.5px);color:#0F766E;font-weight:600;line-height:1.9;box-shadow:0 6px 18px rgba(13,148,136,.08)}
+.info-banner strong{color:#0F766E;font-weight:900}
+.files-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
+.file-pill{background:#fff;border:1.5px solid #99f6e4;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:800;color:#134E4A;display:flex;align-items:center;gap:10px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+
+.section-title{font-family:'Playfair Display',serif;color:#0F766E;font-size:clamp(18px,2.2vw,22px);text-align:center;margin:28px 0 16px;letter-spacing:2px;text-transform:uppercase}
+.section-title::before,.section-title::after{content:"★";color:#FACC15;margin:0 12px}
+
+.es{display:inline-block;direction:ltr;unicode-bidi:isolate;font-family:'Open Sans',sans-serif;font-weight:700}
+
+.global-progress{background:#fff;border:3px solid #0D9488;border-radius:20px;padding:16px 22px;margin-bottom:24px;box-shadow:0 8px 24px rgba(13,148,136,0.15);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.global-progress h3{font-family:'Cairo',sans-serif;color:#0F766E;font-size:clamp(16px,1.8vw,19px);flex-shrink:0;font-weight:900}
+.progress-bar-wrap{flex:1;display:flex;align-items:center;gap:12px;min-width:200px}
+.progress-text{font-family:'Cairo',sans-serif;font-weight:900;color:#0F766E;font-size:16px;min-width:48px;text-align:center}
+.progress-bar{flex:1;height:18px;background:#f0fdfa;border-radius:99px;overflow:hidden;border:1.5px solid #99f6e4;padding:2px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0D9488,#FACC15);transition:width 0.5s cubic-bezier(.4,0,.2,1);width:0%;border-radius:99px}
+.reset-btn{background:linear-gradient(135deg,#64748b,#334155);color:#fff;border:none;padding:10px 18px;border-radius:14px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:800;font-size:13px;transition:all 0.3s;flex-shrink:0}
+.reset-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+
+.days-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:16px}
+
+.day-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 6px 20px rgba(13,148,136,0.12);transition:all 0.3s;display:flex;flex-direction:column;border:2.5px solid transparent;position:relative}
+.day-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(13,148,136,0.22)}
+.day-card.completed{border-color:#059669}
+.completed-badge{display:none}
+.day-card.completed .completed-badge{display:inline-block;position:absolute;background:#059669;color:#fff;padding:5px 16px;border-radius:0 0 12px 12px;font-size:11.5px;font-weight:800;z-index:5;top:0;left:50%;transform:translateX(-50%);font-family:'Cairo',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3)}
+
+.day-card .day-header{padding:16px 20px;color:#fff;text-align:center;position:relative;border-bottom:4px solid #FACC15}
+.day-1 .day-header{background:linear-gradient(135deg,#0F766E,#0D9488)}
+.day-2 .day-header{background:linear-gradient(135deg,#1E3A8A,#2563EB)}
+.day-3 .day-header{background:linear-gradient(135deg,#047857,#059669)}
+.day-4 .day-header{background:linear-gradient(135deg,#6D28D9,#7C3AED)}
+.day-5 .day-header{background:linear-gradient(135deg,#B45309,#D97706)}
+.day-6 .day-header{background:linear-gradient(135deg,#BE185D,#E11D48)}
+.day-7 .day-header{background:linear-gradient(135deg,#0F172A,#1E293B)}
+
+.day-num{display:inline-block;background:#FACC15;color:#0F766E;font-family:'Playfair Display',serif;font-weight:900;font-size:19px;width:38px;height:38px;line-height:38px;border-radius:50%;margin-bottom:6px;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.day-name-en{font-family:'Playfair Display',serif;font-size:14px;letter-spacing:2px;opacity:0.9;text-transform:uppercase;direction:ltr}
+.day-name-ar{font-family:'Cairo',sans-serif;font-size:clamp(18px,2.2vw,22px);font-weight:900;margin:4px 0}
+.day-duration{display:inline-block;background:rgba(255,255,255,0.25);padding:4px 14px;border-radius:14px;font-size:12px;font-weight:800;backdrop-filter:blur(4px)}
+
+.day-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:12px}
+
+.task-section{background:#f8fafc;border-radius:14px;padding:12px 14px;border-right:4px solid #0D9488;transition:all 0.2s;border:1px solid #f1f5f9;border-right-width:4px}
+.task-section:hover{background:#f0fdfa;border-color:#ccfbf1}
+.task-icon-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.task-icon{font-size:20px}
+.task-label{font-family:'Cairo',sans-serif;font-weight:900;color:#0F766E;font-size:13.5px;flex:1}
+.task-content{font-family:'Cairo',sans-serif;font-size:13px;color:#334155;line-height:1.6;font-weight:600}
+.task-tip{display:block;color:#0F766E;font-size:12px;font-style:italic;background:#ccfbf1;padding:6px 10px;border-radius:8px;border-right:3px solid #0D9488;margin-top:8px;font-weight:700}
+
+.day-checklist{background:linear-gradient(135deg,#f0fdfa,#e0f2fe);border:2px dashed #0D9488;border-radius:14px;padding:12px 14px;margin-top:auto}
+.day-checklist-title{font-family:'Cairo',sans-serif;font-weight:900;color:#0F766E;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.day-progress-mini{background:#fff;padding:2px 10px;border-radius:99px;font-size:11.5px;color:#0F766E;border:1.5px solid #5eead4;font-weight:800}
+.check-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #cbd5e1;cursor:pointer;transition:all 0.2s}
+.check-item:last-child{border-bottom:none}
+.check-item:hover{background:rgba(255,255,255,0.7);border-radius:8px;padding-right:6px}
+.check-box{width:20px;height:20px;border:2px solid #0D9488;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex-shrink:0;margin-top:2px;background:#fff;transition:all 0.2s;font-weight:900}
+.check-item.checked .check-box{background:#059669;border-color:#059669}
+.check-item.checked .check-text{text-decoration:line-through;opacity:0.6}
+.check-text{font-size:12.5px;font-weight:700;color:#1e293b;line-height:1.45}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="unit-badge">U2</div>
+  <h1><span class="es-title">EL ESPAÑOL Y YO</span></h1>
+  <div class="subtitle">خطة الدراسة الأسبوعية الشاملة – المستوى A1 <span class="es-name">Instituto Amigos</span></div>
+  <div class="brand">Plan de Estudio Semanal Integrado</div>
+</header>
+
+<div class="container">
+  <div class="info-banner">
+    📌 <strong>دليل الطالب:</strong> تم تصميم هذه الخطة الأسبوعية المنهجية لربط وتناغم جميع التطبيقات والأنشطة التعليمية للدرس الثاني (<span class="es">Unidad 2</span>). كل مهمة أدناه موجهة لتطبيق تعليمي محدد لتحقيق أقصى إتقان للغة الإسبانية خلال 7 أيام. النقر على المربعات يحفظ تقدمك في المتصفح فوراً!
+    <div class="files-grid">
+      <div class="file-pill">📄 <b>الكتاب التفاعلي والشرح المنهجي</b></div>
+      <div class="file-pill">📇 <b>تطبيق بطاقات المفردات (الفلاش كاردز)</b></div>
+      <div class="file-pill">🎙️ <b>تطبيق الاستماع والتقليد (الشادوينج)</b></div>
+    </div>
+  </div>
+
+  <div class="global-progress">
+    <h3>📊 نسبة الإنجاز الأسبوعي التراكمي:</h3>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
+      <span class="progress-text" id="globalText">0%</span>
+    </div>
+    <button class="reset-btn" onclick="resetPlan()">🔄 إعادة ضبط الخطة</button>
+  </div>
+
+  <h2 class="section-title">خطة الأيام السبعة المفصلة</h2>
+
+  <div class="days-grid">
+    <!-- DÍA 1 -->
+    <div class="day-card day-1" id="card-day1">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">1</span><div class="day-name-en">Día 1</div><div class="day-name-ar">التعارف والدول والجنسيات (19 دولة)</div><span class="day-duration">⏱️ 50 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — قسمي 1 و 2</span></div><div class="task-content">دراسة قسم <span class="es">1. Gente de países distintos</span> وقسم <span class="es">2. Países y nacionalidades</span> وحل التمارين التفاعلية لتأنيث وتذكير الجنسيات.</div><span class="task-tip">💡 تذكر: الجنسية المذكرة المنتهية بـ -o تُقلب إلى -a (alemán ➔ alemana).</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📇</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">افتح بوب أب الفئات 🏷️، اختر فئة <span class="es">Nacionalidades</span> واحفظ الجنسيات الـ 19 كاملة بالنطق الصحيح واستخدم التقييم (سهل/متوسط/صعب).</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">تطبيق الاستماع المكثف</span></div><div class="task-content">الاستماع للقصة 1 (هانا وخافيير) والقصة 2 (باولو وكلوديا) مع تشغيل التكرار 3 مرات لكل جملة.</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم الأول</span><span class="day-progress-mini" id="prog-day1">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day1-1',this)"><div class="check-box" id="box-day1-1">✓</div><span class="check-text">إتمام قسمي 1 و 2 في الكتاب التفاعلي وحل التمارين</span></div>
+          <div class="check-item" onclick="toggleTask('day1-2',this)"><div class="check-box" id="box-day1-2">✓</div><span class="check-text">حفظ بطاقات الجنسيات الـ 19 في تطبيق المفردات</span></div>
+          <div class="check-item" onclick="toggleTask('day1-3',this)"><div class="check-box" id="box-day1-3">✓</div><span class="check-text">تقليد نطق جمل القصة 1 و 2 في الاستماع المكثف بتكرار 3 مرات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 -->
+    <div class="day-card day-2" id="card-day2">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">2</span><div class="day-name-en">Día 2</div><div class="day-name-ar">الهوايات وتصريف المضارع المنتظم (-AR)</div><span class="day-duration">⏱️ 55 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — قسم 4</span></div><div class="task-content">دراسة قسم <span class="es">4. Un foro para buscar amigos</span> وقراءة منتدى لورا، وحل جدول تصريف أفعال <span class="es">bailar, cocinar, estudiar</span>.</div><span class="task-tip">💡 نهايات -AR الثابتة: -o, -as, -a, -amos, -áis, -an. والضمائر الشخصية غالباً تحذف!</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📇</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">اختر فئة <span class="es">Aficiones</span> (18 بطاقة) وتدرب على أفعال وتعبيرات الهوايات والأنشطة اليومية.</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">✍️</span><span class="task-label">تطبيق الكتابة والمحادثة</span></div><div class="task-content">كتابة 4 جمل كاملة عن هواياتك وهوايات زملائك باستخدام الأفعال المنتظمة المصرفة.</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم الثاني</span><span class="day-progress-mini" id="prog-day2">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day2-1',this)"><div class="check-box" id="box-day2-1">✓</div><span class="check-text">إتمام قسم 4 في الكتاب التفاعلي وحل جدول التصريف</span></div>
+          <div class="check-item" onclick="toggleTask('day2-2',this)"><div class="check-box" id="box-day2-2">✓</div><span class="check-text">إتقان بطاقات الهوايات الـ 18 في تطبيق المفردات</span></div>
+          <div class="check-item" onclick="toggleTask('day2-3',this)"><div class="check-box" id="box-day2-3">✓</div><span class="check-text">كتابة فقرة من 4 جمل عن هواياتك المفضلة</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 -->
+    <div class="day-card day-3" id="card-day3">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">3</span><div class="day-name-en">Día 3</div><div class="day-name-ar">اللغات، المقابلات الشخصية، والنفي بـ No</div><span class="day-duration">⏱️ 50 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — قسمي 5 و 6</span></div><div class="task-content">دراسة قسم <span class="es">5. Entrevista sobre aficiones</span> وقسم <span class="es">6. ¿Qué idiomas hablas?</span> والاستماع للمقابلات النقدية والتدرب على النفي.</div><span class="task-tip">💡 للنفي التام رداً على سؤال نعم/لا نقول No مرتين: No, no hablo ruso.</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">تطبيق الاستماع المكثف</span></div><div class="task-content">التدرب على القصص 3 و 4 و 5 جملة بجملة وملاحظة النطق الدقيق لأسماء المدن والهوايات.</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📇</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">اختر فئة <span class="es">Idiomas</span> وتدرب على أسماء اللغات وأفعال التحدث وحل مراجعة اليوم التلقائية.</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم الثالث</span><span class="day-progress-mini" id="prog-day3">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day3-1',this)"><div class="check-box" id="box-day3-1">✓</div><span class="check-text">إتمام قسمي 5 و 6 في الكتاب التفاعلي بنجاح</span></div>
+          <div class="check-item" onclick="toggleTask('day3-2',this)"><div class="check-box" id="box-day3-2">✓</div><span class="check-text">إتمام الاستماع المكثف للقصص 3 و 4 و 5 مع التكرار</span></div>
+          <div class="check-item" onclick="toggleTask('day3-3',this)"><div class="check-box" id="box-day3-3">✓</div><span class="check-text">حفظ بطاقات اللغات وإتمام مراجعة اليوم في تطبيق المفردات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 -->
+    <div class="day-card day-4" id="card-day4">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">4</span><div class="day-name-en">Día 4</div><div class="day-name-ar">أسباب التعلم وفعل TENER الشاذ</div><span class="day-duration">⏱️ 55 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — قسم 7</span></div><div class="task-content">دراسة قسم <span class="es">7. Las metas del grupo</span> والتفرقة بين <span class="es">Para + infinitivo</span> و <span class="es">Porque + frase</span>. حفظ جدول تصريف فعل <span class="es">tener</span> الشاذ الملون.</div><span class="task-tip">💡 تصريف tener: yo tengo (شاذ تماماً)، وتغير e > ie في tienes, tiene, tienen!</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">تطبيق الاستماع المكثف</span></div><div class="task-content">الاستماع للقصة 6 (المكالمة الهاتفية بين كلوديا ولورا بخصوص الحفلة واللغات).</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📇</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">دراسة فئة <span class="es">Razones</span> (دوافع التعلم) وفئة <span class="es">Características</span> (الصفات الشخصية والسمات).</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم الرابع</span><span class="day-progress-mini" id="prog-day4">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day4-1',this)"><div class="check-box" id="box-day4-1">✓</div><span class="check-text">إتمام قسم 7 وإتقان تصريف فعل tener الشاذ</span></div>
+          <div class="check-item" onclick="toggleTask('day4-2',this)"><div class="check-box" id="box-day4-2">✓</div><span class="check-text">تقليد نطق القصة 6 في الاستماع المكثف</span></div>
+          <div class="check-item" onclick="toggleTask('day4-3',this)"><div class="check-box" id="box-day4-3">✓</div><span class="check-text">حفظ بطاقات الأسباب والسمات في تطبيق المفردات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 5 -->
+    <div class="day-card day-5" id="card-day5">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">5</span><div class="day-name-en">Día 5</div><div class="day-name-ar">أدوات الفصل، أدوات النكرة، وبودكاست أميغوس</div><span class="day-duration">⏱️ 50 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — قسم 8</span></div><div class="task-content">دراسة قسم <span class="es">8. Hablamos más (Objetos)</span> وتعلم أسماء أدوات الفصل مع أداة النكرة المفردة <span class="es">un / una</span>، وكيفية طلب استعارتها في الفصل.</div><span class="task-tip">💡 احفظ كلمة sacapuntas (بُرّاية) تنتهي بـ -s دائماً في المفرد والجمع: un sacapuntas.</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">تطبيق الاستماع المكثف (القصة 7)</span></div><div class="task-content">الاستماع إلى <span class="es">Podcast Amigos</span> بين كارلوس ولوسيا (21 جملة حوارية واقعية مقسمة ومحاذاة بالمللي ثانية) وممارسة التقليد الفوري.</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📇</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">دراسة فئة <span class="es">Objetos</span> (8 بطاقات) وإجراء اختبار ذاتي في تبويب الاختبار 🎯.</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم الخامس</span><span class="day-progress-mini" id="prog-day5">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day5-1',this)"><div class="check-box" id="box-day5-1">✓</div><span class="check-text">إتمام قسم 8 في الكتاب التفاعلي وتمييز المذكر والمؤنث</span></div>
+          <div class="check-item" onclick="toggleTask('day5-2',this)"><div class="check-box" id="box-day5-2">✓</div><span class="check-text">إتمام الشادوينج لكامل الجمل الـ 21 في بودكاست أميغوس</span></div>
+          <div class="check-item" onclick="toggleTask('day5-3',this)"><div class="check-box" id="box-day5-3">✓</div><span class="check-text">حفظ بطاقات أدوات الفصل واجتياز اختبار المفردات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 6 -->
+    <div class="day-card day-6" id="card-day6">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">6</span><div class="day-name-en">Día 6</div><div class="day-name-ar">مراجعة القواعد وحل التمارين التطبيقية</div><span class="day-duration">⏱️ 60 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📐</span><span class="task-label">الكتاب التفاعلي — قسمي Gramática و Comunicación</span></div><div class="task-content">مراجعة قسمي <span class="es">Gramática</span> و <span class="es">Comunicación</span> وقراءة الأمثلة المنهجية لترسيخ المفاهيم.</div><span class="task-tip">💡 قاعدة ذهبية: حرف العطف y يقلب إلى e أمام الكلمات المبدوءة بصوت i/hi (alemán e inglés).</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📝</span><span class="task-label">الكتاب التفاعلي — قسمي التمارين</span></div><div class="task-content">إتمام حل التمارين التطبيقية الثمانية كاملة في قسمي <span class="es">Ejercicios 1–4</span> و <span class="es">Ejercicios 5–8</span>.</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎯</span><span class="task-label">تطبيق بطاقات المفردات</span></div><div class="task-content">الدخول لتبويب الاختبار وحل 10 أسئلة متتالية صحيحة لتأكيد الإتقان.</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم السادس</span><span class="day-progress-mini" id="prog-day6">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day6-1',this)"><div class="check-box" id="box-day6-1">✓</div><span class="check-text">مراجعة قسمي Gramática و Comunicación في الكتاب التفاعلي</span></div>
+          <div class="check-item" onclick="toggleTask('day6-2',this)"><div class="check-box" id="box-day6-2">✓</div><span class="check-text">إتمام حل التمارين الثمانية في أقسام Ejercicios بنجاح</span></div>
+          <div class="check-item" onclick="toggleTask('day6-3',this)"><div class="check-box" id="box-day6-3">✓</div><span class="check-text">تحقيق علامة كاملة في اختبار تطبيق المفردات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 7 -->
+    <div class="day-card day-7" id="card-day7">
+      <span class="completed-badge">✓ مكتمل بنجاح!</span>
+      <div class="day-header"><span class="day-num">7</span><div class="day-name-en">Día 7</div><div class="day-name-ar">المراجعة الختامية والتتويج الأسبوعي</div><span class="day-duration">⏱️ 50 دقيقة</span></div>
+      <div class="day-body">
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">📖</span><span class="task-label">الكتاب التفاعلي — مراجعة عامة</span></div><div class="task-content">إجراء مراجعة سريعة لنصوص المحادثات والقواعد والتمارين المحلولة للتأكد من استيعاب كافة مفردات الوحدة.</div><span class="task-tip">💡 تحدث بثقة واستخدم التراكيب اللغوية لتقديم نفسك وأصدقائك!</span></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🎙️</span><span class="task-label">تطبيق الاستماع المكثف</span></div><div class="task-content">الاستماع المتصل والممتع لجميع الحوارات والقصص السبع بتشغيل متسلسل.</div></div>
+        <div class="task-section"><div class="task-icon-row"><span class="task-icon">🏆</span><span class="task-label">التتويج الختامي</span></div><div class="task-content">اضغط زر "مراجعة اليوم" ⚡ في تطبيق المفردات والاحتفال بإتمام 100% من الوحدة الثانية!</div></div>
+        <div class="day-checklist"><div class="day-checklist-title"><span>📝 قائمة مهام اليوم السابع</span><span class="day-progress-mini" id="prog-day7">0/3</span></div>
+          <div class="check-item" onclick="toggleTask('day7-1',this)"><div class="check-box" id="box-day7-1">✓</div><span class="check-text">إتمام المراجعة العامة لجميع نصوص وتمارين الكتاب التفاعلي</span></div>
+          <div class="check-item" onclick="toggleTask('day7-2',this)"><div class="check-box" id="box-day7-2">✓</div><span class="check-text">الاستماع المتصل لجميع قصص الشادوينج السبع</span></div>
+          <div class="check-item" onclick="toggleTask('day7-3',this)"><div class="check-box" id="box-day7-3">✓</div><span class="check-text">الاحتفال بتحقيق إنجاز 100% في شريط خطة الأسبوع! 🎉</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const KEY = 'IA_A1_U2_studyplan_perfect_v100';
+let tasks = {};
+function loadPlan(){
+  try{tasks = JSON.parse(localStorage.getItem(KEY) || '{}')}catch(e){tasks = {}};
+  document.querySelectorAll('.check-item').forEach(el=>{
+    const id = el.getAttribute('onclick').match(/'([^']+)'/)[1];
+    if(tasks[id]){
+      el.classList.add('checked');
+    }
+  });
+  updateGlobal();
+}
+function toggleTask(id, el){
+  el.classList.toggle('checked');
+  tasks[id] = el.classList.contains('checked');
+  localStorage.setItem(KEY, JSON.stringify(tasks));
+  updateGlobal();
+}
+function updateGlobal(){
+  let total = 21, done = 0;
+  for(let i=1; i<=7; i++){
+    let dayDone = 0;
+    for(let j=1; j<=3; j++){
+      if(tasks[`day${i}-${j}`]){done++; dayDone++;}
+    }
+    const mini = document.getElementById(`prog-day${i}`);
+    if(mini) mini.textContent = `${dayDone}/3`;
+    const card = document.getElementById(`card-day${i}`);
+    if(card){
+      if(dayDone === 3) card.classList.add('completed');
+      else card.classList.remove('completed');
+    }
+  }
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('globalFill').style.width = pct + '%';
+  document.getElementById('globalText').textContent = pct + '%';
+}
+function resetPlan(){
+  if(confirm('هل تريد فعلاً إعادة ضبط تقدم الخطة الدراسية الأسبوعية؟')){
+    tasks = {};
+    localStorage.removeItem(KEY);
+    document.querySelectorAll('.check-item').forEach(el => el.classList.remove('checked'));
+    updateGlobal();
+  }
+}
+document.addEventListener('DOMContentLoaded', loadPlan);
+</script>
+</body></html>
