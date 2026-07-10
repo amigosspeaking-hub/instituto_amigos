@@ -3,15 +3,35 @@ import time
 import csv
 import requests as http_requests
 from io import StringIO
+import hashlib
 import random
 import json
 from datetime import timedelta
-from flask import Flask, render_template_string, request, redirect, url_for, session, abort, render_template
+from flask import Flask, render_template_string, request, redirect, url_for, session, abort, render_template, send_from_directory, make_response
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'instituto_amigos_ultra_secure_2026')
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
+
+
+# =====================================================================
+# [ Browser Cache - المتصفح بيحفظ الصفحات عنده ]
+# =====================================================================
+@app.after_request
+def add_browser_cache(response):
+    path = request.path
+    # الداشبورد: يتخزن 5 دقائق
+    if path in ('/dashboard', '/teacher_dashboard'):
+        response.headers['Cache-Control'] = 'private, max-age=300'
+    # صفحات الدخول: لا يتم تخزينها
+    elif path in ('/', '/teacher_login'):
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate'
+    # باقي الصفحات (لو مالهاش cache محدد)
+    elif 'Cache-Control' not in response.headers:
+        response.headers['Cache-Control'] = 'private, max-age=60'
+    return response
+
 
 # =====================================================================
 # [ روابط جوجل شيت ]
@@ -534,7 +554,7 @@ motivation_quotes = [
 # [ دوال مساعدة ]
 # =====================================================================
 # =====================================================================
-# [ Cache خفيف للشيت - يحمي الميموري ويوفر طلبات ]
+# [ Cache خفيف للشيت - يحمي السيرفر من طلبات متكررة ]
 # =====================================================================
 _sheet_cache = {}
 CACHE_TTL = 120
@@ -563,9 +583,6 @@ def _csv_text_to_rows(url):
         rows.append(clean)
     return rows
 
-# =====================================================================
-# [ دوال مساعدة ]
-# =====================================================================
 def get_user_data(username, password, role='student'):
     url = TEACHER_SHEET_CSV_URL if role == 'teacher' else STUDENT_SHEET_CSV_URL
     try:
@@ -1909,21 +1926,38 @@ def serve_page(level, filename):
         elif user_level != req_level:
             abort(403)
     
-    template_context = {
-        'student': target_user,
-        'script_url': SCRIPT_URL  
-    }
-    
     actual_folder = "A1.1" if str(level).strip().lower() == "demo" else level
     
-    try:
-        return render_template(f"{actual_folder}/{filename}", **template_context)
-    except Exception as e:
-        print(f"Template error: {e}")
-        try:
-            return render_template(f"{actual_folder}/{filename}")
-        except:
-            abort(404)
+    # بنخدم الملف مباشرة من الديسك بدون ما نحمله في الميموري
+    # send_from_directory بيبعت الملف chunk by chunk (streaming)
+    # يعني ملف 20 ميجا بيستخدم تقريباً صفر ميموري إضافي
+    template_dir = os.path.join(app.root_path, 'templates')
+    folder_path = os.path.join(template_dir, actual_folder)
+    
+    if not os.path.isdir(folder_path):
+        abort(404)
+    
+    filepath = os.path.join(folder_path, filename)
+    if not os.path.isfile(filepath):
+        abort(404)
+    
+    # ابعت الملف مباشرة - streaming بدون تحميل في الميموري
+    response = make_response(send_from_directory(folder_path, filename))
+    
+    # كاش المتصفح: الملفات الكبيرة تتخزن ساعة عند الطالب
+    response.headers['Cache-Control'] = 'private, max-age=3600'
+    
+    # ETag: لو الطالب فتح نفس الصفحة تاني، المتصفح بيبعت ETag
+    # والسيرفر بيرد 304 (Not Modified) = مفيش أي داتا تتنقل
+    file_stat = os.stat(filepath)
+    etag = hashlib.md5(f"{filepath}:{file_stat.st_mtime}:{file_stat.st_size}".encode()).hexdigest()
+    response.headers['ETag'] = etag
+    
+    # لو المتصفح عنده نسخة محدثة، مفيش حاجة تتبعت
+    if request.headers.get('If-None-Match') == etag:
+        return '', 304
+    
+    return response
 
 @app.route('/logout')
 def logout():
