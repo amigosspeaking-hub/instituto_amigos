@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn app:app --workers 1 --max-requests 500 --max-requests-jitter 50 --timeout 120 --preload --limit-request-line 8190 --limit-request-field_size 8190
