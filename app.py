@@ -77,14 +77,8 @@ LESSONS_DATA = {
 # =====================================================================
 EXERCISES_DATA = {
     "demo": [
-        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
-        {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"}
     ],
     "A1.1": [
-        {"title": "تمرين: HOLA, ¿QUÉ TAL?", "file": "exercise1.html"},
-        {"title": "تمرين: EL ESPAÑOL Y YO", "file": "exercise2.html"},
-        {"title": "تمرين: TRABAJO AQUÍ", "file": "exercise3.html"},
-        {"title": "تمرين: ¡ME GUSTAN LAS TAPAS!", "file": "exercise4.html"}
     ],
     "A1.2": [{"title": "تمرين تجريبي", "file": "exercise1.html"}],
     "A1.3": [{"title": "تمرين تجريبي", "file": "exercise1.html"}],
@@ -173,14 +167,10 @@ SCHEDULES_DATA = {
 # =====================================================================
 GAMES_DATA = {
     "demo": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"}
+        {"title": "العاب تفاعليه للمستوي الاول", "file": "A1_Juegos.html"},
     ],
     "A1.1": [
-        {"title": "لعبة تفاعلية للدرس الأول", "file": "game1.html"},
-        {"title": "لعبة تفاعلية للدرس الثاني", "file": "game2.html"},
-        {"title": "لعبة تفاعلية للدرس الثالث", "file": "game3.html"},
-        {"title": "لعبة تفاعلية للدرس الرابع", "file": "game4.html"}
+        {"title": "العاب تفاعليه للمستوي الاول", "file": "A1_Juegos.html"},
     ],
     "A1.2": [{"title": "لعبة تجريبية", "file": "game1.html"}],
     "A1.3": [{"title": "لعبة تجريبية", "file": "game1.html"}],
