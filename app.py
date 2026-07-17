@@ -720,7 +720,6 @@ STUDENT_LOGIN_HTML = """
         </div>
     </div>
     <script>window.addEventListener("load", function(){ setTimeout(function(){ var l=document.getElementById("pageLoader"); if(l) l.classList.add("hidden"); },300); });</script>
-    <script>window.addEventListener("load", function(){ setTimeout(function(){ var l=document.getElementById("pageLoader"); if(l) l.classList.add("hidden"); },300); });</script>
 </body>
 </html>
 """
@@ -1976,9 +1975,8 @@ def serve_page(level, filename):
     
     actual_folder = "A1.1" if str(level).strip().lower() == "demo" else level
     
-    # بنخدم الملف مباشرة من الديسك بدون ما نحمله في الميموري
-    # send_from_directory بيبعت الملف chunk by chunk (streaming)
-    # يعني ملف 20 ميجا بيستخدم تقريباً صفر ميموري إضافي
+    # بنقرا الملف من الديسك ونعمل replace للـ variables بسيط
+    # مش بنستخدم render_template (اللي بيحمل الملف كله في الميموري)
     template_dir = os.path.join(app.root_path, 'templates')
     folder_path = os.path.join(template_dir, actual_folder)
     
@@ -1989,21 +1987,37 @@ def serve_page(level, filename):
     if not os.path.isfile(filepath):
         abort(404)
     
-    # ابعت الملف مباشرة - streaming بدون تحميل في الميموري
-    response = make_response(send_from_directory(folder_path, filename))
-    
-    # كاش المتصفح: الملفات الكبيرة تتخزن ساعة عند الطالب
-    response.headers['Cache-Control'] = 'private, max-age=3600'
-    
-    # ETag: لو الطالب فتح نفس الصفحة تاني، المتصفح بيبعت ETag
-    # والسيرفر بيرد 304 (Not Modified) = مفيش أي داتا تتنقل
+    # ETag: لو الطالب فتح نفس الصفحة تاني، المتصفح بيرد 304
     file_stat = os.stat(filepath)
     etag = hashlib.md5(f"{filepath}:{file_stat.st_mtime}:{file_stat.st_size}".encode()).hexdigest()
-    response.headers['ETag'] = etag
     
-    # لو المتصفح عنده نسخة محدثة، مفيش حاجة تتبعت
     if request.headers.get('If-None-Match') == etag:
         return '', 304
+    
+    # اقرا الملف وعمل replace للـ template variables بسيط
+    # (أقل من 20 حرف replacement بدل ما Jinja2 يعمل parse لكل حاجة)
+    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+        html = f.read()
+    
+    username = target_user.get('username', '') if isinstance(target_user, dict) else ''
+    user_level = target_user.get('level', level) if isinstance(target_user, dict) else level
+    
+    html = html.replace('{{ student.username }}', username)
+    html = html.replace('{{ student.level }}', str(user_level))
+    html = html.replace('{{ script_url }}', SCRIPT_URL)
+    html = html.replace('{{student.username}}', username)
+    html = html.replace('{{student.level}}', str(user_level))
+    html = html.replace('{{script_url}}', SCRIPT_URL)
+    
+    # Inject dir=ltr for Spanish text fix (علامات التعجب والاستفهام)
+    # Add a global style to fix ¡ ¿ direction in lesson content
+    ltr_fix = '<style>[lang="es"], .es, .spanish, [data-lang="es"] { direction: ltr; text-align: left; } .lesson-content, .exercise-content { direction: rtl; } .lesson-content span.es, .lesson-content [lang="es"], .exercise-content span.es, .exercise-content [lang="es"] { direction: ltr; display: inline-block; }</style>'
+    html = html.replace('</head>', ltr_fix + '\n</head>')
+    
+    response = make_response(html)
+    response.headers['Content-Type'] = 'text/html; charset=utf-8'
+    response.headers['Cache-Control'] = 'private, max-age=3600'
+    response.headers['ETag'] = etag
     
     return response
 
