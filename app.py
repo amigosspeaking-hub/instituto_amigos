@@ -38,15 +38,16 @@ def modify_all_responses(response):
             html = response.get_data(as_text=True)
             changed = False
             
-            # اصلاح ¡ و ¿
-            if '\u00A1' in html or '&iexcl;' in html:
-                html = html.replace('\u00A1', '<bdi style="direction:ltr;unicode-bidi:embed">\u00A1</bdi>')
-                html = html.replace('&iexcl;', '<bdi style="direction:ltr;unicode-bidi:embed">&iexcl;</bdi>')
-                changed = True
-            if '\u00BF' in html or '&iquest;' in html:
-                html = html.replace('\u00BF', '<bdi style="direction:ltr;unicode-bidi:embed">\u00BF</bdi>')
-                html = html.replace('&iquest;', '<bdi style="direction:ltr;unicode-bidi:embed">&iquest;</bdi>')
-                changed = True
+            # اصلاح علامات التعجب والاستفهام الاسبانية
+            _fix_pairs = [('¡', '&iexcl;'), ('¿', '&iquest;')]
+            for _char, _entity in _fix_pairs:
+                _bdi = '<bdi dir="ltr" style="unicode-bidi:embed">' + _char + '</bdi>'
+                if _char in html:
+                    html = html.replace(_char, _bdi)
+                    changed = True
+                if _entity in html:
+                    html = html.replace(_entity, _bdi)
+                    changed = True
             
             # شاشة تحميل (لو مفيش واحدة موجودة)
             if '_ldr' not in html and 'pageLoader' not in html:
