@@ -77,22 +77,22 @@ SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUt
 # =====================================================================
 LESSONS_DATA = {
     "demo": [
-        {"title": "<span dir=\"ltr\">HOLA, ¿QUÉ TAL?</span>", "file": "A1_L_U_1.html"},
-        {"title": "<span dir=\"ltr\">EL ESPAÑOL Y YO</span>", "file": "A1_L_U_2.html"}
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"}
     ],
     "A1.1": [
-        {"title": "<span dir=\"ltr\">HOLA, ¿QUÉ TAL?</span>", "file": "A1_L_U_1.html"},
-        {"title": "<span dir=\"ltr\">EL ESPAÑOL Y YO</span>", "file": "A1_L_U_2.html"},
-        {"title": "<span dir=\"ltr\">TRABAJO AQUÍ</span>", "file": "A1_L_U_3.html"},
-        {"title": "<span dir=\"ltr\">¡ME GUSTAN LAS TAPAS!</span>", "file": "A1_L_U_4.html"}
+        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
+        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"},
+        {"title": "TRABAJO AQUÍ", "file": "A1_L_U_3.html"},
+        {"title": "¡ME GUSTAN LAS TAPAS!", "file": "A1_L_U_4.html"}
     ],
     "A1.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A1.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.1": [
-        {"title": "<span dir=\"ltr\">NUEVA ETAPA</span>", "file": "A2.1_Libro_Unidad_1.html"},
-        {"title": "<span dir=\"ltr\">PARA TI Y PARA MÍ</span>", "file": "Unidad 02.htm"},
-        {"title": "<span dir=\"ltr\">UN AÑO ESPECIAL</span>", "file": "A2.1_Libro_Unidad_3.html"},
-        {"title": "<span dir=\"ltr\">CON TUS MANOS</span>", "file": "A2.1_Libro_Unidad_4.html"}
+        {"title": "NUEVA ETAPA", "file": "A2.1_Libro_Unidad_1.html"},
+        {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
+        {"title": "UN AÑO ESPECIAL", "file": "A2.1_Libro_Unidad_3.html"},
+        {"title": "CON TUS MANOS", "file": "A2.1_Libro_Unidad_4.html"}
     ],
     "A2.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
@@ -259,18 +259,18 @@ SHADOWING_DATA = {
 # =====================================================================
 VIDEOS_DATA = {
     "demo": [
-        {"title": "<span dir=\"ltr\">1 - En la biblioteca</span>", "youtube_id": "6qnZ5uMhv2M"},
-        {"title": "<span dir=\"ltr\">2 - Una noche de tapas</span>", "youtube_id": "JtEPChEAVns"}
+        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.1": [
-        {"title": "<span dir=\"ltr\">1 - En la biblioteca</span>", "youtube_id": "6qnZ5uMhv2M"},
-        {"title": "<span dir=\"ltr\">2 - Una noche de tapas</span>", "youtube_id": "JtEPChEAVns"}
+        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.2": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A1.3": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A2.1": [
-        {"title": "<span dir=\"ltr\">Un día muy especial</span>", "youtube_id": "7dgZvDijGP0"},
-        {"title": "<span dir=\"ltr\">Soy un manitas</span>", "youtube_id": "fnC6LeUHcq0"}
+        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
+        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
     ],
     "A2.2": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A2.3": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
@@ -860,6 +860,8 @@ DASHBOARD_HTML = """
         .ln-purple { color: var(--vocab-color); background: rgba(142, 68, 173, 0.1); }
         .ln-orange { color: var(--shadow-color); background: rgba(230, 126, 34, 0.1); }
         .card-body { padding: 25px 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+        .es-title { display: block; direction: ltr; text-align: center; background: linear-gradient(135deg, #fff5f5, #ffe8e8); color: #c0392b; font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 15px; padding: 10px 16px; border-radius: 12px; border: 2px solid #fecaca; margin-bottom: 10px; letter-spacing: 1px; }
         .card-body h4 { font-size: 16px; font-weight: 800; color: var(--secondary); margin-bottom: 8px; }
         .card-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; transition: 0.2s; }
         .card-action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
@@ -987,7 +989,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1002,7 +1004,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1017,7 +1019,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1032,7 +1034,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1047,7 +1049,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1062,7 +1064,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
