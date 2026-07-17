@@ -1951,8 +1951,8 @@ def serve_page(level, filename):
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
     
-    # === شاشة تحميل عربي + اصلاح الاسبانية ===
-    inject = '''<style>
+        # === شاشة تحميل عربي + اصلاح الاسبانية ===
+    inject = """<style>
 #_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}
 #_ldr.x{opacity:0;pointer-events:none}
 ._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}
@@ -1962,16 +1962,46 @@ def serve_page(level, filename):
 ._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}
 ._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}
 @keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}
-/* اصلاح الاتجاه الاسباني */
-body{unicode-bidi:plaintext}
-[lang=es],.es,.spanish,[data-lang=es]{direction:ltr!important;text-align:left!important;unicode-bidi:embed}
 </style>
 <div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div>
 <script>
-window.addEventListener("load",function(){setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},500)});
-setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},6000);
+window.addEventListener("load",function(){
+  setTimeout(function(){
+    var e=document.getElementById("_ldr");
+    if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}
+  },500);
+});
+setTimeout(function(){
+  var e=document.getElementById("_ldr");
+  if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}
+},6000);
+
+/* ===== اصلاح علامات التعجب والاستفهام الاسبانية ===== */
+/* بيدور على كل النص اللي فيه ¡ أو ¿ ويحطه في span LTR */
+(function(){
+  function fixBidi(){
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
+    var nodes=[];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function(n){
+      if(n.nodeValue.indexOf('\u00A1')>=0 || n.nodeValue.indexOf('\u00BF')>=0 || 
+         n.nodeValue.indexOf('\u00BF')>=0 || /[\u00A1\u00BF]/.test(n.nodeValue)){
+        var span=document.createElement('span');
+        span.setAttribute('dir','ltr');
+        span.style.cssText='direction:ltr;unicode-bidi:embed;display:inline';
+        n.parentNode.insertBefore(span,n);
+        span.appendChild(n);
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',fixBidi);
+  } else {
+    fixBidi();
+  }
+})();
 </script>
-'''
+"""
     
     # Inject after <body> tag
     body_match = _re.search(r'(<body[^>]*>)', html, _re.IGNORECASE)
