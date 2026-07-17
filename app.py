@@ -32,9 +32,8 @@ def modify_all_responses(response):
     
     # === اصلاح علامات التعجب والاستفهام الاسبانية + شاشة تحميل ===
     # بيطبق على كل صفحة HTML تلقائياً
-    try:
-        ct = response.content_type or ''
-        if 'text/html' in ct and response.status_code == 200:
+    ct = response.content_type or ''
+    if 'text/html' in ct and response.status_code == 200:
             html = response.get_data(as_text=True)
             changed = False
             
@@ -61,8 +60,7 @@ def modify_all_responses(response):
             
             if changed:
                 response.set_data(html)
-    except Exception:
-        pass
+
     
     return response
 
@@ -1984,6 +1982,12 @@ def serve_page(level, filename):
     html = html.replace('{{student.username}}', str(username))
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
+    
+    # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
+    html = html.replace('¡', '<span dir="ltr" style="unicode-bidi:embed">¡</span>')
+    html = html.replace('¿', '<span dir="ltr" style="unicode-bidi:embed">¿</span>')
+    html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
+    html = html.replace('&iquest;', '<span dir="ltr" style="unicode-bidi:embed">&iquest;</span>')
     
     response = make_response(html)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
