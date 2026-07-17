@@ -2034,5 +2034,9 @@ def logout():
 def health_check():
     return "OK", 200
 
+@app.route('/version')
+def version_check():
+    return "v2.1 - loading + spanish fix + cache - UPDATED", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
