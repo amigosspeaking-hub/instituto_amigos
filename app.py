@@ -1983,7 +1983,15 @@ def serve_page(level, filename):
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
     
-    # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
+    # === اصلاح الاتجاه: خلي الاتجاه LTR عشان الاسباني يطلع صح ===
+    # الاسباني لازم يبقى شمال-يمين، والعربي هيفضل صح تلقائياً
+    html = html.replace('<html dir="rtl">', '<html dir="ltr">')
+    html = html.replace('<html dir="RTL">', '<html dir="ltr">')
+    html = html.replace("<html dir='rtl'>", '<html dir="ltr">')
+    html = html.replace("<html dir='RTL'>", '<html dir="ltr">')
+    # (الاتجاه RTL اتشال من <html> بس — باقي العناصر زي ما هي)
+    
+        # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
     html = html.replace('¡', '<span dir="ltr" style="unicode-bidi:embed">¡</span>')
     html = html.replace('¿', '<span dir="ltr" style="unicode-bidi:embed">¿</span>')
     html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
