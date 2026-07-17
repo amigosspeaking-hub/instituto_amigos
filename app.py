@@ -2011,6 +2011,14 @@ setTimeout(function(){
     else:
         html = '<html><body>' + inject + html + '</body></html>'
     
+    # === اصلاح علامات التعجب والاستفهام الاسبانية ===
+    # Replace ¡ and ¿ with LTR-wrapped versions directly in HTML
+    # Handle both Unicode characters AND HTML entities
+    html = html.replace('\u00A1', '<bdi style="direction:ltr;unicode-bidi:embed">\u00A1</bdi>')
+    html = html.replace('\u00BF', '<bdi style="direction:ltr;unicode-bidi:embed">\u00BF</bdi>')
+    html = html.replace('&iexcl;', '<bdi style="direction:ltr;unicode-bidi:embed">&iexcl;</bdi>')
+    html = html.replace('&iquest;', '<bdi style="direction:ltr;unicode-bidi:embed">&iquest;</bdi>')
+    
     response = make_response(html)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     response.headers['Cache-Control'] = 'private, max-age=3600'
