@@ -77,22 +77,22 @@ SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbychpxvHbr8JbOBoha0qTegQUt
 # =====================================================================
 LESSONS_DATA = {
     "demo": [
-        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"}
+        {"title": "<span dir=\"ltr\">HOLA, ¿QUÉ TAL?</span>", "file": "A1_L_U_1.html"},
+        {"title": "<span dir=\"ltr\">EL ESPAÑOL Y YO</span>", "file": "A1_L_U_2.html"}
     ],
     "A1.1": [
-        {"title": "HOLA, ¿QUÉ TAL?", "file": "A1_L_U_1.html"},
-        {"title": "EL ESPAÑOL Y YO", "file": "A1_L_U_2.html"},
-        {"title": "TRABAJO AQUÍ", "file": "A1_L_U_3.html"},
-        {"title": "¡ME GUSTAN LAS TAPAS!", "file": "A1_L_U_4.html"}
+        {"title": "<span dir=\"ltr\">HOLA, ¿QUÉ TAL?</span>", "file": "A1_L_U_1.html"},
+        {"title": "<span dir=\"ltr\">EL ESPAÑOL Y YO</span>", "file": "A1_L_U_2.html"},
+        {"title": "<span dir=\"ltr\">TRABAJO AQUÍ</span>", "file": "A1_L_U_3.html"},
+        {"title": "<span dir=\"ltr\">¡ME GUSTAN LAS TAPAS!</span>", "file": "A1_L_U_4.html"}
     ],
     "A1.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A1.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.1": [
-        {"title": "NUEVA ETAPA", "file": "A2.1_Libro_Unidad_1.html"},
-        {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
-        {"title": "UN AÑO ESPECIAL", "file": "A2.1_Libro_Unidad_3.html"},
-        {"title": "CON TUS MANOS", "file": "A2.1_Libro_Unidad_4.html"}
+        {"title": "<span dir=\"ltr\">NUEVA ETAPA</span>", "file": "A2.1_Libro_Unidad_1.html"},
+        {"title": "<span dir=\"ltr\">PARA TI Y PARA MÍ</span>", "file": "Unidad 02.htm"},
+        {"title": "<span dir=\"ltr\">UN AÑO ESPECIAL</span>", "file": "A2.1_Libro_Unidad_3.html"},
+        {"title": "<span dir=\"ltr\">CON TUS MANOS</span>", "file": "A2.1_Libro_Unidad_4.html"}
     ],
     "A2.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
@@ -259,18 +259,18 @@ SHADOWING_DATA = {
 # =====================================================================
 VIDEOS_DATA = {
     "demo": [
-        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
-        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
+        {"title": "<span dir=\"ltr\">1 - En la biblioteca</span>", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "<span dir=\"ltr\">2 - Una noche de tapas</span>", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.1": [
-        {"title": "1 - En la biblioteca", "youtube_id": "6qnZ5uMhv2M"},
-        {"title": "2 - Una noche de tapas", "youtube_id": "JtEPChEAVns"}
+        {"title": "<span dir=\"ltr\">1 - En la biblioteca</span>", "youtube_id": "6qnZ5uMhv2M"},
+        {"title": "<span dir=\"ltr\">2 - Una noche de tapas</span>", "youtube_id": "JtEPChEAVns"}
     ],
     "A1.2": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A1.3": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A2.1": [
-        {"title": "Un día muy especial", "youtube_id": "7dgZvDijGP0"},
-        {"title": "Soy un manitas", "youtube_id": "fnC6LeUHcq0"}
+        {"title": "<span dir=\"ltr\">Un día muy especial</span>", "youtube_id": "7dgZvDijGP0"},
+        {"title": "<span dir=\"ltr\">Soy un manitas</span>", "youtube_id": "fnC6LeUHcq0"}
     ],
     "A2.2": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
     "A2.3": [{"title": "فيديو تجريبي", "youtube_id": "dQw4w9WgXcQ"}],
