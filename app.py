@@ -664,9 +664,18 @@ STUDENT_LOGIN_HTML = """
         .teacher-link { display: inline-block; margin-top: 20px; color: #555; text-decoration: none; font-weight: bold; font-size: 14px; border-bottom: 2px dashed #ccc; padding-bottom: 2px; transition: 0.3s; }
         .teacher-link:hover { color: #e52421; border-color: #e52421; }
         @media (max-width: 500px) { .card { width: calc(100% - 24px); max-width: 340px; padding: 24px 16px; } .doodle-container { display: none; } }
+        .page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fcfbf7; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        .page-loader.hidden { opacity: 0; pointer-events: none; }
+        .loader-spinner { width: 45px; height: 45px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary-red); border-radius: 50%; animation: loaderSpin 0.8s linear infinite; margin-bottom: 15px; }
+        @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-text { font-size: 16px; font-weight: 700; color: #333; }
     </style>
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">جاري التحميل...</div>
+    </div>
     <span class="float-word fw1">¡Hola!</span>
     <span class="float-word fw2">ازيك!</span>
     <span class="float-word fw3">Amigos</span>
@@ -710,6 +719,8 @@ STUDENT_LOGIN_HTML = """
             <a href="https://wa.me/+201108425280" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
         </div>
     </div>
+    <script>window.addEventListener("load", function(){ setTimeout(function(){ var l=document.getElementById("pageLoader"); if(l) l.classList.add("hidden"); },300); });</script>
+    <script>window.addEventListener("load", function(){ setTimeout(function(){ var l=document.getElementById("pageLoader"); if(l) l.classList.add("hidden"); },300); });</script>
 </body>
 </html>
 """
@@ -740,9 +751,18 @@ TEACHER_LOGIN_HTML = """
         .student-link:hover { color: #fff; }
         .error { color: #fff; margin-bottom: 15px; font-weight: bold; background: #e74c3c; padding: 8px; border-radius: 5px; }
         @media (max-width: 500px) { .card { width: calc(100% - 24px); max-width: 340px; padding: 24px 16px; } }
+        .page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a2e; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        .page-loader.hidden { opacity: 0; pointer-events: none; }
+        .loader-spinner { width: 45px; height: 45px; border: 4px solid #333; border-top: 4px solid #f39c12; border-radius: 50%; animation: loaderSpin 0.8s linear infinite; margin-bottom: 15px; }
+        @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-text { font-size: 16px; font-weight: 700; color: white; }
     </style>
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">جاري التحميل...</div>
+    </div>
     <div class="card">
         <i class="fa-solid fa-chalkboard-user" style="font-size: 50px; color: #f39c12; margin-bottom: 15px;"></i>
         <h1>بوابة المدرسين 👨‍🏫</h1>
@@ -892,12 +912,32 @@ DASHBOARD_HTML = """
         .custom-audio-player { width: 100%; height: 45px; margin-bottom: 15px; }
         .pro-download-btn { display: inline-flex; align-items: center; gap: 10px; background: #10b981; color: white; text-decoration: none; padding: 12px 26px; border-radius: 12px; font-weight: 800; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 14px rgba(16,185,129,0.3); }
         .pro-download-btn:hover { background: #059669; transform: translateY(-2px); }
+
+        /* ===== Loading Overlay ===== */
+        .page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.97); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        .page-loader.hidden { opacity: 0; pointer-events: none; }
+        .loader-spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--primary); border-radius: 50%; animation: loaderSpin 0.8s linear infinite; margin-bottom: 20px; }
+        @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-text { font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 8px; }
+        .loader-sub { font-size: 14px; color: var(--text-muted); }
+        .loader-progress { width: 200px; height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 15px; }
+        .loader-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; width: 0%; transition: width 0.3s ease; animation: progressAnim 2s ease-in-out infinite; }
+        @keyframes progressAnim { 0% { width: 5%; } 50% { width: 70%; } 100% { width: 95%; } }
+        /* ===== Scroll indicator for tabs ===== */
+        .tabs-nav-wrapper { position: relative; }
+        .tabs-nav-wrapper::after { content: '\276F'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: linear-gradient(to left, white, transparent); padding: 10px 8px 10px 20px; color: var(--primary); font-size: 18px; font-weight: bold; pointer-events: none; animation: fadeArrow 2s ease-in-out infinite; z-index: 5; }
+        @keyframes fadeArrow { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @media (min-width: 769px) { .tabs-nav-wrapper::after { display: none; } }
+
         @media (max-width: 768px) {
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
             .motivation-boxes-wrap { width: 100%; max-width: 400px; margin: 0 auto; }
             .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
-            .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
-            .tab-trigger { flex-shrink: 0; }
+            .tabs-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 10px; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; scroll-snap-type: x mandatory; position: relative; }
+            .tabs-nav::-webkit-scrollbar { height: 4px; }
+            .tabs-nav::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+            .tabs-nav::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+            .tab-trigger { flex-shrink: 0; scroll-snap-align: start; font-size: 12px; padding: 8px 12px; white-space: nowrap; }
             .cards-grid { grid-template-columns: 1fr; gap: 15px; }
             .wheel-container-wrapper { padding: 20px 15px; }
             .pro-recorder-card { padding: 20px 15px; }
@@ -905,6 +945,12 @@ DASHBOARD_HTML = """
     </style>
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">جاري تحميل لوحتك التعليمية...</div>
+        <div class="loader-sub">Loading your dashboard...</div>
+        <div class="loader-progress"><div class="loader-progress-bar"></div></div>
+    </div>
     <nav class="top-nav">
         <div class="top-right-container">
             <div class="user-buttons">
@@ -935,7 +981,7 @@ DASHBOARD_HTML = """
             </div>
         </header>
 
-        <nav class="tabs-nav">
+        <div class="tabs-nav-wrapper"><nav class="tabs-nav">
             <button class="tab-trigger active" onclick="switchTab(event, 'lectures-tab')"><i class="fa-solid fa-video"></i> الدروس | Lecciones</button>
             <button class="tab-trigger" onclick="switchTab(event, 'exercises-tab')"><i class="fa-solid fa-pen-ruler"></i> التمارين | Ejercicios</button>
             <button class="tab-trigger" onclick="switchTab(event, 'vocab-tab')"><i class="fa-solid fa-spell-check"></i> الكلمات | Vocabulario</button>
@@ -944,7 +990,7 @@ DASHBOARD_HTML = """
             <button class="tab-trigger" onclick="switchTab(event, 'games-tab')"><i class="fa-solid fa-gamepad"></i> الألعاب | Juegos</button>
             <button class="tab-trigger" onclick="switchTab(event, 'videos-tab')"><i class="fa-brands fa-youtube"></i> فيديوهات | Videos</button>
             <button class="tab-trigger" onclick="switchTab(event, 'wheel-tab')"><i class="fa-solid fa-dharmachakra"></i> العجلة | Rueda</button>
-        </nav>
+        </nav></div>
 
         <div id="lectures-tab" class="tab-content active">
             <div class="section-header">
@@ -1129,6 +1175,18 @@ DASHBOARD_HTML = """
         </div>
     </div>
     <script>
+        // Hide loading overlay when page is ready
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loader = document.getElementById('pageLoader');
+                if (loader) { loader.classList.add('hidden'); }
+            }, 500);
+        });
+        setTimeout(function() {
+            var loader = document.getElementById('pageLoader');
+            if (loader) { loader.classList.add('hidden'); }
+        }, 3000);
+
         function switchTab(evt, tabId) {
             document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".tab-trigger").forEach(el => el.classList.remove("active"));
