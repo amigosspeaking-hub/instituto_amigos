@@ -19,17 +19,50 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 # [ Browser Cache - المتصفح بيحفظ الصفحات عنده ]
 # =====================================================================
 @app.after_request
-def add_browser_cache(response):
+def modify_all_responses(response):
     path = request.path
-    # الداشبورد: يتخزن 5 دقائق
+    
+    # Browser cache headers
     if path in ('/dashboard', '/teacher_dashboard'):
         response.headers['Cache-Control'] = 'private, max-age=300'
-    # صفحات الدخول: لا يتم تخزينها
     elif path in ('/', '/teacher_login'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate'
-    # باقي الصفحات (لو مالهاش cache محدد)
     elif 'Cache-Control' not in response.headers:
         response.headers['Cache-Control'] = 'private, max-age=60'
+    
+    # === اصلاح علامات التعجب والاستفهام الاسبانية + شاشة تحميل ===
+    # بيطبق على كل صفحة HTML تلقائياً
+    try:
+        ct = response.content_type or ''
+        if 'text/html' in ct and response.status_code == 200:
+            html = response.get_data(as_text=True)
+            changed = False
+            
+            # اصلاح ¡ و ¿
+            if '\u00A1' in html or '&iexcl;' in html:
+                html = html.replace('\u00A1', '<bdi style="direction:ltr;unicode-bidi:embed">\u00A1</bdi>')
+                html = html.replace('&iexcl;', '<bdi style="direction:ltr;unicode-bidi:embed">&iexcl;</bdi>')
+                changed = True
+            if '\u00BF' in html or '&iquest;' in html:
+                html = html.replace('\u00BF', '<bdi style="direction:ltr;unicode-bidi:embed">\u00BF</bdi>')
+                html = html.replace('&iquest;', '<bdi style="direction:ltr;unicode-bidi:embed">&iquest;</bdi>')
+                changed = True
+            
+            # شاشة تحميل (لو مفيش واحدة موجودة)
+            if '_ldr' not in html and 'pageLoader' not in html:
+                import re as _re_mod
+                body_match = _re_mod.search(r'(<body[^>]*>)', html, _re_mod.IGNORECASE)
+                if body_match:
+                    ldr = '<style>#_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}#_ldr.x{opacity:0;pointer-events:none}._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}@keyframes _sk{to{transform:rotate(360deg)}}._tx{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:6px}._su{font-size:14px;color:#888;margin-bottom:16px}._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}@keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}</style><div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div><script>window.addEventListener("load",function(){setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},500)});setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},6000);</script>'
+                    pos = body_match.end()
+                    html = html[:pos] + ldr + html[pos:]
+                    changed = True
+            
+            if changed:
+                response.set_data(html)
+    except Exception:
+        pass
+    
     return response
 
 
@@ -1950,74 +1983,6 @@ def serve_page(level, filename):
     html = html.replace('{{student.username}}', str(username))
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
-    
-        # === شاشة تحميل عربي + اصلاح الاسبانية ===
-    inject = """<style>
-#_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}
-#_ldr.x{opacity:0;pointer-events:none}
-._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}
-@keyframes _sk{to{transform:rotate(360deg)}}
-._tx{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:6px}
-._su{font-size:14px;color:#888;margin-bottom:16px}
-._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}
-._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}
-@keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}
-</style>
-<div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div>
-<script>
-window.addEventListener("load",function(){
-  setTimeout(function(){
-    var e=document.getElementById("_ldr");
-    if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}
-  },500);
-});
-setTimeout(function(){
-  var e=document.getElementById("_ldr");
-  if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}
-},6000);
-
-/* ===== اصلاح علامات التعجب والاستفهام الاسبانية ===== */
-/* بيدور على كل النص اللي فيه ¡ أو ¿ ويحطه في span LTR */
-(function(){
-  function fixBidi(){
-    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
-    var nodes=[];
-    while(walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach(function(n){
-      if(n.nodeValue.indexOf('\u00A1')>=0 || n.nodeValue.indexOf('\u00BF')>=0 || 
-         n.nodeValue.indexOf('\u00BF')>=0 || /[\u00A1\u00BF]/.test(n.nodeValue)){
-        var span=document.createElement('span');
-        span.setAttribute('dir','ltr');
-        span.style.cssText='direction:ltr;unicode-bidi:embed;display:inline';
-        n.parentNode.insertBefore(span,n);
-        span.appendChild(n);
-      }
-    });
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',fixBidi);
-  } else {
-    fixBidi();
-  }
-})();
-</script>
-"""
-    
-    # Inject after <body> tag
-    body_match = _re.search(r'(<body[^>]*>)', html, _re.IGNORECASE)
-    if body_match:
-        pos = body_match.end()
-        html = html[:pos] + inject + html[pos:]
-    else:
-        html = '<html><body>' + inject + html + '</body></html>'
-    
-    # === اصلاح علامات التعجب والاستفهام الاسبانية ===
-    # Replace ¡ and ¿ with LTR-wrapped versions directly in HTML
-    # Handle both Unicode characters AND HTML entities
-    html = html.replace('\u00A1', '<bdi style="direction:ltr;unicode-bidi:embed">\u00A1</bdi>')
-    html = html.replace('\u00BF', '<bdi style="direction:ltr;unicode-bidi:embed">\u00BF</bdi>')
-    html = html.replace('&iexcl;', '<bdi style="direction:ltr;unicode-bidi:embed">&iexcl;</bdi>')
-    html = html.replace('&iquest;', '<bdi style="direction:ltr;unicode-bidi:embed">&iquest;</bdi>')
     
     response = make_response(html)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
