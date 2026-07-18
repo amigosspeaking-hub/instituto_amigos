@@ -48,16 +48,6 @@ def modify_all_responses(response):
                     html = html.replace(_entity, _bdi)
                     changed = True
             
-            # شاشة تحميل (لو مفيش واحدة موجودة)
-            if '_ldr' not in html and 'pageLoader' not in html:
-                import re as _re_mod
-                body_match = _re_mod.search(r'(<body[^>]*>)', html, _re_mod.IGNORECASE)
-                if body_match:
-                    ldr = '<style>#_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}#_ldr.x{opacity:0;pointer-events:none}._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}@keyframes _sk{to{transform:rotate(360deg)}}._tx{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:6px}._su{font-size:14px;color:#888;margin-bottom:16px}._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}@keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}</style><div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div><script>window.addEventListener("load",function(){setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},500)});setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},6000);</script>'
-                    pos = body_match.end()
-                    html = html[:pos] + ldr + html[pos:]
-                    changed = True
-            
             if changed:
                 response.set_data(html)
 
@@ -939,6 +929,20 @@ DASHBOARD_HTML = """
     </style>
 </head>
 <body>
+    <!-- شاشة تحميل الملفات -->
+    <div id="fileLoader" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:'Cairo',sans-serif;direction:rtl;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+            <div style="width:55px;height:55px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:22px;"></div>
+            <div style="font-size:22px;font-weight:800;color:#2c3e50;margin-bottom:8px;" id="fileLoaderText">جاري تحميل المحتوى...</div>
+            <div style="font-size:14px;color:#888;margin-bottom:18px;">يرجى الانتظار</div>
+            <div style="width:280px;height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;">
+                <div id="fileLoaderBar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0%;transition:width 0.3s;"></div>
+            </div>
+            <div style="font-size:13px;color:#aaa;margin-top:10px;" id="fileLoaderPercent">0%</div>
+        </div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
     <nav class="top-nav">
         <div class="top-right-container">
             <div class="user-buttons">
@@ -989,7 +993,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" onclick="loadFile(this.href);return false;"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1004,7 +1008,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" onclick="loadFile(this.href);return false;"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1019,7 +1023,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" onclick="loadFile(this.href);return false;"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1034,7 +1038,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" onclick="loadFile(this.href);return false;"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1049,7 +1053,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" onclick="loadFile(this.href);return false;"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1064,7 +1068,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
+                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" onclick="loadFile(this.href);return false;"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1400,6 +1404,50 @@ DASHBOARD_HTML = """
             document.getElementById("wheelSubtitle").style.display = "block";
             setTimeout(drawWheel, 20);
         }
+
+        // === تحميل الملفات مع شاشة تحميل ===
+        function loadFile(url) {
+            var overlay = document.getElementById('fileLoader');
+            var bar = document.getElementById('fileLoaderBar');
+            var pct = document.getElementById('fileLoaderPercent');
+            var txt = document.getElementById('fileLoaderText');
+            
+            overlay.style.display = 'block';
+            bar.style.width = '0%';
+            pct.textContent = '0%';
+            txt.textContent = 'جاري تحميل المحتوى...';
+            
+            // Simulate progress
+            var progress = 0;
+            var progressInterval = setInterval(function() {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                bar.style.width = progress + '%';
+                pct.textContent = Math.round(progress) + '%';
+            }, 200);
+            
+            // Fetch the file
+            fetch(url)
+                .then(function(response) {
+                    clearInterval(progressInterval);
+                    bar.style.width = '100%';
+                    pct.textContent = '100%';
+                    txt.textContent = 'تم التحميل! جاري فتح الملف...';
+                    
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        // Open from cache
+                        window.open(url, '_blank');
+                    }, 500);
+                })
+                .catch(function(err) {
+                    clearInterval(progressInterval);
+                    overlay.style.display = 'none';
+                    // Fallback: open directly
+                    window.open(url, '_blank');
+                });
+        }
+
     </script>
 </body>
 </html>
@@ -1985,15 +2033,16 @@ def serve_page(level, filename):
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
     
-    # === اصلاح الاتجاه: خلي الاتجاه LTR عشان الاسباني يطلع صح ===
-    # الاسباني لازم يبقى شمال-يمين، والعربي هيفضل صح تلقائياً
-    html = html.replace('<html dir="rtl">', '<html dir="ltr">')
-    html = html.replace('<html dir="RTL">', '<html dir="ltr">')
-    html = html.replace("<html dir='rtl'>", '<html dir="ltr">')
-    html = html.replace("<html dir='RTL'>", '<html dir="ltr">')
-    # (الاتجاه RTL اتشال من <html> بس — باقي العناصر زي ما هي)
+    # === شاشة تحميل عربي ===
+    _ldr_html = '''<style>#_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}#_ldr.x{opacity:0;pointer-events:none}._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}@keyframes _sk{to{transform:rotate(360deg)}}._tx{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:6px}._su{font-size:14px;color:#888;margin-bottom:16px}._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}@keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}</style><div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div><script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},800)});setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},6000);</script>'''
+    _body_match = _re.search(r'(<body[^>]*>)', html, _re.IGNORECASE)
+    if _body_match:
+        _pos = _body_match.end()
+        html = html[:_pos] + _ldr_html + html[_pos:]
+    else:
+        html = _ldr_html + html
     
-        # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
+    # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
     html = html.replace('¡', '<span dir="ltr" style="unicode-bidi:embed">¡</span>')
     html = html.replace('¿', '<span dir="ltr" style="unicode-bidi:embed">¿</span>')
     html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
