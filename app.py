@@ -965,7 +965,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" onclick="_loadPage(this.href);return false;"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" onclick="_loadPage(this.href);return false;"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -980,7 +980,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" onclick="_loadPage(this.href);return false;"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" onclick="_loadPage(this.href);return false;"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -995,7 +995,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" onclick="_loadPage(this.href);return false;"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" onclick="_loadPage(this.href);return false;"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1010,7 +1010,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" onclick="_loadPage(this.href);return false;"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" onclick="_loadPage(this.href);return false;"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1025,7 +1025,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" onclick="_loadPage(this.href);return false;"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" onclick="_loadPage(this.href);return false;"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1040,7 +1040,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" onclick="_loadPage(this.href);return false;"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
+                    <div class="card-body"><h4 dir="ltr" style="background:#fff5f5;color:#c0392b;padding:8px 14px;border-radius:10px;border:2px solid #fecaca;margin-bottom:10px;">{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" onclick="_loadPage(this.href);return false;"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1498,7 +1498,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.lessons %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الدرس | Abrir Lección</a></div>
                     </div>
                     {% endfor %}
@@ -1509,7 +1509,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.exercises %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح التمرين | Abrir Ejercicio</a></div>
                     </div>
                     {% endfor %}
@@ -1520,7 +1520,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.vocab %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الكلمات | Abrir Vocabulario</a></div>
                     </div>
                     {% endfor %}
@@ -1531,7 +1531,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.schedules %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الجدول | Abrir Plan</a></div>
                     </div>
                     {% endfor %}
@@ -1542,7 +1542,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.shadowing %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح الشادوينج | Abrir Shadowing</a></div>
                     </div>
                     {% endfor %}
@@ -1553,7 +1553,7 @@ TEACHER_DASHBOARD_HTML = """
                 <div class="cards-grid">
                     {% for item in materials.games %}
                     <div class="course-card">
-                        <div class="header">{{ item.title }}</div>
+                        <div class="header" dir="ltr">{{ item.title }}</div>
                         <div class="body"><a href="/page/{{ current_level }}/{{ item.file }}" target="_blank">افتح اللعبة | Abrir Juego</a></div>
                     </div>
                     {% endfor %}
@@ -1955,7 +1955,14 @@ def serve_page(level, filename):
     if request.headers.get('If-None-Match') == etag:
         return '', 304
     
-    # اقرا الملف وعمل replace للـ template variables
+    # لو الملف مش HTML (صوت، صورة، فيديو) — ابعته مباشرة من غير معالجة
+    ext = filename.lower().rsplit('.', 1)[-1] if '.' in filename else ''
+    if ext not in ('html', 'htm'):
+        response = make_response(send_from_directory(folder_path, filename))
+        response.headers['Cache-Control'] = 'private, max-age=3600'
+        return response
+    
+    # الملف HTML — اقرأه وعمل replace للـ template variables
     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
         html = f.read()
     
@@ -1968,12 +1975,6 @@ def serve_page(level, filename):
     html = html.replace('{{student.username}}', str(username))
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
-    
-    # اصلاح اتجاه ¡ ¿ الاسبانية
-    html = html.replace('\u00a1', '<span dir="ltr" style="unicode-bidi:embed">\u00a1</span>')
-    html = html.replace('\u00bf', '<span dir="ltr" style="unicode-bidi:embed">\u00bf</span>')
-    html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
-    html = html.replace('&iquest;', '<span dir="ltr" style="unicode-bidi:embed">&iquest;</span>')
     
     response = make_response(html)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
