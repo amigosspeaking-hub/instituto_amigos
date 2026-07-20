@@ -896,15 +896,25 @@ DASHBOARD_HTML = """
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
             .motivation-boxes-wrap { width: 100%; max-width: 400px; margin: 0 auto; }
             .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
-            .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
-            .tab-trigger { flex-shrink: 0; }
+            .tabs-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 10px 10px 14px 10px; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+            .tabs-nav::-webkit-scrollbar { height: 3px; }
+            .tabs-nav::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+            .tab-trigger { flex-shrink: 0; font-size: 11px; padding: 7px 10px; white-space: nowrap; }
             .cards-grid { grid-template-columns: 1fr; gap: 15px; }
             .wheel-container-wrapper { padding: 20px 15px; }
             .pro-recorder-card { padding: 20px 15px; }
         }
     </style>
 </head>
-<body>
+<body>\n    <div id="_pageOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:Cairo,sans-serif;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+            <div style="width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_spin .8s linear infinite;margin-bottom:20px;"></div>
+            <div style="font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:8px;">جاري تحميل المحتوى...</div>
+            <div style="font-size:14px;color:#888;">يرجى الانتظار</div>
+        </div>
+    </div>
+    <style>@keyframes _spin{to{transform:rotate(360deg)}}</style>
+
     <nav class="top-nav">
         <div class="top-right-container">
             <div class="user-buttons">
@@ -955,7 +965,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" onclick="_loadPage(this.href);return false;"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -970,7 +980,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" onclick="_loadPage(this.href);return false;"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -985,7 +995,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" onclick="_loadPage(this.href);return false;"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1000,7 +1010,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" onclick="_loadPage(this.href);return false;"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1015,7 +1025,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" onclick="_loadPage(this.href);return false;"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1030,7 +1040,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" onclick="_loadPage(this.href);return false;"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1366,7 +1376,15 @@ DASHBOARD_HTML = """
             document.getElementById("wheelSubtitle").style.display = "block";
             setTimeout(drawWheel, 20);
         }
-    </script>
+    
+        // تحميل الملف مع شاشة انتظار
+        function _loadPage(url) {
+            var o = document.getElementById('_pageOverlay');
+            if(o) o.style.display = 'flex';
+            window.open(url, '_blank');
+            setTimeout(function() { if(o) o.style.display = 'none'; }, 2500);
+        }
+</script>
 </body>
 </html>
 """
@@ -1931,22 +1949,36 @@ def serve_page(level, filename):
     if not os.path.isfile(filepath):
         abort(404)
     
-    # ابعت الملف مباشرة - streaming بدون تحميل في الميموري
-    response = make_response(send_from_directory(folder_path, filename))
-    
-    # كاش المتصفح: الملفات الكبيرة تتخزن ساعة عند الطالب
-    response.headers['Cache-Control'] = 'private, max-age=3600'
-    
-    # ETag: لو الطالب فتح نفس الصفحة تاني، المتصفح بيبعت ETag
-    # والسيرفر بيرد 304 (Not Modified) = مفيش أي داتا تتنقل
+    # ETag
     file_stat = os.stat(filepath)
     etag = hashlib.md5(f"{filepath}:{file_stat.st_mtime}:{file_stat.st_size}".encode()).hexdigest()
-    response.headers['ETag'] = etag
-    
-    # لو المتصفح عنده نسخة محدثة، مفيش حاجة تتبعت
     if request.headers.get('If-None-Match') == etag:
         return '', 304
     
+    # اقرا الملف وعمل replace للـ template variables
+    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+        html = f.read()
+    
+    username = target_user.get('username', '') if isinstance(target_user, dict) else ''
+    user_level = target_user.get('level', level) if isinstance(target_user, dict) else level
+    
+    html = html.replace('{{ student.username }}', str(username))
+    html = html.replace('{{ student.level }}', str(user_level))
+    html = html.replace('{{ script_url }}', SCRIPT_URL)
+    html = html.replace('{{student.username}}', str(username))
+    html = html.replace('{{student.level}}', str(user_level))
+    html = html.replace('{{script_url}}', SCRIPT_URL)
+    
+    # اصلاح اتجاه ¡ ¿ الاسبانية
+    html = html.replace('\u00a1', '<span dir="ltr" style="unicode-bidi:embed">\u00a1</span>')
+    html = html.replace('\u00bf', '<span dir="ltr" style="unicode-bidi:embed">\u00bf</span>')
+    html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
+    html = html.replace('&iquest;', '<span dir="ltr" style="unicode-bidi:embed">&iquest;</span>')
+    
+    response = make_response(html)
+    response.headers['Content-Type'] = 'text/html; charset=utf-8'
+    response.headers['Cache-Control'] = 'private, max-age=3600'
+    response.headers['ETag'] = etag
     return response
 
 @app.route('/logout')
