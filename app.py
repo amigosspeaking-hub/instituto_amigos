@@ -920,8 +920,10 @@ DASHBOARD_HTML = """
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
             .motivation-boxes-wrap { width: 100%; max-width: 400px; margin: 0 auto; }
             .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
-            .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
-            .tab-trigger { flex-shrink: 0; }
+            .tabs-nav { justify-content: flex-start !important; overflow-x: auto; flex-wrap: nowrap; padding: 10px 10px 14px 10px; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 6px; }
+            .tabs-nav::-webkit-scrollbar { height: 3px; }
+            .tabs-nav::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+            .tab-trigger { flex-shrink: 0; font-size: 11px; padding: 7px 10px; white-space: nowrap; }
             .cards-grid { grid-template-columns: 1fr; gap: 15px; }
             .wheel-container-wrapper { padding: 20px 15px; }
             .pro-recorder-card { padding: 20px 15px; }
@@ -1412,40 +1414,35 @@ DASHBOARD_HTML = """
             var pct = document.getElementById('fileLoaderPercent');
             var txt = document.getElementById('fileLoaderText');
             
-            overlay.style.display = 'block';
+            overlay.style.display = 'flex';
             bar.style.width = '0%';
             pct.textContent = '0%';
             txt.textContent = 'جاري تحميل المحتوى...';
             
-            // Simulate progress
             var progress = 0;
             var progressInterval = setInterval(function() {
-                progress += Math.random() * 15;
-                if (progress > 90) progress = 90;
+                progress += Math.random() * 20 + 5;
+                if (progress > 85) progress = 85;
                 bar.style.width = progress + '%';
                 pct.textContent = Math.round(progress) + '%';
-            }, 200);
+            }, 300);
             
-            // Fetch the file
-            fetch(url)
-                .then(function(response) {
-                    clearInterval(progressInterval);
-                    bar.style.width = '100%';
-                    pct.textContent = '100%';
-                    txt.textContent = 'تم التحميل! جاري فتح الملف...';
-                    
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                        // Open from cache
-                        window.open(url, '_blank');
-                    }, 500);
-                })
-                .catch(function(err) {
-                    clearInterval(progressInterval);
-                    overlay.style.display = 'none';
-                    // Fallback: open directly
-                    window.open(url, '_blank');
-                });
+            // نفتح الملف في tab جديد — المتصفح هيحمله عادي
+            var newTab = window.open(url, '_blank');
+            
+            // لو المتصفح فتحه بنجاح
+            if (newTab) {
+                clearInterval(progressInterval);
+                bar.style.width = '100%';
+                pct.textContent = '100%';
+                txt.textContent = 'تم فتح الملف!';
+                setTimeout(function() { overlay.style.display = 'none'; }, 800);
+            } else {
+                // لو الـ popup اتعطل — نavigate مباشرة
+                clearInterval(progressInterval);
+                overlay.style.display = 'none';
+                window.location.href = url;
+            }
         }
 
     </script>
@@ -2033,16 +2030,6 @@ def serve_page(level, filename):
     html = html.replace('{{student.level}}', str(user_level))
     html = html.replace('{{script_url}}', SCRIPT_URL)
     
-    # === شاشة تحميل عربي ===
-    _ldr_html = '''<style>#_ldr{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Cairo,sans-serif;transition:opacity .5s}#_ldr.x{opacity:0;pointer-events:none}._sp{width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sk .8s linear infinite;margin-bottom:20px}@keyframes _sk{to{transform:rotate(360deg)}}._tx{font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:6px}._su{font-size:14px;color:#888;margin-bottom:16px}._bw{width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden}._bb{height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0;animation:_bp 4s ease-in-out forwards}@keyframes _bp{0%{width:3%}30%{width:35%}60%{width:65%}90%{width:92%}100%{width:100%}}</style><div id="_ldr"><div class="_sp"></div><div class="_tx">جاري تحميل المحتوى...</div><div class="_su">يرجى الانتظار</div><div class="_bw"><div class="_bb"></div></div></div><script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},800)});setTimeout(function(){var e=document.getElementById("_ldr");if(e){e.classList.add("x");setTimeout(function(){e.remove()},600)}},6000);</script>'''
-    _body_match = _re.search(r'(<body[^>]*>)', html, _re.IGNORECASE)
-    if _body_match:
-        _pos = _body_match.end()
-        html = html[:_pos] + _ldr_html + html[_pos:]
-    else:
-        html = _ldr_html + html
-    
-    # === اصلاح اتجاه علامات ¡ ¿ الاسبانية ===
     html = html.replace('¡', '<span dir="ltr" style="unicode-bidi:embed">¡</span>')
     html = html.replace('¿', '<span dir="ltr" style="unicode-bidi:embed">¿</span>')
     html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
