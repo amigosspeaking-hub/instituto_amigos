@@ -1393,37 +1393,7 @@ DASHBOARD_HTML = """
         // تحميل الملف مع شاشة انتظار
         
 
-        function _loadPage(url) {
-            var o = document.getElementById('_pgLoad');
-            var bar = document.getElementById('_pgBar');
-            var pct = document.getElementById('_pgPct');
-            var txt = document.getElementById('_pgText');
-            
-            o.style.display = 'flex';
-            bar.style.width = '0%';
-            pct.textContent = '0%';
-            txt.textContent = 'جاري تحميل المحتوى...';
-            
-            var p = 0;
-            var iv = setInterval(function() {
-                p += Math.random() * 20 + 5;
-                if (p > 90) p = 90;
-                bar.style.width = p + '%';
-                pct.textContent = Math.round(p) + '%';
-            }, 300);
-            
-            fetch(url).then(function(r) {
-                clearInterval(iv);
-                bar.style.width = '100%';
-                pct.textContent = '100%';
-                txt.textContent = 'تم التحميل! جاري فتح الصفحة...';
-                setTimeout(function() { window.location.href = url; }, 400);
-            }).catch(function() {
-                clearInterval(iv);
-                o.style.display = 'none';
-                window.location.href = url;
-            });
-        }
+
         function _loadPage(url) {
             var o = document.getElementById('_pgLoad');
             var bar = document.getElementById('_pgBar');
@@ -1453,6 +1423,35 @@ DASHBOARD_HTML = """
                 clearInterval(iv);
                 window.location.href = url;
             });
+        }
+        // اخفاء اللودينج لما الصفحة ترجع (زرار رجوع)
+        window.addEventListener('pageshow', function() {
+            var o = document.getElementById('_pgLoad');
+            if (o) o.style.display = 'none';
+        });
+        
+        function _loadPage(url) {
+            var o = document.getElementById('_pgLoad');
+            var bar = document.getElementById('_pgBar');
+            var pct = document.getElementById('_pgPct');
+            var txt = document.getElementById('_pgText');
+            
+            o.style.display = 'block';
+            bar.style.width = '5%';
+            pct.textContent = '0%';
+            txt.textContent = 'جاري تحميل المحتوى...';
+            
+            // بروجرس وهمي لغاية ما الملف يفتح
+            var p = 5;
+            var iv = setInterval(function() {
+                p += Math.random() * 10 + 3;
+                if (p > 95) p = 95;
+                bar.style.width = p + '%';
+                pct.textContent = Math.round(p) + '%';
+            }, 500);
+            
+            // نavigate مباشرة — اللودينج هيفضل ظاهر لغاية ما الصفحة الجديدة تفتح
+            window.location.href = url;
         }
 </script>
 </body>
