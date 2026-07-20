@@ -907,18 +907,19 @@ DASHBOARD_HTML = """
     </style>
 </head>
 <body>
-    <div id="_pgLoad" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:Cairo,sans-serif;">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+    <div id="_pgLoad" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:Cairo,sans-serif;direction:rtl;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;">
             <div style="width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_sp .8s linear infinite;margin-bottom:20px;"></div>
-            <div style="font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:8px;" id="_pgText">جاري تحميل المحتوى...</div>
-            <div style="width:280px;height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:10px;">
+            <div style="font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:10px;" id="_pgText">جاري تحميل المحتوى...</div>
+            <div style="width:260px;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden;">
                 <div id="_pgBar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0%;transition:width 0.3s;"></div>
             </div>
-            <div style="font-size:13px;color:#aaa;margin-top:8px;" id="_pgPct">0%</div>
+            <div style="font-size:14px;color:#999;margin-top:10px;" id="_pgPct">0%</div>
         </div>
     </div>
     <style>@keyframes _sp{to{transform:rotate(360deg)}}</style>
-\n    <div id="_pageOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:Cairo,sans-serif;">
+
+    \n    <div id="_pageOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:Cairo,sans-serif;">
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
             <div style="width:50px;height:50px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:_spin .8s linear infinite;margin-bottom:20px;"></div>
             <div style="font-size:20px;font-weight:700;color:#2c3e50;margin-bottom:8px;">جاري تحميل المحتوى...</div>
@@ -1390,12 +1391,7 @@ DASHBOARD_HTML = """
         }
     
         // تحميل الملف مع شاشة انتظار
-        function _loadPage(url) {
-            var o = document.getElementById('_pageOverlay');
-            if(o) o.style.display = 'flex';
-            window.open(url, '_blank');
-            setTimeout(function() { if(o) o.style.display = 'none'; }, 2500);
-        }
+        
 
         function _loadPage(url) {
             var o = document.getElementById('_pgLoad');
@@ -1425,6 +1421,36 @@ DASHBOARD_HTML = """
             }).catch(function() {
                 clearInterval(iv);
                 o.style.display = 'none';
+                window.location.href = url;
+            });
+        }
+        function _loadPage(url) {
+            var o = document.getElementById('_pgLoad');
+            var bar = document.getElementById('_pgBar');
+            var pct = document.getElementById('_pgPct');
+            var txt = document.getElementById('_pgText');
+            
+            o.style.display = 'block';
+            bar.style.width = '0%';
+            pct.textContent = '0%';
+            txt.textContent = 'جاري تحميل المحتوى...';
+            
+            var p = 0;
+            var iv = setInterval(function() {
+                p += Math.random() * 15 + 5;
+                if (p > 85) p = 85;
+                bar.style.width = p + '%';
+                pct.textContent = Math.round(p) + '%';
+            }, 300);
+            
+            fetch(url).then(function(r) {
+                clearInterval(iv);
+                bar.style.width = '100%';
+                pct.textContent = '100%';
+                txt.textContent = 'تم التحميل!';
+                setTimeout(function() { window.location.href = url; }, 300);
+            }).catch(function() {
+                clearInterval(iv);
                 window.location.href = url;
             });
         }
@@ -1968,7 +1994,7 @@ def serve_page(level, filename):
                 'A1_V_U_1.html', 'A1_V_U_2.html',
                 'schedule1.html', 'schedule2.html',
                 'A1_P_U_1.html', 'A1_P_U_2.html',
-                'game1.html', 'game2.html',
+                'game1.html', 'game2.html', 'A1_Juegos.html',
                 'shadowing1.html', 'shadowing2.html',
                 'A1_S_U_1.html', 'A1_S_U_2.html',
                 'multi1.html', 'multi2.html'
