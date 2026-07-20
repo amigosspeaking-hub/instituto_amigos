@@ -19,39 +19,17 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 # [ Browser Cache - المتصفح بيحفظ الصفحات عنده ]
 # =====================================================================
 @app.after_request
-def modify_all_responses(response):
+def add_browser_cache(response):
     path = request.path
-    
-    # Browser cache headers
+    # الداشبورد: يتخزن 5 دقائق
     if path in ('/dashboard', '/teacher_dashboard'):
         response.headers['Cache-Control'] = 'private, max-age=300'
+    # صفحات الدخول: لا يتم تخزينها
     elif path in ('/', '/teacher_login'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate'
+    # باقي الصفحات (لو مالهاش cache محدد)
     elif 'Cache-Control' not in response.headers:
         response.headers['Cache-Control'] = 'private, max-age=60'
-    
-    # === اصلاح علامات التعجب والاستفهام الاسبانية + شاشة تحميل ===
-    # بيطبق على كل صفحة HTML تلقائياً
-    ct = response.content_type or ''
-    if 'text/html' in ct and response.status_code == 200:
-            html = response.get_data(as_text=True)
-            changed = False
-            
-            # اصلاح علامات التعجب والاستفهام الاسبانية
-            _fix_pairs = [('¡', '&iexcl;'), ('¿', '&iquest;')]
-            for _char, _entity in _fix_pairs:
-                _bdi = '<bdi dir="ltr" style="unicode-bidi:embed">' + _char + '</bdi>'
-                if _char in html:
-                    html = html.replace(_char, _bdi)
-                    changed = True
-                if _entity in html:
-                    html = html.replace(_entity, _bdi)
-                    changed = True
-            
-            if changed:
-                response.set_data(html)
-
-    
     return response
 
 
@@ -850,8 +828,6 @@ DASHBOARD_HTML = """
         .ln-purple { color: var(--vocab-color); background: rgba(142, 68, 173, 0.1); }
         .ln-orange { color: var(--shadow-color); background: rgba(230, 126, 34, 0.1); }
         .card-body { padding: 25px 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-
-        
         .card-body h4 { font-size: 16px; font-weight: 800; color: var(--secondary); margin-bottom: 8px; }
         .card-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; transition: 0.2s; }
         .card-action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
@@ -920,10 +896,8 @@ DASHBOARD_HTML = """
             .welcome-section { flex-direction: column; text-align: center; gap: 20px; padding: 25px 20px; }
             .motivation-boxes-wrap { width: 100%; max-width: 400px; margin: 0 auto; }
             .top-nav { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
-            .tabs-nav { justify-content: flex-start !important; overflow-x: auto; flex-wrap: nowrap; padding: 10px 10px 14px 10px; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 6px; }
-            .tabs-nav::-webkit-scrollbar { height: 3px; }
-            .tabs-nav::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-            .tab-trigger { flex-shrink: 0; font-size: 11px; padding: 7px 10px; white-space: nowrap; }
+            .tabs-nav { justify-content: center; overflow-x: auto; flex-wrap: nowrap; padding: 10px; }
+            .tab-trigger { flex-shrink: 0; }
             .cards-grid { grid-template-columns: 1fr; gap: 15px; }
             .wheel-container-wrapper { padding: 20px 15px; }
             .pro-recorder-card { padding: 20px 15px; }
@@ -931,20 +905,6 @@ DASHBOARD_HTML = """
     </style>
 </head>
 <body>
-    <!-- شاشة تحميل الملفات -->
-    <div id="fileLoader" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.97);z-index:999999;font-family:'Cairo',sans-serif;direction:rtl;">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
-            <div style="width:55px;height:55px;border:5px solid #eee;border-top:5px solid #e52421;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:22px;"></div>
-            <div style="font-size:22px;font-weight:800;color:#2c3e50;margin-bottom:8px;" id="fileLoaderText">جاري تحميل المحتوى...</div>
-            <div style="font-size:14px;color:#888;margin-bottom:18px;">يرجى الانتظار</div>
-            <div style="width:280px;height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden;">
-                <div id="fileLoaderBar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#e52421,#ffd100);width:0%;transition:width 0.3s;"></div>
-            </div>
-            <div style="font-size:13px;color:#aaa;margin-top:10px;" id="fileLoaderPercent">0%</div>
-        </div>
-    </div>
-    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-
     <nav class="top-nav">
         <div class="top-right-container">
             <div class="user-buttons">
@@ -1406,27 +1366,6 @@ DASHBOARD_HTML = """
             document.getElementById("wheelSubtitle").style.display = "block";
             setTimeout(drawWheel, 20);
         }
-
-         300);
-            
-            // نفتح الملف في tab جديد — المتصفح هيحمله عادي
-            var newTab = window.open(url, '_blank');
-            
-            // لو المتصفح فتحه بنجاح
-            if (newTab) {
-                clearInterval(progressInterval);
-                bar.style.width = '100%';
-                pct.textContent = '100%';
-                txt.textContent = 'تم فتح الملف!';
-                setTimeout(function() { overlay.style.display = 'none'; }, 800);
-            } else {
-                // لو الـ popup اتعطل — نavigate مباشرة
-                clearInterval(progressInterval);
-                overlay.style.display = 'none';
-                window.location.href = url;
-            }
-        }
-
     </script>
 </body>
 </html>
@@ -1979,8 +1918,9 @@ def serve_page(level, filename):
     
     actual_folder = "A1.1" if str(level).strip().lower() == "demo" else level
     
-    import re as _re
-    
+    # بنخدم الملف مباشرة من الديسك بدون ما نحمله في الميموري
+    # send_from_directory بيبعت الملف chunk by chunk (streaming)
+    # يعني ملف 20 ميجا بيستخدم تقريباً صفر ميموري إضافي
     template_dir = os.path.join(app.root_path, 'templates')
     folder_path = os.path.join(template_dir, actual_folder)
     
@@ -1991,36 +1931,22 @@ def serve_page(level, filename):
     if not os.path.isfile(filepath):
         abort(404)
     
-    # ETag
+    # ابعت الملف مباشرة - streaming بدون تحميل في الميموري
+    response = make_response(send_from_directory(folder_path, filename))
+    
+    # كاش المتصفح: الملفات الكبيرة تتخزن ساعة عند الطالب
+    response.headers['Cache-Control'] = 'private, max-age=3600'
+    
+    # ETag: لو الطالب فتح نفس الصفحة تاني، المتصفح بيبعت ETag
+    # والسيرفر بيرد 304 (Not Modified) = مفيش أي داتا تتنقل
     file_stat = os.stat(filepath)
     etag = hashlib.md5(f"{filepath}:{file_stat.st_mtime}:{file_stat.st_size}".encode()).hexdigest()
+    response.headers['ETag'] = etag
+    
+    # لو المتصفح عنده نسخة محدثة، مفيش حاجة تتبعت
     if request.headers.get('If-None-Match') == etag:
         return '', 304
     
-    # اقرا الملف
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
-        html = f.read()
-    
-    # Replace template variables
-    username = target_user.get('username', '') if isinstance(target_user, dict) else ''
-    user_level = target_user.get('level', level) if isinstance(target_user, dict) else level
-    
-    html = html.replace('{{ student.username }}', str(username))
-    html = html.replace('{{ student.level }}', str(user_level))
-    html = html.replace('{{ script_url }}', SCRIPT_URL)
-    html = html.replace('{{student.username}}', str(username))
-    html = html.replace('{{student.level}}', str(user_level))
-    html = html.replace('{{script_url}}', SCRIPT_URL)
-    
-    html = html.replace('¡', '<span dir="ltr" style="unicode-bidi:embed">¡</span>')
-    html = html.replace('¿', '<span dir="ltr" style="unicode-bidi:embed">¿</span>')
-    html = html.replace('&iexcl;', '<span dir="ltr" style="unicode-bidi:embed">&iexcl;</span>')
-    html = html.replace('&iquest;', '<span dir="ltr" style="unicode-bidi:embed">&iquest;</span>')
-    
-    response = make_response(html)
-    response.headers['Content-Type'] = 'text/html; charset=utf-8'
-    response.headers['Cache-Control'] = 'private, max-age=3600'
-    response.headers['ETag'] = etag
     return response
 
 @app.route('/logout')
@@ -2031,10 +1957,6 @@ def logout():
 @app.route('/healthz')
 def health_check():
     return "OK", 200
-
-@app.route('/version')
-def version_check():
-    return "v2.1 - loading + spanish fix + cache - UPDATED", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
