@@ -851,7 +851,7 @@ DASHBOARD_HTML = """
         .ln-orange { color: var(--shadow-color); background: rgba(230, 126, 34, 0.1); }
         .card-body { padding: 25px 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
-        .es-title { display: block; direction: ltr; text-align: center; background: linear-gradient(135deg, #fff5f5, #ffe8e8); color: #c0392b; font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 15px; padding: 10px 16px; border-radius: 12px; border: 2px solid #fecaca; margin-bottom: 10px; letter-spacing: 1px; }
+        
         .card-body h4 { font-size: 16px; font-weight: 800; color: var(--secondary); margin-bottom: 8px; }
         .card-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; transition: 0.2s; }
         .card-action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
@@ -995,7 +995,7 @@ DASHBOARD_HTML = """
                 {% for item in lessons_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-red">Unidad {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" onclick="loadFile(this.href);return false;"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-lecture" target="_blank"><span>ابدأ الشرح</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Lección</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1010,7 +1010,7 @@ DASHBOARD_HTML = """
                 {% for item in exercises_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-gold">Ejercicio {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" onclick="loadFile(this.href);return false;"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-exercise" target="_blank"><span>ابدأ التمرين</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Empezar Ejercicio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1025,7 +1025,7 @@ DASHBOARD_HTML = """
                 {% for item in vocab_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-purple">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" onclick="loadFile(this.href);return false;"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-vocab" target="_blank"><span>افتح الكلمات</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Vocabulario</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1040,7 +1040,7 @@ DASHBOARD_HTML = """
                 {% for item in schedules_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-blue">الجدول {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" onclick="loadFile(this.href);return false;"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-schedule" target="_blank"><span>افتح الجدول</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Plan de Estudio</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1055,7 +1055,7 @@ DASHBOARD_HTML = """
                 {% for item in shadowing_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-orange">الدرس {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" onclick="loadFile(this.href);return false;"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-shadow" target="_blank"><span>ابدأ الشادوينج</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Shadowing</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1070,7 +1070,7 @@ DASHBOARD_HTML = """
                 {% for item in games_list %}
                 <div class="course-card">
                     <div class="card-header"><span class="lesson-number ln-green">لعبة {{ loop.index }}</span></div>
-                    <div class="card-body"><div class="es-title">{{ item.title }}</div><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" onclick="loadFile(this.href);return false;"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
+                    <div class="card-body"><h4>{{ item.title }}</h4><a href="/page/{{ student.level }}/{{ item.file }}" class="card-action-btn btn-game" target="_blank"><span>ادخل العب</span> <span style="opacity: 0.9; font-size: 0.95em; font-family: sans-serif;">| Jugar</span></a></div>
                 </div>
                 {% endfor %}
             </div>
@@ -1407,25 +1407,7 @@ DASHBOARD_HTML = """
             setTimeout(drawWheel, 20);
         }
 
-        // === تحميل الملفات مع شاشة تحميل ===
-        function loadFile(url) {
-            var overlay = document.getElementById('fileLoader');
-            var bar = document.getElementById('fileLoaderBar');
-            var pct = document.getElementById('fileLoaderPercent');
-            var txt = document.getElementById('fileLoaderText');
-            
-            overlay.style.display = 'flex';
-            bar.style.width = '0%';
-            pct.textContent = '0%';
-            txt.textContent = 'جاري تحميل المحتوى...';
-            
-            var progress = 0;
-            var progressInterval = setInterval(function() {
-                progress += Math.random() * 20 + 5;
-                if (progress > 85) progress = 85;
-                bar.style.width = progress + '%';
-                pct.textContent = Math.round(progress) + '%';
-            }, 300);
+         300);
             
             // نفتح الملف في tab جديد — المتصفح هيحمله عادي
             var newTab = window.open(url, '_blank');
