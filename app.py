@@ -61,7 +61,7 @@ LESSONS_DATA = {
         {"title": "PARA TI Y PARA MÍ", "file": "Unidad 02.htm"},
         {"title": "UN AÑO ESPECIAL", "file": "A2.1_Libro_Unidad_3.html"},
         {"title": "CON TUS MANOS", "file": "A2.1_Libro_Unidad_4.html"}
-        {"title": "Repaso - A2.1", "file": "revision-a2.1.html"}
+        {"title": "Repaso A2.1", "file": "revision-a2.1.html"}
     ],
     "A2.2": [{"title": "درس تجريبي", "file": "lesson1.html"}],
     "A2.3": [{"title": "درس تجريبي", "file": "lesson1.html"}],
